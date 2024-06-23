@@ -10,13 +10,19 @@
 |<img width="250" alt="mcrkgus" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/d69ab5be-5879-48f7-8310-0c8322500d29">|<img width="250" alt="EunsuSeo01" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/939cad7d-bffc-4de3-a8b5-b437b9789324">|<img width="250" alt="shimseohyun" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/44849665-870d-422b-90e0-7c7e71443ff8">|
 |어떤|일을|할까|
 
+
 ## 🛠 Development Environment
 <img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0+-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
+---
+----
 
-## 💻 Git Flow
+## 💻 Git Convention
+### Git Flow
 - `develop 브랜치` 개발 작업 브랜치
 - `main 브랜치` 릴리즈 버전 관리 브랜치
+
+<사진>
 
 ```
 1. 작업할 내용에 대해서 이슈를 생성한다.
@@ -27,3 +33,107 @@
 6. 작업 완료 후, 에러가 없는지 확인한 후 push 한다
 7. 코드리뷰 후 수정사항 반영한 뒤, develop 브랜치에 merge 한다
 ```
+
+- *Tag*
+
+| 태그      | 설명                                      |
+|-----------|-------------------------------------------|
+| Feat      | 새로운 기능 구현                           |
+| Fix       | 버그, 오류 해결                            |
+| Chore     | 코드 수정, 내부 파일 수정                   |
+| Add       | 라이브러리 추가, 에셋 추가                 |
+| Del       | 쓸모없는 코드 삭제                         |
+| Docs      | README나 WIKI 등의 문서 개정                |
+| Refactor  | 전면 수정                                  |
+| Setting   | 프로젝트 설정                              |
+| Merge     | 다른 브랜치와 병합함                       |
+
+### Issue
+```Swift
+[종류] 작업 명
+ex) [Feat] Main View UI 구현
+```
+`담당자`, `라벨` 추가 하기
+
+### Commit
+```Swift
+[종류] #이슈 - 작업 이름
+ex) [Feat] #13 - Main UI 구현
+
+✅ Merge
+/// feature branch -> develop
+기본 머지 메세지
+
+/// develop branch -> feature branch (브랜치 최신화)
+[Merge] #이슈 - Pull Develop
+ex) [Merge] #13 - Pull Develop
+```
+
+### Pull Request
+```Swift
+[종류] #이슈번호 작업명
+ex) [Feat] #13 Main View UI 구현
+```
+`담당자`, `리뷰어`, `라벨` 추가 하기
+
+- *CodeReview*
+```Swift
+✅ Pn Rule
+
+P1 : 꼭 반영해주세요. 
+
+P2 : 반영하면 좋을 것 같습니다. 
+
+P3 : 단순 의견 제시 (무시해도 됩니다)
+```
+
+----
+## 📂 Foldering
+```
+📁 Project
+├── 📁 Application
+│   ├── AppDelegate.swift
+│   ├── SceneDelegate.swift
+│   ├── LaunchScreen.storyboard
+│   └── Info.plist
+├── 📁 Global
+│   ├── 🗂️ Protocols
+│   ├── 🗂️ Components
+│   │   ├── HankkiPopup
+│   │   └── HankkiButton
+│   ├── 🗂️ Consts
+│   │   └── ImageLiterals
+│   ├── 🗂️ Extensions
+│   │   ├── UIView+.swift
+│   │   ├── UIViewController+.swift
+│   │   ├── UIFont+.swift
+│   │   └── UIColor+.swift
+│   ├── 🗂️ Resources
+│   │   ├── 🗂️ Fonts
+│   │   └── Assets.xcassets
+│   └── 🗂️ Supporting Files
+│       ├── Config.swift
+│       └── Debug.xcconfig
+│       └── Release.xcconfig
+├── 📁 Network
+│   ├── 🗂️ Base
+│   ├── 🗂️ Home
+│   │   ├── 🗂️ DTO
+│   │   ├── HomeAPI.swift
+│   │   └── HomeAPIService.swift
+└── 📁 Present
+    ├── 🗂️ Home
+    │   ├── 🗂️ Model
+    │   ├── 🗂️ View
+    │   ├── 🗂️ ViewModel
+    └── 🗂️ HankkiPlayList
+```
+
+## 🎁 Library
+| Name         |          |
+| ------------ |  :-----: |
+| Then         |   `SPM`  |
+| SnapKit      |  `SPM`  |
+| Kingfisher   |  `SPM`  |
+| MapKit      | `SPM`  |
+| Moya         |  `SPM`  |
