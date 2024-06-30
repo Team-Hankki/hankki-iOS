@@ -12,7 +12,7 @@
 
 
 ## 🛠 Development Environment
-<img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0+-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
+<img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
 
 
