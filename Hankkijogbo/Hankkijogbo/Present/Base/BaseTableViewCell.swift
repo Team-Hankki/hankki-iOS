@@ -18,8 +18,8 @@ class BaseTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupStyle()
-        setupLayout()
         setupHierarchy()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +30,7 @@ class BaseTableViewCell: UITableViewCell {
 
     func setupStyle() { }
     
-    func setupLayout() { }
-    
     func setupHierarchy() { }
+    
+    func setupLayout() { }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 /// 모든 UICollectionViewCell는 BaseCollectionViewCell를 상속 받는다.
 /// - 각 함수를 override하여 각 Cell에 맞게 함수 내용을 작성한다.
-/// - 각 Cell에서는 setupStyle과 setupLayout, setupHierarchy 함수를 호출하지 않아도 된다.
+/// - 각 Cell에서는 setupStyle과 setupHierarchy, setupLayout 함수를 호출하지 않아도 된다.
 class BaseCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Init
@@ -18,8 +18,8 @@ class BaseCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupStyle()
-        setupLayout()
         setupHierarchy()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +30,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
 
     func setupStyle() { }
     
-    func setupLayout() { }
-    
     func setupHierarchy() { }
+    
+    func setupLayout() { }
 }
