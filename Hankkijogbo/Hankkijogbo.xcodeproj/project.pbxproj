@@ -37,6 +37,11 @@
 		83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCD2C256B180042BA48 /* UIButton+.swift */; };
 		83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */; };
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
+		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
+		A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */; };
+		A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940D2C31660E001ADA03 /* BaseModel.swift */; };
+		A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940E2C31660E001ADA03 /* BaseViewController.swift */; };
+		A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +51,7 @@
 		83DBED792C255A180042BA48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		83DBED7E2C255A1A0042BA48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83DBED812C255A1A0042BA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		83DBED832C255A1A0042BA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83DBED832C255A1A0042BA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Hankkijogbo/Global/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		83DBED912C2564990042BA48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		83DBED932C2564A20042BA48 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		83DBED952C2564AC0042BA48 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +74,11 @@
 		83DBEDCD2C256B180042BA48 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		A2FF940D2C31660E001ADA03 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		A2FF940E2C31660E001ADA03 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +114,7 @@
 		83DBED742C255A180042BA48 /* Hankkijogbo */ = {
 			isa = PBXGroup;
 			children = (
+				A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */,
 				83DBED892C2564480042BA48 /* Application */,
 				83DBED8C2C25646F0042BA48 /* Global */,
 				83DBED8B2C2564670042BA48 /* Network */,
@@ -124,6 +135,7 @@
 		83DBED8A2C25645B0042BA48 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				A22D20C92C3165B6001AFAC6 /* Base */,
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				83DBED8D2C2564790042BA48 /* Home */,
 			);
@@ -141,6 +153,7 @@
 		83DBED8C2C25646F0042BA48 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				A22D20C82C316534001AFAC6 /* Base */,
 				83DBEDAA2C2565980042BA48 /* Protocols */,
 				83DBEDA92C2565920042BA48 /* Components */,
 				83DBEDA82C25658C0042BA48 /* Consts */,
@@ -304,6 +317,24 @@
 			path = HankkiButtons;
 			sourceTree = "<group>";
 		};
+		A22D20C82C316534001AFAC6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A22D20C92C3165B6001AFAC6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A2FF940D2C31660E001ADA03 /* BaseModel.swift */,
+				A2FF940E2C31660E001ADA03 /* BaseViewController.swift */,
+				A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */,
+				A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -314,6 +345,7 @@
 				83DBED6E2C255A180042BA48 /* Sources */,
 				83DBED6F2C255A180042BA48 /* Frameworks */,
 				83DBED702C255A180042BA48 /* Resources */,
+				A22D20C52C31628A001AFAC6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -372,12 +404,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */,
 				83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A22D20C52C31628A001AFAC6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		83DBED6E2C255A180042BA48 /* Sources */ = {
@@ -389,6 +442,7 @@
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
 				83DBEDAD2C2565D20042BA48 /* a.swift in Sources */,
+				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
 				83DBEDC82C256AD00042BA48 /* NSObject+.swift in Sources */,
 				83DBEDB62C2566380042BA48 /* FontLiterals.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
@@ -402,12 +456,15 @@
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
+				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
+				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
+				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
 				83DBEDA22C2565340042BA48 /* HomeAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +535,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -535,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -553,14 +610,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KT2Q6HC762;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Hankkijogbo/Info.plist;
+				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = HANKKI;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,14 +642,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KT2Q6HC762;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Hankkijogbo/Info.plist;
+				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = HANKKI;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
