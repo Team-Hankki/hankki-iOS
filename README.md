@@ -12,10 +12,9 @@
 
 
 ## 🛠 Development Environment
-<img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0+-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
+<img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
----
-----
+
 
 ## 💻 Git Convention
 ### Git Flow
@@ -87,7 +86,6 @@ P2 : 반영하면 좋을 것 같습니다.
 P3 : 단순 의견 제시 (무시해도 됩니다)
 ```
 
-----
 ## 📂 Foldering
 ```
 📁 Project
@@ -109,7 +107,7 @@ P3 : 단순 의견 제시 (무시해도 됩니다)
 │   │   ├── UIFont+.swift
 │   │   └── UIColor+.swift
 │   ├── 🗂️ Resources
-│   │   ├── 🗂️ Fonts
+│   │   ├── Fonts
 │   │   └── Assets.xcassets
 │   └── 🗂️ Supporting Files
 │       ├── Config.swift
@@ -117,23 +115,28 @@ P3 : 단순 의견 제시 (무시해도 됩니다)
 │       └── Release.xcconfig
 ├── 📁 Network
 │   ├── 🗂️ Base
-│   ├── 🗂️ Home
-│   │   ├── 🗂️ DTO
-│   │   ├── HomeAPI.swift
-│   │   └── HomeAPIService.swift
+│   └── 🗂️ Home
+│       ├── DTO
+│       ├── HomeAPI.swift
+│       └── HomeAPIService.swift
 └── 📁 Present
+    ├── 🗂️ Base
+    │   ├── BaseCollectionViewCell.swift
+    │   ├── BaseModel.swift
+    │   ├── BaseTableViewCell.swift
+    │   └── BaseViewController.swift
     ├── 🗂️ Home
-    │   ├── 🗂️ Model
-    │   ├── 🗂️ View
-    │   ├── 🗂️ ViewModel
+    │   ├── Model
+    │   ├── View
+    │   └── ViewModel
     └── 🗂️ HankkiPlayList
 ```
 
 ## 🎁 Library
-| Name         |          |
-| ------------ |  :-----: |
-| Then         |   `SPM`  |
-| SnapKit      |  `SPM`  |
-| Kingfisher   |  `SPM`  |
-| MapKit      | `SPM`  |
-| Moya         |  `SPM`  |
+| Name         |          |          |
+| ------------ |  :-----: |  ------------ |
+| Then         |   `SPM`  |객체를 생성하고 설정하는 코드를 하나의 블록으로 묶어 가독성을 향상시킨다.|
+| SnapKit      |  `SPM`  |Auto Layout 제약조건을 코드로 쉽게 작성할 수 있도록 한다.|
+| Kingfisher   |  `SPM`  |URL로부터 이미지 다운 중 처리 작업을 간소화할 수 있도록 한다.|
+| MapKit      | `SPM`  |다양한 지도 기능을 원활하게 구현할 수 있도록 한다.|
+| Moya         |  `SPM`  | 네트워크 요청을 간현화하고, 구조화된 방식으로 관리하여 코드의 가독성과 유지 보수성을 높인다.|
