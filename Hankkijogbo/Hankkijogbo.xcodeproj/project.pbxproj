@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
 		83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED772C255A180042BA48 /* SceneDelegate.swift */; };
 		83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED792C255A180042BA48 /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DBED752C255A180042BA48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83DBED772C255A180042BA48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,7 +155,6 @@
 		83DBED8C2C25646F0042BA48 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				A22D20C82C316534001AFAC6 /* Base */,
 				83DBEDAA2C2565980042BA48 /* Protocols */,
 				83DBEDA92C2565920042BA48 /* Components */,
 				83DBEDA82C25658C0042BA48 /* Consts */,
@@ -305,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				83DBED7E2C255A1A0042BA48 /* Assets.xcassets */,
+				838D09D42C329A0A001400A4 /* Colors.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -315,13 +317,6 @@
 				83DBEDB82C25666E0042BA48 /* MainButton.swift */,
 			);
 			path = HankkiButtons;
-			sourceTree = "<group>";
-		};
-		A22D20C82C316534001AFAC6 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		A22D20C92C3165B6001AFAC6 /* Base */ = {
@@ -405,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */,
+				838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */,
 				83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
 			);
