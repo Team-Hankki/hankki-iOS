@@ -7,80 +7,86 @@
 
 import UIKit
 
-enum FontStyle {
-    case h1
-    case h2
-    case subtitle1
-    case subtitle2
-    case subtitle3
-    case body1
-    case body2
-    case body3
-    case body4
-    case body5
+enum PretendardStyle {
+    case h1, h2
+    case subtitle1, subtitle2, subtitle3
+    case body1, body2, body3, body4, body5
     case button
-    case caption1
-    case caption2
+    case caption1, caption2
+    
+    var rawValue: String {
+        switch self {
+        case .h1, .h2, .body2:
+            return "Pretendard-Bold"
+        case .subtitle1, .subtitle2, .subtitle3, .body3:
+            return "Pretendard-SemiBold"
+        case .body1, .caption1:
+            return "Pretendard-Medium"
+        case .body4, .body5, .button, .caption2:
+            return "Pretendard-Regular"
+        }
+    }
+    
+    var size: CGFloat {
+        switch self {
+        case .h1:
+            return 24
+        case .h2:
+            return 20
+        case .subtitle1:
+            return 18
+        case .subtitle2:
+            return 17
+        case .subtitle3, .body1:
+            return 16
+        case .body2, .body3, .body4:
+            return 14
+        case .body5:
+            return 13
+        case .button, .caption1:
+            return 12
+        case .caption2:
+            return 11
+        }
+    }
 }
 
-enum FontName: String {
-    case pretendardBold = "Pretendard-Bold"
-    case pretendardSemiBold = "Pretendard-SemiBold"
-    case pretendardMedium = "Pretendard-Medium"
-    case pretendardRegular = "Pretendard-Regular"
-    case suitBold = "SUIT-Bold"
-    case suitSemiBold = "SUIT-SemiBold"
-    case suitMedium = "SUIT-Medium"
-    case suitRegular = "SUIT-Regular"
+enum SuitStyle {
+    case h1
+    case subtitle
+    case body1, body2
+    
+    var rawValue: String {
+        switch self {
+        case .h1:
+            return "SUIT-Bold"
+        case .subtitle:
+            return "SUIT-SemiBold"
+        case .body1:
+            return "SUIT-Medium"
+        case .body2:
+            return "SUIT-Regular"
+        }
+    }
+    
+    var size: CGFloat {
+        switch self {
+        case .h1:
+            return 24
+        case .subtitle, .body1:
+            return 16
+        case .body2:
+            return 14
+        }
+    }
 }
 
 extension UIFont {
-    static func setupFontStyle(of style: FontStyle) -> UIFont? {
-        let size: CGFloat
-        let fontName: String
-        
-        switch style {
-        case .h1:
-            size = 24
-            fontName = FontName.pretendardBold.rawValue
-        case .h2:
-            size = 20
-            fontName = FontName.pretendardBold.rawValue
-        case .subtitle1:
-            size = 18
-            fontName = FontName.pretendardSemiBold.rawValue
-        case .subtitle2:
-            size = 17
-            fontName = FontName.pretendardSemiBold.rawValue
-        case .subtitle3:
-            size = 16
-            fontName = FontName.pretendardSemiBold.rawValue
-        case .body1:
-            size = 16
-            fontName = FontName.pretendardMedium.rawValue
-        case .body2:
-            size = 14
-            fontName = FontName.pretendardBold.rawValue
-        case .body3:
-            size = 14
-            fontName = FontName.pretendardSemiBold.rawValue
-        case .body4:
-            size = 14
-            fontName = FontName.pretendardRegular.rawValue
-        case .body5:
-            size = 13
-            fontName = FontName.pretendardRegular.rawValue
-        case .button:
-            size = 12
-            fontName = FontName.pretendardRegular.rawValue
-        case .caption1:
-            size = 12
-            fontName = FontName.pretendardMedium.rawValue
-        case .caption2:
-            size = 11
-            fontName = FontName.pretendardRegular.rawValue
-        }
-        
-        return UIFont(name: fontName, size: size)
+    static func setupPretendardStyle(of style: PretendardStyle) -> UIFont? {
+        return UIFont(name: style.rawValue, size: style.size)
+    }
+    
+    static func setupSuitStyle(of style: SuitStyle) -> UIFont? {
+        return UIFont(name: style.rawValue, size: style.size)
     }
 }
