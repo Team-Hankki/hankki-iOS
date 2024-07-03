@@ -42,10 +42,10 @@
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
 		A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */; };
-		A2F27BE72C34EEDB001E6514 /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B542262C32A26600A6B225 /* SUIT-Bold.otf */; };
-		A2F27BE82C34EEDD001E6514 /* SUIT-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5422D2C32A26700A6B225 /* SUIT-SemiBold.otf */; };
-		A2F27BE92C34EEE0001E6514 /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B542292C32A26600A6B225 /* SUIT-Medium.otf */; };
-		A2F27BEA2C34EEE2001E6514 /* SUIT-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5422B2C32A26600A6B225 /* SUIT-Regular.otf */; };
+		A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */; };
+		A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */; };
+		A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */; };
+		A2F27C022C3500DB001E6514 /* SUITE-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2F27BFE2C3500DB001E6514 /* SUITE-Medium.otf */; };
 		A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */; };
 		A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940D2C31660E001ADA03 /* BaseModel.swift */; };
 		A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940E2C31660E001ADA03 /* BaseViewController.swift */; };
@@ -82,15 +82,15 @@
 		83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		A2B542262C32A26600A6B225 /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
-		A2B542292C32A26600A6B225 /* SUIT-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
-		A2B5422B2C32A26600A6B225 /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
-		A2B5422D2C32A26700A6B225 /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		A2B542422C32AF7500A6B225 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
+		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
+		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
+		A2F27BFE2C3500DB001E6514 /* SUITE-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Medium.otf"; sourceTree = "<group>"; };
 		A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		A2FF940D2C31660E001ADA03 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		A2FF940E2C31660E001ADA03 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B542382C32A29300A6B225 /* Pretendard */,
-				A2B542252C32A26600A6B225 /* SUIT */,
+				A2B542252C32A26600A6B225 /* SUITE */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -345,15 +345,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		A2B542252C32A26600A6B225 /* SUIT */ = {
+		A2B542252C32A26600A6B225 /* SUITE */ = {
 			isa = PBXGroup;
 			children = (
-				A2B542262C32A26600A6B225 /* SUIT-Bold.otf */,
-				A2B5422D2C32A26700A6B225 /* SUIT-SemiBold.otf */,
-				A2B542292C32A26600A6B225 /* SUIT-Medium.otf */,
-				A2B5422B2C32A26600A6B225 /* SUIT-Regular.otf */,
+				A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */,
+				A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */,
+				A2F27BFE2C3500DB001E6514 /* SUITE-Medium.otf */,
+				A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */,
 			);
-			path = SUIT;
+			path = SUITE;
 			sourceTree = "<group>";
 		};
 		A2B542382C32A29300A6B225 /* Pretendard */ = {
@@ -436,17 +436,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F27C022C3500DB001E6514 /* SUITE-Medium.otf in Resources */,
 				A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */,
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
+				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
-				A2F27BEA2C34EEE2001E6514 /* SUIT-Regular.otf in Resources */,
 				83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */,
+				A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */,
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
-				A2F27BE82C34EEDD001E6514 /* SUIT-SemiBold.otf in Resources */,
-				A2F27BE92C34EEE0001E6514 /* SUIT-Medium.otf in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
-				A2F27BE72C34EEDB001E6514 /* SUIT-Bold.otf in Resources */,
+				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

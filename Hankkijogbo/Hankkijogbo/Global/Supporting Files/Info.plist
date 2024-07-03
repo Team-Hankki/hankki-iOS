@@ -8,10 +8,10 @@
 		<string>Pretendard-SemiBold.otf</string>
 		<string>Pretendard-Medium.otf</string>
 		<string>Pretendard-Regular.otf</string>
-		<string>SUIT-Bold.otf</string>
-		<string>SUIT-SemiBold.otf</string>
-		<string>SUIT-Medium.otf</string>
-		<string>SUIT-Regular.otf</string>
+		<string>SUITE-Bold.otf</string>
+		<string>SUITE-SemiBold.otf</string>
+		<string>SUITE-Medium.otf</string>
+		<string>SUITE-Regular.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -51,7 +51,7 @@ enum PretendardStyle {
     }
 }
 
-enum SuitStyle {
+enum SuiteStyle {
     case h1
     case subtitle
     case body1, body2
@@ -59,13 +59,13 @@ enum SuitStyle {
     var rawValue: String {
         switch self {
         case .h1:
-            return "SUIT-Bold"
+            return "SUITE-Bold"
         case .subtitle:
-            return "SUIT-SemiBold"
+            return "SUITE-SemiBold"
         case .body1:
-            return "SUIT-Medium"
+            return "SUITE-Medium"
         case .body2:
-            return "SUIT-Regular"
+            return "SUITE-Regular"
         }
     }
     
@@ -86,7 +86,7 @@ extension UIFont {
         return UIFont(name: style.rawValue, size: style.size)
     }
     
-    static func setupSuitStyle(of style: SuitStyle) -> UIFont? {
+    static func setupSuiteStyle(of style: SuiteStyle) -> UIFont? {
         return UIFont(name: style.rawValue, size: style.size)
     }
 }
