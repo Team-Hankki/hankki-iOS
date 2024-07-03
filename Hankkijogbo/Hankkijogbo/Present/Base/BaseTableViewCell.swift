@@ -17,9 +17,9 @@ class BaseTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupStyle()
         setupHierarchy()
         setupLayout()
+        setupStyle()
     }
     
     required init?(coder: NSCoder) {
@@ -27,10 +27,10 @@ class BaseTableViewCell: UITableViewCell {
     }
 
     // MARK: - Set UI
-
-    func setupStyle() { }
     
     func setupHierarchy() { }
     
     func setupLayout() { }
+    
+    func setupStyle() { }
 }
