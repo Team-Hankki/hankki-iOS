@@ -32,16 +32,16 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        setupStyle()
         setupHierarchy()
         setupLayout()
+        setupStyle()
     }
 
     // MARK: - Set UI
-
-    func setupStyle() { }
     
     func setupHierarchy() { }
     
     func setupLayout() { }
+    
+    func setupStyle() { }
 }
