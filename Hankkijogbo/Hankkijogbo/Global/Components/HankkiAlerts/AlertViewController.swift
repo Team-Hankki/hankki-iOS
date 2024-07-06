@@ -10,6 +10,7 @@ import UIKit
 import Then
 import SnapKit
 
+
 final class AlertViewController: BaseViewController {
     
     // MARK: - Properties
@@ -42,8 +43,13 @@ final class AlertViewController: BaseViewController {
     private let primaryButton: UIButton = UIButton()
     
     // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupAlertStyle()
+        setupAlertHierarchy()
+        setupAlertLayout()
         
         if image.isEmpty {
             setupTextAlertStyle()
@@ -54,28 +60,47 @@ final class AlertViewController: BaseViewController {
             setupImageAlertHierarchy()
             setupImageAlertLayout()
         }
-    }
-    
-    override func setupStyle() {
-        setupDefaultAlertStyle()
-    }
-    
-    override func setupHierarchy() {
-        view.addSubview(alertView)
-        setupLabelStackViewHirachy()
-        setupButtonStackViewHirachy()
-    }
-    
-    override func setupLayout() {
-        alertView.snp.makeConstraints {
-            $0.width.equalTo(330)
-            $0.center.equalToSuperview()
-        }
+        
+        setupButtonAction()
     }
 }
 
 extension AlertViewController {
-    private func setupDefaultAlertStyle() {
+    
+    // MARK: - Private Func
+    
+    private func cancleAction() {
+        dismiss(animated: false)
+    }
+    
+    // MARK: - @objc
+    
+    @objc func secondaryButtonDidTapped() {
+        if let secondaryButtonHandler {
+            secondaryButtonHandler()
+        } else {
+            cancleAction()
+        }
+    }
+    
+    @objc func primaryButtonDidTapped() {
+        if let primaryButtonHandler {
+            primaryButtonHandler()
+        } else {
+            cancleAction()
+        }
+    }
+    
+    // MARK: - setupAction
+    
+    func setupButtonAction() {
+        secondaryButton.addTarget(self, action: #selector(secondaryButtonDidTapped), for: .touchUpInside)
+        primaryButton.addTarget(self, action: #selector(primaryButtonDidTapped), for: .touchUpInside)
+    }
+    
+    // MARK: - setupStyle
+    
+    private func setupAlertStyle() {
         view.backgroundColor = .black.withAlphaComponent(0.67)
         
         alertView.do {
@@ -183,6 +208,14 @@ extension AlertViewController {
         }
     }
     
+    // MARK: - setupHierarchy
+    
+    private func setupAlertHierarchy() {
+        view.addSubview(alertView)
+        setupLabelStackViewHirachy()
+        setupButtonStackViewHirachy()
+    }
+    
     private func setupTextAlertHierarchy() {
         alertView.addSubviews(labelStackView, buttonStackView)
     }
@@ -206,6 +239,15 @@ extension AlertViewController {
         }
         if !primaryButtonText.isEmpty {
             buttonStackView.addArrangedSubview(primaryButton)
+        }
+    }
+    
+    // MARK: - setupLayout
+    
+    private func setupAlertLayout() {
+        alertView.snp.makeConstraints {
+            $0.width.equalTo(330)
+            $0.center.equalToSuperview()
         }
     }
     
