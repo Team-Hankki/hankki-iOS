@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 /// 모든 UIViewController는 BaseViewController를 상속 받는다.
 /// - 각 함수를 override하여 각 VC에 맞게 함수 내용을 작성한다.
 /// - 각 VC에서는 해당 함수들을 호출하지 않아도 된다.
