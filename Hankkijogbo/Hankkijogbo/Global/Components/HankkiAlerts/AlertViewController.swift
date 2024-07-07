@@ -10,7 +10,6 @@ import UIKit
 import Then
 import SnapKit
 
-
 final class AlertViewController: BaseViewController {
     
     // MARK: - Properties
@@ -47,35 +46,149 @@ final class AlertViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupAlertStyle()
-        setupAlertHierarchy()
-        setupAlertLayout()
+        setupButtonAction()
+    }
+    
+    // MARK: - setupStyle
+    
+    override func setupStyle() {
+        let style: AlertStyle = image.isEmpty ? .textAlertStyle : .imageAlertStyle
         
-        if image.isEmpty {
-            setupTextAlertStyle()
-            setupTextAlertHierarchy()
-            setupTextAlertLayout()
-        } else {
-            setupImageAlertStyle()
-            setupImageAlertHierarchy()
-            setupImageAlertLayout()
+        view.backgroundColor = .black.withAlphaComponent(0.67)
+        
+        alertView.do {
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = style.alertCornerRadius
         }
         
-        setupButtonAction()
+        imageView.do {
+            $0.backgroundColor = .gray300
+            $0.layer.cornerRadius = 10
+            $0.isHidden = image.isEmpty
+        }
+        
+        labelStackView.do {
+            $0.axis = .vertical
+            $0.alignment = style.labelStackViewAlignment
+            $0.spacing = 8
+        }
+        
+        titleLabel.do {
+            $0.text = titleText
+            $0.font = .setupPretendardStyle(of: .subtitle3)
+            $0.textColor = .black
+            $0.numberOfLines = 0
+            $0.textAlignment = style.labelAlignment
+            $0.isHidden = titleText.isEmpty
+        }
+        
+        subLabel.do {
+            $0.text = subText
+            $0.font = .setupPretendardStyle(of: .body4)
+            $0.textColor = .gray500
+            $0.numberOfLines = 0
+            $0.textAlignment = style.labelAlignment
+            $0.isHidden = subText.isEmpty
+        }
+        
+        buttonStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 8
+            $0.alignment = style.buttonStackViewAlignment
+        }
+        
+        setupButtonStyle(button: secondaryButton,
+                         title: secondaryButtonText,
+                         backgroundColor: .white, titleColor: .red)
+        
+        setupButtonStyle(button: primaryButton,
+                        title: primaryButtonText,
+                         backgroundColor: .red, titleColor: .white)
+    }
+    
+    // MARK: - setupHierarchy
+    
+    override func setupHierarchy() {
+        view.addSubview(alertView)
+        labelStackView.addArrangedSubviews(titleLabel, subLabel)
+        buttonStackView.addArrangedSubviews(secondaryButton, primaryButton)
+        alertView.addSubviews(imageView, labelStackView, buttonStackView)
+    }
+    
+    // MARK: - setupLayout
+    
+    override func setupLayout() {
+        alertView.snp.makeConstraints {
+            $0.width.equalTo(330)
+            $0.center.equalToSuperview()
+        }
+        
+        secondaryButton.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(54)
+        }
+        
+        primaryButton.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(54)
+        }
+        
+        if image.isEmpty {
+            labelStackView.snp.makeConstraints {
+                $0.top.equalToSuperview().offset(24)
+                $0.leading.equalToSuperview().inset(20)
+            }
+            
+            buttonStackView.snp.makeConstraints {
+                $0.top.equalTo(labelStackView.snp.bottom).offset(16)
+                $0.trailing.equalToSuperview().inset(20)
+                $0.bottom.equalToSuperview().inset(24)
+            }
+        } else {
+            imageView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.width.height.equalTo(140)
+                $0.top.equalToSuperview().inset(24)
+            }
+            
+            labelStackView.snp.makeConstraints {
+                $0.top.equalTo(imageView.snp.bottom).offset(20)
+                $0.centerX.equalToSuperview()
+            }
+            
+            buttonStackView.snp.makeConstraints {
+                $0.top.equalTo(labelStackView.snp.bottom).offset(36)
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(24)
+            }
+        }
     }
 }
 
-extension AlertViewController {
+// MARK: - private Func
+
+private extension AlertViewController {
     
-    // MARK: - Private Func
-    
-    private func cancleAction() {
+    func cancleAction() {
         dismiss(animated: false)
+    }
+    
+    func setupButtonStyle(button: UIButton,
+                          title: String,
+                          backgroundColor: UIColor,
+                          titleColor: UIColor
+    ) {
+        button.layer.cornerRadius = 16
+        button.backgroundColor = backgroundColor
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
+        button.setTitleColor(titleColor, for: .normal)
+        button.isHidden = title.isEmpty
     }
     
     // MARK: - @objc
     
-    @objc func secondaryButtonDidTapped() {
+    @objc func secondaryButtonDidTap() {
         if let secondaryButtonHandler {
             secondaryButtonHandler()
         } else {
@@ -83,7 +196,7 @@ extension AlertViewController {
         }
     }
     
-    @objc func primaryButtonDidTapped() {
+    @objc func primaryButtonDidTap() {
         if let primaryButtonHandler {
             primaryButtonHandler()
         } else {
@@ -94,192 +207,8 @@ extension AlertViewController {
     // MARK: - setupAction
     
     func setupButtonAction() {
-        secondaryButton.addTarget(self, action: #selector(secondaryButtonDidTapped), for: .touchUpInside)
-        primaryButton.addTarget(self, action: #selector(primaryButtonDidTapped), for: .touchUpInside)
-    }
-    
-    // MARK: - setupStyle
-    
-    private func setupAlertStyle() {
-        view.backgroundColor = .black.withAlphaComponent(0.67)
-        
-        alertView.do {
-            $0.backgroundColor = .white
-        }
-        
-        imageView.do {
-            $0.backgroundColor = .gray300
-            $0.layer.cornerRadius = 10
-        }
-        
-        labelStackView.do {
-            $0.axis = .vertical
-        }
-        
-        titleLabel.do {
-            $0.text = titleText
-            $0.font = .setupPretendardStyle(of: .subtitle3)
-            $0.textColor = .black
-            $0.numberOfLines = 0
-        }
-        
-        subLabel.do {
-            $0.text = subText
-            $0.font = .setupPretendardStyle(of: .body4)
-            $0.textColor = .gray500
-            $0.numberOfLines = 0
-        }
-        
-        buttonStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 8
-        }
-        
-        secondaryButton.do {
-            $0.layer.cornerRadius = 16
-            $0.backgroundColor = .white
-            $0.setTitle(secondaryButtonText, for: .normal)
-            $0.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
-            $0.setTitleColor(.red, for: .normal)
-            
-            $0.snp.makeConstraints {
-                $0.width.equalTo(100)
-                $0.height.equalTo(54)
-            }
-        }
-        
-        primaryButton.do {
-            $0.layer.cornerRadius = 16
-            $0.backgroundColor = .red
-            $0.setTitle(primaryButtonText, for: .normal)
-            $0.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
-            $0.setTitleColor(.white, for: .normal)
-            
-            $0.snp.makeConstraints {
-                $0.width.equalTo(100)
-                $0.height.equalTo(54)
-            }
-        }
-    }
-    
-    private func setupTextAlertStyle() {
-        alertView.do {
-            $0.layer.cornerRadius = 24
-        }
-        
-        labelStackView.do {
-            $0.alignment = .leading
-            $0.spacing = 8
-        }
-        
-        titleLabel.do {
-            $0.textAlignment = .left
-        }
-        
-        subLabel.do {
-            $0.textAlignment = .left
-        }
-        
-        buttonStackView.do {
-            $0.alignment = .trailing
-        }
+        secondaryButton.addTarget(self, action: #selector(secondaryButtonDidTap), for: .touchUpInside)
+        primaryButton.addTarget(self, action: #selector(primaryButtonDidTap), for: .touchUpInside)
     }
 
-    private func setupImageAlertStyle() {
-        alertView.do {
-            $0.layer.cornerRadius = 32
-        }
-        
-        labelStackView.do {
-            $0.alignment = .center
-            $0.spacing = 16
-        }
-        
-        titleLabel.do {
-            $0.textAlignment = .center
-        }
-        
-        subLabel.do {
-            $0.textAlignment = .center
-        }
-        
-        buttonStackView.do {
-            $0.alignment = .center
-        }
-    }
-    
-    // MARK: - setupHierarchy
-    
-    private func setupAlertHierarchy() {
-        view.addSubview(alertView)
-        setupLabelStackViewHirachy()
-        setupButtonStackViewHirachy()
-    }
-    
-    private func setupTextAlertHierarchy() {
-        alertView.addSubviews(labelStackView, buttonStackView)
-    }
-    
-    private func setupImageAlertHierarchy() {
-        alertView.addSubviews(imageView, labelStackView, buttonStackView)
-    }
-    
-    private func setupLabelStackViewHirachy() {
-        if !titleText.isEmpty {
-            labelStackView.addArrangedSubview(titleLabel)
-        }
-        if !subText.isEmpty {
-            labelStackView.addArrangedSubview(subLabel)
-        }
-    }
-    
-    private func setupButtonStackViewHirachy() {
-        if !secondaryButtonText.isEmpty {
-            buttonStackView.addArrangedSubview(secondaryButton)
-        }
-        if !primaryButtonText.isEmpty {
-            buttonStackView.addArrangedSubview(primaryButton)
-        }
-    }
-    
-    // MARK: - setupLayout
-    
-    private func setupAlertLayout() {
-        alertView.snp.makeConstraints {
-            $0.width.equalTo(330)
-            $0.center.equalToSuperview()
-        }
-    }
-    
-    private func setupTextAlertLayout() {
-        labelStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().inset(20)
-        }
-        
-        buttonStackView.snp.makeConstraints {
-            $0.top.equalTo(labelStackView.snp.bottom).offset(16)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(20)
-        }
-    }
-    
-    private func setupImageAlertLayout() {
-        imageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(140)
-            $0.top.equalToSuperview().inset(30)
-        }
-        
-        labelStackView.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
-        }
-        
-        buttonStackView.snp.makeConstraints {
-            $0.top.equalTo(labelStackView.snp.bottom).offset(36)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(30)
-        }
-    }
 }
