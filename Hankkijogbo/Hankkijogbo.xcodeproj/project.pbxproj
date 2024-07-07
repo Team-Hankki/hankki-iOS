@@ -38,7 +38,7 @@
 		83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */; };
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
-		864A89BC2C3B350900140B63 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertType.swift */; };
+		864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertStyle.swift */; };
 		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
@@ -87,7 +87,7 @@
 		83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		864A89BB2C3B350900140B63 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
+		864A89BB2C3B350900140B63 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -348,7 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				861704F62C38304D00D99E50 /* AlertViewController.swift */,
-				864A89BB2C3B350900140B63 /* AlertType.swift */,
+				864A89BB2C3B350900140B63 /* AlertStyle.swift */,
 			);
 			path = HankkiAlerts;
 			sourceTree = "<group>";
@@ -502,7 +502,7 @@
 				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
-				864A89BC2C3B350900140B63 /* AlertType.swift in Sources */,
+				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
 				83DBEDC82C256AD00042BA48 /* NSObject+.swift in Sources */,
 				83DBEDB62C2566380042BA48 /* FontLiterals.swift in Sources */,
