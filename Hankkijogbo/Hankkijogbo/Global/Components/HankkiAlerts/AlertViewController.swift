@@ -49,8 +49,6 @@ final class AlertViewController: BaseViewController {
         setupButtonAction()
     }
     
-    // MARK: - setupStyle
-    
     override func setupStyle() {
         let style: AlertStyle = image.isEmpty ? .textAlertStyle : .imageAlertStyle
         
@@ -106,16 +104,12 @@ final class AlertViewController: BaseViewController {
                          backgroundColor: .red, titleColor: .white)
     }
     
-    // MARK: - setupHierarchy
-    
     override func setupHierarchy() {
         view.addSubview(alertView)
         labelStackView.addArrangedSubviews(titleLabel, subLabel)
         buttonStackView.addArrangedSubviews(secondaryButton, primaryButton)
         alertView.addSubviews(imageView, labelStackView, buttonStackView)
     }
-    
-    // MARK: - setupLayout
     
     override func setupLayout() {
         alertView.snp.makeConstraints {
@@ -169,7 +163,7 @@ final class AlertViewController: BaseViewController {
 
 private extension AlertViewController {
     
-    func cancleAction() {
+    func cancelAction() {
         dismiss(animated: false)
     }
     
@@ -192,7 +186,7 @@ private extension AlertViewController {
         if let secondaryButtonHandler {
             secondaryButtonHandler()
         } else {
-            cancleAction()
+            cancelAction()
         }
     }
     
@@ -200,7 +194,7 @@ private extension AlertViewController {
         if let primaryButtonHandler {
             primaryButtonHandler()
         } else {
-            cancleAction()
+            cancelAction()
         }
     }
     
