@@ -45,4 +45,31 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    /// Alert을 띄우는 메서드
+    func showAlert(
+        image: String = "",
+        titleText: String,
+        subText: String = "",
+        secondaryButtonText: String = "",
+        primaryButtonText: String,
+        secondaryButtonHandler: (() -> Void)? = nil,
+        primaryButtonHandler: (() -> Void)? = nil
+    ) {
+        let alert = AlertViewController()
+        alert.modalPresentationStyle = .overFullScreen
+        alert.do {
+            $0.image = image
+            
+            $0.titleText = titleText
+            $0.subText = subText
+            
+            $0.secondaryButtonText = secondaryButtonText
+            $0.primaryButtonText = primaryButtonText
+            
+            $0.secondaryButtonHandler = secondaryButtonHandler
+            $0.primaryButtonHandler = primaryButtonHandler
+        }
+        present(alert, animated: false, completion: nil)
+    }
 }
