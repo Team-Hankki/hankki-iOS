@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
 		83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED772C255A180042BA48 /* SceneDelegate.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DBED752C255A180042BA48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		838BEB012C38193800AAA153 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				838BEB022C38196300AAA153 /* TabBarItem.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		83DBED692C255A180042BA48 = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				861704F52C38303300D99E50 /* HankkiAlerts */,
+				838BEB012C38193800AAA153 /* TabBar */,
 				83DBEDB72C25664A0042BA48 /* HankkiButtons */,
 			);
 			path = Components;
@@ -499,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
+				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
 				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
