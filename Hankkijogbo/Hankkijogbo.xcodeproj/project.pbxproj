@@ -39,7 +39,8 @@
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
 		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
-		A2B599182C39B5C8004B7E4E /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* ToastView.swift */; };
+		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
+		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
@@ -91,7 +92,8 @@
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		A2B542422C32AF7500A6B225 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
-		A2B599172C39B5C8004B7E4E /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		A2B599172C39B5C8004B7E4E /* BlackToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackToastView.swift; sourceTree = "<group>"; };
+		A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteToastView.swift; sourceTree = "<group>"; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
 		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
@@ -379,7 +381,8 @@
 		A2B599162C39B497004B7E4E /* HankkiToasts */ = {
 			isa = PBXGroup;
 			children = (
-				A2B599172C39B5C8004B7E4E /* ToastView.swift */,
+				A2B599172C39B5C8004B7E4E /* BlackToastView.swift */,
+				A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */,
 			);
 			path = HankkiToasts;
 			sourceTree = "<group>";
@@ -497,7 +500,7 @@
 			files = (
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
 				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
-				A2B599182C39B5C8004B7E4E /* ToastView.swift in Sources */,
+				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
@@ -517,6 +520,7 @@
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
+				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ToastView.swift
+//  BlackToastView.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/7/24.
@@ -10,12 +10,14 @@ import UIKit
 import SnapKit
 import Then
 
-final class ToastView: BaseView {
+final class BlackToastView: BaseView {
     
     // MARK: - Properties
     
+    typealias ButtonAction = (() -> Void)
+    
     var message: String
-    @objc var action: (() -> Void)
+    @objc var action: ButtonAction
     
     // MARK: - UI Properties
     
@@ -24,7 +26,7 @@ final class ToastView: BaseView {
     
     // MARK: - Life Cycle
     
-    init(message: String, action: @escaping (() -> Void)) {
+    init(message: String, action: @escaping ButtonAction) {
         self.message = message
         self.action = action
         super.init(frame: .zero)
@@ -68,7 +70,7 @@ final class ToastView: BaseView {
         }
         actionButton.do {
             $0.setTitle("보기", for: .normal)
-            $0.titleLabel?.textColor = .white
+            $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .setupPretendardStyle(of: .body4)
             $0.setUnderline()
             $0.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
@@ -76,24 +78,11 @@ final class ToastView: BaseView {
     }
 }
 
-private extension ToastView {
-    
-    // MARK: - Private Func
-
-    /// 2초 후에 애니메이션과 함께 토스트 메세지를 제거한다.
-    private func removeToastWithAnimation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-                self.alpha = 0
-            }, completion: { _ in
-                self.removeFromSuperview()
-            })
-        })
-    }
+private extension BlackToastView {
     
     // MARK: - @objc
     
-    @objc private func actionButtonDidTap() {
+    @objc func actionButtonDidTap() {
         action()
     }
 }
