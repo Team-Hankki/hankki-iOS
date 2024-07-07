@@ -100,7 +100,7 @@ final class AlertViewController: BaseViewController {
                          backgroundColor: .white, titleColor: .red)
         
         setupButtonStyle(button: primaryButton,
-                        title: primaryButtonText,
+                         title: primaryButtonText,
                          backgroundColor: .red, titleColor: .white)
     }
     
@@ -167,10 +167,11 @@ private extension AlertViewController {
         dismiss(animated: false)
     }
     
-    func setupButtonStyle(button: UIButton,
-                          title: String,
-                          backgroundColor: UIColor,
-                          titleColor: UIColor
+    func setupButtonStyle(
+        button: UIButton,
+        title: String,
+        backgroundColor: UIColor,
+        titleColor: UIColor
     ) {
         button.layer.cornerRadius = 16
         button.backgroundColor = backgroundColor
