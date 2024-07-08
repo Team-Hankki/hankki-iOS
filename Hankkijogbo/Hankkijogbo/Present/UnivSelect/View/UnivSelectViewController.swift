@@ -40,7 +40,7 @@ final class UnivSelectViewController: BaseViewController {
             $0.axis = .vertical
             $0.spacing = 10
             $0.isLayoutMarginsRelativeArrangement = true
-            $0.layoutMargins = UIEdgeInsets(top: 38, left: 22, bottom: 34, right: 22)
+            $0.layoutMargins = UIEdgeInsets(top: 38, left: 22, bottom: 10, right: 22)
         }
         
         headerTitleLabel.do {
@@ -131,8 +131,8 @@ private extension UnivSelectViewController {
         
         layout.do {
             $0.scrollDirection = .vertical
-            $0.minimumLineSpacing = 14
-            $0.itemSize = CGSize(width: view.frame.width-44, height: 39)
+            $0.minimumLineSpacing = 0
+            $0.itemSize = CGSize(width: view.frame.width-44, height: 39 + 14)
         }
         
         return layout
