@@ -48,8 +48,9 @@
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
 		A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */; };
-		A2DEBF492C3BD7A300DE14A9 /* ZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF462C3BD7A300DE14A9 /* ZipListBottomSheetViewController.swift */; };
-		A2DEBF4A2C3BD7A300DE14A9 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF472C3BD7A300DE14A9 /* ZipListCollectionViewCell.swift */; };
+		A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */; };
+		A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */; };
+		A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
@@ -110,8 +111,9 @@
 		A2B599172C39B5C8004B7E4E /* BlackToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackToastView.swift; sourceTree = "<group>"; };
 		A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteToastView.swift; sourceTree = "<group>"; };
 		A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
-		A2DEBF462C3BD7A300DE14A9 /* ZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
-		A2DEBF472C3BD7A300DE14A9 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
+		A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
 		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
@@ -448,8 +450,9 @@
 		A2DEBF482C3BD7A300DE14A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2DEBF462C3BD7A300DE14A9 /* ZipListBottomSheetViewController.swift */,
-				A2DEBF472C3BD7A300DE14A9 /* ZipListCollectionViewCell.swift */,
+				A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */,
+				A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */,
+				A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
+				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
@@ -602,8 +606,8 @@
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
-				A2DEBF492C3BD7A300DE14A9 /* ZipListBottomSheetViewController.swift in Sources */,
-				A2DEBF4A2C3BD7A300DE14A9 /* ZipListCollectionViewCell.swift in Sources */,
+				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,
+				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,
 				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
 				83DBEDA22C2565340042BA48 /* HomeAPIService.swift in Sources */,
 			);

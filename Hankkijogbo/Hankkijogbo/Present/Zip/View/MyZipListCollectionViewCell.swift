@@ -1,5 +1,5 @@
 //
-//  ZipListCollectionViewCell.swift
+//  MyZipListCollectionViewCell.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/7/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ZipListCollectionViewCell: BaseCollectionViewCell {
+final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
@@ -58,21 +58,25 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         thumbnailImageView.do {
             $0.layer.cornerRadius = 10
+            $0.backgroundColor = .gray
         }
         zipTitleLabel.do {
             $0.textColor = .gray800
             $0.font = .setupPretendardStyle(of: .body2)
+            $0.text = "학교 5년째 다니는 화석의 추천"
         }
         firstHashtagLabel.do {
             $0.textColor = .gray400
             $0.font = .setupPretendardStyle(of: .button)
+            $0.text = "#미친가성비"
         }
         secondHashtagLabel.do {
             $0.textColor = .gray400
             $0.font = .setupPretendardStyle(of: .button)
+            $0.text = "#꼭가보세요"
         }
         addZipButton.do {
-            $0.setImage(.init(systemName: "plus"), for: .normal)
+            $0.setImage(.icPlus, for: .normal)
         }
     }
 }
