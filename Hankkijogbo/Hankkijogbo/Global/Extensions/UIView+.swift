@@ -66,14 +66,15 @@ extension UIView {
 
 extension UIView {
     
-    /// 2초 후에 애니메이션과 함께 토스트 메세지를 제거한다.
-    func removeToastWithAnimation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-                self.alpha = 0
-            }, completion: { _ in
-                self.removeFromSuperview()
-            })
+    /// 애니메이션과 함께 뷰를 제거한다.
+    func removeViewWithAnimation(duration: Double = 0.5, delay: Double = 2) {
+        UIView.animate(withDuration: duration,
+                       delay: delay,
+                       options: .curveEaseIn,
+                       animations: {
+            self.alpha = 0
+        }, completion: { _ in
+            self.removeFromSuperview()
         })
     }
     

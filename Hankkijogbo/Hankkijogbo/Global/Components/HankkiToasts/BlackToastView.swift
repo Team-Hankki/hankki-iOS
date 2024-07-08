@@ -31,7 +31,7 @@ final class BlackToastView: BaseView {
         self.action = action
         super.init(frame: .zero)
         
-        removeToastWithAnimation()
+        removeViewWithAnimation()
     }
     
     required init?(coder: NSCoder) {
