@@ -24,6 +24,12 @@ final class UnivSelectViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupButtonAction()
+    }
+    
     override func setupStyle() {
         headerStackView.do {
             $0.axis = .vertical
@@ -103,5 +109,28 @@ final class UnivSelectViewController: BaseViewController {
             $0.bottom.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
+    }
+}
+
+// MARK: - private Func
+
+private extension UnivSelectViewController {
+    
+    // MARK: - @objc
+    
+    @objc func doneButtonDidTap() {
+        print("선택하기 버튼이 클릭되었습니다.")
+    }
+    
+    @objc func laterButtonDidTap() {
+        print("찾는대학이 없는 버튼이 클릭되었습니다.")
+    }
+    
+    // MARK: - setupAction
+    
+    func setupButtonAction() {
+        doneButton.addTarget(self, action: #selector(doneButtonDidTap), for: .touchUpInside)
+        
+        laterButton.addTarget(self, action: #selector(laterButtonDidTap), for: .touchUpInside)
     }
 }
