@@ -83,7 +83,7 @@ extension UIViewController {
     ) {
         let toastView = BlackToastView(message: message, action: action)
         view.addSubview(toastView)
-        if view.hasNotch {
+        if UIScreen.hasNotch {
             toastView.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
                 $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
@@ -103,7 +103,7 @@ extension UIViewController {
     ) {
         let toastView = WhiteToastView(message: message, action: action)
         view.addSubview(toastView)
-        if view.hasNotch {
+        if UIScreen.hasNotch {
             toastView.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
                 $0.top.equalTo(view.safeAreaLayoutGuide).offset(28)
