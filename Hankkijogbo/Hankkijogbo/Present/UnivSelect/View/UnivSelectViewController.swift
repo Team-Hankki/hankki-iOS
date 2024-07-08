@@ -11,9 +11,9 @@ final class UnivSelectViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var currentUniv: String = ""
+    private var currentUniv: String = ""
     
-    let dummyUnivList: [String] = ["더미대학교", "한끼대학교", "가현대학교", "은수대학교", "서현대학교", "물만두비빔밥", "오이냉채", "계란국", "김치말이국수", "맛있겠다."]
+    private let dummyUnivList: [String] = ["더미대학교", "한끼대학교", "가현대학교", "은수대학교", "서현대학교", "물만두비빔밥", "오이냉채", "계란국", "김치말이국수", "맛있겠다."]
 
     // MARK: - UI Properties
     
