@@ -16,7 +16,7 @@ protocol FontStyle {
 enum PretendardStyle: FontStyle {
     case h1, h2
     case subtitle1, subtitle2, subtitle3
-    case body1, body2, body3, body4, body5
+    case body1, body2, body3, body4, body5, body6
     case button
     case caption1, caption2
     
@@ -26,7 +26,7 @@ enum PretendardStyle: FontStyle {
             return "Pretendard-Bold"
         case .subtitle1, .subtitle2, .subtitle3, .body3:
             return "Pretendard-SemiBold"
-        case .body1, .caption1:
+        case .body1, .body6, .caption1:
             return "Pretendard-Medium"
         case .body4, .body5, .button, .caption2:
             return "Pretendard-Regular"
@@ -49,6 +49,8 @@ enum PretendardStyle: FontStyle {
             return 14
         case .body5:
             return 13
+        case .body6:
+            return 15
         case .button, .caption1:
             return 12
         case .caption2:
