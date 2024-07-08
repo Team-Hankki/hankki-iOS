@@ -11,6 +11,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
     
@@ -95,6 +96,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         }
         
         containerView.do {
+            $0.isUserInteractionEnabled = true
             $0.backgroundColor = .white
             $0.layer.cornerRadius = 32
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -145,8 +147,14 @@ private extension MyZipListBottomSheetViewController {
     // MARK: - Private Func
     
     func setupGesture() {
-        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGestureHandler))
-        self.containerView.addGestureRecognizer(panGesture)
+        let upSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(containerViewDidUpSwipe))
+        upSwipeGesture.direction = .up
+        self.containerView.addGestureRecognizer(upSwipeGesture)
+        let downSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(containerViewDidDownSwipe))
+        downSwipeGesture.direction = .down
+        self.containerView.addGestureRecognizer(downSwipeGesture)
+        let dimmedTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap))
+        self.dimmedView.addGestureRecognizer(dimmedTapGesture)
     }
     
     func setupDelegate() {
@@ -165,6 +173,11 @@ private extension MyZipListBottomSheetViewController {
             forCellWithReuseIdentifier: MyZipListCollectionViewCell.className
         )
     }
+}
+
+extension MyZipListBottomSheetViewController {
+    
+    // MARK: - Bottom Sheet
     
     func showMyZipBottomSheet() {
         containerView.snp.remakeConstraints {
@@ -177,21 +190,65 @@ private extension MyZipListBottomSheetViewController {
         }, completion: nil)
     }
     
-    @objc func panGestureHandler(recognizer: UIPanGestureRecognizer) {
-        let velocity = recognizer.velocity(in: self.view)
-        var updatedHeight = velocity.y > 0 ? defaultHeight : expandedHeight
-        
+    func removeMyZipBottomSheet() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
-            $0.height.equalTo(updatedHeight)
+            $0.height.equalTo(0)
         }
-        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.dimmedView.alpha = 0.0
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            if self.presentingViewController != nil {
+                self.dismiss(animated: false, completion: nil)
+            }
+        })
+    }
+    
+    func remakeContainerViewHeight(_ height: CGFloat) {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(height)
+        }
+    }
+    
+    func viewLayoutIfNeededWithAnimation() {
         UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .curveEaseIn,
                        animations: {
             self.view.layoutIfNeeded()
         })
+    }
+}
+
+private extension MyZipListBottomSheetViewController {
+    
+    // MARK: - @objc
+    
+    @objc func containerViewDidUpSwipe() {
+        isExpanded = true
+        remakeContainerViewHeight(expandedHeight)
+        viewLayoutIfNeededWithAnimation()
+    }
+    
+    @objc func containerViewDidDownSwipe() {
+        var updatedHeight = defaultHeight
+        
+        if isExpanded {
+            updatedHeight = defaultHeight
+        } else {
+            updatedHeight = 0
+            removeMyZipBottomSheet()
+        }
+        
+        isExpanded = false
+        remakeContainerViewHeight(updatedHeight)
+        viewLayoutIfNeededWithAnimation()
+    }
+    
+    @objc func dimmedViewDidTap() {
+        removeMyZipBottomSheet()
     }
 }
 
