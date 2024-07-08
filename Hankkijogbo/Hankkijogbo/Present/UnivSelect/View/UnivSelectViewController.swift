@@ -18,7 +18,10 @@ final class UnivSelectViewController: BaseViewController {
     private let headerTitleLabel: UILabel = UILabel()
     private let headerContentLabel: UILabel = UILabel()
     
-
+    private let bottomButtonView: UIView = UIView()
+    private let doneButton: UIButton = UIButton()
+    private let laterButton: UIButton = UIButton()
+    
     // MARK: - Life Cycle
     
     override func setupStyle() {
@@ -46,16 +49,59 @@ final class UnivSelectViewController: BaseViewController {
                 color: .gray400
             )
         }
+        
+        bottomButtonView.do {
+            $0.backgroundColor = .hankkiWhite
+        }
+        
+        doneButton.do {
+            if let attributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: "선택하기",
+                color: .hankkiWhite
+            ) {
+                $0.setAttributedTitle(attributedTitle, for: .normal)
+                $0.backgroundColor = .hankkiRed
+                $0.layer.cornerRadius = 16
+            }
+        }
+        
+        laterButton.do {
+            if let attributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.button,
+                withText: "찾는 대학교가 없어요. 우선 둘러볼게요!",
+                color: .gray400
+            ) {
+                $0.setAttributedTitle(attributedTitle, for: .normal)
+            }
+        }
     }
     
     override func setupHierarchy() {
-        view.addSubviews(headerStackView)
+        view.addSubviews(headerStackView, bottomButtonView)
         headerStackView.addArrangedSubviews(headerTitleLabel, headerContentLabel)
+        bottomButtonView.addSubviews(doneButton, laterButton)
     }
     
     override func setupLayout() {
         headerStackView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        bottomButtonView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        doneButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(10)
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.height.equalTo(54)
+        }
+        
+        laterButton.snp.makeConstraints {
+            $0.top.equalTo(doneButton.snp.bottom).offset(10)
+            $0.bottom.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
     }
 }
