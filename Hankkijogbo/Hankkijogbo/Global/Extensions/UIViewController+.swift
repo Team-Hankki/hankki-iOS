@@ -115,21 +115,4 @@ extension UIViewController {
             }
         }
     }
-    
-    /// UISheetPresentationController를 통해 ViewController를 Sheet 형태로 present할 때 사용한다.
-    /// - detents의 기본값 : medium, large -> sheet가 중간 및 최대 높이를 가질 수 있게 설정
-    func showSheetPresentation(
-        _ viewController: UIViewController,
-        detents: [UISheetPresentationController.Detent] = [.medium(), .large()],
-        cornerRadius: CGFloat = 32
-    ) {
-        if let sheet = viewController.sheetPresentationController {
-            sheet.detents = detents
-            sheet.preferredCornerRadius = cornerRadius
-            sheet.prefersEdgeAttachedInCompactHeight = true
-            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-        }
-
-        present(viewController, animated: true, completion: nil)
-    }
 }
