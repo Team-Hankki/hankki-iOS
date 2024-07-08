@@ -100,7 +100,12 @@ final class UnivSelectViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(headerStackView, univCollectionView, bottomButtonViewGradient, bottomButtonView)
+        view.addSubviews(
+            headerStackView,
+            univCollectionView,
+            bottomButtonViewGradient, 
+            bottomButtonView
+        )
         headerStackView.addArrangedSubviews(headerTitleLabel, headerContentLabel)
         bottomButtonView.addSubviews(doneButton, laterButton)
     }
@@ -148,7 +153,7 @@ private extension UnivSelectViewController {
         layout.do {
             $0.scrollDirection = .vertical
             $0.minimumLineSpacing = 0
-            $0.itemSize = CGSize(width: view.frame.width-44, height: 39 + 14)
+            $0.itemSize = CGSize(width: view.frame.width - 44, height: 39 + 14)
             $0.footerReferenceSize = CGSize(width: view.frame.width, height: 54)
         }
         
@@ -184,28 +189,24 @@ private extension UnivSelectViewController {
     // MARK: - @objc
     
     @objc func doneButtonDidTap() {
+        // TODO: - api 연동 후 버튼 내용 수정
         print(currentUniv, ": 선택하기 버튼이 클릭되었습니다.")
     }
     
     @objc func laterButtonDidTap() {
+        // TODO: - api 연동 후 버튼 내용 수정
         print("찾는대학이 없는 버튼이 클릭되었습니다.")
     }
-    
-    // MARK: - setupAction
     
     func setupButtonAction() {
         doneButton.addTarget(self, action: #selector(doneButtonDidTap), for: .touchUpInside)
         laterButton.addTarget(self, action: #selector(laterButtonDidTap), for: .touchUpInside)
     }
     
-    // MARK: - setupRegister
-    
     func setupRegister() {
         univCollectionView.register(UnivCollectionViewCell.self, forCellWithReuseIdentifier: UnivCollectionViewCell.className)
     }
-    
-    // MARK: - setupDelegate
-    
+
     func setupDelegate() {
         univCollectionView.dataSource = self
         univCollectionView.delegate = self
