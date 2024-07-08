@@ -92,13 +92,10 @@ final class UnivSelectViewController: BaseViewController {
         }
         
         laterButton.do {
-            if let attributedTitle = UILabel.setupAttributedText(
-                for: PretendardStyle.button,
-                withText: "찾는 대학교가 없어요. 우선 둘러볼게요!",
-                color: .gray400
-            ) {
-                $0.setAttributedTitle(attributedTitle, for: .normal)
-            }
+            $0.setTitle("찾는 대학교가 없어요. 우선 둘러볼게요!", for: .normal)
+            $0.titleLabel?.font = .setupPretendardStyle(of: .button)
+            $0.setTitleColor(.gray400, for: .normal)
+            $0.setUnderline()
         }
     }
     
