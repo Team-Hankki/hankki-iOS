@@ -45,4 +45,74 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    /// Alert을 띄우는 메서드
+    func showAlert(
+        image: String = "",
+        titleText: String,
+        subText: String = "",
+        secondaryButtonText: String = "",
+        primaryButtonText: String,
+        secondaryButtonHandler: (() -> Void)? = nil,
+        primaryButtonHandler: (() -> Void)? = nil
+    ) {
+        let alert = AlertViewController()
+        alert.modalPresentationStyle = .overFullScreen
+        alert.do {
+            $0.image = image
+            
+            $0.titleText = titleText
+            $0.subText = subText
+            
+            $0.secondaryButtonText = secondaryButtonText
+            $0.primaryButtonText = primaryButtonText
+            
+            $0.secondaryButtonHandler = secondaryButtonHandler
+            $0.primaryButtonHandler = primaryButtonHandler
+        }
+        present(alert, animated: false, completion: nil)
+    }
+}
+
+extension UIViewController {
+    
+    /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
+    func showBlackToast(
+        message: String,
+        action: @escaping (() -> Void)
+    ) {
+        let toastView = BlackToastView(message: message, action: action)
+        view.addSubview(toastView)
+        if UIScreen.hasNotch {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            }
+        } else {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(16)
+            }
+        }
+    }
+    
+    /// 상단에 뜨는 흰 토스트뷰를 띄우는 함수
+    func showWhiteToast(
+        message: String,
+        action: @escaping (() -> Void)
+    ) {
+        let toastView = WhiteToastView(message: message, action: action)
+        view.addSubview(toastView)
+        if UIScreen.hasNotch {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(view.safeAreaLayoutGuide).offset(28)
+            }
+        } else {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalToSuperview().inset(35)
+            }
+        }
+    }
 }
