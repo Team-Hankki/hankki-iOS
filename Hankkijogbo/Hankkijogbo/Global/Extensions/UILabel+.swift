@@ -48,4 +48,37 @@ extension UILabel {
         attributedString.addAttributes([.font: font as Any, .foregroundColor: color as Any], range: range)
         attributedText = attributedString
     }
+    
+    /// attributedText를 설정하는 메서드
+    static func setupAttributedText<T: FontStyle>(
+        for fontName: T,
+        withText text: String = "",
+        color: UIColor = .black
+    ) -> NSAttributedString? {
+        
+        var font: UIFont
+
+        if T.self == PretendardStyle.self {
+            font = UIFont.setupPretendardStyle(of: fontName as! PretendardStyle)!
+        } else if T.self == SuiteStyle.self {
+            font = UIFont.setupSuiteStyle(of: fontName as! SuiteStyle)!
+        } else {
+            font = UIFont.systemFont(ofSize: 12)
+        }
+        
+        let paragraphStyle = NSMutableParagraphStyle().then {
+            $0.minimumLineHeight = fontName.lineHeight * fontName.size
+            $0.maximumLineHeight = fontName.lineHeight * fontName.size
+        }
+        
+        let offset = (fontName.lineHeight * fontName.size - fontName.size) / 2
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: color,
+            .paragraphStyle: paragraphStyle,
+            .baselineOffset: offset]
+                
+        return NSAttributedString(string: text, attributes: attributes)
+    }
 }

@@ -72,18 +72,22 @@ final class AlertViewController: BaseViewController {
         }
         
         titleLabel.do {
-            $0.text = titleText
-            $0.font = .setupPretendardStyle(of: .subtitle3)
-            $0.textColor = .black
-            $0.numberOfLines = 0
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: titleText,
+                color: .black
+            )
             $0.textAlignment = style.labelAlignment
+            $0.numberOfLines = 0
             $0.isHidden = titleText.isEmpty
         }
         
         subLabel.do {
-            $0.text = subText
-            $0.font = .setupPretendardStyle(of: .body4)
-            $0.textColor = .gray500
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body4,
+                withText: subText,
+                color: .gray500
+            )
             $0.numberOfLines = 0
             $0.textAlignment = style.labelAlignment
             $0.isHidden = subText.isEmpty
@@ -173,12 +177,18 @@ private extension AlertViewController {
         backgroundColor: UIColor,
         titleColor: UIColor
     ) {
-        button.layer.cornerRadius = 16
-        button.backgroundColor = backgroundColor
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
-        button.setTitleColor(titleColor, for: .normal)
-        button.isHidden = title.isEmpty
+        button.do {
+            if let attributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: title,
+                color: titleColor
+            ) {
+                $0.setAttributedTitle(attributedTitle, for: .normal)
+                $0.layer.cornerRadius = 16
+                $0.backgroundColor = backgroundColor
+                $0.isHidden = title.isEmpty
+            }
+        }
     }
     
     // MARK: - @objc

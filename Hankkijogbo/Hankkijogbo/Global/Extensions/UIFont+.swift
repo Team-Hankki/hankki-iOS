@@ -7,7 +7,13 @@
 
 import UIKit
 
-enum PretendardStyle {
+protocol FontStyle {
+    var rawValue: String { get }
+    var size: CGFloat { get }
+    var lineHeight: CGFloat { get }
+}
+
+enum PretendardStyle: FontStyle {
     case h1, h2
     case subtitle1, subtitle2, subtitle3
     case body1, body2, body3, body4, body5
@@ -49,16 +55,23 @@ enum PretendardStyle {
             return 11
         }
     }
+    
+    var lineHeight: CGFloat {
+        switch self {
+        default:
+            return 1.5
+        }
+    }
 }
 
-enum SuiteStyle {
-    case h1
+enum SuiteStyle: FontStyle {
+    case h1, h2
     case subtitle
     case body1, body2
     
     var rawValue: String {
         switch self {
-        case .h1:
+        case .h1, .h2:
             return "SUITE-Bold"
         case .subtitle:
             return "SUITE-SemiBold"
@@ -73,10 +86,19 @@ enum SuiteStyle {
         switch self {
         case .h1:
             return 24
+        case .h2:
+            return 20
         case .subtitle, .body1:
             return 16
         case .body2:
             return 14
+        }
+    }
+    
+    var lineHeight: CGFloat {
+        switch self {
+        default:
+            return 1.5
         }
     }
 }
