@@ -12,6 +12,8 @@ final class UnivSelectViewController: BaseViewController {
     // MARK: - Properties
     
     var currentUniv: String = ""
+    
+    let dummyUnivList: [String] = ["더미대학교", "한끼대학교", "가현대학교", "은수대학교", "서현대학교", "물만두비빔밥", "오이냉채", "계란국", "김치말이국수", "맛있겠다."]
 
     // MARK: - UI Properties
     
@@ -61,6 +63,10 @@ final class UnivSelectViewController: BaseViewController {
             )
         }
         
+        univCollectionView.do {
+            $0.allowsMultipleSelection = false
+        }
+        
         bottomButtonView.do {
             $0.backgroundColor = .hankkiWhite
         }
@@ -72,9 +78,10 @@ final class UnivSelectViewController: BaseViewController {
                 color: .hankkiWhite
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
-                $0.backgroundColor = .hankkiRed
-                $0.layer.cornerRadius = 16
             }
+            $0.backgroundColor = .hankkiRedLight
+            $0.layer.cornerRadius = 16
+            $0.isEnabled = false
         }
         
         laterButton.do {
@@ -138,10 +145,17 @@ private extension UnivSelectViewController {
         return layout
     }
     
+    func setupEnabledDoneButton() {
+        doneButton.do {
+            $0.backgroundColor = .hankkiRed
+            $0.isEnabled = true
+        }
+    }
+    
     // MARK: - @objc
     
     @objc func doneButtonDidTap() {
-        print("선택하기 버튼이 클릭되었습니다.")
+        print(currentUniv, ": 선택하기 버튼이 클릭되었습니다.")
     }
     
     @objc func laterButtonDidTap() {
@@ -152,11 +166,10 @@ private extension UnivSelectViewController {
     
     func setupButtonAction() {
         doneButton.addTarget(self, action: #selector(doneButtonDidTap), for: .touchUpInside)
-        
         laterButton.addTarget(self, action: #selector(laterButtonDidTap), for: .touchUpInside)
     }
     
-    //MARK: - setupRegister
+    // MARK: - setupRegister
     
     func setupRegister() {
         univCollectionView.register(UnivCollectionViewCell.self, forCellWithReuseIdentifier: UnivCollectionViewCell.className)
@@ -166,6 +179,7 @@ private extension UnivSelectViewController {
     
     func setupDelegate() {
         univCollectionView.dataSource = self
+        univCollectionView.delegate = self
     }
 }
 
@@ -173,7 +187,7 @@ private extension UnivSelectViewController {
 
 extension UnivSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return dummyUnivList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -181,7 +195,22 @@ extension UnivSelectViewController: UICollectionViewDataSource {
             withReuseIdentifier: UnivCollectionViewCell.className,
             for: indexPath
         ) as? UnivCollectionViewCell else { return UICollectionViewCell() }
-//        cell.dataBind(itemData[indexPath.item], itemRow: indexPath.item)
+        cell.dataBind(dummyUnivList[indexPath.item])
         return cell
+    }
+}
+
+extension UnivSelectViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        currentUniv = dummyUnivList[indexPath[1]]
+        if !currentUniv.isEmpty {
+            setupEnabledDoneButton()
+        }
+    }
+}
+
+extension UnivSelectViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return true
     }
 }

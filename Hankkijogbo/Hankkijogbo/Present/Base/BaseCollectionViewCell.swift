@@ -37,5 +37,3 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     func setupStyle() { }
 }
-
-

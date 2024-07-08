@@ -11,16 +11,25 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                univLabel.textColor = .hankkiRed
+            } else {
+                univLabel.textColor = .gray900
+            }
+        }
+    }
+
     // MARK: - UI Properties
     
     private let univLabel: UILabel = UILabel()
     private let line: UIView = UIView()
-    
+
     override func setupStyle() {
         univLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "서현대학교",
                 color: .gray900
             )
         }
@@ -37,7 +46,7 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
     override func setupLayout() {
         univLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(14)
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(8)
         }
         
         line.snp.makeConstraints {
@@ -45,5 +54,11 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
+    }
+}
+
+extension UnivCollectionViewCell {
+    func dataBind(_ univText: String) {
+        univLabel.text = univText
     }
 }
