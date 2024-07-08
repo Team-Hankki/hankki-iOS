@@ -184,10 +184,10 @@ private extension AlertViewController {
                 color: titleColor
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
-                $0.layer.cornerRadius = 16
-                $0.backgroundColor = backgroundColor
-                $0.isHidden = title.isEmpty
             }
+            $0.layer.cornerRadius = 16
+            $0.backgroundColor = backgroundColor
+            $0.isHidden = title.isEmpty
         }
     }
     
