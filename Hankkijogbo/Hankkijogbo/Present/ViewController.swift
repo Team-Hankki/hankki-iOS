@@ -14,12 +14,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        showBlackToast(message: "나의 족보에 추가되었습니다.") {
-            print("zz")
-        }
-        showWhiteToast(message: "내 족보에 추가했어요") {
-            print("xx")
-        }
+        view.backgroundColor = .hankkiWhite
     }
 }
