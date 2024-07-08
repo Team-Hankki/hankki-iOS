@@ -24,42 +24,24 @@ extension UIView {
         self.clipsToBounds = true
         self.layer.cornerRadius = radius
     }
-}
-
-extension UIView {
     
-    // MARK: - 기기 대응
-    
-    func getDeviceWidth() -> CGFloat {
-        return UIScreen.main.bounds.width
+    /// 애니메이션과 함께 뷰를 제거한다.
+    func removeViewWithAnimation(duration: Double = 0.5, delay: Double = 2) {
+        UIView.animate(withDuration: duration,
+                       delay: delay,
+                       options: .curveEaseIn,
+                       animations: {
+            self.alpha = 0
+        }, completion: { _ in
+            self.removeFromSuperview()
+        })
     }
     
-    func getDeviceHeight() -> CGFloat {
-        return UIScreen.main.bounds.height
-    }
-    
-    /// 아이폰 13 미니(width 375)를 기준으로 레이아웃을 잡고, 기기의 width 사이즈를 곱해 대응 값을 구할 때 사용
-    func convertByWidthRatio(_ convert: CGFloat) -> CGFloat {
-        return convert * (getDeviceWidth() / 375)
-    }
-    
-    /// 아이폰 13 미니(height 812)를 기준으로 레이아웃을 잡고, 기기의 height 사이즈를 곱해 대응 값을 구할 때 사용
-    func convertByHeightRatio(_ convert: CGFloat) -> CGFloat {
-        return convert * (getDeviceHeight() / 812)
-    }
-    
-    /// 아이폰 13 미니(width 375)를 기준으로 레이아웃을 잡고, 기기의 width 사이즈를 곱해 대응 값을 구할 때 사용
-    func convertByReverseWidthRatio(_ convert: CGFloat) -> CGFloat {
-        return convert * (375 / getDeviceWidth())
-    }
-    
-    /// 아이폰 13 미니(height 812)를 기준으로 레이아웃을 잡고, 기기의 height 사이즈를 곱해 대응 값을 구할 때 사용
-    func convertByReverseHeightRatio(_ convert: CGFloat) -> CGFloat {
-        return convert * (812 / getDeviceHeight())
-    }
-    
-    /// 노치가 있는지 없는지 Bool 값 반환
-    var hasNotch: Bool {
-        return !( (UIScreen.main.bounds.width / UIScreen.main.bounds.height) > 0.5 )
+    /// 파라미터 값에 맞는 Shadow를 추가한다.
+    func addShadow(color: UIColor, opacity: Float, radius: CGFloat, offset: CGSize) {
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowRadius = radius
+        self.layer.shadowOffset = offset
     }
 }
