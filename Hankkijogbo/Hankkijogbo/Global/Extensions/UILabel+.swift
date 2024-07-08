@@ -53,7 +53,7 @@ extension UILabel {
     static func setupAttributedText<T: FontStyle>(
         for fontName: T,
         withText text: String = "",
-        color: UIColor = .black
+        color: UIColor = .gray900
     ) -> NSAttributedString? {
         
         var font: UIFont
@@ -77,7 +77,8 @@ extension UILabel {
             .font: font,
             .foregroundColor: color,
             .paragraphStyle: paragraphStyle,
-            .baselineOffset: offset]
+            .baselineOffset: offset
+        ]
                 
         return NSAttributedString(string: text, attributes: attributes)
     }

@@ -75,7 +75,7 @@ final class AlertViewController: BaseViewController {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
                 withText: titleText,
-                color: .black
+                color: .gray900
             )
             $0.textAlignment = style.labelAlignment
             $0.numberOfLines = 0
