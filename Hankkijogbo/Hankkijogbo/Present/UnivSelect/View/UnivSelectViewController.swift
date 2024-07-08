@@ -25,6 +25,8 @@ final class UnivSelectViewController: BaseViewController {
     private let doneButton: UIButton = UIButton()
     private let laterButton: UIButton = UIButton()
     
+    private let bottomButtonViewGradient = UIView()
+    
     private lazy var univCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupUnivCollectionViewFlowLayout())
     
     // MARK: - Life Cycle
@@ -35,6 +37,11 @@ final class UnivSelectViewController: BaseViewController {
         setupButtonAction()
         setupDelegate()
         setupRegister()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupBottomButtonViewGradient()
     }
     
     override func setupStyle() {
@@ -68,7 +75,7 @@ final class UnivSelectViewController: BaseViewController {
         }
         
         bottomButtonView.do {
-            $0.backgroundColor = .hankkiWhite
+            $0.backgroundColor = .clear
         }
         
         doneButton.do {
@@ -96,7 +103,7 @@ final class UnivSelectViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(headerStackView, univCollectionView, bottomButtonView)
+        view.addSubviews(headerStackView, univCollectionView, bottomButtonViewGradient, bottomButtonView)
         headerStackView.addArrangedSubviews(headerTitleLabel, headerContentLabel)
         bottomButtonView.addSubviews(doneButton, laterButton)
     }
@@ -108,24 +115,29 @@ final class UnivSelectViewController: BaseViewController {
         
         univCollectionView.snp.makeConstraints {
             $0.top.equalTo(headerStackView.snp.bottom)
-            $0.bottom.equalTo(bottomButtonView.snp.top)
+            $0.bottom.equalTo(bottomButtonView.snp.top).offset(16 + 54)
             $0.leading.trailing.equalToSuperview()
         }
         
+        bottomButtonViewGradient.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(154)
+        }
+        
         bottomButtonView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         doneButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(10)
+            $0.top.bottom.equalToSuperview().inset(50)
             $0.leading.trailing.equalToSuperview().inset(22)
             $0.height.equalTo(54)
         }
         
         laterButton.snp.makeConstraints {
-            $0.top.equalTo(doneButton.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview()
+            $0.top.equalTo(doneButton.snp.bottom).offset(14)
             $0.centerX.equalToSuperview()
+            $0.height.equalTo(18)
         }
     }
 }
@@ -140,6 +152,7 @@ private extension UnivSelectViewController {
             $0.scrollDirection = .vertical
             $0.minimumLineSpacing = 0
             $0.itemSize = CGSize(width: view.frame.width-44, height: 39 + 14)
+            $0.footerReferenceSize = CGSize(width: view.frame.width, height: 54)
         }
         
         return layout
@@ -150,6 +163,25 @@ private extension UnivSelectViewController {
             $0.backgroundColor = .hankkiRed
             $0.isEnabled = true
         }
+    }
+    
+    func setupBottomButtonViewGradient() {
+        let gradient = CAGradientLayer()
+        
+        gradient.do {
+            $0.colors = [
+                UIColor.white.withAlphaComponent(0).cgColor,
+                UIColor.white.cgColor,
+                UIColor.white.cgColor
+              ]
+            $0.locations = [0.0, 0.3, 1.0]
+            $0.startPoint = CGPoint(x: 0.5, y: 0.0)
+            $0.endPoint = CGPoint(x: 0.5, y: 1.0)
+            $0.frame = bottomButtonView.bounds
+            
+        }
+        
+        bottomButtonViewGradient.layer.addSublayer(gradient)
     }
     
     // MARK: - @objc
@@ -195,7 +227,7 @@ extension UnivSelectViewController: UICollectionViewDataSource {
             withReuseIdentifier: UnivCollectionViewCell.className,
             for: indexPath
         ) as? UnivCollectionViewCell else { return UICollectionViewCell() }
-        cell.dataBind(dummyUnivList[indexPath.item])
+        cell.dataBind(dummyUnivList[indexPath.item], isFinal: dummyUnivList.count == indexPath.item + 1)
         return cell
     }
 }
