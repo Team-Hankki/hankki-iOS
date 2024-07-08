@@ -8,6 +8,7 @@
 import UIKit
 
 final class UnivSelectViewController: BaseViewController {
+    
     // MARK: - Properties
     
     var currentUniv: String = ""
@@ -22,12 +23,16 @@ final class UnivSelectViewController: BaseViewController {
     private let doneButton: UIButton = UIButton()
     private let laterButton: UIButton = UIButton()
     
+    private lazy var univCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupUnivCollectionViewFlowLayout())
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupButtonAction()
+        setupDelegate()
+        setupRegister()
     }
     
     override func setupStyle() {
@@ -84,7 +89,7 @@ final class UnivSelectViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(headerStackView, bottomButtonView)
+        view.addSubviews(headerStackView, univCollectionView, bottomButtonView)
         headerStackView.addArrangedSubviews(headerTitleLabel, headerContentLabel)
         bottomButtonView.addSubviews(doneButton, laterButton)
     }
@@ -92,6 +97,12 @@ final class UnivSelectViewController: BaseViewController {
     override func setupLayout() {
         headerStackView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        univCollectionView.snp.makeConstraints {
+            $0.top.equalTo(headerStackView.snp.bottom)
+            $0.bottom.equalTo(bottomButtonView.snp.top)
+            $0.leading.trailing.equalToSuperview()
         }
         
         bottomButtonView.snp.makeConstraints {
@@ -115,6 +126,17 @@ final class UnivSelectViewController: BaseViewController {
 // MARK: - private Func
 
 private extension UnivSelectViewController {
+    func setupUnivCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.do {
+            $0.scrollDirection = .vertical
+            $0.minimumLineSpacing = 14
+            $0.itemSize = CGSize(width: view.frame.width-44, height: 39)
+        }
+        
+        return layout
+    }
     
     // MARK: - @objc
     
@@ -132,5 +154,34 @@ private extension UnivSelectViewController {
         doneButton.addTarget(self, action: #selector(doneButtonDidTap), for: .touchUpInside)
         
         laterButton.addTarget(self, action: #selector(laterButtonDidTap), for: .touchUpInside)
+    }
+    
+    //MARK: - setupRegister
+    
+    func setupRegister() {
+        univCollectionView.register(UnivCollectionViewCell.self, forCellWithReuseIdentifier: UnivCollectionViewCell.className)
+    }
+    
+    // MARK: - setupDelegate
+    
+    func setupDelegate() {
+        univCollectionView.dataSource = self
+    }
+}
+
+// MARK: - delegate
+
+extension UnivSelectViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: UnivCollectionViewCell.className,
+            for: indexPath
+        ) as? UnivCollectionViewCell else { return UICollectionViewCell() }
+//        cell.dataBind(itemData[indexPath.item], itemRow: indexPath.item)
+        return cell
     }
 }
