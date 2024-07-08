@@ -33,10 +33,10 @@ extension UIViewController {
             statusBar.backgroundColor = statusBarColor
             return
         }
-
+        
         guard let window = UIApplication.shared.windows.first,
               let statusBarManager = window.windowScene?.statusBarManager else { return }
-
+        
         let statusBarView = UIView(frame: statusBarManager.statusBarFrame)
         statusBarView.backgroundColor = statusBarColor
         window.addSubview(statusBarView)
@@ -45,6 +45,9 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension UIViewController {
     
     /// Alert을 띄우는 메서드
     func showAlert(
@@ -72,9 +75,6 @@ extension UIViewController {
         }
         present(alert, animated: false, completion: nil)
     }
-}
-
-extension UIViewController {
     
     /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
     func showBlackToast(
@@ -114,5 +114,22 @@ extension UIViewController {
                 $0.top.equalToSuperview().inset(35)
             }
         }
+    }
+    
+    /// UISheetPresentationController를 통해 ViewController를 Sheet 형태로 present할 때 사용한다.
+    /// - detents의 기본값 : medium, large -> sheet가 중간 및 최대 높이를 가질 수 있게 설정
+    func showSheetPresentation(
+        _ viewController: UIViewController,
+        detents: [UISheetPresentationController.Detent] = [.medium(), .large()],
+        cornerRadius: CGFloat = 32
+    ) {
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = detents
+            sheet.preferredCornerRadius = cornerRadius
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        }
+
+        present(viewController, animated: true, completion: nil)
     }
 }

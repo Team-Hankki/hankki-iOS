@@ -30,6 +30,22 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         setupRegister()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIView.animate(withDuration: 0.2) {
+            self.presentingViewController?.view.alpha = 0.33
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        UIView.animate(withDuration: 0.2) {
+            self.presentingViewController?.view.alpha = 1
+        }
+    }
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
@@ -44,7 +60,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     override func setupLayout() {
         bottomSheetHandlerView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(50)
+            $0.top.equalToSuperview().inset(9)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(44)
             $0.height.equalTo(4)
@@ -133,7 +149,7 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader, // 헤더일때
+        guard kind == UICollectionView.elementKindSectionHeader,
               let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: MyZipListHeaderView.className,
@@ -141,7 +157,6 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
               ) as? MyZipListHeaderView else {
             return UICollectionReusableView()
         }
-
         return header
     }
     
