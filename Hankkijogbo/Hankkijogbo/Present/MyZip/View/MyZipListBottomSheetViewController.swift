@@ -11,8 +11,13 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
+    var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
+    
     // MARK: - UI Properties
     
+    private let dimmedView = UIView()
+    private let containerView = UIView()
     private let bottomSheetHandlerView = UIView()
     private let titleLabel = UILabel()
     private let addNewZipButton = UIButton()
@@ -26,30 +31,17 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupGesture()
         setupDelegate()
         setupRegister()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        UIView.animate(withDuration: 0.2) {
-            self.presentingViewController?.view.alpha = 0.33
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        UIView.animate(withDuration: 0.2) {
-            self.presentingViewController?.view.alpha = 1
-        }
+        showMyZipBottomSheet()
     }
     
     // MARK: - Set UI
     
     override func setupHierarchy() {
-        view.addSubviews(
+        view.addSubviews(dimmedView, containerView)
+        containerView.addSubviews(
             bottomSheetHandlerView,
             titleLabel,
             addNewZipStackView,
@@ -59,25 +51,38 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     }
     
     override func setupLayout() {
+        dimmedView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        
         bottomSheetHandlerView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(9)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(44)
             $0.height.equalTo(4)
         }
+        
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(18)
             $0.centerX.equalToSuperview()
         }
+        
         addNewZipStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(18)
             $0.leading.trailing.equalToSuperview().inset(22)
             $0.height.equalTo(56)
         }
+        
         addNewZipButton.snp.makeConstraints {
             $0.size.equalTo(56)
             $0.leading.equalToSuperview()
         }
+        
         myZipCollectionView.snp.makeConstraints {
             $0.top.equalTo(addNewZipStackView.snp.bottom).offset(18)
             $0.leading.trailing.bottom.equalToSuperview()
@@ -85,34 +90,50 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        dimmedView.do {
+            $0.backgroundColor = .black.withAlphaComponent(0.67)
+        }
+        
+        containerView.do {
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = 32
+            $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
         bottomSheetHandlerView.do {
             $0.backgroundColor = .gray200
             $0.layer.cornerRadius = 2
         }
+        
         titleLabel.do {
             $0.text = "나의 식당 족보"
             $0.textColor = .gray850
             $0.font = .setupPretendardStyle(of: .subtitle3)
         }
+        
         addNewZipStackView.do {
             $0.axis = .horizontal
             $0.spacing = 18
             $0.alignment = .center
         }
+        
         addNewZipButton.do {
             $0.backgroundColor = .gray
         }
+        
         addNewZipLabel.do {
             $0.text = "새로운 족보 추가하기"
             $0.textColor = .gray800
             $0.font = .setupPretendardStyle(of: .body3)
         }
+        
         flowLayout.do {
             $0.estimatedItemSize = .init(width: UIScreen.getDeviceWidth(), height: 56)
             $0.headerReferenceSize = .init(width: UIScreen.getDeviceWidth(), height: 35)
             $0.minimumLineSpacing = 12
             $0.scrollDirection = .vertical
         }
+        
         myZipCollectionView.do {
             $0.backgroundColor = .gray50
         }
@@ -122,6 +143,11 @@ final class MyZipListBottomSheetViewController: BaseViewController {
 private extension MyZipListBottomSheetViewController {
     
     // MARK: - Private Func
+    
+    func setupGesture() {
+        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGestureHandler))
+        self.containerView.addGestureRecognizer(panGesture)
+    }
     
     func setupDelegate() {
         myZipCollectionView.delegate = self
@@ -138,6 +164,34 @@ private extension MyZipListBottomSheetViewController {
             MyZipListCollectionViewCell.self,
             forCellWithReuseIdentifier: MyZipListCollectionViewCell.className
         )
+    }
+    
+    func showMyZipBottomSheet() {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(defaultHeight)
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc func panGestureHandler(recognizer: UIPanGestureRecognizer) {
+        let velocity = recognizer.velocity(in: self.view)
+        var updatedHeight = velocity.y > 0 ? defaultHeight : expandedHeight
+        
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(updatedHeight)
+        }
+        
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
+            self.view.layoutIfNeeded()
+        })
     }
 }
 

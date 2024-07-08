@@ -19,7 +19,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     private let secondHashtagLabel = UILabel()
     private let addZipButton = UIButton()
     
-    // MARK: - Func
+    // MARK: - Set UI
     
     override func setupHierarchy() {
         contentView.addSubviews(

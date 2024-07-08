@@ -200,7 +200,7 @@
 				A22D20C92C3165B6001AFAC6 /* Base */,
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				83DBED8D2C2564790042BA48 /* Home */,
-				A2B599192C39D0BC004B7E4E /* Zip */,
+				A2B599192C39D0BC004B7E4E /* MyZip */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -439,12 +439,12 @@
 			path = HankkiToasts;
 			sourceTree = "<group>";
 		};
-		A2B599192C39D0BC004B7E4E /* Zip */ = {
+		A2B599192C39D0BC004B7E4E /* MyZip */ = {
 			isa = PBXGroup;
 			children = (
 				A2DEBF482C3BD7A300DE14A9 /* View */,
 			);
-			path = Zip;
+			path = MyZip;
 			sourceTree = "<group>";
 		};
 		A2DEBF482C3BD7A300DE14A9 /* View */ = {
