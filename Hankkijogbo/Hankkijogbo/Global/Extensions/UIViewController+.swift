@@ -73,3 +73,46 @@ extension UIViewController {
         present(alert, animated: false, completion: nil)
     }
 }
+
+extension UIViewController {
+    
+    /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
+    func showBlackToast(
+        message: String,
+        action: @escaping (() -> Void)
+    ) {
+        let toastView = BlackToastView(message: message, action: action)
+        view.addSubview(toastView)
+        if view.hasNotch {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            }
+        } else {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(16)
+            }
+        }
+    }
+    
+    /// 상단에 뜨는 흰 토스트뷰를 띄우는 함수
+    func showWhiteToast(
+        message: String,
+        action: @escaping (() -> Void)
+    ) {
+        let toastView = WhiteToastView(message: message, action: action)
+        view.addSubview(toastView)
+        if view.hasNotch {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(view.safeAreaLayoutGuide).offset(28)
+            }
+        } else {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalToSuperview().inset(35)
+            }
+        }
+    }
+}

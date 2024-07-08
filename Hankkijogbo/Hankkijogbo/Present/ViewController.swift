@@ -12,17 +12,14 @@ import Then
 
 class ViewController: UIViewController {
     
-    let toastMessage = WhiteToastView(message: "나의 족보에 추가했어요") {
-        print("나의 족보 화면으로 이동해야 함")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(toastMessage)
-        toastMessage.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        showBlackToast(message: "나의 족보에 추가되었습니다.") {
+            print("zz")
+        }
+        showWhiteToast(message: "내 족보에 추가했어요") {
+            print("xx")
         }
     }
 }

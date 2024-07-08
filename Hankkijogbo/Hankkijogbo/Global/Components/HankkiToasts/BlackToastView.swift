@@ -46,6 +46,7 @@ final class BlackToastView: BaseView {
     
     override func setupLayout() {
         self.snp.makeConstraints {
+            $0.width.equalTo(343)
             $0.height.equalTo(49)
         }
         messageLabel.snp.makeConstraints {
@@ -60,7 +61,7 @@ final class BlackToastView: BaseView {
     
     override func setupStyle() {
         self.do {
-            $0.backgroundColor = .gray900.withAlphaComponent(0.85)
+            $0.backgroundColor = UIColor.gray900.withAlphaComponent(0.85)
             $0.layer.cornerRadius = 6
         }
         messageLabel.do {
