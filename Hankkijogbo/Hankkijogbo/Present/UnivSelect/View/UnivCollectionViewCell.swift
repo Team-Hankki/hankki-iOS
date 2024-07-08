@@ -62,13 +62,13 @@ extension UnivCollectionViewCell {
         univLabel.text = univText
         
         if isFinal {
-            setupFianlStyle()
+            setupFinalStyle()
         }
     }
 }
 
 private extension UnivCollectionViewCell {
-    func setupFianlStyle() {
+    func setupFinalStyle() {
         line.do {
             $0.isHidden = true
         }
