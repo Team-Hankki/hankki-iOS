@@ -79,7 +79,7 @@ final class UnivSelectViewController: BaseViewController {
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
-            $0.backgroundColor = .hankkiRedLight
+            $0.backgroundColor = .hankkiRedLight2
             $0.layer.cornerRadius = 16
             $0.isEnabled = false
         }
