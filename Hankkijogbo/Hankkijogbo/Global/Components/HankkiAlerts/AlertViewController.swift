@@ -55,7 +55,7 @@ final class AlertViewController: BaseViewController {
         view.backgroundColor = .black.withAlphaComponent(0.67)
         
         alertView.do {
-            $0.backgroundColor = .white
+            $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = style.alertCornerRadius
         }
         
@@ -101,11 +101,11 @@ final class AlertViewController: BaseViewController {
         
         setupButtonStyle(button: secondaryButton,
                          title: secondaryButtonText,
-                         backgroundColor: .white, titleColor: .red)
+                         backgroundColor: .hankkiWhite, titleColor: .hankkiRed)
         
         setupButtonStyle(button: primaryButton,
                          title: primaryButtonText,
-                         backgroundColor: .red, titleColor: .white)
+                         backgroundColor: .hankkiRed, titleColor: .hankkiWhite)
     }
     
     override func setupHierarchy() {
