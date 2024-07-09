@@ -11,9 +11,9 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
 
-    let iconImageView: UIImageView = UIImageView()
-    let titleLabel: UILabel = UILabel()
-    let lineView: UIView = UIView()
+    private let iconImageView: UIImageView = UIImageView()
+    private let titleLabel: UILabel = UILabel()
+    private let lineView: UIView = UIView()
     
     override func setupStyle() {
         iconImageView.do {

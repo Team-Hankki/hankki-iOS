@@ -11,7 +11,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
 
-    let imageView: UIImageView = UIImageView()
+    private let imageView: UIImageView = UIImageView()
     
     override func setupStyle() {
         imageView.do {
@@ -21,13 +21,12 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setupHierarchy() {
-        self.addSubviews(imageView)
+        self.addSubview(imageView)
     }
     
     override func setupLayout() {
         imageView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalToSuperview()
+            $0.width.height.equalToSuperview()
         }
     }
 }

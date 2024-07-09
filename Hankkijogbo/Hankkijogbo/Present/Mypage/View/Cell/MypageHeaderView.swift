@@ -11,14 +11,14 @@ final class MypageHeaderView: UICollectionReusableView {
     
     // MARK: - Properties
     
-    let profileImage: String = "image"
-    let profileNameText: String = "한끼 줍쇼"
+    private let profileImage: String = "image"
+    private let profileNameText: String = "한끼 줍쇼"
     
     // MARK: - UI Properties
     
-    let profileView: UIView = UIView()
-    let profileImageView: UIImageView = UIImageView()
-    let profileNameLabel: UILabel = UILabel()
+    private let profileView: UIView = UIView()
+    private let profileImageView: UIImageView = UIImageView()
+    private let profileNameLabel: UILabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,13 +50,13 @@ final class MypageHeaderView: UICollectionReusableView {
     }
     
     private func setupHierarchy() {
-        self.addSubviews(profileView)
+        self.addSubview(profileView)
         profileView.addSubviews(profileImageView, profileNameLabel)
     }
     
     private func setupLayout() {
         profileView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
         }
 
         profileImageView.snp.makeConstraints {

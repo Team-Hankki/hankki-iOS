@@ -11,14 +11,16 @@ import Then
 import SnapKit
 
 final class MypageQuitFooterView: UICollectionReusableView {
+    
     // MARK: - Properties
     
     var quitButtonHandler: (() -> Void)?
     
     // MARK: - UI Properties
-    let buttonStackVIew: UIStackView = UIStackView()
-    let buttonLabel: UILabel = UILabel()
-    let buttonImage: UIImageView = UIImageView()
+    
+    private let buttonStackVIew: UIStackView = UIStackView()
+    private let buttonLabel: UILabel = UILabel()
+    private let buttonImage: UIImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,7 +58,7 @@ final class MypageQuitFooterView: UICollectionReusableView {
     }
     
     private func setupHierarchy() {
-        self.addSubviews(buttonStackVIew)
+        self.addSubview(buttonStackVIew)
         buttonStackVIew.addArrangedSubviews(buttonLabel, buttonImage)
     }
     

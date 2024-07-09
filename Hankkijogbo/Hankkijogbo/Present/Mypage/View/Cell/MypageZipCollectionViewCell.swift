@@ -11,7 +11,7 @@ final class MypageZipCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
 
-    let imageView: UIImageView = UIImageView()
+    private let imageView: UIImageView = UIImageView()
     
     override func setupStyle() {
         imageView.do {
@@ -21,7 +21,7 @@ final class MypageZipCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setupHierarchy() {
-        self.addSubviews(imageView)
+        self.addSubview(imageView)
     }
     
     override func setupLayout() {

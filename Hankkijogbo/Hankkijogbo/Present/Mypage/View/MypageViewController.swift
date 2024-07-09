@@ -34,7 +34,7 @@ final class MypageViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(collectionView)
+        view.addSubview(collectionView)
     }
     
     override func setupLayout() {
