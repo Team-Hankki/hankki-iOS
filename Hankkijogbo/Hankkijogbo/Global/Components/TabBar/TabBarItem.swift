@@ -52,7 +52,7 @@ enum TabBarItem: CaseIterable {
         switch self {
         case .home: return ViewController()
         case .report: return ViewController()
-        case .mypage: return ViewController()
+        case .mypage: return MypageViewController()
         }
     }
 }
