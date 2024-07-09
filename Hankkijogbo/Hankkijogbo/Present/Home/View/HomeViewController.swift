@@ -16,6 +16,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavigationBar()
         setupMap()
         setupPosition()
     }
@@ -26,7 +27,7 @@ final class HomeViewController: BaseViewController {
     
     override func setupLayout() {
         rootView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
     }
@@ -59,6 +60,19 @@ extension HomeViewController {
                 print("Marker \(index + 1) clicked")
                 return true
             }
+        }
+    }
+}
+
+extension HomeViewController {
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
+                                                              hasRightButton: false,
+                                                              mainTitle: .string("한끼대학교"),
+                                                              rightButton: .string(""),
+                                                              rightButtonAction: {})
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
         }
     }
 }

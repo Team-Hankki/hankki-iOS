@@ -77,10 +77,10 @@ private extension HomeView {
         updateButtonStyle(sender)
     }
     
+    // TODO: - SVG 파일로 변경 후 button image 변경
     func updateButtonStyle(_ button: UIButton) {
         if button.isSelected {
             button.setTitleColor(.gray600, for: .normal)
-           // button.setImage(.ic, for: <#T##UIControl.State#>)
         } else {
             button.setTitleColor(.gray400, for: .normal)
         }
