@@ -108,6 +108,11 @@ private extension ZipListViewController {
         showAlert(titleText: "족보를 삭제할까요?", secondaryButtonText: "돌아가기", primaryButtonText: "삭제하기", primaryButtonHandler: deleteZip)
     }
     
+    func navigateToZipViewController() {
+            let zipViewController = ZipViewController()
+            navigationController?.pushViewController(zipViewController, animated: true)
+    }
+    
     func deleteZip() {
         let selectedItemItems = collectionView.indexPathsForSelectedItems?
             .map { $0.item }
@@ -186,6 +191,7 @@ extension ZipListViewController: UICollectionViewDelegate {
                     print("새로운 족보리스트 추가 뷰로 이동")
                 } else {
                     print(indexPath.item, "번째 셀의 뷰로 이동")
+                    navigateToZipViewController()
                 }
             }
         }
