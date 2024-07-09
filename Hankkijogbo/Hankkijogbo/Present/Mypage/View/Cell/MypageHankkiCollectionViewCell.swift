@@ -26,7 +26,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     
     override func setupLayout() {
         imageView.snp.makeConstraints {
-            $0.width.height.equalToSuperview()
+            $0.size.equalToSuperview()
         }
     }
 }

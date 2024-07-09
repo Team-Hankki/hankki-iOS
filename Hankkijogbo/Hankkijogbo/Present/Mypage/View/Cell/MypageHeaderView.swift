@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MypageHeaderView: UICollectionReusableView {
+final class MypageHeaderView: BaseCollectionViewCell {
     
     // MARK: - Properties
     
@@ -20,19 +20,7 @@ final class MypageHeaderView: UICollectionReusableView {
     private let profileImageView: UIImageView = UIImageView()
     private let profileNameLabel: UILabel = UILabel()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupHierarchy()
-        setupLayout()
-        setupStyle()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupStyle() {
+    override func setupStyle() {
         profileImageView.do {
             $0.backgroundColor = .gray400
         }
@@ -49,18 +37,18 @@ final class MypageHeaderView: UICollectionReusableView {
     
     }
     
-    private func setupHierarchy() {
+    override func setupHierarchy() {
         self.addSubview(profileView)
         profileView.addSubviews(profileImageView, profileNameLabel)
     }
     
-    private func setupLayout() {
+    override func setupLayout() {
         profileView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
         }
 
         profileImageView.snp.makeConstraints {
-            $0.width.height.equalTo(98)
+            $0.size.equalTo(98)
             $0.top.equalToSuperview().inset(10)
             $0.centerX.equalToSuperview()
         }

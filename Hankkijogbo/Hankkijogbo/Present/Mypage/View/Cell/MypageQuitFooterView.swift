@@ -10,7 +10,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class MypageQuitFooterView: UICollectionReusableView {
+final class MypageQuitFooterView: BaseCollectionViewCell {
     
     // MARK: - Properties
     
@@ -24,11 +24,7 @@ final class MypageQuitFooterView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupStyle()
-        setupHierarchy()
-        setupLayout()
-        
+
         setupAction()
     }
     
@@ -36,7 +32,7 @@ final class MypageQuitFooterView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupStyle() {
+    override func setupStyle() {
         buttonStackVIew.do {
             $0.axis = .horizontal
             $0.alignment = .center
@@ -57,17 +53,17 @@ final class MypageQuitFooterView: UICollectionReusableView {
         }
     }
     
-    private func setupHierarchy() {
+    override func setupHierarchy() {
         self.addSubview(buttonStackVIew)
         buttonStackVIew.addArrangedSubviews(buttonLabel, buttonImage)
     }
     
-    private func setupLayout() {
+    override func setupLayout() {
         buttonStackVIew.snp.makeConstraints {
             $0.trailing.equalToSuperview()
         }
         buttonImage.snp.makeConstraints {
-            $0.width.height.equalTo(16)
+            $0.size.equalTo(16)
         }
     }
 }
@@ -76,12 +72,10 @@ extension MypageQuitFooterView {
     @objc func quitButtonDidTap () {
         if let quitButtonHandler {
             quitButtonHandler()
-        } else {
-            return
         }
     }
     
-    func setupAction () {
+    func setupAction    () {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(quitButtonDidTap))
         buttonStackVIew.addGestureRecognizer(tapGesture)
     }

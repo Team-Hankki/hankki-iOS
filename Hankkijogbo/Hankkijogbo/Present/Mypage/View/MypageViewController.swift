@@ -19,10 +19,10 @@ final class MypageViewController: BaseViewController {
     
     // MARK: - UI Properties
     
-    lazy var layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
+    private lazy var layout = UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
         return self.setupCollectionViewSection(for: SectionType(rawValue: sectionIndex)!)
     }
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     
     // MARK: - Life Cycle
     

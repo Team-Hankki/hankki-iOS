@@ -39,7 +39,7 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
     
     override func setupLayout() {
         iconImageView.snp.makeConstraints {
-            $0.width.height.equalTo(24)
+            $0.size.equalTo(24)
             $0.trailing.equalToSuperview()
             $0.top.equalToSuperview().inset(18)
         }
