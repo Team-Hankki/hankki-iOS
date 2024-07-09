@@ -48,6 +48,7 @@
 		864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9072C3D20560051EA36 /* MypageHeaderView.swift */; };
 		864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */; };
 		864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */; };
+		864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */; };
 		86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */; };
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
@@ -112,6 +113,7 @@
 		864FA9072C3D20560051EA36 /* MypageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageHeaderView.swift; sourceTree = "<group>"; };
 		864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageQuitFooterView.swift; sourceTree = "<group>"; };
+		864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageZipCollectionViewCell.swift; sourceTree = "<group>"; };
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				864FA9072C3D20560051EA36 /* MypageHeaderView.swift */,
 				864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */,
 				864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */,
+				864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
+				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
