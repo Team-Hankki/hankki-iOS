@@ -23,8 +23,8 @@ enum Config {
 }
 
 extension Config {
-    static let naverMapClientID: String = {
-        guard let key = Config.infoDictionary[Keys.Plist.naverMapClientID] as? String else {
+    static let NMFClientId: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.NMFClientId] as? String else {
             fatalError("ClientID is not set in plist for this configuration.")
         }
         return key

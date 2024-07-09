@@ -334,10 +334,10 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
+				8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
-				8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */,
-				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBED802C255A1A0042BA48 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
@@ -425,14 +425,6 @@
 			path = HankkiAlerts;
 			sourceTree = "<group>";
 		};
-		882504312247C1B21670BA58 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		86685C4D2C3BC63500C080C4 /* UnivSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +449,14 @@
 				86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		882504312247C1B21670BA58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A22D20C92C3165B6001AFAC6 /* Base */ = {
@@ -738,6 +738,7 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -801,6 +802,7 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
