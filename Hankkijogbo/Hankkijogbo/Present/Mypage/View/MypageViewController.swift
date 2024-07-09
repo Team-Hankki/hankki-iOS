@@ -58,6 +58,20 @@ private extension MypageViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
+    func setupCollectionViewSection(for section: SectionType) -> NSCollectionLayoutSection {
+        setupSection(section)
+    }
+    
+    func showQuitAlert() {
+        self.showAlert(
+            image:"dummy",
+            titleText: "소중한 족보가 사라져요",
+            subText: "탈퇴 계정은 복구할 수 없어요",
+            secondaryButtonText:"돌아가기",
+            primaryButtonText: "탈퇴하기"
+        )
+    }
 }
 
 // MARK: - Delegate
@@ -87,7 +101,11 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 ofKind: kind,
                 withReuseIdentifier: MypageQuitFooterView.className,
                 for: indexPath
-            )
+            )as! MypageQuitFooterView
+            
+            footerView.quitButtonHandler = {
+                self.showQuitAlert()
+            }
             
             return footerView
         
@@ -126,91 +144,5 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension MypageViewController: UIGestureRecognizerDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         setupAction(SectionType(rawValue: indexPath.section)!, itemIndex: indexPath.item)
-    }
-}
-
-//MARK: - setup CollectionView Section
-
-private extension MypageViewController {
-
-    func setupCollectionViewSection(for section: SectionType) -> NSCollectionLayoutSection {
-        setupSection(section)
-    }
-    
-    func setupNSCollectionLayoutSection(itemSize: NSCollectionLayoutSize, groupSize: NSCollectionLayoutSize) -> NSCollectionLayoutSection {
-        let itemSize = itemSize
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = groupSize
-        
-        let group = NSCollectionLayoutGroup.vertical(
-            layoutSize: groupSize,
-            subitems: [item]
-        )
-        let section = NSCollectionLayoutSection(group: group)
-        
-        return section
-    }
-    
-    func setupZipSection() -> NSCollectionLayoutSection {
-        let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
-            itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72))
-        )
-        
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(196))
-        
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        
-        section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22)
-        
-        return section
-    }
-    
-    func setupHankkiSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(94 / ( 375-44 )))
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            subitem: item,
-            count: 2
-        )
-        group.interItemSpacing = .flexible(21)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 22, bottom: 8, trailing: 22)
-        
-        return section
-    }
-    
-    func setupOptionSection() -> NSCollectionLayoutSection {
-        let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
-            itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
-        )
-
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22)
-
-        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(48))
-        
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: footerSize,
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottomTrailing
-        )
-        
-        section.boundarySupplementaryItems = [footer]
-
-        return section
     }
 }

@@ -11,6 +11,9 @@ import Then
 import SnapKit
 
 final class MypageQuitFooterView: UICollectionReusableView {
+    // MARK: - Properties
+    
+    var quitButtonHandler: (() -> Void)?
     
     // MARK: - UI Properties
     let buttonStackVIew: UIStackView = UIStackView()
@@ -23,6 +26,8 @@ final class MypageQuitFooterView: UICollectionReusableView {
         setupStyle()
         setupHierarchy()
         setupLayout()
+        
+        setupAction()
     }
     
     required init?(coder: NSCoder) {
@@ -62,5 +67,20 @@ final class MypageQuitFooterView: UICollectionReusableView {
         buttonImage.snp.makeConstraints {
             $0.width.height.equalTo(16)
         }
+    }
+}
+
+extension MypageQuitFooterView {
+    @objc func quitButtonDidTap () {
+        if let quitButtonHandler {
+            quitButtonHandler()
+        } else {
+            return
+        }
+    }
+    
+    func setupAction () {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(quitButtonDidTap))
+        buttonStackVIew.addGestureRecognizer(tapGesture)
     }
 }
