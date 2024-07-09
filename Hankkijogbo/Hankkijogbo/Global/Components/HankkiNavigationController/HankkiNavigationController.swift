@@ -90,7 +90,7 @@ private extension HankkiNavigationController {
         
         mainTitleLabel.do {
             $0.font = .setupPretendardStyle(of: .h1)
-            $0.textColor = .black
+            $0.textColor = .gray900
         }
         
         backButton.do {
