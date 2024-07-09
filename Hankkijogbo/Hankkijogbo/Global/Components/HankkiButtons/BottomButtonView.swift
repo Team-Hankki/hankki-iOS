@@ -75,7 +75,7 @@ final class BottomButtonView: BaseView {
     }
     
     override func setupHierarchy() {
-        self.addSubviews(
+        self.addSubview(
             bottomButtonViewGradient
         )
         if !primaryButtonText.isEmpty {
@@ -124,7 +124,6 @@ private extension BottomButtonView {
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
             $0.frame = self.bounds
-            
         }
         
         bottomButtonViewGradient.layer.addSublayer(gradient)
