@@ -108,9 +108,11 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         }
         
         titleLabel.do {
-            $0.text = "나의 식당 족보"
-            $0.textColor = .gray850
-            $0.font = .setupPretendardStyle(of: .subtitle3)
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: "나의 식당 족보",
+                color: .gray850
+            )
         }
         
         addNewZipStackView.do {
@@ -124,9 +126,11 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         }
         
         addNewZipLabel.do {
-            $0.text = "새로운 족보 추가하기"
-            $0.textColor = .gray800
-            $0.font = .setupPretendardStyle(of: .body3)
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body3,
+                withText: "새로운 족보 추가하기",
+                color: .gray800
+            )
         }
         
         flowLayout.do {

@@ -8,9 +8,7 @@
 import UIKit
 
 final class MyZipListHeaderView: UICollectionReusableView {
-    
-    // MARK: - Properties
-    
+        
     // MARK: - UI Properties
     
     private let headerLabel = UILabel()
@@ -47,9 +45,11 @@ private extension MyZipListHeaderView {
     
     func setupStyle() {
         headerLabel.do {
-            $0.textColor = .gray500
-            $0.font = .setupPretendardStyle(of: .caption1)
-            $0.text = "족보 목록"
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.caption1,
+                withText: "족보 목록",
+                color: .gray500
+            )
         }
     }
 }

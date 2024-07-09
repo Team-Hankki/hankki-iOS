@@ -8,9 +8,7 @@
 import UIKit
 
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
-    
-    // MARK: - Properties
-    
+        
     // MARK: - UI Properties
     
     private let thumbnailImageView = UIImageView()
@@ -61,19 +59,25 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .gray
         }
         zipTitleLabel.do {
-            $0.textColor = .gray800
-            $0.font = .setupPretendardStyle(of: .body2)
-            $0.text = "학교 5년째 다니는 화석의 추천"
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body2,
+                withText: "학교 5년째 다니는 화석의 추천",
+                color: .gray800
+            )
         }
         firstHashtagLabel.do {
-            $0.textColor = .gray400
-            $0.font = .setupPretendardStyle(of: .button)
-            $0.text = "#미친가성비"
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.button,
+                withText: "#미친가성비",
+                color: .gray400
+            )
         }
         secondHashtagLabel.do {
-            $0.textColor = .gray400
-            $0.font = .setupPretendardStyle(of: .button)
-            $0.text = "#꼭가보세요"
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.button,
+                withText: "#꼭가보세요",
+                color: .gray400
+            )
         }
         addZipButton.do {
             $0.setImage(.icPlus, for: .normal)
