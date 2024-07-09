@@ -33,10 +33,10 @@ extension UIViewController {
             statusBar.backgroundColor = statusBarColor
             return
         }
-
+        
         guard let window = UIApplication.shared.windows.first,
               let statusBarManager = window.windowScene?.statusBarManager else { return }
-
+        
         let statusBarView = UIView(frame: statusBarManager.statusBarFrame)
         statusBarView.backgroundColor = statusBarColor
         window.addSubview(statusBarView)
@@ -45,6 +45,9 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension UIViewController {
     
     /// Alert을 띄우는 메서드
     func showAlert(
@@ -71,5 +74,45 @@ extension UIViewController {
             $0.primaryButtonHandler = primaryButtonHandler
         }
         present(alert, animated: false, completion: nil)
+    }
+    
+    /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
+    func showBlackToast(
+        message: String,
+        action: @escaping (() -> Void)
+    ) {
+        let toastView = BlackToastView(message: message, action: action)
+        view.addSubview(toastView)
+        if UIScreen.hasNotch {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            }
+        } else {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(16)
+            }
+        }
+    }
+    
+    /// 상단에 뜨는 흰 토스트뷰를 띄우는 함수
+    func showWhiteToast(
+        message: String,
+        action: @escaping (() -> Void)
+    ) {
+        let toastView = WhiteToastView(message: message, action: action)
+        view.addSubview(toastView)
+        if UIScreen.hasNotch {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(view.safeAreaLayoutGuide).offset(28)
+            }
+        } else {
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalToSuperview().inset(35)
+            }
+        }
     }
 }
