@@ -9,7 +9,7 @@ import UIKit
 
 final class SearchCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - Components
+    // MARK: - UI Properties
     
     private let reportedNumberLabel = UILabel()
     private let searchButton = UIButton()
@@ -61,7 +61,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = 10
             $0.setImage(.icSearch, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body3,
+                for: PretendardStyle.body6,
                 withText: "이름으로 식당 검색",
                 color: .gray400
             ), for: .normal)

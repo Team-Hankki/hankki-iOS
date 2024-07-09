@@ -115,13 +115,9 @@ extension ReportCompositionalFactory {
     static func getCategoryLayoutSection() -> NSCollectionLayoutSection {
         let header = createBoundarySupplementaryItem(type: .header, widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(57), alignment: .topLeading)
         let item = createItem(widthDimension: .estimated(50), heightDimension: .fractionalHeight(1))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(28))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(36))
         group.interItemSpacing = .fixed(6)
-        let section = createLayoutSection(
-            group: group,
-            sectionContentInsets: .init(top: 14, leading: 22, bottom: 0, trailing: 10),
-            boundarySupplementaryItems: [header]
-        )
+        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 14, leading: 22, bottom: 20, trailing: 10), boundarySupplementaryItems: [header])
         section.interGroupSpacing = 8
 
         return section
@@ -130,9 +126,10 @@ extension ReportCompositionalFactory {
     // MARK: - Image Section
 
     static func getImageLayoutSection() -> NSCollectionLayoutSection {
-        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(74))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(74))
-        let section = createLayoutSection(group: group, orthogonalScrollingBehavior: .groupPaging)
+        let header = createBoundarySupplementaryItem(type: .header, widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(57), alignment: .topLeading)
+        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(111))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(111))
+        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 0, leading: 22, bottom: 0, trailing: 22), boundarySupplementaryItems: [header])
         return section
     }
     

@@ -9,8 +9,8 @@ import UIKit
 
 final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - Components
-    
+    // MARK: - UI Properties
+
     private let categoryButton = UIButton()
     
     // MARK: - Set UI
@@ -28,7 +28,7 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         categoryButton.do {
             $0.backgroundColor = .white
-            $0.layer.cornerRadius = 14
+            $0.layer.cornerRadius = 18
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray200.cgColor
             $0.setImage(.icHeart, for: .normal)

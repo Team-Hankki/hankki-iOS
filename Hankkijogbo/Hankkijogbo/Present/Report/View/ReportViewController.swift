@@ -11,7 +11,8 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let dummy = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
+    let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
+    let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
     
     // MARK: - UI Properties
     
@@ -82,6 +83,7 @@ private extension ReportViewController {
     func setupRegister() {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
+        collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.className)
         collectionView.register(
             ReportHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -121,11 +123,12 @@ extension ReportViewController: UICollectionViewDataSource {
               ) as? ReportHeaderView else {
             return UICollectionReusableView()
         }
+        header.dataBind(dummyHeader[indexPath.section - 1])
         return header
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -134,7 +137,9 @@ extension ReportViewController: UICollectionViewDataSource {
         case .search:
             return 1
         case .category:
-            return dummy.count
+            return dummyCategory.count
+        case .image:
+            return 1
         default:
             return 0
         }
@@ -149,7 +154,10 @@ extension ReportViewController: UICollectionViewDataSource {
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.dataBind(dummy[indexPath.row])
+            cell.dataBind(dummyCategory[indexPath.row])
+            return cell
+        case .image:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.className, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
             return cell
         default:
             return UICollectionViewCell()
