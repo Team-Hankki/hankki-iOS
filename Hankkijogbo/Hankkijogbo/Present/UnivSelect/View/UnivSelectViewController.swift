@@ -21,11 +21,12 @@ final class UnivSelectViewController: BaseViewController {
     private let headerTitleLabel: UILabel = UILabel()
     private let headerContentLabel: UILabel = UILabel()
     
-    private let bottomButtonView: UIView = UIView()
-    private let doneButton: UIButton = UIButton()
-    private let laterButton: UIButton = UIButton()
-    
-    private let bottomButtonViewGradient = UIView()
+    lazy var bottomButtonView: BottomButtonView = BottomButtonView(
+        primaryButtonText: "으악",
+        lineButtonText: "찾는 대학교가 없어요. 우선 둘러볼게요!",
+        primaryButtonHandler: bottomButtonPrimaryHandler,
+        lineButtonHandler: bottomButtonLineHandler
+    )
     
     private lazy var univCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupUnivCollectionViewFlowLayout())
     
@@ -33,15 +34,8 @@ final class UnivSelectViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupButtonAction()
         setupDelegate()
         setupRegister()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupBottomButtonViewGradient()
     }
     
     override func setupStyle() {
@@ -73,41 +67,15 @@ final class UnivSelectViewController: BaseViewController {
         univCollectionView.do {
             $0.allowsMultipleSelection = false
         }
-        
-        bottomButtonView.do {
-            $0.backgroundColor = .clear
-        }
-        
-        doneButton.do {
-            if let attributedTitle = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
-                withText: "선택하기",
-                color: .hankkiWhite
-            ) {
-                $0.setAttributedTitle(attributedTitle, for: .normal)
-            }
-            $0.backgroundColor = .hankkiRedLight2
-            $0.layer.cornerRadius = 16
-            $0.isEnabled = false
-        }
-        
-        laterButton.do {
-            $0.setTitle("찾는 대학교가 없어요. 우선 둘러볼게요!", for: .normal)
-            $0.titleLabel?.font = .setupPretendardStyle(of: .button)
-            $0.setTitleColor(.gray400, for: .normal)
-            $0.setUnderline()
-        }
     }
     
     override func setupHierarchy() {
         view.addSubviews(
             headerStackView,
             univCollectionView,
-            bottomButtonViewGradient, 
             bottomButtonView
         )
         headerStackView.addArrangedSubviews(headerTitleLabel, headerContentLabel)
-        bottomButtonView.addSubviews(doneButton, laterButton)
     }
     
     override func setupLayout() {
@@ -121,25 +89,10 @@ final class UnivSelectViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview()
         }
         
-        bottomButtonViewGradient.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(154)
-        }
-        
         bottomButtonView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        doneButton.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(50)
-            $0.leading.trailing.equalToSuperview().inset(22)
-            $0.height.equalTo(54)
-        }
-        
-        laterButton.snp.makeConstraints {
-            $0.top.equalTo(doneButton.snp.bottom).offset(14)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(18)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(154)
         }
     }
 }
@@ -160,47 +113,13 @@ private extension UnivSelectViewController {
         return layout
     }
     
-    func setupEnabledDoneButton() {
-        doneButton.do {
-            $0.backgroundColor = .hankkiRed
-            $0.isEnabled = true
-        }
+    // Todo: - 나중에 수정
+    func bottomButtonPrimaryHandler() {
+        print(currentUniv, "을 선택했어요!")
     }
     
-    func setupBottomButtonViewGradient() {
-        let gradient = CAGradientLayer()
-        
-        gradient.do {
-            $0.colors = [
-                UIColor.white.withAlphaComponent(0).cgColor,
-                UIColor.white.cgColor,
-                UIColor.white.cgColor
-              ]
-            $0.locations = [0.0, 0.3, 1.0]
-            $0.startPoint = CGPoint(x: 0.5, y: 0.0)
-            $0.endPoint = CGPoint(x: 0.5, y: 1.0)
-            $0.frame = bottomButtonView.bounds
-            
-        }
-        
-        bottomButtonViewGradient.layer.addSublayer(gradient)
-    }
-    
-    // MARK: - @objc
-    
-    @objc func doneButtonDidTap() {
-        // TODO: - api 연동 후 버튼 내용 수정
-        print(currentUniv, ": 선택하기 버튼이 클릭되었습니다.")
-    }
-    
-    @objc func laterButtonDidTap() {
-        // TODO: - api 연동 후 버튼 내용 수정
-        print("찾는대학이 없는 버튼이 클릭되었습니다.")
-    }
-    
-    func setupButtonAction() {
-        doneButton.addTarget(self, action: #selector(doneButtonDidTap), for: .touchUpInside)
-        laterButton.addTarget(self, action: #selector(laterButtonDidTap), for: .touchUpInside)
+    func bottomButtonLineHandler() {
+        print("지금 선택하지 않았어요")
     }
     
     func setupRegister() {
@@ -232,9 +151,9 @@ extension UnivSelectViewController: UICollectionViewDataSource {
 
 extension UnivSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currentUniv = dummyUnivList[indexPath[1]]
+        currentUniv = dummyUnivList[indexPath.item]
         if !currentUniv.isEmpty {
-            setupEnabledDoneButton()
+            bottomButtonView.setupEnabledDoneButton()
         }
     }
 }
