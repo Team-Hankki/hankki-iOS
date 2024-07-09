@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NMFClientId</key>
-	<string>ejq31a396s</string>
+	<string>$(NMFClientId)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.otf</string>
