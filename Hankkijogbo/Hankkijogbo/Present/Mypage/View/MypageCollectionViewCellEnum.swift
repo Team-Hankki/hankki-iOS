@@ -24,7 +24,6 @@ extension MypageViewController {
     }
     
     func setupAction(_ section: SectionType, itemIndex: Int) {
-        print("터치")
         // TODO: - 함수 추후 변경
         switch section {
         case .zip:
@@ -86,11 +85,9 @@ private extension MypageViewController {
     }
     
     func setupZipSection() -> NSCollectionLayoutSection {
-        let itemWidth: CGFloat = (375 - 22*2)
-        
         let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
             itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .absolute(UIView.convertByAspectRatioHeight(itemWidth, width: 331, height: 72)))
+            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22*2, width: 331, height: 72)))
         )
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(196))
