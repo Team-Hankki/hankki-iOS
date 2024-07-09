@@ -109,7 +109,11 @@ private extension ZipListViewController {
     }
     
     func deleteZip() {
-        print(collectionView.indexPathsForSelectedItems?.map { $0.item } ?? [], "을 삭제합니다.")
+        let selectedItemItems = collectionView.indexPathsForSelectedItems?
+            .map { $0.item }
+            .filter { $0 != 0 } ?? []
+        
+        print(selectedItemItems, "을 삭제합니다.")
         
         for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: indexPath, animated: false)
@@ -173,8 +177,10 @@ extension ZipListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
         // TODO: - 뷰나오면 추가
-            if isEditMode && indexPath.item != 0 {
-                cell.setSelected(true)
+            if isEditMode {
+                if indexPath.item != 0 {
+                    cell.setSelected(true)
+                }
             } else {
                 if indexPath.item == 0 {
                     print("새로운 족보리스트 추가 뷰로 이동")
