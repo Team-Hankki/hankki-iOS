@@ -12,7 +12,6 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
     
     var data: DataStruct?
-    private var isEditMode: Bool = false
     
     // MARK: - UI Properties
     
@@ -30,18 +29,13 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
-                withText: "test",
-                color: .hankkiWhite
-            )
             $0.numberOfLines = 3
             $0.textAlignment = .left
             $0.lineBreakMode = .byTruncatingTail
         }
         
         imageView.do {
-            $0.layer.borderColor = UIColor.black.cgColor
+            $0.layer.borderColor = UIColor.red.cgColor
             $0.layer.borderWidth = 2
         }
         
@@ -80,7 +74,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.height.equalTo(UIView.convertByAspectRatioHeight(self.frame.width, width: 160, height: 160))
+            $0.height.equalTo(UIView.convertByAspectRatioHeight(self.frame.width, width: 160, height: 137))
             $0.bottom.equalToSuperview()
         }
         
@@ -105,6 +99,7 @@ extension ZipListCollectionViewCell {
     enum CellType {
         case create
         case common
+        case disable
         
         var backgroundColor: UIColor {
             switch self {
@@ -112,6 +107,8 @@ extension ZipListCollectionViewCell {
                 .hankkiYellow
             case .common:
                 .gray800
+            case .disable:
+                .hankkiYellowLight
             }
         }
         
@@ -121,19 +118,33 @@ extension ZipListCollectionViewCell {
                 .gray800
             case .common:
                 .white
+            case .disable:
+                .gray400
+            }
+        }
+        
+        var opacity: CGFloat {
+            switch self {
+            case .create:
+                1.0
+            case .common:
+                1.0
+            case .disable:
+                0.4
             }
         }
     }
     
     func dataBind(_ data: DataStruct) {
         self.data = data
-        titleLabel.text = self.data?.title
         
+        cellView.backgroundColor = data.type.backgroundColor
         titleLabel.attributedText = UILabel.setupAttributedText(
             for: PretendardStyle.subtitle3,
             withText: data.title,
             color: data.type.fontColor
         )
+        imageView.alpha = data.type.opacity
     }
     
     func setSelected(_ selected: Bool) {
