@@ -42,7 +42,7 @@ final class HomeViewController: BaseViewController {
 // MARK: - MapView
 
 extension HomeViewController {
-    func setupMap() {
+    private func setupMap() {
         rootView.mapView.touchDelegate = self
     }
     

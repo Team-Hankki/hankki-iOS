@@ -35,8 +35,7 @@ final class HomeView: BaseView {
         }
         
         typeButton.snp.makeConstraints {
-            $0.top.equalTo(mapView.snp.top).inset(22)
-            $0.leading.equalTo(mapView.snp.leading).inset(22)
+            $0.top.leading.equalTo(mapView).inset(22)
             $0.width.equalTo(61)
             $0.height.equalTo(32)
         }
@@ -70,14 +69,21 @@ final class HomeView: BaseView {
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
                 $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 0)
-                $0.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             }
         }
     }
 }
 
 private extension HomeView {
-    @objc private func buttonTapped(_ sender: UIButton) {
+    
+    func setupAddTarget() {
+        let buttons = [typeButton, priceButton, sortButton]
+        for button in buttons {
+            button.addTarget(self, action: #selector(actionButtonDidTap(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @objc func actionButtonDidTap(_ sender: UIButton) {
         sender.isSelected.toggle()
         updateButtonStyle(sender)
     }
