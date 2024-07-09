@@ -33,10 +33,10 @@ extension UIViewController {
             statusBar.backgroundColor = statusBarColor
             return
         }
-
+        
         guard let window = UIApplication.shared.windows.first,
               let statusBarManager = window.windowScene?.statusBarManager else { return }
-
+        
         let statusBarView = UIView(frame: statusBarManager.statusBarFrame)
         statusBarView.backgroundColor = statusBarColor
         window.addSubview(statusBarView)
@@ -45,6 +45,9 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension UIViewController {
     
     /// Alert을 띄우는 메서드
     func showAlert(
@@ -72,9 +75,6 @@ extension UIViewController {
         }
         present(alert, animated: false, completion: nil)
     }
-}
-
-extension UIViewController {
     
     /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
     func showBlackToast(

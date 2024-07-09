@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
@@ -58,6 +59,10 @@
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
 		A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */; };
+		A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */; };
+		A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */; };
+		A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */; };
+		A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
@@ -74,6 +79,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -128,6 +135,10 @@
 		A2B599172C39B5C8004B7E4E /* BlackToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackToastView.swift; sourceTree = "<group>"; };
 		A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteToastView.swift; sourceTree = "<group>"; };
 		A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
+		A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
+		A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
+		A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
 		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
@@ -137,6 +148,9 @@
 		A2FF940D2C31660E001ADA03 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		A2FF940E2C31660E001ADA03 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		A751092EC33C1A97172AADAF /* Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hankkijogbo.debug.xcconfig"; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
+		D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hankkijogbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA1A19937374DA3ADCE2F3A9 /* Pods-Hankkijogbo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hankkijogbo.release.xcconfig"; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,12 +161,22 @@
 				83DBEDBE2C25698B0042BA48 /* Then in Frameworks */,
 				83DBEDC12C2569A80042BA48 /* SnapKit in Frameworks */,
 				83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */,
+				1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08119332DE381C9FDF7962D4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A751092EC33C1A97172AADAF /* Pods-Hankkijogbo.debug.xcconfig */,
+				DA1A19937374DA3ADCE2F3A9 /* Pods-Hankkijogbo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		838BEB012C38193800AAA153 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +200,8 @@
 			children = (
 				83DBED742C255A180042BA48 /* Hankkijogbo */,
 				83DBED732C255A180042BA48 /* Products */,
+				08119332DE381C9FDF7962D4 /* Pods */,
+				882504312247C1B21670BA58 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,6 +242,7 @@
 				A22D20C92C3165B6001AFAC6 /* Base */,
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				83DBED8D2C2564790042BA48 /* Home */,
+				A2B599192C39D0BC004B7E4E /* MyZip */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -322,6 +349,8 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
+				8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
 				83DBED802C255A1A0042BA48 /* LaunchScreen.storyboard */,
@@ -467,6 +496,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		882504312247C1B21670BA58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A22D20C92C3165B6001AFAC6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +511,7 @@
 				A2FF940E2C31660E001ADA03 /* BaseViewController.swift */,
 				A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */,
 				A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */,
+				A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */,
 				A2F27C032C353AEF001E6514 /* BaseView.swift */,
 			);
 			path = Base;
@@ -510,6 +548,24 @@
 			path = HankkiToasts;
 			sourceTree = "<group>";
 		};
+		A2B599192C39D0BC004B7E4E /* MyZip */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEBF482C3BD7A300DE14A9 /* View */,
+			);
+			path = MyZip;
+			sourceTree = "<group>";
+		};
+		A2DEBF482C3BD7A300DE14A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */,
+				A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */,
+				A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -517,10 +573,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83DBED862C255A1A0042BA48 /* Build configuration list for PBXNativeTarget "Hankkijogbo" */;
 			buildPhases = (
+				6454826702B700F6B9EC53AF /* [CP] Check Pods Manifest.lock */,
 				83DBED6E2C255A180042BA48 /* Sources */,
 				83DBED6F2C255A180042BA48 /* Frameworks */,
 				83DBED702C255A180042BA48 /* Resources */,
 				A22D20C52C31628A001AFAC6 /* ShellScript */,
+				E9B32137E99D6E38CE103F38 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -597,6 +655,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6454826702B700F6B9EC53AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Hankkijogbo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A22D20C52C31628A001AFAC6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -614,6 +694,23 @@
 			shellPath = /bin/sh;
 			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		E9B32137E99D6E38CE103F38 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -622,6 +719,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
+				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
@@ -636,6 +734,7 @@
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
 				83DBEDC82C256AD00042BA48 /* NSObject+.swift in Sources */,
 				83DBEDB62C2566380042BA48 /* FontLiterals.swift in Sources */,
+				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
 				83DBEDCC2C256B080042BA48 /* UILabel+.swift in Sources */,
@@ -668,6 +767,8 @@
 				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
+				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,
+				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,
 				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
 				83DBEDA22C2565340042BA48 /* HomeAPIService.swift in Sources */,
 			);
@@ -689,6 +790,7 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -752,6 +854,7 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -808,6 +911,7 @@
 		};
 		83DBED872C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A751092EC33C1A97172AADAF /* Pods-Hankkijogbo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -840,6 +944,7 @@
 		};
 		83DBED882C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA1A19937374DA3ADCE2F3A9 /* Pods-Hankkijogbo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
