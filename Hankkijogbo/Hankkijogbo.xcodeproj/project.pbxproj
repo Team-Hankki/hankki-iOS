@@ -164,8 +164,6 @@
 		83DBED692C255A180042BA48 = {
 			isa = PBXGroup;
 			children = (
-				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
-				8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */,
 				83DBED742C255A180042BA48 /* Hankkijogbo */,
 				83DBED732C255A180042BA48 /* Products */,
 				08119332DE381C9FDF7962D4 /* Pods */,
@@ -316,6 +314,8 @@
 			children = (
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
+				8302F8D82C3D2BFC004ADAA4 /* Config.xcconfig */,
+				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBED802C255A1A0042BA48 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
