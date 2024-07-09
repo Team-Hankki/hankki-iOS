@@ -7,14 +7,8 @@
 
 import UIKit
 
-struct MypageOptionCollectionViewCellStruct {
-    var title: String
-    var onTab: () -> Void
-}
-
 final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
-    var onTab: (() -> Void)?
-    
+
     // MARK: - UI Properties
 
     let iconImageView: UIImageView = UIImageView()
@@ -64,8 +58,11 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension MypageOptionCollectionViewCell {
-    func dataBind(data: MypageOptionCollectionViewCellStruct) {
-        onTab = data.onTab
+    struct DataStruct {
+        var title: String
+    }
+    
+    func dataBind(data: DataStruct) {
         titleLabel.text = data.title
     }
 }
