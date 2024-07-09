@@ -7,9 +7,6 @@
 
 import UIKit
 
-import SnapKit
-import Then
-
 final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Components

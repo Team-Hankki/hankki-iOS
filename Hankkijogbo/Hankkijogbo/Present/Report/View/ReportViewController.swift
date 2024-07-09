@@ -11,6 +11,8 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
+    let dummy = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
+    
     // MARK: - UI Properties
     
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalFactory.create()
@@ -79,9 +81,17 @@ private extension ReportViewController {
     
     func setupRegister() {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
+        collectionView.register(
+            ReportHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: ReportHeaderView.className
+        )
     }
     
     func setupNavigationBar() {
+        // TODO: - 백버튼 액션
+        // TODO: - 네비 타이틀 폰트 설정
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: true,
                                                               mainTitle: .string("제보하기"),
@@ -102,17 +112,48 @@ private extension ReportViewController {
 
 extension ReportViewController: UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader,
+              let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: ReportHeaderView.className,
+                for: indexPath
+              ) as? ReportHeaderView else {
+            return UICollectionReusableView()
+        }
+        return header
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1
+        let sectionType = ReportSectionType(rawValue: section)
+        switch sectionType {
+        case .search:
+            return 1
+        case .category:
+            return dummy.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
-        return cell
+        let sectionType = ReportSectionType(rawValue: indexPath.section)
+
+        switch sectionType {
+        case .search:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+            return cell
+        case .category:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+            cell.dataBind(dummy[indexPath.row])
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
     }
 }
 

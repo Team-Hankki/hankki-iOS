@@ -85,7 +85,7 @@ extension ReportCompositionalFactory {
     
     static func createLayoutSection(
         group: NSCollectionLayoutGroup,
-        orthogonalScrollingBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior,
+        orthogonalScrollingBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior = .none,
         sectionContentInsets: NSDirectionalEdgeInsets = .zero,
         boundarySupplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem]? = nil
     ) -> NSCollectionLayoutSection {
@@ -104,8 +104,8 @@ extension ReportCompositionalFactory {
     // MARK: - Search Section
     
     static func getSearchLayoutSection() -> NSCollectionLayoutSection {
-        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
+        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(112))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(112))
         let section = createLayoutSection(group: group, orthogonalScrollingBehavior: .groupPaging)
         return section
     }
@@ -113,9 +113,17 @@ extension ReportCompositionalFactory {
     // MARK: - Category Section
 
     static func getCategoryLayoutSection() -> NSCollectionLayoutSection {
-        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(74))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(74))
-        let section = createLayoutSection(group: group, orthogonalScrollingBehavior: .groupPaging)
+        let header = createBoundarySupplementaryItem(type: .header, widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(57), alignment: .topLeading)
+        let item = createItem(widthDimension: .estimated(50), heightDimension: .fractionalHeight(1))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(28))
+        group.interItemSpacing = .fixed(6)
+        let section = createLayoutSection(
+            group: group,
+            sectionContentInsets: .init(top: 14, leading: 22, bottom: 0, trailing: 10),
+            boundarySupplementaryItems: [header]
+        )
+        section.interGroupSpacing = 8
+
         return section
     }
     
@@ -127,7 +135,6 @@ extension ReportCompositionalFactory {
         let section = createLayoutSection(group: group, orthogonalScrollingBehavior: .groupPaging)
         return section
     }
-    
     
     // MARK: - Menu Section
     
