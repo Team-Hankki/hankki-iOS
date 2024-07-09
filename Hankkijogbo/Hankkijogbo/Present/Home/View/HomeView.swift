@@ -20,8 +20,13 @@ final class HomeView: BaseView {
     let priceButton = UIButton()
     let sortButton = UIButton()
     
+    // MARK: - Set UI
+    
     override func setupHierarchy() {
-        addSubviews(mapView, typeButton, priceButton, sortButton)
+        addSubviews(mapView, 
+                    typeButton,
+                    priceButton,
+                    sortButton)
     }
     
     override func setupLayout() {
@@ -81,8 +86,10 @@ private extension HomeView {
     func updateButtonStyle(_ button: UIButton) {
         if button.isSelected {
             button.setTitleColor(.gray600, for: .normal)
+            button.setImage(.icArrow.withTintColor(.black), for: .normal)
         } else {
             button.setTitleColor(.gray400, for: .normal)
+            button.setImage(.icArrow, for: .normal)
         }
     }
 }
