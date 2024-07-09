@@ -72,8 +72,7 @@ final class WhiteToastView: BaseView {
         }
         actionButton.do {
             $0.setTitle("이동", for: .normal)
-            // TODO: - 색 이름 한끼레드로 변경되면 적용해야 됨
-            $0.setTitleColor(.red, for: .normal)
+            $0.setTitleColor(.hankkiRed, for: .normal)
             $0.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
             $0.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
         }
