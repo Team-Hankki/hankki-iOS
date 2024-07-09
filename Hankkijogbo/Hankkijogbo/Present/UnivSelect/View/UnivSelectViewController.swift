@@ -22,7 +22,7 @@ final class UnivSelectViewController: BaseViewController {
     private let headerContentLabel: UILabel = UILabel()
     
     lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: "으악",
+        primaryButtonText: "선택하기",
         lineButtonText: "찾는 대학교가 없어요. 우선 둘러볼게요!",
         primaryButtonHandler: bottomButtonPrimaryHandler,
         lineButtonHandler: bottomButtonLineHandler
