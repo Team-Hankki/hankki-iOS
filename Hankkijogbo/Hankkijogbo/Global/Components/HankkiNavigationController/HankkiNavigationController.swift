@@ -37,7 +37,7 @@ final class HankkiNavigationController: UINavigationController {
     private let safeAreaView: UIView = UIView()
     private let customNavigationBar: UIView = UINavigationBar()
     
-    private let leftStackView: UIStackView = UIStackView()
+    private let titleStackView: UIStackView = UIStackView()
     private let mainImageView: UIImageView = UIImageView()
     private let mainTitleLabel: UILabel = UILabel()
     private let backButton: UIButton = UIButton()
@@ -82,7 +82,7 @@ private extension HankkiNavigationController {
             $0.backgroundColor = customNavigationBar.backgroundColor
         }
         
-        leftStackView.do {
+        titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
             $0.spacing = 4
@@ -90,7 +90,7 @@ private extension HankkiNavigationController {
         
         mainTitleLabel.do {
             $0.font = .setupPretendardStyle(of: .h1)
-            $0.textColor = .black
+            $0.textColor = .gray900
         }
         
         backButton.do {
@@ -106,8 +106,8 @@ private extension HankkiNavigationController {
     
     func setupHierarchy() {
         view.addSubviews(safeAreaView, customNavigationBar)
-        customNavigationBar.addSubviews(leftStackView, rightButton)
-        leftStackView.addArrangedSubviews(backButton, mainTitleLabel, mainImageView)
+        customNavigationBar.addSubviews(backButton, titleStackView, rightButton)
+        titleStackView.addArrangedSubviews(mainTitleLabel, mainImageView)
     }
     
     func setupLayout() {
@@ -123,13 +123,17 @@ private extension HankkiNavigationController {
             $0.horizontalEdges.equalToSuperview()
         }
         
-        leftStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.centerY.equalToSuperview()
+        titleStackView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
         rightButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview()
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(20)
             $0.centerY.equalToSuperview()
         }
     }
@@ -164,6 +168,11 @@ private extension HankkiNavigationController {
             mainTitleLabel.isHidden = true
             mainImageView.isHidden = false
             mainImageView.image = image
+        case .stringAndImage(let string, let image):
+            mainTitleLabel.isHidden = false
+            mainImageView.isHidden = false
+            mainTitleLabel.text = string
+            mainImageView.image = image
         }
     }
     
@@ -175,6 +184,9 @@ private extension HankkiNavigationController {
         case .image(let image):
             rightButton.setTitle(nil, for: .normal)
             rightButton.setImage(image, for: .normal)
+        case .stringAndImage(let string, let image):
+            rightButton.setImage(image, for: .normal)
+            rightButton.setTitle(string, for: .normal)
         }
     }
     
