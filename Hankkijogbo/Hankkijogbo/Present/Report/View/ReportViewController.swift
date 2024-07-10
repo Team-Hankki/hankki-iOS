@@ -63,7 +63,7 @@ final class ReportViewController: BaseViewController {
         }
         bottomButtonView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(34)
             $0.height.equalTo(154)
         }
     }
@@ -130,7 +130,7 @@ private extension ReportViewController {
 
 // MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource {
+extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -199,8 +199,4 @@ extension ReportViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
     }
-}
-
-extension ReportViewController: UICollectionViewDelegate {
-    
 }
