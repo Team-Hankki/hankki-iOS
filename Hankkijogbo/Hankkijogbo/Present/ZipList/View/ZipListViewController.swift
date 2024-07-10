@@ -54,7 +54,7 @@ final class ZipListViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(collectionView)
+        view.addSubview(collectionView)
     }
     
     override func setupLayout() {
@@ -105,7 +105,10 @@ private extension ZipListViewController {
     }
     
     func deleteButtonDidTap() {
-        showAlert(titleText: "족보를 삭제할까요?", secondaryButtonText: "돌아가기", primaryButtonText: "삭제하기", primaryButtonHandler: deleteZip)
+        showAlert(titleText: "족보를 삭제할까요?", 
+                  secondaryButtonText: "돌아가기",
+                  primaryButtonText: "삭제하기",
+                  primaryButtonHandler: deleteZip)
     }
     
     func deleteZip() {
@@ -146,7 +149,7 @@ private extension ZipListViewController {
 
 // MARK: - delegate
 
-extension ZipListViewController: UICollectionViewDataSource {
+extension ZipListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dummyZipList.count + 1
     }
@@ -171,11 +174,11 @@ extension ZipListViewController: UICollectionViewDataSource {
         
         return cell
     }
-}
-
-extension ZipListViewController: UICollectionViewDelegate {
+    
+    /// Cell을 터치 했을 때 (선택)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
+        
         // TODO: - 뷰나오면 추가
             if isEditMode {
                 if indexPath.item != 0 {
@@ -190,6 +193,7 @@ extension ZipListViewController: UICollectionViewDelegate {
             }
         }
         
+        /// Cell을 터치 했을 때 (해제)
         func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
             
