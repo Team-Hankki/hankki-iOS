@@ -59,7 +59,8 @@ final class ZipListViewController: BaseViewController {
     
     override func setupLayout() {
         collectionView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(31)
+            $0.top.equalToSuperview().inset(31)
+            $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(22)
         }
     }
@@ -84,7 +85,8 @@ private extension ZipListViewController {
                 hasRightButton: true,
                 mainTitle: .string("나의 식당 족보"),
                 rightButton: .string("삭제"),
-                rightButtonAction: deleteButtonDidTap
+                rightButtonAction: deleteButtonDidTap,
+                backButtonAction: { self.setIsEditMode() }
             )
         } else {
             type = HankkiNavigationType(
@@ -111,22 +113,30 @@ private extension ZipListViewController {
                   primaryButtonHandler: deleteZip)
     }
     
-    func deleteZip() {
-        let selectedItemItems = collectionView.indexPathsForSelectedItems?
-            .map { $0.item }
-            .filter { $0 != 0 } ?? []
-        
-        print(selectedItemItems, "을 삭제합니다.")
-        
+    func deselectedAllItems() {
         for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
             collectionView.deselectItem(at: indexPath, animated: false)
             if let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell {
                 cell.setSelected(false)
             }
         }
+    }
+    
+    func deleteZip() {
+        let selectedItemItems = collectionView.indexPathsForSelectedItems?
+            .map { $0.item }
+            .filter { $0 != 0 } ?? []
         
-        isEditMode = false
+        print(selectedItemItems, "을 삭제합니다.")
+        setIsEditMode()
         dismiss(animated: false)
+    }
+    
+    func setIsEditMode() {
+        if isEditMode {
+            deselectedAllItems()
+            isEditMode.toggle()
+        }
     }
 }
 
@@ -141,6 +151,7 @@ private extension ZipListViewController {
             $0.itemSize = CGSize(width: itemWidth,
                                  height: UIView.convertByAspectRatioHeight(itemWidth, width: 160, height: 230))
             $0.headerReferenceSize = CGSize(width: view.frame.width, height: 30)
+            $0.footerReferenceSize = CGSize(width: view.frame.width, height: 22)
   
         }
         return layout

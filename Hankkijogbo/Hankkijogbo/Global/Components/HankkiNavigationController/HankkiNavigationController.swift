@@ -19,6 +19,12 @@ final class HankkiNavigationController: UINavigationController {
         }
     }
     
+    private var backButtonAction: ButtonAction? {
+        didSet {
+            backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        }
+    }
+    
     // MARK: - Properties
 
     private let navigationHeight: CGFloat = 50
@@ -66,6 +72,7 @@ extension HankkiNavigationController {
         setupRightButton(stringOrImage: forType.rightButton)
         
         rightButtonAction = forType.rightButtonAction
+        backButtonAction = forType.backButtonAction
     }
 }
 
@@ -191,7 +198,11 @@ private extension HankkiNavigationController {
     }
     
     @objc func backButtonTapped() {
-        popViewController(animated: true)
+        if let backButtonAction {
+            return backButtonAction()
+        } else {
+            popViewController(animated: true)
+        }
     }
     
     @objc func rightButtonTapped() {
