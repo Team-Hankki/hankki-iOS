@@ -1,8 +1,17 @@
+//
+//  ZipHeaderCollectionView.swift
+//  Hankkijogbo
+//
+//  Created by 심서현 on 7/10/24.
+//
+
 import UIKit
 
-final class ZipViewController: BaseViewController {
+final class  HankkiListViewController: BaseViewController {
     
     // MARK: - Properties
+    
+    let type: HankkiListViewControllerType
     
     private var dummyList = [1,2,3,4,5,6,7,8,9,10]
     
@@ -11,6 +20,16 @@ final class ZipViewController: BaseViewController {
     private lazy var hankkiTableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: - Life Cycle
+    
+    init(_ type: HankkiListViewControllerType) {
+        self.type = type
+        super.init()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +66,7 @@ final class ZipViewController: BaseViewController {
     }
 }
 
-private extension ZipViewController {
+private extension HankkiListViewController {
     func setupRegister() {
         hankkiTableView.register(ZipHeaderTableView.self, forHeaderFooterViewReuseIdentifier: ZipHeaderTableView.className)
         hankkiTableView.register(HankkiTableViewCell.self, forCellReuseIdentifier: HankkiTableViewCell.className)
@@ -67,13 +86,14 @@ private extension ZipViewController {
             mainTitle: .string("식당족보"),
             rightButton: .string(""),
             rightButtonAction: {},
-            backgroundColor: .hankkiRed
+            backgroundColor: self.type.navigationColor
         )
         
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
         }
      }
+    
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
         dummyList.remove(at: indexPath.row)
@@ -84,7 +104,7 @@ private extension ZipViewController {
     }
 }
 
-extension ZipViewController: UITableViewDataSource {
+extension HankkiListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dummyList.count
     }
@@ -103,7 +123,12 @@ extension ZipViewController: UITableViewDataSource {
         return 104
     }
     
+    /// 헤더 선택
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.type != .myZip {
+            return nil
+        }
+        
         let headerView = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: ZipHeaderTableView.className
         )
@@ -111,17 +136,17 @@ extension ZipViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2, width: 329, height: 231) + 22
+        return self.type.tableViewHeight
     }
 }
 
-extension ZipViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? HankkiTableViewCell else { return }
-        cell.isUserInteractionEnabled = true
-    }
-    
+extension HankkiListViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if self.type != .myZip {
+            return nil
+        }
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
             self.deleteItem(at: indexPath)
             // TODO: -api 연동 제대로하기
@@ -136,7 +161,7 @@ extension ZipViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
+        if scrollView.contentOffset.y < 0 && self.type == .myZip {
             scrollView.bounces = false
         } else {
             scrollView.bounces = true
