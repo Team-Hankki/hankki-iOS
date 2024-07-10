@@ -97,8 +97,7 @@ extension HomeViewController {
             typeCollectionView.snp.makeConstraints {
                 $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
                 $0.leading.equalTo(rootView).inset(8)
-//                $0.width.equalTo(900) //typecollectionviewcell width * 갯수
-//                $0.height.equalTo(100)
+                $0.trailing.equalToSuperview()
                 $0.centerX.equalToSuperview()
             }
         

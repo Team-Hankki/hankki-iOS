@@ -9,8 +9,12 @@ import UIKit
 
 final class TypeCollectionView: BaseView {
 
+    // MARK: - UI Components
+    
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    
+    // MARK: - Life Cycle
 
     override func setupHierarchy() {
         addSubview(collectionView)
@@ -26,11 +30,13 @@ final class TypeCollectionView: BaseView {
     
     override func setupStyle() {
         flowLayout.do {
-            //$0.itemSize = .init(width: UIScreen.getDeviceWidth(), height: 100)
             $0.minimumLineSpacing = 6
             $0.scrollDirection = .horizontal
         }
         
-        collectionView.backgroundColor = .clear
+        collectionView.do {
+            $0.backgroundColor = .clear
+            $0.showsHorizontalScrollIndicator = false
+        }
     }
 }

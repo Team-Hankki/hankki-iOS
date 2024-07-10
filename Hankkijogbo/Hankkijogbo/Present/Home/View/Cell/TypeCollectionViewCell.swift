@@ -14,6 +14,8 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
     private let thumbnailImageView: UIImageView = UIImageView()
     private let typeLabel: UILabel = UILabel()
     
+    // MARK: - Life Cycle
+    
     override func setupHierarchy() {
         addSubviews(thumbnailImageView, typeLabel)
     }
