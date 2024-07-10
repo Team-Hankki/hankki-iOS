@@ -18,7 +18,7 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - UI Properties
     
-    private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalFactory.create()
+    private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: "제보하기",

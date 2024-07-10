@@ -57,6 +57,7 @@
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
 		A240EA082C3EF6E0000FF458 /* BufferFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA072C3EF6E0000FF458 /* BufferFooterView.swift */; };
+		A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -66,7 +67,7 @@
 		A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */; };
 		A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */; };
 		A2DEBF5A2C3D25A800DE14A9 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */; };
-		A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalFactory.swift */; };
+		A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */; };
 		A2DEBF5E2C3D67C200DE14A9 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5D2C3D67C200DE14A9 /* SearchCollectionViewCell.swift */; };
 		A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */; };
 		A2DEBF622C3D67D400DE14A9 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF612C3D67D400DE14A9 /* ImageCollectionViewCell.swift */; };
@@ -139,6 +140,7 @@
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A240EA072C3EF6E0000FF458 /* BufferFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferFooterView.swift; sourceTree = "<group>"; };
+		A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutFactory.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -152,7 +154,7 @@
 		A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
 		A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCompositionalFactory.swift; sourceTree = "<group>"; };
+		A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCompositionalLayoutFactory.swift; sourceTree = "<group>"; };
 		A2DEBF5D2C3D67C200DE14A9 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF612C3D67D400DE14A9 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 		83DBEDA92C2565920042BA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
 				A240EA092C3EF712000FF458 /* HankkiReusableView */,
 				A2B599162C39B497004B7E4E /* HankkiToasts */,
 				861704F52C38303300D99E50 /* HankkiAlerts */,
@@ -549,6 +552,14 @@
 			path = HankkiReusableView;
 			sourceTree = "<group>";
 		};
+		A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */,
+			);
+			path = HankkiCompositionalLayout;
+			sourceTree = "<group>";
+		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,13 +621,13 @@
 			isa = PBXGroup;
 			children = (
 				A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */,
-				A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalFactory.swift */,
+				A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */,
 				A2DEBF5D2C3D67C200DE14A9 /* SearchCollectionViewCell.swift */,
+				A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */,
 				A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */,
 				A2DEBF612C3D67D400DE14A9 /* ImageCollectionViewCell.swift */,
 				A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */,
 				A2DEBF772C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift */,
-				A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -775,7 +786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2DEBF622C3D67D400DE14A9 /* ImageCollectionViewCell.swift in Sources */,
-				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalFactory.swift in Sources */,
+				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
@@ -810,6 +821,7 @@
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */,
 				A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */,
+				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
