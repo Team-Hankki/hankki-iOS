@@ -47,7 +47,7 @@ final class ReportViewController: BaseViewController {
         reportButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.width.equalTo(311)
+            $0.horizontalEdges.equalToSuperview().inset(22)
             $0.height.equalTo(50)
         }
     }
@@ -59,11 +59,11 @@ final class ReportViewController: BaseViewController {
             $0.backgroundColor = .white
         }
         reportButton.do {
-            $0.titleLabel?.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.button,
+            $0.setAttributedTitle(UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
                 withText: "제보하기",
                 color: .hankkiWhite
-            )
+            ), for: .normal)
             $0.backgroundColor = .hankkiRed
             $0.layer.cornerRadius = 16
         }
@@ -84,6 +84,7 @@ private extension ReportViewController {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.className)
+        collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         collectionView.register(
             ReportHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -128,7 +129,7 @@ extension ReportViewController: UICollectionViewDataSource {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        4
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -139,6 +140,8 @@ extension ReportViewController: UICollectionViewDataSource {
         case .category:
             return dummyCategory.count
         case .image:
+            return 1
+        case .menu:
             return 1
         default:
             return 0
@@ -158,6 +161,9 @@ extension ReportViewController: UICollectionViewDataSource {
             return cell
         case .image:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.className, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+            return cell
+        case .menu:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             return cell
         default:
             return UICollectionViewCell()

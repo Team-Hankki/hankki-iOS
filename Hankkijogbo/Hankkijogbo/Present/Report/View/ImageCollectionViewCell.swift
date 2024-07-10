@@ -9,10 +9,6 @@ import UIKit
 
 final class ImageCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - Properties
-    
-    private let border = CAShapeLayer()
-    
     // MARK: - UI Properties
     
     private let recommendGuideLabel = UILabel()

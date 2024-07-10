@@ -136,9 +136,9 @@ extension ReportCompositionalFactory {
     // MARK: - Menu Section
     
     static func getMenuLayoutSection() -> NSCollectionLayoutSection {
-        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(74))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(74))
-        let section = createLayoutSection(group: group, orthogonalScrollingBehavior: .groupPaging)
+        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(97))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(97))
+        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 32, leading: 22, bottom: 0, trailing: 14))
         return section
     }
 }
