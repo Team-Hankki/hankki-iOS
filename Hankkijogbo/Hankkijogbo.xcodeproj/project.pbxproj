@@ -13,6 +13,7 @@
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
 		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
+		8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
@@ -84,6 +85,7 @@
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
 		8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListModel.swift; sourceTree = "<group>"; };
 		8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionView.swift; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */,
 				8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */,
+				8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
+				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,

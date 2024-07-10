@@ -15,6 +15,10 @@ final class HomeViewController: BaseViewController {
     
     private var rootView = HomeView()
     
+    // MARK: - UI Components
+    
+    private var typeCollectionView = TypeCollectionView()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -23,6 +27,10 @@ final class HomeViewController: BaseViewController {
         setupNavigationBar()
         setupMap()
         setupPosition()
+        
+        setupDelegate()
+        setupRegister()
+        setupaddTarget()
     }
     
     // MARK: - Set UI
@@ -36,6 +44,10 @@ final class HomeViewController: BaseViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
+    }
+    
+    override func setupStyle() {
+ 
     }
 }
 
@@ -68,6 +80,38 @@ extension HomeViewController {
             }
         }
     }
+    
+    private func setupaddTarget() {
+        rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
+        rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
+        rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc func typeButtonDidTap() {
+        // 가로스크롤 collectionView 띄우기
+        print("COLLECTION VIEW FILTERING")
+        typeCollectionView.isHidden = false
+         
+            view.addSubview(typeCollectionView)
+
+            typeCollectionView.snp.makeConstraints {
+                $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
+                $0.leading.equalTo(rootView).inset(8)
+//                $0.width.equalTo(900) //typecollectionviewcell width * 갯수
+//                $0.height.equalTo(100)
+                $0.centerX.equalToSuperview()
+            }
+        
+    }
+    
+    @objc func priceButtonDidTap() {
+        // dropdown show
+    }
+    
+    @objc func sortButtonDidTap() {
+        // dropdown show
+    }
+    
 }
 
 extension HomeViewController {
@@ -88,5 +132,38 @@ extension HomeViewController: NMFMapViewCameraDelegate {}
 extension HomeViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         print("Map clicked")
+    }
+}
+
+extension HomeViewController {
+    func setupDelegate() {
+        typeCollectionView.collectionView.delegate = self
+        typeCollectionView.collectionView.dataSource = self
+    }
+    
+    func setupRegister() {
+        typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
+                                         forCellWithReuseIdentifier: TypeCollectionViewCell.className)
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate {}
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.bindData()
+        return cell
+    }
+}
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        return CGSize(width: 100, height: 100)
     }
 }

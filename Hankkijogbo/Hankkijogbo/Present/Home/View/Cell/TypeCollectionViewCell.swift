@@ -21,20 +21,25 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
     override func setupLayout() {
         thumbnailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(21)
-            $0.horizontalEdges.equalToSuperview().inset(31)
+            $0.centerX.equalToSuperview()
             $0.width.height.equalTo(38)
         }
         
         typeLabel.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom).offset(12)
-            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
         
     }
     
     override func setupStyle() {
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.gray200.cgColor
+        self.makeRounded(radius: 16)
+        self.backgroundColor = .white
+        
         thumbnailImageView.do {
-            $0.backgroundColor = .gray600
+            $0.backgroundColor = .gray400
             $0.makeRounded(radius: 8)
         }
         
@@ -47,7 +52,7 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 
 extension TypeCollectionViewCell {
     func bindData() {
-        let typeList = ["한식", "중식", "양식", "일식", "분식"]
+        let typeList = ["한식", "중식", "양식", "일식", "분식", "샐러드", "카페", "햄버거", "국밥"]
         for type in typeList {
             typeLabel.text = type
         }
