@@ -20,7 +20,10 @@ final class ReportViewController: BaseViewController {
     
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
-    private let reportButton: UIButton = UIButton()
+    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
+        primaryButtonText: "제보하기",
+        primaryButtonHandler: bottomButtonPrimaryHandler
+    )
     
     // MARK: - Life Cycle
     
@@ -28,7 +31,19 @@ final class ReportViewController: BaseViewController {
         super.viewDidLoad()
         
         setupRegister()
+        setupDelegate()
         setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Setup UI
@@ -36,7 +51,7 @@ final class ReportViewController: BaseViewController {
     override func setupHierarchy() {
         view.addSubviews(
             collectionView,
-            reportButton
+            bottomButtonView
         )
     }
     
@@ -44,30 +59,19 @@ final class ReportViewController: BaseViewController {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(18)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(reportButton.snp.top).offset(-20)
+            $0.bottom.equalToSuperview()
         }
-        reportButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.horizontalEdges.equalToSuperview().inset(22)
-            $0.height.equalTo(50)
+        bottomButtonView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(154)
         }
     }
     
     override func setupStyle() {
         collectionView.do {
-            $0.dataSource = self
-            $0.delegate = self
-            $0.backgroundColor = .white
-        }
-        reportButton.do {
-            $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
-                withText: "제보하기",
-                color: .hankkiWhite
-            ), for: .normal)
-            $0.backgroundColor = .hankkiRed
-            $0.layer.cornerRadius = 16
+            $0.backgroundColor = .hankkiWhite
+            $0.showsVerticalScrollIndicator = false
         }
     }
 }
@@ -93,6 +97,16 @@ private extension ReportViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: ReportHeaderView.className
         )
+        collectionView.register(
+            BufferFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: BufferFooterView.className
+        )
+    }
+    
+    func setupDelegate() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     func setupNavigationBar() {
@@ -109,9 +123,9 @@ private extension ReportViewController {
         }
     }
     
-    // MARK: - @objc
-    
-    // MARK: - Layout
+    func bottomButtonPrimaryHandler() {
+        print("제보하기 클릭")
+    }
 }
 
 // MARK: - UICollectionView Delegate
@@ -119,16 +133,29 @@ private extension ReportViewController {
 extension ReportViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader,
-              let header = collectionView.dequeueReusableSupplementaryView(
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: ReportHeaderView.className,
                 for: indexPath
-              ) as? ReportHeaderView else {
+            ) as? ReportHeaderView else {
+                return UICollectionReusableView()
+            }
+            header.dataBind(dummyHeader[indexPath.section - 1])
+            return header
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: BufferFooterView.className,
+                for: indexPath
+            ) as? BufferFooterView else {
+                return UICollectionReusableView()
+            }
+            return footer
+        default:
             return UICollectionReusableView()
         }
-        header.dataBind(dummyHeader[indexPath.section - 1])
-        return header
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -151,7 +178,6 @@ extension ReportViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let sectionType = ReportSectionType(rawValue: indexPath.section)
-
         switch sectionType {
         case .search:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
