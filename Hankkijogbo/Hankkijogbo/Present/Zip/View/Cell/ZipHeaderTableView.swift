@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ZipHeaderCollectionView: BaseCollectionReusableView {
+final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
@@ -26,12 +26,22 @@ final class ZipHeaderCollectionView: BaseCollectionReusableView {
     private let shareButton = UIButton()
     
     // MARK: - Life Cycle
-
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        
+        setupStyle()
+        setupHierarchy()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - setup UI
     
-    override func setupStyle() {
-        print(111)
-        
+    private func setupStyle() {
         headerView.do {
             $0.backgroundColor = .hankkiRed
         }
@@ -86,14 +96,14 @@ final class ZipHeaderCollectionView: BaseCollectionReusableView {
         }
     }
     
-    override func setupHierarchy() {
+    private func setupHierarchy() {
         self.addSubviews(headerView)
         headerView.addSubview(headerImageView)
         headerImageView.addSubviews(headerLabel, tagStackView, nameStackView, shareButton)
         nameStackView.addArrangedSubviews(nameImageView, nameLabel)
     }
     
-    override func setupLayout() {
+    private func setupLayout() {
         createTagChipView("#으아아아")
         createTagChipView("#끼에에에엑")
         
@@ -138,7 +148,7 @@ final class ZipHeaderCollectionView: BaseCollectionReusableView {
     }
 }
 
-private extension ZipHeaderCollectionView {
+private extension ZipHeaderTableView {
     func createTagChipView(_ title: String) {
         let tagChipView = UIView()
         let tagLabel = UILabel()

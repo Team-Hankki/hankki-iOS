@@ -1,10 +1,3 @@
-//
-//  ZipControllerView.swift
-//  Hankkijogbo
-//
-//  Created by 심서현 on 7/10/24.
-//
-
 import UIKit
 
 final class ZipViewController: BaseViewController {
@@ -13,7 +6,7 @@ final class ZipViewController: BaseViewController {
     
     // MARK: - UI Properties
     
-    private lazy var hankkiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setupCollectionViewFlowLayout())
+    private lazy var hankkiTableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: - Life Cycle
     
@@ -33,29 +26,33 @@ final class ZipViewController: BaseViewController {
     // MARK: - setup UI
     
     override func setupStyle() {
-        hankkiCollectionView.backgroundColor = .gray100
+        hankkiTableView.do {
+            $0.isEditing = false
+            $0.bounces = true
+            $0.alwaysBounceVertical = true
+        }
     }
     
     override func setupHierarchy() {
-        view.addSubview(hankkiCollectionView)
+        view.addSubviews(hankkiTableView)
     }
     
     override func setupLayout() {
-        hankkiCollectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        hankkiTableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }
 
 private extension ZipViewController {
     func setupRegister() {
-        hankkiCollectionView.register(ZipHeaderCollectionView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ZipHeaderCollectionView.className)
-        hankkiCollectionView.register(HankkiCollectionViewCell.self, forCellWithReuseIdentifier: HankkiCollectionViewCell.className)
+        hankkiTableView.register(ZipHeaderTableView.self, forHeaderFooterViewReuseIdentifier: ZipHeaderTableView.className)
+        hankkiTableView.register(HankkiTableViewCell.self, forCellReuseIdentifier: HankkiTableViewCell.className)
     }
     
     func setupDelegate() {
-        hankkiCollectionView.delegate = self
-        hankkiCollectionView.dataSource = self
+        hankkiTableView.delegate = self
+        hankkiTableView.dataSource = self
     }
     
     func setupNavigationBar() {
@@ -66,7 +63,8 @@ private extension ZipViewController {
             hasRightButton: false,
             mainTitle: .string("식당족보"),
             rightButton: .string(""),
-            rightButtonAction: {}
+            rightButtonAction: {},
+            backgroundColor: .hankkiRed
         )
         
         if let navigationController = navigationController as? HankkiNavigationController {
@@ -75,56 +73,63 @@ private extension ZipViewController {
      }
 }
 
-private extension ZipViewController {
-    func setupCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.do {
-            $0.scrollDirection = .vertical
-            $0.minimumLineSpacing = 0
-            
-            $0.itemSize = CGSize(width: view.frame.width,
-                                 height: 104)
-            $0.headerReferenceSize = CGSize(width: view.frame.width, height: UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2,
-                                                                                                               width: 329, height: 231) + 22)
-            
-        }
-        return layout
-    }
-}
-    
-extension ZipViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+extension ZipViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: HankkiCollectionViewCell.className,
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: HankkiTableViewCell.className,
             for: indexPath
-        ) as? HankkiCollectionViewCell else { return UICollectionViewCell() }
+        ) as? HankkiTableViewCell else { return UITableViewCell() }
         
         cell.dataBind()
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: ZipHeaderCollectionView.className,
-                for: indexPath
-            )
-            return headerView
-            
-        default:
-            fatalError("Unexpected element kind")
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 104
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: ZipHeaderTableView.className
+        )
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2, width: 329, height: 231) + 22
     }
 }
 
-extension ZipViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? HankkiCollectionViewCell else { return }
+extension ZipViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? HankkiTableViewCell else { return }
+        cell.isUserInteractionEnabled = true
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (action, view, completionHandler) in
+            print(action)
+            print(view)
+            print("삭제시작")
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = .hankkiRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.bounces = false
+        } else {
+            scrollView.bounces = true
+        }
+    }
+
 }

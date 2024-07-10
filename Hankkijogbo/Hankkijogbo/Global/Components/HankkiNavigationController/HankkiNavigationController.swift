@@ -66,6 +66,13 @@ extension HankkiNavigationController {
         setupRightButton(stringOrImage: forType.rightButton)
         
         rightButtonAction = forType.rightButtonAction
+        safeAreaView.backgroundColor = forType.backgroundColor
+    }
+    
+    /// NavigationBar의 배경색을 바꿈
+    func setupBackgroundColor(_ color: UIColor) {
+        safeAreaView.backgroundColor = color
+        customNavigationBar.backgroundColor = color
     }
 }
 
@@ -73,15 +80,7 @@ extension HankkiNavigationController {
 
 private extension HankkiNavigationController {
     
-    func setupStyle() {
-        customNavigationBar.do {
-            $0.backgroundColor = .white
-        }
-        
-        safeAreaView.do {
-            $0.backgroundColor = customNavigationBar.backgroundColor
-        }
-        
+    func setupStyle() {        
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center

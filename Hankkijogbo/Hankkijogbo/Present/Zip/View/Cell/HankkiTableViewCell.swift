@@ -7,13 +7,15 @@
 
 import UIKit
 
-final class HankkiCollectionViewCell: BaseCollectionViewCell {
+final class HankkiTableViewCell: BaseTableViewCell {
+    
     // MARK: - Properties
+    
     // MARK: - UI Properties
     
     private let cellStackView = UIStackView()
     
-    private let imageView = UIImageView()
+    private let thumbnailView = UIImageView()
     private let infoStackView = UIStackView()
     
     private let tagChipView = UIView()
@@ -25,8 +27,21 @@ final class HankkiCollectionViewCell: BaseCollectionViewCell {
     private let subInfoImageView = UIImageView()
     
     private let line = UIView()
+    
+    private let heartButton = UIImageView()
 
     // MARK: - Life Cycle
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupSubInfoStackView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - setup UI
     
     override func setupStyle() {
@@ -36,9 +51,10 @@ final class HankkiCollectionViewCell: BaseCollectionViewCell {
             $0.spacing = 12
             $0.layoutMargins = UIEdgeInsets(top: 16, left: 22, bottom: 16, right: 22)
             $0.isLayoutMarginsRelativeArrangement = true
+            $0.alignment = .center
         }
         
-        imageView.do {
+        thumbnailView.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .red
         }
@@ -67,37 +83,41 @@ final class HankkiCollectionViewCell: BaseCollectionViewCell {
         }
         
         subInfoImageView.do {
-            $0.backgroundColor = .red
+            $0.backgroundColor = .gray100
         }
         
         line.do {
             $0.backgroundColor = .gray200
         }
+        
+        heartButton.do {
+            $0.backgroundColor = .yellow
+        }
     }
     
     override func setupHierarchy() {
         self.addSubviews(cellStackView, line)
-        cellStackView.addArrangedSubviews(imageView, infoStackView)
+        cellStackView.addArrangedSubviews(thumbnailView, infoStackView, heartButton)
         infoStackView.addArrangedSubviews(tagChipView, titleLabel, subInfoStackView)
         tagChipView.addSubview(tagLabel)
     }
     
     override func setupLayout() {
-        createSubInfoView("7,500원")
-        subInfoStackView.addArrangedSubview(subInfoImageView)
-        createSubInfoView("3wretqw")
-        
         cellStackView.snp.makeConstraints {
             $0.width.equalToSuperview()
         }
         
-        imageView.snp.makeConstraints {
+        thumbnailView.snp.makeConstraints {
             $0.size.equalTo(72)
+        }
+        
+        tagChipView.snp.makeConstraints {
+            $0.height.equalTo(20)
         }
         
         tagLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(8)
-            $0.verticalEdges.equalToSuperview().inset(1.5)
+            $0.centerY.equalToSuperview()
         }
         
         subInfoImageView.snp.makeConstraints {
@@ -110,15 +130,25 @@ final class HankkiCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(1)
             $0.horizontalEdges.equalToSuperview().inset(22)
         }
+        
+        heartButton.snp.makeConstraints {
+            $0.size.equalTo(38)
+        }
     }
 }
 
-extension HankkiCollectionViewCell {
+extension HankkiTableViewCell {
     func dataBind() {
     }
 }
 
-private extension HankkiCollectionViewCell {
+private extension HankkiTableViewCell {
+    func setupSubInfoStackView() {
+        createSubInfoView("7,500원")
+        subInfoStackView.addArrangedSubview(subInfoImageView)
+        createSubInfoView("300")
+    }
+    
     func createSubInfoView(_ text: String) {
         let subInfoView = UIView()
         let subInfoImageView = UIImageView()
