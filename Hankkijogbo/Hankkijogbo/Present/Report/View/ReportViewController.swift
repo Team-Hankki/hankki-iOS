@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var isImageSet: Bool = false
+    var image: UIImage?
+
     /// 다 임의로 넣어둠
     let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
     let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
@@ -72,12 +76,6 @@ final class ReportViewController: BaseViewController {
     }
 }
 
-extension ReportViewController {
-    
-    // MARK: - Func
-    
-}
-
 private extension ReportViewController {
     
     // MARK: - Private Func
@@ -85,6 +83,7 @@ private extension ReportViewController {
     func setupRegister() {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
+        collectionView.register(SelectImageCollectionViewCell.self, forCellWithReuseIdentifier: SelectImageCollectionViewCell.className)
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.className)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         collectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
@@ -108,15 +107,30 @@ private extension ReportViewController {
             navigationController.setupNavigationBar(forType: type)
         }
     }
+}
+
+private extension ReportViewController{
     
     // MARK: - @objc
     
-    // MARK: - Layout
+    @objc func selectImageButtonDidTap() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .any(of: [.images])
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    @objc func imageXButtonDidTap() {
+        isImageSet = false
+        self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
+    }
 }
 
 // MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource {
+extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader,
@@ -161,8 +175,17 @@ extension ReportViewController: UICollectionViewDataSource {
             cell.dataBind(dummyCategory[indexPath.row])
             return cell
         case .image:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.className, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
-            return cell
+            if isImageSet {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.className, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
+                cell.changeImageButton.addTarget(self, action: #selector(selectImageButtonDidTap), for: .touchUpInside)
+                cell.selectedImageView.image = image
+                cell.xButton.addTarget(self, action: #selector(imageXButtonDidTap), for: .touchUpInside)
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectImageCollectionViewCell.className, for: indexPath) as? SelectImageCollectionViewCell else { return UICollectionViewCell() }
+                cell.selectImageButton.addTarget(self, action: #selector(selectImageButtonDidTap), for: .touchUpInside)
+                return cell
+            }
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             return cell
@@ -175,6 +198,24 @@ extension ReportViewController: UICollectionViewDataSource {
     }
 }
 
-extension ReportViewController: UICollectionViewDelegate {
-    
+// MARK: - PHPickerViewControllerDelegate
+
+extension ReportViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true) // 1
+        let itemProvider = results.first?.itemProvider // 2
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in // 4
+                DispatchQueue.main.async {
+                    if let image = image as? UIImage {
+                        self.isImageSet = true
+                        self.image = image
+                        self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
+                    } else {
+                        self.isImageSet = false
+                    }
+                }
+            }
+        }
+    }
 }

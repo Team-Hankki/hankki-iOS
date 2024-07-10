@@ -130,8 +130,8 @@ extension ReportCompositionalFactory {
 
     static func getImageLayoutSection() -> NSCollectionLayoutSection {
         let header = createBoundarySupplementaryItem(type: .header, widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(57), alignment: .topLeading)
-        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(111))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(111))
+        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(137))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(137))
         let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 0, leading: 22, bottom: 0, trailing: 22), boundarySupplementaryItems: [header])
         return section
     }
