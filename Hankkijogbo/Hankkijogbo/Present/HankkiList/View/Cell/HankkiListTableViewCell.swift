@@ -168,7 +168,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 
 extension HankkiListTableViewCell {
     func dataBind(_ data: DataStruct, isLikeButtonDisable: Bool) {
-        
         self.data = data
 
         titleLabel.text = data.name
@@ -202,7 +201,7 @@ private extension HankkiListTableViewCell {
         }
         
         subInfoSeparatorView.do {
-            $0.backgroundColor = .hankkiRedLight
+            $0.image = .icSeparator
             $0.isHidden = (index == 0)
         }
   
