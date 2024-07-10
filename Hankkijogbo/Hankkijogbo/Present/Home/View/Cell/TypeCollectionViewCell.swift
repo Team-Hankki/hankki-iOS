@@ -53,10 +53,7 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension TypeCollectionViewCell {
-    func bindData() {
-        let typeList = ["한식", "중식", "양식", "일식", "분식", "샐러드", "카페", "햄버거", "국밥"]
-        for type in typeList {
-            typeLabel.text = type
-        }
+    func bindData(model: TypeModel) {
+        typeLabel.text = model.menutype
     }
 }

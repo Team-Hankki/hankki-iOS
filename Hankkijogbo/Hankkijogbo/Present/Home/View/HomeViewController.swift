@@ -14,6 +14,12 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     private var rootView = HomeView()
+    private var isButtonModified = false
+    
+    // 임시 dummy data
+    let typedata = dummyType
+    let pricedata = dummyPrice
+    let sortdata = dummySort
     
     // MARK: - UI Components
     
@@ -47,7 +53,7 @@ final class HomeViewController: BaseViewController {
     }
     
     override func setupStyle() {
- 
+        
     }
 }
 
@@ -88,18 +94,22 @@ extension HomeViewController {
     }
     
     @objc func typeButtonDidTap() {
-        // 가로스크롤 collectionView 띄우기
-        print("COLLECTION VIEW FILTERING")
-        typeCollectionView.isHidden = false
-         
+        if isButtonModified {
+            revertButton()
+        } else {
+            // 가로스크롤 collectionView 띄우기
+            print("COLLECTION VIEW FILTERING")
+            typeCollectionView.isHidden = false
+            
             view.addSubview(typeCollectionView)
-
+            
             typeCollectionView.snp.makeConstraints {
                 $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
                 $0.leading.equalTo(rootView).inset(8)
                 $0.trailing.equalToSuperview()
                 $0.centerX.equalToSuperview()
             }
+        }
         
     }
     
@@ -142,11 +152,17 @@ extension HomeViewController {
     
     func setupRegister() {
         typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
-                                         forCellWithReuseIdentifier: TypeCollectionViewCell.className)
+                                                   forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate {}
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        typeCollectionView.isHidden = true
+        changeButtonTitle(newTitle: typedata[indexPath.item].menutype)
+        print( typedata[indexPath.item].menutype, "이 클릭되었습니다. ")
+    }
+}
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
@@ -156,13 +172,32 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.bindData()
+        cell.bindData(model: typedata[indexPath.item])
         return cell
     }
 }
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         return CGSize(width: 100, height: 100)
     }
+}
+
+extension HomeViewController {
+    func changeButtonTitle(newTitle: String){
+        rootView.typeButton.setTitle(newTitle, for: .normal)
+        rootView.typeButton.backgroundColor = .red
+        rootView.typeButton.setImage(.icClose, for: .normal)
+        isButtonModified = true
+    }
+    
+    func revertButton() {
+        rootView.typeButton.setTitle("종류", for: .normal)
+        rootView.typeButton.backgroundColor = .white
+        rootView.typeButton.setTitleColor(.gray400, for: .normal)
+        rootView.typeButton.setImage(.icArrow, for: .normal)
+        isButtonModified = false
+    }
+    
+    
 }
