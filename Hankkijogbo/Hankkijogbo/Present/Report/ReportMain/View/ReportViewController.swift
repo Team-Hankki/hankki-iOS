@@ -81,7 +81,7 @@ private extension ReportViewController {
     // MARK: - Private Func
     
     func setupRegister() {
-        collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
+        collectionView.register(SearchBarCollectionViewCell.self, forCellWithReuseIdentifier: SearchBarCollectionViewCell.className)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
         collectionView.register(SelectImageCollectionViewCell.self, forCellWithReuseIdentifier: SelectImageCollectionViewCell.className)
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.className)
@@ -126,6 +126,11 @@ private extension ReportViewController{
         isImageSet = false
         self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
     }
+    
+    @objc func searchBarButtonDidTap() {
+        let searchViewController = SearchViewController()
+        self.navigationController?.pushViewController(searchViewController, animated: true)
+    }
 }
 
 // MARK: - UICollectionView Delegate
@@ -168,7 +173,8 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
 
         switch sectionType {
         case .search:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchBarCollectionViewCell.className, for: indexPath) as? SearchBarCollectionViewCell else { return UICollectionViewCell() }
+            cell.searchBarButton.addTarget(self, action: #selector(searchBarButtonDidTap), for: .touchUpInside)
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }

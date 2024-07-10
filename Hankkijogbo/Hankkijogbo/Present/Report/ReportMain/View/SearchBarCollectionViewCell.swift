@@ -1,5 +1,5 @@
 //
-//  SearchCollectionViewCell.swift
+//  SearchBarCollectionViewCell.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/9/24.
@@ -7,12 +7,13 @@
 
 import UIKit
 
-final class SearchCollectionViewCell: BaseCollectionViewCell {
+final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
     
+    let searchBarButton = UIButton()
+
     private let reportedNumberLabel = UILabel()
-    private let searchButton = UIButton()
     private let descriptionLabel = UILabel()
     private let separatorView = UIView()
     
@@ -21,7 +22,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         contentView.addSubviews(
             reportedNumberLabel,
-            searchButton,
+            searchBarButton,
             descriptionLabel,
             separatorView
         )
@@ -32,17 +33,17 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(26)
         }
-        searchButton.snp.makeConstraints {
+        searchBarButton.snp.makeConstraints {
             $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().inset(22)
             $0.height.equalTo(48)
         }
         descriptionLabel.snp.makeConstraints {
-            $0.centerY.equalTo(searchButton)
-            $0.leading.equalTo(searchButton.snp.trailing).offset(6)
+            $0.centerY.equalTo(searchBarButton)
+            $0.leading.equalTo(searchBarButton.snp.trailing).offset(6)
         }
         separatorView.snp.makeConstraints {
-            $0.top.equalTo(searchButton.snp.bottom).offset(26)
+            $0.top.equalTo(searchBarButton.snp.bottom).offset(26)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(12)
         }
@@ -56,7 +57,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
                 color: .hankkiRed
             )
         }
-        searchButton.do {
+        searchBarButton.do {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 10
             $0.setImage(.icSearch, for: .normal)
