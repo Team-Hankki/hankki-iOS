@@ -7,9 +7,19 @@
 
 import UIKit
 
+// MARK: - Protocol
+
+protocol TotalListCollectionViewCellDelegate: AnyObject {
+    func didTapAddButton(in cell: TotalListCollectionViewCell)
+}
+
 final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - UI Properties
+    // MARK: - Properties
+    
+    weak var delegate: TotalListCollectionViewCellDelegate?
+    
+    // MARK: - UI Components
     
     private let thumbnailImageView: UIImageView = UIImageView()
     private let menutag: UILabel = UILabel()
@@ -43,6 +53,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
                     hankkiTitle,
                     hankkiInfoStackView,
                     addButton)
+        
         hankkiInfoStackView.addArrangedSubviews(priceImage,
                                                 priceLabel, 
                                                 dotImage, 
@@ -52,6 +63,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         backgroundColor = .white
+        
         thumbnailImageView.do {
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .gray
@@ -134,11 +146,11 @@ extension TotalListCollectionViewCell {
     }
     
     @objc func actionButtonDipTap() {
-        print("BUTTON TAPPED")
-        // let vc = MyZipListBottomSheetViewController()
-       //  navigationController?.pushViewController(vc, animated: true)
+        delegate?.didTapAddButton(in: self)
     }
 }
+
+// MARK: - Network
 
 extension TotalListCollectionViewCell {
     func bindData(model: TotalListModel) {

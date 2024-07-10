@@ -17,14 +17,13 @@ final class TotalListBottomSheetController: BaseViewController {
     
     let data = dummyData
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let dimmedView = UIView()
     private let containerView = UIView()
     private let bottomSheetHandlerView = UIView()
     private let flowLayout = UICollectionViewFlowLayout()
     private lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-    private let totalListCollectionViewCell = TotalListCollectionViewCell()
     
     // MARK: - Life Cycle
     
@@ -34,8 +33,7 @@ final class TotalListBottomSheetController: BaseViewController {
         setupGesture()
         setupDelegate()
         setupRegister()
-        showMyZipBottomSheet()
-       // setupAddTarget()
+        showBottomSheet()
     }
     
     // MARK: - Set UI
@@ -63,14 +61,14 @@ final class TotalListBottomSheetController: BaseViewController {
         }
         
         totalListCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(30)
+            $0.top.equalToSuperview().offset(32)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
     override func setupStyle() {
         dimmedView.do {
-            $0.backgroundColor = .black.withAlphaComponent(0.67)
+            $0.backgroundColor = .clear
         }
         
         containerView.do {
@@ -87,7 +85,6 @@ final class TotalListBottomSheetController: BaseViewController {
         
         flowLayout.do {
             $0.estimatedItemSize = .init(width: UIScreen.getDeviceWidth(), height: 56)
-            $0.headerReferenceSize = .init(width: UIScreen.getDeviceWidth(), height: 35)
             $0.minimumLineSpacing = 12
             $0.scrollDirection = .vertical
         }
@@ -101,6 +98,19 @@ final class TotalListBottomSheetController: BaseViewController {
 // MARK: - Private extension
 
 private extension TotalListBottomSheetController {
+    
+    func setupDelegate() {
+        totalListCollectionView.delegate = self
+        totalListCollectionView.dataSource = self
+    }
+    
+    func setupRegister() {
+        totalListCollectionView.register(TotalListCollectionViewCell.self,
+                                         forCellWithReuseIdentifier: TotalListCollectionViewCell.className)
+    }
+    
+    // MARK: - Bottom Sheet
+    
     func setupGesture() {
         let upSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(containerViewDidUpSwipe))
         upSwipeGesture.direction = .up
@@ -114,34 +124,8 @@ private extension TotalListBottomSheetController {
         dimmedView.addGestureRecognizer(dimmedTapGesture)
     }
     
-    func setupDelegate() {
-        totalListCollectionView.delegate = self
-        totalListCollectionView.dataSource = self
-    }
-    
-    func setupRegister() {
-        totalListCollectionView.register(
-            TotalListCollectionViewCell.self,
-            forCellWithReuseIdentifier: TotalListCollectionViewCell.className
-        )
-    }
-    
-//    func setupAddTarget() {
-//        totalListCollectionViewCell.addButton.addTarget(self, action: #selector(actionButtonDipTap), for: .touchUpInside)
-//    }
-//    
-//    @objc func actionButtonDipTap() {
-//        print("BUTTON TAPPED")
-//        let vc = MyZipListBottomSheetViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
-}
-
-extension TotalListBottomSheetController {
-    
-    // MARK: - Bottom Sheet
-    
-    func showMyZipBottomSheet() {
+    /// BottomSheet 표출
+    func showBottomSheet() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(defaultHeight)
@@ -152,7 +136,8 @@ extension TotalListBottomSheetController {
         }, completion: nil)
     }
     
-    func removeMyZipBottomSheet() {
+    /// BottomSheet 숨기기
+    func removeBottomSheet() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(0)
@@ -168,6 +153,7 @@ extension TotalListBottomSheetController {
         })
     }
     
+    /// BottomSheet 높이 변경
     func remakeContainerViewHeight(_ height: CGFloat) {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
@@ -202,7 +188,7 @@ private extension TotalListBottomSheetController {
             updatedHeight = defaultHeight
         } else {
             updatedHeight = 0
-            removeMyZipBottomSheet()
+            removeBottomSheet()
         }
         
         isExpanded = false
@@ -211,7 +197,7 @@ private extension TotalListBottomSheetController {
     }
     
     @objc func dimmedViewDidTap() {
-        removeMyZipBottomSheet()
+        removeBottomSheet()
     }
 }
 
@@ -229,6 +215,7 @@ extension TotalListBottomSheetController: UICollectionViewDataSource {
         let model = data[indexPath.row]
         cell.bindData(model: model)
         cell.makeRounded(radius: 10)
+        cell.delegate = self
         return cell
     }
 }
@@ -242,8 +229,15 @@ extension TotalListBottomSheetController: UICollectionViewDelegate {
 }
 
 extension TotalListBottomSheetController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 331, height: 104)
+    }
+}
+
+extension TotalListBottomSheetController: TotalListCollectionViewCellDelegate {
+    func didTapAddButton(in cell: TotalListCollectionViewCell) {
+        let myzipVC = MyZipListBottomSheetViewController()
+        myzipVC.modalPresentationStyle = .fullScreen
+        present(myzipVC, animated: true, completion: nil)
     }
 }
