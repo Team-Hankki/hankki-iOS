@@ -11,8 +11,10 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
+    /// 다 임의로 넣어둠
     let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
     let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
+    let dummyMenu = ["", ""]
     
     // MARK: - UI Properties
     
@@ -85,6 +87,7 @@ private extension ReportViewController {
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.className)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
+        collectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
         collectionView.register(
             ReportHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -129,20 +132,18 @@ extension ReportViewController: UICollectionViewDataSource {
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        4
+        5
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let sectionType = ReportSectionType(rawValue: section)
         switch sectionType {
-        case .search:
+        case .search, .image, .addMenu:
             return 1
         case .category:
             return dummyCategory.count
-        case .image:
-            return 1
         case .menu:
-            return 1
+            return dummyMenu.count
         default:
             return 0
         }
@@ -164,6 +165,9 @@ extension ReportViewController: UICollectionViewDataSource {
             return cell
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
+            return cell
+        case .addMenu:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMenuCollectionViewCell.className, for: indexPath) as? AddMenuCollectionViewCell else { return UICollectionViewCell() }
             return cell
         default:
             return UICollectionViewCell()

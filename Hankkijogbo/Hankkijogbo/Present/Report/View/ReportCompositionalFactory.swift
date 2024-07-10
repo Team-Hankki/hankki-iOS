@@ -14,6 +14,7 @@ enum ReportSectionType: Int {
     case category
     case image
     case menu
+    case addMenu
 }
 
 enum SupplementaryItemType {
@@ -37,6 +38,8 @@ enum ReportCompositionalFactory {
                 section = getImageLayoutSection()
             case .menu:
                 section = getMenuLayoutSection()
+            case .addMenu:
+                section = getAddMenuLayoutSection()
             }
             return section
         }
@@ -139,6 +142,16 @@ extension ReportCompositionalFactory {
         let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(97))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(97))
         let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 32, leading: 22, bottom: 0, trailing: 14))
+        section.interGroupSpacing = 12
+        return section
+    }
+    
+    // MARK: - Add Menu Section
+    
+    static func getAddMenuLayoutSection() -> NSCollectionLayoutSection {
+        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
+        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 24, leading: 22, bottom: 52, trailing: 22))
         return section
     }
 }
