@@ -44,4 +44,10 @@ extension UIView {
         self.layer.shadowRadius = radius
         self.layer.shadowOffset = offset
     }
+    
+    /// width 기준으로 종횡비를 유지해  view의 CGsize를 계산하는 함수
+    static func convertByAspectRatioHeight(_ newWidth: CGFloat, width: CGFloat, height: CGFloat) -> CGFloat {
+        let newHeight: CGFloat = newWidth / width * height
+        return newHeight
+    }
 }

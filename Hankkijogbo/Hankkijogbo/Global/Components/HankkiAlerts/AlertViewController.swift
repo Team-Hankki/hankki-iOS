@@ -145,7 +145,7 @@ final class AlertViewController: BaseViewController {
         } else {
             imageView.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
-                $0.width.height.equalTo(140)
+                $0.size.equalTo(140)
                 $0.top.equalToSuperview().inset(24)
             }
             
