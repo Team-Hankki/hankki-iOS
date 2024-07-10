@@ -160,7 +160,7 @@ private extension ZipListViewController {
 
 // MARK: - delegate
 
-extension ZipListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ZipListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dummyZipList.count + 1
     }
@@ -185,7 +185,9 @@ extension ZipListViewController: UICollectionViewDataSource, UICollectionViewDel
         
         return cell
     }
-    
+}
+
+extension ZipListViewController: UICollectionViewDelegate {
     /// Cell을 터치 했을 때 (선택)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
