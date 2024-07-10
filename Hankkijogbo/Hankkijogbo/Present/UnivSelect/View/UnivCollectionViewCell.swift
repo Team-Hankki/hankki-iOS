@@ -60,7 +60,7 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
 extension UnivCollectionViewCell {
     func dataBind(_ univText: String, isFinal: Bool) {
         univLabel.text = univText
-        
+    
         if isFinal {
             setupFinalStyle()
         }

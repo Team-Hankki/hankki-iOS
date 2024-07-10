@@ -51,6 +51,7 @@
 		864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */; };
 		864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */; };
 		864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */; };
+		864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA91B2C3D63400051EA36 /* BottomButtonView.swift */; };
 		86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */; };
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
@@ -123,6 +124,7 @@
 		864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageQuitFooterView.swift; sourceTree = "<group>"; };
 		864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageZipCollectionViewCell.swift; sourceTree = "<group>"; };
 		864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCollectionViewCellEnum.swift; sourceTree = "<group>"; };
+		864FA91B2C3D63400051EA36 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				83DBEDB82C25666E0042BA48 /* MainButton.swift */,
+				864FA91B2C3D63400051EA36 /* BottomButtonView.swift */,
 			);
 			path = HankkiButtons;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
 				83DBEDB22C2566230042BA48 /* ImageLiterals.swift in Sources */,
+				864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */,
 				83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */,
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
 				864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */,
