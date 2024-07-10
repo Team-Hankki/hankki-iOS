@@ -56,9 +56,12 @@
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
-		A240EA0E2C3F0B84000FF458 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA0D2C3F0B84000FF458 /* SearchViewController.swift */; };
-		A240EA102C3F0FAD000FF458 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA0F2C3F0FAD000FF458 /* SearchCollectionViewCell.swift */; };
+		A240EA082C3EF6E0000FF458 /* BufferFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA072C3EF6E0000FF458 /* BufferFooterView.swift */; };
+		A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */; };
 		A240EA152C3F1B66000FF458 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA142C3F1B66000FF458 /* ImageCollectionViewCell.swift */; };
+		A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA182C3F35BC000FF458 /* SearchBarCollectionViewCell.swift */; };
+		A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */; };
+		A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -68,8 +71,7 @@
 		A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */; };
 		A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */; };
 		A2DEBF5A2C3D25A800DE14A9 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */; };
-		A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalFactory.swift */; };
-		A2DEBF5E2C3D67C200DE14A9 /* SearchBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5D2C3D67C200DE14A9 /* SearchBarCollectionViewCell.swift */; };
+		A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */; };
 		A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */; };
 		A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF612C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift */; };
 		A2DEBF642C3D67DE00DE14A9 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */; };
@@ -140,9 +142,12 @@
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		A240EA0D2C3F0B84000FF458 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		A240EA0F2C3F0FAD000FF458 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA072C3EF6E0000FF458 /* BufferFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferFooterView.swift; sourceTree = "<group>"; };
+		A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutFactory.swift; sourceTree = "<group>"; };
 		A240EA142C3F1B66000FF458 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = ../../../../../../../.Trash/ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA182C3F35BC000FF458 /* SearchBarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchCollectionViewCell.swift; path = Hankkijogbo/Present/Report/Search/View/SearchCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Hankkijogbo/Present/Report/Search/View/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -156,8 +161,7 @@
 		A2DEBF4B2C3BE1A600DE14A9 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
 		A2DEBF552C3D230F00DE14A9 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCompositionalFactory.swift; sourceTree = "<group>"; };
-		A2DEBF5D2C3D67C200DE14A9 /* SearchBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCompositionalLayoutFactory.swift; sourceTree = "<group>"; };
 		A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF612C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -414,6 +418,8 @@
 		83DBEDA92C2565920042BA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
+				A240EA092C3EF712000FF458 /* HankkiReusableView */,
 				A2B599162C39B497004B7E4E /* HankkiToasts */,
 				861704F52C38303300D99E50 /* HankkiAlerts */,
 				83DA28942C38519B004819FA /* HankkiNavigationController */,
@@ -544,6 +550,22 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		A240EA092C3EF712000FF458 /* HankkiReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA072C3EF6E0000FF458 /* BufferFooterView.swift */,
+			);
+			path = HankkiReusableView;
+			sourceTree = "<group>";
+		};
+		A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */,
+			);
+			path = HankkiCompositionalLayout;
+			sourceTree = "<group>";
+		};
 		A240EA112C3F19F4000FF458 /* ReportMain */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,18 +577,18 @@
 		A240EA122C3F19FE000FF458 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				A240EA132C3F1A20000FF458 /* View */,
+				A240EA1E2C3F35D3000FF458 /* View */,
 			);
 			path = Search;
 			sourceTree = "<group>";
 		};
-		A240EA132C3F1A20000FF458 /* View */ = {
+		A240EA1E2C3F35D3000FF458 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A240EA0D2C3F0B84000FF458 /* SearchViewController.swift */,
-				A240EA0F2C3F0FAD000FF458 /* SearchCollectionViewCell.swift */,
+				A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */,
+				A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */,
 			);
-			path = View;
+			name = View;
 			sourceTree = "<group>";
 		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
@@ -631,14 +653,14 @@
 			isa = PBXGroup;
 			children = (
 				A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */,
-				A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalFactory.swift */,
-				A2DEBF5D2C3D67C200DE14A9 /* SearchBarCollectionViewCell.swift */,
+				A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */,
+				A240EA182C3F35BC000FF458 /* SearchBarCollectionViewCell.swift */,
+				A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */,
 				A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */,
 				A240EA142C3F1B66000FF458 /* ImageCollectionViewCell.swift */,
 				A2DEBF612C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift */,
 				A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */,
 				A2DEBF772C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift */,
-				A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -797,7 +819,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
-				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalFactory.swift in Sources */,
+				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
+				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
+				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
@@ -832,30 +856,32 @@
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */,
 				A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */,
+				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
+				A240EA082C3EF6E0000FF458 /* BufferFooterView.swift in Sources */,
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
 				A240EA152C3F1B66000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
-				A2DEBF5E2C3D67C200DE14A9 /* SearchBarCollectionViewCell.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
+				A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */,
 				83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */,
+				A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
 				A2DEBF642C3D67DE00DE14A9 /* MenuCollectionViewCell.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
-				A240EA102C3F0FAD000FF458 /* SearchCollectionViewCell.swift in Sources */,
+				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
-				A240EA0E2C3F0B84000FF458 /* SearchViewController.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,
 				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,

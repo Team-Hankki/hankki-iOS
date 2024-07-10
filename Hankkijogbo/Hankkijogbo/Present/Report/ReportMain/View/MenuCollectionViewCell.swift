@@ -134,7 +134,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         errorLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                withText: "8천원 이하만 가능해요",
+                withText: "8000원 이하만 가능해요",
                 color: .hankkiRed
             )
         }

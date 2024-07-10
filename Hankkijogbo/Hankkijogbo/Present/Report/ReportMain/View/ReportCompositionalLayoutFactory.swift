@@ -1,5 +1,5 @@
 //
-//  ReportCompositionalFactory.swift
+//  ReportCompositionalLayoutFactory.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/9/24.
@@ -17,12 +17,7 @@ enum ReportSectionType: Int {
     case addMenu
 }
 
-enum SupplementaryItemType {
-    case header
-    case footer
-}
-
-enum ReportCompositionalFactory {
+final class ReportCompositionalLayoutFactory: CompositionalLayoutFactory {
     static func create() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
             guard let sectionType: ReportSectionType = ReportSectionType(rawValue: sectionIndex) else {
@@ -46,63 +41,7 @@ enum ReportCompositionalFactory {
     }
 }
 
-extension ReportCompositionalFactory {
-    static func createItem(
-        widthDimension: NSCollectionLayoutDimension,
-        heightDimension: NSCollectionLayoutDimension,
-        contentInsets: NSDirectionalEdgeInsets = .zero
-    ) -> NSCollectionLayoutItem {
-        let itemSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: heightDimension)
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = contentInsets
-        return item
-    }
-    
-    static func createGroup(
-        item: [NSCollectionLayoutItem],
-        widthDimension: NSCollectionLayoutDimension,
-        heightDimension: NSCollectionLayoutDimension,
-        contentInsets: NSDirectionalEdgeInsets = .zero
-    ) -> NSCollectionLayoutGroup {
-        let groupSize = NSCollectionLayoutSize(widthDimension: widthDimension, heightDimension: heightDimension)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: item)
-        group.contentInsets = contentInsets
-        return group
-    }
-    
-    static func createBoundarySupplementaryItem(
-        type: SupplementaryItemType,
-        widthDimension: NSCollectionLayoutDimension,
-        heightDimension: NSCollectionLayoutDimension,
-        alignment: NSRectAlignment = .top
-    ) -> NSCollectionLayoutBoundarySupplementaryItem {
-        return NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: widthDimension,
-                heightDimension: heightDimension
-            ),
-            elementKind: type == .header ? UICollectionView.elementKindSectionHeader : UICollectionView.elementKindSectionFooter,
-            alignment: alignment
-        )
-    }
-    
-    static func createLayoutSection(
-        group: NSCollectionLayoutGroup,
-        orthogonalScrollingBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior = .none,
-        sectionContentInsets: NSDirectionalEdgeInsets = .zero,
-        boundarySupplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem]? = nil
-    ) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = orthogonalScrollingBehavior
-        section.contentInsets = sectionContentInsets
-        if let supplementaryItems = boundarySupplementaryItems {
-            section.boundarySupplementaryItems = supplementaryItems
-        }
-        return section
-    }
-}
-
-extension ReportCompositionalFactory {
+extension ReportCompositionalLayoutFactory {
     
     // MARK: - Search Section
     
@@ -149,9 +88,10 @@ extension ReportCompositionalFactory {
     // MARK: - Add Menu Section
     
     static func getAddMenuLayoutSection() -> NSCollectionLayoutSection {
+        let footer = createBoundarySupplementaryItem(type: .footer, widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80), alignment: .bottom)
         let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
-        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 24, leading: 22, bottom: 52, trailing: 22))
+        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 24, leading: 22, bottom: 52, trailing: 22), boundarySupplementaryItems: [footer])
         return section
     }
 }
