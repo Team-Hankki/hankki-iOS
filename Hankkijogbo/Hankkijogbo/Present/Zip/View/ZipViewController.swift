@@ -4,6 +4,8 @@ final class ZipViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private var dummyList = [1,2,3,4,5,6,7,8,9,10]
+    
     // MARK: - UI Properties
     
     private lazy var hankkiTableView = UITableView(frame: .zero, style: .grouped)
@@ -27,12 +29,13 @@ final class ZipViewController: BaseViewController {
     
     override func setupStyle() {
         hankkiTableView.do {
+            $0.backgroundColor = .hankkiWhite
             $0.isEditing = false
             $0.bounces = true
             $0.alwaysBounceVertical = true
         }
     }
-    
+
     override func setupHierarchy() {
         view.addSubviews(hankkiTableView)
     }
@@ -71,11 +74,19 @@ private extension ZipViewController {
             navigationController.setupNavigationBar(forType: type)
         }
      }
+    /// 셀을 지우는 함수
+    func deleteItem(at indexPath: IndexPath) {
+        dummyList.remove(at: indexPath.row)
+        
+        hankkiTableView.beginUpdates()
+        hankkiTableView.deleteRows(at: [indexPath], with: .automatic)
+        hankkiTableView.endUpdates()
+    }
 }
 
 extension ZipViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return dummyList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,10 +122,10 @@ extension ZipViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (action, view, completionHandler) in
-            print(action)
-            print(view)
-            print("삭제시작")
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
+            self.deleteItem(at: indexPath)
+            // TODO: -api 연동 제대로하기
+            print(indexPath.item, "번째 셀을 삭제했어요!!!!!!!!!!")
             completionHandler(true)
         }
         deleteAction.backgroundColor = .hankkiRed

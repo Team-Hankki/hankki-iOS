@@ -11,6 +11,8 @@ final class HankkiTableViewCell: BaseTableViewCell {
     
     // MARK: - Properties
     
+    private let dummyTagList = ["#두루미", "#해파리"]
+    
     // MARK: - UI Properties
     
     private let cellStackView = UIStackView()
@@ -144,9 +146,10 @@ extension HankkiTableViewCell {
 
 private extension HankkiTableViewCell {
     func setupSubInfoStackView() {
-        createSubInfoView("7,500원")
-        subInfoStackView.addArrangedSubview(subInfoImageView)
-        createSubInfoView("300")
+        dummyTagList.enumerated().forEach { index, tag in
+            if index != 0 {subInfoStackView.addArrangedSubview(subInfoImageView)}
+            createSubInfoView(tag)
+        }
     }
     
     func createSubInfoView(_ text: String) {

@@ -11,6 +11,8 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
+    private let dummyTagList = ["#말미잘", "#호루라기"]
+    
     // MARK: - UI Properties
     
     private let headerView = UIView()
@@ -33,6 +35,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         setupStyle()
         setupHierarchy()
         setupLayout()
+        setupTagStackView()
     }
     
     required init?(coder: NSCoder) {
@@ -104,9 +107,6 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     }
     
     private func setupLayout() {
-        createTagChipView("#으아아아")
-        createTagChipView("#끼에에에엑")
-        
         headerView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
@@ -149,6 +149,10 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
 }
 
 private extension ZipHeaderTableView {
+    func setupTagStackView() {
+        dummyTagList.forEach { createTagChipView($0) }
+    }
+    
     func createTagChipView(_ title: String) {
         let tagChipView = UIView()
         let tagLabel = UILabel()
