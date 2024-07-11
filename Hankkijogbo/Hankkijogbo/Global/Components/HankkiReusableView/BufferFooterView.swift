@@ -11,9 +11,9 @@ final class BufferFooterView: BaseCollectionReusableView {
     
     // MARK: - Set UI
     
-    override func setupLayout() {
-        self.snp.makeConstraints {
-            $0.height.equalTo(154)
+    override func setupStyle() {
+        self.do {
+            $0.backgroundColor = .clear
         }
     }
 }

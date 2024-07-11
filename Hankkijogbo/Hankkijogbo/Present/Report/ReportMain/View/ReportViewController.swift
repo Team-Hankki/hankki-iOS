@@ -151,7 +151,7 @@ private extension ReportViewController{
     }
 }
 
-// MARK: - UICollectionView Delegate
+// MARK: - UICollectionViewDataSource
 
 extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
