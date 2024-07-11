@@ -41,9 +41,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
         }
         selectImageButton.do {
             $0.backgroundColor = .gray100
-            $0.layer.borderColor = UIColor.gray200.cgColor
-            $0.layer.borderWidth = 1
-            $0.layer.cornerRadius = 10
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray200)
             // TODO: - image 변경
             $0.setImage(.icFood, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
