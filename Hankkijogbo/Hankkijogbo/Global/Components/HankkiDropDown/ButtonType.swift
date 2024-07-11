@@ -8,7 +8,6 @@
 import Foundation
 
 enum ButtonType {
-    // case type
     case price
     case sort
 }

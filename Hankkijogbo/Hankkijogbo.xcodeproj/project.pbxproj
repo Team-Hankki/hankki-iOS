@@ -15,7 +15,7 @@
 		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
 		8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */; };
 		8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */; };
-		832546EC2C3F28F900B8C3DC /* DropDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownViewController.swift */; };
+		832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownView.swift */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
@@ -90,7 +90,7 @@
 		8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionView.swift; sourceTree = "<group>"; };
 		8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringModel.swift; sourceTree = "<group>"; };
-		832546EB2C3F28F900B8C3DC /* DropDownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownViewController.swift; sourceTree = "<group>"; };
+		832546EB2C3F28F900B8C3DC /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		832546EA2C3F28D100B8C3DC /* HankkiDropDown */ = {
 			isa = PBXGroup;
 			children = (
-				832546EB2C3F28F900B8C3DC /* DropDownViewController.swift */,
+				832546EB2C3F28F900B8C3DC /* DropDownView.swift */,
 				83A23A412C4010AA00A71ECE /* ButtonType.swift */,
 			);
 			path = HankkiDropDown;
@@ -749,7 +749,7 @@
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
-				832546EC2C3F28F900B8C3DC /* DropDownViewController.swift in Sources */,
+				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,

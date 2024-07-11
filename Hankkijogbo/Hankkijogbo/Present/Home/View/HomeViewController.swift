@@ -11,13 +11,12 @@ import NMapsMap
 
 final class HomeViewController: BaseViewController {
     
-    
     // MARK: - Properties
     
     private var rootView = HomeView()
     
     private var isButtonModified = false
-    var customDropDown: DropDownViewController?
+    var customDropDown: DropDownView?
     var isDropDownVisible = false
     
     // 임시 dummy data
@@ -120,7 +119,7 @@ extension HomeViewController {
     }
     
     private func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
-        customDropDown = DropDownViewController(isPriceModel: isPriceModel, buttonType: buttonType)
+        customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType)
         customDropDown?.delegate = self
         
         guard let customDropDown = customDropDown else { return }
@@ -129,7 +128,7 @@ extension HomeViewController {
         customDropDown.snp.makeConstraints {
             $0.top.equalTo(isPriceModel ? rootView.priceButton.snp.bottom : rootView.sortButton.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(0) // 초기 높이 0으로 설정
+            $0.width.height.equalTo(0)
         }
         
         UIView.animate(withDuration: 0.3) {
@@ -263,9 +262,8 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController: DropDownViewControllerDelegate {
-    
-    func dropDownViewController(_ controller: DropDownViewController, didSelectItem item: String, buttonType: ButtonType) {
+extension HomeViewController: DropDownViewDelegate {
+    func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
         switch buttonType {
         case .price:
             changeButtonTitle(for: rootView.priceButton, newTitle: item)
