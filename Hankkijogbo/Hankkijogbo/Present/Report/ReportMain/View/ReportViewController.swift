@@ -216,7 +216,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.className, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
                 cell.changeImageButton.addTarget(self, action: #selector(selectImageButtonDidTap), for: .touchUpInside)
                 cell.selectedImageView.image = image
-                cell.xButton.addTarget(self, action: #selector(imageXButtonDidTap), for: .touchUpInside)
+                cell.imageXButton.addTarget(self, action: #selector(imageXButtonDidTap), for: .touchUpInside)
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectImageCollectionViewCell.className, for: indexPath) as? SelectImageCollectionViewCell else { return UICollectionViewCell() }
