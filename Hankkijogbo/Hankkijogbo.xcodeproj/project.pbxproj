@@ -19,6 +19,7 @@
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
+		83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23A412C4010AA00A71ECE /* ButtonType.swift */; };
 		83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28952C3851BB004819FA /* HankkiNavigationType.swift */; };
 		83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28972C3852C5004819FA /* HankkiNavigationController.swift */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
@@ -93,6 +94,7 @@
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		83A23A412C4010AA00A71ECE /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
 		83DA28952C3851BB004819FA /* HankkiNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationType.swift; sourceTree = "<group>"; };
 		83DA28972C3852C5004819FA /* HankkiNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationController.swift; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				832546EB2C3F28F900B8C3DC /* DropDownViewController.swift */,
+				83A23A412C4010AA00A71ECE /* ButtonType.swift */,
 			);
 			path = HankkiDropDown;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownViewController.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
+				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,

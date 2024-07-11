@@ -6,18 +6,25 @@
 //
 
 import UIKit
-import SnapKit
-import Then
+
+protocol DropDownViewControllerDelegate: AnyObject {
+   // func testfunction()
+    func dropDownViewController(_ controller: DropDownViewController, didSelectItem item: String, buttonType: ButtonType)
+}
 
 final class DropDownViewController: BaseView {
     
     // MARK: - Properties
     
+    weak var delegate: DropDownViewControllerDelegate?
+    private var buttonType: ButtonType
+    
     private var numberOfCells: Int = 0
-    private var tableView = UITableView()
+    var tableView = UITableView()
     
     private let dataPrice = dummyPrice
     private let dataSort = dummySort
+    private var data: [String] = []
     
     // MARK: - Life Cycle
     
@@ -35,18 +42,36 @@ final class DropDownViewController: BaseView {
         
     }
     
-    init(isPriceModel: Bool) {
-        if isPriceModel {
-            self.numberOfCells = dataPrice.count
-        } else {
-            self.numberOfCells = dataSort.count
+//    init(isPriceModel: Bool) {
+//        if isPriceModel {
+//            self.numberOfCells = dataPrice.count
+//            print(numberOfCells,"💞")
+//             self.data = dataPrice.map { $0.amount }
+//        } else {
+//            self.numberOfCells = dataSort.count
+//            print(numberOfCells, "💞💞")
+//             self.data = dataSort.map { $0.sortType }
+//        }
+//        super.init(frame: .zero)
+//        
+//        setupDelegate()
+//        setupRegister()
+//        
+//    }
+    init(isPriceModel: Bool, buttonType: ButtonType) {
+            self.buttonType = buttonType
+            if isPriceModel {
+                self.numberOfCells = dataPrice.count
+                self.data = dataPrice.map { $0.amount } // amount 필드를 사용하는 것으로 가정
+            } else {
+                self.numberOfCells = dataSort.count
+                self.data = dataSort.map { $0.sortType } // sortType 필드를 사용하는 것으로 가정
+            }
+            super.init(frame: .zero)
+            
+            setupDelegate()
+            setupRegister()
         }
-        super.init(frame: .zero)
-        
-        setupDelegate()
-        setupRegister()
-        
-    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,8 +91,11 @@ extension DropDownViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        print("Selected Cell \(indexPath.row + 1)")
+        print("123123")
+       // delegate?.testfunction()
+        print(indexPath.item)
+//        delegate?.dropDownViewController(self, didSelectItem: data[indexPath.item])
+        delegate?.dropDownViewController(self, didSelectItem: data[indexPath.row], buttonType: buttonType)
     }
     
 }
@@ -87,4 +115,9 @@ extension DropDownViewController {
         self.numberOfCells = count
         tableView.reloadData()
     }
+}
+
+
+extension DropDownViewController {
+    
 }
