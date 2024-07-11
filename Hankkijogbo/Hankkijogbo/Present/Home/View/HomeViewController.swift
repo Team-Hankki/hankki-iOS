@@ -111,49 +111,13 @@ extension HomeViewController {
         
     }
     
-//    @objc func priceButtonDidTap() {
-//        toggleDropDown(isPriceModel: true)
-//    }
-//    
-//    @objc func sortButtonDidTap() {
-//        toggleDropDown(isPriceModel: false)
-//    }
-//    
-//    private func toggleDropDown(isPriceModel: Bool) {
-//        if isDropDownVisible {
-//            hideDropDown()
-//        } else {
-//            showDropDown(isPriceModel: isPriceModel)
-//        }
-//        isDropDownVisible.toggle()
-//    }
-//
-//    private func showDropDown(isPriceModel: Bool) {
-//        if isPriceModel {
-//            customDropDown = DropDownViewController(isPriceModel: true)
-//        } else {
-//            customDropDown = DropDownViewController(isPriceModel: false)
-//        }
-//        
-//        guard let customDropDown = customDropDown else { return }
-//        customDropDown.delegate = self
-//        
-//        view.addSubview(customDropDown)
-//        customDropDown.snp.makeConstraints {
-//            $0.top.equalTo(rootView.priceButton.snp.bottom).offset(10)
-//            $0.centerX.equalToSuperview()
-//            $0.width.height.equalTo(0) // 초기 높이 0으로 설정
-//        }
-//        
-//        UIView.animate(withDuration: 0.3) {
-//            customDropDown.snp.updateConstraints {
-//                let height = isPriceModel ? self.pricedata.count * 44 : self.sortdata.count * 44
-//                $0.width.equalTo(112)
-//                $0.height.equalTo(height)
-//            }
-//            self.view.layoutIfNeeded()
-//        }
-//    }
+    @objc func priceButtonDidTap() {
+        toggleDropDown(isPriceModel: true, buttonType: .price)
+    }
+    
+    @objc func sortButtonDidTap() {
+        toggleDropDown(isPriceModel: false, buttonType: .sort)
+    }
     
     private func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         customDropDown = DropDownViewController(isPriceModel: isPriceModel, buttonType: buttonType)
@@ -177,15 +141,7 @@ extension HomeViewController {
             self.view.layoutIfNeeded()
         }
     }
-
-    @objc func priceButtonDidTap() {
-        toggleDropDown(isPriceModel: true, buttonType: .price)
-    }
-
-    @objc func sortButtonDidTap() {
-        toggleDropDown(isPriceModel: false, buttonType: .sort)
-    }
-
+    
     private func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         if isDropDownVisible {
             hideDropDown()
@@ -194,7 +150,7 @@ extension HomeViewController {
         }
         isDropDownVisible.toggle()
     }
-
+    
     private func hideDropDown() {
         guard let customDropDown = customDropDown else { return }
         
@@ -273,38 +229,36 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController {
     func changeButtonTitle(for button: UIButton, newTitle: String) {
-            button.setTitle(newTitle, for: .normal)
-            button.backgroundColor = .hankkiYellowLight
+        button.setTitle(newTitle, for: .normal)
+        button.backgroundColor = .hankkiYellowLight
         button.layer.borderColor = UIColor.hankkiYellow.cgColor
-            button.setImage(.icClose, for: .normal)
-            button.removeTarget(self, action: nil, for: .touchUpInside)
-            button.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
+        button.setImage(.icClose, for: .normal)
+        button.removeTarget(self, action: nil, for: .touchUpInside)
+        button.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
         button.sizeToFit()
-            isButtonModified = true
-        }
-        
+        isButtonModified = true
+    }
+    
     @objc func revertButtonAction(_ sender: UIButton) {
-            let filter: String
-            if sender == rootView.priceButton {
-                filter = "가격대"
-            } else if sender == rootView.sortButton {
-                filter = "정렬"
-            } else {
-                filter = "종류"
-            }
-            revertButton(for: sender, filter: filter)
+        let filter: String
+        if sender == rootView.priceButton {
+            filter = "가격대"
+        } else if sender == rootView.sortButton {
+            filter = "정렬"
+        } else {
+            filter = "종류"
         }
+        revertButton(for: sender, filter: filter)
+    }
     
     func revertButton(for button: UIButton, filter: String) {
         button.setTitle(filter, for: .normal)
         button.backgroundColor = .white
+        button.layer.borderColor = UIColor.gray300.cgColor
         button.setTitleColor(.gray400, for: .normal)
         button.setImage(.icArrow, for: .normal)
         button.removeTarget(self, action: nil, for: .touchUpInside)
-  //      button.sizeToFit()
-//        button.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
-//        button.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
-//        button.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
+        button.sizeToFit()
         isButtonModified = false
     }
 }
