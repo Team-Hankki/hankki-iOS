@@ -15,13 +15,13 @@ final class HankkiNavigationController: UINavigationController {
     typealias ButtonAction = () -> Void
     private var rightButtonAction: ButtonAction? {
         didSet {
-            rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
+            rightButton.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)
         }
     }
     
     private var backButtonAction: ButtonAction? {
         didSet {
-            backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+            backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -102,7 +102,7 @@ private extension HankkiNavigationController {
         
         backButton.do {
             $0.setImage(.icArrowBack, for: .normal)
-            $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
         
         rightButton.do {
@@ -197,7 +197,7 @@ private extension HankkiNavigationController {
         }
     }
     
-    @objc func backButtonTapped() {
+    @objc func backButtonDidTap() {
         if let backButtonAction {
             return backButtonAction()
         } else {
@@ -205,7 +205,7 @@ private extension HankkiNavigationController {
         }
     }
     
-    @objc func rightButtonTapped() {
+    @objc func rightButtonDidTap() {
         rightButtonAction?()
     }
 }
