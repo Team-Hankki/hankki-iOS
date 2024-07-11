@@ -177,6 +177,8 @@ extension HankkiListTableViewCell {
         heartButton.isHidden = isLikeButtonDisable
         priceLabel.text = "\(data.lowestPrice)원"
         heartCountLabel.text = "\(data.heartCount)"
+        
+        heartButton.isSelected = !data.isDeleted
     }
 }
 

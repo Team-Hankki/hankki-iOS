@@ -13,5 +13,6 @@ extension HankkiListTableViewCell {
         let category: String
         let lowestPrice: Int
         let heartCount: Int
+        var isDeleted: Bool = false
     }
 }

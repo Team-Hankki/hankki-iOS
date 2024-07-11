@@ -29,7 +29,7 @@ final class  HankkiListViewController: BaseViewController {
         HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
         HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134)
     ]
-    
+
     // MARK: - UI Properties
     
     private lazy var hankkiTableView = UITableView(frame: .zero, style: .grouped)
@@ -200,6 +200,7 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
             } else {
                 print(indexPath.item, "번째 식당을 추가합니다.")
             }
+            dummyHankkiList[indexPath.item].isDeleted.toggle()
         }
     }
 }

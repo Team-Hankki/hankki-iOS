@@ -77,7 +77,7 @@ private extension ZipListViewController {
     }
     
     func setupNavigationBar() {
-        let type: HankkiNavigationType
+        var type: HankkiNavigationType
 
         if isEditMode {
             type = HankkiNavigationType(
@@ -86,8 +86,9 @@ private extension ZipListViewController {
                 mainTitle: .string("나의 식당 족보"),
                 rightButton: .string("삭제"),
                 rightButtonAction: deleteButtonDidTap,
-                backButtonAction: { self.setIsEditMode() }
+                backButtonAction: setIsEditMode
             )
+
         } else {
             type = HankkiNavigationType(
                 hasBackButton: true,
@@ -138,10 +139,8 @@ private extension ZipListViewController {
     }
     
     func setIsEditMode() {
-        if isEditMode {
-            deselectedAllItems()
-            isEditMode.toggle()
-        }
+        deselectedAllItems()
+        isEditMode.toggle()
     }
 }
 

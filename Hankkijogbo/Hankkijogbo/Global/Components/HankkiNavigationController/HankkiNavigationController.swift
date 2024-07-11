@@ -72,6 +72,8 @@ extension HankkiNavigationController {
         setupRightButton(stringOrImage: forType.rightButton)
         
         rightButtonAction = forType.rightButtonAction
+        backButtonAction = forType.backButtonAction
+        
         safeAreaView.backgroundColor = forType.backgroundColor
     }
     
@@ -79,7 +81,6 @@ extension HankkiNavigationController {
     func setupBackgroundColor(_ color: UIColor) {
         safeAreaView.backgroundColor = color
         customNavigationBar.backgroundColor = color
-        backButtonAction = forType.backButtonAction
     }
 }
 
