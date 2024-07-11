@@ -11,16 +11,31 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    var selectedHankkiNameString: String? {
+        didSet {
+            print(selectedHankkiNameString ?? "")
+        }
+    }
+    
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                hankkiNameLabel.textColor = .hankkiRed
-                checkButton.setImage(.btnCheckFilled, for: .normal)
-                self.backgroundColor = .hankkiRedLight
+                if selectedHankkiNameString != nil {
+                    hankkiNameLabel.textColor = .gray850
+                    checkButton.setImage(nil, for: .normal)
+                    self.backgroundColor = .hankkiWhite
+                    self.selectedHankkiNameString = nil
+                } else {
+                    hankkiNameLabel.textColor = .hankkiRed
+                    checkButton.setImage(.btnCheckFilled, for: .normal)
+                    self.backgroundColor = .hankkiRedLight
+                    self.selectedHankkiNameString = hankkiNameLabel.text
+                }
             } else {
                 hankkiNameLabel.textColor = .gray850
                 checkButton.setImage(nil, for: .normal)
                 self.backgroundColor = .hankkiWhite
+                self.selectedHankkiNameString = nil
             }
         }
     }
