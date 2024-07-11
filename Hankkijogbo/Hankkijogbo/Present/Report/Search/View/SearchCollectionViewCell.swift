@@ -7,13 +7,19 @@
 
 import UIKit
 
+protocol ChangeBottomButtonDelegate: AnyObject {
+    func changeBottomButtonView(_ isDone: Bool)
+}
+
 final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    var delegate: SearchViewController?
+    
     var selectedHankkiNameString: String? {
         didSet {
-            print(selectedHankkiNameString ?? "")
+            delegate?.changeBottomButtonView(selectedHankkiNameString != nil)
         }
     }
     

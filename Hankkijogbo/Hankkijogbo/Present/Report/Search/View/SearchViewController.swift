@@ -32,6 +32,10 @@ final class SearchViewController: BaseViewController {
     private lazy var searchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let searchIconImageView: UIImageView = UIImageView()
     private let searchBarBottomGradientView: UIView = UIView()
+    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
+        primaryButtonText: "삭당을 제보해주세요",
+        primaryButtonHandler: bottomButtonPrimaryHandler
+    )
     
     // MARK: - Life Cycle
     
@@ -50,7 +54,8 @@ final class SearchViewController: BaseViewController {
             searchGuideLabel,
             searchTextField,
             searchCollectionView,
-            searchBarBottomGradientView
+            searchBarBottomGradientView,
+            bottomButtonView
         )
     }
     
@@ -75,6 +80,12 @@ final class SearchViewController: BaseViewController {
             $0.top.equalTo(searchTextField.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(42)
+        }
+        
+        bottomButtonView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(34)
+            $0.height.equalTo(154)
         }
     }
     
@@ -123,7 +134,6 @@ private extension SearchViewController {
         searchCollectionView.dataSource = self
     }
     // TODO: - gradient 설정
-    // TODO: - pull 받고 바텀버튼 추가
     func addViewGradient(_ view: UIView) {
         let gradient = CAGradientLayer()
         
@@ -141,6 +151,10 @@ private extension SearchViewController {
         
         view.layer.addSublayer(gradient)
     }
+    
+    @objc func bottomButtonPrimaryHandler() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: - UICollectionView
@@ -152,6 +166,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+        cell.delegate = self
         return cell
     }
 }
@@ -163,5 +178,15 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         0
+    }
+}
+
+extension SearchViewController: ChangeBottomButtonDelegate {
+    func changeBottomButtonView(_ isDone: Bool) {
+        if isDone {
+            self.bottomButtonView.setupEnabledDoneButton()
+        } else {
+            self.bottomButtonView.setupDisabledDoneButton()
+        }
     }
 }
