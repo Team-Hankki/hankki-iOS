@@ -91,15 +91,16 @@ private extension ReportViewController {
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: ImageCollectionViewCell.className)
         collectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         collectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
+        
         collectionView.register(
             ReportHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: ReportHeaderView.className
         )
         collectionView.register(
-            BufferFooterView.self,
+            BufferView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: BufferFooterView.className
+            withReuseIdentifier: BufferView.className
         )
     }
     
@@ -170,9 +171,9 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case UICollectionView.elementKindSectionFooter:
             guard let footer = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
-                withReuseIdentifier: BufferFooterView.className,
+                withReuseIdentifier: BufferView.className,
                 for: indexPath
-            ) as? BufferFooterView else {
+            ) as? BufferView else {
                 return UICollectionReusableView()
             }
             return footer
