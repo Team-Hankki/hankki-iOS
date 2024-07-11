@@ -24,14 +24,26 @@ extension HankkiListViewController {
         var tableViewHeight: CGFloat {
             switch self {
             case .myZip:
-                UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2, 
-                                                  width: 329,
-                                                  height: 231) + 22
+                UIView.convertByAspectRatioHeight(
+                    UIScreen.getDeviceWidth() - 22 * 2,
+                    width: 329,
+                    height: 231
+                ) + 22
+                
             case .repoted, .liked:
                 0
             }
         }
+        
+        var navigationTitle: String {
+            switch self {
+            case .myZip:
+                "나의 식당 족보"
+            case .repoted:
+                "내가 제보한 식당"
+            case .liked:
+                "좋아요 누른 식당"
+            }
+        }
     }
-    
 }
-

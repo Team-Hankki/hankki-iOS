@@ -81,6 +81,14 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         shareButton.do {
+            var configuration = UIButton.Configuration.tinted()
+            
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 9, bottom: 9, trailing: 16)
+            configuration.background.cornerRadius = 20
+            configuration.background.backgroundColor = .gray800
+        
+            $0.configuration = configuration
+            
             let image = UIImage.icHeart
             let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 20, height: 20)).image { _ in
                 image.draw(in: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
@@ -89,13 +97,6 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
             $0.setImage(resizedImage, for: .normal)
             
             $0.setAttributedTitle(UILabel.setupAttributedText(for: PretendardStyle.body3, withText: "공유", color: .hankkiWhite), for: .normal)
-            
-            var configuration = UIButton.Configuration.tinted()
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 9, bottom: 9, trailing: 16)
-            configuration.background.cornerRadius = 20
-            configuration.background.backgroundColor = .gray800
-            
-            $0.configuration = configuration
         }
     }
     
