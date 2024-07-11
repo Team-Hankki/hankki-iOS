@@ -33,6 +33,12 @@ final class MypageViewController: BaseViewController {
         setupDelegate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+        
+         setupNavigationBar()
+     }
+    
     override func setupHierarchy() {
         view.addSubview(collectionView)
     }
@@ -62,6 +68,18 @@ private extension MypageViewController {
     func setupCollectionViewSection(for section: SectionType) -> NSCollectionLayoutSection {
         setupSection(section)
     }
+    
+    func setupNavigationBar() {
+         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
+                                                               hasRightButton: false,
+                                                               mainTitle: .string("MY"),
+                                                               rightButton: .string(""),
+                                                               rightButtonAction: {})
+                                                                 
+        if let navigationController = navigationController as? HankkiNavigationController {
+              navigationController.setupNavigationBar(forType: type)
+        }
+     }
     
     func showQuitAlert() {
         self.showAlert(
