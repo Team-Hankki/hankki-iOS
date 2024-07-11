@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 enum SupplementaryItemType {
     case header
     case footer

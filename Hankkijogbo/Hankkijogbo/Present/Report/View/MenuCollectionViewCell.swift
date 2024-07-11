@@ -20,7 +20,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceLabel = UILabel()
     private let priceTextField = UITextField()
     private let priceUnitLabel = UILabel()
-    private let xButton = UIButton()
+    private let deleteButton = UIButton()
     private let errorLabel = UILabel()
     
     // MARK: - Init
@@ -44,7 +44,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             priceLabel,
             priceTextField,
             priceUnitLabel,
-            xButton,
+            deleteButton,
             errorLabel
         )
     }
@@ -74,7 +74,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.trailing.equalTo(priceTextField).offset(-17)
             $0.centerY.equalTo(priceTextField).offset(2)
         }
-        xButton.snp.makeConstraints {
+        deleteButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
             $0.leading.equalTo(priceTextField.snp.trailing).offset(3)          
             $0.size.equalTo(32)
@@ -128,7 +128,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 color: .gray800
             )
         }
-        xButton.do {
+        deleteButton.do {
             $0.setImage(.icClose, for: .normal)
         }
         errorLabel.do {

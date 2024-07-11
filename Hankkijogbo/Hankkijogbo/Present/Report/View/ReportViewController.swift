@@ -32,12 +32,12 @@ final class ReportViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
-        setupNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -58,7 +58,7 @@ final class ReportViewController: BaseViewController {
     override func setupLayout() {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(18)
-            $0.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
         bottomButtonView.snp.makeConstraints {
@@ -74,12 +74,6 @@ final class ReportViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = false
         }
     }
-}
-
-extension ReportViewController {
-    
-    // MARK: - Func
-    
 }
 
 private extension ReportViewController {

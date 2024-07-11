@@ -28,9 +28,7 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         categoryButton.do {
             $0.backgroundColor = .white
-            $0.layer.cornerRadius = 18
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray200.cgColor
+            $0.makeRoundBorder(cornerRadius: 18, borderWidth: 1, borderColor: .gray200)
             $0.setImage(.icHeart, for: .normal)
             $0.configuration = .plain()
             $0.configuration?.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 10)
