@@ -7,6 +7,12 @@
 
 import UIKit
 
+private extension MypageViewController {
+    func navigateToZipListViewController() {
+            let zipListViewController = ZipListViewController()
+            navigationController?.pushViewController(zipListViewController, animated: true)
+    }
+}
 extension MypageViewController {
     enum SectionType: Int, CaseIterable {
         case zip, hankki, option
@@ -27,7 +33,7 @@ extension MypageViewController {
         // TODO: - 함수 추후 변경
         switch section {
         case .zip:
-            print("나의 한끼 족보로 이동")
+            navigateToZipListViewController()
             
         case .hankki:
             print("제보하거나 좋아요한 한끼 식당 리스트로 이동")
