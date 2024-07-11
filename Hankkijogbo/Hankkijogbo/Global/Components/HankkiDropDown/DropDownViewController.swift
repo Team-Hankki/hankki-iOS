@@ -16,6 +16,9 @@ final class DropDownViewController: BaseView {
     private var numberOfCells: Int = 0
     private var tableView = UITableView()
     
+    private let dataPrice = dummyPrice
+    private let dataSort = dummySort
+    
     // MARK: - Life Cycle
     
     override func setupHierarchy() {
@@ -32,10 +35,13 @@ final class DropDownViewController: BaseView {
         
     }
     
-    init(numberOfCells: Int) {
-        self.numberOfCells = numberOfCells
+    init(isPriceModel: Bool) {
+        if isPriceModel {
+            self.numberOfCells = dataPrice.count
+        } else {
+            self.numberOfCells = dataSort.count
+        }
         super.init(frame: .zero)
-     //    setupView()
         
         setupDelegate()
         setupRegister()

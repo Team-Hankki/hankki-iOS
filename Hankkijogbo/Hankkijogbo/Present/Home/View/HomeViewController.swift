@@ -121,18 +121,28 @@ extension HomeViewController {
         if isDropDownVisible {
             hideDropDown()
         } else {
-            showDropDown()
+            showDropDown(isPriceModel: true)
         }
         isDropDownVisible.toggle()
     }
     
     @objc func sortButtonDidTap() {
-        // dropdown show
+        if isDropDownVisible {
+            hideDropDown()
+        } else {
+            showDropDown(isPriceModel: false)
+        }
+        isDropDownVisible.toggle()
     }
     
     
-    private func showDropDown() {
-        customDropDown = DropDownViewController(numberOfCells: 5)
+    private func showDropDown(isPriceModel: Bool) {
+        if isPriceModel {
+            customDropDown = DropDownViewController(isPriceModel: true)
+        } else {
+            customDropDown = DropDownViewController(isPriceModel: false)
+        }
+        
         guard let customDropDown = customDropDown else { return }
         
         view.addSubview(customDropDown)
