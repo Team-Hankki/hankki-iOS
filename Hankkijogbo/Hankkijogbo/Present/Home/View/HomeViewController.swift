@@ -14,7 +14,10 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     private var rootView = HomeView()
+    
     private var isButtonModified = false
+    var customDropDown: DropDownViewController?
+    var isDropDownVisible = false
     
     // 임시 dummy data
     let typedata = dummyType
@@ -115,12 +118,52 @@ extension HomeViewController {
     
     @objc func priceButtonDidTap() {
         // dropdown show
+        if isDropDownVisible {
+            hideDropDown()
+        } else {
+            showDropDown()
+        }
+        isDropDownVisible.toggle()
     }
     
     @objc func sortButtonDidTap() {
         // dropdown show
     }
     
+    
+    private func showDropDown() {
+        customDropDown = DropDownViewController(numberOfCells: 5)
+        guard let customDropDown = customDropDown else { return }
+        
+        view.addSubview(customDropDown)
+        customDropDown.snp.makeConstraints { make in
+            make.top.equalTo(rootView.priceButton.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(0) // 초기 높이 0으로 설정
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            customDropDown.snp.updateConstraints { make in
+                make.height.equalTo(220) // 셀 갯수에 따라 높이 설정 (예: 5 * 44)
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func hideDropDown() {
+        guard let customDropDown = customDropDown else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            customDropDown.snp.updateConstraints { make in
+                make.height.equalTo(0)
+            }
+            self.view.layoutIfNeeded()
+        }) { _ in
+            customDropDown.removeFromSuperview()
+            self.customDropDown = nil
+        }
+    }
 }
 
 extension HomeViewController {
