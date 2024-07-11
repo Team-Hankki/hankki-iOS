@@ -44,6 +44,11 @@ final class SearchViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         addViewGradient(searchBarBottomGradientView)
     }
     
@@ -72,7 +77,7 @@ final class SearchViewController: BaseViewController {
         }
         
         searchCollectionView.snp.makeConstraints {
-            $0.top.equalTo(searchTextField.snp.bottom).offset(18)
+            $0.top.equalTo(searchTextField.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -133,20 +138,20 @@ private extension SearchViewController {
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
     }
-    // TODO: - gradient 설정
+
     func addViewGradient(_ view: UIView) {
         let gradient = CAGradientLayer()
         
         gradient.do {
             $0.colors = [
                 UIColor.white.withAlphaComponent(0).cgColor,
-                UIColor.white.cgColor,
+                UIColor.white.withAlphaComponent(0.5).cgColor,
                 UIColor.white.cgColor
             ]
-            $0.locations = [0.0, 0.3, 1.0]
+            $0.locations = [0.16, 0.61, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 1.0)
             $0.endPoint = CGPoint(x: 0.5, y: 0.0)
-//            $0.frame = self.view.bounds
+            $0.frame = searchBarBottomGradientView.bounds
         }
         
         view.layer.addSublayer(gradient)
