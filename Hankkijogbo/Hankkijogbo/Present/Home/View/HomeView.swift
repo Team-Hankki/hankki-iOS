@@ -20,13 +20,16 @@ final class HomeView: BaseView {
     let priceButton = UIButton()
     let sortButton = UIButton()
     
+    private let buttonStackView = UIStackView()
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
         addSubviews(mapView, 
-                    typeButton,
-                    priceButton,
-                    sortButton)
+                    buttonStackView)
+        buttonStackView.addArrangedSubviews(typeButton,
+                                            priceButton,
+                                            sortButton)
     }
     
     override func setupLayout() {
@@ -34,26 +37,11 @@ final class HomeView: BaseView {
             $0.edges.equalToSuperview()
         }
         
-        typeButton.snp.makeConstraints {
-            $0.top.leading.equalTo(mapView).inset(22)
-            $0.width.equalTo(61)
-            $0.height.equalTo(32)
+        buttonStackView.snp.makeConstraints {
+            $0.top.leading.equalTo(mapView).inset(12)
         }
         
-        priceButton.snp.makeConstraints {
-            $0.top.equalTo(typeButton.snp.top)
-            $0.leading.equalTo(typeButton.snp.trailing).offset(8)
-            $0.width.equalTo(72)
-            $0.height.equalTo(32)
-        }
-        
-        sortButton.snp.makeConstraints {
-            $0.top.equalTo(typeButton.snp.top)
-            $0.leading.equalTo(priceButton.snp.trailing).offset(8)
-            $0.width.equalTo(61)
-            $0.height.equalTo(32)
-        }
-        
+        [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
     }
     
     override func setupStyle() {
@@ -70,6 +58,11 @@ final class HomeView: BaseView {
                 $0.semanticContentAttribute = .forceRightToLeft
                 $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 0)
             }
+        }
+        
+        buttonStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 8
         }
     }
 }

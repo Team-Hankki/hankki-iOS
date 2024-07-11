@@ -274,10 +274,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController {
     func changeButtonTitle(for button: UIButton, newTitle: String) {
             button.setTitle(newTitle, for: .normal)
-            button.backgroundColor = .red
+            button.backgroundColor = .hankkiYellowLight
+        button.layer.borderColor = UIColor.hankkiYellow.cgColor
             button.setImage(.icClose, for: .normal)
             button.removeTarget(self, action: nil, for: .touchUpInside)
             button.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
+        button.sizeToFit()
             isButtonModified = true
         }
         
@@ -299,6 +301,7 @@ extension HomeViewController {
         button.setTitleColor(.gray400, for: .normal)
         button.setImage(.icArrow, for: .normal)
         button.removeTarget(self, action: nil, for: .touchUpInside)
+  //      button.sizeToFit()
 //        button.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
 //        button.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
 //        button.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
