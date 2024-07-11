@@ -60,6 +60,7 @@
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
+		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B761232C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761222C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift */; };
@@ -141,6 +142,7 @@
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
+		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B761222C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCellDataStruct.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 			isa = PBXGroup;
 			children = (
 				86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */,
+				86784E8E2C4021E200E94A5D /* TagTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				8302F8DF2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift in Sources */,
+				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
@@ -993,7 +997,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KT2Q6HC762;
+				DEVELOPMENT_TEAM = 3Y6FWGNU3J;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
@@ -1026,7 +1030,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KT2Q6HC762;
+				DEVELOPMENT_TEAM = 3Y6FWGNU3J;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
