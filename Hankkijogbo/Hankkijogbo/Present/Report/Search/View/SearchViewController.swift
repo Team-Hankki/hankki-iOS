@@ -31,6 +31,7 @@ final class SearchViewController: BaseViewController {
     private let flowLayout = UICollectionViewFlowLayout()
     private lazy var searchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let searchIconImageView: UIImageView = UIImageView()
+    private let xIconButton: UIButton = UIButton()
     private let searchBarBottomGradientView: UIView = UIView()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: "삭당을 제보해주세요",
@@ -44,6 +45,7 @@ final class SearchViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
+        setupTarget()
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,6 +60,8 @@ final class SearchViewController: BaseViewController {
         view.addSubviews(
             searchGuideLabel,
             searchTextField,
+            searchIconImageView,
+            xIconButton,
             searchCollectionView,
             searchBarBottomGradientView,
             bottomButtonView
@@ -74,6 +78,18 @@ final class SearchViewController: BaseViewController {
             $0.top.equalTo(searchGuideLabel.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview().inset(22)
             $0.height.equalTo(48)
+        }
+        
+        searchIconImageView.snp.makeConstraints {
+            $0.centerY.equalTo(searchTextField)
+            $0.leading.equalTo(searchTextField).offset(10)
+            $0.size.equalTo(24)
+        }
+        
+        xIconButton.snp.makeConstraints {
+            $0.centerY.equalTo(searchTextField)
+            $0.trailing.equalTo(searchTextField).offset(-18)
+            $0.size.equalTo(20)
         }
         
         searchCollectionView.snp.makeConstraints {
@@ -106,17 +122,24 @@ final class SearchViewController: BaseViewController {
         
         searchIconImageView.do {
             $0.image = .icSearch
-            $0.frame = .init(x: 0, y: 0, width: 24, height: 24)
+        }
+        xIconButton.do {
+            $0.setImage(.btnPlusFilled, for: .normal)
+            $0.isHidden = true
         }
         
-        // TODO: - left padding 추가
         searchTextField.do {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 10
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray900.cgColor
-            $0.leftView = searchIconImageView
-            $0.leftViewMode = .always
+            $0.attributedPlaceholder = UILabel.setupAttributedText(
+                for: PretendardStyle.body6,
+                withText: "가게 이름으로 검색",
+                color: .gray400
+            )
+            $0.addPadding(left: 40, right: 45)
+            $0.changeBorderVisibility(isVisible: false, color: UIColor.gray900.cgColor)
         }
         
         searchCollectionView.do {
@@ -145,10 +168,15 @@ private extension SearchViewController {
     }
     
     func setupDelegate() {
+        searchTextField.delegate = self
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
     }
-
+    
+    func setupTarget() {
+        xIconButton.addTarget(self, action: #selector(xIconButtonDidTap), for: .touchUpInside)
+    }
+    
     func addViewGradient(_ view: UIView) {
         let gradient = CAGradientLayer()
         
@@ -167,8 +195,60 @@ private extension SearchViewController {
         view.layer.addSublayer(gradient)
     }
     
+    /// isVisible 값에 따라 텍스트필드 사이드에 있는 X 버튼과 Eye 버튼의 isHidden 값을 변경한다.
+    func changeSideButtonVisibility(isVisible: Bool) {
+        xIconButton.isHidden = !isVisible
+    }
+}
+
+private extension SearchViewController {
+    
+    // MARK: - @objc Func
+    
+    @objc func xIconButtonDidTap() {
+        searchTextField.text = ""
+    }
+    
     @objc func bottomButtonPrimaryHandler() {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension SearchViewController: UITextFieldDelegate {
+    /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
+    /// - 1. border를 활성화해준다.
+    /// - 2. 텍스트가 채워져 있으면 바로 사이드 버튼들의 visibility를 변경한다.
+    final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if !(textField.text ?? "").isEmpty {
+            changeSideButtonVisibility(isVisible: true)
+        }
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.gray900.cgColor
+        return true
+    }
+    
+    /// 텍스트 필드 내용 수정 중일 때 호출되는 함수
+    /// - 사이드 버튼들의 visibility를 변경한다.
+    final func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        changeSideButtonVisibility(isVisible: true)
+        return true
+    }
+    
+    /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
+    /// - border를 제거해준다.
+    final func textFieldDidEndEditing(_ textField: UITextField) {
+        changeSideButtonVisibility(isVisible: false)
+        textField.layer.borderWidth = 0
+        textField.layer.borderColor = nil
+    }
+    
+    /// 키보드의 return 키 클릭 시 호출되는 함수
+    /// - 키보드를 내려준다
+    final func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
