@@ -9,16 +9,33 @@ import UIKit
 
 final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
+    // MARK: - Properties
+    
+    var selectedCategoryString: String? {
+        didSet {
+            print(selectedCategoryString ?? "")
+        }
+    }
+    
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.backgroundColor = .hankkiRedLight
-                self.layer.borderColor = UIColor.hankkiRed.cgColor
-                self.categoryLabel.textColor = .gray700
+                if let selectedCategory = selectedCategoryString {
+                    self.backgroundColor = .hankkiWhite
+                    self.layer.borderColor = UIColor.gray200.cgColor
+                    self.categoryLabel.textColor = .gray400
+                    self.selectedCategoryString = nil
+                } else {
+                    self.backgroundColor = .hankkiRedLight
+                    self.layer.borderColor = UIColor.hankkiRed.cgColor
+                    self.categoryLabel.textColor = .gray700
+                    self.selectedCategoryString = self.categoryLabel.text
+                }
             } else {
                 self.backgroundColor = .hankkiWhite
                 self.layer.borderColor = UIColor.gray200.cgColor
                 self.categoryLabel.textColor = .gray400
+                self.selectedCategoryString = nil
             }
         }
     }
