@@ -12,11 +12,8 @@ import NMapsMap
 final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
-    
-    private var rootView = HomeView()
-    
+
     private var isButtonModified = false
-    var customDropDown: DropDownView?
     var isDropDownVisible = false
     
     // 임시 dummy data
@@ -27,6 +24,8 @@ final class HomeViewController: BaseViewController {
     // MARK: - UI Components
     
     private var typeCollectionView = TypeCollectionView()
+    private var rootView = HomeView()
+    var customDropDown: DropDownView?
     
     // MARK: - Life cycle
     
@@ -79,7 +78,7 @@ extension HomeViewController {
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: location.lat, lng: location.lng)
             marker.mapView = rootView.mapView
-            marker.touchHandler = { (overlay) in
+            marker.touchHandler = { _ in
                 print("Marker \(index + 1) clicked")
                 return true
             }
@@ -91,6 +90,8 @@ extension HomeViewController {
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
     }
+    
+    // MARK: - @objc function - Filtering Action
     
     @objc func typeButtonDidTap() {
         if isButtonModified {
@@ -107,7 +108,6 @@ extension HomeViewController {
                 $0.centerX.equalToSuperview()
             }
         }
-        
     }
     
     @objc func priceButtonDidTap() {
@@ -117,7 +117,7 @@ extension HomeViewController {
     @objc func sortButtonDidTap() {
         toggleDropDown(isPriceModel: false, buttonType: .sort)
     }
-    
+        
     private func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType)
         customDropDown?.delegate = self
@@ -125,21 +125,26 @@ extension HomeViewController {
         guard let customDropDown = customDropDown else { return }
         
         view.addSubview(customDropDown)
+        
         customDropDown.snp.makeConstraints {
             $0.top.equalTo(isPriceModel ? rootView.priceButton.snp.bottom : rootView.sortButton.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
+            switch buttonType {
+            case .price:
+                $0.centerX.equalTo(rootView.priceButton)
+            case .sort:
+                $0.centerX.equalTo(rootView.sortButton)
+            }
             $0.width.height.equalTo(0)
         }
         
-        UIView.animate(withDuration: 0.3) {
-            customDropDown.snp.updateConstraints {
-                let height = isPriceModel ? self.pricedata.count * 44 : self.sortdata.count * 44
-                $0.width.equalTo(112)
-                $0.height.equalTo(height)
-            }
-            self.view.layoutIfNeeded()
+        customDropDown.snp.updateConstraints {
+            let height = isPriceModel ? self.pricedata.count * 44 : self.sortdata.count * 44
+            $0.width.equalTo(112)
+            $0.height.equalTo(height)
         }
+        self.view.layoutIfNeeded() // 제약 조건을 즉시 적용하여 드롭다운을 바로 표시합니다.
     }
+
     
     private func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         if isDropDownVisible {
