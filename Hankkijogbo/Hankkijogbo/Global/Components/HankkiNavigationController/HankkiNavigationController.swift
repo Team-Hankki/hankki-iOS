@@ -15,7 +15,13 @@ final class HankkiNavigationController: UINavigationController {
     typealias ButtonAction = () -> Void
     private var rightButtonAction: ButtonAction? {
         didSet {
-            rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
+            rightButton.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)
+        }
+    }
+    
+    private var backButtonAction: ButtonAction? {
+        didSet {
+            backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -73,6 +79,7 @@ extension HankkiNavigationController {
     func setupBackgroundColor(_ color: UIColor) {
         safeAreaView.backgroundColor = color
         customNavigationBar.backgroundColor = color
+        backButtonAction = forType.backButtonAction
     }
 }
 
@@ -94,7 +101,7 @@ private extension HankkiNavigationController {
         
         backButton.do {
             $0.setImage(.icArrowBack, for: .normal)
-            $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
         
         rightButton.do {
@@ -189,11 +196,15 @@ private extension HankkiNavigationController {
         }
     }
     
-    @objc func backButtonTapped() {
-        popViewController(animated: true)
+    @objc func backButtonDidTap() {
+        if let backButtonAction {
+            return backButtonAction()
+        } else {
+            popViewController(animated: true)
+        }
     }
     
-    @objc func rightButtonTapped() {
+    @objc func rightButtonDidTap() {
         rightButtonAction?()
     }
 }

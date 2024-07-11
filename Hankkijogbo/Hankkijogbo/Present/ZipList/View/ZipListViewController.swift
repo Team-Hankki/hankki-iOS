@@ -54,12 +54,13 @@ final class ZipListViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(collectionView)
+        view.addSubview(collectionView)
     }
     
     override func setupLayout() {
         collectionView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(31)
+            $0.top.equalToSuperview().inset(31)
+            $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(22)
         }
     }
@@ -84,7 +85,8 @@ private extension ZipListViewController {
                 hasRightButton: true,
                 mainTitle: .string("나의 식당 족보"),
                 rightButton: .string("삭제"),
-                rightButtonAction: deleteButtonDidTap
+                rightButtonAction: deleteButtonDidTap,
+                backButtonAction: { self.setIsEditMode() }
             )
         } else {
             type = HankkiNavigationType(
@@ -105,7 +107,19 @@ private extension ZipListViewController {
     }
     
     func deleteButtonDidTap() {
-        showAlert(titleText: "족보를 삭제할까요?", secondaryButtonText: "돌아가기", primaryButtonText: "삭제하기", primaryButtonHandler: deleteZip)
+        showAlert(titleText: "족보를 삭제할까요?", 
+                  secondaryButtonText: "돌아가기",
+                  primaryButtonText: "삭제하기",
+                  primaryButtonHandler: deleteZip)
+    }
+    
+    func deselectedAllItems() {
+        for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
+            collectionView.deselectItem(at: indexPath, animated: false)
+            if let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell {
+                cell.setSelected(false)
+            }
+        }
     }
     
     func navigateToHankkiListViewController() {
@@ -119,16 +133,15 @@ private extension ZipListViewController {
             .filter { $0 != 0 } ?? []
         
         print(selectedItemItems, "을 삭제합니다.")
-        
-        for indexPath in collectionView.indexPathsForSelectedItems ?? [] {
-            collectionView.deselectItem(at: indexPath, animated: false)
-            if let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell {
-                cell.setSelected(false)
-            }
-        }
-        
-        isEditMode = false
+        setIsEditMode()
         dismiss(animated: false)
+    }
+    
+    func setIsEditMode() {
+        if isEditMode {
+            deselectedAllItems()
+            isEditMode.toggle()
+        }
     }
 }
 
@@ -143,6 +156,7 @@ private extension ZipListViewController {
             $0.itemSize = CGSize(width: itemWidth,
                                  height: UIView.convertByAspectRatioHeight(itemWidth, width: 160, height: 230))
             $0.headerReferenceSize = CGSize(width: view.frame.width, height: 30)
+            $0.footerReferenceSize = CGSize(width: view.frame.width, height: 22)
   
         }
         return layout
@@ -179,8 +193,10 @@ extension ZipListViewController: UICollectionViewDataSource {
 }
 
 extension ZipListViewController: UICollectionViewDelegate {
+    /// Cell을 터치 했을 때 (선택)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
+        
         // TODO: - 뷰나오면 추가
             if isEditMode {
                 if indexPath.item != 0 {
@@ -196,6 +212,7 @@ extension ZipListViewController: UICollectionViewDelegate {
             }
         }
         
+        /// Cell을 터치 했을 때 (해제)
         func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
             

@@ -25,7 +25,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         cellView.do {
             $0.backgroundColor = .gray800
-            $0.layer.cornerRadius = 12
+            $0.makeRounded(radius: 12)
         }
         
         titleLabel.do {
@@ -46,7 +46,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
         
         redOpacityLayerView.do {
             $0.backgroundColor = .hankkiRed.withAlphaComponent(0.4)
-            $0.layer.cornerRadius = 12
+            $0.makeRounded(radius: 12)
             $0.layer.borderColor = UIColor.hankkiRed.cgColor
             $0.layer.borderWidth = 2
             
@@ -91,50 +91,6 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension ZipListCollectionViewCell {
-    struct DataStruct {
-        let title: String
-        var type: CellType = .common
-    }
-    
-    enum CellType {
-        case create
-        case common
-        case disable
-        
-        var backgroundColor: UIColor {
-            switch self {
-            case .create:
-                .hankkiYellow
-            case .common:
-                .gray800
-            case .disable:
-                .hankkiYellowLight
-            }
-        }
-        
-        var fontColor: UIColor {
-            switch self {
-            case .create:
-                .gray800
-            case .common:
-                .white
-            case .disable:
-                .gray400
-            }
-        }
-        
-        var opacity: CGFloat {
-            switch self {
-            case .create:
-                1.0
-            case .common:
-                1.0
-            case .disable:
-                0.4
-            }
-        }
-    }
-    
     func dataBind(_ data: DataStruct) {
         self.data = data
         
