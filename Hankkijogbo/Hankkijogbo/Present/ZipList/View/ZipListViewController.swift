@@ -1,5 +1,5 @@
 //
-//  ZipViewController.swift
+//  ZipListViewController.swift
 //  Hankkijogbo
 //
 //  Created by 심서현 on 7/9/24.
@@ -124,8 +124,8 @@ private extension ZipListViewController {
     }
     
     func navigateToHankkiListViewController() {
-        let zipViewController = HankkiListViewController(.myZip)
-            navigationController?.pushViewController(zipViewController, animated: true)
+        let hankkiListViewController = HankkiListViewController(.myZip)
+            navigationController?.pushViewController(hankkiListViewController, animated: true)
     }
     
     func deleteZip() {
