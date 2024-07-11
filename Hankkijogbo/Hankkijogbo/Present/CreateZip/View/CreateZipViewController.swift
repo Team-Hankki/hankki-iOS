@@ -70,20 +70,20 @@ final class CreateZipViewController: BaseViewController {
             $0.changePlaceholderColor(forPlaceHolder: "성대생 추천 맛집 알려주세요", forColor: .gray400)
             $0.rightViewMode = .always
             $0.rightView = titleCountView
-//            $0.autocorrectionType = .no
-//            $0.spellCheckingType = .no
         }
         
         titleCountLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body3,
-                                                            withText: "(0/\(titleMaxCount))",
-                                                            color: .gray300)
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body3,
+                withText: "(0/\(titleMaxCount))",
+                color: .gray300)
         }
         
         tagInputTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.body1,
-                                                            withText: "족보를 떠올리면?",
-                                                            color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(
+                for: SuiteStyle.body1,
+                withText: "족보를 떠올리면?",
+                color: .gray900)
         }
         
         tagInputTextField.do {
@@ -95,8 +95,6 @@ final class CreateZipViewController: BaseViewController {
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
             $0.placeholder = "#든든한 #한끼해장"
             $0.changePlaceholderColor(forPlaceHolder: "#든든한 #한끼해장", forColor: .gray400)
-//            $0.autocorrectionType = .no
-//            $0.spellCheckingType = .no
         }
     }
     
@@ -194,10 +192,10 @@ private extension CreateZipViewController {
         self.showAlert(titleText: "제출 확인용 테스트 모달입니다.", 
                        subText: "\(titleInputTextField.text ?? " ") \n \(arr)",
                        primaryButtonText: "돌아가기",
-                       primaryButtonHandler: submmitAction)
+                       primaryButtonHandler: dismissAction)
     }
     
-    func submmitAction() {
+    func dismissAction() {
         dismiss(animated: false)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.popViewController(animated: false)
@@ -217,14 +215,18 @@ private extension CreateZipViewController {
 
 extension CreateZipViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.gray400.cgColor
         
-        if textField.tag == 0 { titleCountLabel.textColor = .gray500 }
-        
-        if textField.tag == 1 {
+        switch textField.tag {
+        case 0 :
+            titleCountLabel.textColor = .gray500
+        case 1:
             let currentText = textField.text ?? ""
             if currentText.isEmpty {
                 textField.text = "#"
             }
+        default:
+            return
         }
     }
     
@@ -239,7 +241,6 @@ extension CreateZipViewController: UITextFieldDelegate {
             return
         }
     
-        print(currentText, currentText.count)
         if currentText.count <= 1 {
             textField.text = ""
             return
@@ -252,19 +253,19 @@ extension CreateZipViewController: UITextFieldDelegate {
         }
     }
     
-//    func isValidString(_ s: String) -> Bool {
-//        let regex = "^[ㄱ-힣a-zA-Z0-9]+$"
-//        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
-//        return predicate.evaluate(with: s)
-//    }
+    func isValidString(_ s: String) -> Bool {
+        let regex = "^[ㄱ-힣a-zA-Z0-9]+$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: s)
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        
-//        if !isValidString(string) && string != " " && !string.isEmpty {
-//            print(string)
-//            return false
-//        }
-//        
+        
+        if !isValidString(string) && string != " " && !string.isEmpty {
+            print(string)
+            return false
+        }
+        
         let currentText = (textField.text ?? "")
         let updatedText = currentText+string
         
@@ -275,16 +276,31 @@ extension CreateZipViewController: UITextFieldDelegate {
             }
             return true
         }
+        
+        var lastChar = ""
+        
+        if let text = currentText.last {
+            lastChar = String(text)
+        } else {
+            lastChar = ""
+        }
+        
+        if string.isEmpty && lastChar == "#" && currentText.count > 1 {
+            tagInputTextField.text = String(currentText.prefix(currentText.count - 2))
+            return false
+        }
+        
+        if lastChar == "#" && currentText.count == 1 && string == " " {
+            return false
+        }
 
         if currentText.count == 1 && string.isEmpty {
             return false
         }
         
-        if !currentText.contains(" ") {
-            if updatedText.count > tagMaxCount + 1 {
-                tagInputTextField.text = String(updatedText.prefix(tagMaxCount))
-                return false
-            }
+        if !currentText.contains(" ") && updatedText.count > tagMaxCount + 1 {
+            tagInputTextField.text = String(updatedText.prefix(tagMaxCount))
+            return false
         }
         
         if string == " " {
@@ -295,11 +311,6 @@ extension CreateZipViewController: UITextFieldDelegate {
                 tagInputTextField.text = "\(currentText) #"
                 return false
             }
-        }
-        
-        if let char = string.cString(using: String.Encoding.utf8) {
-            let isBackSpace = strcmp(char, "\\b")
-            if isBackSpace == -92 { return true }
         }
         
         if updatedText.count > firstTagCount + 1 + tagMaxCount + 1 {
