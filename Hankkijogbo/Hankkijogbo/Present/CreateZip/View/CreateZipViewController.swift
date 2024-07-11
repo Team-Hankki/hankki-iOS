@@ -12,6 +12,7 @@ final class CreateZipViewController: BaseViewController {
     // MARK: - Properties
     
     private let tagMaxCount: Int = 9
+    private let titleMaxCount: Int = 16
     
     private var firstTagCount: Int = 0
     
@@ -27,7 +28,7 @@ final class CreateZipViewController: BaseViewController {
     private let tagInputTitle = UILabel()
     private let tagInputTextField = TagTextField()
     
-    private let submmitButton = UIButton()
+    private lazy var submmitButton = MainButton(titleText: "족보 만들기", buttonHandler: submmitButtonDidTap)
     
     // MARK: - Life Cycle
     
@@ -36,6 +37,12 @@ final class CreateZipViewController: BaseViewController {
         
         setupDelegate()
         setupAction()
+        self.hideKeyboard()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         setupNavigationBar()
     }
     
     // MARK: - Set UI
@@ -63,11 +70,13 @@ final class CreateZipViewController: BaseViewController {
             $0.changePlaceholderColor(forPlaceHolder: "성대생 추천 맛집 알려주세요", forColor: .gray400)
             $0.rightViewMode = .always
             $0.rightView = titleCountView
+//            $0.autocorrectionType = .no
+//            $0.spellCheckingType = .no
         }
         
         titleCountLabel.do {
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body3,
-                                                            withText: "(0/18)",
+                                                            withText: "(0/\(titleMaxCount))",
                                                             color: .gray300)
         }
         
@@ -86,19 +95,8 @@ final class CreateZipViewController: BaseViewController {
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
             $0.placeholder = "#든든한 #한끼해장"
             $0.changePlaceholderColor(forPlaceHolder: "#든든한 #한끼해장", forColor: .gray400)
-        }
-        
-        submmitButton.do {
-            if let attributedTitle = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
-                withText: "족보 만들기",
-                color: .hankkiWhite
-            ) {
-                $0.setAttributedTitle(attributedTitle, for: .normal)
-            }
-            $0.backgroundColor = .hankkiRedLight2
-            $0.makeRounded(radius: 16)
-            $0.isEnabled = true
+//            $0.autocorrectionType = .no
+//            $0.spellCheckingType = .no
         }
     }
     
@@ -117,7 +115,7 @@ final class CreateZipViewController: BaseViewController {
     override func setupLayout() {
         viewTitle.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(75)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(30)
         }
         
         titleInputTitle.snp.makeConstraints {
@@ -160,6 +158,17 @@ final class CreateZipViewController: BaseViewController {
 }
 
 private extension CreateZipViewController {
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                              hasRightButton: false,
+                                                              mainTitle: .string(""),
+                                                              rightButton: .string(""),
+                                                              rightButtonAction: {})
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
+        }
+    }
+    
     func setupDelegate() {
         titleInputTextField.delegate = self
         tagInputTextField.delegate = self
@@ -167,23 +176,45 @@ private extension CreateZipViewController {
     
     func setupAction() {
         titleInputTextField.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
-        submmitButton.addTarget(self, action: #selector(submmitButtonDidTap), for: .touchUpInside)
+        titleInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        tagInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
 
-    @objc func titleTextFieldDidChange(_ textField: UITextField) {
-        let currentText = textField.text ?? ""
-        if currentText.count <= 18 { titleCountLabel.text = "(\(currentText.count)/18)" }
+    @objc func textFieldDidChange() {
+        isFormValid()
     }
     
-    @objc func submmitButtonDidTap() {
+    @objc func titleTextFieldDidChange(_ textField: UITextField) {
+        let currentText = textField.text ?? ""
+        if currentText.count <= titleMaxCount { titleCountLabel.text = "(\(currentText.count)/\(titleMaxCount))" }
+    }
+    
+    func submmitButtonDidTap() {
         let arr = (tagInputTextField.text ?? "").split(separator: " ")
         self.showAlert(titleText: "제출 확인용 테스트 모달입니다.", 
                        subText: "\(titleInputTextField.text ?? " ") \n \(arr)",
-                       primaryButtonText: "돌아가기")
+                       primaryButtonText: "돌아가기",
+                       primaryButtonHandler: submmitAction)
+    }
+    
+    func submmitAction() {
+        dismiss(animated: false)
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.popViewController(animated: false)
+        }
+    }
+    
+    func isFormValid() {
+        if !(titleInputTextField.text ?? "").isEmpty && (tagInputTextField.text ?? "").count > 1 {
+            submmitButton.setupEnabledButton()
+        } else {
+            submmitButton.setupDisabledButton()
+        }
     }
 }
 
 // MARK: - delegate
+
 extension CreateZipViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -203,10 +234,10 @@ extension CreateZipViewController: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         
         if textField.tag == 0 {
-            titleInputTextField.text = String(currentText.prefix(18))
+            titleCountLabel.textColor = .gray200
+            titleInputTextField.text = String(currentText.prefix(titleMaxCount))
             return
         }
-        titleCountLabel.textColor = .gray200
     
         print(currentText, currentText.count)
         if currentText.count <= 1 {
@@ -221,14 +252,25 @@ extension CreateZipViewController: UITextFieldDelegate {
         }
     }
     
+//    func isValidString(_ s: String) -> Bool {
+//        let regex = "^[ㄱ-힣a-zA-Z0-9]+$"
+//        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+//        return predicate.evaluate(with: s)
+//    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+//        
+//        if !isValidString(string) && string != " " && !string.isEmpty {
+//            print(string)
+//            return false
+//        }
+//        
         let currentText = (textField.text ?? "")
         let updatedText = currentText+string
         
         if textField.tag == 0 {
-            if updatedText.count > 18 + 1 {
-                titleInputTextField.text = String(updatedText.prefix(18))
+            if updatedText.count > titleMaxCount + 1 {
+                titleInputTextField.text = String(updatedText.prefix(titleMaxCount))
                 return false
             }
             return true

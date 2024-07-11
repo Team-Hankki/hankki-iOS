@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = HankkiNavigationController(rootViewController: TabBarController())
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = /*navigationController*/ CreateZipViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     
