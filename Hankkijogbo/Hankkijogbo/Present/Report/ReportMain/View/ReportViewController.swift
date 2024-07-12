@@ -120,6 +120,11 @@ private extension ReportViewController {
             navigationController.setupNavigationBar(forType: type)
         }
     }
+    
+    func scrollToFooterView() {
+        let footerIndexPath = IndexPath(item: 0, section: ReportSectionType.addMenu.rawValue)
+        collectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .bottom, animated: true) // 제보하기의 Footer로 스크롤 이동
+    }
 }
 
 // MARK: - @objc Func
@@ -147,6 +152,21 @@ private extension ReportViewController{
     
     @objc func bottomButtonPrimaryHandler() {
         print("제보하기 클릭")
+    }
+    
+    /// 메뉴 셀 삭제
+    @objc func menuDeleteButtonDidTap(_ sender: UIButton) {
+        if !dummyMenu.isEmpty {
+            // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
+            let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
+            let itemIndexPath = self.collectionView.indexPathForItem(at: buttonPosition)
+            
+            guard let item = itemIndexPath?.item else { return }
+            dummyMenu.remove(at: item) // 해당 위치의 데이터 삭제
+            collectionView.deleteItems(at: [IndexPath(item: item, section: ReportSectionType.menu.rawValue)]) // item 삭제
+            
+            scrollToFooterView()
+        }
     }
 }
 
@@ -223,6 +243,7 @@ extension ReportViewController: UICollectionViewDataSource {
             }
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
+            cell.menuDeleteButton.addTarget(self, action: #selector(menuDeleteButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMenuCollectionViewCell.className, for: indexPath) as? AddMenuCollectionViewCell else { return UICollectionViewCell() }
@@ -238,8 +259,7 @@ extension ReportViewController: UICollectionViewDelegate {
         if ReportSectionType(rawValue: indexPath.section) == .addMenu {
             dummyMenu.append("")
             collectionView.insertItems(at: [IndexPath(item: dummyMenu.count - 1, section: ReportSectionType.menu.rawValue)])
-            let indexPath = IndexPath(item: 0, section: ReportSectionType.addMenu.rawValue)
-            collectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: indexPath, scrollPosition: .bottom, animated: true)
+            scrollToFooterView()
         }
     }
 }

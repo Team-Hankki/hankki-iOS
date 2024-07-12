@@ -20,7 +20,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceLabel = UILabel()
     private let priceTextField = UITextField()
     private let priceUnitLabel = UILabel()
-    private let deleteButton = UIButton()
+    let menuDeleteButton = UIButton()
     private let errorLabel = UILabel()
     
     // MARK: - Init
@@ -35,7 +35,15 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Set UI
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        menuTextField.text = ""
+        priceTextField.text = ""
+        errorLabel.text = ""
+    }
+    
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
         contentView.addSubviews(
@@ -44,7 +52,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             priceLabel,
             priceTextField,
             priceUnitLabel,
-            deleteButton,
+            menuDeleteButton,
             errorLabel
         )
     }
@@ -74,7 +82,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.trailing.equalTo(priceTextField).offset(-17)
             $0.centerY.equalTo(priceTextField).offset(2)
         }
-        deleteButton.snp.makeConstraints {
+        menuDeleteButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
             $0.leading.equalTo(priceTextField.snp.trailing).offset(3)          
             $0.size.equalTo(32)
@@ -128,7 +136,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 color: .gray800
             )
         }
-        deleteButton.do {
+        menuDeleteButton.do {
             $0.setImage(.icClose, for: .normal)
         }
         errorLabel.do {
