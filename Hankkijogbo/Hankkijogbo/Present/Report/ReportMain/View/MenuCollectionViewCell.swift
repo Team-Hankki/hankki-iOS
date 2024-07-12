@@ -16,7 +16,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let menuNamePlaceHolderString: String = "예) 된장찌개"
     private let pricePlaceHolderString: String = "8000"
         
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let menuLabel = UILabel()
     private let menuTextField = UITextField()
@@ -32,6 +32,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.init(frame: frame)
         
         setupTextFieldDelegate()
+        setupAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -124,12 +125,12 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
                 withText: "가격",
-                color: .hankkiRed
+                color: .gray500
             )
         }
         priceTextField.do {
             $0.backgroundColor = .white
-            $0.layer.borderColor = UIColor.hankkiRed.cgColor
+            $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 10
             $0.attributedText = UILabel.setupAttributedText(
@@ -160,6 +161,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 withText: "8000원 이하만 가능해요",
                 color: .hankkiRed
             )
+            $0.isHidden = true
         }
     }
 }
@@ -171,6 +173,31 @@ private extension MenuCollectionViewCell {
     func setupTextFieldDelegate() {
         menuTextField.delegate = self
         priceTextField.delegate = self
+    }
+    
+    func setupAddTarget() {
+        priceTextField.addTarget(self, action: #selector(priceTextFieldDidEditingChange), for: .editingChanged)
+    }
+    
+    // MARK: - @objc Func
+    
+    @objc func priceTextFieldDidEditingChange() {
+        if Int(priceTextField.text ?? "") ?? 0 > 8000 {
+            // 에러 스타일 띄우기
+            self.priceLabel.textColor = .hankkiRed
+            priceTextField.do {
+                $0.layer.borderColor = UIColor.hankkiRed.cgColor
+                $0.textColor = .hankkiRed
+            }
+            errorLabel.isHidden = false
+        } else {
+            self.priceLabel.textColor = .gray500
+            priceTextField.do {
+                $0.layer.borderColor = UIColor.gray300.cgColor
+                $0.textColor = .gray800
+            }
+            errorLabel.isHidden = true
+        }
     }
 }
 
