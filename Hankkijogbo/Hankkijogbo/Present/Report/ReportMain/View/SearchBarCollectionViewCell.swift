@@ -9,7 +9,7 @@ import UIKit
 
 final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     let searchBarButton = UIButton()
 
@@ -17,7 +17,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     private let descriptionLabel = UILabel()
     private let separatorView = UIView()
     
-    // MARK: - Set UI
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
         contentView.addSubviews(
@@ -53,7 +53,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
         reportedNumberLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                withText: "한끼족보의 52번째",
+                withText: "52번째 제보예요",
                 color: .hankkiRed
             )
         }

@@ -18,9 +18,9 @@ final class ReportViewController: BaseViewController {
     /// 다 임의로 넣어둠
     let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
     let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
-    let dummyMenu = ["", ""]
+    var dummyMenu = [""]
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
@@ -82,8 +82,6 @@ final class ReportViewController: BaseViewController {
 
 private extension ReportViewController {
     
-    // MARK: - Private Func
-    
     func setupRegister() {
         collectionView.register(SearchBarCollectionViewCell.self, forCellWithReuseIdentifier: SearchBarCollectionViewCell.className)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.className)
@@ -124,9 +122,9 @@ private extension ReportViewController {
     }
 }
 
+// MARK: - @objc Func
+
 private extension ReportViewController{
-    
-    // MARK: - @objc
     
     @objc func selectImageButtonDidTap() {
         var configuration = PHPickerConfiguration()
@@ -152,9 +150,9 @@ private extension ReportViewController{
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ReportViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -235,7 +233,18 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
-// MARK: - PHPickerViewControllerDelegate
+extension ReportViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if ReportSectionType(rawValue: indexPath.section) == .addMenu {
+            dummyMenu.append("")
+            collectionView.insertItems(at: [IndexPath(item: dummyMenu.count - 1, section: ReportSectionType.menu.rawValue)])
+            let indexPath = IndexPath(item: 0, section: ReportSectionType.addMenu.rawValue)
+            collectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: indexPath, scrollPosition: .bottom, animated: true)
+        }
+    }
+}
+
+// MARK: - PHPickerViewController Delegate
 
 extension ReportViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
