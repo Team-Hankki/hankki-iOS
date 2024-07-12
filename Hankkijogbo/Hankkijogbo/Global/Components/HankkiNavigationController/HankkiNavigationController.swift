@@ -101,7 +101,7 @@ private extension HankkiNavigationController {
         }
         
         backButton.do {
-            $0.setImage(.icArrowBack, for: .normal)
+            $0.setImage(.btnBack, for: .normal)
             $0.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
         

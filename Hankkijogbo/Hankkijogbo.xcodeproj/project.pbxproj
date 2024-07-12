@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */; };
+		8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */; };
 		8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */; };
-		8302F8DF2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
 		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
@@ -20,6 +20,7 @@
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
 		83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23A412C4010AA00A71ECE /* ButtonType.swift */; };
+		83A23A462C415AC100A71ECE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 83A23A452C415AC100A71ECE /* Config.xcconfig */; };
 		83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28952C3851BB004819FA /* HankkiNavigationType.swift */; };
 		83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28972C3852C5004819FA /* HankkiNavigationController.swift */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
@@ -92,7 +93,6 @@
 		A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */; };
 		A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF612C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift */; };
 		A2DEBF642C3D67DE00DE14A9 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */; };
-		A2DEBF6A2C3D7EB900DE14A9 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2DEBF692C3D7EB900DE14A9 /* Config.xcconfig */; };
 		A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */; };
 		A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF772C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
@@ -111,9 +111,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListCollectionViewCell.swift; path = Cell/TotalListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetController.swift; sourceTree = "<group>"; };
-		8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
 		8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListModel.swift; sourceTree = "<group>"; };
 		8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -124,6 +124,7 @@
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		83A23A412C4010AA00A71ECE /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
+		83A23A452C415AC100A71ECE /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		83DA28952C3851BB004819FA /* HankkiNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationType.swift; sourceTree = "<group>"; };
 		83DA28972C3852C5004819FA /* HankkiNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationController.swift; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +200,6 @@
 		A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF612C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		A2DEBF692C3D7EB900DE14A9 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
 		A2DEBF6B2C3D805B00DE14A9 /* Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Hankkijogbo.debug.xcconfig"; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
 		A2DEBF6C2C3D806400DE14A9 /* Pods-Hankkijogbo.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Hankkijogbo.release.xcconfig"; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig"; sourceTree = "<group>"; };
 		A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHeaderView.swift; sourceTree = "<group>"; };
@@ -243,7 +243,6 @@
 		8302F8E52C3E98DB004ADAA4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */,
 				8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */,
 				8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */,
 			);
@@ -326,7 +325,7 @@
 				A2DEBF572C3D257100DE14A9 /* Report */,
 				A2B599192C39D0BC004B7E4E /* MyZip */,
 				864FA9002C3D1F650051EA36 /* Mypage */,
-        86B761112C3DC76000413059 /* ZipList */,
+				86B761112C3DC76000413059 /* ZipList */,
 				86B761192C3DE03200413059 /* HankkiList */,
 			);
 			path = Present;
@@ -379,7 +378,7 @@
 				83DBED952C2564AC0042BA48 /* HomeViewController.swift */,
 				8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */,
 				8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */,
-				8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */,
+				8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -440,7 +439,7 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A2DEBF692C3D7EB900DE14A9 /* Config.xcconfig */,
+				83A23A452C415AC100A71ECE /* Config.xcconfig */,
 				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
@@ -857,7 +856,7 @@
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
 				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
-				A2DEBF6A2C3D7EB900DE14A9 /* Config.xcconfig in Resources */,
+				83A23A462C415AC100A71ECE /* Config.xcconfig in Resources */,
 				838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */,
 				83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */,
 				A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */,
@@ -953,7 +952,6 @@
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
-				8302F8DF2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
 				8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
@@ -1004,6 +1002,7 @@
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
 				A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */,
+				8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */,
 				83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */,
 				A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
@@ -1039,7 +1038,6 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2DEBF692C3D7EB900DE14A9 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1103,7 +1101,6 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2DEBF692C3D7EB900DE14A9 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

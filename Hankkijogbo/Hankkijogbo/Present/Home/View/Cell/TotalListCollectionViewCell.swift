@@ -10,11 +10,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol TotalListCollectionViewCellDelegate: AnyObject {
-<<<<<<< HEAD:Hankkijogbo/Hankkijogbo/Present/Home/View/Cell/TotalListCollectionViewCell.swift
     func addButtonDidTap(in cell: TotalListCollectionViewCell)
-=======
-    func didTapAddButton(in cell: TotalListCollectionViewCell)
->>>>>>> develop:Hankkijogbo/Hankkijogbo/Present/Home/View/TotalListCollectionViewCell.swift
 }
 
 final class TotalListCollectionViewCell: BaseCollectionViewCell {
@@ -94,10 +90,13 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         priceImage.do {
-            $0.image = .icFood
+            $0.image = .icFood16
         }
         
         //dot image 추가
+        dotImage.do {
+            $0.image = .icSeparator
+        }
         
         likeImage.do {
             $0.image = .icHeart
@@ -110,7 +109,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         addButton.do {
-            $0.setImage(.btnPlusFilled, for: .normal)
+            $0.setImage(.btnAddFilled, for: .normal)
         }
     }
     
@@ -150,12 +149,7 @@ extension TotalListCollectionViewCell {
     }
     
     @objc func actionButtonDipTap() {
-<<<<<<< HEAD:Hankkijogbo/Hankkijogbo/Present/Home/View/Cell/TotalListCollectionViewCell.swift
-        delegate?.addButtonDidTap(in: self)
-=======
-        delegate?.didTapAddButton(in: self)
->>>>>>> develop:Hankkijogbo/Hankkijogbo/Present/Home/View/TotalListCollectionViewCell.swift
-    }
+        delegate?.addButtonDidTap(in: self)    }
 }
 
 // MARK: - Network

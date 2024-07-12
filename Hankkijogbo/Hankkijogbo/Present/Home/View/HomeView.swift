@@ -52,7 +52,7 @@ final class HomeView: BaseView {
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
                 $0.setTitle(buttonType[index], for: .normal)
                 $0.setTitleColor(.gray400, for: .normal)
-                $0.setImage(.icArrow, for: .normal)
+                $0.setImage(.icArrowClose, for: .normal)
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
@@ -85,10 +85,10 @@ private extension HomeView {
     func updateButtonStyle(_ button: UIButton) {
         if button.isSelected {
             button.setTitleColor(.gray600, for: .normal)
-            button.setImage(.icArrow.withTintColor(.black), for: .normal)
+            button.setImage(.icArrowOpen.withTintColor(.black), for: .normal)
         } else {
             button.setTitleColor(.gray400, for: .normal)
-            button.setImage(.icArrow, for: .normal)
+            button.setImage(.icArrowClose, for: .normal)
         }
     }
 }

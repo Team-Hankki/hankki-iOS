@@ -105,7 +105,7 @@ private extension HomeViewController {
     func setupNavigationBar() {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImage("한끼대학교", .icArrow),
+                                                              mainTitle: .stringAndImage("한끼대학교", .btnDropdown),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {})
         if let navigationController = navigationController as? HankkiNavigationController {
@@ -271,7 +271,7 @@ extension HomeViewController {
             $0.backgroundColor = .white
             $0.layer.borderColor = UIColor.gray300.cgColor
             $0.setTitleColor(.gray400, for: .normal)
-            $0.setImage(.icArrow, for: .normal)
+            $0.setImage(.icArrowClose, for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.sizeToFit()
         }
