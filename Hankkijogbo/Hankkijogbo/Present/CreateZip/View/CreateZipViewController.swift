@@ -28,7 +28,7 @@ final class CreateZipViewController: BaseViewController {
     private let tagInputTitle = UILabel()
     private let tagInputTextField = TagTextField()
     
-    private lazy var submmitButton = MainButton(titleText: "족보 만들기", buttonHandler: submmitButtonDidTap)
+    private lazy var submitButton = MainButton(titleText: "족보 만들기", buttonHandler: submitButtonDidTap)
     
     // MARK: - Life Cycle
     
@@ -105,7 +105,7 @@ final class CreateZipViewController: BaseViewController {
             titleInputTextField, 
             tagInputTitle,
             tagInputTextField,
-            submmitButton
+            submitButton
           )
         titleCountView.addSubview(titleCountLabel)
     }
@@ -146,7 +146,7 @@ final class CreateZipViewController: BaseViewController {
             $0.trailing.equalToSuperview().inset(14)
             $0.centerY.equalToSuperview()
         }
-        submmitButton.snp.makeConstraints {
+        submitButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(tagInputTextField.snp.bottom).offset(37)
             $0.height.equalTo(54)
@@ -204,9 +204,9 @@ private extension CreateZipViewController {
     
     func isFormValid() {
         if !(titleInputTextField.text ?? "").isEmpty && (tagInputTextField.text ?? "").count > 1 {
-            submmitButton.setupEnabledButton()
+            submitButton.setupEnabledButton()
         } else {
-            submmitButton.setupDisabledButton()
+            submitButton.setupDisabledButton()
         }
     }
 }
@@ -218,7 +218,7 @@ extension CreateZipViewController: UITextFieldDelegate {
         textField.layer.borderColor = UIColor.gray400.cgColor
         
         switch textField.tag {
-        case 0 :
+        case 0:
             titleCountLabel.textColor = .gray500
         case 1:
             let currentText = textField.text ?? ""
@@ -264,11 +264,13 @@ extension CreateZipViewController: UITextFieldDelegate {
         let currentText = (textField.text ?? "")
         let updatedText = currentText+string
         
+        // 정규식에 맞는 텍스트만 입력되도록 합니다. (+ 스페이스 바, 백스페이스)
         if !isValidString(string) && string != " " && !string.isEmpty {
-            print(string)
             return false
         }
         
+        // textField.tag == 0 : 족보 제목
+        // TextField의 글자 수를 제한 합니다.
         if textField.tag == 0 {
             if updatedText.count > titleMaxCount + 1 {
                 titleInputTextField.text = String(updatedText.prefix(titleMaxCount))
@@ -277,40 +279,66 @@ extension CreateZipViewController: UITextFieldDelegate {
             return true
         }
         
-        var lastChar = ""
+        // textField.tag == 1 : 족보 태그
         
+        // 현재 입력된 TextField의 마지막글자를 반환합니다.
+        var lastChar = ""
         if let text = currentText.last {
             lastChar = String(text)
         }
         
+        // 현재 입력된 TextField의 마지막 글자가 #인 경우
         if lastChar == "#" {
+            // 텍스트 필드의 상태 : #태그1 #
+            // 첫번째 태그가 입력이 완료 되었고, 두번째 태그를 작성해야하는데 백스페이스를 입력한 경우
+            // 두번째 태그의 입력이 취소 되고, 첫번째 태그를 수정할 수 있게 해야한다.
+            // -> 글자를 지우면 미리 입력된 #과, 태그를 분리하는 띄워쓰기를 동시에 지운다.
             if string.isEmpty && currentText.count > 1 {
                 tagInputTextField.text = String(currentText.prefix(currentText.count - 2))
                 return false
-            } else if currentText.count == 1 && string == " " {
+            }
+            // 텍스트 필드의 상태 : #
+            // 첫번째 태그가 입력되지 않은 상태에서, 띄어쓰기로 두번재 태그를 작성하려는 경우
+            // 두번째 태그 작성이 안되게 막아야한다. (첫번째 태그값이 공백이 되면 안됨)
+            // -> 첫번째 태그가 입력되지 않으면 스페이스 키 입력을 막아 2번째 텍스트가 작성되지 않도록한다.
+            else if currentText.count == 1 && string == " " {
                 return false
             }
         }
 
+        // 텍스트 필드의 상태 : #
+        // 현재 입력 : 백스페이스 (지우기)
+        // 첫번째 태그를 작성하지 않고, 백페이스를 입력해 작성되어있던 #도 지우려는 경우
+        // -> 지우기가 되지 않아야한다.
         if currentText.count == 1 && string.isEmpty {
             return false
         }
         
+        // 첫번째 태그가 최대 글자수를 넘지 않게 막는다.
         if !currentText.contains(" ") && updatedText.count > tagMaxCount + 1 {
             tagInputTextField.text = String(updatedText.prefix(tagMaxCount))
             return false
         }
         
+        // 현재 입력 : 스페이스
         if string == " " {
+            // 텍스트 필드의 상태 : #태그1 #태그2작성중
+            // 첫번째 태그를 입력하고, 두번째 태그를 입력하고 있는 중, 한번 더 스페이스를 눌러 3번째 태그를 추가하려는 경우
+            // -> 스페이스가 입력되지 않게 막아야한다.
             if currentText.contains(" ") {
                 return false
-            } else {
+            } 
+            // 텍스트 필드의 상태 : #태그1
+            // 첫번째 태그를 입력을 마무리하고, 두번째 태그를 작성하려고하는 경우
+            // -> 첫번째 태그를 완성하고, 두번째 태그 작성을 위해 #을 자동으로 입력한다.
+            else {
                 firstTagCount = currentText.count
                 tagInputTextField.text = "\(currentText) #"
                 return false
             }
         }
         
+        // 두번째 태그가 최대 글자수를 넘지 않게 막는다.
         if updatedText.count > firstTagCount + 1 + tagMaxCount + 1 {
             tagInputTextField.text = String(updatedText.prefix(firstTagCount + 1 + tagMaxCount))
             return false
