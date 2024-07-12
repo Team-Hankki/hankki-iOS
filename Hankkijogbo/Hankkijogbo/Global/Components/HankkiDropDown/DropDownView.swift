@@ -38,7 +38,7 @@ final class DropDownView: BaseView {
     }
     
     override func setupStyle() {
-        tableView.layer.cornerRadius = 10
+        tableView.makeRounded(radius: 10)
     }
     
     init(isPriceModel: Bool, buttonType: ButtonType) {

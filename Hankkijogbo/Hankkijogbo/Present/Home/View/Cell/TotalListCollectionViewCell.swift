@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol TotalListCollectionViewCellDelegate: AnyObject {
-    func didTapAddButton(in cell: TotalListCollectionViewCell)
+    func addButtonDidTap(in cell: TotalListCollectionViewCell)
 }
 
 final class TotalListCollectionViewCell: BaseCollectionViewCell {
@@ -146,7 +146,7 @@ extension TotalListCollectionViewCell {
     }
     
     @objc func actionButtonDipTap() {
-        delegate?.didTapAddButton(in: self)
+        delegate?.addButtonDidTap(in: self)
     }
 }
 

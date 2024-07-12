@@ -32,13 +32,18 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationBar()
         setupMap()
         setupPosition()
         
         setupDelegate()
         setupRegister()
         setupaddTarget()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupNavigationBar()
     }
     
     // MARK: - Set UI
@@ -57,8 +62,8 @@ final class HomeViewController: BaseViewController {
 
 // MARK: - MapView
 
-extension HomeViewController {
-    private func setupMap() {
+private extension HomeViewController {
+    func setupMap() {
         rootView.mapView.touchDelegate = self
     }
     
@@ -84,14 +89,42 @@ extension HomeViewController {
             }
         }
     }
+}
+
+private extension HomeViewController {
+    func setupDelegate() {
+        typeCollectionView.collectionView.delegate = self
+        typeCollectionView.collectionView.dataSource = self
+    }
     
-    private func setupaddTarget() {
+    func setupRegister() {
+        typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
+                                                   forCellWithReuseIdentifier: TypeCollectionViewCell.className)
+    }
+    
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
+                                                              hasRightButton: false,
+                                                              mainTitle: .stringAndImage("한끼대학교", .icArrow),
+                                                              rightButton: .string(""),
+                                                              rightButtonAction: {})
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
+        }
+    }
+}
+
+// MARK: - Filtering 관련 Extension
+
+private extension HomeViewController {
+    
+    func setupaddTarget() {
         rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
     }
     
-    // MARK: - @objc function - Filtering Action
+    // MARK: - @objc Func
     
     @objc func typeButtonDidTap() {
         if isButtonModified {
@@ -118,7 +151,7 @@ extension HomeViewController {
         toggleDropDown(isPriceModel: false, buttonType: .sort)
     }
         
-    private func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
+    func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType)
         customDropDown?.delegate = self
         
@@ -146,7 +179,7 @@ extension HomeViewController {
     }
 
     
-    private func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
+    func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         if isDropDownVisible {
             hideDropDown()
         } else {
@@ -155,7 +188,7 @@ extension HomeViewController {
         isDropDownVisible.toggle()
     }
     
-    private func hideDropDown() {
+    func hideDropDown() {
         guard let customDropDown = customDropDown else { return }
         
         UIView.animate(withDuration: 0.3, animations: {
@@ -170,36 +203,11 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController {
-    func setupNavigationBar() {
-        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
-                                                              hasRightButton: false,
-                                                              mainTitle: .stringAndImage("한끼대학교", .icArrow),
-                                                              rightButton: .string(""),
-                                                              rightButtonAction: {})
-        if let navigationController = navigationController as? HankkiNavigationController {
-            navigationController.setupNavigationBar(forType: type)
-        }
-    }
-}
-
 extension HomeViewController: NMFMapViewCameraDelegate {}
 
 extension HomeViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         print("Map clicked")
-    }
-}
-
-extension HomeViewController {
-    func setupDelegate() {
-        typeCollectionView.collectionView.delegate = self
-        typeCollectionView.collectionView.dataSource = self
-    }
-    
-    func setupRegister() {
-        typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
-                                                   forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
 }
 
@@ -233,13 +241,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController {
     func changeButtonTitle(for button: UIButton, newTitle: String) {
-        button.setTitle(newTitle, for: .normal)
-        button.backgroundColor = .hankkiYellowLight
-        button.layer.borderColor = UIColor.hankkiYellow.cgColor
-        button.setImage(.icClose, for: .normal)
-        button.removeTarget(self, action: nil, for: .touchUpInside)
-        button.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
-        button.sizeToFit()
+        button.do {
+            $0.setTitle(newTitle, for: .normal)
+            $0.backgroundColor = .hankkiYellowLight
+            $0.layer.borderColor = UIColor.hankkiYellow.cgColor
+            $0.setImage(.icClose, for: .normal)
+            $0.removeTarget(self, action: nil, for: .touchUpInside)
+            $0.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
+            $0.sizeToFit()
+        }
         isButtonModified = true
     }
     
@@ -256,13 +266,15 @@ extension HomeViewController {
     }
     
     func revertButton(for button: UIButton, filter: String) {
-        button.setTitle(filter, for: .normal)
-        button.backgroundColor = .white
-        button.layer.borderColor = UIColor.gray300.cgColor
-        button.setTitleColor(.gray400, for: .normal)
-        button.setImage(.icArrow, for: .normal)
-        button.removeTarget(self, action: nil, for: .touchUpInside)
-        button.sizeToFit()
+        button.do {
+            $0.setTitle(filter, for: .normal)
+            $0.backgroundColor = .white
+            $0.layer.borderColor = UIColor.gray300.cgColor
+            $0.setTitleColor(.gray400, for: .normal)
+            $0.setImage(.icArrow, for: .normal)
+            $0.removeTarget(self, action: nil, for: .touchUpInside)
+            $0.sizeToFit()
+        }
         isButtonModified = false
     }
 }
