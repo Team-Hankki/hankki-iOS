@@ -15,7 +15,13 @@ final class HankkiNavigationController: UINavigationController {
     typealias ButtonAction = () -> Void
     private var rightButtonAction: ButtonAction? {
         didSet {
-            rightButton.addTarget(self, action: #selector(rightButtonTapped), for: .touchUpInside)
+            rightButton.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)
+        }
+    }
+    
+    private var backButtonAction: ButtonAction? {
+        didSet {
+            backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -66,6 +72,15 @@ extension HankkiNavigationController {
         setupRightButton(stringOrImage: forType.rightButton)
         
         rightButtonAction = forType.rightButtonAction
+        backButtonAction = forType.backButtonAction
+        
+        safeAreaView.backgroundColor = forType.backgroundColor
+    }
+    
+    /// NavigationBar의 배경색을 바꿈
+    func setupBackgroundColor(_ color: UIColor) {
+        safeAreaView.backgroundColor = color
+        customNavigationBar.backgroundColor = color
     }
 }
 
@@ -73,15 +88,7 @@ extension HankkiNavigationController {
 
 private extension HankkiNavigationController {
     
-    func setupStyle() {
-        customNavigationBar.do {
-            $0.backgroundColor = .white
-        }
-        
-        safeAreaView.do {
-            $0.backgroundColor = customNavigationBar.backgroundColor
-        }
-        
+    func setupStyle() {        
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
@@ -95,7 +102,7 @@ private extension HankkiNavigationController {
         
         backButton.do {
             $0.setImage(.icArrowBack, for: .normal)
-            $0.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         }
         
         rightButton.do {
@@ -190,11 +197,15 @@ private extension HankkiNavigationController {
         }
     }
     
-    @objc func backButtonTapped() {
-        popViewController(animated: true)
+    @objc func backButtonDidTap() {
+        if let backButtonAction {
+            return backButtonAction()
+        } else {
+            popViewController(animated: true)
+        }
     }
     
-    @objc func rightButtonTapped() {
+    @objc func rightButtonDidTap() {
         rightButtonAction?()
     }
 }

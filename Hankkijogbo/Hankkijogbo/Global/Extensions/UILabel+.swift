@@ -71,7 +71,7 @@ extension UILabel {
             $0.maximumLineHeight = fontName.lineHeight * fontName.size
         }
         
-        let offset = (fontName.lineHeight * fontName.size - fontName.size) / 2
+        let offset = (fontName.lineHeight * fontName.size - fontName.size) / 4
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,

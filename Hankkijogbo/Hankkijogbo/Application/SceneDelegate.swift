@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = HankkiNavigationController(rootViewController: TabBarController())
         
         window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = navigationController
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     

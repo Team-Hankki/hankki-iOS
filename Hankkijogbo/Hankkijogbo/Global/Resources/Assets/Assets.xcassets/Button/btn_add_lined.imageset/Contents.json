@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Property 1=btn_plus_lined.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

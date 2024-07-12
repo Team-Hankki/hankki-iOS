@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "btn_dropdown.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
