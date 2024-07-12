@@ -67,7 +67,7 @@ final class HomeView: BaseView {
     }
 }
 
-private extension HomeView {
+extension HomeView {
     
     func setupAddTarget() {
         let buttons = [typeButton, priceButton, sortButton]
@@ -81,7 +81,6 @@ private extension HomeView {
         updateButtonStyle(sender)
     }
     
-    // TODO: - SVG 파일로 변경 후 button image 변경
     func updateButtonStyle(_ button: UIButton) {
         if button.isSelected {
             button.setTitleColor(.gray600, for: .normal)
