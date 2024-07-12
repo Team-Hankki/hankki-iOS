@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Frame 52.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Frame 52@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Frame 52@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Property 1=btn_plus_filled.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
