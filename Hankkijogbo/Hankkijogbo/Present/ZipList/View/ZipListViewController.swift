@@ -1,5 +1,5 @@
 //
-//  ZipViewController.swift
+//  ZipListViewController.swift
 //  Hankkijogbo
 //
 //  Created by 심서현 on 7/9/24.
@@ -77,7 +77,7 @@ private extension ZipListViewController {
     }
     
     func setupNavigationBar() {
-        let type: HankkiNavigationType
+        var type: HankkiNavigationType
 
         if isEditMode {
             type = HankkiNavigationType(
@@ -86,8 +86,9 @@ private extension ZipListViewController {
                 mainTitle: .string("나의 식당 족보"),
                 rightButton: .string("삭제"),
                 rightButtonAction: deleteButtonDidTap,
-                backButtonAction: { self.setIsEditMode() }
+                backButtonAction: setIsEditMode
             )
+
         } else {
             type = HankkiNavigationType(
                 hasBackButton: true,
@@ -122,6 +123,11 @@ private extension ZipListViewController {
         }
     }
     
+    func navigateToHankkiListViewController() {
+        let hankkiListViewController = HankkiListViewController(.myZip)
+            navigationController?.pushViewController(hankkiListViewController, animated: true)
+    }
+    
     func deleteZip() {
         let selectedItemItems = collectionView.indexPathsForSelectedItems?
             .map { $0.item }
@@ -133,10 +139,8 @@ private extension ZipListViewController {
     }
     
     func setIsEditMode() {
-        if isEditMode {
-            deselectedAllItems()
-            isEditMode.toggle()
-        }
+        deselectedAllItems()
+        isEditMode.toggle()
     }
 }
 
@@ -202,6 +206,7 @@ extension ZipListViewController: UICollectionViewDelegate {
                     print("새로운 족보리스트 추가 뷰로 이동")
                 } else {
                     print(indexPath.item, "번째 셀의 뷰로 이동")
+                    navigateToHankkiListViewController()
                 }
             }
         }
