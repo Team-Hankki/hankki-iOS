@@ -193,7 +193,7 @@ private extension MenuCollectionViewCell {
         } else {
             self.priceLabel.textColor = .gray500
             priceTextField.do {
-                $0.layer.borderColor = UIColor.gray300.cgColor
+                $0.layer.borderColor = UIColor.gray800.cgColor
                 $0.textColor = .gray800
             }
             errorLabel.isHidden = true
@@ -207,7 +207,7 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
     /// - border 색 검정색으로 변경
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.layer.borderColor = UIColor.gray900.cgColor
+        textField.layer.borderColor = UIColor.gray800.cgColor
         return true
     }
     
