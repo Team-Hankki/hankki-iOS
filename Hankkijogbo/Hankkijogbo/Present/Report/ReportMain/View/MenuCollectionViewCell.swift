@@ -11,8 +11,10 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    private let menuNameMaxLength = 30
-    private let priceMaxLength = 5
+    private let menuNameMaxLength: Int = 30
+    private let priceMaxLength: Int = 5
+    private let menuNamePlaceHolderString: String = "예) 된장찌개"
+    private let pricePlaceHolderString: String = "8000"
         
     // MARK: - UI Properties
     
@@ -81,7 +83,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceUnitLabel.snp.makeConstraints {
             $0.trailing.equalTo(priceTextField).offset(-17)
-            $0.centerY.equalTo(priceTextField).offset(2)
+            $0.centerY.equalTo(priceTextField)
         }
         menuDeleteButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
@@ -111,6 +113,11 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 for: PretendardStyle.body1,
                 color: .gray800
             )
+            $0.attributedPlaceholder = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                withText: menuNamePlaceHolderString,
+                color: .gray400
+            )
             $0.addPadding(left: 12, right: 12)
         }
         priceLabel.do {
@@ -128,6 +135,11 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
                 color: .gray800
+            )
+            $0.attributedPlaceholder = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                withText: pricePlaceHolderString,
+                color: .gray400
             )
             $0.addPadding(left: 12, right: 16)
             $0.keyboardType = .numberPad
