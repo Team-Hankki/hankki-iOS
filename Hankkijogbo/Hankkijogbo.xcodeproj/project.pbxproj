@@ -84,6 +84,8 @@
 		A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA232C412759000FF458 /* UICollectionView+.swift */; };
 		A240EA262C4176FF000FF458 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA252C4176FF000FF458 /* String+.swift */; };
 		A240EA2A2C41BE98000FF458 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A240EA292C41BE98000FF458 /* Config.xcconfig */; };
+		A240EA2D2C41BF2E000FF458 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA2C2C41BF2E000FF458 /* ReportCompleteViewController.swift */; };
+		A240EA2F2C41C053000FF458 /* HankkiInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA2E2C41C053000FF458 /* HankkiInfoCardView.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -191,6 +193,8 @@
 		A240EA232C412759000FF458 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		A240EA252C4176FF000FF458 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A240EA292C41BE98000FF458 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Hankkijogbo/Global/Resources/Config.xcconfig; sourceTree = SOURCE_ROOT; };
+		A240EA2C2C41BF2E000FF458 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
+		A240EA2E2C41C053000FF458 /* HankkiInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiInfoCardView.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -734,6 +738,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		A240EA2B2C41BF00000FF458 /* Complete */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA2C2C41BF2E000FF458 /* ReportCompleteViewController.swift */,
+				A240EA2E2C41C053000FF458 /* HankkiInfoCardView.swift */,
+			);
+			path = Complete;
+			sourceTree = "<group>";
+		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +801,7 @@
 			children = (
 				A240EA112C3F19F4000FF458 /* ReportMain */,
 				A240EA122C3F19FE000FF458 /* Search */,
+				A240EA2B2C41BF00000FF458 /* Complete */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -979,6 +993,7 @@
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
+				A240EA2F2C41C053000FF458 /* HankkiInfoCardView.swift in Sources */,
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
@@ -1007,6 +1022,7 @@
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
 				864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */,
 				83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */,
+				A240EA2D2C41BF2E000FF458 /* ReportCompleteViewController.swift in Sources */,
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
