@@ -43,8 +43,9 @@ final class ZipListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
          super.viewWillAppear(animated)
-        
          setupNavigationBar()
+        // TODO: - 족보리스트 로드 통신 추가
+        print("새롭게 데이터 로드하기")
     }
     
     override func setupStyle() {
@@ -160,6 +161,11 @@ private extension ZipListViewController {
         }
         return layout
     }
+    
+    func navigateToCreateZipViewController() {
+        let createZipViewController = CreateZipViewController()
+        navigationController?.pushViewController(createZipViewController, animated: true)
+    }
 }
 
 // MARK: - delegate
@@ -203,7 +209,7 @@ extension ZipListViewController: UICollectionViewDelegate {
                 }
             } else {
                 if indexPath.item == 0 {
-                    print("새로운 족보리스트 추가 뷰로 이동")
+                    navigateToCreateZipViewController()
                 } else {
                     print(indexPath.item, "번째 셀의 뷰로 이동")
                     navigateToHankkiListViewController()
