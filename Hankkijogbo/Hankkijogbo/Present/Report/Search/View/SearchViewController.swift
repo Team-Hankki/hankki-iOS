@@ -24,14 +24,14 @@ final class SearchViewController: BaseViewController {
         SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음")
     ]
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let searchGuideLabel: UILabel = UILabel()
     private let searchTextField: UITextField = UITextField()
     private let flowLayout = UICollectionViewFlowLayout()
     private lazy var searchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let searchIconImageView: UIImageView = UIImageView()
-    private let xIconButton: UIButton = UIButton()
+    private let searchTextDeleteButton: UIButton = UIButton()
     private let searchBarBottomGradientView: UIView = UIView()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: "삭당을 제보해주세요",
@@ -45,7 +45,7 @@ final class SearchViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
-        setupTarget()
+        setupAddTarget()
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,7 +61,7 @@ final class SearchViewController: BaseViewController {
             searchGuideLabel,
             searchTextField,
             searchIconImageView,
-            xIconButton,
+            searchTextDeleteButton,
             searchCollectionView,
             searchBarBottomGradientView,
             bottomButtonView
@@ -86,7 +86,7 @@ final class SearchViewController: BaseViewController {
             $0.size.equalTo(24)
         }
         
-        xIconButton.snp.makeConstraints {
+        searchTextDeleteButton.snp.makeConstraints {
             $0.centerY.equalTo(searchTextField)
             $0.trailing.equalTo(searchTextField).offset(-18)
             $0.size.equalTo(20)
@@ -123,7 +123,8 @@ final class SearchViewController: BaseViewController {
         searchIconImageView.do {
             $0.image = .icSearch
         }
-        xIconButton.do {
+        
+        searchTextDeleteButton.do {
             $0.setImage(.btnPlusFilled, for: .normal)
             $0.isHidden = true
         }
@@ -150,9 +151,7 @@ final class SearchViewController: BaseViewController {
 }
 
 private extension SearchViewController {
-    
-    // MARK: - Private Func
-    
+        
     func setupRegister() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
         searchCollectionView.register(
@@ -173,8 +172,8 @@ private extension SearchViewController {
         searchCollectionView.dataSource = self
     }
     
-    func setupTarget() {
-        xIconButton.addTarget(self, action: #selector(xIconButtonDidTap), for: .touchUpInside)
+    func setupAddTarget() {
+        searchTextDeleteButton.addTarget(self, action: #selector(searchTextDeleteButtonDidTap), for: .touchUpInside)
     }
     
     func addViewGradient(_ view: UIView) {
@@ -197,15 +196,15 @@ private extension SearchViewController {
     
     /// isVisible 값에 따라 텍스트필드 사이드에 있는 X 버튼과 Eye 버튼의 isHidden 값을 변경한다.
     func changeSideButtonVisibility(isVisible: Bool) {
-        xIconButton.isHidden = !isVisible
+        searchTextDeleteButton.isHidden = !isVisible
     }
 }
 
+// MARK: - @objc Func
+
 private extension SearchViewController {
     
-    // MARK: - @objc Func
-    
-    @objc func xIconButtonDidTap() {
+    @objc func searchTextDeleteButtonDidTap() {
         searchTextField.text = ""
     }
     
@@ -214,7 +213,7 @@ private extension SearchViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: - UITextField Delegate
 
 extension SearchViewController: UITextFieldDelegate {
     /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
@@ -252,7 +251,7 @@ extension SearchViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - UICollectionView
+// MARK: - UICollectionView Delegate
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -298,6 +297,8 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         return .init(width: UIScreen.getDeviceWidth(), height: 68 + 48)
     }
 }
+
+// MARK: - ChangeBottomButton Delegate
 
 extension SearchViewController: ChangeBottomButtonDelegate {
     func changeBottomButtonView(_ isDone: Bool) {

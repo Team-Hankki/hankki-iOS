@@ -36,7 +36,12 @@ extension MypageViewController {
             navigateToZipListViewController()
             
         case .hankki:
-            print("제보하거나 좋아요한 한끼 식당 리스트로 이동")
+            switch itemIndex {
+            case 0:
+                navigateToHankkiListViewController(.repoted)
+            default:
+                navigateToHankkiListViewController(.liked)
+            }
             
         case .option:
             switch itemIndex {
@@ -46,7 +51,6 @@ extension MypageViewController {
                 print("1:1 문의로 이동")
             case 2:
                 self.showAlert(
-                    image: "dummy",
                     titleText: "정말 로그아웃 하실 건가요?",
                     subText: "Apple 계정을 로그아웃합니다",
                     secondaryButtonText: "돌아가기",

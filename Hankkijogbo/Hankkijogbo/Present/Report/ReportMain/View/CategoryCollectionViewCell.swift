@@ -19,33 +19,35 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                if let selectedCategory = selectedCategoryString {
-                    self.backgroundColor = .hankkiWhite
-                    self.layer.borderColor = UIColor.gray200.cgColor
-                    self.categoryLabel.textColor = .gray400
-                    self.selectedCategoryString = nil
+            self.do {
+                if isSelected {
+                    if let selectedCategory = selectedCategoryString {
+                        $0.backgroundColor = .hankkiWhite
+                        $0.layer.borderColor = UIColor.gray200.cgColor
+                        $0.categoryLabel.textColor = .gray400
+                        $0.selectedCategoryString = nil
+                    } else {
+                        $0.backgroundColor = .hankkiRedLight
+                        $0.layer.borderColor = UIColor.hankkiRed.cgColor
+                        $0.categoryLabel.textColor = .gray700
+                        $0.selectedCategoryString = self.categoryLabel.text
+                    }
                 } else {
-                    self.backgroundColor = .hankkiRedLight
-                    self.layer.borderColor = UIColor.hankkiRed.cgColor
-                    self.categoryLabel.textColor = .gray700
-                    self.selectedCategoryString = self.categoryLabel.text
+                    $0.backgroundColor = .hankkiWhite
+                    $0.layer.borderColor = UIColor.gray200.cgColor
+                    $0.categoryLabel.textColor = .gray400
+                    $0.selectedCategoryString = nil
                 }
-            } else {
-                self.backgroundColor = .hankkiWhite
-                self.layer.borderColor = UIColor.gray200.cgColor
-                self.categoryLabel.textColor = .gray400
-                self.selectedCategoryString = nil
             }
         }
     }
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     let categoryImageView = UIImageView()
     let categoryLabel = UILabel()
     
-    // MARK: - Set UI
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
         addSubviews(categoryImageView, categoryLabel)

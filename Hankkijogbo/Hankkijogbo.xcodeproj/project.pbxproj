@@ -61,7 +61,12 @@
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
+		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
+		86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */; };
+		86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761202C3DF60800413059 /* ZipHeaderTableView.swift */; };
 		86B761232C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761222C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift */; };
+		86B761302C3EEDEE00413059 /* HankkiListViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */; };
+		86B761322C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761312C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift */; };
 		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
 		A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA072C3EF6E0000FF458 /* BufferView.swift */; };
 		A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */; };
@@ -155,7 +160,12 @@
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
+		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
+		86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListTableViewCell.swift; sourceTree = "<group>"; };
+		86B761202C3DF60800413059 /* ZipHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipHeaderTableView.swift; sourceTree = "<group>"; };
 		86B761222C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCellDataStruct.swift; sourceTree = "<group>"; };
+		86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewControllerType.swift; sourceTree = "<group>"; };
+		86B761312C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListTableViewCellDataStruct.swift; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A240EA072C3EF6E0000FF458 /* BufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferView.swift; sourceTree = "<group>"; };
 		A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutFactory.swift; sourceTree = "<group>"; };
@@ -290,6 +300,7 @@
 				A2B599192C39D0BC004B7E4E /* MyZip */,
 				864FA9002C3D1F650051EA36 /* Mypage */,
 				86B761112C3DC76000413059 /* ZipList */,
+				86B761192C3DE03200413059 /* HankkiList */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -573,6 +584,34 @@
 			children = (
 				86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */,
 				86B761222C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		86B761192C3DE03200413059 /* HankkiList */ = {
+			isa = PBXGroup;
+			children = (
+				86B7611A2C3DE03700413059 /* View */,
+			);
+			path = HankkiList;
+			sourceTree = "<group>";
+		};
+		86B7611A2C3DE03700413059 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86B7611D2C3DE04600413059 /* Cell */,
+				86B7611B2C3DE04200413059 /* HankkiListViewController.swift */,
+				86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		86B7611D2C3DE04600413059 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */,
+				86B761202C3DF60800413059 /* ZipHeaderTableView.swift */,
+				86B761312C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -874,6 +913,7 @@
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
+				86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */,
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
@@ -895,7 +935,10 @@
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
+				86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */,
+				86B761322C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift in Sources */,
 				83DBEDCC2C256B080042BA48 /* UILabel+.swift in Sources */,
+				86B761302C3EEDEE00413059 /* HankkiListViewControllerType.swift in Sources */,
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
 				83DBEDB22C2566230042BA48 /* ImageLiterals.swift in Sources */,
@@ -922,6 +965,7 @@
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
+				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
