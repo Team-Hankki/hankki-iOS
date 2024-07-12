@@ -42,7 +42,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     private let line = UIView()
     
     private let heartButton = UIButton()
-
+    
     // MARK: - Life Cycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

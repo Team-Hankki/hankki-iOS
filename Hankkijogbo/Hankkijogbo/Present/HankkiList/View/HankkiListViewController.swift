@@ -12,8 +12,10 @@ final class  HankkiListViewController: BaseViewController {
     // MARK: - Properties
     
     let type: HankkiListViewControllerType
-    
-    private var dummyHankkiList: [HankkiListTableViewCell.DataStruct] = [
+
+//    private var data: [HankkiListTableViewCell.DataStruct] = []
+
+    private var data: [HankkiListTableViewCell.DataStruct] = [
         HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
         HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
         HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
@@ -34,12 +36,13 @@ final class  HankkiListViewController: BaseViewController {
     
     private lazy var hankkiTableView = UITableView(frame: .zero, style: .grouped)
     
+    private let emptyView = UIView()
+    
     // MARK: - Life Cycle
     
     init(_ type: HankkiListViewControllerType) {
         self.type = type
         super.init()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -68,15 +71,25 @@ final class  HankkiListViewController: BaseViewController {
             $0.bounces = true
             $0.alwaysBounceVertical = true
         }
+        
+        // TODO: - 서현 디자인 나오면 작업...
+        emptyView.do {
+            $0.backgroundColor = .yellow
+            $0.isHidden = data.count == 0
+        }
     }
 
     override func setupHierarchy() {
-        view.addSubviews(hankkiTableView)
+        view.addSubviews(hankkiTableView, emptyView)
     }
     
     override func setupLayout() {
         hankkiTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        emptyView.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(type.headrViewHeight)
         }
     }
 }
@@ -89,7 +102,7 @@ private extension HankkiListViewController {
     
     func setupDelegate() {
         hankkiTableView.delegate = self
-        hankkiTableView.dataSource = self   
+        hankkiTableView.dataSource = self
     }
     
     func setupNavigationBar() {
@@ -111,7 +124,7 @@ private extension HankkiListViewController {
     
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
-        dummyHankkiList.remove(at: indexPath.row)
+        data.remove(at: indexPath.row)
         
         hankkiTableView.beginUpdates()
         hankkiTableView.deleteRows(at: [indexPath], with: .automatic)
@@ -121,7 +134,7 @@ private extension HankkiListViewController {
 
 extension HankkiListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyHankkiList.count
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,7 +143,7 @@ extension HankkiListViewController: UITableViewDataSource {
             for: indexPath
         ) as? HankkiListTableViewCell else { return UITableViewCell() }
         
-        cell.dataBind(dummyHankkiList[indexPath.item], isLikeButtonDisable: self.type != .liked)
+        cell.dataBind(data[indexPath.item], isLikeButtonDisable: self.type != .liked)
         cell.delegate = self
         return cell
     }
@@ -152,7 +165,7 @@ extension HankkiListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.type.tableViewHeight
+        return self.type.headrViewHeight
     }
 }
 
@@ -199,7 +212,7 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
             } else {
                 print(indexPath.item, "번째 식당을 추가합니다.")
             }
-            dummyHankkiList[indexPath.item].isDeleted.toggle()
+            data[indexPath.item].isDeleted.toggle()
         }
     }
 }

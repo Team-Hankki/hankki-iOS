@@ -21,7 +21,7 @@ extension HankkiListViewController {
                 .white
             }
         }
-        var tableViewHeight: CGFloat {
+        var headrViewHeight: CGFloat {
             switch self {
             case .myZip:
                 UIView.convertByAspectRatioHeight(
