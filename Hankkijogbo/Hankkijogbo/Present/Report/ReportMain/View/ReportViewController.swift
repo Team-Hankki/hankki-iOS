@@ -8,7 +8,6 @@
 import UIKit
 import PhotosUI
 
-
 // TODO: - 식당 검색 결과도 띄워줘야 함
 
 final class ReportViewController: BaseViewController {
@@ -134,7 +133,7 @@ private extension ReportViewController {
 
 // MARK: - @objc Func
 
-private extension ReportViewController{
+private extension ReportViewController {
     
     @objc func selectImageButtonDidTap() {
         var configuration = PHPickerConfiguration()
@@ -273,10 +272,10 @@ extension ReportViewController: UICollectionViewDelegate {
 
 extension ReportViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true) // 1
-        let itemProvider = results.first?.itemProvider // 2
-        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
-            itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in // 4
+        picker.dismiss(animated: true)
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in
                 DispatchQueue.main.async {
                     if let image = image as? UIImage {
                         self.isImageSet = true

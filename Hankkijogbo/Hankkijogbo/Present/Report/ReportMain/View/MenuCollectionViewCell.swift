@@ -11,6 +11,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    private let menuNameMaxLength = 30
     private let priceMaxLength = 5
         
     // MARK: - UI Properties
@@ -129,6 +130,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 color: .gray800
             )
             $0.addPadding(left: 12, right: 16)
+            $0.keyboardType = .numberPad
         }
         priceUnitLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
@@ -170,14 +172,19 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
         return true
     }
     
-    /// 가격 5자 제한
     final func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == priceTextField {
-            let currentString = (textField.text ?? "") as NSString
-            let newString = currentString.replacingCharacters(in: range, with: string)
+        let currentString = (textField.text ?? "") as NSString
+        let newString = currentString.replacingCharacters(in: range, with: string)
+        
+        if textField == menuTextField {
+            // 메뉴 이름 30자 제한 및 이모지 제한
+            return (newString.count <= menuNameMaxLength) && (textField.disableEmojiText(range: range, string: string))
+        } else if textField == priceTextField {
+            // 가격 5자 제한
             return newString.count <= priceMaxLength
         }
-        return true
+        
+        return false
     }
     
     /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
