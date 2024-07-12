@@ -261,13 +261,13 @@ extension CreateZipViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        let currentText = (textField.text ?? "")
+        let updatedText = currentText+string
+        
         if !isValidString(string) && string != " " && !string.isEmpty {
             print(string)
             return false
         }
-        
-        let currentText = (textField.text ?? "")
-        let updatedText = currentText+string
         
         if textField.tag == 0 {
             if updatedText.count > titleMaxCount + 1 {
@@ -281,17 +281,15 @@ extension CreateZipViewController: UITextFieldDelegate {
         
         if let text = currentText.last {
             lastChar = String(text)
-        } else {
-            lastChar = ""
         }
         
-        if string.isEmpty && lastChar == "#" && currentText.count > 1 {
-            tagInputTextField.text = String(currentText.prefix(currentText.count - 2))
-            return false
-        }
-        
-        if lastChar == "#" && currentText.count == 1 && string == " " {
-            return false
+        if lastChar == "#" {
+            if string.isEmpty && currentText.count > 1 {
+                tagInputTextField.text = String(currentText.prefix(currentText.count - 2))
+                return false
+            } else if currentText.count == 1 && string == " " {
+                return false
+            }
         }
 
         if currentText.count == 1 && string.isEmpty {
