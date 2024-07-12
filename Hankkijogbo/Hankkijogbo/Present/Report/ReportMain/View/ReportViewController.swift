@@ -8,6 +8,9 @@
 import UIKit
 import PhotosUI
 
+
+// TODO: - 식당 검색 결과도 띄워줘야 함
+
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
@@ -79,6 +82,8 @@ final class ReportViewController: BaseViewController {
         }
     }
 }
+
+// MARK: - Private Func
 
 private extension ReportViewController {
     

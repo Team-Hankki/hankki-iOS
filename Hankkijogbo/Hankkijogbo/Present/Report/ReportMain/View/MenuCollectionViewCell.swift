@@ -108,7 +108,6 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = 10
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "",
                 color: .gray800
             )
             $0.addPadding(left: 12, right: 12)
@@ -125,8 +124,10 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.layer.borderColor = UIColor.hankkiRed.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 10
-            $0.font = .setupPretendardStyle(of: .body1)
-            $0.textColor = .gray800
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                color: .gray800
+            )
             $0.addPadding(left: 12, right: 16)
         }
         priceUnitLabel.do {
@@ -154,16 +155,41 @@ private extension MenuCollectionViewCell {
     // MARK: - Private Func
     
     func setupTextFieldDelegate() {
+        menuTextField.delegate = self
         priceTextField.delegate = self
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: - UITextField Delegate
 
 extension MenuCollectionViewCell: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentString = (textField.text ?? "") as NSString
-        let newString = currentString.replacingCharacters(in: range, with: string)
-        return newString.count <= priceMaxLength
+    /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
+    /// - border 색 검정색으로 변경
+    final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.layer.borderColor = UIColor.gray900.cgColor
+        return true
+    }
+    
+    /// 가격 5자 제한
+    final func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == priceTextField {
+            let currentString = (textField.text ?? "") as NSString
+            let newString = currentString.replacingCharacters(in: range, with: string)
+            return newString.count <= priceMaxLength
+        }
+        return true
+    }
+    
+    /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
+    /// - border 색 원래대로 변경
+    final func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.gray300.cgColor
+    }
+    
+    /// 키보드의 return 키 클릭 시 호출되는 함수
+    /// - 키보드를 내려준다
+    final func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
