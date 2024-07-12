@@ -125,7 +125,7 @@ final class SearchViewController: BaseViewController {
         }
         
         searchTextDeleteButton.do {
-            $0.setImage(.btnPlusFilled, for: .normal)
+            $0.setImage(.btnDeleteBig, for: .normal)
             $0.isHidden = true
         }
         

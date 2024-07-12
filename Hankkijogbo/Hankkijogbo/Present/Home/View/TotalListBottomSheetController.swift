@@ -235,7 +235,7 @@ extension TotalListBottomSheetController: UICollectionViewDelegateFlowLayout {
 }
 
 extension TotalListBottomSheetController: TotalListCollectionViewCellDelegate {
-    func didTapAddButton(in cell: TotalListCollectionViewCell) {
+    func addButtonDidTap(in cell: TotalListCollectionViewCell) {
         let myzipVC = MyZipListBottomSheetViewController()
         myzipVC.modalPresentationStyle = .fullScreen
         present(myzipVC, animated: true, completion: nil)

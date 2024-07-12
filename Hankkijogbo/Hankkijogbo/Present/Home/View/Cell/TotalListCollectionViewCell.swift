@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Protocol
 
 protocol TotalListCollectionViewCellDelegate: AnyObject {
-    func didTapAddButton(in cell: TotalListCollectionViewCell)
+    func addButtonDidTap(in cell: TotalListCollectionViewCell)
 }
 
 final class TotalListCollectionViewCell: BaseCollectionViewCell {
@@ -90,10 +90,13 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         priceImage.do {
-            $0.image = .icFood
+            $0.image = .icFood16
         }
         
         //dot image 추가
+        dotImage.do {
+            $0.image = .icSeparator
+        }
         
         likeImage.do {
             $0.image = .icHeart
@@ -106,7 +109,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         addButton.do {
-            $0.setImage(.btnPlusFilled, for: .normal)
+            $0.setImage(.btnAddFilled, for: .normal)
         }
     }
     
@@ -146,8 +149,7 @@ extension TotalListCollectionViewCell {
     }
     
     @objc func actionButtonDipTap() {
-        delegate?.didTapAddButton(in: self)
-    }
+        delegate?.addButtonDidTap(in: self)    }
 }
 
 // MARK: - Network

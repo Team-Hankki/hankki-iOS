@@ -80,7 +80,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
             )
         }
         addZipButton.do {
-            $0.setImage(.icPlus, for: .normal)
+            $0.setImage(.btnAddLined, for: .normal)
         }
     }
 }
