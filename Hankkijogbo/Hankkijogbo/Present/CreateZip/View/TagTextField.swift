@@ -19,15 +19,3 @@ class TagTextField: UITextField {
         return super.canPerformAction(action, withSender: sender)
     }
 }
-
-extension UITextField {
-    // 터치 이벤트를 무시하여 드래그 방지
-    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        
-        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
-            return false
-        }
-        
-        return super.canPerformAction(action, withSender: sender)
-    }
-}
