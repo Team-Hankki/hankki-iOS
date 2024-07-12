@@ -35,6 +35,7 @@ final class ReportCompleteViewController: BaseViewController {
         super.viewDidLoad()
         
         bottomButtonView.setupEnabledDoneButton()
+        setupAddTarget()
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,6 +126,10 @@ private extension ReportCompleteViewController {
     
     // MARK: - Private Func
     
+    func setupAddTarget() {
+        goToHomeButton.addTarget(self, action: #selector(goToHomeButtonDidTap), for: .touchUpInside)
+    }
+    
     func setupBottomGradientView() {
         let gradient = CAGradientLayer()
         
@@ -148,7 +153,10 @@ private extension ReportCompleteViewController {
     @objc func bottomButtonPrimaryHandler() {
         print(goToReportedHankkiString)
     }
+    
+    @objc func goToHomeButtonDidTap() {
+        let tabBarController = TabBarController()
+        self.navigationController?.viewControllers = [tabBarController]
+        self.navigationController?.popViewController(animated: true)
+    }
 }
-
-// MARK: - UITableView Delegate
-// MARK: - 이외의 Delegate나 .. 그런거
