@@ -1,5 +1,5 @@
 //
-//  ImageCollectionViewCell.swift
+//  SelectImageCollectionViewCell.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/9/24.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class ImageCollectionViewCell: BaseCollectionViewCell {
+final class SelectImageCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
     
     private let recommendGuideLabel = UILabel()
-    private let selectImageButton = UIButton()
-    
+    let selectImageButton = UIButton()
+        
     // MARK: - Set UI
     
     override func setupHierarchy() {
@@ -42,6 +42,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
         selectImageButton.do {
             $0.backgroundColor = .gray100
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray200)
+            // TODO: - image 변경
             $0.setImage(.icFood, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body3,

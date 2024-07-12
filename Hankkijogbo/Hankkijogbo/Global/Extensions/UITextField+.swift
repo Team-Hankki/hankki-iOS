@@ -25,4 +25,11 @@ extension UITextField {
     func changePlaceholderColor(forPlaceHolder: String, forColor: UIColor) {
         self.attributedPlaceholder = NSAttributedString(string: forPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: forColor])
     }
+    
+    /// 텍스트필드의 border의 가시성을 변경하는 함수
+    /// - isVisible이 true면 border가 보이고 false면 보이지 않는다
+    final func changeBorderVisibility(isVisible: Bool, color: CGColor) {
+        self.layer.borderWidth = isVisible ? 1 : 0
+        self.layer.borderColor = color
+    }
 }
