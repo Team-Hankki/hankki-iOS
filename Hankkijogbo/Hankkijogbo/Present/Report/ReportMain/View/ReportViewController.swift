@@ -10,12 +10,21 @@ import PhotosUI
 
 // TODO: - 식당 검색 결과도 띄워줘야 함
 
+struct MenuModel {
+    var name: String
+    var price: Int
+}
+
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
     var isImageSet: Bool = false
     var image: UIImage?
+    
+    var hankkiNameString: String?
+    var categoryString: String?
+    var oneMenuData: MenuModel?
 
     /// 다 임의로 넣어둠
     let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
@@ -151,6 +160,7 @@ private extension ReportViewController {
     
     @objc func searchBarButtonDidTap() {
         let searchViewController = SearchViewController()
+        searchViewController.delegate = self
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
@@ -231,6 +241,7 @@ extension ReportViewController: UICollectionViewDataSource {
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
             cell.dataBind(dummyCategory[indexPath.row])
             return cell
         case .image:
@@ -247,6 +258,7 @@ extension ReportViewController: UICollectionViewDataSource {
             }
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
             cell.menuDeleteButton.addTarget(self, action: #selector(menuDeleteButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
@@ -287,5 +299,27 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
+    }
+}
+
+// MARK: - PassSelectedHankkiData Delegate
+
+extension ReportViewController: PassItemDataDelegate {
+    func passItemData(type: ReportSectionType, data: String) {
+        switch type {
+        case .search:
+            self.hankkiNameString = data
+        case .category:
+            self.categoryString = data
+        case .menu:
+            self.oneMenuData = MenuModel(name: data, price: 0)
+        default:
+            return
+        }
+        
+        guard let hankkiNameString = self.hankkiNameString,
+              let categoryString = self.categoryString,
+              let menuList = self.oneMenuData else { return }
+        self.bottomButtonView.setupEnabledDoneButton()
     }
 }

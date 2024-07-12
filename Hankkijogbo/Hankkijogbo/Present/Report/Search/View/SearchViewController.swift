@@ -12,6 +12,10 @@ struct SearchResultModel {
     var address: String
 }
 
+protocol PassItemDataDelegate {
+    func passItemData(type: ReportSectionType, data: String)
+}
+
 final class SearchViewController: BaseViewController {
     
     // MARK: - Properties
@@ -23,6 +27,9 @@ final class SearchViewController: BaseViewController {
         SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
         SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음")
     ]
+    
+    var selectedHankkiNameString: String?
+    var delegate: PassItemDataDelegate?
     
     // MARK: - UI Components
     
@@ -209,6 +216,8 @@ private extension SearchViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
+        guard let nameString = selectedHankkiNameString else { return }
+        delegate?.passItemData(type: .search, data: nameString)
         self.navigationController?.popViewController(animated: true)
     }
 }

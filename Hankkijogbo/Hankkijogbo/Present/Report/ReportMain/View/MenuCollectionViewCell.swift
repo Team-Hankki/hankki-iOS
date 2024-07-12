@@ -15,6 +15,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceMaxLength: Int = 5
     private let menuNamePlaceHolderString: String = "예) 된장찌개"
     private let pricePlaceHolderString: String = "8000"
+    var delegate: PassItemDataDelegate?
         
     // MARK: - UI Components
     
@@ -197,6 +198,11 @@ private extension MenuCollectionViewCell {
                 $0.textColor = .gray800
             }
             errorLabel.isHidden = true
+            
+            guard let menuText = menuTextField.text else { return }
+            if !menuText.isEmpty {
+                delegate?.passItemData(type: .menu, data: menuText)
+            }
         }
     }
 }
