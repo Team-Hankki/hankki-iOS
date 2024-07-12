@@ -68,7 +68,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         thumbnailView.do {
-            $0.layer.cornerRadius = 8
+            $0.makeRounded(radius: 8)
             $0.backgroundColor = .red
         }
         
@@ -88,7 +88,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         categoryChipView.do {
-            $0.layer.cornerRadius = 10
+            $0.makeRounded(radius: 10)
             $0.backgroundColor = .hankkiRedLight
         }
         
@@ -106,7 +106,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         subInfoStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 0
         }
         
         line.do {

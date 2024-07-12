@@ -101,7 +101,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     }
     
     private func setupHierarchy() {
-        self.addSubviews(headerView)
+        self.addSubview(headerView)
         headerView.addSubview(headerImageView)
         headerImageView.addSubviews(headerLabel, tagStackView, nameStackView, shareButton)
         nameStackView.addArrangedSubviews(nameImageView, nameLabel)
@@ -110,7 +110,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     private func setupLayout() {
         headerView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
         }
         
         headerImageView.snp.makeConstraints {

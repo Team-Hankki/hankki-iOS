@@ -89,8 +89,7 @@ private extension HankkiListViewController {
     
     func setupDelegate() {
         hankkiTableView.delegate = self
-        hankkiTableView.dataSource = self
-        
+        hankkiTableView.dataSource = self   
     }
     
     func setupNavigationBar() {
