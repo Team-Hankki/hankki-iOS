@@ -75,7 +75,7 @@ final class  HankkiListViewController: BaseViewController {
         // TODO: - 서현 디자인 나오면 작업...
         emptyView.do {
             $0.backgroundColor = .yellow
-            $0.isHidden = data.count == 0
+            $0.isHidden = data.count != 0
         }
     }
 
