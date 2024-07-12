@@ -16,8 +16,6 @@ final class MainButton: UIButton {
     let titleText: String
     var buttonHandler: ButtonAction?
     
-    // MARK: - UI Properties
-    
     // MARK: - Life Cycle
     
     init(
@@ -37,34 +35,17 @@ final class MainButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Setup UI
-    
-    private func setupStyle() {
-        self.do {
-            if let attributedTitle = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
-                withText: titleText,
-                color: .hankkiWhite
-            ) {
-                $0.setAttributedTitle(attributedTitle, for: .normal)
-            }
-            $0.backgroundColor = .hankkiRedLight2
-            $0.layer.cornerRadius = 16
-            $0.isEnabled = false
-        }
-    }
 }
 
 extension MainButton {
+    func setupButtonAction() {
+        self.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+    }
+    
     @objc func buttonDidTap() {
         if let buttonHandler {
             return buttonHandler()
         }
-    }
-    
-    func setupButtonAction() {
-        self.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
     }
 }
 
@@ -79,6 +60,23 @@ extension MainButton {
     func setupDisabledButton() {
         self.do {
             $0.backgroundColor = .hankkiRedLight2
+            $0.isEnabled = false
+        }
+    }
+}
+
+private extension MainButton {
+    func setupStyle() {
+        self.do {
+            if let attributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: titleText,
+                color: .hankkiWhite
+            ) {
+                $0.setAttributedTitle(attributedTitle, for: .normal)
+            }
+            $0.backgroundColor = .hankkiRedLight2
+            $0.makeRounded(radius: 16)
             $0.isEnabled = false
         }
     }

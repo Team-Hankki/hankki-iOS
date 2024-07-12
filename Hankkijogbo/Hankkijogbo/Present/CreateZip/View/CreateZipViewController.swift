@@ -36,7 +36,7 @@ final class CreateZipViewController: BaseViewController {
         super.viewDidLoad()
         
         setupDelegate()
-        setupAction()
+        setupAddTarget()
         self.hideKeyboard()
     }
     
@@ -172,7 +172,7 @@ private extension CreateZipViewController {
         tagInputTextField.delegate = self
     }
     
-    func setupAction() {
+    func setupAddTarget() {
         titleInputTextField.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
         titleInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         tagInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -187,7 +187,7 @@ private extension CreateZipViewController {
         if currentText.count <= titleMaxCount { titleCountLabel.text = "(\(currentText.count)/\(titleMaxCount))" }
     }
     
-    func submmitButtonDidTap() {
+    func submitButtonDidTap() {
         let arr = (tagInputTextField.text ?? "").split(separator: " ")
         self.showAlert(titleText: "제출 확인용 테스트 모달입니다.", 
                        subText: "\(titleInputTextField.text ?? " ") \n \(arr)",
