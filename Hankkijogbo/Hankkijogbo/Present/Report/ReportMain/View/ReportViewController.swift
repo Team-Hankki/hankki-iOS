@@ -8,19 +8,30 @@
 import UIKit
 import PhotosUI
 
+// TODO: - 식당 검색 결과도 띄워줘야 함
+
+struct MenuModel {
+    var name: String
+    var price: Int
+}
+
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
     var isImageSet: Bool = false
     var image: UIImage?
+    
+    var hankkiNameString: String?
+    var categoryString: String?
+    var oneMenuData: MenuModel?
 
     /// 다 임의로 넣어둠
     let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
     let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
-    let dummyMenu = ["", ""]
+    var dummyMenu = [""]
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
@@ -80,9 +91,9 @@ final class ReportViewController: BaseViewController {
     }
 }
 
+// MARK: - Private Func
+
 private extension ReportViewController {
-    
-    // MARK: - Private Func
     
     func setupRegister() {
         collectionView.register(SearchBarCollectionViewCell.self, forCellWithReuseIdentifier: SearchBarCollectionViewCell.className)
@@ -122,11 +133,16 @@ private extension ReportViewController {
             navigationController.setupNavigationBar(forType: type)
         }
     }
+    
+    func scrollToFooterView() {
+        let footerIndexPath = IndexPath(item: 0, section: ReportSectionType.addMenu.rawValue)
+        collectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .bottom, animated: true) // 제보하기의 Footer로 스크롤 이동
+    }
 }
 
-private extension ReportViewController{
-    
-    // MARK: - @objc
+// MARK: - @objc Func
+
+private extension ReportViewController {
     
     @objc func selectImageButtonDidTap() {
         var configuration = PHPickerConfiguration()
@@ -144,17 +160,33 @@ private extension ReportViewController{
     
     @objc func searchBarButtonDidTap() {
         let searchViewController = SearchViewController()
+        searchViewController.delegate = self
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     @objc func bottomButtonPrimaryHandler() {
         print("제보하기 클릭")
     }
+    
+    /// 메뉴 셀 삭제
+    @objc func menuDeleteButtonDidTap(_ sender: UIButton) {
+        if !dummyMenu.isEmpty {
+            // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
+            let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
+            let itemIndexPath = self.collectionView.indexPathForItem(at: buttonPosition)
+            
+            guard let item = itemIndexPath?.item else { return }
+            dummyMenu.remove(at: item) // 해당 위치의 데이터 삭제
+            collectionView.deleteItems(at: [IndexPath(item: item, section: ReportSectionType.menu.rawValue)]) // item 삭제
+            
+            scrollToFooterView()
+        }
+    }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ReportViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -209,6 +241,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
             cell.dataBind(dummyCategory[indexPath.row])
             return cell
         case .image:
@@ -225,6 +258,8 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             }
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
+            cell.menuDeleteButton.addTarget(self, action: #selector(menuDeleteButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMenuCollectionViewCell.className, for: indexPath) as? AddMenuCollectionViewCell else { return UICollectionViewCell() }
@@ -235,14 +270,24 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
-// MARK: - PHPickerViewControllerDelegate
+extension ReportViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if ReportSectionType(rawValue: indexPath.section) == .addMenu {
+            dummyMenu.append("")
+            collectionView.insertItems(at: [IndexPath(item: dummyMenu.count - 1, section: ReportSectionType.menu.rawValue)])
+            scrollToFooterView()
+        }
+    }
+}
+
+// MARK: - PHPickerViewController Delegate
 
 extension ReportViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true) // 1
-        let itemProvider = results.first?.itemProvider // 2
-        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
-            itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in // 4
+        picker.dismiss(animated: true)
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in
                 DispatchQueue.main.async {
                     if let image = image as? UIImage {
                         self.isImageSet = true
@@ -254,5 +299,27 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
+    }
+}
+
+// MARK: - PassSelectedHankkiData Delegate
+
+extension ReportViewController: PassItemDataDelegate {
+    func passItemData(type: ReportSectionType, data: String) {
+        switch type {
+        case .search:
+            self.hankkiNameString = data
+        case .category:
+            self.categoryString = data
+        case .menu:
+            self.oneMenuData = MenuModel(name: data, price: 0)
+        default:
+            return
+        }
+        
+        guard let hankkiNameString = self.hankkiNameString,
+              let categoryString = self.categoryString,
+              let menuList = self.oneMenuData else { return }
+        self.bottomButtonView.setupEnabledDoneButton()
     }
 }

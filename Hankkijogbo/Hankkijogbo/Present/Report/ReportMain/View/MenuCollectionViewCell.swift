@@ -11,16 +11,20 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    private let priceMaxLength = 5
+    private let menuNameMaxLength: Int = 30
+    private let priceMaxLength: Int = 5
+    private let menuNamePlaceHolderString: String = "예) 된장찌개"
+    private let pricePlaceHolderString: String = "8000"
+    var delegate: PassItemDataDelegate?
         
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let menuLabel = UILabel()
     private let menuTextField = UITextField()
     private let priceLabel = UILabel()
     private let priceTextField = UITextField()
     private let priceUnitLabel = UILabel()
-    private let deleteButton = UIButton()
+    let menuDeleteButton = UIButton()
     private let errorLabel = UILabel()
     
     // MARK: - Init
@@ -29,13 +33,22 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         super.init(frame: frame)
         
         setupTextFieldDelegate()
+        setupAddTarget()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Set UI
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        menuTextField.text = ""
+        priceTextField.text = ""
+        errorLabel.text = ""
+    }
+    
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
         contentView.addSubviews(
@@ -44,7 +57,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             priceLabel,
             priceTextField,
             priceUnitLabel,
-            deleteButton,
+            menuDeleteButton,
             errorLabel
         )
     }
@@ -72,9 +85,9 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceUnitLabel.snp.makeConstraints {
             $0.trailing.equalTo(priceTextField).offset(-17)
-            $0.centerY.equalTo(priceTextField).offset(2)
+            $0.centerY.equalTo(priceTextField)
         }
-        deleteButton.snp.makeConstraints {
+        menuDeleteButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
             $0.leading.equalTo(priceTextField.snp.trailing).offset(3)          
             $0.size.equalTo(32)
@@ -100,8 +113,12 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = 10
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "",
                 color: .gray800
+            )
+            $0.attributedPlaceholder = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                withText: menuNamePlaceHolderString,
+                color: .gray400
             )
             $0.addPadding(left: 12, right: 12)
         }
@@ -109,17 +126,25 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
                 withText: "가격",
-                color: .hankkiRed
+                color: .gray500
             )
         }
         priceTextField.do {
             $0.backgroundColor = .white
-            $0.layer.borderColor = UIColor.hankkiRed.cgColor
+            $0.layer.borderColor = UIColor.gray300.cgColor
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 10
-            $0.font = .setupPretendardStyle(of: .body1)
-            $0.textColor = .gray800
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                color: .gray800
+            )
+            $0.attributedPlaceholder = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                withText: pricePlaceHolderString,
+                color: .gray400
+            )
             $0.addPadding(left: 12, right: 16)
+            $0.keyboardType = .numberPad
         }
         priceUnitLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
@@ -128,7 +153,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 color: .gray800
             )
         }
-        deleteButton.do {
+        menuDeleteButton.do {
             $0.setImage(.icClose, for: .normal)
         }
         errorLabel.do {
@@ -137,6 +162,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 withText: "8000원 이하만 가능해요",
                 color: .hankkiRed
             )
+            $0.isHidden = true
         }
     }
 }
@@ -146,16 +172,76 @@ private extension MenuCollectionViewCell {
     // MARK: - Private Func
     
     func setupTextFieldDelegate() {
+        menuTextField.delegate = self
         priceTextField.delegate = self
+    }
+    
+    func setupAddTarget() {
+        priceTextField.addTarget(self, action: #selector(priceTextFieldDidEditingChange), for: .editingChanged)
+    }
+    
+    // MARK: - @objc Func
+    
+    @objc func priceTextFieldDidEditingChange() {
+        if Int(priceTextField.text ?? "") ?? 0 > 8000 {
+            // 에러 스타일 띄우기
+            self.priceLabel.textColor = .hankkiRed
+            priceTextField.do {
+                $0.layer.borderColor = UIColor.hankkiRed.cgColor
+                $0.textColor = .hankkiRed
+            }
+            errorLabel.isHidden = false
+        } else {
+            self.priceLabel.textColor = .gray500
+            priceTextField.do {
+                $0.layer.borderColor = UIColor.gray800.cgColor
+                $0.textColor = .gray800
+            }
+            errorLabel.isHidden = true
+            
+            guard let menuText = menuTextField.text else { return }
+            if !menuText.isEmpty {
+                delegate?.passItemData(type: .menu, data: menuText)
+            }
+        }
     }
 }
 
-// MARK: - UITextFieldDelegate
+// MARK: - UITextField Delegate
 
 extension MenuCollectionViewCell: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
+    /// - border 색 검정색으로 변경
+    final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.layer.borderColor = UIColor.gray800.cgColor
+        return true
+    }
+    
+    final func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentString = (textField.text ?? "") as NSString
         let newString = currentString.replacingCharacters(in: range, with: string)
-        return newString.count <= priceMaxLength
+        
+        if textField == menuTextField {
+            // 메뉴 이름 30자 제한 및 이모지 제한
+            return (newString.count <= menuNameMaxLength) && (textField.disableEmojiText(range: range, string: string))
+        } else if textField == priceTextField {
+            // 가격 5자 제한
+            return newString.count <= priceMaxLength
+        }
+        
+        return false
+    }
+    
+    /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
+    /// - border 색 원래대로 변경
+    final func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.gray300.cgColor
+    }
+    
+    /// 키보드의 return 키 클릭 시 호출되는 함수
+    /// - 키보드를 내려준다
+    final func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
