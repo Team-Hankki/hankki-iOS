@@ -33,21 +33,10 @@ extension ZipListCollectionViewCell {
             switch self {
             case .create:
                 return .imgZipCreateNormal
-            case .common :
+            case .common:
                 return .imgZipThumbnail1
             case .disable:
                 return .imgZipCreateDisable
-            }
-        }
-        
-        var fontColor: UIColor {
-            switch self {
-            case .create:
-                .gray800
-            case .common:
-                .white
-            case .disable:
-                .gray400
             }
         }
         

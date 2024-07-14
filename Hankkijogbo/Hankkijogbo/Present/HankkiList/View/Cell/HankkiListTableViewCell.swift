@@ -69,7 +69,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         thumbnailView.do {
             $0.makeRounded(radius: 8)
-            $0.backgroundColor = .red
+            $0.image = .imgHankkiListDefault
         }
         
         infoStackView.do {
@@ -113,16 +113,15 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         heartButton.do {
-            
-            let selectedImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-                UIImage.btnLikeSelected52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
-            }
-            let normalImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-                UIImage.btnLikeNormal52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
-            }
-            
-            $0.setImage(selectedImage, for: .selected)
-            $0.setImage(normalImage, for: .normal)
+//            let selectedImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
+//                UIImage.btnLikeSelected52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
+//            }
+//            let normalImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
+//                UIImage.btnLikeNormal52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
+//            }
+//            
+            $0.setImage(.btnLikeSelected52, for: .selected)
+            $0.setImage(.btnLikeSelected52, for: .normal)
             $0.isSelected = true
         }
     }

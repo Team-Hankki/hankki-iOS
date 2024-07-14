@@ -93,7 +93,7 @@ extension ZipListCollectionViewCell {
         titleLabel.attributedText = UILabel.setupAttributedText(
             for: PretendardStyle.subtitle3,
             withText: data.title,
-            color: data.type.fontColor
+            color: .white
         )
         imageView.image = data.type.image
     }

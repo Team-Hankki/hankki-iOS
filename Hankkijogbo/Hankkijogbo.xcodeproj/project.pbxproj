@@ -659,8 +659,8 @@
 		86B7611D2C3DE04600413059 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */,
 				86B761202C3DF60800413059 /* ZipHeaderTableView.swift */,
+				86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */,
 				86B761312C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift */,
 			);
 			path = Cell;
