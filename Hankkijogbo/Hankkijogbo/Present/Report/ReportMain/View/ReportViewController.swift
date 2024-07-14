@@ -8,8 +8,6 @@
 import UIKit
 import PhotosUI
 
-// TODO: - 식당 검색 결과도 띄워줘야 함
-
 struct MenuModel {
     var name: String
     var price: Int
@@ -22,7 +20,11 @@ final class ReportViewController: BaseViewController {
     var isImageSet: Bool = false
     var image: UIImage?
     
-    var hankkiNameString: String?
+    var hankkiNameString: String? {
+        didSet {
+            collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        }
+    }
     var categoryString: String?
     var oneMenuData: MenuModel?
 
@@ -244,6 +246,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         switch sectionType {
         case .search:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchBarCollectionViewCell.className, for: indexPath) as? SearchBarCollectionViewCell else { return UICollectionViewCell() }
+            cell.hankkiNameString = self.hankkiNameString ?? ""
             cell.searchBarButton.addTarget(self, action: #selector(searchBarButtonDidTap), for: .touchUpInside)
             return cell
         case .category:
