@@ -16,7 +16,7 @@ final class AddMenuCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        contentView.addSubview(addMenuButton)
+        addSubview(addMenuButton)
     }
     
     override func setupLayout() {
