@@ -22,7 +22,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             objc_setAssociatedObject(self, &HomeViewController.locationManagerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-
+    
     private static var locationManagerKey: Int = 0
     
     // 위치 서비스 동의 요청
@@ -72,17 +72,17 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     // 위치 접근 거부 경고 알림 표시
-    func showLocationAccessDeniedAlert() {
-        let alert = UIAlertController(title: "위치 접근 거부", message: "설정에서 위치 접근을 허용해 주세요.", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "설정", style: .default) { _ in
-            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
-            }
+    private func showLocationAccessDeniedAlert() {
+        showAlert(titleText: "설정 > 개인정보보호 >\n위치서비스와 설정 > 한끼족보에서\n위치 정보 접근을 모두 허용해 주세요. ",
+                  secondaryButtonText: "닫기",
+                  primaryButtonText: "설정하기",
+                  primaryButtonHandler: moveToSetting)
+    }
+    
+    func moveToSetting() {
+        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
         }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        alert.addAction(settingsAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
     }
     
     // targetButton 클릭 시의 동작 처리
