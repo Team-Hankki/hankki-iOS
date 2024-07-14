@@ -9,15 +9,22 @@ import UIKit
 
 final class TotalListBottomSheetView: BaseView {
     
+    // MARK: - Properties
+    
     let data = dummyData
     
-   // let hankkiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    // MARK: - UI Components
+    
+    private let bottomSheetHandlerView = UIView()
     private let flowLayout = UICollectionViewFlowLayout()
     private lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    private let containerView = UIView()
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         setupDelegate()
     }
     
@@ -25,12 +32,26 @@ final class TotalListBottomSheetView: BaseView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func setupHierarchy() {
-        addSubview(totalListCollectionView)
+        addSubview(containerView)
+        containerView.addSubviews(bottomSheetHandlerView, totalListCollectionView)
+        
     }
     
     override func setupStyle() {
+        backgroundColor = .white
+        
+        containerView.do {
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = 30
+            $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            $0.layer.masksToBounds = true
+        }
+        
+        bottomSheetHandlerView.do {
+            $0.backgroundColor = .gray200
+            $0.layer.cornerRadius = 2
+        }
         
         flowLayout.do {
             $0.estimatedItemSize = .init(width: UIScreen.getDeviceWidth(), height: 56)
@@ -39,17 +60,29 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         totalListCollectionView.do {
-            $0.backgroundColor = .gray100
+            $0.backgroundColor = .white
             $0.register(TotalListCollectionViewCell.self, forCellWithReuseIdentifier: TotalListCollectionViewCell.className)
             $0.dragInteractionEnabled = true
         }
     }
     
     override func setupLayout() {
-        totalListCollectionView.snp.makeConstraints {
+        containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
+        bottomSheetHandlerView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(9)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(44)
+            $0.height.equalTo(4)
+        }
+        
+        totalListCollectionView.snp.makeConstraints {
+            //            $0.edges.equalToSuperview()
+            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(10)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+        
     }
 }
 
@@ -72,7 +105,7 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         let model = data[indexPath.row]
         cell.bindData(model: model)
         cell.makeRounded(radius: 10)
-     //   cell.delegate = self
+        //   cell.delegate = self
         return cell
     }
     
@@ -88,7 +121,7 @@ extension TotalListBottomSheetView: UICollectionViewDelegate {
 
 extension TotalListBottomSheetView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 331, height: 104)
+        return CGSize(width: 375, height: 104)
     }
 }
 
