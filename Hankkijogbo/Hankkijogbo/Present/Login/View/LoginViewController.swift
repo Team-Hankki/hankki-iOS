@@ -2,9 +2,7 @@ import UIKit
 import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
-    
-    // MARK: - Properties
-    
+
     // MARK: - UI Properties
     
     let viewTitle = UILabel()
