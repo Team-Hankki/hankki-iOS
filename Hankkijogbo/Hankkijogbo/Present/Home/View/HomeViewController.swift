@@ -24,7 +24,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - UI Components
     
     private var typeCollectionView = TypeCollectionView()
-    private var rootView = HomeView()
+    var rootView = HomeView()
     var customDropDown: DropDownView?
     
     // MARK: - Life cycle
@@ -62,13 +62,14 @@ final class HomeViewController: BaseViewController {
 
 // MARK: - MapView
 
-private extension HomeViewController {
+extension HomeViewController {
     func setupMap() {
         rootView.mapView.touchDelegate = self
     }
     
     func setupPosition() {
-        let initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        var initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        
         rootView.mapView.positionMode = .direction
         rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
         
