@@ -22,7 +22,8 @@ final class MypageHeaderView: BaseCollectionViewCell {
     
     override func setupStyle() {
         profileImageView.do {
-            $0.backgroundColor = .gray400
+            // TODO: - assets: server 에서 받아서 변환하기
+            $0.image = .imgMypageProfileDefault
         }
         
         profileNameLabel.do {

@@ -34,11 +34,6 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
             $0.lineBreakMode = .byTruncatingTail
         }
         
-        imageView.do {
-            $0.layer.borderColor = UIColor.red.cgColor
-            $0.layer.borderWidth = 2
-        }
-        
         selectButton.do {
             $0.backgroundColor = .gray400
             $0.isHidden = true
@@ -100,7 +95,7 @@ extension ZipListCollectionViewCell {
             withText: data.title,
             color: data.type.fontColor
         )
-        imageView.alpha = data.type.opacity
+        imageView.image = data.type.image
     }
     
     func setSelected(_ selected: Bool) {

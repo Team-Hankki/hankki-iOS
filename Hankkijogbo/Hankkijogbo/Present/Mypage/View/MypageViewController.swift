@@ -11,7 +11,12 @@ final class MypageViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private lazy var optionList: [MypageOptionCollectionViewCell.DataStruct] = [
+    private let hankkiList:[MypageHankkiCollectionViewCell.DataStruct] = [
+        MypageHankkiCollectionViewCell.DataStruct(image: .icFood31, title: "내가 제보한 식당"),
+        MypageHankkiCollectionViewCell.DataStruct(image: .icLike, title: "좋아요 누른 식당")
+    ]
+    
+    private let optionList: [MypageOptionCollectionViewCell.DataStruct] = [
         MypageOptionCollectionViewCell.DataStruct(title: "FAQ"),
         MypageOptionCollectionViewCell.DataStruct(title: "1:1 문의"),
         MypageOptionCollectionViewCell.DataStruct(title: "로그아웃")
@@ -150,6 +155,8 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MypageHankkiCollectionViewCell.className, for: indexPath) as? MypageHankkiCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            
+            cell.dataBind(hankkiList[indexPath.item])
             return cell
             
         case .option:

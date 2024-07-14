@@ -121,8 +121,7 @@ private extension MypageViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(UIView.convertByAspectRatioHeight(itemWidth, width: 155, height: 95)
-        ))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(95))
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
