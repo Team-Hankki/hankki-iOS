@@ -26,6 +26,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceUnitLabel = UILabel()
     let deleteMenuButton = UIButton()
     private let errorLabel = UILabel()
+    private let doneToolbar: UIToolbar = UIToolbar()
     
     // MARK: - Init
     
@@ -34,6 +35,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         
         setupTextFieldDelegate()
         setupAddTarget()
+        setupToolbar()
     }
     
     required init?(coder: NSCoder) {
@@ -145,6 +147,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.addPadding(left: 12, right: 16)
             $0.keyboardType = .numberPad
+            
+            $0.inputAccessoryView = doneToolbar
         }
         priceUnitLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
@@ -180,6 +184,14 @@ private extension MenuCollectionViewCell {
         priceTextField.addTarget(self, action: #selector(priceTextFieldDidEditingChange), for: .editingChanged)
     }
     
+    func setupToolbar() {
+        doneToolbar.items=[
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
+        ]
+        doneToolbar.sizeToFit()
+    }
+    
     // MARK: - @objc Func
     
     @objc func priceTextFieldDidEditingChange() {
@@ -204,6 +216,11 @@ private extension MenuCollectionViewCell {
                 delegate?.passItemData(type: .menu, data: menuText)
             }
         }
+    }
+    
+    @objc func doneButtonDidTap() {
+        // 숫자 패드 내리기
+        self.priceTextField.resignFirstResponder()
     }
 }
 
