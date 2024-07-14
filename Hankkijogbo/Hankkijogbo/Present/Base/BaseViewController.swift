@@ -38,7 +38,9 @@ class BaseViewController: UIViewController {
         setupHierarchy()
         setupLayout()
         setupStyle()
+        
         setUpKeyboard()
+        hideKeyboard()
     }
 
     // MARK: - Set UI
