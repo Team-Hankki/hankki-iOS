@@ -1,11 +1,5 @@
-//
-//  LoginViewController.swift
-//  Hankkijogbo
-//
-//  Created by 심서현 on 7/12/24.
-//
-
 import UIKit
+import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
     
@@ -84,8 +78,37 @@ private extension LoginViewController {
     func setupAction() {
         loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
     }
-    
+
     @objc func loginButtonDidTap() {
-        print("로그인")
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+        print("로그인 시도")
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window ?? UIWindow()
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerDelegate {
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        //로그인 성공
+        print("로그인 성공")
+    }
+    
+    // 실패 후 동작
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithError error: Error) {
+        print("애플 로그인 실패: \(error.localizedDescription)")
     }
 }
