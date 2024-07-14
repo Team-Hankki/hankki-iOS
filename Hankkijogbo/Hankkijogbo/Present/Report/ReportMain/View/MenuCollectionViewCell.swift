@@ -48,6 +48,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         menuTextField.text = ""
         priceTextField.text = ""
         errorLabel.text = ""
+        priceLabel.textColor = .gray500
+        priceTextField.layer.borderColor = UIColor.gray300.cgColor
     }
     
     // MARK: - Setup UI
@@ -147,7 +149,6 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.addPadding(left: 12, right: 16)
             $0.keyboardType = .numberPad
-            
             $0.inputAccessoryView = doneToolbar
         }
         priceUnitLabel.do {
