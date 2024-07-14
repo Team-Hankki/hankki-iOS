@@ -77,6 +77,7 @@
 		A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA232C412759000FF458 /* UICollectionView+.swift */; };
 		A240EA262C4176FF000FF458 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA252C4176FF000FF458 /* String+.swift */; };
 		A240EA332C440235000FF458 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A240EA322C440235000FF458 /* Config.xcconfig */; };
+		A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA342C4405A4000FF458 /* UIResponder+.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -177,6 +178,7 @@
 		A240EA232C412759000FF458 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		A240EA252C4176FF000FF458 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A240EA322C440235000FF458 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Hankkijogbo/Global/Resources/Config.xcconfig; sourceTree = SOURCE_ROOT; };
+		A240EA342C4405A4000FF458 /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 			children = (
 				83DBEDC72C256AD00042BA48 /* NSObject+.swift */,
 				A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */,
+				A240EA342C4405A4000FF458 /* UIResponder+.swift */,
 				83DBEDD12C256B7A0042BA48 /* UIColor+.swift */,
 				A2B542422C32AF7500A6B225 /* UIFont+.swift */,
 				83DBEDC52C256A7A0042BA48 /* UIView+.swift */,
@@ -920,6 +923,7 @@
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
+				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
 				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
