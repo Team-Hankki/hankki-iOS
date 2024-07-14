@@ -43,7 +43,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .gray100
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray200)
             // TODO: - image 변경
-            $0.setImage(.icFood, for: .normal)
+            $0.setImage(.icAddPhoto, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
                 withText: "대표 음식 이미지 첨부하기 (선택)",

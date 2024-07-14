@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */; };
+		8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */; };
 		8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */; };
-		8302F8DF2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
+		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
+		8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */; };
+		8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */; };
+		832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownView.swift */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
+		83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23A412C4010AA00A71ECE /* ButtonType.swift */; };
+		83A23A462C415AC100A71ECE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 83A23A452C415AC100A71ECE /* Config.xcconfig */; };
 		83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28952C3851BB004819FA /* HankkiNavigationType.swift */; };
 		83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28972C3852C5004819FA /* HankkiNavigationController.swift */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
@@ -47,6 +53,7 @@
 		83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */; };
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
+		86493CE42C407429002B2669 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 86493CE32C407429002B2669 /* Config.xcconfig */; };
 		864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertStyle.swift */; };
 		864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */; };
 		864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */; };
@@ -59,6 +66,8 @@
 		86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */; };
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
+		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
+		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -109,14 +118,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListCollectionViewCell.swift; path = Cell/TotalListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetController.swift; sourceTree = "<group>"; };
-		8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
 		8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListModel.swift; sourceTree = "<group>"; };
+		8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionView.swift; sourceTree = "<group>"; };
+		8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringModel.swift; sourceTree = "<group>"; };
+		832546EB2C3F28F900B8C3DC /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		83A23A412C4010AA00A71ECE /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
+		83A23A452C415AC100A71ECE /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		83DA28952C3851BB004819FA /* HankkiNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationType.swift; sourceTree = "<group>"; };
 		83DA28972C3852C5004819FA /* HankkiNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationController.swift; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +163,7 @@
 		83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		86493CE32C407429002B2669 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
 		864A89BB2C3B350900140B63 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageHankkiCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -160,6 +176,8 @@
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
+		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
+		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +254,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8302F8E52C3E98DB004ADAA4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */,
+				8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		832546EA2C3F28D100B8C3DC /* HankkiDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				832546EB2C3F28F900B8C3DC /* DropDownView.swift */,
+				83A23A412C4010AA00A71ECE /* ButtonType.swift */,
+			);
+			path = HankkiDropDown;
+			sourceTree = "<group>";
+		};
 		838BEB012C38193800AAA153 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +340,7 @@
 				A2B599192C39D0BC004B7E4E /* MyZip */,
 				864FA9002C3D1F650051EA36 /* Mypage */,
 				86B761112C3DC76000413059 /* ZipList */,
+				86784E882C3FC0B900E94A5D /* CreateZip */,
 				86B761192C3DE03200413059 /* HankkiList */,
 			);
 			path = Present;
@@ -351,11 +388,12 @@
 		83DBED8F2C25648B0042BA48 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8302F8E52C3E98DB004ADAA4 /* Cell */,
 				83DBED932C2564A20042BA48 /* HomeView.swift */,
 				83DBED952C2564AC0042BA48 /* HomeViewController.swift */,
 				8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */,
 				8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */,
-				8302F8DE2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift */,
+				8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -365,6 +403,7 @@
 			children = (
 				83DBED972C2564B40042BA48 /* HomeModel.swift */,
 				8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */,
+				8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -459,6 +498,7 @@
 			children = (
 				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
 				A240EA092C3EF712000FF458 /* HankkiReusableView */,
+				832546EA2C3F28D100B8C3DC /* HankkiDropDown */,
 				A2B599162C39B497004B7E4E /* HankkiToasts */,
 				861704F52C38303300D99E50 /* HankkiAlerts */,
 				83DA28942C38519B004819FA /* HankkiNavigationController */,
@@ -566,6 +606,23 @@
 				86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86784E882C3FC0B900E94A5D /* CreateZip */ = {
+			isa = PBXGroup;
+			children = (
+				86784E892C3FC0C100E94A5D /* View */,
+			);
+			path = CreateZip;
+			sourceTree = "<group>";
+		};
+		86784E892C3FC0C100E94A5D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */,
+				86784E8E2C4021E200E94A5D /* TagTextField.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		86B761112C3DC76000413059 /* ZipList */ = {
@@ -925,6 +982,7 @@
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
 				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
 				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
+				86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */,
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
@@ -932,6 +990,9 @@
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				8302F8DF2C3D6F35004ADAA4 /* TotalListCollectionViewCell.swift in Sources */,
+				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
+				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
+				8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
@@ -964,13 +1025,16 @@
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
+				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
+				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
+				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
@@ -978,6 +1042,7 @@
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
 				A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */,
+				8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */,
 				83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */,
 				A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
@@ -1139,7 +1204,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LM9BKUSL5K;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
@@ -1172,7 +1237,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LM9BKUSL5K;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";

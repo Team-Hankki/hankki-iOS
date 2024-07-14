@@ -115,10 +115,10 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         heartButton.do {
             
             let selectedImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-                UIImage.icHeart.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
+                UIImage.btnLikeSelected52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
             }
             let normalImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-                UIImage.icFood.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
+                UIImage.btnLikeNormal52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
             }
             
             $0.setImage(selectedImage, for: .selected)
@@ -219,13 +219,13 @@ private extension HankkiListTableViewCell {
         
         switch index {
         case 0:
-            subInfoImageView.image = .icFood
+            subInfoImageView.image = .icFood16
             stackView.addArrangedSubview(priceLabel)
         case 1:
             subInfoImageView.image = .icHeart
             stackView.addArrangedSubview(heartCountLabel)
         default:
-            subInfoImageView.image = .icFood
+            subInfoImageView.image = .icFood16
         }
         
         return stackView

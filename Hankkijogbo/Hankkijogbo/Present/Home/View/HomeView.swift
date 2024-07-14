@@ -20,13 +20,16 @@ final class HomeView: BaseView {
     let priceButton = UIButton()
     let sortButton = UIButton()
     
+    private let buttonStackView = UIStackView()
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
         addSubviews(mapView, 
-                    typeButton,
-                    priceButton,
-                    sortButton)
+                    buttonStackView)
+        buttonStackView.addArrangedSubviews(typeButton,
+                                            priceButton,
+                                            sortButton)
     }
     
     override func setupLayout() {
@@ -34,26 +37,11 @@ final class HomeView: BaseView {
             $0.edges.equalToSuperview()
         }
         
-        typeButton.snp.makeConstraints {
-            $0.top.leading.equalTo(mapView).inset(22)
-            $0.width.equalTo(61)
-            $0.height.equalTo(32)
+        buttonStackView.snp.makeConstraints {
+            $0.top.leading.equalTo(mapView).inset(12)
         }
         
-        priceButton.snp.makeConstraints {
-            $0.top.equalTo(typeButton.snp.top)
-            $0.leading.equalTo(typeButton.snp.trailing).offset(8)
-            $0.width.equalTo(72)
-            $0.height.equalTo(32)
-        }
-        
-        sortButton.snp.makeConstraints {
-            $0.top.equalTo(typeButton.snp.top)
-            $0.leading.equalTo(priceButton.snp.trailing).offset(8)
-            $0.width.equalTo(61)
-            $0.height.equalTo(32)
-        }
-        
+        [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
     }
     
     override func setupStyle() {
@@ -64,17 +52,22 @@ final class HomeView: BaseView {
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
                 $0.setTitle(buttonType[index], for: .normal)
                 $0.setTitleColor(.gray400, for: .normal)
-                $0.setImage(.icArrow, for: .normal)
+                $0.setImage(.icArrowClose, for: .normal)
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
                 $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 0)
             }
         }
+        
+        buttonStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 8
+        }
     }
 }
 
-private extension HomeView {
+extension HomeView {
     
     func setupAddTarget() {
         let buttons = [typeButton, priceButton, sortButton]
@@ -88,14 +81,13 @@ private extension HomeView {
         updateButtonStyle(sender)
     }
     
-    // TODO: - SVG 파일로 변경 후 button image 변경
     func updateButtonStyle(_ button: UIButton) {
         if button.isSelected {
             button.setTitleColor(.gray600, for: .normal)
-            button.setImage(.icArrow.withTintColor(.black), for: .normal)
+            button.setImage(.icArrowOpen.withTintColor(.black), for: .normal)
         } else {
             button.setTitleColor(.gray400, for: .normal)
-            button.setImage(.icArrow, for: .normal)
+            button.setImage(.icArrowClose, for: .normal)
         }
     }
 }
