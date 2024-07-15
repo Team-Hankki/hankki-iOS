@@ -15,7 +15,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let dimmedView = UIView()
     private let containerView = UIView()
@@ -91,6 +91,10 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.do {
+            $0.backgroundColor = .clear
+        }
+        
         dimmedView.do {
             $0.backgroundColor = .black.withAlphaComponent(0.67)
         }

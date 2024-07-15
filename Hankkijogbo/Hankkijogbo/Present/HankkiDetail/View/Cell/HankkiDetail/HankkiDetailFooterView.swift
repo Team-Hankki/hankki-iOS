@@ -23,10 +23,10 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
         text: "\(self.likedNumber)",
         buttonHandler: likedButtonDidTap
     )
-    private lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton(
+    lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton(
         image: .btnAddDetail,
         text: self.addMyZipString,
-        buttonHandler: addMyZipButtonDidTap
+        buttonHandler: nil
     )
     
     // MARK: - Setup UI
@@ -53,6 +53,7 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
         addMyZipButton.snp.makeConstraints {
             $0.centerY.equalTo(likedButton)
             $0.leading.equalTo(likedButton.snp.trailing).offset(12)
+            $0.width.lessThanOrEqualTo(150)
             $0.height.equalTo(42)
         }
     }
@@ -87,10 +88,5 @@ extension HankkiDetailFooterView {
             ),
             for: .normal
         )
-    }
-    
-    @objc func addMyZipButtonDidTap() {
-        // 나의 식당 족보 바텀 시트 up
-        print("나의 식당 족보 바텀 시트 up")
     }
 }

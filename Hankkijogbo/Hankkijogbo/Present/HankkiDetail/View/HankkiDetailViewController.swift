@@ -190,6 +190,13 @@ private extension HankkiDetailViewController {
             window?.addSubview(statusBarView)
         }
     }
+    
+    func presentMyZipListBottomSheet() {
+        let viewController = MyZipListBottomSheetViewController()
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: false, completion: nil)
+    }
 }
 
 extension HankkiDetailViewController {
@@ -207,6 +214,10 @@ extension HankkiDetailViewController {
             primaryButtonText: "돌아가기",
             primaryButtonHandler: dismissWithFadeOut
         )
+    }
+    
+    @objc func addMyZipButtonDidTap() {
+        presentMyZipListBottomSheet()
     }
 }
 
@@ -244,6 +255,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 ) as? HankkiDetailFooterView else {
                     return UICollectionReusableView()
                 }
+                footer.addMyZipButton.hankkiDetailButton.addTarget(self, action: #selector(addMyZipButtonDidTap), for: .touchUpInside)
                 return footer
             default:
                 return UICollectionReusableView()

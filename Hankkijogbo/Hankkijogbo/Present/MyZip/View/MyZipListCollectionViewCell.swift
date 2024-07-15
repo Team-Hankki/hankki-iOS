@@ -8,8 +8,10 @@
 import UIKit
 
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
+    
+    var isChecked: Bool = false
         
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let thumbnailImageView = UIImageView()
     private let zipTitleLabel = UILabel()
@@ -17,7 +19,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     private let secondHashtagLabel = UILabel()
     private let addZipButton = UIButton()
     
-    // MARK: - Set UI
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
         contentView.addSubviews(
@@ -50,6 +52,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         addZipButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(37)
             $0.centerY.equalToSuperview()
+            $0.size.equalTo(24)
         }
     }
     
@@ -81,6 +84,16 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         }
         addZipButton.do {
             $0.setImage(.btnAddLined, for: .normal)
+            $0.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
+        }
+    }
+    
+    @objc func addZipButtonDidTap() {
+        isChecked = !isChecked
+        if isChecked {
+            addZipButton.setImage(.btnCheckFilled, for: .normal)
+        } else {
+            addZipButton.setImage(.btnAddLined, for: .normal)
         }
     }
 }
