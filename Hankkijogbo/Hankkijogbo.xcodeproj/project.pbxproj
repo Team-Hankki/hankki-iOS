@@ -11,7 +11,6 @@
 		8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */; };
 		8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853C2C4178D80004D9F7 /* CoreLocation.swift */; };
 		830285412C4429070004D9F7 /* FilteringButtonFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285402C4429070004D9F7 /* FilteringButtonFunc.swift */; };
-		8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
 		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
@@ -119,7 +118,6 @@
 		8302853C2C4178D80004D9F7 /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
 		830285402C4429070004D9F7 /* FilteringButtonFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringButtonFunc.swift; sourceTree = "<group>"; };
 		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetController.swift; sourceTree = "<group>"; };
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
 		8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListModel.swift; sourceTree = "<group>"; };
 		8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -396,7 +394,6 @@
 				8302F8E52C3E98DB004ADAA4 /* Cell */,
 				83DBED932C2564A20042BA48 /* HomeView.swift */,
 				83DBED952C2564AC0042BA48 /* HomeViewController.swift */,
-				8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */,
 				8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */,
 			);
 			path = View;
@@ -987,7 +984,6 @@
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
-				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
