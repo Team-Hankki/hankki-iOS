@@ -13,30 +13,29 @@ final class  HankkiListViewController: BaseViewController {
     
     let type: HankkiListViewControllerType
 
-//    private var data: [HankkiListTableViewCell.DataStruct] = []
+    private var data: [HankkiListTableViewCell.DataStruct] = []
 
-    private var data: [HankkiListTableViewCell.DataStruct] = [
-        HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
-        HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
-        HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
-        HankkiListTableViewCell.DataStruct(id: 4, name: "김가현의 어묵 볶음", imageURL: "dummy.png", category: "아요식", lowestPrice: 8000, heartCount: 400),
-        HankkiListTableViewCell.DataStruct(id: 5, name: "배떡", imageURL: "dummy.png", category: "분식", lowestPrice: 18000, heartCount: 6),
-        HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
-        HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134),
-        HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
-        HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
-        HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
-        HankkiListTableViewCell.DataStruct(id: 4, name: "김가현의 어묵 볶음", imageURL: "dummy.png", category: "아요식", lowestPrice: 8000, heartCount: 400),
-        HankkiListTableViewCell.DataStruct(id: 5, name: "배떡", imageURL: "dummy.png", category: "분식", lowestPrice: 18000, heartCount: 6),
-        HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
-        HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134)
-    ]
+//    private var data: [HankkiListTableViewCell.DataStruct] = [
+//        HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
+//        HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
+//        HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
+//        HankkiListTableViewCell.DataStruct(id: 4, name: "김가현의 어묵 볶음", imageURL: "dummy.png", category: "아요식", lowestPrice: 8000, heartCount: 400),
+//        HankkiListTableViewCell.DataStruct(id: 5, name: "배떡", imageURL: "dummy.png", category: "분식", lowestPrice: 18000, heartCount: 6),
+//        HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
+//        HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134),
+//        HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
+//        HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
+//        HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
+//        HankkiListTableViewCell.DataStruct(id: 4, name: "김가현의 어묵 볶음", imageURL: "dummy.png", category: "아요식", lowestPrice: 8000, heartCount: 400),
+//        HankkiListTableViewCell.DataStruct(id: 5, name: "배떡", imageURL: "dummy.png", category: "분식", lowestPrice: 18000, heartCount: 6),
+//        HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
+//        HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134)
+//    ]
 
     // MARK: - UI Properties
     
-    private lazy var hankkiTableView = UITableView(frame: .zero, style: .grouped)
-    
-    private let emptyView = UIView()
+    private let hankkiTableView = UITableView(frame: .zero, style: .grouped)
+    private lazy var emptyView = EmptyView(text: "아직 제보한 식당이 없어요", buttonText: "식당 구경하러 가기", buttonAction: self.navigateToHomeView)
     
     // MARK: - Life Cycle
     
@@ -72,9 +71,7 @@ final class  HankkiListViewController: BaseViewController {
             $0.alwaysBounceVertical = true
         }
         
-        // TODO: - 서현 디자인 나오면 작업...
         emptyView.do {
-            $0.backgroundColor = .yellow
             $0.isHidden = data.count != 0
         }
     }
@@ -87,6 +84,7 @@ final class  HankkiListViewController: BaseViewController {
         hankkiTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
         emptyView.snp.makeConstraints {
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(type.headrViewHeight)
@@ -121,6 +119,11 @@ private extension HankkiListViewController {
             navigationController.setupNavigationBar(forType: type)
         }
      }
+    
+    func navigateToHomeView() {
+        let homeViewController = HomeViewController()
+        navigationController?.pushViewController(homeViewController, animated: true)
+    }
     
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
