@@ -9,6 +9,10 @@ import UIKit
 
 import NMapsMap
 
+//protocol TotalListBottomSheetViewDelegate: AnyObject {
+//    func totalListBottomSheetView(_ view: TotalListBottomSheetView, addButtonDidTap indexPath: IndexPath)
+//}
+
 final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
@@ -26,7 +30,7 @@ final class HomeViewController: BaseViewController {
     private var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
-    var mainBottomSheet = TotalListBottomSheetController()
+    var mainBottomSheet = TotalListBottomSheetView()
     
     // MARK: - Life cycle
     
@@ -97,6 +101,8 @@ private extension HomeViewController {
     func setupDelegate() {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
+        mainBottomSheet.delegate = self
+//        mainBottomSheet.delegate = self
     }
     
     func setupRegister() {
@@ -203,20 +209,10 @@ extension HomeViewController: DropDownViewDelegate {
     }
 }
 
-extension HomeViewController {
-    func setupBottomSheet() {
-        view.addSubview(mainBottomSheet.view)
-        mainBottomSheet.view.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
-        }
-//        view.addSubview(mainBottomSheet.)
-//        mainBottomSheet.snp.makeConstraints {
-//            $0.bottom.horizontalEdges.equalToSuperview()
-//        }
-    }
-    
-    private func showBottomSheet() {
-        let subViewController = TotalListBottomSheetController()
-        self.present(subViewController, animated: false, completion: nil)
+extension HomeViewController: TotalListBottomSheetViewDelegate {
+    func totalListBottomSheetView(_ view: TotalListBottomSheetView, didTapPlusButtonAt indexPath: IndexPath) {
+        print("Clicked At HomeViewController")
+        let myZipViewController = MyZipListBottomSheetViewController()
+        self.present(myZipViewController, animated: true, completion: nil)
     }
 }

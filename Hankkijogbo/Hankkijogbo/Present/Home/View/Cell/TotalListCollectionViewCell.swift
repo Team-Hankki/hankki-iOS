@@ -93,7 +93,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.image = .icFood16
         }
         
-        //dot image 추가
         dotImage.do {
             $0.image = .icSeparator
         }
@@ -149,7 +148,8 @@ extension TotalListCollectionViewCell {
     }
     
     @objc func actionButtonDipTap() {
-        delegate?.addButtonDidTap(in: self)    }
+        delegate?.addButtonDidTap(in: self)
+    }
 }
 
 // MARK: - Network
