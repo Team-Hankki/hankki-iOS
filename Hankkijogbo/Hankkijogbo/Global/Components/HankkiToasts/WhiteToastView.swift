@@ -31,7 +31,7 @@ final class WhiteToastView: BaseView {
         self.action = action
         super.init(frame: .zero)
         
-        addShadow(color: .black.withAlphaComponent(0.18), opacity: 1, radius: 18, offset: CGSize(width: 0, height: 6))
+        addShadow(color: .black, alpha: 0.18, y: 6, blur: 18)
         removeViewWithAnimation()
     }
     

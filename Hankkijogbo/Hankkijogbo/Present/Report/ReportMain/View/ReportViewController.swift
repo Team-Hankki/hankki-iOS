@@ -124,7 +124,7 @@ private extension ReportViewController {
     }
 }
 
-private extension ReportViewController{
+private extension ReportViewController {
     
     // MARK: - @objc
     

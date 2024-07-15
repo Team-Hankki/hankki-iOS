@@ -1,0 +1,236 @@
+//
+//  HankkiDetailViewController.swift
+//  Hankkijogbo
+//
+//  Created by 서은수 on 7/15/24.
+//
+
+import UIKit
+
+final class HankkiDetailViewController: BaseViewController {
+    
+    // MARK: - Properties
+    
+    var hankkiMenuDummy: [HankkiMenuDummy] = [
+        HankkiMenuDummy(menuName: "수육 정식", menuPrice: 7900),
+        HankkiMenuDummy(menuName: "수육 정식", menuPrice: 7900),
+        HankkiMenuDummy(menuName: "수육 정식", menuPrice: 7900)
+    ]
+    lazy var hankkiInfo: HankkiInfo = HankkiInfo(
+        hankkiName: "한끼네한정식한정식한끼네한정식한정식",
+        hankkiCategory: "한식",
+        hankkiMenu: hankkiMenuDummy
+    )
+    
+    var hankkiDisappearOption: String = "식당이 사라졌어요"
+    var priceLimitOption: String = "더이상 8,000원 이하인 메뉴가 없어요"
+    var improperReportOption: String = "부적절한 제보예요"
+    
+    // MARK: - UI Components
+    
+    private let scrollView: UIScrollView = UIScrollView()
+    private let contentView: UIView = UIView()
+    private let backButton: UIButton = UIButton()
+    private let thumbnailImageView: UIImageView = UIImageView()
+    private var infoCollectionView: HankkiDetailCollectionView = HankkiDetailCollectionView()
+    private var reportOptionCollectionView: HankkiReportOptionCollectionView = HankkiReportOptionCollectionView()
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupRegister()
+        setupDelegate()
+        setupAddTarget()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    // MARK: - Setup UI
+    
+    override func setupHierarchy() {
+        view.addSubviews(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubviews(
+            thumbnailImageView,
+            backButton,
+            infoCollectionView,
+            reportOptionCollectionView
+        )
+    }
+    
+    override func setupLayout() {
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(UIScreen.getDeviceWidth())
+        }
+        thumbnailImageView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(250)
+        }
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(15)
+            $0.leading.equalToSuperview().inset(20)
+            $0.size.equalTo(20)
+        }
+        infoCollectionView.snp.makeConstraints {
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-37)
+            $0.leading.equalToSuperview().inset(18)
+        }
+        reportOptionCollectionView.snp.makeConstraints {
+            $0.top.equalTo(infoCollectionView.snp.bottom).offset(50)
+            $0.horizontalEdges.equalToSuperview().inset(22)
+            $0.bottom.equalToSuperview().inset(31)
+        }
+    }
+    
+    override func setupStyle() {
+        scrollView.do {
+            $0.backgroundColor = .clear
+        }
+        thumbnailImageView.do {
+            $0.backgroundColor = .gray300
+        }
+        backButton.do {
+            $0.setImage(.btnBackWhite, for: .normal)
+        }
+    }
+}
+
+// MARK: - Private Func
+
+private extension HankkiDetailViewController {
+    func setupRegister() {
+        infoCollectionView.collectionView.do {
+            $0.register(HankkiDetailCollectionViewCell.self, forCellWithReuseIdentifier: HankkiDetailCollectionViewCell.className)
+            $0.register(
+                HankkiDetailHeaderView.self,
+                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: HankkiDetailHeaderView.className
+            )
+            $0.register(
+                HankkiDetailFooterView.self,
+                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                withReuseIdentifier: HankkiDetailFooterView.className
+            )
+        }
+        
+        reportOptionCollectionView.collectionView.do {
+            $0.register(HankkiReportOptionCollectionViewCell.self, forCellWithReuseIdentifier: HankkiReportOptionCollectionViewCell.className)
+            $0.register(
+                HankkiReportOptionHeaderView.self,
+                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                withReuseIdentifier: HankkiReportOptionHeaderView.className
+            )
+            $0.register(
+                HankkiReportOptionFooterView.self,
+                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                withReuseIdentifier: HankkiReportOptionFooterView.className
+            )
+        }
+    }
+    
+    func setupDelegate() {
+        infoCollectionView.collectionView.delegate = self
+        infoCollectionView.collectionView.dataSource = self
+        reportOptionCollectionView.collectionView.delegate = self
+        reportOptionCollectionView.collectionView.dataSource = self
+    }
+    
+    func setupAddTarget() {
+        backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc func backButtonDidTap() {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - UICollectionView Delegate
+
+extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if collectionView == infoCollectionView.collectionView {
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: HankkiDetailHeaderView.className,
+                    for: indexPath
+                ) as? HankkiDetailHeaderView else {
+                    return UICollectionReusableView()
+                }
+                header.dataBind(name: hankkiInfo.hankkiName, category: hankkiInfo.hankkiCategory)
+                return header
+            case UICollectionView.elementKindSectionFooter:
+                guard let footer = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: HankkiDetailFooterView.className,
+                    for: indexPath
+                ) as? HankkiDetailFooterView else {
+                    return UICollectionReusableView()
+                }
+                return footer
+            default:
+                return UICollectionReusableView()
+            }
+        } else if collectionView == reportOptionCollectionView.collectionView {
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                guard let header = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: HankkiReportOptionHeaderView.className,
+                    for: indexPath
+                ) as? HankkiReportOptionHeaderView else {
+                    return UICollectionReusableView()
+                }
+                return header
+            case UICollectionView.elementKindSectionFooter:
+                guard let footer = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: HankkiReportOptionFooterView.className,
+                    for: indexPath
+                ) as? HankkiReportOptionFooterView else {
+                    return UICollectionReusableView()
+                }
+                return footer
+            default:
+                return UICollectionReusableView()
+            }
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == infoCollectionView.collectionView {
+            hankkiMenuDummy.count
+        } else {
+            3
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == infoCollectionView.collectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiDetailCollectionViewCell.className, for: indexPath) as? HankkiDetailCollectionViewCell else { return UICollectionViewCell() }
+            return cell
+        } else if collectionView == reportOptionCollectionView.collectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiReportOptionCollectionViewCell.className, for: indexPath) as? HankkiReportOptionCollectionViewCell else { return UICollectionViewCell() }
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+}
