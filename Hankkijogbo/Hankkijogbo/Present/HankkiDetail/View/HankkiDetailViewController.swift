@@ -209,9 +209,9 @@ extension HankkiDetailViewController {
     
     @objc func editMenuButtonDidTap() {
         self.showAlert(
-            image: "이미지 들어가야 됨",
-            titleText: "한끼귀염님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!",
-            primaryButtonText: "돌아가기",
+            titleText: "조금만 기다려주세요!",
+            subText: "메뉴를 편집할 수 있도록\n준비하고 있어요",
+            primaryButtonText: "확인",
             primaryButtonHandler: dismissWithFadeOut
         )
     }
@@ -219,6 +219,15 @@ extension HankkiDetailViewController {
     @objc func addMyZipButtonDidTap() {
         presentMyZipListBottomSheet()
     }
+    
+    @objc func hankkiReportButtonDidTap() {
+         self.showAlert(
+             image: "이미지 들어가야 됨",
+             titleText: "한끼귀염님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!",
+             primaryButtonText: "돌아가기",
+             primaryButtonHandler: dismissWithFadeOut
+         )
+     }
 }
 
 extension HankkiDetailViewController {
@@ -322,6 +331,11 @@ extension HankkiDetailViewController: UpdateReportButtonStyleDelegate {
         
         if isEnabled {
             footer.hankkiReportButton.setupEnabledButton()
+            footer.hankkiReportButton.addTarget(
+                self,
+                action: #selector(hankkiReportButtonDidTap),
+                for: .touchUpInside
+            )
         } else {
             footer.hankkiReportButton.setupDisabledButton()
         }

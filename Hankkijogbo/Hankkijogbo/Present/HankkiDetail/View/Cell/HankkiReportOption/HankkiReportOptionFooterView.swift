@@ -26,16 +26,4 @@ final class HankkiReportOptionFooterView: BaseCollectionReusableView {
             $0.height.equalTo(54)
         }
     }
-    
-    override func setupStyle() {
-        hankkiReportButton.do {
-            $0.buttonHandler = hankkiReportButtonDidTap
-        }
-    }
-    
-    // MARK: - @objc Func
-
-    @objc func hankkiReportButtonDidTap() {
-        print("제보하기 클릭")
-    }
 }
