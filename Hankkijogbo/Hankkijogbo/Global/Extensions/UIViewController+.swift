@@ -115,4 +115,11 @@ extension UIViewController {
             }
         }
     }
+    
+    /// - ViewController를 dismiss 할 때 fade out 효과를 주는 함수
+    func dismissWithFadeOut() {
+        let transition = CATransition().fadeTransition(duration: 0.2)
+        self.view.window!.layer.add(transition, forKey: nil)
+        self.dismiss(animated: false, completion: nil)
+    }
 }

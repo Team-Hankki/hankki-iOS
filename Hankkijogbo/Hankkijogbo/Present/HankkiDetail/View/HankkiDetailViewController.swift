@@ -111,12 +111,14 @@ final class HankkiDetailViewController: BaseViewController {
     }
 }
 
-// MARK: - Private Func
-
 private extension HankkiDetailViewController {
+    
+    // MARK: - Private Func
+    
     func setupRegister() {
         infoCollectionView.collectionView.do {
             $0.register(HankkiDetailCollectionViewCell.self, forCellWithReuseIdentifier: HankkiDetailCollectionViewCell.className)
+            $0.register(HankkiEditMenuCollectionViewCell.self, forCellWithReuseIdentifier: HankkiEditMenuCollectionViewCell.className)
             $0.register(
                 HankkiDetailHeaderView.self,
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -155,8 +157,19 @@ private extension HankkiDetailViewController {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
     }
     
+    // MARK: - @objc Func
+    
     @objc func backButtonDidTap() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func editMenuButtonDidTap() {
+        self.showAlert(
+            image: "이미지 들어가야 됨",
+            titleText: "한끼귀염님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!",
+            primaryButtonText: "돌아가기",
+            primaryButtonHandler: dismissWithFadeOut
+        )
     }
 }
 
@@ -217,7 +230,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == infoCollectionView.collectionView {
-            hankkiMenuDummy.count
+            hankkiMenuDummy.count + 1
         } else {
             3
         }
@@ -225,8 +238,14 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == infoCollectionView.collectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiDetailCollectionViewCell.className, for: indexPath) as? HankkiDetailCollectionViewCell else { return UICollectionViewCell() }
-            return cell
+            if indexPath.item == hankkiMenuDummy.count {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiEditMenuCollectionViewCell.className, for: indexPath) as? HankkiEditMenuCollectionViewCell else { return UICollectionViewCell() }
+                cell.editMenuButton.addTarget(self, action: #selector(editMenuButtonDidTap), for: .touchUpInside)
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiDetailCollectionViewCell.className, for: indexPath) as? HankkiDetailCollectionViewCell else { return UICollectionViewCell() }
+                return cell
+            }
         } else if collectionView == reportOptionCollectionView.collectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiReportOptionCollectionViewCell.className, for: indexPath) as? HankkiReportOptionCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
