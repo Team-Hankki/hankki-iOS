@@ -10,6 +10,7 @@
 		1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */; };
 		8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */; };
 		8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853C2C4178D80004D9F7 /* CoreLocation.swift */; };
+		830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285442C45596D0004D9F7 /* NetworkResult.swift */; };
 		8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
@@ -117,6 +118,7 @@
 /* Begin PBXFileReference section */
 		8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListCollectionViewCell.swift; path = Cell/TotalListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302853C2C4178D80004D9F7 /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
+		830285442C45596D0004D9F7 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetController.swift; sourceTree = "<group>"; };
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
@@ -249,6 +251,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		830285432C4559570004D9F7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				830285442C45596D0004D9F7 /* NetworkResult.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		8302F8E52C3E98DB004ADAA4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +356,7 @@
 		83DBED8B2C2564670042BA48 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				830285432C4559570004D9F7 /* Base */,
 				83DBED992C2564C50042BA48 /* Home */,
 			);
 			path = Network;
@@ -985,6 +996,7 @@
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
+				830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
 				86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */,
