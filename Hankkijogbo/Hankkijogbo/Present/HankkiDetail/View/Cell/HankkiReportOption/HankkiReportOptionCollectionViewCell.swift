@@ -8,7 +8,7 @@
 import UIKit
 
 /// Cell의 클릭 상태에 따라 FooterView의 버튼 스타일을 변경하기 위한 delegate
-protocol UpdateReportButtonStyleDelegate {
+protocol UpdateReportButtonStyleDelegate: AnyObject {
     func updateReportButtonStyle(isEnabled: Bool)
 }
 
