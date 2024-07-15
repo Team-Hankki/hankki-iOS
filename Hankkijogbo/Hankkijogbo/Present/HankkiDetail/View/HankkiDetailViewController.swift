@@ -30,6 +30,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
+    private let whiteBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
     private let thumbnailImageView: UIImageView = UIImageView()
     private var infoCollectionView: HankkiDetailCollectionView = HankkiDetailCollectionView()
@@ -43,6 +44,8 @@ final class HankkiDetailViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
+        
+        changeStatusBarBackgroundColor(color: .gray300)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +66,7 @@ final class HankkiDetailViewController: BaseViewController {
         view.addSubviews(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
+            whiteBackgroundView,
             thumbnailImageView,
             backButton,
             infoCollectionView,
@@ -72,7 +76,8 @@ final class HankkiDetailViewController: BaseViewController {
     
     override func setupLayout() {
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -81,6 +86,10 @@ final class HankkiDetailViewController: BaseViewController {
         thumbnailImageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.height.equalTo(250)
+        }
+        whiteBackgroundView.snp.makeConstraints {
+            $0.top.equalTo(thumbnailImageView.snp.bottom)
+            $0.horizontalEdges.bottom.equalToSuperview()
         }
         backButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(15)
@@ -101,9 +110,16 @@ final class HankkiDetailViewController: BaseViewController {
     override func setupStyle() {
         scrollView.do {
             $0.backgroundColor = .clear
+            $0.bounces = false
+        }
+        contentView.do {
+            $0.backgroundColor = .gray300
         }
         thumbnailImageView.do {
             $0.backgroundColor = .gray300
+        }
+        whiteBackgroundView.do {
+            $0.backgroundColor = .white
         }
         backButton.do {
             $0.setImage(.btnBackWhite, for: .normal)
@@ -147,6 +163,7 @@ private extension HankkiDetailViewController {
     }
     
     func setupDelegate() {
+        scrollView.delegate = self
         infoCollectionView.collectionView.delegate = self
         infoCollectionView.collectionView.dataSource = self
         reportOptionCollectionView.collectionView.delegate = self
@@ -156,6 +173,26 @@ private extension HankkiDetailViewController {
     func setupAddTarget() {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
     }
+    
+    /// - 상태바 배경색 변경
+    func changeStatusBarBackgroundColor(color: UIColor) {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let statusBarManager = windowScene.statusBarManager {
+            let width = statusBarManager.statusBarFrame.width
+            let height = statusBarManager.statusBarFrame.height
+            
+            let statusBarView = UIView(frame: .init(x: 0, y: 0, width: width, height: height + 5))
+            statusBarView.backgroundColor = color
+            
+            window?.addSubview(statusBarView)
+        }
+    }
+}
+
+extension HankkiDetailViewController {
     
     // MARK: - @objc Func
     
@@ -170,6 +207,16 @@ private extension HankkiDetailViewController {
             primaryButtonText: "돌아가기",
             primaryButtonHandler: dismissWithFadeOut
         )
+    }
+}
+
+extension HankkiDetailViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.bounces = false
+        } else {
+            scrollView.bounces = true
+        }
     }
 }
 
