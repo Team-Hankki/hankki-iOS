@@ -28,7 +28,7 @@ final class HomeView: BaseView {
     // MARK: - Set UI
     
     override func setupHierarchy() {
-        addSubviews(mapView, 
+        addSubviews(mapView,
                     buttonStackView,
                     targetButton,
                     bottomSheetView)
@@ -82,6 +82,10 @@ final class HomeView: BaseView {
         
         targetButton.do {
             $0.setImage(.btnTarget, for: .normal)
+        }
+        
+        bottomSheetView.do {
+            $0.backgroundColor = .clear
         }
     }
 }

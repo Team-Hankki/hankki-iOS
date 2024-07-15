@@ -26,6 +26,7 @@ final class HomeViewController: BaseViewController {
     private var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
+    var mainBottomSheet = TotalListBottomSheetController()
     
     // MARK: - Life cycle
     
@@ -199,5 +200,23 @@ extension HomeViewController: DropDownViewDelegate {
             changeButtonTitle(for: rootView.sortButton, newTitle: item)
         }
         hideDropDown()
+    }
+}
+
+extension HomeViewController {
+    func setupBottomSheet() {
+        view.addSubview(mainBottomSheet.view)
+        mainBottomSheet.view.snp.makeConstraints {
+            $0.bottom.horizontalEdges.equalToSuperview()
+        }
+//        view.addSubview(mainBottomSheet.)
+//        mainBottomSheet.snp.makeConstraints {
+//            $0.bottom.horizontalEdges.equalToSuperview()
+//        }
+    }
+    
+    private func showBottomSheet() {
+        let subViewController = TotalListBottomSheetController()
+        self.present(subViewController, animated: false, completion: nil)
     }
 }

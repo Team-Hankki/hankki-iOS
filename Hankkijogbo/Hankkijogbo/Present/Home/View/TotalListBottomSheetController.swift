@@ -67,12 +67,13 @@ final class TotalListBottomSheetController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.backgroundColor = .clear
         dimmedView.do {
             $0.backgroundColor = .clear
         }
         
         containerView.do {
-            $0.isUserInteractionEnabled = true
+            //$0.isUserInteractionEnabled = true
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 30
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
