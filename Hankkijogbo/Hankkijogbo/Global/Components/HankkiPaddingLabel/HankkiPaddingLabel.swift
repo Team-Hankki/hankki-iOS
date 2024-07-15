@@ -9,7 +9,7 @@ import UIKit
 
 /// - 패딩을 적용할 수 있도록 커스텀한 Label
 final class HankkiPaddingLabel: UILabel {
-    var padding = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
+    var padding: UIEdgeInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
 
     convenience init(padding: UIEdgeInsets) {
         self.init()

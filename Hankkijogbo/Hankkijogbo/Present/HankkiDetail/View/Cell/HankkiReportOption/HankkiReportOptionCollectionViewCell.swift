@@ -28,18 +28,15 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
                 if selectedOptionString != nil {
                     setupNormalStyle()
                     self.selectedOptionString = nil
-                    print(1)  
                     delegate?.updateReportButtonStyle(isEnabled: false)
                 } else {
                     setupSelectedStyle()
                     self.selectedOptionString = self.reportOptionLabel.text
-                    print(2)         
                     delegate?.updateReportButtonStyle(isEnabled: true)
                 }
             } else {
                 setupNormalStyle()
                 self.selectedOptionString = nil
-                print(3)     
                 delegate?.updateReportButtonStyle(isEnabled: false)
             }
         }

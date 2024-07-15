@@ -13,7 +13,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
     
     private let headerStackView: UIStackView = UIStackView()
     private let headerLabel: UILabel = UILabel()
-    private let categoryLabel: HankkiPaddingLabel = HankkiPaddingLabel()
+    private let categoryLabel: HankkiPaddingLabel = HankkiPaddingLabel(padding: .init(top: 10, left: 12, bottom: 10, right: 12))
     
     // MARK: - Setup UI
     

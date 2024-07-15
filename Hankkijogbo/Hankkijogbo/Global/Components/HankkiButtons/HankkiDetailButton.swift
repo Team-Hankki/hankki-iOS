@@ -24,14 +24,16 @@ final class HankkiDetailButton: BaseView {
     // MARK: - Init
     
     init(
-        image: UIImage = .init(),
-        text: String = "",
-        buttonHandler: ButtonAction? = nil
+        image: UIImage,
+        text: String,
+        buttonHandler: ButtonAction?
     ) {
         self.image = image
         self.text = text
         self.buttonHandler = buttonHandler
         super.init(frame: .zero)
+        
+        setupAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +67,7 @@ final class HankkiDetailButton: BaseView {
     
     override func setupLayout() {
         hankkiDetailButton.snp.makeConstraints {
-            $0.width.equalTo(105)
+            $0.width.greaterThanOrEqualTo(105)
             $0.height.equalTo(42)
         }
     }
@@ -73,13 +75,13 @@ final class HankkiDetailButton: BaseView {
 
 private extension HankkiDetailButton {
     
+    func setupAddTarget() {
+        hankkiDetailButton.addTarget(self, action: #selector(hankkiDetailButtonDidTap), for: .touchUpInside)
+    }
+    
     @objc func hankkiDetailButtonDidTap() {
         if let buttonHandler {
             return buttonHandler()
         }
-    }
-    
-    func setupAddTarget() {
-        hankkiDetailButton.addTarget(self, action: #selector(hankkiDetailButtonDidTap), for: .touchUpInside)
     }
 }

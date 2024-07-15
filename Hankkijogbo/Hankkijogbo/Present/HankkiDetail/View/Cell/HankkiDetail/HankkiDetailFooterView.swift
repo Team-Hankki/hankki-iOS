@@ -18,8 +18,16 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     // MARK: - UI Components
     
     private lazy var footerButtonStackView: UIStackView = UIStackView()
-    private lazy var likedButton: HankkiDetailButton = HankkiDetailButton()
-    private lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton()
+    private lazy var likedButton: HankkiDetailButton = HankkiDetailButton(
+        image: isLiked ? .btnLikeSelected24 : .btnLikeNormal24,
+        text: "\(self.likedNumber)",
+        buttonHandler: likedButtonDidTap
+    )
+    private lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton(
+        image: .btnAddDetail,
+        text: self.addMyZipString,
+        buttonHandler: addMyZipButtonDidTap
+    )
     
     // MARK: - Setup UI
     
@@ -33,7 +41,18 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     
     override func setupLayout() {
         footerButtonStackView.snp.makeConstraints {
-            $0.top.centerX.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(32)
+            $0.height.equalTo(42)
+        }
+        likedButton.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+            $0.width.lessThanOrEqualTo(105)
+            $0.height.equalTo(42)
+        }
+        addMyZipButton.snp.makeConstraints {
+            $0.centerY.equalTo(likedButton)
+            $0.leading.equalTo(likedButton.snp.trailing).offset(12)
             $0.height.equalTo(42)
         }
     }
@@ -45,16 +64,6 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
             $0.distribution = .fill
             $0.alignment = .top
         }
-        likedButton.do {
-            $0.image = isLiked ? .btnLikeSelected24 : .btnLikeNormal24
-            $0.text = "\(self.likedNumber)"
-            $0.buttonHandler = likedButtonDidTap
-        }
-        addMyZipButton.do {
-            $0.image = .btnAddFilled
-            $0.text = self.addMyZipString
-            $0.buttonHandler = addMyZipButtonDidTap
-        }
     }
 }
 
@@ -63,9 +72,13 @@ extension HankkiDetailFooterView {
     // MARK: - @objc Func
     
     @objc func likedButtonDidTap() {
+        print("liked")
         isLiked = !isLiked
+        print(isLiked)
         likedButton.image = isLiked ? .btnLikeSelected24 : .btnLikeNormal24
         likedNumber += isLiked ? 1 : -1
+        self.layoutIfNeeded()
+        self.superview?.reloadInputViews()
     }
     
     @objc func addMyZipButtonDidTap() {
