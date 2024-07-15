@@ -65,7 +65,10 @@ private extension EmptyView {
     
     func setupHierachy() {
         self.addSubview(view)
-        view.addSubviews(imageView, textLabel, button)
+        view.addSubviews(imageView, textLabel)
+        if buttonText != nil {
+            view.addSubview(button)
+        }
     }
 
     func setupLayout() {
@@ -89,10 +92,10 @@ private extension EmptyView {
             }
         }
         
-        button.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(textLabel.snp.bottom).offset(25)
-            if buttonText != nil {
+        if buttonText != nil {
+            button.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.top.equalTo(textLabel.snp.bottom).offset(25)
                 $0.bottom.equalToSuperview()
             }
         }

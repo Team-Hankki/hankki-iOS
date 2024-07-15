@@ -35,7 +35,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
         }
         
         selectButton.do {
-            $0.backgroundColor = .gray400
+            $0.image = .btnCheckFilled
             $0.isHidden = true
         }
         

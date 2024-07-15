@@ -113,13 +113,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         heartButton.do {
-//            let selectedImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-//                UIImage.btnLikeSelected52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
-//            }
-//            let normalImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-//                UIImage.btnLikeNormal52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
-//            }
-//            
             $0.setImage(.btnLikeSelected52, for: .selected)
             $0.setImage(.btnLikeSelected52, for: .normal)
             $0.isSelected = true
