@@ -229,8 +229,23 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
             return cell
         } else if collectionView == reportOptionCollectionView.collectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiReportOptionCollectionViewCell.className, for: indexPath) as? HankkiReportOptionCollectionViewCell else { return UICollectionViewCell() }
+            cell.delegate = self
             return cell
         }
         return UICollectionViewCell()
+    }
+}
+
+// MARK: - UpdateReportButtonStyle Delegate
+
+extension HankkiDetailViewController: UpdateReportButtonStyleDelegate {
+    func updateReportButtonStyle(isEnabled: Bool) {
+        guard let footer = reportOptionCollectionView.collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HankkiReportOptionFooterView.className, for: IndexPath(item: 3, section: 0)) as? HankkiReportOptionFooterView else { return }
+        
+        if isEnabled {
+            footer.hankkiReportButton.setupEnabledButton()
+        } else {
+            footer.hankkiReportButton.setupDisabledButton()
+        }
     }
 }

@@ -7,6 +7,11 @@
 
 import UIKit
 
+/// Cell의 클릭 상태에 따라 FooterView의 버튼 스타일을 변경하기 위한 delegate
+protocol UpdateReportButtonStyleDelegate {
+    func updateReportButtonStyle(isEnabled: Bool)
+}
+
 final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
@@ -20,19 +25,27 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                if let selectedOptionString = selectedOptionString {
+                if selectedOptionString != nil {
                     setupNormalStyle()
                     self.selectedOptionString = nil
+                    print(1)  
+                    delegate?.updateReportButtonStyle(isEnabled: false)
                 } else {
                     setupSelectedStyle()
                     self.selectedOptionString = self.reportOptionLabel.text
+                    print(2)         
+                    delegate?.updateReportButtonStyle(isEnabled: true)
                 }
             } else {
                 setupNormalStyle()
                 self.selectedOptionString = nil
+                print(3)     
+                delegate?.updateReportButtonStyle(isEnabled: false)
             }
         }
     }
+    
+    var delegate: UpdateReportButtonStyleDelegate?
     
     // MARK: - UI Components
     

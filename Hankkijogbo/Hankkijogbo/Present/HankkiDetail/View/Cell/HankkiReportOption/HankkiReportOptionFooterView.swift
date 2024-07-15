@@ -11,7 +11,7 @@ final class HankkiReportOptionFooterView: BaseCollectionReusableView {
     
     // MARK: - UI Components
     
-    private let hankkiReportButton: MainButton = MainButton(titleText: "제보하기")
+    let hankkiReportButton: MainButton = MainButton(titleText: "제보하기")
     
     // MARK: - Setup UI
     
