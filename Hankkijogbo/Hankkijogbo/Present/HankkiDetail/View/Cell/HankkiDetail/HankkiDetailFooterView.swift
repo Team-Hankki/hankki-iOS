@@ -72,13 +72,21 @@ extension HankkiDetailFooterView {
     // MARK: - @objc Func
     
     @objc func likedButtonDidTap() {
-        print("liked")
         isLiked = !isLiked
-        print(isLiked)
-        likedButton.image = isLiked ? .btnLikeSelected24 : .btnLikeNormal24
+        likedButton.hankkiDetailButton.setImage(
+            isLiked ? .btnLikeSelected24 : .btnLikeNormal24,
+            for: .normal
+        )
+        
         likedNumber += isLiked ? 1 : -1
-        self.layoutIfNeeded()
-        self.superview?.reloadInputViews()
+        likedButton.hankkiDetailButton.setAttributedTitle(
+            UILabel.setupAttributedText(
+                for: PretendardStyle.body4,
+                withText: "\(likedNumber)",
+                color: .gray500
+            ),
+            for: .normal
+        )
     }
     
     @objc func addMyZipButtonDidTap() {

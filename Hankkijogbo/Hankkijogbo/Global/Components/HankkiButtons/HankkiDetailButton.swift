@@ -19,7 +19,7 @@ final class HankkiDetailButton: BaseView {
     
     // MARK: - UI Components
     
-    private let hankkiDetailButton: UIButton = UIButton()
+    let hankkiDetailButton: UIButton = UIButton()
     
     // MARK: - Init
     
