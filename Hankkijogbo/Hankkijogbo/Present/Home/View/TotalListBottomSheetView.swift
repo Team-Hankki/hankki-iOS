@@ -11,6 +11,10 @@ final class TotalListBottomSheetView: BaseView {
     
     // MARK: - Properties
     
+    var isExpanded: Bool = false
+    var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
+    var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
+    
     let data = dummyData
     
     // MARK: - UI Components
@@ -26,6 +30,8 @@ final class TotalListBottomSheetView: BaseView {
         super.init(frame: frame)
         
         setupDelegate()
+        setupGesture()
+      //  showBottomSheet()
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +41,6 @@ final class TotalListBottomSheetView: BaseView {
     override func setupHierarchy() {
         addSubview(containerView)
         containerView.addSubviews(bottomSheetHandlerView, totalListCollectionView)
-        
     }
     
     override func setupStyle() {
@@ -70,6 +75,7 @@ final class TotalListBottomSheetView: BaseView {
         containerView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+
         bottomSheetHandlerView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(9)
             $0.centerX.equalToSuperview()
@@ -78,7 +84,6 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         totalListCollectionView.snp.makeConstraints {
-            //            $0.edges.equalToSuperview()
             $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(10)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
@@ -90,6 +95,87 @@ extension TotalListBottomSheetView {
     func setupDelegate() {
         totalListCollectionView.delegate = self
         totalListCollectionView.dataSource = self
+    }
+    
+    func setupGesture() {
+        let upSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(containerViewDidUpSwipe))
+        upSwipeGesture.direction = .up
+        containerView.addGestureRecognizer(upSwipeGesture)
+        
+        let downSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(containerViewDidDownSwipe))
+        downSwipeGesture.direction = .down
+        containerView.addGestureRecognizer(downSwipeGesture)
+        
+        let dimmedTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap))
+    }
+    
+    /// BottomSheet 표출
+    func showBottomSheet() {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(defaultHeight)
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    /// BottomSheet 숨기기
+    func removeBottomSheet() {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+    }
+    
+    /// BottomSheet 높이 변경
+    func remakeContainerViewHeight(_ height: CGFloat) {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(height)
+        }
+        totalListCollectionView.layoutIfNeeded()
+    }
+    
+    func viewLayoutIfNeededWithAnimation() {
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
+            self.layoutIfNeeded()
+        })
+    }
+}
+
+private extension TotalListBottomSheetView {
+    
+    // MARK: - @objc
+    
+    @objc func containerViewDidUpSwipe() {
+        isExpanded = true
+        remakeContainerViewHeight(expandedHeight)
+        viewLayoutIfNeededWithAnimation()
+    }
+    
+    @objc func containerViewDidDownSwipe() {
+        var updatedHeight = defaultHeight
+        
+        if isExpanded {
+            updatedHeight = defaultHeight
+        } else {
+            updatedHeight = 0
+            removeBottomSheet()
+        }
+        
+        isExpanded = false
+        remakeContainerViewHeight(updatedHeight)
+        viewLayoutIfNeededWithAnimation()
+    }
+    
+    @objc func dimmedViewDidTap() {
+        print("Dimmend View Tapped ")
+        removeBottomSheet()
     }
 }
 
