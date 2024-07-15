@@ -44,20 +44,20 @@ final class HankkiDetailViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
-        
-        changeStatusBarBackgroundColor(color: .gray300)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
+        changeStatusBarBackgroundColor(color: .gray300)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.isNavigationBarHidden = false
+        changeStatusBarBackgroundColor(color: .hankkiWhite)
     }
     
     // MARK: - Setup UI
