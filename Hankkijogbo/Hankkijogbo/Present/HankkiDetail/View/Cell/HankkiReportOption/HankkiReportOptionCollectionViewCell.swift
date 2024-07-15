@@ -9,10 +9,43 @@ import UIKit
 
 final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - UI Properties
+    // MARK: - Properties
+    
+    var selectedOptionString: String? {
+        didSet {
+            print(selectedOptionString ?? "")
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                if let selectedOptionString = selectedOptionString {
+                    setupNormalStyle()
+                    self.selectedOptionString = nil
+                } else {
+                    setupSelectedStyle()
+                    self.selectedOptionString = self.reportOptionLabel.text
+                }
+            } else {
+                setupNormalStyle()
+                self.selectedOptionString = nil
+            }
+        }
+    }
+    
+    // MARK: - UI Components
     
     private var reportOptionLabel: UILabel = UILabel()
     private let radioButton: UIButton = UIButton()
+    
+    // MARK: - Life Cycle
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.setupNormalStyle()
+    }
     
     // MARK: - Setup UI
     
@@ -51,5 +84,28 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         radioButton.do {
             $0.setImage(.btnRadioNormal, for: .normal)
         }
+    }
+}
+
+private extension HankkiReportOptionCollectionViewCell {
+    
+    func setupSelectedStyle() {
+        self.layer.borderColor = UIColor.hankkiRed.cgColor
+        self.radioButton.setImage(.btnRadioSelected, for: .normal)
+        self.reportOptionLabel.attributedText = UILabel.setupAttributedText(
+            for: PretendardStyle.body3,
+            withText: "hankkiMenuName",
+            color: .hankkiRed
+        )
+    }
+    
+    func setupNormalStyle() {
+        self.layer.borderColor = UIColor.gray200.cgColor
+        self.radioButton.setImage(.btnRadioNormal, for: .normal)
+        self.reportOptionLabel.attributedText = UILabel.setupAttributedText(
+            for: PretendardStyle.body3,
+            withText: "hankkiMenuName",
+            color: .gray400
+        )
     }
 }
