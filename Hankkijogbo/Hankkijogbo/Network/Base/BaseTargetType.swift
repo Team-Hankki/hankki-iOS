@@ -49,7 +49,7 @@ extension BaseTargetType {
     
     var headers: [String: String]? {
         var header = ["Content-Type": "application/json"]
-//        header["Authorization"] 
+        header["Authorization"] = URLConstant.bearer // TODO: - Token 연결 
         return header
     }
     
