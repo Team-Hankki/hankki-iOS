@@ -51,13 +51,15 @@ extension UIViewController {
     
     /// Alert을 띄우는 메서드
     func showAlert(
-        image: String = "",
+        image: UIImage? = nil,
         titleText: String,
         subText: String = "",
         secondaryButtonText: String = "",
         primaryButtonText: String,
         secondaryButtonHandler: (() -> Void)? = nil,
-        primaryButtonHandler: (() -> Void)? = nil
+        primaryButtonHandler: (() -> Void)? = nil,
+        hightlightedText:String = "",
+        hightlightedColor:UIColor? = nil
     ) {
         let alert = AlertViewController()
         alert.modalPresentationStyle = .overFullScreen
@@ -72,6 +74,10 @@ extension UIViewController {
             
             $0.secondaryButtonHandler = secondaryButtonHandler
             $0.primaryButtonHandler = primaryButtonHandler
+            
+            if hightlightedColor != nil {
+                $0.setupTitleText(start: 0, end: hightlightedText.count, color: hightlightedColor!)
+            }
         }
         present(alert, animated: false, completion: nil)
     }

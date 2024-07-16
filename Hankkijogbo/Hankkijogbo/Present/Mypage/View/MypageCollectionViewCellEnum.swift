@@ -52,7 +52,6 @@ extension MypageViewController {
             case 2:
                 self.showAlert(
                     titleText: "정말 로그아웃 하실 건가요?",
-                    subText: "Apple 계정을 로그아웃합니다",
                     secondaryButtonText: "돌아가기",
                     primaryButtonText: "로그아웃"
                 )

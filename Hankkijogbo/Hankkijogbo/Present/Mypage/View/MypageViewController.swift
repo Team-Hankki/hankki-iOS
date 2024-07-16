@@ -96,7 +96,6 @@ private extension MypageViewController {
     func showQuitAlert() {
         self.showAlert(
             titleText: "소중한 족보가 사라져요",
-            subText: "탈퇴 계정은 복구할 수 없어요",
             secondaryButtonText: "돌아가기",
             primaryButtonText: "탈퇴하기"
         )

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EmptyView: UIView {
+final class EmptyView: BaseView {
     
     // MARK: - Properties
     
@@ -38,7 +38,7 @@ final class EmptyView: UIView {
         super.init(frame: .zero)
         
         setupStyle()
-        setupHierachy()
+        setupHierarchy()
         setupLayout()
     }
    
@@ -48,10 +48,7 @@ final class EmptyView: UIView {
     
     // MARK: - Setup UI
     
-}
-
-private extension EmptyView {
-    func setupStyle() {
+    override func setupStyle() {
         imageView.do {
             $0.image = .imgEmpty
         }
@@ -63,7 +60,7 @@ private extension EmptyView {
         }
     }
     
-    func setupHierachy() {
+    override func setupHierarchy() {
         self.addSubview(view)
         view.addSubviews(imageView, textLabel)
         if buttonText != nil {
@@ -71,7 +68,7 @@ private extension EmptyView {
         }
     }
 
-    func setupLayout() {
+    override func setupLayout() {
         view.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.85)
@@ -103,14 +100,8 @@ private extension EmptyView {
 }
 
 extension EmptyView {
-    /// - 특정 범위에 색깔 지정
-    func setupTextColor(start: Int, end: Int, color: UIColor) {
-        guard let attributedText = textLabel.attributedText else {
-            return
-        }
-        let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
-        let range = NSRange(location: start, length: min(end, text.count))
-        mutableAttributedText.addAttribute(.foregroundColor, value: color, range: range)
-        textLabel.attributedText = mutableAttributedText
+    /// 텍스트 부분의 색을 일부 변경합니다.
+    func setupTextLabelColor(start: Int, end: Int, color: UIColor) {
+        textLabel.setupTextColorRange(start: start, end: end, color: color)
     }
 }
