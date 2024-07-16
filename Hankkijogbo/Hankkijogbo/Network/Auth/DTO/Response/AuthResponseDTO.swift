@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct PostReissueDTO: Codable {
-    let code: Int
-    let message: String
-    let data: GetCategoryFilterResponseData
-}
-
 struct PostReissueData: Codable {
     let accessToken: String
     let refreshToken: String
+}
+
+struct PostLoginData: Codable {
+    let accessToken: String
+    let refreshToken: String
+    let isRegistered: Bool
 }

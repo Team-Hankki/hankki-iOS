@@ -21,6 +21,7 @@ enum HeaderType {
     case accessTokenHeader
     case refreshTokenHeader
     case tokenHealthHeader(tokenHealthType: TokenHealthType)
+    case AuthorizationCode
 }
 
 /// 각 API에 따라 공통된 Path 값 (존재하지 않는 경우 빈 String 값)
@@ -44,7 +45,10 @@ protocol BaseTargetType: TargetType {
 
 extension BaseTargetType {
     var baseURL: URL {
-        return URL(string: URLConstant.baseURL)!
+        guard let baseURL = URL(string: URLConstant.baseURL) else {
+            fatalError("ERROR - BASEURL")
+        }
+        return baseURL
     }
     
     var headers: [String: String]? {

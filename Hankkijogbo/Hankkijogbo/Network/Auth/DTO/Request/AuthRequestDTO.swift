@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct AuthRequestDTO {
-    
+struct PostLoginRequestDTO: Codable {
+    let name: String
+    var platform: String = "APPLE"
 }

@@ -10,9 +10,9 @@ import Moya
 
 enum AuthTargetType {
     case postReissue
-    case patchLogout
+    case postLogin(requestBody: PostLoginRequestDTO)
     case deleteWithdraw
-    case postLogin
+    case patchLogout
 }
 
 extension AuthTargetType: BaseTargetType {
@@ -21,11 +21,11 @@ extension AuthTargetType: BaseTargetType {
         switch self {
         case .postReissue:
             return .refreshTokenHeader
-        case .patchLogout:
+        case .postLogin:
             return .accessTokenHeader
         case .deleteWithdraw:
             return .accessTokenHeader
-        case .postLogin:
+        case .patchLogout:
             return .accessTokenHeader
         }
     }
@@ -43,41 +43,40 @@ extension AuthTargetType: BaseTargetType {
     var requestBodyParameter: (any Codable)? {
         switch self {
         case .postReissue:
-            <#code#>
-        case .patchLogout:
-            <#code#>
+            return .none
+        case .postLogin(let requestBody):
+            return requestBody
         case .deleteWithdraw:
-            <#code#>
-        case .postLogin:
-            <#code#>
+            return .none
+        case .patchLogout:
+            return .none
         }
     }
     
     var path: String {
         switch self {
         case .postReissue:
-            <#code#>
-        case .patchLogout:
-            <#code#>
+            return utilPath.rawValue + "reissue"
+        case .postLogin(requestBody: let requestBody):
+            return utilPath.rawValue + "login"
         case .deleteWithdraw:
-            <#code#>
-        case .postLogin:
-            <#code#>
+            return utilPath.rawValue + "withdraw"
+        case .patchLogout:
+            return utilPath.rawValue + "logout"
         }
     }
     
     var method: Moya.Method {
         switch self {
+        
         case .postReissue:
-            <#code#>
-        case .patchLogout:
-            <#code#>
+            return .post
+        case .postLogin(requestBody: let requestBody):
+            return .post
         case .deleteWithdraw:
-            <#code#>
-        case .postLogin:
-            <#code#>
+            return .delete
+        case .patchLogout:
+            return .patch
         }
     }
-    
-    
 }
