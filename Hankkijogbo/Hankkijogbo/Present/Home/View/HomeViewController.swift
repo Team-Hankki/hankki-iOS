@@ -12,7 +12,7 @@ import NMapsMap
 final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
-
+    
     private var isButtonModified = false
     var isDropDownVisible = false
     
@@ -24,7 +24,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - UI Components
     
     private var typeCollectionView = TypeCollectionView()
-    private var rootView = HomeView()
+    var rootView = HomeView()
     var customDropDown: DropDownView?
     
     // MARK: - Life cycle
@@ -43,6 +43,7 @@ final class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
+        requestLocationAuthorization()
     }
     
     // MARK: - Set UI
@@ -61,13 +62,14 @@ final class HomeViewController: BaseViewController {
 
 // MARK: - MapView
 
-private extension HomeViewController {
+extension HomeViewController {
     func setupMap() {
         rootView.mapView.touchDelegate = self
     }
     
     func setupPosition() {
-        let initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        var initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        
         rootView.mapView.positionMode = .direction
         rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
         
@@ -121,6 +123,7 @@ private extension HomeViewController {
         rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
+        rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
     }
     
     // MARK: - @objc Func
@@ -149,7 +152,7 @@ private extension HomeViewController {
     @objc func sortButtonDidTap() {
         toggleDropDown(isPriceModel: false, buttonType: .sort)
     }
-        
+    
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType)
         customDropDown?.delegate = self
@@ -176,7 +179,6 @@ private extension HomeViewController {
         }
         self.view.layoutIfNeeded() // 제약 조건을 즉시 적용하여 드롭다운을 바로 표시합니다.
     }
-
     
     func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         if isDropDownVisible {

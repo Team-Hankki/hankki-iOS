@@ -197,7 +197,7 @@ private extension HankkiDetailViewController {
     
     func setupImageStyle() {
         thumbnailImageView.do {
-            $0.image = .dummy
+            $0.image = .btnLikeSelected52
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
         }

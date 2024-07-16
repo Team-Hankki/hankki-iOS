@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "그라디언트 프레임-2 1.png",
+      "filename" : "blackGradient@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "그라디언트 프레임-1.png",
+      "filename" : "blackGradient@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "그라디언트 프레임 1.png",
+      "filename" : "blackGradient@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
