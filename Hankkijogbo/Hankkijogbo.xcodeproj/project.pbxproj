@@ -90,6 +90,7 @@
 		86880BE52C46D3EE00CAEF58 /* AuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */; };
 		86880BE82C46D45500CAEF58 /* AuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */; };
 		86880BEA2C46D6F700CAEF58 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE92C46D6F700CAEF58 /* BaseDTO.swift */; };
+		86880BEE2C46E38200CAEF58 /* GetUniversityResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BED2C46E38200CAEF58 /* GetUniversityResponseDTO.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -225,6 +226,7 @@
 		86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestDTO.swift; sourceTree = "<group>"; };
 		86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDTO.swift; sourceTree = "<group>"; };
 		86880BE92C46D6F700CAEF58 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
+		86880BED2C46E38200CAEF58 /* GetUniversityResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUniversityResponseDTO.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
@@ -744,6 +746,7 @@
 		86880BDD2C46CCF500CAEF58 /* University */ = {
 			isa = PBXGroup;
 			children = (
+				86880BEB2C46E25800CAEF58 /* DTO */,
 				86880BDE2C46CD0600CAEF58 /* UniversityTargetType.swift */,
 				86880BE02C46CD4C00CAEF58 /* UniversityService.swift */,
 			);
@@ -771,6 +774,22 @@
 			isa = PBXGroup;
 			children = (
 				86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		86880BEB2C46E25800CAEF58 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				86880BEC2C46E36300CAEF58 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		86880BEC2C46E36300CAEF58 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				86880BED2C46E38200CAEF58 /* GetUniversityResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1169,6 +1188,7 @@
 				830285572C4562D50004D9F7 /* HakkiAPIService.swift in Sources */,
 				86880BE82C46D45500CAEF58 /* AuthResponseDTO.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
+				86880BEE2C46E38200CAEF58 /* GetUniversityResponseDTO.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,

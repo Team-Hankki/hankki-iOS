@@ -9,36 +9,48 @@ import Foundation
 import Moya
 
 enum UniversityTargetType {
-    
+    case getUniversity
 }
 
 extension UniversityTargetType: BaseTargetType {
     var headerType: HeaderType {
-        <#code#>
+        switch self {
+        case .getUniversity:
+            return .accessTokenHeader
+        }
     }
     
     var utilPath: UtilPath {
-        <#code#>
+        return .university
     }
     
     var pathParameter: String? {
-        <#code#>
+        return .none
     }
     
     var queryParameter: [String : Any]? {
-        <#code#>
+        return .none
     }
     
     var requestBodyParameter: (any Codable)? {
-        <#code#>
+        switch self {
+        case .getUniversity:
+            return .none
+        }
     }
     
     var path: String {
-        <#code#>
+        switch self {
+        case .getUniversity:
+            return utilPath.rawValue
+        }
     }
     
     var method: Moya.Method {
-        <#code#>
+        switch self {
+        case .getUniversity:
+            return .get
+        }
     }
     
     

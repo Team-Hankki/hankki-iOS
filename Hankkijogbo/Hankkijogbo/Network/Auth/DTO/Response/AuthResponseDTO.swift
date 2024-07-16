@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct PostReissueData: Codable {
+struct PostReissueResponseData: Codable {
     let accessToken: String
     let refreshToken: String
 }
 
-struct PostLoginData: Codable {
+struct PostLoginResponseData: Codable {
     let accessToken: String
     let refreshToken: String
     let isRegistered: Bool
