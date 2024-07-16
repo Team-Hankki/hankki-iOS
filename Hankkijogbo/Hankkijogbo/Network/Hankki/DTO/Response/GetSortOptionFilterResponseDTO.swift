@@ -14,7 +14,7 @@ struct GetSortOptionFilterResponseDTO: Codable {
 }
 
 struct GetSortOptionFilterResponseData: Codable {
-    let priceCategories: [GetSortOptionFilterData]
+    let options: [GetSortOptionFilterData]
 }
 
 struct GetSortOptionFilterData: Codable {
