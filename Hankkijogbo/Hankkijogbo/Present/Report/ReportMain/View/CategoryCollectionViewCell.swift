@@ -17,13 +17,13 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    var delegate: PassItemDataDelegate?
+    weak var delegate: PassItemDataDelegate?
     
     override var isSelected: Bool {
         didSet {
             self.do {
                 if isSelected {
-                    if let selectedCategory = selectedCategoryString {
+                    if selectedCategoryString != nil {
                         $0.backgroundColor = .hankkiWhite
                         $0.layer.borderColor = UIColor.gray200.cgColor
                         $0.categoryLabel.textColor = .gray400

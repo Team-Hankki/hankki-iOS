@@ -12,7 +12,7 @@ struct SearchResultModel {
     var address: String
 }
 
-protocol PassItemDataDelegate {
+protocol PassItemDataDelegate: AnyObject {
     func passItemData(type: ReportSectionType, data: String)
 }
 
@@ -29,7 +29,7 @@ final class SearchViewController: BaseViewController {
     ]
     
     var selectedHankkiNameString: String?
-    var delegate: PassItemDataDelegate?
+    weak var delegate: PassItemDataDelegate?
     
     // MARK: - UI Components
     

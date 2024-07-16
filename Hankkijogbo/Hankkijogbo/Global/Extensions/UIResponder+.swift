@@ -19,7 +19,7 @@ extension UIResponder {
         Static.responder = nil
         // 특정 동작을 유발시켜서 현재 응답자를 찾아낸다
         UIApplication.shared.sendAction(#selector(UIResponder._trap), to: nil, from: nil, for: nil)
-        // 찾아낸 응답잔 반환
+        // 찾아낸 응답자 반환
         return Static.responder
     }
 

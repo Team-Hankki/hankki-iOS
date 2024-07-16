@@ -15,7 +15,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    var delegate: SearchViewController?
+    weak var delegate: SearchViewController?
     
     var selectedHankkiNameString: String? {
         didSet {

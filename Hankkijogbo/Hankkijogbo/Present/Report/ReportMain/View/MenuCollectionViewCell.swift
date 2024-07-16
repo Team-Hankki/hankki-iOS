@@ -15,7 +15,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceMaxLength: Int = 5
     private let menuNamePlaceHolderString: String = "예) 된장찌개"
     private let pricePlaceHolderString: String = "8000"
-    var delegate: PassItemDataDelegate?
+    weak var delegate: PassItemDataDelegate?
         
     // MARK: - UI Components
     
