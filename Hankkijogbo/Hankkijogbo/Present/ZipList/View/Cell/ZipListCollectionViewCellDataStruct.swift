@@ -21,22 +21,22 @@ extension ZipListCollectionViewCell {
         var backgroundColor: UIColor {
             switch self {
             case .create:
-                .hankkiYellow
+                .hankkiRed
             case .common:
                 .gray800
             case .disable:
-                .hankkiYellowLight
+                .hankkiRedLight
             }
         }
         
-        var fontColor: UIColor {
+        var image: UIImage {
             switch self {
             case .create:
-                .gray800
+                return .imgZipCreateNormal
             case .common:
-                .white
+                return .imgZipThumbnail1
             case .disable:
-                .gray400
+                return .imgZipCreateDisable
             }
         }
         

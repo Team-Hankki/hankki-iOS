@@ -16,7 +16,7 @@ final class AlertViewController: BaseViewController {
     
     typealias ButtonAction = () -> Void
     
-    var image: String = ""
+    var image: UIImage?
     
     var titleText: String = ""
     var subText: String = ""
@@ -50,7 +50,7 @@ final class AlertViewController: BaseViewController {
     }
     
     override func setupStyle() {
-        let style: AlertStyle = image.isEmpty ? .textAlertStyle : .imageAlertStyle
+        let style: AlertStyle = (image != nil) ? .textAlertStyle : .imageAlertStyle
         
         view.backgroundColor = .black.withAlphaComponent(0.67)
         
@@ -60,9 +60,9 @@ final class AlertViewController: BaseViewController {
         }
         
         imageView.do {
-            $0.backgroundColor = .gray300
+            $0.image = image
             $0.layer.cornerRadius = 10
-            $0.isHidden = image.isEmpty
+            $0.isHidden = (image != nil)
         }
         
         labelStackView.do {
@@ -131,7 +131,7 @@ final class AlertViewController: BaseViewController {
             $0.height.equalTo(54)
         }
         
-        if image.isEmpty {
+        if (image != nil) {
             labelStackView.snp.makeConstraints {
                 $0.top.equalToSuperview().offset(24)
                 $0.leading.equalToSuperview().inset(20)
@@ -216,4 +216,10 @@ private extension AlertViewController {
         primaryButton.addTarget(self, action: #selector(primaryButtonDidTap), for: .touchUpInside)
     }
 
+}
+
+extension AlertViewController {
+    func setupTitleText(start: Int, end: Int, color: UIColor) {
+        titleLabel.setupTextColorRange(start: start, end: end, color: color)
+    }
 }

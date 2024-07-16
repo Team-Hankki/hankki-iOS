@@ -69,7 +69,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         thumbnailView.do {
             $0.makeRounded(radius: 8)
-            $0.backgroundColor = .red
+            $0.image = .imgHankkiListDefault
         }
         
         infoStackView.do {
@@ -113,16 +113,8 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         heartButton.do {
-            
-            let selectedImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-                UIImage.btnLikeSelected52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
-            }
-            let normalImage = UIGraphicsImageRenderer(size: CGSize(width: 52, height: 52)).image { _ in
-                UIImage.btnLikeNormal52.draw(in: CGRect(origin: .zero, size: CGSize(width: 52, height: 52)))
-            }
-            
-            $0.setImage(selectedImage, for: .selected)
-            $0.setImage(normalImage, for: .normal)
+            $0.setImage(.btnLikeSelected52, for: .selected)
+            $0.setImage(.btnLikeSelected52, for: .normal)
             $0.isSelected = true
         }
     }
@@ -168,7 +160,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 
 extension HankkiListTableViewCell {
     func dataBind(_ data: DataStruct, isLikeButtonDisable: Bool) {
-        
         self.data = data
 
         titleLabel.text = data.name
@@ -202,7 +193,7 @@ private extension HankkiListTableViewCell {
         }
         
         subInfoSeparatorView.do {
-            $0.backgroundColor = .hankkiRedLight
+            $0.image = .icSeparator
             $0.isHidden = (index == 0)
         }
   
