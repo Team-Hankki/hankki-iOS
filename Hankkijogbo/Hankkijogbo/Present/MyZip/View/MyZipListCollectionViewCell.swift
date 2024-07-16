@@ -17,7 +17,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     private let zipTitleLabel = UILabel()
     private let firstHashtagLabel = UILabel()
     private let secondHashtagLabel = UILabel()
-    private let addZipButton = UIButton()
+    let addZipButton = UIButton()
     
     // MARK: - Setup UI
     

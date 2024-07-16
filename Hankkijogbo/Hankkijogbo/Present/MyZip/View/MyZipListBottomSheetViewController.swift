@@ -283,7 +283,14 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyZipListCollectionViewCell.className, for: indexPath) as? MyZipListCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.addZipButton.addTarget(self, action: #selector(test), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func test() {
+        self.modalTransitionStyle = .crossDissolve
+        self.dismiss(animated: true)
+        // 토스트뷰
     }
 }
 

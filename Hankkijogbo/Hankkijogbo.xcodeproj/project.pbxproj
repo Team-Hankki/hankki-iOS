@@ -97,6 +97,7 @@
 		A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA532C4551A3000FF458 /* HankkiReportOptionFooterView.swift */; };
 		A240EA592C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */; };
 		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
+		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -218,6 +219,7 @@
 		A240EA532C4551A3000FF458 /* HankkiReportOptionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiReportOptionFooterView.swift; sourceTree = "<group>"; };
 		A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiEditMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
+		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				83DBEDCB2C256B080042BA48 /* UILabel+.swift */,
 				83DBEDCD2C256B180042BA48 /* UIButton+.swift */,
 				83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */,
+				A2471B8C2C46AB770080FA30 /* UIApplication+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1102,6 +1105,7 @@
 				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
 				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
 				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
+				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
 				A240EA422C445D86000FF458 /* HankkiDetailFooterView.swift in Sources */,

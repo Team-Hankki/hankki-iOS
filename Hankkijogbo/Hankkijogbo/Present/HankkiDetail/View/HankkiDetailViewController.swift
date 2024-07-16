@@ -11,6 +11,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var isImageSet: Bool = true
     var hankkiMenuDummy: [HankkiMenuDummy] = [
         HankkiMenuDummy(menuName: "수육 정식", menuPrice: 7900),
         HankkiMenuDummy(menuName: "수육 정식", menuPrice: 7900),
@@ -35,6 +36,7 @@ final class HankkiDetailViewController: BaseViewController {
     private let whiteBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
     private let thumbnailImageView: UIImageView = UIImageView()
+    private let topBlackGradientImageView: UIImageView = UIImageView()
     private var infoCollectionView: HankkiDetailCollectionView = HankkiDetailCollectionView()
     private var reportOptionCollectionView: HankkiReportOptionCollectionView = HankkiReportOptionCollectionView()
     
@@ -52,14 +54,12 @@ final class HankkiDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
-        changeStatusBarBackgroundColor(color: .gray300)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.isNavigationBarHidden = false
-        changeStatusBarBackgroundColor(color: .hankkiWhite)
     }
     
     // MARK: - Setup UI
@@ -74,32 +74,39 @@ final class HankkiDetailViewController: BaseViewController {
             infoCollectionView,
             reportOptionCollectionView
         )
+        thumbnailImageView.addSubview(topBlackGradientImageView)
     }
     
     override func setupLayout() {
         scrollView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.equalTo(self.view).offset(-UIApplication.getStatusBarHeight())
+            $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.bottom.equalToSuperview()
             $0.width.equalTo(UIScreen.getDeviceWidth())
         }
         thumbnailImageView.snp.makeConstraints {
-            $0.top.horizontalEdges.equalToSuperview()
+            $0.top.width.equalToSuperview()
             $0.height.equalTo(250)
+        }
+        topBlackGradientImageView.snp.makeConstraints {
+            $0.top.equalTo(self.scrollView)
+            $0.size.equalTo(thumbnailImageView)
         }
         whiteBackgroundView.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(15)
+            $0.top.equalToSuperview().inset(UIApplication.getStatusBarHeight() + 15)
             $0.leading.equalToSuperview().inset(20)
             $0.size.equalTo(20)
         }
         infoCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-37)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-40)
             $0.leading.equalToSuperview().inset(18)
         }
         reportOptionCollectionView.snp.makeConstraints {
@@ -112,13 +119,19 @@ final class HankkiDetailViewController: BaseViewController {
     override func setupStyle() {
         scrollView.do {
             $0.backgroundColor = .clear
-            $0.bounces = false
         }
         contentView.do {
-            $0.backgroundColor = .gray300
+            if !isImageSet {
+                $0.backgroundColor = .gray300
+            }
         }
-        thumbnailImageView.do {
-            $0.backgroundColor = .gray300
+        if isImageSet {
+            setupImageStyle()
+        } else {
+            setupNoImageStyle()
+        }
+        topBlackGradientImageView.do {
+            $0.image = .blackGradient
         }
         whiteBackgroundView.do {
             $0.backgroundColor = .white
@@ -176,20 +189,17 @@ private extension HankkiDetailViewController {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
     }
     
-    /// - 상태바 배경색 변경
-    func changeStatusBarBackgroundColor(color: UIColor) {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let statusBarManager = windowScene.statusBarManager {
-            let width = statusBarManager.statusBarFrame.width
-            let height = statusBarManager.statusBarFrame.height
-            
-            let statusBarView = UIView(frame: .init(x: 0, y: 0, width: width, height: height + 5))
-            statusBarView.backgroundColor = color
-            
-            window?.addSubview(statusBarView)
+    func setupNoImageStyle() {
+        thumbnailImageView.do {
+            $0.backgroundColor = .gray300
+        }
+    }
+    
+    func setupImageStyle() {
+        thumbnailImageView.do {
+            $0.image = .dummy
+            $0.contentMode = .scaleAspectFill
+            $0.clipsToBounds = true
         }
     }
     
