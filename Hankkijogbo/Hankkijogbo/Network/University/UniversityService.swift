@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import Moya
+
+protocol UniversityAPIServiceProtocol {
+    
+}
+
+final class UniversityAPIService: BaseAPIService, UniversityAPIServiceProtocol {
+    
+    private let provider = MoyaProvider<UniversityTargetType>(plugins: [MoyaPlugin()])
+
+}
+

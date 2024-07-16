@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import Moya
+
+protocol ZipAPIServiceProtocol {
+    
+}
+
+final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
+    
+    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin()])
+
+}
+

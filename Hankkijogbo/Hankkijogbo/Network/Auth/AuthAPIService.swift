@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import Moya
+
+protocol AuthAPIServiceProtocol {
+    
+}
+
+final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
+    
+    private let provider = MoyaProvider<AuthTargetType>(plugins: [MoyaPlugin()])
+
+}
+

@@ -79,6 +79,17 @@
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
 		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
+		86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */; };
+		86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */; };
+		86880BD52C46C55200CAEF58 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD42C46C55200CAEF58 /* UserTargetType.swift */; };
+		86880BD72C46C55C00CAEF58 /* UserAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD62C46C55C00CAEF58 /* UserAPIService.swift */; };
+		86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD92C46CC8500CAEF58 /* ZipTargetType.swift */; };
+		86880BDC2C46CCA100CAEF58 /* ZipAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BDB2C46CCA100CAEF58 /* ZipAPIService.swift */; };
+		86880BDF2C46CD0600CAEF58 /* UniversityTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BDE2C46CD0600CAEF58 /* UniversityTargetType.swift */; };
+		86880BE12C46CD4C00CAEF58 /* UniversityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE02C46CD4C00CAEF58 /* UniversityService.swift */; };
+		86880BE52C46D3EE00CAEF58 /* AuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */; };
+		86880BE82C46D45500CAEF58 /* AuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */; };
+		86880BEA2C46D6F700CAEF58 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE92C46D6F700CAEF58 /* BaseDTO.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -203,6 +214,17 @@
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
 		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
+		86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIService.swift; sourceTree = "<group>"; };
+		86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTargetType.swift; sourceTree = "<group>"; };
+		86880BD42C46C55200CAEF58 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargetType.swift; sourceTree = "<group>"; };
+		86880BD62C46C55C00CAEF58 /* UserAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIService.swift; sourceTree = "<group>"; };
+		86880BD92C46CC8500CAEF58 /* ZipTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipTargetType.swift; sourceTree = "<group>"; };
+		86880BDB2C46CCA100CAEF58 /* ZipAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipAPIService.swift; sourceTree = "<group>"; };
+		86880BDE2C46CD0600CAEF58 /* UniversityTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityTargetType.swift; sourceTree = "<group>"; };
+		86880BE02C46CD4C00CAEF58 /* UniversityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityService.swift; sourceTree = "<group>"; };
+		86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestDTO.swift; sourceTree = "<group>"; };
+		86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDTO.swift; sourceTree = "<group>"; };
+		86880BE92C46D6F700CAEF58 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +309,7 @@
 				8302854C2C455EC70004D9F7 /* MoyaPlugin.swift */,
 				8302855C2C4567A30004D9F7 /* BaseTargetType.swift */,
 				83DD39732C4644DD00DD7EC3 /* URLConstant.swift */,
+				86880BE92C46D6F700CAEF58 /* BaseDTO.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -425,6 +448,10 @@
 		83DBED8B2C2564670042BA48 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				86880BDD2C46CCF500CAEF58 /* University */,
+				86880BD82C46CC6700CAEF58 /* Zip */,
+				86880BD32C46C53700CAEF58 /* User */,
+				86880BCE2C46C0B600CAEF58 /* Auth */,
 				8302854E2C455FB00004D9F7 /* Hankki */,
 				830285432C4559570004D9F7 /* Base */,
 			);
@@ -684,6 +711,68 @@
 				86784E8E2C4021E200E94A5D /* TagTextField.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		86880BCE2C46C0B600CAEF58 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				86880BE22C46D3BA00CAEF58 /* DTO */,
+				86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */,
+				86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		86880BD32C46C53700CAEF58 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				86880BD42C46C55200CAEF58 /* UserTargetType.swift */,
+				86880BD62C46C55C00CAEF58 /* UserAPIService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		86880BD82C46CC6700CAEF58 /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				86880BD92C46CC8500CAEF58 /* ZipTargetType.swift */,
+				86880BDB2C46CCA100CAEF58 /* ZipAPIService.swift */,
+			);
+			path = Zip;
+			sourceTree = "<group>";
+		};
+		86880BDD2C46CCF500CAEF58 /* University */ = {
+			isa = PBXGroup;
+			children = (
+				86880BDE2C46CD0600CAEF58 /* UniversityTargetType.swift */,
+				86880BE02C46CD4C00CAEF58 /* UniversityService.swift */,
+			);
+			path = University;
+			sourceTree = "<group>";
+		};
+		86880BE22C46D3BA00CAEF58 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				86880BE62C46D43300CAEF58 /* Response */,
+				86880BE32C46D3C100CAEF58 /* Request */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		86880BE32C46D3C100CAEF58 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		86880BE62C46D43300CAEF58 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		86B761112C3DC76000413059 /* ZipList */ = {
@@ -1069,6 +1158,7 @@
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
+				86880BD72C46C55C00CAEF58 /* UserAPIService.swift in Sources */,
 				830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */,
 				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
@@ -1077,6 +1167,7 @@
 				8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				830285572C4562D50004D9F7 /* HakkiAPIService.swift in Sources */,
+				86880BE82C46D45500CAEF58 /* AuthResponseDTO.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
@@ -1093,6 +1184,7 @@
 				86B761322C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift in Sources */,
 				83DBEDCC2C256B080042BA48 /* UILabel+.swift in Sources */,
 				86B761302C3EEDEE00413059 /* HankkiListViewControllerType.swift in Sources */,
+				86880BD52C46C55200CAEF58 /* UserTargetType.swift in Sources */,
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
 				83DBEDB22C2566230042BA48 /* ImageLiterals.swift in Sources */,
@@ -1100,18 +1192,22 @@
 				83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */,
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
 				864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */,
+				86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */,
 				83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */,
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
 				86E78D1D2C46B67400BE0DC3 /* EmptyView.swift in Sources */,
+				86880BDF2C46CD0600CAEF58 /* UniversityTargetType.swift in Sources */,
 				83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */,
+				86880BE12C46CD4C00CAEF58 /* UniversityService.swift in Sources */,
 				A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */,
 				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
+				86880BEA2C46D6F700CAEF58 /* BaseDTO.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
@@ -1125,10 +1221,12 @@
 				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
+				86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */,
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
+				86880BDC2C46CCA100CAEF58 /* ZipAPIService.swift in Sources */,
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
 				A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */,
 				8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */,
@@ -1138,6 +1236,7 @@
 				86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */,
 				8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
+				86880BE52C46D3EE00CAEF58 /* AuthRequestDTO.swift in Sources */,
 				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
@@ -1147,6 +1246,7 @@
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,
+				86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */,
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,
 				83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */,
