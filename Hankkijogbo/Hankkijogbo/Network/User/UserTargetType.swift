@@ -9,36 +9,67 @@ import Foundation
 import Moya
 
 enum UserTargetType {
-    
+    case getMe
+    case getMeUniversity
+    case getMeHankkiHeartList
+    case getMeHankkiReportList
+    case getMeZipList
+    case postMeUniversity(requestBody: PostMeUniversityRequestDTO)
 }
 
 extension UserTargetType: BaseTargetType {
     var headerType: HeaderType {
-        <#code#>
+        return .accessTokenHeader
     }
     
     var utilPath: UtilPath {
-        <#code#>
+        return .user
     }
     
     var pathParameter: String? {
-        <#code#>
+        return .none
     }
     
     var queryParameter: [String : Any]? {
-        <#code#>
+        return .none
     }
     
     var requestBodyParameter: (any Codable)? {
-        <#code#>
+        return .none
     }
     
     var path: String {
-        <#code#>
+        switch self {
+        case .getMe:
+            return utilPath.rawValue
+        case .getMeUniversity:
+            return utilPath.rawValue
+        case .getMeHankkiHeartList:
+            return utilPath.rawValue + "university"
+        case .getMeHankkiReportList:
+            return utilPath.rawValue + "stores/hearts"
+        case .getMeZipList:
+            return utilPath.rawValue + "stores/reports"
+        case .postMeUniversity:
+            return utilPath.rawValue + "university"
+        }
     }
     
     var method: Moya.Method {
-        <#code#>
+        switch self {
+        case .getMe:
+            return .get
+        case .getMeUniversity:
+            return .get
+        case .getMeHankkiHeartList:
+            return .get
+        case .getMeHankkiReportList:
+            return .get
+        case .getMeZipList:
+            return .get
+        case .postMeUniversity:
+            return .post
+        }
     }
     
     

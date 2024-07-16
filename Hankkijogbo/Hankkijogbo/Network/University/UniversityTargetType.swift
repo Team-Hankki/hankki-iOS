@@ -9,13 +9,13 @@ import Foundation
 import Moya
 
 enum UniversityTargetType {
-    case getUniversity
+    case getUniversities
 }
 
 extension UniversityTargetType: BaseTargetType {
     var headerType: HeaderType {
         switch self {
-        case .getUniversity:
+        case .getUniversities:
             return .accessTokenHeader
         }
     }
@@ -34,26 +34,24 @@ extension UniversityTargetType: BaseTargetType {
     
     var requestBodyParameter: (any Codable)? {
         switch self {
-        case .getUniversity:
+        case .getUniversities:
             return .none
         }
     }
     
     var path: String {
         switch self {
-        case .getUniversity:
+        case .getUniversities:
             return utilPath.rawValue
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getUniversity:
+        case .getUniversities:
             return .get
         }
-    }
-    
-    
+    }    
 }
 
 
