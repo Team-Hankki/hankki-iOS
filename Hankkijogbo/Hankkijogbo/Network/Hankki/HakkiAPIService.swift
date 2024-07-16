@@ -11,7 +11,7 @@ import Moya
 protocol HankkiAPIServiceProtocol {
     func getCategoryFilter(completion: @escaping(NetworkResult<GetCategoryFilterResponseDTO>) -> Void)
     func getPriceCategoryFilter(completion: @escaping(NetworkResult<GetPriceFilterResponseDTO>) -> Void)
-   // func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
+   func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
@@ -52,5 +52,20 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
         }
     }
     
-    
+    /// 정렬 드롭다운 정보 조회
+    func getSortOptionFilter(completion: @escaping (NetworkResult<GetSortOptionFilterResponseDTO>) -> Void) {
+        provider.request(.getSortOptionFilter) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<GetSortOptionFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<GetSortOptionFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
 }
