@@ -7,7 +7,7 @@
 ## 🍎 Developers
 | [@mcrkgus](https://github.com/mcrkgus) | [@EunsuSeo01](https://github.com/EunsuSeo01) | [@shimseohyun](https://github.com/shimseohyun) |
 |:---:|:---:|:---:|
-|<img width="250" alt="mcrkgus" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/d69ab5be-5879-48f7-8310-0c8322500d29">|<img width="250" alt="EunsuSeo01" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/939cad7d-bffc-4de3-a8b5-b437b9789324">|<img width="250" alt="shimseohyun" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/44849665-870d-422b-90e0-7c7e71443ff8">|
+|<img width="250" alt="mcrkgus" src="https://github.com/user-attachments/assets/acfb09f7-5600-4861-b5c4-bb2c337e8d17">|<img width="250" alt="EunsuSeo01" src="https://github.com/user-attachments/assets/0cb6f598-2627-4173-8206-3aef7726b129">|<img width="250" alt="shimseohyun" src="https://github.com/user-attachments/assets/53244098-45eb-48a6-a734-26a5854ab5d0">|
 |어떤|일을|할까|
 
 
@@ -133,10 +133,11 @@ P3 : 단순 의견 제시 (무시해도 됩니다)
 ```
 
 ## 🎁 Library
-| Name         |          |          |
+| Name         | Version  |          |
 | ------------ |  :-----: |  ------------ |
-| Then         |   `SPM`  |객체를 생성하고 설정하는 코드를 하나의 블록으로 묶어 가독성을 향상시킨다.|
-| SnapKit      |  `SPM`  |Auto Layout 제약조건을 코드로 쉽게 작성할 수 있도록 한다.|
-| Kingfisher   |  `SPM`  |URL로부터 이미지 다운 중 처리 작업을 간소화할 수 있도록 한다.|
-| MapKit      | `SPM`  |다양한 지도 기능을 원활하게 구현할 수 있도록 한다.|
-| Moya         |  `SPM`  | 네트워크 요청을 간편화하고, 구조화된 방식으로 관리하여 코드의 가독성과 유지 보수성을 높인다.|
+| [Then](https://github.com/devxoul/Then) | `3.0.0` | 객체를 생성하고 설정하는 코드를 하나의 블록으로 묶어 가독성을 향상시킨다. |
+| [SnapKit](https://github.com/SnapKit/SnapKit) | `5.7.1` | Auto Layout 제약조건을 코드로 쉽게 작성할 수 있도록 한다. |
+| [Moya](https://github.com/Moya/Moya) |  `15.0.3`  | 네트워크 요청을 간편화하고, 구조화된 방식으로 관리하여 코드의 가독성과 유지 보수성을 높인다.|
+| [Kingfisher](https://github.com/onevcat/Kingfisher) | `7.12.0` | URL로부터 이미지 다운 중 처리 작업을 간소화할 수 있도록 한다. |
+| [MapKit](https://github.com/Moya/Moya) | `15.0.3` | 다양한 지도 기능을 원활하게 구현할 수 있도록 한다. |
+| [Lottie](https://github.com/airbnb/lottie-ios) | `4.5.0` | 벡터 그래픽 애니메이션을 추가하고 관리한다. |
