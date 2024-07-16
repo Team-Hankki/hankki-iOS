@@ -10,6 +10,16 @@
 		1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */; };
 		8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */; };
 		8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302853C2C4178D80004D9F7 /* CoreLocation.swift */; };
+		830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285442C45596D0004D9F7 /* NetworkResult.swift */; };
+		830285472C455BB10004D9F7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285462C455BB10004D9F7 /* NetworkService.swift */; };
+		8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302854A2C455E860004D9F7 /* BaseAPIService.swift */; };
+		8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302854C2C455EC70004D9F7 /* MoyaPlugin.swift */; };
+		830285532C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285522C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift */; };
+		830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285542C4562BE0004D9F7 /* HankkiTargetType.swift */; };
+		830285572C4562D50004D9F7 /* HakkiAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285562C4562D50004D9F7 /* HakkiAPIService.swift */; };
+		830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285582C4565940004D9F7 /* GetHankkiListRequestDTO.swift */; };
+		8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302855A2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift */; };
+		8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302855C2C4567A30004D9F7 /* BaseTargetType.swift */; };
 		8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
@@ -32,10 +42,6 @@
 		83DBED942C2564A20042BA48 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED932C2564A20042BA48 /* HomeView.swift */; };
 		83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED952C2564AC0042BA48 /* HomeViewController.swift */; };
 		83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED972C2564B40042BA48 /* HomeModel.swift */; };
-		83DBED9E2C2565150042BA48 /* response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED9D2C2565150042BA48 /* response.swift */; };
-		83DBEDA02C25651C0042BA48 /* request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED9F2C25651C0042BA48 /* request.swift */; };
-		83DBEDA22C2565340042BA48 /* HomeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDA12C2565340042BA48 /* HomeAPIService.swift */; };
-		83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDA32C25653F0042BA48 /* HomeTargetType.swift */; };
 		83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDAF2C2566120042BA48 /* UIStackView+.swift */; };
 		83DBEDB22C2566230042BA48 /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB12C2566230042BA48 /* ImageLiterals.swift */; };
 		83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB32C2566300042BA48 /* StringLiterals.swift */; };
@@ -52,6 +58,7 @@
 		83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCD2C256B180042BA48 /* UIButton+.swift */; };
 		83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */; };
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
+		83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39732C4644DD00DD7EC3 /* URLConstant.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
 		864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertStyle.swift */; };
 		864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */; };
@@ -125,6 +132,16 @@
 /* Begin PBXFileReference section */
 		8302853A2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalListCollectionViewCell.swift; path = Cell/TotalListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302853C2C4178D80004D9F7 /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
+		830285442C45596D0004D9F7 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		830285462C455BB10004D9F7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		8302854A2C455E860004D9F7 /* BaseAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
+		8302854C2C455EC70004D9F7 /* MoyaPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaPlugin.swift; sourceTree = "<group>"; };
+		830285522C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategoryFilterResponseDTO.swift; sourceTree = "<group>"; };
+		830285542C4562BE0004D9F7 /* HankkiTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiTargetType.swift; sourceTree = "<group>"; };
+		830285562C4562D50004D9F7 /* HakkiAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HakkiAPIService.swift; sourceTree = "<group>"; };
+		830285582C4565940004D9F7 /* GetHankkiListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHankkiListRequestDTO.swift; sourceTree = "<group>"; };
+		8302855A2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHankkiListResponseDTO.swift; sourceTree = "<group>"; };
+		8302855C2C4567A30004D9F7 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetController.swift; sourceTree = "<group>"; };
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
@@ -150,10 +167,6 @@
 		83DBED932C2564A20042BA48 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		83DBED952C2564AC0042BA48 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		83DBED972C2564B40042BA48 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
-		83DBED9D2C2565150042BA48 /* response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = response.swift; sourceTree = "<group>"; };
-		83DBED9F2C25651C0042BA48 /* request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = request.swift; sourceTree = "<group>"; };
-		83DBEDA12C2565340042BA48 /* HomeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPIService.swift; sourceTree = "<group>"; };
-		83DBEDA32C25653F0042BA48 /* HomeTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTargetType.swift; sourceTree = "<group>"; };
 		83DBEDAF2C2566120042BA48 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		83DBEDB12C2566230042BA48 /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		83DBEDB32C2566300042BA48 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
@@ -167,6 +180,7 @@
 		83DBEDCD2C256B180042BA48 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		83DD39732C4644DD00DD7EC3 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		864A89BB2C3B350900140B63 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +276,55 @@
 				865C3D062C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		830285432C4559570004D9F7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				830285442C45596D0004D9F7 /* NetworkResult.swift */,
+				830285462C455BB10004D9F7 /* NetworkService.swift */,
+				8302854A2C455E860004D9F7 /* BaseAPIService.swift */,
+				8302854C2C455EC70004D9F7 /* MoyaPlugin.swift */,
+				8302855C2C4567A30004D9F7 /* BaseTargetType.swift */,
+				83DD39732C4644DD00DD7EC3 /* URLConstant.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		8302854E2C455FB00004D9F7 /* Hankki */ = {
+			isa = PBXGroup;
+			children = (
+				8302854F2C455FB90004D9F7 /* DTO */,
+				830285542C4562BE0004D9F7 /* HankkiTargetType.swift */,
+				830285562C4562D50004D9F7 /* HakkiAPIService.swift */,
+			);
+			path = Hankki;
+			sourceTree = "<group>";
+		};
+		8302854F2C455FB90004D9F7 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				830285502C455FC00004D9F7 /* Request */,
+				830285512C455FC70004D9F7 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		830285502C455FC00004D9F7 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				830285582C4565940004D9F7 /* GetHankkiListRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		830285512C455FC70004D9F7 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				830285522C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift */,
+				8302855A2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		8302F8E52C3E98DB004ADAA4 /* Cell */ = {
@@ -362,7 +425,8 @@
 		83DBED8B2C2564670042BA48 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				83DBED992C2564C50042BA48 /* Home */,
+				8302854E2C455FB00004D9F7 /* Hankki */,
+				830285432C4559570004D9F7 /* Base */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -420,41 +484,6 @@
 				8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		83DBED992C2564C50042BA48 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				83DBED9A2C2564D80042BA48 /* DTO */,
-				83DBEDA32C25653F0042BA48 /* HomeTargetType.swift */,
-				83DBEDA12C2565340042BA48 /* HomeAPIService.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		83DBED9A2C2564D80042BA48 /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				83DBED9B2C2564F70042BA48 /* Request */,
-				83DBED9C2C2564FD0042BA48 /* Response */,
-			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
-		83DBED9B2C2564F70042BA48 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				83DBED9F2C25651C0042BA48 /* request.swift */,
-			);
-			path = Request;
-			sourceTree = "<group>";
-		};
-		83DBED9C2C2564FD0042BA48 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				83DBED9D2C2565150042BA48 /* response.swift */,
-			);
-			path = Response;
 			sourceTree = "<group>";
 		};
 		83DBEDA52C25656D0042BA48 /* Supporting Files */ = {
@@ -1021,10 +1050,11 @@
 			files = (
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
+				830285472C455BB10004D9F7 /* NetworkService.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
-				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
+				830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
 				86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */,
@@ -1039,15 +1069,18 @@
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
+				830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */,
 				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
 				8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */,
-				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
+				830285572C4562D50004D9F7 /* HakkiAPIService.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
+				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
+				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,
 				83DBEDC82C256AD00042BA48 /* NSObject+.swift in Sources */,
 				A2DEBF5A2C3D25A800DE14A9 /* ReportViewController.swift in Sources */,
 				865826062C4170BE00265401 /* LoginViewController.swift in Sources */,
@@ -1076,12 +1109,14 @@
 				A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */,
 				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
+				8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
+				830285532C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift in Sources */,
 				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
@@ -1097,24 +1132,25 @@
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
 				A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */,
 				8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */,
-				83DBEDA42C25653F0042BA48 /* HomeTargetType.swift in Sources */,
 				A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
 				A2DEBF642C3D67DE00DE14A9 /* MenuCollectionViewCell.swift in Sources */,
 				86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */,
+				8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
 				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
 				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
+				8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,
+				83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */,
 				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
-				83DBEDA22C2565340042BA48 /* HomeAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
