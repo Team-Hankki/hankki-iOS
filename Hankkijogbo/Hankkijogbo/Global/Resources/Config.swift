@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import Moya
 
 enum Config {
     enum Keys {
         enum Plist {
+            static let baseURL = "BASE_URL"
             static let NMFClientId = "NMFClientId"
         }
     }
@@ -23,6 +25,13 @@ enum Config {
 }
 
 extension Config {
+    static let baseURL: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.baseURL] as? String else {
+            fatalError("🍚⛔️BASE_URL is not set in plist for this configuration⛔️🍚")
+        }
+        return key
+    }()
+    
     static let NMFClientId: String = {
         guard let key = Config.infoDictionary[Keys.Plist.NMFClientId] as? String else {
             fatalError("ClientID is not set in plist for this configuration.")
