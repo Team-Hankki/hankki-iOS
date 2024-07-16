@@ -116,7 +116,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
                 withText: hankkiNameString,
                 color: .hankkiRed
             ), for: .normal)
-            $0.setImage(.icArrow, for: .normal)
+            $0.setImage(.icArrowClose, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft
             $0.configuration = .plain()
             $0.configuration?.titleLineBreakMode = .byTruncatingTail

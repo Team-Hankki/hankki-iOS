@@ -4,8 +4,6 @@
 <dict>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>메뉴 사진 첨부를 위해 사용자의 갤러리에 접근합니다.</string>
 	<key>NMFClientId</key>
 	<string>$(NMFClientId)</string>
 	<key>UIAppFonts</key>
