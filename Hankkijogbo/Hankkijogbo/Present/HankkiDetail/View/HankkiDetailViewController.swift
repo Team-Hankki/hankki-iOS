@@ -22,9 +22,11 @@ final class HankkiDetailViewController: BaseViewController {
         hankkiMenu: hankkiMenuDummy
     )
     
-    var hankkiDisappearOption: String = "식당이 사라졌어요"
-    var priceLimitOption: String = "더이상 8,000원 이하인 메뉴가 없어요"
-    var improperReportOption: String = "부적절한 제보예요"
+    var reportOptionArray: [String] = [
+        "식당이 사라졌어요",
+        "더이상 8,000원 이하인 메뉴가 없어요",
+        "부적절한 제보예요"
+    ]
     
     // MARK: - UI Components
     
@@ -300,7 +302,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
         if collectionView == infoCollectionView.collectionView {
             hankkiMenuDummy.count + 1
         } else {
-            3
+            reportOptionArray.count
         }
     }
     
@@ -317,6 +319,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
         } else if collectionView == reportOptionCollectionView.collectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiReportOptionCollectionViewCell.className, for: indexPath) as? HankkiReportOptionCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
+            cell.dataBind(text: reportOptionArray[indexPath.item])
             return cell
         }
         return UICollectionViewCell()

@@ -31,7 +31,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
                     delegate?.updateReportButtonStyle(isEnabled: false)
                 } else {
                     setupSelectedStyle()
-                    self.selectedOptionString = self.reportOptionLabel.text
+                    self.selectedOptionString = self.optionString
                     delegate?.updateReportButtonStyle(isEnabled: true)
                 }
             } else {
@@ -42,7 +42,9 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    var delegate: UpdateReportButtonStyleDelegate?
+    var optionString: String = ""
+    
+    weak var delegate: UpdateReportButtonStyleDelegate?
     
     // MARK: - UI Components
     
@@ -87,13 +89,18 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         reportOptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "hankkiMenuName",
+                withText: optionString,
                 color: .gray400
             )
         }
         radioButton.do {
             $0.setImage(.btnRadioNormal, for: .normal)
         }
+    }
+    
+    func dataBind(text: String) {
+        self.optionString = text
+        setupNormalStyle()
     }
 }
 
@@ -104,7 +111,7 @@ private extension HankkiReportOptionCollectionViewCell {
         self.radioButton.setImage(.btnRadioSelected, for: .normal)
         self.reportOptionLabel.attributedText = UILabel.setupAttributedText(
             for: PretendardStyle.body3,
-            withText: "hankkiMenuName",
+            withText: optionString,
             color: .hankkiRed
         )
     }
@@ -114,7 +121,7 @@ private extension HankkiReportOptionCollectionViewCell {
         self.radioButton.setImage(.btnRadioNormal, for: .normal)
         self.reportOptionLabel.attributedText = UILabel.setupAttributedText(
             for: PretendardStyle.body3,
-            withText: "hankkiMenuName",
+            withText: optionString,
             color: .gray400
         )
     }
