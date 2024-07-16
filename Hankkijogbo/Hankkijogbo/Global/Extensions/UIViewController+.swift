@@ -60,21 +60,6 @@ extension UIViewController {
         }
     }
     
-    func changeStatusBarBgColor(statusBarColor: UIColor?) {
-        guard #available(iOS 13.0, *) else {
-            guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
-            statusBar.backgroundColor = statusBarColor
-            return
-        }
-        
-        guard let window = UIApplication.shared.windows.first,
-              let statusBarManager = window.windowScene?.statusBarManager else { return }
-        
-        let statusBarView = UIView(frame: statusBarManager.statusBarFrame)
-        statusBarView.backgroundColor = statusBarColor
-        window.addSubview(statusBarView)
-    }
-    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -161,5 +146,12 @@ extension UIViewController {
         viewController.modalTransitionStyle = .crossDissolve
         viewController.modalPresentationStyle = .overFullScreen
         self.present(viewController, animated: false, completion: nil)
+    }
+    
+    /// - ViewController를 dismiss 할 때 fade out 효과를 주는 함수
+    func dismissWithFadeOut() {
+        let transition = CATransition().fadeTransition(duration: 0.2)
+        self.view.window!.layer.add(transition, forKey: nil)
+        self.dismiss(animated: false, completion: nil)
     }
 }

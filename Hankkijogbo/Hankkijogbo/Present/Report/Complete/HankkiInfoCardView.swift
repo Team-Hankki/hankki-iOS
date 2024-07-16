@@ -35,7 +35,7 @@ final class HankkiInfoCardView: BaseView {
         self.hankkiNameString = hankkiNameString
         super.init(frame: .zero)
         
-        addShadow(color: .black.withAlphaComponent(0.04), opacity: 1, radius: 7, offset: CGSize(width: 0, height: 4))
+        addShadow(color: .black, alpha: 0.04, y: 4, blur: 7)
     }
     
     required init?(coder: NSCoder) {
