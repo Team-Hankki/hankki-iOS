@@ -21,7 +21,15 @@ final class HankkiInfoCardView: BaseView {
             )
         }
     }
-    var addToMyZipListString: String = "내 족보에 추가"
+    var addToMyZipListString: String = "내 족보에 추가" {
+        didSet {
+            self.addToMyZipListButton.setAttributedTitle(UILabel.setupAttributedText(
+                for: PretendardStyle.body2,
+                withText: addToMyZipListString,
+                color: .hankkiRed
+            ), for: .normal)
+        }
+    }
     
     // MARK: - UI Components
     

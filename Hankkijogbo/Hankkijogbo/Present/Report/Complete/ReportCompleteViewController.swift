@@ -16,6 +16,7 @@ final class ReportCompleteViewController: BaseViewController {
     var selectedHankkiName: String = "고봉김밥집 1호점"
     
     var goToReportedHankkiString: String = "제보한 식당 보러가기"
+    var updateStringNotificationName: String = "UpdateAddToMyZipListString"
     
     // MARK: - UI Components
     
@@ -43,6 +44,12 @@ final class ReportCompleteViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         setupBottomGradientView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(updateStringNotificationName), object: nil)
     }
     
     // MARK: - Setup UI
@@ -167,7 +174,11 @@ private extension ReportCompleteViewController {
     
     @objc func addToMyZipListButtonDidTap() {
         // TODO: - API 연동하면서 제보한 식당 보러가기 액션 구현
-        self.presentMyZipListBottomSheet()
+        presentMyZipListBottomSheet()
+    }
+    
+    @objc func updateAddToMyZipListString() {
+        hankkiInfoCardView.addToMyZipListString = "다른 족보에도 추가"
     }
     
     @objc func goToHomeButtonDidTap() {
