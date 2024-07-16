@@ -15,7 +15,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceMaxLength: Int = 5
     private let menuNamePlaceHolderString: String = "예) 된장찌개"
     private let pricePlaceHolderString: String = "8000"
-    var delegate: PassItemDataDelegate?
+    weak var delegate: PassItemDataDelegate?
         
     // MARK: - UI Components
     
@@ -24,8 +24,9 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     private let priceLabel = UILabel()
     private let priceTextField = UITextField()
     private let priceUnitLabel = UILabel()
-    let menuDeleteButton = UIButton()
+    let deleteMenuButton = UIButton()
     private let errorLabel = UILabel()
+    private let doneToolbar: UIToolbar = UIToolbar()
     
     // MARK: - Init
     
@@ -34,6 +35,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         
         setupTextFieldDelegate()
         setupAddTarget()
+        setupToolbar()
     }
     
     required init?(coder: NSCoder) {
@@ -46,6 +48,8 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         menuTextField.text = ""
         priceTextField.text = ""
         errorLabel.text = ""
+        priceLabel.textColor = .gray500
+        priceTextField.layer.borderColor = UIColor.gray300.cgColor
     }
     
     // MARK: - Setup UI
@@ -57,7 +61,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             priceLabel,
             priceTextField,
             priceUnitLabel,
-            menuDeleteButton,
+            deleteMenuButton,
             errorLabel
         )
     }
@@ -87,7 +91,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.trailing.equalTo(priceTextField).offset(-17)
             $0.centerY.equalTo(priceTextField)
         }
-        menuDeleteButton.snp.makeConstraints {
+        deleteMenuButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
             $0.leading.equalTo(priceTextField.snp.trailing).offset(3)          
             $0.size.equalTo(32)
@@ -145,6 +149,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.addPadding(left: 12, right: 16)
             $0.keyboardType = .numberPad
+            $0.inputAccessoryView = doneToolbar
         }
         priceUnitLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
@@ -153,7 +158,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
                 color: .gray800
             )
         }
-        menuDeleteButton.do {
+        deleteMenuButton.do {
             $0.setImage(.icClose, for: .normal)
         }
         errorLabel.do {
@@ -180,6 +185,14 @@ private extension MenuCollectionViewCell {
         priceTextField.addTarget(self, action: #selector(priceTextFieldDidEditingChange), for: .editingChanged)
     }
     
+    func setupToolbar() {
+        doneToolbar.items=[
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
+        ]
+        doneToolbar.sizeToFit()
+    }
+    
     // MARK: - @objc Func
     
     @objc func priceTextFieldDidEditingChange() {
@@ -204,6 +217,11 @@ private extension MenuCollectionViewCell {
                 delegate?.passItemData(type: .menu, data: menuText)
             }
         }
+    }
+    
+    @objc func doneButtonDidTap() {
+        // 숫자 패드 내리기
+        self.priceTextField.resignFirstResponder()
     }
 }
 

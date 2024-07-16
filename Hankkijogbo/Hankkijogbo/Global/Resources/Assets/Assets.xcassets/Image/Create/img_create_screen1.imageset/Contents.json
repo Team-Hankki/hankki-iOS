@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "compression-type" : "automatic",
+      "filename" : "img_create_screen1.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

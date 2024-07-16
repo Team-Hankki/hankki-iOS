@@ -15,7 +15,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    var delegate: SearchViewController?
+    weak var delegate: SearchViewController?
     
     var selectedHankkiNameString: String? {
         didSet {
@@ -49,8 +49,8 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Properties
     
-    private let hankkiNameLabel: UILabel = UILabel()
-    private let addressLabel: UILabel = UILabel()
+    let hankkiNameLabel: UILabel = UILabel()
+    let addressLabel: UILabel = UILabel()
     private let checkButton: UIButton = UIButton()
     private let separatorView: UIView = UIView()
     
@@ -108,5 +108,10 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         separatorView.do {
             $0.backgroundColor = .gray100
         }
+    }
+    
+    func bindData(model: SearchResultModel) {
+        self.hankkiNameLabel.text = model.name
+        self.addressLabel.text = model.address
     }
 }

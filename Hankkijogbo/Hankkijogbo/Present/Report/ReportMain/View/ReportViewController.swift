@@ -8,8 +8,6 @@
 import UIKit
 import PhotosUI
 
-// TODO: - 식당 검색 결과도 띄워줘야 함
-
 struct MenuModel {
     var name: String
     var price: Int
@@ -22,7 +20,11 @@ final class ReportViewController: BaseViewController {
     var isImageSet: Bool = false
     var image: UIImage?
     
-    var hankkiNameString: String?
+    var hankkiNameString: String? {
+        didSet {
+            collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        }
+    }
     var categoryString: String?
     var oneMenuData: MenuModel?
 
@@ -169,8 +171,15 @@ private extension ReportViewController {
         self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
     }
     
+    /// 메뉴 셀 추가
+    @objc func addMenuButtonDidTap() {
+        dummyMenu.append("")
+        collectionView.insertItems(at: [IndexPath(item: dummyMenu.count - 1, section: ReportSectionType.menu.rawValue)])
+        scrollToFooterView()
+    }
+    
     /// 메뉴 셀 삭제
-    @objc func menuDeleteButtonDidTap(_ sender: UIButton) {
+    @objc func deleteMenuButtonDidTap(_ sender: UIButton) {
         if !dummyMenu.isEmpty {
             // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
             let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
@@ -187,7 +196,7 @@ private extension ReportViewController {
 
 // MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource {
+extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -238,6 +247,7 @@ extension ReportViewController: UICollectionViewDataSource {
         switch sectionType {
         case .search:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchBarCollectionViewCell.className, for: indexPath) as? SearchBarCollectionViewCell else { return UICollectionViewCell() }
+            cell.hankkiNameString = self.hankkiNameString ?? ""
             cell.searchBarButton.addTarget(self, action: #selector(searchBarButtonDidTap), for: .touchUpInside)
             return cell
         case .category:
@@ -260,23 +270,14 @@ extension ReportViewController: UICollectionViewDataSource {
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.menuDeleteButton.addTarget(self, action: #selector(menuDeleteButtonDidTap(_:)), for: .touchUpInside)
+            cell.deleteMenuButton.addTarget(self, action: #selector(deleteMenuButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMenuCollectionViewCell.className, for: indexPath) as? AddMenuCollectionViewCell else { return UICollectionViewCell() }
+            cell.addMenuButton.addTarget(self, action: #selector(addMenuButtonDidTap), for: .touchUpInside)
             return cell
         default:
             return UICollectionViewCell()
-        }
-    }
-}
-
-extension ReportViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if ReportSectionType(rawValue: indexPath.section) == .addMenu {
-            dummyMenu.append("")
-            collectionView.insertItems(at: [IndexPath(item: dummyMenu.count - 1, section: ReportSectionType.menu.rawValue)])
-            scrollToFooterView()
         }
     }
 }
@@ -318,9 +319,10 @@ extension ReportViewController: PassItemDataDelegate {
             return
         }
         
-        guard let hankkiNameString = self.hankkiNameString,
-              let categoryString = self.categoryString,
-              let menuList = self.oneMenuData else { return }
-        self.bottomButtonView.setupEnabledDoneButton()
+        if self.hankkiNameString != nil,
+           self.categoryString != nil,
+           self.oneMenuData != nil {
+            self.bottomButtonView.setupEnabledDoneButton()
+        }
     }
 }

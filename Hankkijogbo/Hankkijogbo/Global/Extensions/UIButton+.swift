@@ -43,4 +43,38 @@ extension UIButton {
         )
         setAttributedTitle(attributedString, for: .normal)
     }
+    
+    /// - 버튼의 패딩을 설정하는 함수
+    func setupPadding(top: CGFloat, leading: CGFloat, bottom: CGFloat, trailing: CGFloat) {
+        if self.configuration == nil {
+            self.configuration = UIButton.Configuration.filled()
+        }
+        guard var configuration = self.configuration else { return }
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: top, leading: leading, bottom: bottom, trailing: trailing)
+        self.configuration = configuration
+    }
+    
+    /// - 버튼의 배경 색을 설정하는 함수
+    func setupBackgroundColor(_ color: UIColor) {
+        if self.configuration == nil {
+            self.configuration = UIButton.Configuration.filled()
+        }
+        guard var configuration = self.configuration else { return }
+        configuration.baseBackgroundColor = .gray100
+        self.configuration = configuration
+    }
+    
+    /// - 버튼의 아이콘을 설정하는 함수
+    /// - icon: 버튼 아이콘,
+    /// - gap: 아이콘과 타이틀과의 간격
+    func setupIcon(_ icon: UIImage, gap: CGFloat, itemPlace: NSDirectionalRectEdge = .leading) {
+        if self.configuration == nil {
+            self.configuration = UIButton.Configuration.filled()
+        }
+        guard var configuration = self.configuration else { return }
+        configuration.image = icon
+        configuration.imagePlacement = itemPlace
+        configuration.imagePadding = gap
+        self.configuration = configuration
+    }
 }

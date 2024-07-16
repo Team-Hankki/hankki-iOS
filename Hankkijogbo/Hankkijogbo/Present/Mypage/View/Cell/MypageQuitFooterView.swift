@@ -49,7 +49,7 @@ final class MypageQuitFooterView: BaseCollectionViewCell {
             )
         }
         buttonImage.do {
-            $0.backgroundColor = .gray400
+            $0.image = .icLogout
         }
     }
     
