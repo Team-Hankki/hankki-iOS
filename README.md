@@ -15,13 +15,24 @@
 <img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
 
+## 💻 Code convention
 
-## 💻 Git Convention
-### Git Flow
+[Code Convention](https://fast-kilometer-dbf.notion.site/Coding-Convention-4f9de9541571486e86bfaa5a548137e3?pvs=4)
+> StyleShare 의 Swift Style Guide 를 기본으로 작성되었습니다.
+> SwiftLint 를 통해서 통일성있는 클린코드를 추구합니다.
+```
+1. 성능 최적화와 위해 더 이상 상속되지 않을 class 에는 꼭 final 키워드를 붙입니다.
+2. 안전성을 위해 class 에서 사용되는 property는 모두 private로 선언합니다.
+3. 명시성을 위해 약어와 생략을 지양합니다.
+   VC -> ViewController
+   TVC -> TableViewCell
+4. 빠른 확인을 위해 Global위치에 함수를 만든다면, 퀵 헬프 주석을 답니다.
+5. 런타임 크래시를 방지하기 위해 강제 언래핑을 사용하지 않습니다.
+```
+
+## 🖊️ Git Flow
 - `develop 브랜치` 개발 작업 브랜치
 - `main 브랜치` 릴리즈 버전 관리 브랜치
-
-<사진>
 
 ```
 1. 작업할 내용에 대해서 이슈를 생성한다.
@@ -33,58 +44,6 @@
 7. 코드리뷰 후 수정사항 반영한 뒤, develop 브랜치에 merge 한다
 ```
 
-- *Tag*
-
-| 태그      | 설명                                      |
-|-----------|-------------------------------------------|
-| Feat      | 새로운 기능 구현                           |
-| Fix       | 버그, 오류 해결                            |
-| Chore     | 코드 수정, 내부 파일 수정                   |
-| Add       | 라이브러리 추가, 에셋 추가                 |
-| Del       | 쓸모없는 코드 삭제                         |
-| Docs      | README나 WIKI 등의 문서 개정                |
-| Refactor  | 전면 수정                                  |
-| Setting   | 프로젝트 설정                              |
-| Merge     | 다른 브랜치와 병합함                       |
-
-### Issue
-```Swift
-[종류] 작업 명
-ex) [Feat] Main View UI 구현
-```
-`담당자`, `라벨` 추가 하기
-
-### Commit
-```Swift
-[종류] #이슈 - 작업 이름
-ex) [Feat] #13 - Main UI 구현
-
-✅ Merge
-/// feature branch -> develop
-기본 머지 메세지
-
-/// develop branch -> feature branch (브랜치 최신화)
-[Merge] #이슈 - Pull Develop
-ex) [Merge] #13 - Pull Develop
-```
-
-### Pull Request
-```Swift
-[종류] #이슈번호 작업명
-ex) [Feat] #13 Main View UI 구현
-```
-`담당자`, `리뷰어`, `라벨` 추가 하기
-
-- *Code Review*
-```Swift
-✅ Pn Rule
-
-P1 : 꼭 반영해주세요. 
-
-P2 : 반영하면 좋을 것 같습니다. 
-
-P3 : 단순 의견 제시 (무시해도 됩니다)
-```
 
 ## 📂 Foldering
 ```
