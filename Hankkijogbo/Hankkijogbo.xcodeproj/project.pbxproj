@@ -84,6 +84,10 @@
 		A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */; };
 		A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */; };
 		A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA212C403E91000FF458 /* ImageCollectionViewCell.swift */; };
+		A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA232C412759000FF458 /* UICollectionView+.swift */; };
+		A240EA262C4176FF000FF458 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA252C4176FF000FF458 /* String+.swift */; };
+		A240EA332C440235000FF458 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A240EA322C440235000FF458 /* Config.xcconfig */; };
+		A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA342C4405A4000FF458 /* UIResponder+.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -192,6 +196,10 @@
 		A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchCollectionViewCell.swift; path = Hankkijogbo/Present/Report/Search/View/SearchCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Hankkijogbo/Present/Report/Search/View/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		A240EA212C403E91000FF458 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA232C412759000FF458 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		A240EA252C4176FF000FF458 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		A240EA322C440235000FF458 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Hankkijogbo/Global/Resources/Config.xcconfig; sourceTree = SOURCE_ROOT; };
+		A240EA342C4405A4000FF458 /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -452,7 +460,7 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				83A23A452C415AC100A71ECE /* Config.xcconfig */,
+				A240EA322C440235000FF458 /* Config.xcconfig */,
 				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
@@ -466,14 +474,17 @@
 			children = (
 				83DBEDC72C256AD00042BA48 /* NSObject+.swift */,
 				A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */,
+				A240EA342C4405A4000FF458 /* UIResponder+.swift */,
 				83DBEDD12C256B7A0042BA48 /* UIColor+.swift */,
 				A2B542422C32AF7500A6B225 /* UIFont+.swift */,
 				83DBEDC52C256A7A0042BA48 /* UIView+.swift */,
 				83DBEDAF2C2566120042BA48 /* UIStackView+.swift */,
+				A240EA232C412759000FF458 /* UICollectionView+.swift */,
 				83DBEDC92C256AE70042BA48 /* UIViewController+.swift */,
 				83DBEDCB2C256B080042BA48 /* UILabel+.swift */,
 				83DBEDCD2C256B180042BA48 /* UIButton+.swift */,
 				83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */,
+				A240EA252C4176FF000FF458 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -902,7 +913,7 @@
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
 				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
-				83A23A462C415AC100A71ECE /* Config.xcconfig in Resources */,
+				A240EA332C440235000FF458 /* Config.xcconfig in Resources */,
 				838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */,
 				83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */,
 				A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */,
@@ -991,6 +1002,7 @@
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
+				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
 				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
 				86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */,
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
@@ -1010,6 +1022,7 @@
 				A2DEBF5A2C3D25A800DE14A9 /* ReportViewController.swift in Sources */,
 				865826062C4170BE00265401 /* LoginViewController.swift in Sources */,
 				83DBEDB62C2566380042BA48 /* FontLiterals.swift in Sources */,
+				A240EA262C4176FF000FF458 /* String+.swift in Sources */,
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
@@ -1060,6 +1073,7 @@
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
 				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
+				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
 				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
@@ -1088,7 +1102,6 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83A23A452C415AC100A71ECE /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1152,7 +1165,6 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83A23A452C415AC100A71ECE /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

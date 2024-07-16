@@ -9,14 +9,14 @@ import UIKit
 
 final class AddMenuCollectionViewCell: BaseCollectionViewCell {
         
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
-    private let addMenuButton = UIButton()
+    let addMenuButton = UIButton()
     
-    // MARK: - Set UI
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
-        contentView.addSubview(addMenuButton)
+        addSubview(addMenuButton)
     }
     
     override func setupLayout() {
