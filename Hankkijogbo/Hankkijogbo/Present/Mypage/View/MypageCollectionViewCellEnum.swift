@@ -52,7 +52,6 @@ extension MypageViewController {
             case 2:
                 self.showAlert(
                     titleText: "정말 로그아웃 하실 건가요?",
-                    subText: "Apple 계정을 로그아웃합니다",
                     secondaryButtonText: "돌아가기",
                     primaryButtonText: "로그아웃"
                 )
@@ -121,8 +120,7 @@ private extension MypageViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(UIView.convertByAspectRatioHeight(itemWidth, width: 155, height: 95)
-        ))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(95))
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
