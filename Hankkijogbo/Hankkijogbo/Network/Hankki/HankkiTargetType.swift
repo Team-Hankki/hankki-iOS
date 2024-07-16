@@ -36,7 +36,17 @@ extension HankkiTargetType: BaseTargetType {
         }
     }
     
-    var queryParameter: [String: Any]? { return .none }
+    // var queryParameter: [String: Any]? { return .none }
+    var queryParameter: [String: Any]? {
+        switch self {
+        case .getHankkiPin(let university, let category, let lowestPrice, let order):
+            return ["university": university, "category": category, "lowestPrice": lowestPrice, "order": order]
+        case .getHankkiList(let university, let category, let lowestPrice, let order):
+            return ["university": university, "category": category, "lowestPrice": lowestPrice, "order": order]
+        default:
+            return .none
+        }
+    }
     
     var requestBodyParameter: Codable? {
         // Patch, Post 등 Request
@@ -70,17 +80,12 @@ extension HankkiTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getCategoryFilter: .get
-        case .getPriceCategoryFilter: .get
-        case .getSortOptionFilter: .get
-        case .getHankkiPin: .get
-        case .getHankkiList: .get
-        case .getHankkiThumbnail: .get
-        case .getHankkiDetail: .get
-        case .postHankkiHeart: .post
-        case .deleteHankkiHeart: .delete
-        case .getHankkiValidate: .get
-            
+        case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail, .getHankkiValidate:
+            return .get
+        case .postHankkiHeart:
+            return .post
+        case .deleteHankkiHeart:
+            return .delete
         }
     }
 }
