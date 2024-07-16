@@ -15,12 +15,12 @@ class BaseAPIService {
         case 200, 201, 204:
             if let decodedData = fetchDecodeData(data: data, responseType: T.self) {
                 return .success(decodedData)
-            } else { return .decodeErr }
+            } else { return .decodeError }
         case 400: return .badRequest
         case 401: return .unAuthorized
         case 404: return .notFound
         case 422: return .unProcessable
-        case 500: return .serverErr
+        case 500: return .serverError
         default: return .networkFail
         }
     }
@@ -33,7 +33,7 @@ class BaseAPIService {
         case 401: return .unAuthorized
         case 404: return .notFound
         case 422: return .unProcessable
-        case 500: return .serverErr
+        case 500: return .serverError
         default: return .networkFail
         }
     }

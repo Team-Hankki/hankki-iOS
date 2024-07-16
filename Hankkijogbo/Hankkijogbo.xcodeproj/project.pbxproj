@@ -95,6 +95,21 @@
 		A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */; };
 		A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */; };
 		A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA212C403E91000FF458 /* ImageCollectionViewCell.swift */; };
+		A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3B2C4450E2000FF458 /* HankkiDetailViewController.swift */; };
+		A240EA3E2C445D62000FF458 /* HankkiDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3D2C445D62000FF458 /* HankkiDetailCollectionView.swift */; };
+		A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3F2C445D6B000FF458 /* HankkiDetailHeaderView.swift */; };
+		A240EA422C445D86000FF458 /* HankkiDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA412C445D86000FF458 /* HankkiDetailFooterView.swift */; };
+		A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA432C446AB6000FF458 /* HankkiDetailButton.swift */; };
+		A240EA462C451061000FF458 /* HankkiDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA452C451061000FF458 /* HankkiDetailCollectionViewCell.swift */; };
+		A240EA492C45274B000FF458 /* HankkiPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA482C45274B000FF458 /* HankkiPaddingLabel.swift */; };
+		A240EA4C2C454AA1000FF458 /* HankkiInfoDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA4B2C454AA1000FF458 /* HankkiInfoDummy.swift */; };
+		A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA4D2C454B78000FF458 /* HankkiReportOptionCollectionView.swift */; };
+		A240EA502C454B90000FF458 /* HankkiReportOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA4F2C454B90000FF458 /* HankkiReportOptionCollectionViewCell.swift */; };
+		A240EA522C45519B000FF458 /* HankkiReportOptionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA512C45519B000FF458 /* HankkiReportOptionHeaderView.swift */; };
+		A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA532C4551A3000FF458 /* HankkiReportOptionFooterView.swift */; };
+		A240EA592C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */; };
+		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
+		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
 		A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA232C412759000FF458 /* UICollectionView+.swift */; };
 		A240EA262C4176FF000FF458 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA252C4176FF000FF458 /* String+.swift */; };
 		A240EA332C440235000FF458 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A240EA322C440235000FF458 /* Config.xcconfig */; };
@@ -219,6 +234,21 @@
 		A240EA1A2C3F35C8000FF458 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchCollectionViewCell.swift; path = Hankkijogbo/Present/Report/Search/View/SearchCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		A240EA1C2C3F35CB000FF458 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Hankkijogbo/Present/Report/Search/View/SearchViewController.swift; sourceTree = SOURCE_ROOT; };
 		A240EA212C403E91000FF458 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA3B2C4450E2000FF458 /* HankkiDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailViewController.swift; sourceTree = "<group>"; };
+		A240EA3D2C445D62000FF458 /* HankkiDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailCollectionView.swift; sourceTree = "<group>"; };
+		A240EA3F2C445D6B000FF458 /* HankkiDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailHeaderView.swift; sourceTree = "<group>"; };
+		A240EA412C445D86000FF458 /* HankkiDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailFooterView.swift; sourceTree = "<group>"; };
+		A240EA432C446AB6000FF458 /* HankkiDetailButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailButton.swift; sourceTree = "<group>"; };
+		A240EA452C451061000FF458 /* HankkiDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA482C45274B000FF458 /* HankkiPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiPaddingLabel.swift; sourceTree = "<group>"; };
+		A240EA4B2C454AA1000FF458 /* HankkiInfoDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiInfoDummy.swift; sourceTree = "<group>"; };
+		A240EA4D2C454B78000FF458 /* HankkiReportOptionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiReportOptionCollectionView.swift; sourceTree = "<group>"; };
+		A240EA4F2C454B90000FF458 /* HankkiReportOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiReportOptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA512C45519B000FF458 /* HankkiReportOptionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiReportOptionHeaderView.swift; sourceTree = "<group>"; };
+		A240EA532C4551A3000FF458 /* HankkiReportOptionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiReportOptionFooterView.swift; sourceTree = "<group>"; };
+		A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiEditMenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
+		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		A240EA232C412759000FF458 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		A240EA252C4176FF000FF458 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A240EA322C440235000FF458 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Hankkijogbo/Global/Resources/Config.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -412,6 +442,7 @@
 				865826032C4170A400265401 /* Login */,
 				86685C4D2C3BC63500C080C4 /* UnivSelect */,
 				83DBED8D2C2564790042BA48 /* Home */,
+				A240EA362C444D2D000FF458 /* HankkiDetail */,
 				A2DEBF572C3D257100DE14A9 /* Report */,
 				A2B599192C39D0BC004B7E4E /* MyZip */,
 				864FA9002C3D1F650051EA36 /* Mypage */,
@@ -510,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				83DBEDC72C256AD00042BA48 /* NSObject+.swift */,
+				A240EA5A2C459DEA000FF458 /* CATransition+.swift */,
 				A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */,
 				A240EA342C4405A4000FF458 /* UIResponder+.swift */,
 				83DBEDD12C256B7A0042BA48 /* UIColor+.swift */,
@@ -521,6 +553,7 @@
 				83DBEDCB2C256B080042BA48 /* UILabel+.swift */,
 				83DBEDCD2C256B180042BA48 /* UIButton+.swift */,
 				83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */,
+				A2471B8C2C46AB770080FA30 /* UIApplication+.swift */,
 				A240EA252C4176FF000FF458 /* String+.swift */,
 			);
 			path = Extensions;
@@ -539,6 +572,7 @@
 		83DBEDA92C2565920042BA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A240EA472C45273D000FF458 /* HankkiPaddingLabel */,
 				86E78D1C2C46B67400BE0DC3 /* EmptyView */,
 				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
 				A240EA092C3EF712000FF458 /* HankkiReusableView */,
@@ -583,6 +617,7 @@
 			children = (
 				83DBEDB82C25666E0042BA48 /* MainButton.swift */,
 				864FA91B2C3D63400051EA36 /* BottomButtonView.swift */,
+				A240EA432C446AB6000FF458 /* HankkiDetailButton.swift */,
 				865C3D012C44E9E0009D9BEA /* MoreButton.swift */,
 			);
 			path = HankkiButtons;
@@ -819,6 +854,72 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		A240EA362C444D2D000FF458 /* HankkiDetail */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA4A2C454A93000FF458 /* Model */,
+				A240EA392C4450C7000FF458 /* View */,
+			);
+			path = HankkiDetail;
+			sourceTree = "<group>";
+		};
+		A240EA392C4450C7000FF458 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA3B2C4450E2000FF458 /* HankkiDetailViewController.swift */,
+				A240EA552C45596C000FF458 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A240EA472C45273D000FF458 /* HankkiPaddingLabel */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA482C45274B000FF458 /* HankkiPaddingLabel.swift */,
+			);
+			path = HankkiPaddingLabel;
+			sourceTree = "<group>";
+		};
+		A240EA4A2C454A93000FF458 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA4B2C454AA1000FF458 /* HankkiInfoDummy.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A240EA552C45596C000FF458 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA562C455977000FF458 /* HankkiDetail */,
+				A240EA572C4559D7000FF458 /* HankkiReportOption */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A240EA562C455977000FF458 /* HankkiDetail */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA3D2C445D62000FF458 /* HankkiDetailCollectionView.swift */,
+				A240EA3F2C445D6B000FF458 /* HankkiDetailHeaderView.swift */,
+				A240EA452C451061000FF458 /* HankkiDetailCollectionViewCell.swift */,
+				A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */,
+				A240EA412C445D86000FF458 /* HankkiDetailFooterView.swift */,
+			);
+			path = HankkiDetail;
+			sourceTree = "<group>";
+		};
+		A240EA572C4559D7000FF458 /* HankkiReportOption */ = {
+			isa = PBXGroup;
+			children = (
+				A240EA4D2C454B78000FF458 /* HankkiReportOptionCollectionView.swift */,
+				A240EA512C45519B000FF458 /* HankkiReportOptionHeaderView.swift */,
+				A240EA4F2C454B90000FF458 /* HankkiReportOptionCollectionViewCell.swift */,
+				A240EA532C4551A3000FF458 /* HankkiReportOptionFooterView.swift */,
+			);
+			path = HankkiReportOption;
+			sourceTree = "<group>";
+		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
 			isa = PBXGroup;
 			children = (
@@ -1048,6 +1149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A240EA492C45274B000FF458 /* HankkiPaddingLabel.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				830285472C455BB10004D9F7 /* NetworkService.swift in Sources */,
@@ -1074,10 +1176,16 @@
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
+				A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */,
 				8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */,
+				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
+				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
+				83DBEDA02C25651C0042BA48 /* request.swift in Sources */,
+				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				830285572C4562D50004D9F7 /* HakkiAPIService.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
+				A240EA422C445D86000FF458 /* HankkiDetailFooterView.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,
@@ -1089,9 +1197,13 @@
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
+				A240EA522C45519B000FF458 /* HankkiReportOptionHeaderView.swift in Sources */,
 				86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */,
 				86B761322C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift in Sources */,
+				A240EA502C454B90000FF458 /* HankkiReportOptionCollectionViewCell.swift in Sources */,
 				83DBEDCC2C256B080042BA48 /* UILabel+.swift in Sources */,
+				A240EA462C451061000FF458 /* HankkiDetailCollectionViewCell.swift in Sources */,
+				A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */,
 				86B761302C3EEDEE00413059 /* HankkiListViewControllerType.swift in Sources */,
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
@@ -1104,15 +1216,18 @@
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
+				A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */,
 				86E78D1D2C46B67400BE0DC3 /* EmptyView.swift in Sources */,
 				83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */,
 				A2DEBF602C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift in Sources */,
+				A240EA4C2C454AA1000FF458 /* HankkiInfoDummy.swift in Sources */,
 				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
+				A240EA3E2C445D62000FF458 /* HankkiDetailCollectionView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
@@ -1127,9 +1242,11 @@
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
+				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */,
+				A240EA592C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift in Sources */,
 				A240EA1B2C3F35C8000FF458 /* SearchCollectionViewCell.swift in Sources */,
 				8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */,
 				A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */,
@@ -1298,7 +1415,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hankkijogbo/Hankkijogbo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KT2Q6HC762;
+				DEVELOPMENT_TEAM = LM9BKUSL5K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
@@ -1333,7 +1450,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hankkijogbo/Hankkijogbo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KT2Q6HC762;
+				DEVELOPMENT_TEAM = LM9BKUSL5K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
