@@ -59,7 +59,7 @@ extension MainButton {
     
     func setupDisabledButton() {
         self.do {
-            $0.backgroundColor = .hankkiRedLight2
+            $0.backgroundColor = .hankkiSemiRed
             $0.isEnabled = false
         }
     }
@@ -75,7 +75,7 @@ private extension MainButton {
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
-            $0.backgroundColor = .hankkiRedLight2
+            $0.backgroundColor = .hankkiSemiRed
             $0.makeRounded(radius: 16)
             $0.isEnabled = false
         }

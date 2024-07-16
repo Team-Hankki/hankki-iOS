@@ -50,7 +50,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         headerImageView.do {
-            $0.backgroundColor = .gray400
+            $0.image = .imgZipScreen1
         }
         
         headerLabel.do {
@@ -73,7 +73,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         nameImageView.do {
-            $0.backgroundColor = .red
+            $0.image = .imgZipProfile
         }
         
         nameLabel.do {
@@ -89,12 +89,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         
             $0.configuration = configuration
             
-            let image = UIImage.icHeart
-            let resizedImage = UIGraphicsImageRenderer(size: CGSize(width: 20, height: 20)).image { _ in
-                image.draw(in: CGRect(origin: .zero, size: CGSize(width: 20, height: 20)))
-            }
-            
-            $0.setImage(resizedImage, for: .normal)
+            $0.setImage(.icShare, for: .normal)
             
             $0.setAttributedTitle(UILabel.setupAttributedText(for: PretendardStyle.body3, withText: "공유", color: .hankkiWhite), for: .normal)
         }
@@ -178,8 +173,7 @@ private extension ZipHeaderTableView {
         }
         
         tagLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(6)
-            $0.bottom.equalToSuperview().inset(4)
+            $0.centerY.equalToSuperview()
             $0.horizontalEdges.equalToSuperview().inset(10)
         }
         

@@ -45,5 +45,16 @@ extension HankkiListViewController {
                 "좋아요 누른 식당"
             }
         }
+        
+        var emptyViewLabel: String {
+            switch self {
+            case .myZip:
+                "나의 족보에\n식당을 추가해보세요"
+            case .repoted:
+                "아직 제보한 식당이 없어요"
+            case .liked:
+                "아직 좋아요 누른 식당이 없어요"
+            }
+        }
     }
 }

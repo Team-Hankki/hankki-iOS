@@ -21,7 +21,6 @@
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
 		83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23A412C4010AA00A71ECE /* ButtonType.swift */; };
-		83A23A462C415AC100A71ECE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 83A23A452C415AC100A71ECE /* Config.xcconfig */; };
 		83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28952C3851BB004819FA /* HankkiNavigationType.swift */; };
 		83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28972C3852C5004819FA /* HankkiNavigationController.swift */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
@@ -63,6 +62,12 @@
 		864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */; };
 		864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */; };
 		864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA91B2C3D63400051EA36 /* BottomButtonView.swift */; };
+		865C3D002C444E16009D9BEA /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3CFF2C444E16009D9BEA /* EmptyView.swift */; };
+		865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D012C44E9E0009D9BEA /* MoreButton.swift */; };
+		865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */; };
+		865C3D072C45B4B3009D9BEA /* Pods-Hankkijogbo.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 865C3D052C45B4B3009D9BEA /* Pods-Hankkijogbo.debug.xcconfig */; };
+		865C3D082C45B4B3009D9BEA /* Pods-Hankkijogbo.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 865C3D062C45B4B3009D9BEA /* Pods-Hankkijogbo.release.xcconfig */; };
+		865C3D0A2C45B4D3009D9BEA /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 865C3D092C45B4D3009D9BEA /* Config.xcconfig */; };
 		865826062C4170BE00265401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865826052C4170BE00265401 /* LoginViewController.swift */; };
 		86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */; };
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
@@ -133,7 +138,6 @@
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		83A23A412C4010AA00A71ECE /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
-		83A23A452C415AC100A71ECE /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		83DA28952C3851BB004819FA /* HankkiNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationType.swift; sourceTree = "<group>"; };
 		83DA28972C3852C5004819FA /* HankkiNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationController.swift; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +178,12 @@
 		864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageZipCollectionViewCell.swift; sourceTree = "<group>"; };
 		864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCollectionViewCellEnum.swift; sourceTree = "<group>"; };
 		864FA91B2C3D63400051EA36 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
+		865C3CFF2C444E16009D9BEA /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		865C3D012C44E9E0009D9BEA /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
+		865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFooterTableView.swift; sourceTree = "<group>"; };
+		865C3D052C45B4B3009D9BEA /* Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
+		865C3D062C45B4B3009D9BEA /* Pods-Hankkijogbo.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig"; sourceTree = "<group>"; };
+		865C3D092C45B4D3009D9BEA /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		865826052C4170BE00265401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		865826072C41762600265401 /* Hankkijogbo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hankkijogbo.entitlements; sourceTree = "<group>"; };
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
@@ -217,8 +227,6 @@
 		A2DEBF5F2C3D67CA00DE14A9 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF612C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2DEBF632C3D67DE00DE14A9 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
-		A2DEBF6B2C3D805B00DE14A9 /* Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Hankkijogbo.debug.xcconfig"; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
-		A2DEBF6C2C3D806400DE14A9 /* Pods-Hankkijogbo.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-Hankkijogbo.release.xcconfig"; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig"; sourceTree = "<group>"; };
 		A2DEBF752C3DBEEB00DE14A9 /* ReportHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHeaderView.swift; sourceTree = "<group>"; };
 		A2DEBF772C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
@@ -251,8 +259,8 @@
 		08119332DE381C9FDF7962D4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A2DEBF6B2C3D805B00DE14A9 /* Pods-Hankkijogbo.debug.xcconfig */,
-				A2DEBF6C2C3D806400DE14A9 /* Pods-Hankkijogbo.release.xcconfig */,
+				865C3D052C45B4B3009D9BEA /* Pods-Hankkijogbo.debug.xcconfig */,
+				865C3D062C45B4B3009D9BEA /* Pods-Hankkijogbo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -508,6 +516,7 @@
 				A2B599162C39B497004B7E4E /* HankkiToasts */,
 				861704F52C38303300D99E50 /* HankkiAlerts */,
 				83DA28942C38519B004819FA /* HankkiNavigationController */,
+				865C3CFE2C444DE3009D9BEA /* EmptyView */,
 				838BEB012C38193800AAA153 /* TabBar */,
 				83DBEDB72C25664A0042BA48 /* HankkiButtons */,
 			);
@@ -545,6 +554,7 @@
 			children = (
 				83DBEDB82C25666E0042BA48 /* MainButton.swift */,
 				864FA91B2C3D63400051EA36 /* BottomButtonView.swift */,
+				865C3D012C44E9E0009D9BEA /* MoreButton.swift */,
 			);
 			path = HankkiButtons;
 			sourceTree = "<group>";
@@ -579,15 +589,21 @@
 		864FA9042C3D20030051EA36 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */,
 				864FA9072C3D20560051EA36 /* MypageHeaderView.swift */,
+				864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */,
+				864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */,
 				864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */,
 				864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */,
-				864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		865C3CFE2C444DE3009D9BEA /* EmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				865C3CFF2C444E16009D9BEA /* EmptyView.swift */,
+			);
+			path = EmptyView;
 		865826032C4170A400265401 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,8 +710,9 @@
 		86B7611D2C3DE04600413059 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */,
 				86B761202C3DF60800413059 /* ZipHeaderTableView.swift */,
+				865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */,
+				86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */,
 				86B761312C3F12B300413059 /* HankkiListTableViewCellDataStruct.swift */,
 			);
 			path = Cell;
@@ -909,10 +926,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F27C022C3500DB001E6514 /* SUITE-Medium.otf in Resources */,
+				865C3D0A2C45B4D3009D9BEA /* Config.xcconfig in Resources */,
 				A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */,
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
 				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
+				865C3D072C45B4B3009D9BEA /* Pods-Hankkijogbo.debug.xcconfig in Resources */,
 				A240EA332C440235000FF458 /* Config.xcconfig in Resources */,
 				838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */,
 				83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */,
@@ -920,6 +939,7 @@
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
+				865C3D082C45B4B3009D9BEA /* Pods-Hankkijogbo.release.xcconfig in Resources */,
 				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -993,6 +1013,7 @@
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
+				865C3D002C444E16009D9BEA /* EmptyView.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				83DBED9E2C2565150042BA48 /* response.swift in Sources */,
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
@@ -1010,6 +1031,7 @@
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
 				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
+				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
 				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
@@ -1059,6 +1081,7 @@
 				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
+				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
@@ -1221,7 +1244,7 @@
 		};
 		83DBED872C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2DEBF6B2C3D805B00DE14A9 /* Pods-Hankkijogbo.debug.xcconfig */;
+			baseConfigurationReference = 865C3D052C45B4B3009D9BEA /* Pods-Hankkijogbo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1257,7 +1280,7 @@
 		};
 		83DBED882C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2DEBF6C2C3D806400DE14A9 /* Pods-Hankkijogbo.release.xcconfig */;
+			baseConfigurationReference = 865C3D062C45B4B3009D9BEA /* Pods-Hankkijogbo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
