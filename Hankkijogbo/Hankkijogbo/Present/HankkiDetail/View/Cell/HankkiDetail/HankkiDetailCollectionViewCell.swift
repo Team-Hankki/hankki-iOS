@@ -11,8 +11,8 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    var hankkiMenuName: String = "dfdsf"
-    var hankkiMenuPrice: Int = 0
+    var hankkiMenuName: String = "수육 정식"
+    var hankkiMenuPrice: Int = 7000
     
     // MARK: - UI Properties
     

@@ -14,7 +14,7 @@ final class HankkiReportOptionCollectionView: BaseView {
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
-    // MARK: - Life Cycle
+    // MARK: - Setup UI
 
     override func setupHierarchy() {
         addSubview(collectionView)

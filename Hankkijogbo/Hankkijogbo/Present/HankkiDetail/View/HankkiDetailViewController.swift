@@ -84,8 +84,7 @@ final class HankkiDetailViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
             $0.width.equalTo(UIScreen.getDeviceWidth())
         }
         thumbnailImageView.snp.makeConstraints {

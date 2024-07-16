@@ -20,7 +20,7 @@ final class HankkiReportOptionHeaderView: BaseCollectionReusableView {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        self.addSubview(headerLabel)
+        addSubview(headerLabel)
     }
     
     override func setupLayout() {

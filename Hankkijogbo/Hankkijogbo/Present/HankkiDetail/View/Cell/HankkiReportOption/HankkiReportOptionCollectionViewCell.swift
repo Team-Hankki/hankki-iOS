@@ -62,10 +62,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        addSubviews(
-            reportOptionLabel,
-            radioButton
-        )
+        addSubviews(reportOptionLabel, radioButton)
     }
     
     override func setupLayout() {

@@ -9,7 +9,7 @@ import UIKit
 
 final class HankkiEditMenuCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     var editMenuButton: UIButton = UIButton()
     

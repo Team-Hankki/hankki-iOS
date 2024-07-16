@@ -16,7 +16,7 @@ final class HankkiReportOptionFooterView: BaseCollectionReusableView {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        self.addSubview(hankkiReportButton)
+        addSubview(hankkiReportButton)
     }
     
     override func setupLayout() {
