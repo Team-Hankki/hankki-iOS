@@ -22,11 +22,14 @@ final class HomeView: BaseView {
     
     private let buttonStackView = UIStackView()
     
+    let targetButton = UIButton()
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
         addSubviews(mapView, 
-                    buttonStackView)
+                    buttonStackView,
+                    targetButton)
         buttonStackView.addArrangedSubviews(typeButton,
                                             priceButton,
                                             sortButton)
@@ -42,6 +45,11 @@ final class HomeView: BaseView {
         }
         
         [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
+        
+        targetButton.snp.makeConstraints {
+            $0.top.equalTo(buttonStackView).offset(40)
+            $0.leading.equalTo(buttonStackView)
+        }
     }
     
     override func setupStyle() {
@@ -63,6 +71,10 @@ final class HomeView: BaseView {
         buttonStackView.do {
             $0.axis = .horizontal
             $0.spacing = 8
+        }
+        
+        targetButton.do {
+            $0.setImage(.btnTarget, for: .normal)
         }
     }
 }

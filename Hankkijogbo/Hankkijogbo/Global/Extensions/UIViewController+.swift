@@ -27,6 +27,39 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    /// - 키보드 올라올 때와 내려갈 때 Observer 등록
+    func setUpKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    /// - 키보드가 올라올 때 키보드가 텍스트필드 가리면 뷰의 높이를 올려주는 동작이 들어있습니다.
+    @objc func keyboardWillShow(_ sender: Notification) {
+        // keyboardFrame : 현재 동작하고 있는 이벤트에서 키보드의 frame을 받아옴
+        // currentTextField : 현재 응답을 받고 있는 UITextField를 확인한다.
+        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let currentTextField = UIResponder.currentResponder as? UITextField else { return }
+        
+        // 키보드 상단의 y값 (= 높이)
+        let keyboardYTop = keyboardFrame.cgRectValue.origin.y
+        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let textFieldYBottom = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+        
+        // textField 하단의 y축 값이 키보드 상단의 y축 값보다 클 때 (= 키보드가 textField를 가릴 때)
+        if textFieldYBottom > keyboardYTop {
+            let textFieldYTop = convertedTextFieldFrame.origin.y
+            let properTextFieldHight = textFieldYTop - keyboardYTop/1.3
+            // view의 y값 변경
+            view.frame.origin.y = -properTextFieldHight
+        }
+    }
+    
+    /// - 키보드가 내려갈 때 뷰의 y값 돌려놓기
+    @objc func keyboardWillHide(_ sender: Notification) {
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
+    }
+    
     func changeStatusBarBgColor(statusBarColor: UIColor?) {
         guard #available(iOS 13.0, *) else {
             guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
