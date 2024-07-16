@@ -7,18 +7,10 @@
 
 import UIKit
 
-// MARK: - Protocol
-
-protocol TotalListCollectionViewCellDelegate: AnyObject {
-    func addButtonDidTap(in cell: TotalListCollectionViewCell)
-}
-
 final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
-    
-    weak var delegate: TotalListCollectionViewCellDelegate?
-    
+
     // MARK: - UI Components
     
     private let thumbnailImageView: UIImageView = UIImageView()
@@ -38,7 +30,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupAddTarget()
     }
 
     required init?(coder: NSCoder) {
@@ -139,16 +130,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(16)
         }
-    }
-}
-
-extension TotalListCollectionViewCell {
-    func setupAddTarget() {
-        addButton.addTarget(self, action: #selector(actionButtonDipTap), for: .touchUpInside)
-    }
-    
-    @objc func actionButtonDipTap() {
-        delegate?.addButtonDidTap(in: self)
     }
 }
 

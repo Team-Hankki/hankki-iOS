@@ -9,10 +9,6 @@ import UIKit
 
 import NMapsMap
 
-//protocol TotalListBottomSheetViewDelegate: AnyObject {
-//    func totalListBottomSheetView(_ view: TotalListBottomSheetView, addButtonDidTap indexPath: IndexPath)
-//}
-
 final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
@@ -101,8 +97,6 @@ private extension HomeViewController {
     func setupDelegate() {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
-        mainBottomSheet.delegate = self
-//        mainBottomSheet.delegate = self
     }
     
     func setupRegister() {
@@ -206,13 +200,5 @@ extension HomeViewController: DropDownViewDelegate {
             changeButtonTitle(for: rootView.sortButton, newTitle: item)
         }
         hideDropDown()
-    }
-}
-
-extension HomeViewController: TotalListBottomSheetViewDelegate {
-    func totalListBottomSheetView(_ view: TotalListBottomSheetView, didTapPlusButtonAt indexPath: IndexPath) {
-        print("Clicked At HomeViewController")
-        let myZipViewController = MyZipListBottomSheetViewController()
-        self.present(myZipViewController, animated: true, completion: nil)
     }
 }

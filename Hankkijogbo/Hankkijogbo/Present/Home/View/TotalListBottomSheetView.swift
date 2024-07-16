@@ -7,18 +7,10 @@
 
 import UIKit
 
-protocol TotalListBottomSheetViewDelegate: AnyObject {
-    func totalListBottomSheetView(_ view: TotalListBottomSheetView, didTapPlusButtonAt indexPath: IndexPath)
-}
-
-
 final class TotalListBottomSheetView: BaseView {
     
-    
     // MARK: - Properties
-    
-    weak var delegate: TotalListBottomSheetViewDelegate?
-    
+
     var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
@@ -31,6 +23,7 @@ final class TotalListBottomSheetView: BaseView {
     private let flowLayout = UICollectionViewFlowLayout()
     private lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let containerView = UIView()
+    private let cell = TotalListCollectionViewCell()
     
     // MARK: - Life Cycle
     
@@ -197,7 +190,6 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         let model = data[indexPath.row]
         cell.bindData(model: model)
         cell.makeRounded(radius: 10)
-        cell.delegate = self
         return cell
     }
     
@@ -217,11 +209,3 @@ extension TotalListBottomSheetView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension TotalListBottomSheetView: TotalListCollectionViewCellDelegate {
-    func addButtonDidTap(in cell: TotalListCollectionViewCell) {
-        print("Clicked At ToalListBottomSheetView")
-        if let indexPath = totalListCollectionView.indexPath(for: cell) {
-            delegate?.totalListBottomSheetView(self, didTapPlusButtonAt: indexPath)
-        }
-    }
-}
