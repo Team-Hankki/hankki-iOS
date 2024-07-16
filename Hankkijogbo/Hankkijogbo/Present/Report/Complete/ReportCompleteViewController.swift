@@ -130,7 +130,6 @@ final class ReportCompleteViewController: BaseViewController {
             ), for: .normal)
         }
     }
-    
 }
 
 private extension ReportCompleteViewController {
@@ -139,6 +138,7 @@ private extension ReportCompleteViewController {
     
     func setupAddTarget() {
         goToHomeButton.addTarget(self, action: #selector(goToHomeButtonDidTap), for: .touchUpInside)
+        hankkiInfoCardView.addToMyZipListButton.addTarget(self, action: #selector(addToMyZipListButtonDidTap), for: .touchUpInside)
     }
     
     func setupBottomGradientView() {
@@ -163,6 +163,11 @@ private extension ReportCompleteViewController {
     
     @objc func bottomButtonPrimaryHandler() {
         print(goToReportedHankkiString)
+    }
+    
+    @objc func addToMyZipListButtonDidTap() {
+        // TODO: - API 연동하면서 제보한 식당 보러가기 액션 구현
+        self.presentMyZipListBottomSheet()
     }
     
     @objc func goToHomeButtonDidTap() {

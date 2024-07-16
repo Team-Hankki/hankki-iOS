@@ -27,7 +27,7 @@ final class HankkiInfoCardView: BaseView {
     
     private let reportedGuideLabel: UILabel = UILabel()
     private let hankkiNameLabel: UILabel = UILabel()
-    private let addToMyZipListButton: UIButton = UIButton()
+    let addToMyZipListButton: UIButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -93,15 +93,8 @@ final class HankkiInfoCardView: BaseView {
                 color: .hankkiRed
             ), for: .normal)
             $0.setImage(.icAddRed, for: .normal)
-            $0.addTarget(self, action: #selector(addToMyZipListButtonDidTap), for: .touchUpInside)
             $0.configuration = .plain()
             $0.configuration?.imagePadding = 2
         }
-    }
-}
-
-extension HankkiInfoCardView {
-    @objc func addToMyZipListButtonDidTap() {
-        print("내 족보에 추가 클릭")
     }
 }

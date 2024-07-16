@@ -154,4 +154,12 @@ extension UIViewController {
             }
         }
     }
+    
+    /// 나의 식당 족보 바텀 시트 띄우기
+    func presentMyZipListBottomSheet() {
+        let viewController = MyZipListBottomSheetViewController()
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: false, completion: nil)
+    }
 }

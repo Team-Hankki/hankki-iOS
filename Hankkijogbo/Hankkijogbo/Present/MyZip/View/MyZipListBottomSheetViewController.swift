@@ -91,6 +91,10 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.do {
+            $0.backgroundColor = .clear
+        }
+        
         dimmedView.do {
             $0.backgroundColor = .black.withAlphaComponent(0.67)
         }
