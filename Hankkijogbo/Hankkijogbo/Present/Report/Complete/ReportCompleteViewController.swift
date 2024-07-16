@@ -23,6 +23,7 @@ final class ReportCompleteViewController: BaseViewController {
     private let randomThanksLabel: UILabel = UILabel()
     
     private let hankkiImageView: UIImageView = UIImageView()
+    private let hankkiOrangeGradientImageView: UIImageView = UIImageView()
     private lazy var hankkiInfoCardView: HankkiInfoCardView = HankkiInfoCardView(hankkiNameString: selectedHankkiName)
     
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(primaryButtonText: goToReportedHankkiString, primaryButtonHandler: bottomButtonPrimaryHandler)
@@ -50,6 +51,7 @@ final class ReportCompleteViewController: BaseViewController {
         view.addSubviews(
             reportedNumberLabel,
             randomThanksLabel,
+            hankkiOrangeGradientImageView,
             hankkiImageView,
             bottomGradientView,
             hankkiInfoCardView,
@@ -68,14 +70,19 @@ final class ReportCompleteViewController: BaseViewController {
             $0.leading.equalTo(reportedNumberLabel)
         }
         hankkiImageView.snp.makeConstraints {
-            $0.top.equalTo(randomThanksLabel.snp.bottom).offset(103)
+            $0.top.equalTo(randomThanksLabel.snp.bottom).offset(UIScreen.convertByHeightRatio(103))
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(312)
-            $0.height.equalTo(372)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(312))
+            $0.height.equalTo(UIScreen.convertByHeightRatio(372))
+        }
+        hankkiOrangeGradientImageView.snp.makeConstraints {
+            $0.centerX.bottom.equalTo(hankkiImageView)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(468))
+            $0.height.equalTo(UIScreen.convertByHeightRatio(468))
         }
         bottomGradientView.snp.makeConstraints {
             $0.horizontalEdges.bottom.equalToSuperview()
-            $0.height.equalTo(374)
+            $0.height.equalTo(UIScreen.convertByHeightRatio(374))
         }
         hankkiInfoCardView.snp.makeConstraints {
             $0.bottom.equalTo(bottomButtonView.snp.top).offset(-50)
@@ -84,11 +91,11 @@ final class ReportCompleteViewController: BaseViewController {
         }
         bottomButtonView.snp.makeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(0)
+            $0.bottom.equalTo(UIScreen.hasNotch ? view.safeAreaLayoutGuide : -10)
             $0.height.equalTo(154)
         }
         goToHomeButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(35)
+            $0.bottom.equalToSuperview().inset(UIScreen.hasNotch ? 32 : 12)
             $0.horizontalEdges.equalToSuperview().inset(22)
         }
     }
@@ -107,6 +114,10 @@ final class ReportCompleteViewController: BaseViewController {
                 withText: "\(nickname)님이 모두의 지갑을 지켰어요!",
                 color: .gray500
             )
+        }
+        hankkiOrangeGradientImageView.do {
+            $0.image = .imgOrangeGradient
+            $0.contentMode = .scaleAspectFill
         }
         hankkiImageView.do {
             $0.image = .imgStore
