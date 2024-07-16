@@ -57,7 +57,7 @@ extension AuthTargetType: BaseTargetType {
         switch self {
         case .postReissue:
             return utilPath.rawValue + "reissue"
-        case .postLogin(requestBody: let requestBody):
+        case .postLogin:
             return utilPath.rawValue + "login"
         case .deleteWithdraw:
             return utilPath.rawValue + "withdraw"
@@ -71,7 +71,7 @@ extension AuthTargetType: BaseTargetType {
         
         case .postReissue:
             return .post
-        case .postLogin(requestBody: let requestBody):
+        case .postLogin:
             return .post
         case .deleteWithdraw:
             return .delete

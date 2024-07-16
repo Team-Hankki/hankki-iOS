@@ -97,6 +97,9 @@
 		86880BF82C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF72C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift */; };
 		86880BFA2C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF92C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift */; };
 		86880BFF2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BFE2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift */; };
+		86880C0B2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C0A2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift */; };
+		86880C0D2C47106700CAEF58 /* PostZipBatchDeleteRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C0C2C47106700CAEF58 /* PostZipBatchDeleteRequestDTO.swift */; };
+		86880C0F2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C0E2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -239,6 +242,9 @@
 		86880BF72C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeStoresReportsResponseDTO.swift; sourceTree = "<group>"; };
 		86880BF92C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeZipListResponseDTO.swift; sourceTree = "<group>"; };
 		86880BFE2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMeUniversityRequestDTO.swift; sourceTree = "<group>"; };
+		86880C0A2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostZipToHankkiRequestDTO.swift; sourceTree = "<group>"; };
+		86880C0C2C47106700CAEF58 /* PostZipBatchDeleteRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostZipBatchDeleteRequestDTO.swift; sourceTree = "<group>"; };
+		86880C0E2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteZipToHankkRequestiDTO.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
@@ -750,6 +756,8 @@
 		86880BD82C46CC6700CAEF58 /* Zip */ = {
 			isa = PBXGroup;
 			children = (
+				86880C092C47083000CAEF58 /* Request */,
+				86880C032C4703DA00CAEF58 /* Response */,
 				86880BD92C46CC8500CAEF58 /* ZipTargetType.swift */,
 				86880BDB2C46CCA100CAEF58 /* ZipAPIService.swift */,
 			);
@@ -832,6 +840,23 @@
 			isa = PBXGroup;
 			children = (
 				86880BFE2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		86880C032C4703DA00CAEF58 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		86880C092C47083000CAEF58 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				86880C0A2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift */,
+				86880C0C2C47106700CAEF58 /* PostZipBatchDeleteRequestDTO.swift */,
+				86880C0E2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1263,6 +1288,7 @@
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
 				86E78D1D2C46B67400BE0DC3 /* EmptyView.swift in Sources */,
+				86880C0D2C47106700CAEF58 /* PostZipBatchDeleteRequestDTO.swift in Sources */,
 				86880BDF2C46CD0600CAEF58 /* UniversityTargetType.swift in Sources */,
 				83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */,
 				86880BE12C46CD4C00CAEF58 /* UniversityService.swift in Sources */,
@@ -1279,6 +1305,7 @@
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
 				830285532C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift in Sources */,
 				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
+				86880C0F2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
@@ -1304,6 +1331,7 @@
 				8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
 				86880BE52C46D3EE00CAEF58 /* AuthRequestDTO.swift in Sources */,
+				86880C0B2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift in Sources */,
 				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
