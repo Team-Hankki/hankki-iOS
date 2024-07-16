@@ -37,7 +37,7 @@ final class ZipFooterTableView: UITableViewHeaderFooterView {
 
 private extension ZipFooterTableView {
     func setupHierarchy() {
-        self.addSubview(button)
+        addSubview(button)
     }
     
     func setupLayout() {

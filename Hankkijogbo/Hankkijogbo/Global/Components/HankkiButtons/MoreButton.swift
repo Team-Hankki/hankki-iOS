@@ -16,8 +16,6 @@ final class MoreButton: UIButton {
     private let buttonText: String?
     private let buttonAction: ButtonAction?
     
-    // MARK: - UIComponents
-    
     // MARK: - Life Cycle
     
     init(
