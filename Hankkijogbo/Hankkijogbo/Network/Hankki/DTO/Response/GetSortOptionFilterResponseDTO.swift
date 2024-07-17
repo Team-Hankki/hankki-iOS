@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct GetSortOptionFilterResponseDTO: Codable {
-    let code: Int
-    let message: String
-    let data: GetSortOptionFilterResponseData
-}
-
 struct GetSortOptionFilterResponseData: Codable {
     let options: [GetSortOptionFilterData]
 }

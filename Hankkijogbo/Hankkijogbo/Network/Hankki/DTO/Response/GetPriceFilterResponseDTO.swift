@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct GetPriceFilterResponseDTO: Codable {
-    let code: Int
-    let message: String
-    let data: GetPriceFilterResponseData
-}
-
 struct GetPriceFilterResponseData: Codable {
     let priceCategories: [GetPriceFilterData]
 }

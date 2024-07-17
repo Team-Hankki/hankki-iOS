@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct GetHankkiListResponseDTO: Codable {
-    let code: Int
-    let message: String
-    let data: GetHankkiListResponseData
-}
-
 struct GetHankkiListResponseData: Codable {
     let stores: [GetHankkiListData]
 }
