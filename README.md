@@ -8,18 +8,18 @@
 | [@mcrkgus](https://github.com/mcrkgus) | [@EunsuSeo01](https://github.com/EunsuSeo01) | [@shimseohyun](https://github.com/shimseohyun) |
 |:---:|:---:|:---:|
 |<img width="250" alt="mcrkgus" src="https://github.com/user-attachments/assets/acfb09f7-5600-4861-b5c4-bb2c337e8d17">|<img width="250" alt="EunsuSeo01" src="https://github.com/user-attachments/assets/0cb6f598-2627-4173-8206-3aef7726b129">|<img width="250" alt="shimseohyun" src="https://github.com/user-attachments/assets/53244098-45eb-48a6-a734-26a5854ab5d0">|
-|어떤|일을|할까|
+|`홈화면`<br/> `지도`<br/> `전체 식당 족보 리스트`<br/>| `식당 제보 화면`<br/> `식당 검색 화면`<br/> `식당 제보 완료 화면`<br/> `식당 상세 화면`<br/> `나의 식당 족보 바텀 시트`<br/>|`온보딩`<br/> `로그인`<br/> `대학 선택`<br/> `마이페이지`<br/> `나의 족보 만들기`<br/> `족보 내 식당 리스트 확인`<br/>|
 
 
 ## 🛠 Development Environment
 <img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
-## ✏️ project design
+## ✏️ Project Design
 [🔗 Project Design](https://fast-kilometer-dbf.notion.site/Project-Design-ff41dbf4511547efaedef8fb546e7f4e?pvs=4)
 ![프로젝트 아키텍쳐](https://github.com/user-attachments/assets/f24bb0da-61f3-4105-b89d-32ed6709e24c)
 
 
-## 💻 Code convention
+## 💻 Code Convention
 
 [🔗 Code Convention](https://fast-kilometer-dbf.notion.site/Coding-Convention-4f9de9541571486e86bfaa5a548137e3?pvs=4)
 > StyleShare 의 Swift Style Guide 를 기본으로 작성되었습니다.
@@ -81,6 +81,11 @@
 │       └── Release.xcconfig
 ├── 📁 Network
 │   ├── 🗂️ Base
+│   │   ├── BaseDTO.swift
+│   │   ├── BaseAPIService.swift
+│   │   ├── BaseTargetTypeswift
+│   │   ├── NetworkResult.swift
+│   │   └── NetworkService.swift
 │   └── 🗂️ Home
 │       ├── DTO
 │       ├── HomeAPI.swift
@@ -88,7 +93,6 @@
 └── 📁 Present
     ├── 🗂️ Base
     │   ├── BaseCollectionViewCell.swift
-    │   ├── BaseModel.swift
     │   ├── BaseTableViewCell.swift
     │   └── BaseViewController.swift
     ├── 🗂️ Home
