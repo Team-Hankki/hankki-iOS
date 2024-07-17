@@ -178,7 +178,3 @@ extension MypageViewController: UIGestureRecognizerDelegate {
         setupAction(SectionType(rawValue: indexPath.section)!, itemIndex: indexPath.item)
     }
 }
-
-extension MypageViewController {
-    
-}
