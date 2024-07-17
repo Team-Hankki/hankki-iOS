@@ -295,14 +295,14 @@ extension HomeViewController: DropDownViewDelegate {
 
 
 func getTestAPI() {
-//    NetworkService.shared.hankkiService.getCategoryFilter { result in
-//        switch result {
-//        case .success(let response):
-//            print("TEST SUCCESS")
-//        case .unAuthorized, .networkFail:
-//            print("TEST FAILED")
-//        default:
-//            return
-//        }
-//    }
+    NetworkService.shared.hankkiService.getCategoryFilter { result in
+        switch result {
+        case .success(let response):
+            print("TEST SUCCESS")
+        case .unAuthorized, .networkFail:
+            print("TEST FAILED")
+        default:
+            return
+        }
+    }
 }
