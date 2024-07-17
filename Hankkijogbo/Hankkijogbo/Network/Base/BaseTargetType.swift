@@ -54,13 +54,6 @@ extension BaseTargetType {
     
     var headers: [String: String]? {
         var header = ["Content-Type": "application/json"]
-        switch headerType {
-        case .loginHeader(let accessToken):
-            header["Authorization"] = "\(accessToken)"
-        default:
-            let accessToken = UserDefaults.standard.getAccesshToken()
-            header["Authorization"] = "Bearer \(accessToken)"
-        }
         return header
     }
     

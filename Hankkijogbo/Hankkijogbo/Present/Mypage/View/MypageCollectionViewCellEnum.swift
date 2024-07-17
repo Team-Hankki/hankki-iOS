@@ -53,8 +53,7 @@ extension MypageViewController {
                 self.showAlert(
                     titleText: "정말 로그아웃 하실 건가요?",
                     secondaryButtonText: "돌아가기",
-                    primaryButtonText: "로그아웃",
-                    primaryButtonHandler: patchLogout
+                    primaryButtonText: "로그아웃"
                 )
             default:
                 return

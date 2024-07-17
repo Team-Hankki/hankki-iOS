@@ -176,23 +176,3 @@ extension MypageViewController: UIGestureRecognizerDelegate {
         setupAction(SectionType(rawValue: indexPath.section)!, itemIndex: indexPath.item)
     }
 }
-
-extension MypageViewController {
-    func patchLogout() {
-        NetworkService.shared.authService.patchLogout { result in
-            switch result {
-            case .success:
-                UserDefaults.standard.removeTokens()
-                
-                let splashViewController = SplashViewController()
-                self.navigationController?.pushViewController(splashViewController, animated: false)
-
-            case .unAuthorized, .pathError:
-                // TODO: - Error 처리하기
-                print("레전드 에러발생")
-            default:
-                return
-            }
-        }
-    }
-}
