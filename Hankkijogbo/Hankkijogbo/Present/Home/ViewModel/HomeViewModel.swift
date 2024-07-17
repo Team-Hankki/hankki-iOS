@@ -104,7 +104,6 @@ final class HomeViewModel {
         }
     }
     
-    
     // 식당 리스트를 가져오는 메서드
     func getHankkiListAPI(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiList(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
