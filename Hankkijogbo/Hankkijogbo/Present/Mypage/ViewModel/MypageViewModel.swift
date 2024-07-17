@@ -9,13 +9,14 @@ import Foundation
 import UIKit
 
 final class MypageViewModel {
+    
+    var reloadCollectionView: (() -> Void)?
+    
     var userInfo: MypageHeaderView.DataStruct = MypageHeaderView.DataStruct(image: UIImage(), name: "") {
         didSet {
             self.reloadCollectionView?()
         }
     }
-    
-    var reloadCollectionView: (() -> Void)?
 }
 
 extension MypageViewModel {

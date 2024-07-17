@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct GetMeHankkiHeartListResponseData: Codable {
-    let stored: [GetMeHankkiHeartResponseData]
+struct GetMeHankkiListResponseData: Codable {
+    let stores: [GetMeHankkiResponseData]
 }
 
-struct GetMeHankkiHeartResponseData: Codable {
+struct GetMeHankkiResponseData: Codable {
     let id: Int
     let name: String
     let imageUrl: String
     let category: String
     let lowestPrice: Int
-    let heartcount: Int
+    let heartCount: Int
 }

@@ -19,10 +19,6 @@ class UnivSelectViewModel {
     
     var reloadCollectionView: (() -> Void)?
     var currentSelectedUniversity: String = ""
-    
-
-    
-    
 }
 
 extension UnivSelectViewModel {

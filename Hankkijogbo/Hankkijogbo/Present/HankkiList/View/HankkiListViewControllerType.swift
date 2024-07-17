@@ -56,5 +56,16 @@ extension HankkiListViewController {
                 "아직 좋아요 누른 식당이 없어요"
             }
         }
+        
+        var userTargetType: UserTargetType {
+            switch self {
+            case .repoted:
+                    .getMeHankkiReportList
+            case .liked:
+                    .getMeHankkiHeartList
+            default:
+                    .getMeHankkiHeartList
+            }
+        }
     }
 }

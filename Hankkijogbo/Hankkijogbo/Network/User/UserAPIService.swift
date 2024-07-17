@@ -11,10 +11,10 @@ import Moya
 
 protocol UserAPIServiceProtocol {
     func getMe(completion: @escaping(NetworkResult<BaseDTO<GetMeResponseData>>) -> Void)
+    func getMeHankkiList(_ type: UserTargetType, completion: @escaping(NetworkResult<BaseDTO<GetMeHankkiListResponseData>>) -> Void)
 }
 
 final class UserAPIService: BaseAPIService, UserAPIServiceProtocol {
-    
     
     private let provider = MoyaProvider<UserTargetType>(plugins: [MoyaPlugin()])
     
@@ -33,5 +33,20 @@ final class UserAPIService: BaseAPIService, UserAPIServiceProtocol {
         }
     }
     
-
+    func getMeHankkiList(_ type: UserTargetType, completion: @escaping (NetworkResult<BaseDTO<GetMeHankkiListResponseData>>) -> Void) {
+        provider.request(type) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<BaseDTO<GetMeHankkiListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<BaseDTO<GetMeHankkiListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    
 }
