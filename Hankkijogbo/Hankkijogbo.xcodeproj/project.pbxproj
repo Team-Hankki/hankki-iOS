@@ -131,6 +131,12 @@
 		A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF772C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift */; };
 		A2EC33A72C46F17A00809840 /* HankkiInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33A42C46F17A00809840 /* HankkiInfoCardView.swift */; };
 		A2EC33A82C46F17A00809840 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33A52C46F17A00809840 /* ReportCompleteViewController.swift */; };
+		A2EC33AD2C47166500809840 /* ReportTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33AC2C47166500809840 /* ReportTargetType.swift */; };
+		A2EC33AF2C47166F00809840 /* LocationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33AE2C47166F00809840 /* LocationTargetType.swift */; };
+		A2EC33B32C47169000809840 /* LocationAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33B22C47169000809840 /* LocationAPIService.swift */; };
+		A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33B62C4716A000809840 /* ReportAPIService.swift */; };
+		A2EC33C42C47183700809840 /* GetReportedNumberResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33C32C47183700809840 /* GetReportedNumberResponseDTO.swift */; };
+		A2EC33C82C47184500809840 /* GetSearchedLocationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33C72C47184500809840 /* GetSearchedLocationResponseDTO.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
@@ -141,7 +147,7 @@
 		A2F27C022C3500DB001E6514 /* SUITE-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2F27BFE2C3500DB001E6514 /* SUITE-Medium.otf */; };
 		A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F27C032C353AEF001E6514 /* BaseView.swift */; };
 		A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */; };
-		A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940D2C31660E001ADA03 /* BaseModel.swift */; };
+		A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940D2C31660E001ADA03 /* BaseDTO.swift */; };
 		A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940E2C31660E001ADA03 /* BaseViewController.swift */; };
 		A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -276,13 +282,19 @@
 		A2DEBF772C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2EC33A42C46F17A00809840 /* HankkiInfoCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HankkiInfoCardView.swift; sourceTree = "<group>"; };
 		A2EC33A52C46F17A00809840 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
+		A2EC33AC2C47166500809840 /* ReportTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTargetType.swift; sourceTree = "<group>"; };
+		A2EC33AE2C47166F00809840 /* LocationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTargetType.swift; sourceTree = "<group>"; };
+		A2EC33B22C47169000809840 /* LocationAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAPIService.swift; sourceTree = "<group>"; };
+		A2EC33B62C4716A000809840 /* ReportAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAPIService.swift; sourceTree = "<group>"; };
+		A2EC33C32C47183700809840 /* GetReportedNumberResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReportedNumberResponseDTO.swift; sourceTree = "<group>"; };
+		A2EC33C72C47184500809840 /* GetSearchedLocationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchedLocationResponseDTO.swift; sourceTree = "<group>"; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
 		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
 		A2F27BFE2C3500DB001E6514 /* SUITE-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Medium.otf"; sourceTree = "<group>"; };
 		A2F27C032C353AEF001E6514 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		A2FF940D2C31660E001ADA03 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		A2FF940D2C31660E001ADA03 /* BaseDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 		A2FF940E2C31660E001ADA03 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5C76934102657091ADFC65F /* Pods_Hankkijogbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hankkijogbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +327,7 @@
 		830285432C4559570004D9F7 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				A2FF940D2C31660E001ADA03 /* BaseDTO.swift */,
 				830285442C45596D0004D9F7 /* NetworkResult.swift */,
 				830285462C455BB10004D9F7 /* NetworkService.swift */,
 				8302854A2C455E860004D9F7 /* BaseAPIService.swift */,
@@ -461,6 +474,8 @@
 			isa = PBXGroup;
 			children = (
 				8302854E2C455FB00004D9F7 /* Hankki */,
+				A2EC33A92C4711A000809840 /* Report */,
+				A2EC33AA2C4711A600809840 /* Location */,
 				830285432C4559570004D9F7 /* Base */,
 			);
 			path = Network;
@@ -807,7 +822,6 @@
 		A22D20C92C3165B6001AFAC6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				A2FF940D2C31660E001ADA03 /* BaseModel.swift */,
 				A2FF940E2C31660E001ADA03 /* BaseViewController.swift */,
 				A2FF940C2C31660E001ADA03 /* BaseTableViewCell.swift */,
 				A2FF940F2C31660E001ADA03 /* BaseCollectionViewCell.swift */,
@@ -1006,6 +1020,57 @@
 				A2EC33A52C46F17A00809840 /* ReportCompleteViewController.swift */,
 			);
 			path = Complete;
+        };
+		A2EC33A92C4711A000809840 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33B82C4716C200809840 /* DTO */,
+				A2EC33AC2C47166500809840 /* ReportTargetType.swift */,
+				A2EC33B62C4716A000809840 /* ReportAPIService.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		A2EC33AA2C4711A600809840 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33B92C4716C700809840 /* DTO */,
+				A2EC33AE2C47166F00809840 /* LocationTargetType.swift */,
+				A2EC33B22C47169000809840 /* LocationAPIService.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		A2EC33B82C4716C200809840 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33BC2C4716EA00809840 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		A2EC33B92C4716C700809840 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33BE2C4716F500809840 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		A2EC33BC2C4716EA00809840 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33C32C47183700809840 /* GetReportedNumberResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		A2EC33BE2C4716F500809840 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33C72C47184500809840 /* GetSearchedLocationResponseDTO.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1169,6 +1234,7 @@
 				830285472C455BB10004D9F7 /* NetworkService.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2EC33A82C46F17A00809840 /* ReportCompleteViewController.swift in Sources */,
+				A2EC33AF2C47166F00809840 /* LocationTargetType.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				A2DEBF4C2C3BE1A600DE14A9 /* MyZipListHeaderView.swift in Sources */,
 				830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */,
@@ -1196,13 +1262,16 @@
 				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
 				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
 				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
+				A2EC33C82C47184500809840 /* GetSearchedLocationResponseDTO.swift in Sources */,
 				864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */,
 				830285572C4562D50004D9F7 /* HakkiAPIService.swift in Sources */,
 				A2FF94122C31660E001ADA03 /* BaseViewController.swift in Sources */,
 				A240EA422C445D86000FF458 /* HankkiDetailFooterView.swift in Sources */,
+				A2EC33B32C47169000809840 /* LocationAPIService.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,
+				A2EC33AD2C47166500809840 /* ReportTargetType.swift in Sources */,
 				83DBEDC82C256AD00042BA48 /* NSObject+.swift in Sources */,
 				A2DEBF5A2C3D25A800DE14A9 /* ReportViewController.swift in Sources */,
 				865826062C4170BE00265401 /* LoginViewController.swift in Sources */,
@@ -1227,6 +1296,7 @@
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
 				864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */,
 				83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */,
+				A2EC33C42C47183700809840 /* GetReportedNumberResponseDTO.swift in Sources */,
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
@@ -1248,7 +1318,7 @@
 				830285532C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift in Sources */,
 				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
-				A2FF94112C31660E001ADA03 /* BaseModel.swift in Sources */,
+				A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellDataStruct.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
 				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
@@ -1276,6 +1346,7 @@
 				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
+				A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,

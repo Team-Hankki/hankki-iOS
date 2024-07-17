@@ -31,6 +31,7 @@ enum UtilPath: String {
     case hankki = "stores"
     case zip = "favorites"
     case report = "reports"
+    case location = "locations"
     case university = "universities"
 }
 
