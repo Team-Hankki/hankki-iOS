@@ -12,10 +12,10 @@ import Foundation
 struct GetSearchedLocationResponseDTO: Codable {
     var code: Int
     var message: String
-    var data: GetSearchedLocationResponseDTOData
+    var data: GetSearchedLocationResponseData
 }
 
-struct GetSearchedLocationResponseDTOData: Codable {
+struct GetSearchedLocationResponseData: Codable {
     var latitude: Double
     var longitude: Double
     var name: String
