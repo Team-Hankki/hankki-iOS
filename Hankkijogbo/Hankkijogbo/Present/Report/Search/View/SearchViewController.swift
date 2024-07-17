@@ -24,6 +24,7 @@ final class SearchViewController: BaseViewController {
     
     var selectedHankkiNameString: String?
     weak var delegate: PassItemDataDelegate?
+    private let debouncer = HankkiDebouncer(seconds: 0.5)
     
     // MARK: - UI Components
     
@@ -48,7 +49,6 @@ final class SearchViewController: BaseViewController {
         setupDelegate()
         setupAddTarget()
         bindViewModel()
-        viewModel.getSearchedLocationAPI(query: "재연")
     }
     
     override func viewDidLayoutSubviews() {
@@ -144,6 +144,9 @@ final class SearchViewController: BaseViewController {
             )
             $0.addPadding(left: 40, right: 45)
             $0.changeBorderVisibility(isVisible: false, color: UIColor.gray900.cgColor)
+            $0.autocorrectionType = .no
+            $0.spellCheckingType = .no
+            $0.autocapitalizationType = .none
         }
         
         searchCollectionView.do {
@@ -216,7 +219,7 @@ private extension SearchViewController {
 private extension SearchViewController {
     
     @objc func searchTextDeleteButtonDidTap() {
-        searchTextField.text = ""
+        searchTextField.text = nil
     }
     
     @objc func bottomButtonPrimaryHandler() {
@@ -256,6 +259,16 @@ extension SearchViewController: UITextFieldDelegate {
         textField.layer.borderColor = nil
     }
     
+    /// 텍스트필드 타이핑이 멈추었을 때 호출되는 함수
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let query = self.searchTextField.text else { return }
+        if !query.isEmpty {
+            debouncer.run {
+                self.viewModel.getSearchedLocationAPI(query: query)
+            }
+        }
+    }
+    
     /// 키보드의 return 키 클릭 시 호출되는 함수
     /// - 키보드를 내려준다
     final func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -267,10 +280,6 @@ extension SearchViewController: UITextFieldDelegate {
 // MARK: - UICollectionView Delegate
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let reusableView = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
