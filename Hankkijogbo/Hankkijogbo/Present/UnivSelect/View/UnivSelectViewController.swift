@@ -35,7 +35,7 @@ final class UnivSelectViewController: BaseViewController {
         setupDelegate()
         setupRegister()
         
-        viewModel.getUniversityList(completion: {_ in })
+        viewModel.getUniversityList()
         setupViewModel()
     }
     
