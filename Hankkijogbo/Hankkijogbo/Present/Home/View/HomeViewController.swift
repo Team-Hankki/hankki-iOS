@@ -13,13 +13,10 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let viewModel = HomeViewModel()
+    
     private var isButtonModified = false
     var isDropDownVisible = false
-    
-    // 임시 dummy data
-    let typedata = dummyType
-    let pricedata = dummyPrice
-    let sortdata = dummySort
     
     // MARK: - UI Components
     
@@ -37,7 +34,8 @@ final class HomeViewController: BaseViewController {
         setupDelegate()
         setupRegister()
         setupaddTarget()
-        getTestAPI()
+        
+        viewModel.getCategoryFilterAPI(completion: {_ in })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,7 +153,7 @@ private extension HomeViewController {
     }
     
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
-        customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType)
+        customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType, viewModel: viewModel)
         customDropDown?.delegate = self
         
         guard let customDropDown = customDropDown else { return }
@@ -174,11 +172,11 @@ private extension HomeViewController {
         }
         
         customDropDown.snp.updateConstraints {
-            let height = isPriceModel ? self.pricedata.count * 44 : self.sortdata.count * 44
+            let height = isPriceModel ? viewModel.priceFilters.count * 44 : viewModel.sortOptions.count * 44
             $0.width.equalTo(112)
             $0.height.equalTo(height)
         }
-        self.view.layoutIfNeeded() // 제약 조건을 즉시 적용하여 드롭다운을 바로 표시합니다.
+        self.view.layoutIfNeeded()
     }
     
     func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
@@ -216,8 +214,9 @@ extension HomeViewController: NMFMapViewTouchDelegate {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         typeCollectionView.isHidden = true
-        changeButtonTitle(for: rootView.typeButton, newTitle: typedata[indexPath.item].menutype)
-        print( typedata[indexPath.item].menutype, "이 클릭되었습니다. ")
+        let selectedCategory = viewModel.categoryFilters[indexPath.item]
+        changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
+        print("\(selectedCategory.name) 이 클릭되었습니다.")
     }
 }
 
@@ -230,7 +229,8 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.bindData(model: typedata[indexPath.item])
+        cell.bindData(model: viewModel.categoryFilters[indexPath.item])
+        //        cell.bindData(model: typedata[indexPath.item])
         return cell
     }
 }
@@ -293,16 +293,3 @@ extension HomeViewController: DropDownViewDelegate {
     }
 }
 
-
-func getTestAPI() {
-    NetworkService.shared.hankkiService.getCategoryFilter { result in
-        switch result {
-        case .success(let response):
-            print("TEST SUCCESS")
-        case .unAuthorized, .networkFail:
-            print("TEST FAILED")
-        default:
-            return
-        }
-    }
-}

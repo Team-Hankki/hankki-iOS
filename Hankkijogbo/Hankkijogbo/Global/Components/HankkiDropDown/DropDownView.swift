@@ -15,14 +15,14 @@ final class DropDownView: BaseView {
     
     // MARK: - Properties
     
+    private let viewModel: HomeViewModel
+    
     weak var delegate: DropDownViewDelegate?
     private var buttonType: ButtonType
     
     private var numberOfCells: Int = 0
     var tableView = UITableView()
     
-    private let dataPrice = dummyPrice
-    private let dataSort = dummySort
     private var data: [String] = []
     
     // MARK: - Life Cycle
@@ -41,27 +41,56 @@ final class DropDownView: BaseView {
         tableView.makeRounded(radius: 10)
     }
     
-    init(isPriceModel: Bool, buttonType: ButtonType) {
+    init(isPriceModel: Bool, buttonType: ButtonType, viewModel: HomeViewModel) {
         self.buttonType = buttonType
-        if isPriceModel {
-            self.numberOfCells = dataPrice.count
-            self.data = dataPrice.map { $0.amount }
-        } else {
-            self.numberOfCells = dataSort.count
-            self.data = dataSort.map { $0.sortType }
-        }
-        
-        print(data, "❤️")
+        self.viewModel = viewModel
         super.init(frame: .zero)
         
         setupDelegate()
         setupRegister()
+        
+        if isPriceModel {
+            viewModel.getPriceCategoryFilterAPI { [weak self] success in
+                guard let self = self else { return }
+                if success {
+                    self.numberOfCells = self.viewModel.priceFilters.count
+                    self.data = self.viewModel.priceFilters.map { $0.name }
+                    self.updateTableView()
+                    self.updateDropDownConstraints()
+                }
+            }
+        } else {
+            viewModel.getSortOptionFilterAPI { [weak self] success in
+                guard let self = self else { return }
+                if success {
+                    self.numberOfCells = self.viewModel.sortOptions.count
+                    self.data = self.viewModel.sortOptions.map { $0.name }
+                    self.updateTableView()
+                    self.updateDropDownConstraints()
+                }
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func updateTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    private func updateDropDownConstraints() {
+        DispatchQueue.main.async {
+            self.snp.updateConstraints {
+                let height = self.numberOfCells * 44
+                $0.height.equalTo(height)
+            }
+            self.superview?.layoutIfNeeded()
+        }
+    }
 }
 
 private extension DropDownView {
@@ -73,14 +102,9 @@ private extension DropDownView {
     func setupRegister() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
-    
-    func updateNumberOfCells(_ count: Int) {
-        self.numberOfCells = count
-        tableView.reloadData()
-    }
 }
 
-extension DropDownView:  UITableViewDelegate, UITableViewDataSource {
+extension DropDownView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfCells
     }

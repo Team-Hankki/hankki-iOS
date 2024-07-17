@@ -21,18 +21,20 @@ enum HeaderType {
     case accessTokenHeader
     case refreshTokenHeader
     case tokenHealthHeader(tokenHealthType: TokenHealthType)
+    case AuthorizationCode
+    case loginHeader(accessToken: String)
 }
 
 /// 각 API에 따라 공통된 Path 값 (존재하지 않는 경우 빈 String 값)
 enum UtilPath: String {
-    case auth = "auth"
-    case user = "users"
-    case menu = "menus"
-    case hankki = "stores"
-    case zip = "favorites"
-    case report = "reports"
-    case location = "locations"
-    case university = "universities"
+    case auth = "/v1/auth"
+    case user = "/v1/users"
+    case menu = "/v1/menus"
+    case hankki = "/v1/stores"
+    case zip = "/v1/favorites"
+    case report = "/v1/reports"
+    case university = "/v1/universities"
+    case location =  "/v1/locations"
 }
 
 protocol BaseTargetType: TargetType {
@@ -46,14 +48,13 @@ protocol BaseTargetType: TargetType {
 extension BaseTargetType {
     var baseURL: URL {
         guard let baseURL = URL(string: URLConstant.baseURL) else {
-            fatalError("BaseURL ERROR")
+            fatalError("ERROR - BASEURL")
         }
         return baseURL
     }
     
     var headers: [String: String]? {
         var header = ["Content-Type": "application/json"]
-        header["Authorization"] = URLConstant.bearer // TODO: - Token 연결 
         return header
     }
     

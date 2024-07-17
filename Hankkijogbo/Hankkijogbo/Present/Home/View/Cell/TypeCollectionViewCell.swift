@@ -9,6 +9,8 @@ import UIKit
 
 final class TypeCollectionViewCell: BaseCollectionViewCell {
     
+    private let viewModel = HomeViewModel()
+    
     // MARK: - UI Components
     
     private let thumbnailImageView: UIImageView = UIImageView()
@@ -54,7 +56,7 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension TypeCollectionViewCell {
-    func bindData(model: TypeModel) {
-        typeLabel.text = model.menutype
+    func bindData(model: GetCategoryFilterData) {
+        typeLabel.text = model.name
     }
 }

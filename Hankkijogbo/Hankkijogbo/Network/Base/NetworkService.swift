@@ -14,10 +14,10 @@ final class NetworkService {
     private init() {}
     
     let hankkiService: HankkiAPIServiceProtocol = HankkiAPIService()
-//    let authService: AuthAPIServiceProtocol = AuthAPIService()
+    let authService: AuthAPIServiceProtocol = AuthAPIService()
 //    let userService: UserAPIServiceProtocol = UserAPIService()
 //    let menuService: MenuAPIServiceProtocol = MenuAPIService()
-//    let universityService: UniversityAPIServiceProtocol = UniversityAPIService()
+    let universityService: UniversityAPIServiceProtocol = UniversityAPIService()
 //    let locationService: LocationAPIServiceProtocol = LocationAPIService()
 //    let favoriteService: FavoriteAPIServiceProtocol = FavoriteAPIServie()
     let reportService: ReportAPIServiceProtocol = ReportAPIService()
