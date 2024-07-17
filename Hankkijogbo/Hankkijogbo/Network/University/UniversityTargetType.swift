@@ -29,7 +29,7 @@ extension UniversityTargetType: BaseTargetType {
         return .none
     }
     
-    var queryParameter: [String : Any]? {
+    var queryParameter: [String: Any]? {
         return .none
     }
     
@@ -52,5 +52,3 @@ extension UniversityTargetType: BaseTargetType {
         }
     }    
 }
-
-

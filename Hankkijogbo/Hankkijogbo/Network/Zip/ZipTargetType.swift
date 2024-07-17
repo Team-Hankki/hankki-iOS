@@ -31,7 +31,7 @@ extension ZipTargetType: BaseTargetType {
         return .none
     }
     
-    var queryParameter: [String : Any]? {
+    var queryParameter: [String: Any]? {
         return .none
     }
     
@@ -65,13 +65,12 @@ extension ZipTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getZipList: return .get
-        case .getZipDetail: return .get
-        case .postZip: return .post
-        case .postZipBatchDelete: return .post
-        case .postZipToHankki: return .post
-        case .deleteZipToHankki: return .delete
+        case .getZipList, .getZipDetail:
+            return .get
+        case .postZip, .postZipBatchDelete, .postZipToHankki:
+            return .post
+        case .deleteZipToHankki: 
+            return .delete
         }
     }
 }
-

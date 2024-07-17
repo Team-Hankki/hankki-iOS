@@ -31,7 +31,7 @@ extension UserTargetType: BaseTargetType {
         return .none
     }
     
-    var queryParameter: [String : Any]? {
+    var queryParameter: [String: Any]? {
         return .none
     }
     
@@ -58,14 +58,11 @@ extension UserTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getMe: return .get
-        case .getMeUniversity: return .get
-        case .getMeHankkiHeartList: return .get
-        case .getMeHankkiReportList: return .get
-        case .getMeZipList: return .get
-        case .postMeUniversity: return .post
+        case .getMe, .getMeUniversity, .getMeHankkiHeartList, .getMeHankkiReportList, .getMeZipList:
+            return .get
+        case .postMeUniversity: 
+             return .post
         }
     }
 
 }
-

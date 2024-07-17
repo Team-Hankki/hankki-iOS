@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostMeUniversityRequestDTO {
+struct PostMeUniversityRequestData {
     let universityId: Int
     let name: String
     let longitude: Double

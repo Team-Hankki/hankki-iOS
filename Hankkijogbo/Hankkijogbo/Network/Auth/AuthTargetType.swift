@@ -65,9 +65,8 @@ extension AuthTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        
-        case .postReissue: return .post
-        case .postLogin: return .post
+        case .postReissue, .postLogin:
+            return .post
         case .deleteWithdraw: return .delete
         case .patchLogout: return .patch
         }
