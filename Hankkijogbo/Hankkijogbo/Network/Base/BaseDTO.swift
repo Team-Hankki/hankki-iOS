@@ -8,13 +8,13 @@
 import Foundation
 
 struct BaseDTO<T: Codable>: Codable {
-    let status: Int
+    let code: Int
     let message: String
     let data: T
 }
 
 struct EmptyResultDTO: Codable {
-    let status: Int
+    let code: Int
     let message: String
     let data: [String: String]?
 }

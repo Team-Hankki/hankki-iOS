@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct GetUniversityResponseData: Codable {
-    let universities: [GetUniversityDetail]
+struct GetUniversityListResponseData: Codable {
+    let universities: [GetUniversityResponseData]
 }
 
-struct GetUniversityDetail: Codable {
+struct GetUniversityResponseData: Codable {
     let id: Int
     let name: String
     let longitude: Float

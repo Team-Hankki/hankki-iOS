@@ -99,8 +99,22 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 extension LoginViewController: ASAuthorizationControllerDelegate {
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        //로그인 성공
-        print("로그인 성공")
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            let fullName = appleIDCredential.fullName
+            let fullNameString = "\((fullName?.familyName ?? "") + (fullName?.givenName ?? ""))"
+                         
+            guard let identityToken = appleIDCredential.identityToken else { return }
+            let identifyTokenString = String(data: identityToken, encoding: .utf8) ?? ""
+        
+            let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(identifyToken: identifyTokenString, name: fullNameString)
+            postLogin(postLoginRequest)
+            
+        default:
+            break
+        }
+        
     }
     
     // 실패 후 동작
@@ -108,5 +122,41 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         controller: ASAuthorizationController,
         didCompleteWithError error: Error) {
         print("애플 로그인 실패: \(error.localizedDescription)")
+    }
+}
+
+private extension LoginViewController {
+    func postLogin (_ postLoginRequest: PostLoginRequestDTO) {
+        NetworkService.shared.authService.postLogin(requestBody: postLoginRequest) { result in
+            switch result {
+            case .success(let response):
+                if response?.code == 200 {
+                    let refreshToken = response?.data.refreshToken ?? ""
+                    let accessToken = response?.data.accessToken ?? ""
+                    print("요청 성공")
+                    print("accessToken      : \(response?.data.accessToken ?? "")")
+                    print("refreshToken     : \(response?.data.refreshToken ?? "")")
+                    print("isRegistered     : \(response?.data.isRegistered ?? false)")
+                    
+                    UserDefaults.standard.set(accessToken, forKey: UserDefaultsKey.accessToken.rawValue)
+                    UserDefaults.standard.set(refreshToken, forKey: UserDefaultsKey.refreshToken.rawValue)
+                    
+                    if response?.data.isRegistered ?? false {
+                        // 로그인한 회원인 경우 -> 네비게이션의 홈 뷰로 이동
+                        self.navigationController?.popToRootViewController(animated: true)
+                        
+                    } else {
+                        // 회원가입인 경우 -> 대학 선택 뷰로 이동
+                        self.navigationController?.popToRootViewController(animated: false)
+                        self.navigationController?.pushViewController(UnivSelectViewController(), animated: true)
+                    }
+                }
+                
+            case .unAuthorized, .networkFail:
+                print("POST LOGIN - TEST FAILED")
+            default:
+                return
+            }
+        }
     }
 }

@@ -13,7 +13,11 @@ final class UnivSelectViewController: BaseViewController {
     
     private var currentUniv: String = ""
     
-    private let dummyUnivList: [String] = ["더미대학교", "한끼대학교", "가현대학교", "은수대학교", "서현대학교", "물만두비빔밥", "오이냉채", "계란국", "김치말이국수", "맛있겠다."]
+    private var universityList: [GetUniversityResponseData] = [] {
+            didSet {
+                univCollectionView.reloadData()
+            }
+        }
 
     // MARK: - UI Properties
     
@@ -36,6 +40,8 @@ final class UnivSelectViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegate()
         setupRegister()
+        
+        getUniversityList()
     }
     
     override func setupStyle() {
@@ -136,7 +142,7 @@ private extension UnivSelectViewController {
 
 extension UnivSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyUnivList.count
+        return universityList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -144,14 +150,14 @@ extension UnivSelectViewController: UICollectionViewDataSource {
             withReuseIdentifier: UnivCollectionViewCell.className,
             for: indexPath
         ) as? UnivCollectionViewCell else { return UICollectionViewCell() }
-        cell.dataBind(dummyUnivList[indexPath.item], isFinal: dummyUnivList.count == indexPath.item + 1)
+        cell.dataBind(universityList[indexPath.item].name, isFinal: universityList.count == indexPath.item + 1)
         return cell
     }
 }
 
 extension UnivSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currentUniv = dummyUnivList[indexPath.item]
+        currentUniv = universityList[indexPath.item].name
         if !currentUniv.isEmpty {
             bottomButtonView.setupEnabledDoneButton()
         }
@@ -161,5 +167,21 @@ extension UnivSelectViewController: UICollectionViewDelegate {
 extension UnivSelectViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return true
+    }
+}
+
+private extension UnivSelectViewController {
+    func getUniversityList() {
+        NetworkService.shared.universityService.getUniversityList { result in
+            switch result {
+            case .success(let response):
+                self.universityList = response?.data.universities ?? []
+                
+            case .unAuthorized, .networkFail:
+                print("실패...")
+            default:
+                return
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct PostLoginRequestDTO: Codable {
+    let identifyToken: String
     let name: String
     var platform: String = "APPLE"
 }

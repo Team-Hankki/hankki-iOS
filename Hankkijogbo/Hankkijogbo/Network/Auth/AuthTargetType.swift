@@ -21,8 +21,8 @@ extension AuthTargetType: BaseTargetType {
         switch self {
         case .postReissue:
             return .refreshTokenHeader
-        case .postLogin:
-            return .accessTokenHeader
+        case .postLogin(let requestBody):
+            return .loginHeader(accessToken: requestBody.identifyToken)
         case .deleteWithdraw:
             return .accessTokenHeader
         case .patchLogout:
@@ -36,7 +36,7 @@ extension AuthTargetType: BaseTargetType {
         return .none
     }
     
-    var queryParameter: [String : Any]? {
+    var queryParameter: [String: Any]? {
         return .none
     }
     
@@ -56,13 +56,13 @@ extension AuthTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .postReissue:
-            return utilPath.rawValue + "reissue"
+            return utilPath.rawValue + "/reissue"
         case .postLogin:
-            return utilPath.rawValue + "login"
+            return utilPath.rawValue + "/login"
         case .deleteWithdraw:
-            return utilPath.rawValue + "withdraw"
+            return utilPath.rawValue + "/withdraw"
         case .patchLogout:
-            return utilPath.rawValue + "logout"
+            return utilPath.rawValue + "/logout"
         }
     }
     
