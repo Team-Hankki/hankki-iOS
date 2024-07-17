@@ -18,11 +18,6 @@ final class HomeViewController: BaseViewController {
     private var isButtonModified = false
     var isDropDownVisible = false
     
-//    // 임시 dummy data
-//    let typedata = dummyType
-//    let pricedata = dummyPrice
-//    let sortdata = dummySort
-
     // MARK: - UI Components
     
     private var typeCollectionView = TypeCollectionView()
@@ -39,8 +34,8 @@ final class HomeViewController: BaseViewController {
         setupDelegate()
         setupRegister()
         setupaddTarget()
-
-       viewModel.getCategoryFilterAPI(completion: {_ in })
+        
+        viewModel.getCategoryFilterAPI(completion: {_ in })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -221,9 +216,7 @@ extension HomeViewController: UICollectionViewDelegate {
         typeCollectionView.isHidden = true
         let selectedCategory = viewModel.categoryFilters[indexPath.item]
         changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
-                print("\(selectedCategory.name) 이 클릭되었습니다.")
-//        changeButtonTitle(for: rootView.typeButton, newTitle: typedata[indexPath.item].menutype)
-            // print( typedata[indexPath.item].menutype, "이 클릭되었습니다. ")
+        print("\(selectedCategory.name) 이 클릭되었습니다.")
     }
 }
 
@@ -237,7 +230,7 @@ extension HomeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.bindData(model: viewModel.categoryFilters[indexPath.item])
-//        cell.bindData(model: typedata[indexPath.item])
+        //        cell.bindData(model: typedata[indexPath.item])
         return cell
     }
 }
@@ -300,16 +293,3 @@ extension HomeViewController: DropDownViewDelegate {
     }
 }
 
-
-func getTestAPI() {
-    NetworkService.shared.hankkiService.getCategoryFilter { result in
-        switch result {
-        case .success(let response):
-            print("TEST SUCCESS")
-        case .unAuthorized, .networkFail:
-            print("TEST FAILED")
-        default:
-            return
-        }
-    }
-}
