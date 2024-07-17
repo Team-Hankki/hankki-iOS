@@ -17,6 +17,8 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var viewModel: ReportViewModel = ReportViewModel()
+    
     var isImageSet: Bool = false
     var image: UIImage?
     
@@ -49,6 +51,9 @@ final class ReportViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
+        bindViewModel()
+        
+        viewModel.getReportedNumber()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +94,15 @@ final class ReportViewController: BaseViewController {
         collectionView.do {
             $0.backgroundColor = .hankkiWhite
             $0.showsVerticalScrollIndicator = false
+        }
+    }
+}
+
+extension ReportViewController {
+    
+    func bindViewModel() {
+        viewModel.updateReportedNumber = {
+            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
     }
 }
@@ -249,6 +263,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchBarCollectionViewCell.className, for: indexPath) as? SearchBarCollectionViewCell else { return UICollectionViewCell() }
             cell.hankkiNameString = self.hankkiNameString ?? ""
             cell.searchBarButton.addTarget(self, action: #selector(searchBarButtonDidTap), for: .touchUpInside)
+            cell.bindGuideText(text: viewModel.reportedNumberGuideText)
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
