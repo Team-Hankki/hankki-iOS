@@ -12,6 +12,7 @@ import Moya
 protocol UserAPIServiceProtocol {
     func getMe(completion: @escaping(NetworkResult<BaseDTO<GetMeResponseData>>) -> Void)
     func getMeHankkiList(_ type: UserTargetType, completion: @escaping(NetworkResult<BaseDTO<GetMeHankkiListResponseData>>) -> Void)
+    func getMeZipList(completion: @escaping (NetworkResult<BaseDTO<GetMeZipListResponseData>>) -> Void)
 }
 
 final class UserAPIService: BaseAPIService, UserAPIServiceProtocol {
@@ -48,5 +49,18 @@ final class UserAPIService: BaseAPIService, UserAPIServiceProtocol {
         }
     }
     
-    
+    func getMeZipList(completion: @escaping (NetworkResult<BaseDTO<GetMeZipListResponseData>>) -> Void) {
+        provider.request(.getMeZipList) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<BaseDTO<GetMeZipListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<BaseDTO<GetMeZipListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
 }

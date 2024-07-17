@@ -12,7 +12,7 @@ struct GetMeZipListResponseData: Codable {
 }
 
 struct GetMeZipResponseData: Codable {
-    let Id: Int
+    let id: Int
     let title: String
     let imageType: String
 }
