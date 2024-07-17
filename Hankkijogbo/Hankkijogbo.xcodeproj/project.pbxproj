@@ -89,7 +89,6 @@
 		86880BE12C46CD4C00CAEF58 /* UniversityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE02C46CD4C00CAEF58 /* UniversityService.swift */; };
 		86880BE52C46D3EE00CAEF58 /* AuthRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */; };
 		86880BE82C46D45500CAEF58 /* AuthResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */; };
-		86880BEA2C46D6F700CAEF58 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BE92C46D6F700CAEF58 /* BaseDTO.swift */; };
 		86880BEE2C46E38200CAEF58 /* GetUniversityListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BED2C46E38200CAEF58 /* GetUniversityListResponseDTO.swift */; };
 		86880BF22C46E74700CAEF58 /* GetMeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF12C46E74700CAEF58 /* GetMeResponseDTO.swift */; };
 		86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF32C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift */; };
@@ -236,7 +235,6 @@
 		86880BE02C46CD4C00CAEF58 /* UniversityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityService.swift; sourceTree = "<group>"; };
 		86880BE42C46D3EE00CAEF58 /* AuthRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestDTO.swift; sourceTree = "<group>"; };
 		86880BE72C46D45500CAEF58 /* AuthResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponseDTO.swift; sourceTree = "<group>"; };
-		86880BE92C46D6F700CAEF58 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 		86880BED2C46E38200CAEF58 /* GetUniversityListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUniversityListResponseDTO.swift; sourceTree = "<group>"; };
 		86880BF12C46E74700CAEF58 /* GetMeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeResponseDTO.swift; sourceTree = "<group>"; };
 		86880BF32C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeUniversityResponseDTO.swift; sourceTree = "<group>"; };
@@ -333,7 +331,6 @@
 				8302854C2C455EC70004D9F7 /* MoyaPlugin.swift */,
 				8302855C2C4567A30004D9F7 /* BaseTargetType.swift */,
 				83DD39732C4644DD00DD7EC3 /* URLConstant.swift */,
-				86880BE92C46D6F700CAEF58 /* BaseDTO.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1313,7 +1310,6 @@
 				8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */,
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
-				86880BEA2C46D6F700CAEF58 /* BaseDTO.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
