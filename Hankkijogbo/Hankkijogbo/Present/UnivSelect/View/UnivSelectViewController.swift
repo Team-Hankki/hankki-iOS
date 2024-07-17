@@ -11,9 +11,7 @@ final class UnivSelectViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private var currentUniv: String = ""
-    
-    private let dummyUnivList: [String] = ["더미대학교", "한끼대학교", "가현대학교", "은수대학교", "서현대학교", "물만두비빔밥", "오이냉채", "계란국", "김치말이국수", "맛있겠다."]
+    private let viewModel: UnivSelectViewModel = UnivSelectViewModel()
 
     // MARK: - UI Properties
     
@@ -36,6 +34,9 @@ final class UnivSelectViewController: BaseViewController {
         super.viewDidLoad()
         setupDelegate()
         setupRegister()
+        
+        viewModel.getUniversityList(completion: {_ in })
+        setupViewModel()
     }
     
     override func setupStyle() {
@@ -100,6 +101,14 @@ final class UnivSelectViewController: BaseViewController {
 // MARK: - private Func
 
 private extension UnivSelectViewController {
+    private func setupViewModel() {
+        viewModel.reloadCollectionView = { [weak self] in
+            DispatchQueue.main.async {
+                self?.univCollectionView.reloadData()
+            }
+        }
+    }
+    
     func setupUnivCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         
@@ -115,7 +124,7 @@ private extension UnivSelectViewController {
     
     // Todo: - 나중에 수정
     func bottomButtonPrimaryHandler() {
-        print(currentUniv, "을 선택했어요!")
+        print(viewModel.currentUniv, "을 선택했어요!")
     }
     
     func bottomButtonLineHandler() {
@@ -136,7 +145,7 @@ private extension UnivSelectViewController {
 
 extension UnivSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyUnivList.count
+        return viewModel.universityList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -144,15 +153,15 @@ extension UnivSelectViewController: UICollectionViewDataSource {
             withReuseIdentifier: UnivCollectionViewCell.className,
             for: indexPath
         ) as? UnivCollectionViewCell else { return UICollectionViewCell() }
-        cell.dataBind(dummyUnivList[indexPath.item], isFinal: dummyUnivList.count == indexPath.item + 1)
+        cell.dataBind(viewModel.universityList[indexPath.item].name, isFinal: viewModel.universityList.count == indexPath.item + 1)
         return cell
     }
 }
 
 extension UnivSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        currentUniv = dummyUnivList[indexPath.item]
-        if !currentUniv.isEmpty {
+        viewModel.currentUniv = viewModel.universityList[indexPath.item].name
+        if !viewModel.currentUniv.isEmpty {
             bottomButtonView.setupEnabledDoneButton()
         }
     }
@@ -163,3 +172,4 @@ extension UnivSelectViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+

@@ -11,7 +11,9 @@ final class MypageViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private let hankkiList:[MypageHankkiCollectionViewCell.DataStruct] = [
+    let viewModel: MypageViewModel = MypageViewModel()
+    
+    private let hankkiList: [MypageHankkiCollectionViewCell.DataStruct] = [
         MypageHankkiCollectionViewCell.DataStruct(image: .icFood31, title: "내가 제보한 식당"),
         MypageHankkiCollectionViewCell.DataStruct(image: .icLike, title: "좋아요 누른 식당")
     ]
@@ -175,4 +177,8 @@ extension MypageViewController: UIGestureRecognizerDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         setupAction(SectionType(rawValue: indexPath.section)!, itemIndex: indexPath.item)
     }
+}
+
+extension MypageViewController {
+    
 }
