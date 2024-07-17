@@ -15,7 +15,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
     
-    // MARK: - UI Properties
+    // MARK: - UI Components
     
     private let dimmedView = UIView()
     private let containerView = UIView()
@@ -91,6 +91,10 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.do {
+            $0.backgroundColor = .clear
+        }
+        
         dimmedView.do {
             $0.backgroundColor = .black.withAlphaComponent(0.67)
         }
@@ -194,7 +198,7 @@ extension MyZipListBottomSheetViewController {
         }, completion: nil)
     }
     
-    func removeMyZipBottomSheet() {
+    func dismissMyZipBottomSheet() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(0)
@@ -243,7 +247,7 @@ private extension MyZipListBottomSheetViewController {
             updatedHeight = defaultHeight
         } else {
             updatedHeight = 0
-            removeMyZipBottomSheet()
+            dismissMyZipBottomSheet()
         }
         
         isExpanded = false
@@ -252,7 +256,7 @@ private extension MyZipListBottomSheetViewController {
     }
     
     @objc func dimmedViewDidTap() {
-        removeMyZipBottomSheet()
+        dismissMyZipBottomSheet()
     }
 }
 
@@ -279,7 +283,12 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyZipListCollectionViewCell.className, for: indexPath) as? MyZipListCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.addZipButton.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
         return cell
+    }
+    
+    @objc func addZipButtonDidTap() {
+        self.dismissMyZipBottomSheet()
     }
 }
 

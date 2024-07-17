@@ -8,16 +8,20 @@
 import UIKit
 
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
-        
-    // MARK: - UI Properties
+    
+    var isChecked: Bool = false
+    // TODO: - literal로 빼기
+    var updateStringNotificationName: String = "UpdateAddToMyZipListString"
+
+    // MARK: - UI Components
     
     private let thumbnailImageView = UIImageView()
     private let zipTitleLabel = UILabel()
     private let firstHashtagLabel = UILabel()
     private let secondHashtagLabel = UILabel()
-    private let addZipButton = UIButton()
+    let addZipButton = UIButton()
     
-    // MARK: - Set UI
+    // MARK: - Setup UI
     
     override func setupHierarchy() {
         contentView.addSubviews(
@@ -50,6 +54,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         addZipButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(37)
             $0.centerY.equalToSuperview()
+            $0.size.equalTo(24)
         }
     }
     
@@ -81,6 +86,17 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         }
         addZipButton.do {
             $0.setImage(.btnAddLined, for: .normal)
+            $0.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
+        }
+    }
+    
+    @objc func addZipButtonDidTap() {
+        isChecked = !isChecked
+        if isChecked {
+            addZipButton.setImage(.btnCheckFilled, for: .normal)
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(updateStringNotificationName)))
+        } else {
+            addZipButton.setImage(.btnAddLined, for: .normal)
         }
     }
 }

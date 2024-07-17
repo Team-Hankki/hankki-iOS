@@ -167,7 +167,8 @@ private extension ReportViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
-        print("제보하기 클릭")
+        let reportCompleteViewController = ReportCompleteViewController()
+        self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
     }
     
     /// 메뉴 셀 추가
