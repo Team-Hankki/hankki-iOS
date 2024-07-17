@@ -198,7 +198,7 @@ extension MyZipListBottomSheetViewController {
         }, completion: nil)
     }
     
-    func removeMyZipBottomSheet() {
+    func dismissMyZipBottomSheet() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(0)
@@ -247,7 +247,7 @@ private extension MyZipListBottomSheetViewController {
             updatedHeight = defaultHeight
         } else {
             updatedHeight = 0
-            removeMyZipBottomSheet()
+            dismissMyZipBottomSheet()
         }
         
         isExpanded = false
@@ -256,7 +256,7 @@ private extension MyZipListBottomSheetViewController {
     }
     
     @objc func dimmedViewDidTap() {
-        removeMyZipBottomSheet()
+        dismissMyZipBottomSheet()
     }
 }
 
@@ -288,7 +288,7 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
     }
     
     @objc func addZipButtonDidTap() {
-        self.removeMyZipBottomSheet()
+        self.dismissMyZipBottomSheet()
     }
 }
 
