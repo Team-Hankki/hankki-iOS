@@ -18,11 +18,8 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        self.addSubview(headerStackView)
-        headerStackView.addArrangedSubviews(
-            headerLabel,
-            categoryLabel
-        )
+        addSubview(headerStackView)
+        headerStackView.addArrangedSubviews(headerLabel, categoryLabel)
     }
     
     override func setupLayout() {

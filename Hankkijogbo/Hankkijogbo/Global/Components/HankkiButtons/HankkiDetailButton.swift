@@ -55,14 +55,12 @@ final class HankkiDetailButton: BaseView {
             $0.configuration = .plain()
             $0.configuration?.imagePadding = 10
             $0.backgroundColor = .hankkiWhite
-            $0.layer.cornerRadius = 10
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray100.cgColor
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray100)
         }
     }
     
     override func setupHierarchy() {
-        self.addSubview(hankkiDetailButton)
+        addSubview(hankkiDetailButton)
     }
     
     override func setupLayout() {
