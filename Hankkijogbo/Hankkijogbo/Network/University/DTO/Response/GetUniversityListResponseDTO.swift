@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetUniversityListResponseData: Codable {
+struct GetUniversityListResponseDataDTO: Codable {
     let universities: [GetUniversityResponseData]
 }
 

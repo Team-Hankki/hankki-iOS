@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import Moya
 
 enum AuthTargetType {
@@ -42,14 +43,10 @@ extension AuthTargetType: BaseTargetType {
     
     var requestBodyParameter: (any Codable)? {
         switch self {
-        case .postReissue:
-            return .none
-        case .postLogin(let requestBody):
-            return requestBody
-        case .deleteWithdraw:
-            return .none
-        case .patchLogout:
-            return .none
+        case .postReissue: return .none
+        case .postLogin(let requestBody): return requestBody
+        case .deleteWithdraw: return .none
+        case .patchLogout: return .none
         }
     }
     
@@ -69,14 +66,10 @@ extension AuthTargetType: BaseTargetType {
     var method: Moya.Method {
         switch self {
         
-        case .postReissue:
-            return .post
-        case .postLogin:
-            return .post
-        case .deleteWithdraw:
-            return .delete
-        case .patchLogout:
-            return .patch
+        case .postReissue: return .post
+        case .postLogin: return .post
+        case .deleteWithdraw: return .delete
+        case .patchLogout: return .patch
         }
     }
 }

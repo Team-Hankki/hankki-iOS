@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import Moya
 
 enum ZipTargetType {
@@ -36,18 +37,12 @@ extension ZipTargetType: BaseTargetType {
     
     var requestBodyParameter: (any Codable)? {
         switch self {
-        case .getZipList(let storeId):
-            return storeId
-        case .getZipDetail:
-            return .none
-        case .postZip:
-            return .none
-        case .postZipBatchDelete(let requestBody):
-            return requestBody
-        case .postZipToHankki:
-            return .none
-        case .deleteZipToHankki:
-            return .none
+        case .getZipList(let storeId): return storeId
+        case .getZipDetail: return .none
+        case .postZip: return .none
+        case .postZipBatchDelete(let requestBody): return requestBody
+        case .postZipToHankki: return .none
+        case .deleteZipToHankki: return .none
         }
     }
     
@@ -70,18 +65,12 @@ extension ZipTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getZipList:
-            return .get
-        case .getZipDetail:
-            return .get
-        case .postZip:
-            return .post
-        case .postZipBatchDelete:
-            return .post
-        case .postZipToHankki:
-            return .post
-        case .deleteZipToHankki:
-            return .delete
+        case .getZipList: return .get
+        case .getZipDetail: return .get
+        case .postZip: return .post
+        case .postZipBatchDelete: return .post
+        case .postZipToHankki: return .post
+        case .deleteZipToHankki: return .delete
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import Moya
 
 enum UniversityTargetType {
@@ -34,8 +35,7 @@ extension UniversityTargetType: BaseTargetType {
     
     var requestBodyParameter: (any Codable)? {
         switch self {
-        case .getUniversityList:
-            return .none
+        case .getUniversityList: return .none
         }
     }
     
@@ -48,8 +48,7 @@ extension UniversityTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getUniversityList:
-            return .get
+        case .getUniversityList: return .get
         }
     }    
 }
