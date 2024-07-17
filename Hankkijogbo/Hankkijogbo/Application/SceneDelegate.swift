@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
 //        window?.rootViewController = navigationController
+//        UserDefaults.standard.saveTokens(accessToken: "엑세스토큰", refreshToken: "리프레시토큰")
         window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
     }
