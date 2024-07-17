@@ -8,8 +8,8 @@
 import Foundation
 
 struct GetHankkiListRequestDTO {
-    let university: String
-    let category: String
-    let lowestPrice: String
-    let order: String
+    let universityId: Int
+    let storeCategory: String
+    let priceCategory: String
+    let sortOption: String
 }
