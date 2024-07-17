@@ -14,9 +14,14 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     private let viewModel = HomeViewModel()
-    
+
     private var isButtonModified = false
     var isDropDownVisible = false
+    
+    private var university: String?
+    private var selectedCategory: String?
+    private var selectedLowestPrice: String?
+    private var selectedOrder: String?
     
     // MARK: - UI Components
     
@@ -35,7 +40,7 @@ final class HomeViewController: BaseViewController {
         setupRegister()
         setupaddTarget()
         
-        viewModel.getCategoryFilterAPI(completion: {_ in })
+        viewModel.getHankkiListAPI(university: "", category: selectedCategory ?? "", lowestPrice: selectedLowestPrice ?? "", order: selectedOrder ?? "", completion: {_ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +133,7 @@ private extension HomeViewController {
     // MARK: - @objc Func
     
     @objc func typeButtonDidTap() {
+        viewModel.getCategoryFilterAPI(completion: {_ in })
         if isButtonModified {
             revertButton(for: rootView.typeButton, filter: "종류")
         } else {
@@ -214,9 +220,9 @@ extension HomeViewController: NMFMapViewTouchDelegate {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         typeCollectionView.isHidden = true
-        let selectedCategory = viewModel.categoryFilters[indexPath.item]
-        changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
-        print("\(selectedCategory.name) 이 클릭되었습니다.")
+        selectedCategory = viewModel.categoryFilters[indexPath.item].name
+        changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory ?? "")
+        print("\(String(describing: selectedCategory)) 이 클릭되었습니다.")
     }
 }
 
@@ -285,8 +291,10 @@ extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
         switch buttonType {
         case .price:
+            selectedLowestPrice = item
             changeButtonTitle(for: rootView.priceButton, newTitle: item)
         case .sort:
+            selectedOrder = item
             changeButtonTitle(for: rootView.sortButton, newTitle: item)
         }
         hideDropDown()

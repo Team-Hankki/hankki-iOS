@@ -16,12 +16,13 @@ final class HomeViewModel {
     var categoryFilters: [GetCategoryFilterData] = []
     var priceFilters: [GetPriceFilterData] = []
     var sortOptions: [GetSortOptionFilterData] = []
+    var hankkiLists: [GetHankkiListData] = []
     
     init(hankkiAPIService: HankkiAPIServiceProtocol = HankkiAPIService()) {
         self.hankkiAPIService = hankkiAPIService
     }
     
-    // 종류 카테고리를 가져오는 메서드 
+    // 종류 카테고리를 가져오는 메서드
     func getCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getCategoryFilter { [weak self] result in
             switch result {
@@ -71,4 +72,39 @@ final class HomeViewModel {
             }
         }
     }
+    
+    //    // 식당 리스트를 가져오는 메서드
+    //    func getHankkiListAPI(completion: @escaping (Bool) -> Void) {
+    //        NetworkService.shared.hankkiService.getHankkiList { [weak self] result in
+    //            switch result {
+    //            case .success(let response):
+    //                self?.hankkiLists = response?.data.stores ?? []
+    //                completion(true)
+    //                print("SUCESS")
+    //            case .unAuthorized, .networkFail:
+    //                completion(false)
+    //                print("FAILED")
+    //            default:
+    //                return
+    //            }
+    //        }
+    //    }
+    // 식당 리스트를 가져오는 메서드
+    func getHankkiListAPI(university: String, category: String, lowestPrice: String, order: String, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiList(university: university, category: category, lowestPrice: lowestPrice, order: order) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.hankkiLists = response?.data.stores ?? []
+                completion(true)
+                print("SUCCESS")
+            case .unAuthorized, .networkFail:
+                completion(false)
+                print("FAILED")
+            default:
+                return
+            }
+        }
+        
+    }
 }
+
