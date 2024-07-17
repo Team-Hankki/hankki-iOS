@@ -7,6 +7,8 @@
 
 import UIKit
 
+import AuthenticationServices
+
 final class MypageViewController: BaseViewController {
     
     // MARK: - Properties
@@ -112,7 +114,8 @@ private extension MypageViewController {
         self.showAlert(
             titleText: "소중한 족보가 사라져요",
             secondaryButtonText: "돌아가기",
-            primaryButtonText: "탈퇴하기"
+            primaryButtonText: "탈퇴하기",
+            primaryButtonHandler: handdleWithdraw
         )
     }
 }
@@ -186,12 +189,48 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 }
 
+private extension MypageViewController {
+    func handdleWithdraw() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+}
+
 extension MypageViewController: UIGestureRecognizerDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         setupAction(SectionType(rawValue: indexPath.section)!, itemIndex: indexPath.item)
     }
 }
-
-extension MypageViewController {
+extension MypageViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            if let authorizationCodeData = appleIDCredential.authorizationCode {
+                if let authorizationCodeString = String(data: authorizationCodeData, encoding: .utf8) {
+                    viewModel.deleteWithdraw(authorizationCode: authorizationCodeString)
+                }
+            }
+        default:
+            break
+        }
+    }
     
+    // 실패 후 동작
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithError error: Error) {
+        print("애플 로그인 실패: \(error.localizedDescription)")
+    }
+}
+
+extension MypageViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window ?? UIWindow()
+    }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 import Then
 import SnapKit
+import AuthenticationServices
 
 final class MypageQuitFooterView: BaseCollectionViewCell {
     

@@ -12,6 +12,7 @@ import Moya
 protocol AuthAPIServiceProtocol {
     func postLogin(requestBody: PostLoginRequestDTO, completion: @escaping(NetworkResult<BaseDTO<PostLoginResponseData>>) -> Void)
     func patchLogout(completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func deleteWithdraw(authorizationCode: String, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
 }
 
 final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
@@ -23,7 +24,7 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<BaseDTO<PostLoginResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
-//                print(networkResult.stateDescription)
+                //                print(networkResult.stateDescription)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
@@ -39,7 +40,22 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
-//                print(networkResult.stateDescription)
+                //                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func deleteWithdraw(authorizationCode: String, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.deleteWithdraw(authorizationCode: authorizationCode)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
