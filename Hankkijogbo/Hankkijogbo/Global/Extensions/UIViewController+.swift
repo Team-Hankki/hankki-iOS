@@ -140,6 +140,15 @@ extension UIViewController {
         }
     }
     
+    // MARK: - 고민사항: 이걸 여기에, 이렇게 넣는 게 맞는가
+    /// 나의 식당 족보 바텀 시트 띄우기
+    func presentMyZipListBottomSheet() {
+        let viewController = MyZipListBottomSheetViewController()
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: false, completion: nil)
+    }
+    
     /// - ViewController를 dismiss 할 때 fade out 효과를 주는 함수
     func dismissWithFadeOut() {
         let transition = CATransition().fadeTransition(duration: 0.2)

@@ -198,7 +198,7 @@ extension MyZipListBottomSheetViewController {
         }, completion: nil)
     }
     
-    func removeMyZipBottomSheet() {
+    func dismissMyZipBottomSheet() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(0)
@@ -247,7 +247,7 @@ private extension MyZipListBottomSheetViewController {
             updatedHeight = defaultHeight
         } else {
             updatedHeight = 0
-            removeMyZipBottomSheet()
+            dismissMyZipBottomSheet()
         }
         
         isExpanded = false
@@ -256,7 +256,7 @@ private extension MyZipListBottomSheetViewController {
     }
     
     @objc func dimmedViewDidTap() {
-        removeMyZipBottomSheet()
+        dismissMyZipBottomSheet()
     }
 }
 
@@ -283,14 +283,12 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyZipListCollectionViewCell.className, for: indexPath) as? MyZipListCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.addZipButton.addTarget(self, action: #selector(test), for: .touchUpInside)
+        cell.addZipButton.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
         return cell
     }
     
-    @objc func test() {
-        self.modalTransitionStyle = .crossDissolve
-        self.dismiss(animated: true)
-        // 토스트뷰
+    @objc func addZipButtonDidTap() {
+        self.dismissMyZipBottomSheet()
     }
 }
 

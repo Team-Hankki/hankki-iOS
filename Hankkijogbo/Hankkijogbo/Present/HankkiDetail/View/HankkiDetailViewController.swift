@@ -201,13 +201,6 @@ private extension HankkiDetailViewController {
             $0.clipsToBounds = true
         }
     }
-    
-    func presentMyZipListBottomSheet() {
-        let viewController = MyZipListBottomSheetViewController()
-        viewController.modalTransitionStyle = .crossDissolve
-        viewController.modalPresentationStyle = .overFullScreen
-        self.present(viewController, animated: false, completion: nil)
-    }
 }
 
 extension HankkiDetailViewController {

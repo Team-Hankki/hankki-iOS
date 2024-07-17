@@ -45,7 +45,10 @@ protocol BaseTargetType: TargetType {
 
 extension BaseTargetType {
     var baseURL: URL {
-        return URL(string: URLConstant.baseURL)!
+        guard let baseURL = URL(string: URLConstant.baseURL) else {
+            fatalError("BaseURL ERROR")
+        }
+        return baseURL
     }
     
     var headers: [String: String]? {

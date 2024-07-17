@@ -10,7 +10,9 @@ import UIKit
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
     var isChecked: Bool = false
-        
+    // TODO: - literal로 빼기
+    var updateStringNotificationName: String = "UpdateAddToMyZipListString"
+
     // MARK: - UI Components
     
     private let thumbnailImageView = UIImageView()
@@ -92,6 +94,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         isChecked = !isChecked
         if isChecked {
             addZipButton.setImage(.btnCheckFilled, for: .normal)
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(updateStringNotificationName)))
         } else {
             addZipButton.setImage(.btnAddLined, for: .normal)
         }
