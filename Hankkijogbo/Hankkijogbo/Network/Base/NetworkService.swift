@@ -18,7 +18,7 @@ final class NetworkService {
 //    let userService: UserAPIServiceProtocol = UserAPIService()
 //    let menuService: MenuAPIServiceProtocol = MenuAPIService()
     let universityService: UniversityAPIServiceProtocol = UniversityAPIService()
-//    let locationService: LocationAPIServiceProtocol = LocationAPIService()
+    let locationService: LocationAPIServiceProtocol = LocationAPIService()
 //    let favoriteService: FavoriteAPIServiceProtocol = FavoriteAPIServie()
     let reportService: ReportAPIServiceProtocol = ReportAPIService()
 }

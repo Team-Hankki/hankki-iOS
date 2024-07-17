@@ -20,13 +20,7 @@ final class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let searchResultDummy: [SearchResultModel] = [
-        SearchResultModel(name: "고동밥집 1호점고동밥집 1호점고동밥집 1호점고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음")
-    ]
+    var viewModel: SearchViewModel = SearchViewModel()
     
     var selectedHankkiNameString: String?
     weak var delegate: PassItemDataDelegate?
@@ -53,6 +47,8 @@ final class SearchViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
+        bindViewModel()
+        viewModel.getSearchedLocationAPI(query: "재연")
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,6 +149,14 @@ final class SearchViewController: BaseViewController {
         searchCollectionView.do {
             $0.backgroundColor = .hankkiWhite
             $0.showsVerticalScrollIndicator = false
+        }
+    }
+}
+
+extension SearchViewController {
+    func bindViewModel() {
+        viewModel.updateLocations = {
+            self.searchCollectionView.reloadData()
         }
     }
 }
@@ -279,13 +283,14 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        searchResultDummy.count
+        viewModel.model?.locations.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell,
+              let locations = viewModel.model?.locations else { return UICollectionViewCell() }
         cell.delegate = self
-        cell.bindData(model: searchResultDummy[indexPath.item])
+        cell.bindLocationData(model: locations[indexPath.item])
         return cell
     }
 }

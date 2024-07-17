@@ -110,7 +110,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func bindData(model: SearchResultModel) {
+    func bindLocationData(model: GetSearchedLocation) {
         self.hankkiNameLabel.text = model.name
         self.addressLabel.text = model.address
     }
