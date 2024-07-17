@@ -38,6 +38,10 @@ final class MypageViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
+        
+        setupViewModel()
+        
+        viewModel.getMe()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +69,15 @@ extension MypageViewController {
 }
 
 private extension MypageViewController {
+    private func setupViewModel() {
+        viewModel.reloadCollectionView = { [weak self] in
+            DispatchQueue.main.async {
+                guard let headerView = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? MypageHeaderView else { return }
+                headerView.dataBind(self?.viewModel.userInfo ?? nil)
+            }
+        }
+    }
+    
     func setupRegister() {
         collectionView.register(MypageZipCollectionViewCell.self, forCellWithReuseIdentifier: MypageZipCollectionViewCell.className)
         collectionView.register(MypageHankkiCollectionViewCell.self, forCellWithReuseIdentifier: MypageHankkiCollectionViewCell.className)

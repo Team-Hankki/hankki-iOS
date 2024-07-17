@@ -10,11 +10,28 @@ import Foundation
 import Moya
 
 protocol UserAPIServiceProtocol {
-    
+    func getMe(completion: @escaping(NetworkResult<BaseDTO<GetMeResponseData>>) -> Void)
 }
 
 final class UserAPIService: BaseAPIService, UserAPIServiceProtocol {
     
+    
     private let provider = MoyaProvider<UserTargetType>(plugins: [MoyaPlugin()])
+    
+    func getMe(completion: @escaping (NetworkResult<BaseDTO<GetMeResponseData>>) -> Void) {
+        provider.request(.getMe) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<BaseDTO<GetMeResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<BaseDTO<GetMeResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
 
 }

@@ -42,17 +42,17 @@ extension UserTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .getMe:
-            return utilPath.rawValue
+            return utilPath.rawValue + "/me"
         case .getMeUniversity:
             return utilPath.rawValue
         case .getMeHankkiHeartList:
-            return utilPath.rawValue + "university"
+            return utilPath.rawValue + "/university"
         case .getMeHankkiReportList:
-            return utilPath.rawValue + "stores/hearts"
+            return utilPath.rawValue + "/stores/hearts"
         case .getMeZipList:
-            return utilPath.rawValue + "stores/reports"
+            return utilPath.rawValue + "/stores/reports"
         case .postMeUniversity:
-            return utilPath.rawValue + "university"
+            return utilPath.rawValue + "/university"
         }
     }
     
