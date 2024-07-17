@@ -7,21 +7,39 @@
 ## 🍎 Developers
 | [@mcrkgus](https://github.com/mcrkgus) | [@EunsuSeo01](https://github.com/EunsuSeo01) | [@shimseohyun](https://github.com/shimseohyun) |
 |:---:|:---:|:---:|
-|<img width="250" alt="mcrkgus" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/d69ab5be-5879-48f7-8310-0c8322500d29">|<img width="250" alt="EunsuSeo01" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/939cad7d-bffc-4de3-a8b5-b437b9789324">|<img width="250" alt="shimseohyun" src="https://github.com/Team-Hankki/hankki-iOS/assets/117021241/44849665-870d-422b-90e0-7c7e71443ff8">|
+|<img width="250" alt="mcrkgus" src="https://github.com/user-attachments/assets/acfb09f7-5600-4861-b5c4-bb2c337e8d17">|<img width="250" alt="EunsuSeo01" src="https://github.com/user-attachments/assets/0cb6f598-2627-4173-8206-3aef7726b129">|<img width="250" alt="shimseohyun" src="https://github.com/user-attachments/assets/53244098-45eb-48a6-a734-26a5854ab5d0">|
 |어떤|일을|할까|
 
 
 ## 🛠 Development Environment
 <img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
+## ✏️ project design
+[🔗 Project Design](https://fast-kilometer-dbf.notion.site/Project-Design-ff41dbf4511547efaedef8fb546e7f4e?pvs=4)
+![프로젝트 아키텍쳐](https://github.com/user-attachments/assets/f24bb0da-61f3-4105-b89d-32ed6709e24c)
 
 
-## 💻 Git Convention
-### Git Flow
+## 💻 Code convention
+
+[🔗 Code Convention](https://fast-kilometer-dbf.notion.site/Coding-Convention-4f9de9541571486e86bfaa5a548137e3?pvs=4)
+> StyleShare 의 Swift Style Guide 를 기본으로 작성되었습니다.
+> SwiftLint 를 통해서 통일성있는 클린코드를 추구합니다.
+```
+1. 성능 최적화와 위해 더 이상 상속되지 않을 class 에는 꼭 final 키워드를 붙입니다.
+2. 안전성을 위해 class 에서 사용되는 property는 모두 private로 선언합니다.
+3. 명시성을 위해 약어와 생략을 지양합니다.
+   VC -> ViewController
+   TVC -> TableViewCell
+4. 빠른 확인을 위해 Global위치에 함수를 만든다면, 퀵 헬프 주석을 답니다.
+5. 런타임 크래시를 방지하기 위해 강제 언래핑을 사용하지 않습니다.
+```
+
+## 🖊️ Git Flow
+
+[🔗 Git Convention](https://fast-kilometer-dbf.notion.site/Github-Convention-45ae288d2b0943439cb4cae9bb61ec58?pvs=4)
+
 - `develop 브랜치` 개발 작업 브랜치
 - `main 브랜치` 릴리즈 버전 관리 브랜치
-
-<사진>
 
 ```
 1. 작업할 내용에 대해서 이슈를 생성한다.
@@ -33,58 +51,6 @@
 7. 코드리뷰 후 수정사항 반영한 뒤, develop 브랜치에 merge 한다
 ```
 
-- *Tag*
-
-| 태그      | 설명                                      |
-|-----------|-------------------------------------------|
-| Feat      | 새로운 기능 구현                           |
-| Fix       | 버그, 오류 해결                            |
-| Chore     | 코드 수정, 내부 파일 수정                   |
-| Add       | 라이브러리 추가, 에셋 추가                 |
-| Del       | 쓸모없는 코드 삭제                         |
-| Docs      | README나 WIKI 등의 문서 개정                |
-| Refactor  | 전면 수정                                  |
-| Setting   | 프로젝트 설정                              |
-| Merge     | 다른 브랜치와 병합함                       |
-
-### Issue
-```Swift
-[종류] 작업 명
-ex) [Feat] Main View UI 구현
-```
-`담당자`, `라벨` 추가 하기
-
-### Commit
-```Swift
-[종류] #이슈 - 작업 이름
-ex) [Feat] #13 - Main UI 구현
-
-✅ Merge
-/// feature branch -> develop
-기본 머지 메세지
-
-/// develop branch -> feature branch (브랜치 최신화)
-[Merge] #이슈 - Pull Develop
-ex) [Merge] #13 - Pull Develop
-```
-
-### Pull Request
-```Swift
-[종류] #이슈번호 작업명
-ex) [Feat] #13 Main View UI 구현
-```
-`담당자`, `리뷰어`, `라벨` 추가 하기
-
-- *Code Review*
-```Swift
-✅ Pn Rule
-
-P1 : 꼭 반영해주세요. 
-
-P2 : 반영하면 좋을 것 같습니다. 
-
-P3 : 단순 의견 제시 (무시해도 됩니다)
-```
 
 ## 📂 Foldering
 ```
@@ -133,10 +99,11 @@ P3 : 단순 의견 제시 (무시해도 됩니다)
 ```
 
 ## 🎁 Library
-| Name         |          |          |
+| Name         | Version  |          |
 | ------------ |  :-----: |  ------------ |
-| Then         |   `SPM`  |객체를 생성하고 설정하는 코드를 하나의 블록으로 묶어 가독성을 향상시킨다.|
-| SnapKit      |  `SPM`  |Auto Layout 제약조건을 코드로 쉽게 작성할 수 있도록 한다.|
-| Kingfisher   |  `SPM`  |URL로부터 이미지 다운 중 처리 작업을 간소화할 수 있도록 한다.|
-| MapKit      | `SPM`  |다양한 지도 기능을 원활하게 구현할 수 있도록 한다.|
-| Moya         |  `SPM`  | 네트워크 요청을 간편화하고, 구조화된 방식으로 관리하여 코드의 가독성과 유지 보수성을 높인다.|
+| [Then](https://github.com/devxoul/Then) | `3.0.0` | 객체를 생성하고 설정하는 코드를 하나의 블록으로 묶어 가독성을 향상시킨다. |
+| [SnapKit](https://github.com/SnapKit/SnapKit) | `5.7.1` | Auto Layout 제약조건을 코드로 쉽게 작성할 수 있도록 한다. |
+| [Moya](https://github.com/Moya/Moya) |  `15.0.3`  | 네트워크 요청을 간편화하고, 구조화된 방식으로 관리하여 코드의 가독성과 유지 보수성을 높인다.|
+| [Kingfisher](https://github.com/onevcat/Kingfisher) | `7.12.0` | URL로부터 이미지 다운 중 처리 작업을 간소화할 수 있도록 한다. |
+| [NMFMaps](https://navermaps.github.io/ios-map-sdk/guide-ko/1.html) | `15.0.3` | 다양한 지도 기능을 원활하게 구현할 수 있도록 한다. |
+| [Lottie](https://github.com/airbnb/lottie-ios) | `4.5.0` | 벡터 그래픽 애니메이션을 추가하고 관리한다. |
