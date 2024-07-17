@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// 정렬 드롭다운 정보 조회
+
 struct GetSortOptionFilterResponseData: Codable {
     let options: [GetSortOptionFilterData]
 }

@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// 메인 페이지 식당 리스트 조회
+
 struct GetHankkiListResponseData: Codable {
     let stores: [GetHankkiListData]
 }
