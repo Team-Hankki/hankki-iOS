@@ -14,10 +14,14 @@
 ## 🛠 Development Environment
 <img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
+## ✏️ project design
+[🔗 Project Design](https://fast-kilometer-dbf.notion.site/Project-Design-ff41dbf4511547efaedef8fb546e7f4e?pvs=4)
+![프로젝트 아키텍쳐](https://github.com/user-attachments/assets/f24bb0da-61f3-4105-b89d-32ed6709e24c)
+
 
 ## 💻 Code convention
 
-[Code Convention](https://fast-kilometer-dbf.notion.site/Coding-Convention-4f9de9541571486e86bfaa5a548137e3?pvs=4)
+[🔗 Code Convention](https://fast-kilometer-dbf.notion.site/Coding-Convention-4f9de9541571486e86bfaa5a548137e3?pvs=4)
 > StyleShare 의 Swift Style Guide 를 기본으로 작성되었습니다.
 > SwiftLint 를 통해서 통일성있는 클린코드를 추구합니다.
 ```
@@ -31,6 +35,9 @@
 ```
 
 ## 🖊️ Git Flow
+
+[🔗 Git Convention](https://fast-kilometer-dbf.notion.site/Github-Convention-45ae288d2b0943439cb4cae9bb61ec58?pvs=4)
+
 - `develop 브랜치` 개발 작업 브랜치
 - `main 브랜치` 릴리즈 버전 관리 브랜치
 
