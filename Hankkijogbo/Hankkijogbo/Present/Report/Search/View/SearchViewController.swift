@@ -220,6 +220,7 @@ private extension SearchViewController {
     
     @objc func searchTextDeleteButtonDidTap() {
         searchTextField.text = nil
+        viewModel.removeAllLocations()
     }
     
     @objc func bottomButtonPrimaryHandler() {

@@ -24,6 +24,10 @@ final class SearchViewModel {
     init(locationAPIService: LocationAPIServiceProtocol = LocationAPIService()) {
         self.locationAPIService = locationAPIService
     }
+    
+    func removeAllLocations() {
+        model?.locations.removeAll()
+    }
 
     func getSearchedLocationAPI(query: String) {
         NetworkService.shared.locationService.getSearchedLocation(query: query) { [weak self] result in
