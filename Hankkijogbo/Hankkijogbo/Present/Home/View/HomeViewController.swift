@@ -13,30 +13,30 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
-    private let viewModel = HomeViewModel()
+    let viewModel = HomeViewModel()
     var isButtonModified = false
     var isDropDownVisible = false
+    var selectedMarkerIndex: Int?
     
     // MARK: - UI Components
     
     private var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
-    var totalListBottomSheetView = TotalListBottomSheetView()
+    var markerInfoCardView: MarkerInfoCardView?
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
-        setupPosition()
         
         setupDelegate()
         setupRegister()
         setupaddTarget()
         bindViewModel()
-        
-        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
+        setupPosition()
+        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,9 +60,11 @@ final class HomeViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        viewModel.hankkiListsDidChange = { [weak self] _ in
+        viewModel.hankkiListsDidChange = { [weak self] data in
+            guard let self else { return }
             DispatchQueue.main.async {
-                self?.totalListBottomSheetView.totalListCollectionView.reloadData()
+                self.rootView.bottomSheetView.data = data
+                self.rootView.bottomSheetView.totalListCollectionView.reloadData()
             }
         }
     }
@@ -76,27 +78,72 @@ extension HomeViewController {
     }
     
     func setupPosition() {
-        var initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        var markers: [GetHankkiPinData] = viewModel.hankkiPins
+        let initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
         
-        rootView.mapView.positionMode = .direction
-        rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+        viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
+            markers = self?.viewModel.hankkiPins ?? []
+            
+            self?.rootView.mapView.positionMode = .direction
+            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            
+            for (index, location) in markers.enumerated() {
+                let marker = NMFMarker()
+                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+                marker.mapView = self?.rootView.mapView
+                marker.touchHandler = { _ in
+                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
+                    self?.showMarkerInfoCard(at: index, pinId: location.id)
+                    return true
+                }
+            }
+        })
+    }
+
+    private func showMarkerInfoCard(at index: Int, pinId: Int) {
+        guard selectedMarkerIndex != index else { return }
+        selectedMarkerIndex = index
         
-        let markers = [
-            (lat: 37.5766102, lng: 126.9783881),
-            (lat: 37.5266102, lng: 126.9785881),
-            (lat: 37.5646102, lng: 126.9787881),
-            (lat: 37.5766152, lng: 126.9789881)
-        ]
+        if markerInfoCardView == nil {
+            markerInfoCardView = MarkerInfoCardView()
+            view.addSubview(markerInfoCardView!)
+            markerInfoCardView?.snp.makeConstraints { make in
+                make.width.equalTo(331)
+                make.height.equalTo(109)
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(22)
+            }
+            view.layoutIfNeeded()
+        }
         
-        for (index, location) in markers.enumerated() {
-            let marker = NMFMarker()
-            marker.position = NMGLatLng(lat: location.lat, lng: location.lng)
-            marker.mapView = rootView.mapView
-            marker.touchHandler = { _ in
-                print("Marker \(index + 1) clicked")
-                return true
+        viewModel.getThumbnailAPI(id: pinId) { [weak self] success in
+            guard let self = self, success, let thumbnailData = self.viewModel.hankkiThumbnail else { return }
+            DispatchQueue.main.async {
+                self.markerInfoCardView?.bindData(model: thumbnailData)
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.markerInfoCardView?.snp.updateConstraints {
+                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
+                    }
+                    self.view.layoutIfNeeded()
+                })
             }
         }
+    }
+    
+    private func hideMarkerInfoCard() {
+        guard markerInfoCardView != nil else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.markerInfoCardView?.snp.updateConstraints {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.markerInfoCardView?.removeFromSuperview()
+            self.markerInfoCardView = nil
+            self.selectedMarkerIndex = nil
+        })
     }
 }
 
@@ -140,7 +187,6 @@ private extension HomeViewController {
     // MARK: - @objc Func
     
     @objc func typeButtonDidTap() {
-        //        viewModel.getCategoryFilterAPI(completion: {_ in })
         viewModel.getCategoryFilterAPI { [weak self] success in
             if success {
                 DispatchQueue.main.async {
@@ -172,60 +218,15 @@ private extension HomeViewController {
         toggleDropDown(isPriceModel: false, buttonType: .sort)
     }
     
-//    func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
-//        customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType, viewModel: viewModel)
-//        customDropDown?.delegate = self
-//        
-//        guard let customDropDown = customDropDown else { return }
-//        
-//        view.addSubview(customDropDown)
-//        
-//        customDropDown.snp.makeConstraints {
-//            $0.top.equalTo(isPriceModel ? rootView.priceButton.snp.bottom : rootView.sortButton.snp.bottom).offset(10)
-//            switch buttonType {
-//            case .price:
-//                $0.centerX.equalTo(rootView.priceButton)
-//            case .sort:
-//                $0.centerX.equalTo(rootView.sortButton)
-//            }
-//            $0.width.height.equalTo(0)
-//        }
-//        
-//        customDropDown.snp.updateConstraints {
-//            let height = isPriceModel ? viewModel.priceFilters.count * 44 : viewModel.sortOptions.count * 44
-//            $0.width.equalTo(112)
-//            $0.height.equalTo(height)
-//        }
-//        self.view.layoutIfNeeded()
-//    }
-    
-//    func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
-//        if isDropDownVisible {
-//            hideDropDown()
-//        } else {
-//            showDropDown(isPriceModel: isPriceModel, buttonType: buttonType)
-//        }
-//        isDropDownVisible.toggle()
-//    }
-//    func hideDropDown() {
-//        guard let customDropDown = customDropDown else { return }
-//        
-//        UIView.animate(withDuration: 0.3, animations: {
-//            customDropDown.snp.updateConstraints {
-//                $0.height.equalTo(0)
-//            }
-//            self.view.layoutIfNeeded()
-//        }) { _ in
-//            customDropDown.removeFromSuperview()
-//            self.customDropDown = nil
-//        }
-//    }
 }
 
 extension HomeViewController: NMFMapViewCameraDelegate {}
 
 extension HomeViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+        self.hideMarkerInfoCard()
+        
         print("Map clicked")
     }
 }
@@ -258,53 +259,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 100, height: 100)
     }
 }
-
-//extension HomeViewController {
-//    func changeButtonTitle(for button: UIButton, newTitle: String) {
-//        button.do {
-//            $0.setTitle(newTitle, for: .normal)
-//            $0.backgroundColor = .hankkiYellowLight
-//            $0.layer.borderColor = UIColor.hankkiYellow.cgColor
-//            $0.setImage(.icClose, for: .normal)
-//            $0.removeTarget(self, action: nil, for: .touchUpInside)
-//            $0.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
-//            $0.sizeToFit()
-//        }
-//        isButtonModified = true
-//    }
-//    
-//    @objc func revertButtonAction(_ sender: UIButton) {
-//        let filter: String
-//        if sender == rootView.priceButton {
-//            filter = "가격대"
-//        } else if sender == rootView.sortButton {
-//            filter = "정렬"
-//        } else {
-//            filter = "종류"
-//        }
-//        revertButton(for: sender, filter: filter)
-//    }
-//    
-//    func revertButton(for button: UIButton, filter: String) {
-//        button.do {
-//            $0.setTitle(filter, for: .normal)
-//            $0.backgroundColor = .white
-//            $0.layer.borderColor = UIColor.gray300.cgColor
-//            $0.setTitleColor(.gray400, for: .normal)
-//            $0.setImage(.icArrowClose, for: .normal)
-//            $0.removeTarget(self, action: nil, for: .touchUpInside)
-//            $0.sizeToFit()
-//        }
-//        if button == rootView.priceButton {
-//            viewModel.priceCategory = ""
-//        } else if button == rootView.sortButton {
-//            viewModel.sortOption = ""
-//        } else {
-//            viewModel.storeCategory = ""
-//        }
-//        isButtonModified = false
-//    }
-//}
 
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {

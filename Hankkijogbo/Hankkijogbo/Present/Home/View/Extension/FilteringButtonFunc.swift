@@ -71,8 +71,7 @@ extension HomeViewController {
         }
         
         customDropDown.snp.updateConstraints {
-//            let height = isPriceModel ? self.pricedata.count * 44 : self.sortdata.count * 44
-            let height = isPriceModel ? (self.customDropDown?.viewModel.priceFilters.count ?? 0) * 44 : self.customDropDown?.viewModel.sortOptions.count ?? 0
+            let height = isPriceModel ? self.viewModel.priceFilters.count * 44 : self.viewModel.categoryFilters.count * 44
             $0.width.equalTo(112)
             $0.height.equalTo(height)
         }
