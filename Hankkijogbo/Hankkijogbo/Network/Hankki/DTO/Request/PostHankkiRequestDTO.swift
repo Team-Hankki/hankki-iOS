@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// 식당 제보하기
+/// 식당 제보하기 Request
 struct PostHankkiRequestDTO: Codable {
     var name: String
     var category: String

@@ -10,19 +10,17 @@ import Foundation
 import Moya
 
 final class ReportViewModel {
-    private let reportAPIService: ReportAPIServiceProtocol
-
+    
     var reportedNumberGuideText: String = "" {
         didSet {
             updateReportedNumber?()
         }
     }
     var updateReportedNumber: (() -> Void)?
-    
-    init(reportAPIService: ReportAPIServiceProtocol = ReportAPIService()) {
-        self.reportAPIService = reportAPIService
-    }
+}
 
+extension ReportViewModel {
+    
     func getReportedNumberAPI() {
         NetworkService.shared.reportService.getReportedNumber { [weak self] result in
             switch result {
@@ -40,9 +38,9 @@ final class ReportViewModel {
         }
     }
     
-    func postHankkiAPI(_ data: Data?) {
-        let multipartData = createMultipartFormData(data)
-        NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { [weak self] result in
+    func postHankkiAPI(_ data: Data?, request: PostHankkiRequestDTO) {
+        let multipartData = createMultipartFormData(image: data, request: request)
+        NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             switch result {
             case .success(let response):
                 guard let data = response?.data else { return }
@@ -57,37 +55,22 @@ final class ReportViewModel {
             }
         }
     }
+}
+
+private extension ReportViewModel {
     
-    private func createMultipartFormData(_ image: Data?) -> [MultipartFormData] {
+    func createMultipartFormData(image: Data?, request: PostHankkiRequestDTO) -> [MultipartFormData] {
         var multipartData: [MultipartFormData] = []
         multipartData.append(MultipartFormData(provider: .data(image ?? .empty), name: "image", fileName: "image.jpg", mimeType: "image/jpeg"))
-        let jsonData = changeJSONData()
+        let jsonData = changeJSONData(request: request)
         multipartData.append(MultipartFormData(provider: .data(jsonData), name: "request", fileName: "request.json", mimeType: "application/json"))
         return multipartData
     }
 
-    private func changeJSONData() -> Data {
+    func changeJSONData(request: PostHankkiRequestDTO) -> Data {
         let requestData = """
-            {
-                "name": "식당이름",
-                "category": "KOREAN",
-                "address": "문래동",
-                "latitude": 1111811381504.1,
-                "longitude": 1,
-                "universityId": 2,
-                "menus": [
-                    {
-                        "name": "떡볶이",
-                        "price": 6000
-                    },
-                    {
-                        "name": "순대",
-                        "price": 8000
-                    }
-                ]
-            }
+            \(request)
             """
         return requestData.data(using: .utf8)!
     }
-
 }

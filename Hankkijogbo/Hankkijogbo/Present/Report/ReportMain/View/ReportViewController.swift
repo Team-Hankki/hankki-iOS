@@ -8,11 +8,6 @@
 import UIKit
 import PhotosUI
 
-struct MenuModel {
-    var name: String
-    var price: Int
-}
-
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
@@ -29,7 +24,7 @@ final class ReportViewController: BaseViewController {
         }
     }
     var categoryString: String?
-    var oneMenuData: MenuModel?
+    var oneMenuData: [MenuData]?
 
     /// 다 임의로 넣어둠
     let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
@@ -54,10 +49,7 @@ final class ReportViewController: BaseViewController {
         setupDelegate()
         bindViewModel()
         
-//        viewModel.getReportedNumberAPI()
-        // 이미지를 Data로 변환
-        
-
+        viewModel.getReportedNumberAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -318,8 +310,6 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                         }
                         self.imageData = imageData
                         self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
-                        
-                        self.viewModel.postHankkiAPI(imageData)
                     } else {
                         self.isImageSet = false
                     }
