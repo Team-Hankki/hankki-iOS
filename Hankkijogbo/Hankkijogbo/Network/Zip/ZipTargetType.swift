@@ -10,12 +10,13 @@ import Foundation
 import Moya
 
 enum ZipTargetType {
-    case getZipList(storedId: Int) // 은수 언니
+    case getZipList(storedId: Int)
     case getZipDetail(zipId: Int)
     case postZip(requestBody: PostZipRequestDTO)
     case postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO)
     case postZipToHankki(requestBody: PostZipToHankkiRequestDTO)
     case deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO)
+    case getMyZipList(id: Double)
 }
 
 extension ZipTargetType: BaseTargetType {
@@ -32,7 +33,12 @@ extension ZipTargetType: BaseTargetType {
     }
     
     var queryParameter: [String: Any]? {
-        return .none
+        switch self {
+        case .getMyZipList(let id):
+            return .some(["candidate": id])
+        default:
+            return .none
+        }
     }
     
     var requestBodyParameter: (any Codable)? {
@@ -43,6 +49,7 @@ extension ZipTargetType: BaseTargetType {
         case .postZipBatchDelete(let requestBody): return requestBody
         case .postZipToHankki: return .none
         case .deleteZipToHankki: return .none
+        case .getMyZipList: return .none
         }
     }
     
@@ -59,13 +66,15 @@ extension ZipTargetType: BaseTargetType {
         case .postZipToHankki(let requestBody):
             return utilPath.rawValue + "/\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
         case .deleteZipToHankki(let requestBody):
-            return utilPath.rawValue + "/\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
+            return utilPath.rawValue + "\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
+        case .getMyZipList:
+            return utilPath.rawValue
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getZipList, .getZipDetail:
+        case .getZipList, .getZipDetail, .getMyZipList:
             return .get
         case .postZip, .postZipBatchDelete, .postZipToHankki:
             return .post

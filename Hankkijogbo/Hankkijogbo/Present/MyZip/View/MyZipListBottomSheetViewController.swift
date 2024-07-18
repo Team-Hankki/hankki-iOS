@@ -11,6 +11,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var viewModel: MyZipViewModel = MyZipViewModel()
     var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
@@ -35,7 +36,10 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         setupGesture()
         setupDelegate()
         setupRegister()
+        bindViewModel()
         showMyZipBottomSheet()
+        
+        viewModel.getMyZipListAPI(id: 19)
     }
     
     // MARK: - Set UI
@@ -126,7 +130,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         }
         
         addNewZipButton.do {
-            $0.backgroundColor = .gray
+            $0.setImage(.imgZipCreateNormal, for: .normal)
         }
         
         addNewZipLabel.do {
@@ -153,6 +157,12 @@ final class MyZipListBottomSheetViewController: BaseViewController {
 private extension MyZipListBottomSheetViewController {
     
     // MARK: - Private Func
+    
+    func bindViewModel() {
+        viewModel.setMyZipListFavoriteData = {
+            self.myZipCollectionView.reloadData()
+        }
+    }
     
     func setupGesture() {
         let upSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(containerViewDidUpSwipe))
@@ -264,7 +274,7 @@ private extension MyZipListBottomSheetViewController {
 
 extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        viewModel.myZipListFavoriteData?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -284,6 +294,9 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.addZipButton.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
+        if let data = viewModel.myZipListFavoriteData {
+            cell.bindData(zipData: data[indexPath.item])
+        }
         return cell
     }
     
