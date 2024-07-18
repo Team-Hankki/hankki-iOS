@@ -141,9 +141,10 @@ extension TotalListBottomSheetView {
     }
 }
 
-private extension TotalListBottomSheetView {
+extension TotalListBottomSheetView {
     
     // MARK: - @objc
+    
     @objc func containerViewDidUpSwipe() {
         isExpanded = true
         viewLayoutIfNeededWithUpAnimation()

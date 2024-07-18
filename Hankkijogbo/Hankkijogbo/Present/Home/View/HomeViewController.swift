@@ -93,14 +93,14 @@ extension HomeViewController {
                 marker.mapView = self?.rootView.mapView
                 marker.touchHandler = { _ in
                     self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
-                    self?.showMarkerInfoCard(at: index)
+                    self?.showMarkerInfoCard(at: index, pinId: location.id)
                     return true
                 }
             }
         })
     }
-    
-    private func showMarkerInfoCard(at index: Int) {
+
+    private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
         
@@ -111,26 +111,24 @@ extension HomeViewController {
                 make.width.equalTo(331)
                 make.height.equalTo(109)
                 make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(109)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(22)
             }
             view.layoutIfNeeded()
         }
         
-        let pinData = viewModel.hankkiPins[index]
-        
-        let category = "Category"
-        let lowestPrice = 10000
-        let heartCount = 5
-        let imageUrl = "http://example.com/image.jpg"
-        let thumbnailData = GetHankkiThumbnailData(from: pinData, category: category, lowestPrice: lowestPrice, heartCount: heartCount, imageUrl: imageUrl)
-        markerInfoCardView?.bindData(model: thumbnailData)
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.markerInfoCardView?.snp.updateConstraints {
-                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
+        viewModel.getThumbnailAPI(id: pinId) { [weak self] success in
+            guard let self = self, success, let thumbnailData = self.viewModel.hankkiThumbnail else { return }
+            DispatchQueue.main.async {
+                self.markerInfoCardView?.bindData(model: thumbnailData)
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.markerInfoCardView?.snp.updateConstraints {
+                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
+                    }
+                    self.view.layoutIfNeeded()
+                })
             }
-            self.view.layoutIfNeeded()
-        })
+        }
     }
     
     private func hideMarkerInfoCard() {

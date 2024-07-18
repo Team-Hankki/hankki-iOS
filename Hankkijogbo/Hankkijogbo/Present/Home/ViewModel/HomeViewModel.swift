@@ -21,7 +21,7 @@ final class HomeViewModel {
         }
     }
     var hankkiPins: [GetHankkiPinData] = []
-    var hankkiThumbnail: GetHankkiThumbnailData?
+    var hankkiThumbnail: GetHankkiThumbnailResponseData?
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
     
@@ -140,4 +140,21 @@ final class HomeViewModel {
             }
         }
     }
+    
+    func getThumbnailAPI(id: Int, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiThumbnail(id: id) { result in
+            switch result {
+            case .success(let response):
+                if let thumbnailData = response?.data{
+                    self.hankkiThumbnail = thumbnailData
+                    completion(true)
+                } else { return }
+            case .unAuthorized, .networkFail:
+                completion(false)
+            default:
+                return
+            }
+        }
+    }
+
 }
