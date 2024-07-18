@@ -12,6 +12,8 @@ final class  HankkiListViewController: BaseViewController {
     // MARK: - Properties
     
     let type: HankkiListViewControllerType
+    let zipId: Int?
+    
     let viewModel: HankkiListViewModel = HankkiListViewModel()
 
     // MARK: - UI Properties
@@ -25,8 +27,9 @@ final class  HankkiListViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(_ type: HankkiListViewControllerType) {
+    init(_ type: HankkiListViewControllerType, zipId: Int?) {
         self.type = type
+        self.zipId = zipId
         super.init()
     }
     
@@ -41,7 +44,11 @@ final class  HankkiListViewController: BaseViewController {
         setupDelegate()
         
         setupViewModel()
-        viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+        if type == .myZip {
+            viewModel.getZipDetail(zipId: zipId ?? 0, completion: {_ in})
+        } else {
+            viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +94,10 @@ private extension HankkiListViewController {
             DispatchQueue.main.async {
                 self?.emptyView.isHidden = (self?.viewModel.hankkiList.count != 0)
                 self?.hankkiTableView.reloadData()
+            }
+            if self?.type == .myZip {
+                guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
+                headerView.dataBind(self?.viewModel.zipInfo ?? nil)
             }
         }
     }

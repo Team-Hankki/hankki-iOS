@@ -10,8 +10,8 @@ import Foundation
 import Moya
 
 enum ZipTargetType {
-    case getZipList(storedId: Int)
-    case getZipDetail(storeId: Int)
+    case getZipList(storedId: Int) // 은수 언니
+    case getZipDetail(zipId: Int)
     case postZip
     case postZipBatchDelete(requestBodt: PostZipBatchDeleteRequestDTO)
     case postZipToHankki(requestBody: PostZipToHankkiRequestDTO)
@@ -50,12 +50,12 @@ extension ZipTargetType: BaseTargetType {
         switch self {
         case .getZipList:
             return utilPath.rawValue
-        case .getZipDetail:
-            return utilPath.rawValue
+        case .getZipDetail(let zipId):
+            return utilPath.rawValue + "/\(zipId)"
         case .postZip:
             return utilPath.rawValue
         case .postZipBatchDelete:
-            return utilPath.rawValue + "batch-delete"
+            return utilPath.rawValue + "/batch-delete"
         case .postZipToHankki(let requestBody):
             return utilPath.rawValue + "\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
         case .deleteZipToHankki(let requestBody):

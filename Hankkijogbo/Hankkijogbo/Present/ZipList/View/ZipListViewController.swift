@@ -125,8 +125,8 @@ private extension ZipListViewController {
         }
     }
     
-    func navigateToHankkiListViewController() {
-        let hankkiListViewController = HankkiListViewController(.myZip)
+    func navigateToHankkiListViewController(zipId: Int) {
+        let hankkiListViewController = HankkiListViewController(.myZip,zipId: zipId)
             navigationController?.pushViewController(hankkiListViewController, animated: true)
     }
     
@@ -215,7 +215,7 @@ extension ZipListViewController: UICollectionViewDelegate {
                     navigateToCreateZipViewController()
                 } else {
                     print(indexPath.item, "번째 셀의 뷰로 이동")
-                    navigateToHankkiListViewController()
+                    navigateToHankkiListViewController(zipId: self.viewModel.zipList[indexPath.item].id)
                 }
             }
         }
