@@ -83,6 +83,11 @@
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
+		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
+		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
+		8670A78C2C49C6BE0098DCF1 /* onboarding1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78B2C49C6BD0098DCF1 /* onboarding1.json */; };
+		8670A78E2C49C84E0098DCF1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78D2C49C84E0098DCF1 /* Config.xcconfig */; };
+		8670A7902C49C9410098DCF1 /* onboarding2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78F2C49C9410098DCF1 /* onboarding2.json */; };
 		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
 		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
 		86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */; };
@@ -152,7 +157,6 @@
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
-		A2C9FC902C48F00D00868DF7 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2C9FC8F2C48F00D00868DF7 /* Config.xcconfig */; };
 		A2C9FC952C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FC942C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift */; };
 		A2C9FC972C49237400868DF7 /* HeartResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FC962C49237400868DF7 /* HeartResponseDTO.swift */; };
 		A2C9FCA12C49711700868DF7 /* GetMyZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FCA02C49711700868DF7 /* GetMyZipListResponseDTO.swift */; };
@@ -274,6 +278,10 @@
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
+		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		8670A78B2C49C6BD0098DCF1 /* onboarding1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding1.json; sourceTree = "<group>"; };
+		8670A78D2C49C84E0098DCF1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
+		8670A78F2C49C9410098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
 		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
 		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIService.swift; sourceTree = "<group>"; };
@@ -348,7 +356,6 @@
 		A2B542422C32AF7500A6B225 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		A2B599172C39B5C8004B7E4E /* BlackToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackToastView.swift; sourceTree = "<group>"; };
 		A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteToastView.swift; sourceTree = "<group>"; };
-		A2C9FC8F2C48F00D00868DF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
 		A2C9FC942C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHankkiDetailResponseDTO.swift; sourceTree = "<group>"; };
 		A2C9FC962C49237400868DF7 /* HeartResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartResponseDTO.swift; sourceTree = "<group>"; };
 		A2C9FCA02C49711700868DF7 /* GetMyZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetMyZipListResponseDTO.swift; path = Hankkijogbo/Network/Zip/Response/GetMyZipListResponseDTO.swift; sourceTree = SOURCE_ROOT; };
@@ -400,6 +407,7 @@
 				83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */,
 				1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */,
 				839FC7232C47A3DB00B7FEDD /* Kingfisher in Frameworks */,
+				8670A7862C49C3290098DCF1 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +569,7 @@
 		83DBED8A2C25645B0042BA48 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				8670A7872C49C34B0098DCF1 /* Onboarding */,
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				86880C1A2C47A0CC00CAEF58 /* Splash */,
 				A22D20C92C3165B6001AFAC6 /* Base */,
@@ -658,7 +667,7 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A2C9FC8F2C48F00D00868DF7 /* Config.xcconfig */,
+				8670A78D2C49C84E0098DCF1 /* Config.xcconfig */,
 				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
@@ -846,6 +855,24 @@
 				8670A7822C4971A80098DCF1 /* UniversityModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8670A7872C49C34B0098DCF1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				8670A7882C49C3560098DCF1 /* View */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		8670A7882C49C3560098DCF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8670A78F2C49C9410098DCF1 /* onboarding2.json */,
+				8670A78B2C49C6BD0098DCF1 /* onboarding1.json */,
+				8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		86784E882C3FC0B900E94A5D /* CreateZip */ = {
@@ -1459,6 +1486,7 @@
 				83DBEDC02C2569A80042BA48 /* SnapKit */,
 				83DBEDC32C256A3B0042BA48 /* Moya */,
 				839FC7222C47A3DB00B7FEDD /* Kingfisher */,
+				8670A7852C49C3290098DCF1 /* Lottie */,
 			);
 			productName = Hankkijogbo;
 			productReference = 83DBED722C255A180042BA48 /* Hankkijogbo.app */;
@@ -1493,6 +1521,7 @@
 				83DBEDBF2C2569A80042BA48 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */,
 				839FC7212C47A3DB00B7FEDD /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				8670A7842C49C3290098DCF1 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 83DBED732C255A180042BA48 /* Products */;
 			projectDirPath = "";
@@ -1509,10 +1538,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F27C022C3500DB001E6514 /* SUITE-Medium.otf in Resources */,
-				A2C9FC902C48F00D00868DF7 /* Config.xcconfig in Resources */,
 				A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */,
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
 				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
+				8670A78E2C49C84E0098DCF1 /* Config.xcconfig in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
 				865C3D072C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig in Resources */,
 				838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */,
@@ -1520,6 +1549,8 @@
 				A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */,
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
+				8670A78C2C49C6BE0098DCF1 /* onboarding1.json in Resources */,
+				8670A7902C49C9410098DCF1 /* onboarding2.json in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
 				865C3D082C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig in Resources */,
 				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
@@ -1653,6 +1684,7 @@
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
 				A240EA522C45519B000FF458 /* HankkiReportOptionHeaderView.swift in Sources */,
+				8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */,
 				86880C272C47CCE900CAEF58 /* MypageViewModel.swift in Sources */,
 				86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */,
 				A2EC33D62C47939500809840 /* ReportCompleteViewController.swift in Sources */,
@@ -2024,6 +2056,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		8670A7842C49C3290098DCF1 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2046,6 +2086,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		8670A7852C49C3290098DCF1 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8670A7842C49C3290098DCF1 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

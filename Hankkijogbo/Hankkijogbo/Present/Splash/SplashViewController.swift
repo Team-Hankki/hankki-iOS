@@ -74,7 +74,6 @@ extension SplashViewController {
     }
     
     func postReissue() {
-        let accessToken = UserDefaults.standard.getAccesshToken()
         NetworkService.shared.authService.postReissue { result in
             switch result {
             case .success(let response):
