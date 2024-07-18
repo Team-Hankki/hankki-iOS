@@ -21,8 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let navigationController = HankkiNavigationController(rootViewController: TabBarController())
         
         window = UIWindow(windowScene: windowScene)
-//        window?.rootViewController = navigationController
-//        UserDefaults.standard.saveTokens(accessToken: "엑세스토큰", refreshToken: "리프레시토큰")
         window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
     }
