@@ -39,6 +39,14 @@ final class UnivSelectViewController: BaseViewController {
         bindViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+        
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.isNavigationBarHidden = true
+        }
+     }
+    
     override func setupStyle() {
         headerStackView.do {
             $0.axis = .vertical
@@ -122,13 +130,12 @@ private extension UnivSelectViewController {
         return layout
     }
     
-    // Todo: - 나중에 수정
     func bottomButtonPrimaryHandler() {
-        print(viewModel.currentUniv, "을 선택했어요!")
+        viewModel.postMeUniversity()
     }
     
     func bottomButtonLineHandler() {
-        print("지금 선택하지 않았어요")
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func setupRegister() {
@@ -160,8 +167,8 @@ extension UnivSelectViewController: UICollectionViewDataSource {
 
 extension UnivSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.currentUniv = viewModel.universityList[indexPath.item].name
-        if !viewModel.currentUniv.isEmpty {
+        viewModel.currentUnivIndex = indexPath.item
+        if viewModel.currentUnivIndex != -1 {
             bottomButtonView.setupEnabledDoneButton()
         }
     }

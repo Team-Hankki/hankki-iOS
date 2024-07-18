@@ -19,11 +19,11 @@ extension LoginViewModel {
                 if let responseData = response {
                     let refreshToken = responseData.data.refreshToken
                     let accessToken = responseData.data.accessToken
-
+                    
                     UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
-//                    self.onLoginSuccess?(responseData.data.isRegistered)
                     
                     DispatchQueue.main.async {
+
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                             if let window = windowScene.windows.first {
                                 if responseData.data.isRegistered {
@@ -34,8 +34,9 @@ extension LoginViewModel {
                                 } else {
                                     // isRegistered -> false ( 회원가입 )
                                     // -> 대학 선택 뷰로 넘어감
-                                    let univSelectViewController = UnivSelectViewController()
-                                    window.rootViewController = univSelectViewController
+                                    let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+                                    window.rootViewController = navigationController
+                                    navigationController.pushViewController(UnivSelectViewController(), animated: false)
                                 }
                             }
                         }

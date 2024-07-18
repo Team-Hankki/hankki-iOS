@@ -13,6 +13,7 @@ protocol AuthAPIServiceProtocol {
     func postLogin(requestBody: PostLoginRequestDTO, completion: @escaping(NetworkResult<BaseDTO<PostLoginResponseData>>) -> Void)
     func patchLogout(completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func deleteWithdraw(authorizationCode: String, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func postReissue(completion: @escaping(NetworkResult<PostReissueResponseData>) -> Void)
 }
 
 final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
@@ -59,6 +60,21 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func postReissue(completion: @escaping (NetworkResult<PostReissueResponseData>) -> Void) {
+        provider.request(.postReissue) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<PostReissueResponseData> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<PostReissueResponseData> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

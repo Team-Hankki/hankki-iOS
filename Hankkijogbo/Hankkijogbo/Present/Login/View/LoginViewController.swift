@@ -113,6 +113,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             if let identityToken = appleIDCredential.identityToken {
                 identityTokenString =  String(data: identityToken, encoding: .utf8) ?? ""
             } else { return }
+            print(identityTokenString)
             
             let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(identifyToken: identityTokenString, name: fullNameString)
             viewModel.postLogin(postLoginRequest)
