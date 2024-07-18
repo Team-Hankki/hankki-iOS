@@ -41,7 +41,7 @@ final class MypageViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         
-        setupViewModel()
+        bindVieModel()
         
         viewModel.getMe()
     }
@@ -71,7 +71,7 @@ extension MypageViewController {
 }
 
 private extension MypageViewController {
-    private func setupViewModel() {
+    private func bindVieModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 guard let headerView = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? MypageHeaderView else { return }

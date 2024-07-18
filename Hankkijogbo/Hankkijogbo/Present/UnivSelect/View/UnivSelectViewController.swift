@@ -36,7 +36,7 @@ final class UnivSelectViewController: BaseViewController {
         setupRegister()
         
         viewModel.getUniversityList()
-        setupViewModel()
+        bindVieModel()
     }
     
     override func setupStyle() {
@@ -101,7 +101,7 @@ final class UnivSelectViewController: BaseViewController {
 // MARK: - private Func
 
 private extension UnivSelectViewController {
-    func setupViewModel() {
+    func bindVieModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.univCollectionView.reloadData()

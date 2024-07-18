@@ -8,10 +8,10 @@
 import Foundation
 
 struct GetMeHankkiListResponseData: Codable {
-    let stores: [GetMeHankkiResponseData]
+    let stores: [GetMeHankkiListData]
 }
 
-struct GetMeHankkiResponseData: Codable {
+struct GetMeHankkiListData: Codable {
     let id: Int
     let name: String
     let imageUrl: String

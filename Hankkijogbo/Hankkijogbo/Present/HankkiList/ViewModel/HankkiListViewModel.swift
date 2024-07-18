@@ -15,7 +15,6 @@ final class HankkiListViewModel {
     var name: String?
     var imageUrl: String?
 
-    
     var reloadCollectionView: (() -> Void)?
     
     var hankkiList: [HankkiListTableViewCell.DataStruct] = [] {

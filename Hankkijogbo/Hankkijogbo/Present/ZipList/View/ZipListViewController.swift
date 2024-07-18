@@ -32,7 +32,7 @@ final class ZipListViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         
-        setupViewModel()
+        bindVieModel()
         viewModel.getZipList(completion: {_ in})
     }
     
@@ -61,7 +61,7 @@ final class ZipListViewController: BaseViewController {
 }
 
 private extension ZipListViewController {
-    private func setupViewModel() {
+    private func bindVieModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()

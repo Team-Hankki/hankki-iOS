@@ -10,10 +10,10 @@ import Foundation
 struct GetZipDetailResponseData: Codable {
     let title: String
     let details: [String]
-    let stores: [GetZipDetailHankkiListResponseData]
+    let stores: [GetZipDetailData]
 }
 
-struct GetZipDetailHankkiListResponseData: Codable {
+struct GetZipDetailData: Codable {
     let id: Int
     let name: String
     let imageUrl: String
