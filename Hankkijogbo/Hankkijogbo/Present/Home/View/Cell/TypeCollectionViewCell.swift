@@ -57,6 +57,6 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 extension TypeCollectionViewCell {
     func bindData(model: GetCategoryFilterData) {
         typeLabel.text = model.name
-        thumbnailImageView.kfSetImage(url: model.imageUrl)
+        thumbnailImageView.setKFImage(url: model.imageUrl)
     }
 }
