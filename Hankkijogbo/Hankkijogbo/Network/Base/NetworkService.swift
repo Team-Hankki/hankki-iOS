@@ -21,4 +21,5 @@ final class NetworkService {
 //    let locationService: LocationAPIServiceProtocol = LocationAPIService()
 //    let favoriteService: FavoriteAPIServiceProtocol = FavoriteAPIServie()
     let zipService: ZipAPIServiceProtocol = ZipAPIService()
+    let reportService: ReportAPIServiceProtocol = ReportAPIService()
 }

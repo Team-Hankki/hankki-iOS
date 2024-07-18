@@ -10,14 +10,14 @@ import UIKit
 extension HankkiListViewController {
     enum HankkiListViewControllerType {
         case myZip
-        case repoted
+        case reported
         case liked
         
         var navigationColor: UIColor {
             switch self {
             case .myZip:
                 .hankkiRed
-            case .repoted, .liked:
+            case .reported, .liked:
                 .white
             }
         }
@@ -30,7 +30,7 @@ extension HankkiListViewController {
                     height: 231
                 ) + 22
                 
-            case .repoted, .liked:
+            case .reported, .liked:
                 0
             }
         }
@@ -39,7 +39,7 @@ extension HankkiListViewController {
             switch self {
             case .myZip:
                 "나의 식당 족보"
-            case .repoted:
+            case .reported:
                 "내가 제보한 식당"
             case .liked:
                 "좋아요 누른 식당"
@@ -50,7 +50,7 @@ extension HankkiListViewController {
             switch self {
             case .myZip:
                 "나의 족보에\n식당을 추가해보세요"
-            case .repoted:
+            case .reported:
                 "아직 제보한 식당이 없어요"
             case .liked:
                 "아직 좋아요 누른 식당이 없어요"
@@ -59,7 +59,7 @@ extension HankkiListViewController {
         
         var userTargetType: UserTargetType {
             switch self {
-            case .repoted:
+            case .reported:
                     .getMeHankkiReportList
             case .liked:
                     .getMeHankkiHeartList

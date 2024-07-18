@@ -9,9 +9,10 @@ import Foundation
 import Moya
 
 protocol HankkiAPIServiceProtocol {
-    func getCategoryFilter(completion: @escaping(NetworkResult<GetCategoryFilterResponseDTO>) -> Void)
-    func getPriceCategoryFilter(completion: @escaping(NetworkResult<GetPriceFilterResponseDTO>) -> Void)
-   func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
+    func getCategoryFilter(completion: @escaping(NetworkResult<BaseDTO<GetCategoryFilterResponseData>>) -> Void)
+    func getPriceCategoryFilter(completion: @escaping(NetworkResult<BaseDTO<GetPriceFilterResponseData>>) -> Void)
+    func getSortOptionFilter(completion: @escaping(NetworkResult<BaseDTO<GetSortOptionFilterResponseData>>) -> Void)
+    func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
@@ -19,16 +20,16 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     private let provider = MoyaProvider<HankkiTargetType>(plugins: [MoyaPlugin()])
     
     /// 카테고리 필터 드롭다운 정보 조회
-    func getCategoryFilter(completion: @escaping (NetworkResult<GetCategoryFilterResponseDTO>) -> Void) {
+    func getCategoryFilter(completion: @escaping (NetworkResult<BaseDTO<GetCategoryFilterResponseData>>) -> Void) {
         provider.request(.getCategoryFilter) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<GetCategoryFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<BaseDTO<GetCategoryFilterResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 print(networkResult.stateDescription)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<GetCategoryFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<BaseDTO<GetCategoryFilterResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }
@@ -36,16 +37,16 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 가격 필터 드롭다운 정보 조회
-    func getPriceCategoryFilter(completion: @escaping (NetworkResult<GetPriceFilterResponseDTO>) -> Void) {
+    func getPriceCategoryFilter(completion: @escaping (NetworkResult<BaseDTO<GetPriceFilterResponseData>>) -> Void) {
         provider.request(.getPriceCategoryFilter) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<GetPriceFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<BaseDTO<GetPriceFilterResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 print(networkResult.stateDescription)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<GetPriceFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<BaseDTO<GetPriceFilterResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }
@@ -53,19 +54,37 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 정렬 드롭다운 정보 조회
-    func getSortOptionFilter(completion: @escaping (NetworkResult<GetSortOptionFilterResponseDTO>) -> Void) {
+    func getSortOptionFilter(completion: @escaping (NetworkResult<BaseDTO<GetSortOptionFilterResponseData>>) -> Void) {
         provider.request(.getSortOptionFilter) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<GetSortOptionFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<BaseDTO<GetSortOptionFilterResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 print(networkResult.stateDescription)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<GetSortOptionFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<BaseDTO<GetSortOptionFilterResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }
         }
     }
+    
+    /// 메인 페이지 식당 리스트 조회
+        func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void) {
+            provider.request(.getHankkiList(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
+                switch result {
+                case .success(let response):
+                    let networkResult: NetworkResult<BaseDTO<GetHankkiListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    print(networkResult.stateDescription)
+                    completion(networkResult)
+                case .failure(let error):
+                    if let response = error.response {
+                        let networkResult: NetworkResult<BaseDTO<GetHankkiListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                        completion(networkResult)
+                    }
+                }
+            }
+        }
+    
 }
