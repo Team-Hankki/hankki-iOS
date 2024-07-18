@@ -1,13 +1,13 @@
 //
-//  TotalListCollectionViewCell.swift
+//  MarkerInfoCardView.swift
 //  Hankkijogbo
 //
-//  Created by Gahyun Kim on 7/9/24.
+//  Created by Gahyun Kim on 7/16/24.
 //
 
 import UIKit
 
-final class TotalListCollectionViewCell: BaseCollectionViewCell {
+final class MarkerInfoCardView: BaseView {
     
     // MARK: - UI Components
     
@@ -44,8 +44,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
                     addButton)
         
         hankkiInfoStackView.addArrangedSubviews(priceImage,
-                                                priceLabel, 
-                                                dotImage, 
+                                                priceLabel,
+                                                dotImage,
                                                 likeImage,
                                                 likeLabel)
     }
@@ -133,7 +133,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
 
 // MARK: - Network
 
-extension TotalListCollectionViewCell {
+extension MarkerInfoCardView {
     func bindData(model: TotalListModel) {
         menutag.text = "#" + model.menu
         hankkiTitle.text = model.hankkiTitle
