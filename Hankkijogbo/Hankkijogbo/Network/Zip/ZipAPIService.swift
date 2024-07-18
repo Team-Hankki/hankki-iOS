@@ -21,6 +21,9 @@ protocol ZipAPIServiceProtocol {
 }
 
 final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
+    
+    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin()])
+    
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
         provider.request(.deleteZipToHankki(requestBody: requestBody)) { result in
             switch result {
@@ -35,9 +38,6 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
             }
         }
     }
-    
-    
-    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin()])
 
     func getMyZipList(id: Double, completion: @escaping (NetworkResult<GetMyZipListResponseDTO>) -> Void) {
         provider.request(.getMyZipList(id: id)) { result in
