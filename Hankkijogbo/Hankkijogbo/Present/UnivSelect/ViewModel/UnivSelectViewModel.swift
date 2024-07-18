@@ -22,17 +22,18 @@ class UnivSelectViewModel {
 }
 
 extension UnivSelectViewModel {
-    func getUniversityList(completion: @escaping (Bool) -> Void) {
+    func getUniversityList() {
         NetworkService.shared.universityService.getUniversityList { [weak self] result in
             switch result {
             case .success(let response):
                 self?.universityList = response?.data.universities ?? []
-                completion(true)
+//                completion(true)
             case .unAuthorized, .networkFail:
                 print("Failed to fetch university list.")
-                completion(false)
+//                completion(false)
             default:
-                completion(false)
+                return
+//                completion(false)
             }
         }
     }

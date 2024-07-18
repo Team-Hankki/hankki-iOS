@@ -65,7 +65,7 @@ extension BaseTargetType {
             header["X-Apple-Code"] = "\(authorizationCode)"
         default:
             let accessToken = UserDefaults.standard.getAccesshToken()
-            header["Authorization"] = "Bearer \(accessToken)"
+            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         }
         return header
     }

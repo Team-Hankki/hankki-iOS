@@ -35,7 +35,7 @@ final class UnivSelectViewController: BaseViewController {
         setupDelegate()
         setupRegister()
         
-        viewModel.getUniversityList(completion: {_ in })
+        viewModel.getUniversityList()
         setupViewModel()
     }
     
@@ -101,7 +101,7 @@ final class UnivSelectViewController: BaseViewController {
 // MARK: - private Func
 
 private extension UnivSelectViewController {
-    private func setupViewModel() {
+    func setupViewModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.univCollectionView.reloadData()
