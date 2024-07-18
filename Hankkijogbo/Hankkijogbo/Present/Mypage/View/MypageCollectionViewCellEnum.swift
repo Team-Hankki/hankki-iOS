@@ -13,6 +13,7 @@ private extension MypageViewController {
             navigationController?.pushViewController(zipListViewController, animated: true)
     }
 }
+
 extension MypageViewController {
     enum SectionType: Int, CaseIterable {
         case zip, hankki, option
@@ -53,7 +54,8 @@ extension MypageViewController {
                 self.showAlert(
                     titleText: "정말 로그아웃 하실 건가요?",
                     secondaryButtonText: "돌아가기",
-                    primaryButtonText: "로그아웃"
+                    primaryButtonText: "로그아웃",
+                    primaryButtonHandler: viewModel.patchLogout
                 )
             default:
                 return
