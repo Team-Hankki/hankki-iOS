@@ -11,11 +11,12 @@ import Moya
 
 enum ZipTargetType {
     case getZipList(storedId: Int)
-    case getZipDetail(storeId: Int)
-    case postZip
-    case postZipBatchDelete(requestBodt: PostZipBatchDeleteRequestDTO)
-    case postZipToHankki(requestBody: PostZipToHankkiRequestDTO)
+    case getZipDetail(zipId: Int)
+    case postZip(requestBody: PostZipRequestDTO)
+    case postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO)
+    case postHankkiToZip(requestBody: PostHankkiToZipRequestDTO)
     case deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO)
+    case getMyZipList(id: Double)
 }
 
 extension ZipTargetType: BaseTargetType {
@@ -32,17 +33,23 @@ extension ZipTargetType: BaseTargetType {
     }
     
     var queryParameter: [String: Any]? {
-        return .none
+        switch self {
+        case .getMyZipList(let id):
+            return .some(["candidate": id])
+        default:
+            return .none
+        }
     }
     
     var requestBodyParameter: (any Codable)? {
         switch self {
         case .getZipList(let storeId): return storeId
         case .getZipDetail: return .none
-        case .postZip: return .none
+        case .postZip(let requestBody): return requestBody
         case .postZipBatchDelete(let requestBody): return requestBody
-        case .postZipToHankki: return .none
+        case .postHankkiToZip: return .none
         case .deleteZipToHankki: return .none
+        case .getMyZipList: return .none
         }
     }
     
@@ -50,24 +57,26 @@ extension ZipTargetType: BaseTargetType {
         switch self {
         case .getZipList:
             return utilPath.rawValue
-        case .getZipDetail:
-            return utilPath.rawValue
+        case .getZipDetail(let zipId):
+            return utilPath.rawValue + "/\(zipId)"
         case .postZip:
             return utilPath.rawValue
         case .postZipBatchDelete:
-            return utilPath.rawValue + "batch-delete"
-        case .postZipToHankki(let requestBody):
-            return utilPath.rawValue + "\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
+            return utilPath.rawValue + "/batch-delete"
+        case .postHankkiToZip(let requestBody):
+            return utilPath.rawValue + "/\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
         case .deleteZipToHankki(let requestBody):
             return utilPath.rawValue + "\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
+        case .getMyZipList:
+            return utilPath.rawValue
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getZipList, .getZipDetail:
+        case .getZipList, .getZipDetail, .getMyZipList:
             return .get
-        case .postZip, .postZipBatchDelete, .postZipToHankki:
+        case .postZip, .postZipBatchDelete, .postHankkiToZip:
             return .post
         case .deleteZipToHankki: 
             return .delete

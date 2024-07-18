@@ -12,25 +12,9 @@ final class  HankkiListViewController: BaseViewController {
     // MARK: - Properties
     
     let type: HankkiListViewControllerType
-
-//    private var data: [HankkiListTableViewCell.DataStruct] = []
-
-    private var data: [HankkiListTableViewCell.DataStruct] = [
-        HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
-        HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
-        HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
-        HankkiListTableViewCell.DataStruct(id: 4, name: "김가현의 어묵 볶음", imageURL: "dummy.png", category: "아요식", lowestPrice: 8000, heartCount: 400),
-        HankkiListTableViewCell.DataStruct(id: 5, name: "배떡", imageURL: "dummy.png", category: "분식", lowestPrice: 18000, heartCount: 6),
-        HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
-        HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134),
-        HankkiListTableViewCell.DataStruct(id: 1, name: "짜장면", imageURL: "dummy.png", category: "중식", lowestPrice: 1200, heartCount: 100),
-        HankkiListTableViewCell.DataStruct(id: 2, name: "동민오빠의 김치말이 국수", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 200),
-        HankkiListTableViewCell.DataStruct(id: 3, name: "록가정식", imageURL: "dummy.png", category: "한식", lowestPrice: 6000, heartCount: 300),
-        HankkiListTableViewCell.DataStruct(id: 4, name: "김가현의 어묵 볶음", imageURL: "dummy.png", category: "아요식", lowestPrice: 8000, heartCount: 400),
-        HankkiListTableViewCell.DataStruct(id: 5, name: "배떡", imageURL: "dummy.png", category: "분식", lowestPrice: 18000, heartCount: 6),
-        HankkiListTableViewCell.DataStruct(id: 6, name: "록주언니의 종합 볶음 밥", imageURL: "dummy7", category: "밥", lowestPrice: 12345, heartCount: 123),
-        HankkiListTableViewCell.DataStruct(id: 7, name: "매밀 전병", imageURL: "dummy.png", category: "간식", lowestPrice: 1230, heartCount: 134)
-    ]
+    let zipId: Int?
+    
+    let viewModel: HankkiListViewModel = HankkiListViewModel()
 
     // MARK: - UI Properties
     
@@ -43,8 +27,9 @@ final class  HankkiListViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(_ type: HankkiListViewControllerType) {
+    init(_ type: HankkiListViewControllerType, zipId: Int?) {
         self.type = type
+        self.zipId = zipId
         super.init()
     }
     
@@ -57,6 +42,14 @@ final class  HankkiListViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
+        
+        bindViewModel()
+        
+        if type == .myZip {
+            viewModel.getZipDetail(zipId: zipId ?? 0, completion: {_ in})
+        } else {
+            viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +69,7 @@ final class  HankkiListViewController: BaseViewController {
         }
         
         emptyView.do {
-            $0.isHidden = data.count != 0
+            $0.isHidden = true
         }
     }
 
@@ -97,6 +90,19 @@ final class  HankkiListViewController: BaseViewController {
 }
 
 private extension HankkiListViewController {
+    private func bindViewModel() {
+        viewModel.reloadCollectionView = { [weak self] in
+            DispatchQueue.main.async {
+                self?.emptyView.isHidden = (self?.viewModel.hankkiList.count != 0)
+                self?.hankkiTableView.reloadData()
+            }
+            if self?.type == .myZip {
+                guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
+                headerView.dataBind(self?.viewModel.zipInfo ?? nil)
+            }
+        }
+    }
+    
     func setupRegister() {
         hankkiTableView.register(ZipHeaderTableView.self, forHeaderFooterViewReuseIdentifier: ZipHeaderTableView.className)
         hankkiTableView.register(ZipFooterTableView.self, forHeaderFooterViewReuseIdentifier: ZipFooterTableView.className)
@@ -128,7 +134,7 @@ private extension HankkiListViewController {
 
 extension HankkiListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return viewModel.hankkiList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,7 +142,7 @@ extension HankkiListViewController: UITableViewDataSource {
         for: indexPath
         ) as? HankkiListTableViewCell else { return UITableViewCell() }
         
-        cell.dataBind(data[indexPath.item], isLikeButtonDisable: self.type != .liked)
+        cell.dataBind(viewModel.hankkiList[indexPath.item], isLikeButtonDisable: self.type != .liked)
         cell.delegate = self
         return cell
     }
@@ -163,7 +169,7 @@ extension HankkiListViewController: UITableViewDataSource {
     
     /// 나의 족보 리스트 푸터 세팅
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if self.type != .myZip || data.count == 0 {
+        if self.type != .myZip || viewModel.hankkiList.count == 0 {
             return nil
         }
         
@@ -175,7 +181,7 @@ extension HankkiListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if self.type != .myZip || data.count == 0 {
+        if self.type != .myZip || viewModel.hankkiList.count == 0 {
             return 0
         } else {
             return 112
@@ -233,7 +239,7 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
             } else {
                 print(indexPath.item, "번째 식당을 추가합니다.")
             }
-            data[indexPath.item].isDeleted.toggle()
+            viewModel.hankkiList[indexPath.item].isDeleted.toggle()
         }
     }
 }
@@ -241,7 +247,9 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
 private extension HankkiListViewController {
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
-        data.remove(at: indexPath.row)
+        let request: DeleteZipToHankkiRequestDTO = DeleteZipToHankkiRequestDTO(favoriteId: zipId ?? 0, storeId: viewModel.hankkiList[indexPath.item].id)
+        viewModel.deleteZipToHankki(requestBody: request, completion: {_ in})
+        viewModel.hankkiList.remove(at: indexPath.row)
         
         hankkiTableView.beginUpdates()
         hankkiTableView.deleteRows(at: [indexPath], with: .automatic)

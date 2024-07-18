@@ -11,8 +11,6 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
-    private let dummyTagList = ["#말미잘", "#호루라기"]
-    
     // MARK: - UI Properties
     
     private let headerView = UIView()
@@ -35,7 +33,6 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         setupStyle()
         setupHierarchy()
         setupLayout()
-        setupTagStackView()
     }
     
     required init?(coder: NSCoder) {
@@ -77,7 +74,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         nameLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, withText: "김한끼", color: .gray600)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, withText: " ", color: .gray600)
         }
         
         shareButton.do {
@@ -145,8 +142,8 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
 }
 
 private extension ZipHeaderTableView {
-    func setupTagStackView() {
-        dummyTagList.forEach { createTagChipView($0) }
+    func setupTagStackView(_ tagList: [String]) {
+        tagList.forEach { createTagChipView($0) }
     }
     
     func createTagChipView(_ title: String) {
@@ -178,5 +175,21 @@ private extension ZipHeaderTableView {
         }
         
         tagStackView.addArrangedSubviews(tagChipView)
+    }
+}
+
+extension ZipHeaderTableView {
+    struct DataStruct {
+        let name: String
+        let imageUrl: String
+        let title: String
+        let details: [String]
+    }
+    
+    func dataBind(_ data: DataStruct?) {
+        headerLabel.text = data?.title
+        setupTagStackView(data?.details ?? [])
+        nameLabel.text = data?.name
+        nameImageView.setKFImage(url: data?.imageUrl)
     }
 }

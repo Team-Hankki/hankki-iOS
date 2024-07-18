@@ -36,23 +36,28 @@ extension UserTargetType: BaseTargetType {
     }
     
     var requestBodyParameter: (any Codable)? {
-        return .none
+        switch self {
+        case .postMeUniversity(requestBody: let requestBody):
+            return requestBody
+        default:
+            return .none
+        }
     }
     
     var path: String {
         switch self {
         case .getMe:
-            return utilPath.rawValue
+            return utilPath.rawValue + "/me"
         case .getMeUniversity:
-            return utilPath.rawValue
+            return utilPath.rawValue + "/me/university"
         case .getMeHankkiHeartList:
-            return utilPath.rawValue + "university"
+            return utilPath.rawValue + "/me/stores/hearts"
         case .getMeHankkiReportList:
-            return utilPath.rawValue + "stores/hearts"
+            return utilPath.rawValue + "/me/stores/reports"
         case .getMeZipList:
-            return utilPath.rawValue + "stores/reports"
+            return utilPath.rawValue + "/me/favorites"
         case .postMeUniversity:
-            return utilPath.rawValue + "university"
+            return utilPath.rawValue + "/me/university"
         }
     }
     

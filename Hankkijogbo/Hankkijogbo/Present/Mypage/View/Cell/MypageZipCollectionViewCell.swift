@@ -10,7 +10,6 @@ import UIKit
 final class MypageZipCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
-
     
     private let imageView: UIImageView = UIImageView()
     private let titleLabel: UILabel = UILabel()

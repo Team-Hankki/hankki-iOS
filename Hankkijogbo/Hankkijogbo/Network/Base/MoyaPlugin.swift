@@ -54,6 +54,10 @@ final class MoyaPlugin: PluginType {
         if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
             log.append("🍚4️⃣🍚\(reString)\n")
         }
+        log.append("===================== 🍚 내용~~~ 🍚 =====================")
+        if let responseString = String(bytes: response.data, encoding: .utf8) {
+            log.append("\n\(responseString)\n")
+        }
         log.append("===================== 🍚 END HTTP 🍚 =====================")
         print(log)
     }

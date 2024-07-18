@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "img_zip_create_disable.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "img_zip_create_disable@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "img_zip_create_disable@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "img_list_plus_disabled_ios.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -27,9 +27,32 @@ extension UserDefaults {
     func getAccesshToken() -> String {
         return UserDefaults.standard.string(forKey: UserDefaultsKey.accessToken.rawValue) ?? ""
     }
+    
+    func saveUniversity(_ university: UniversityModel) {
+        print("대학정보 저장")
+        let defaults = UserDefaults.standard
+        if let encoded = try? JSONEncoder().encode(university) {
+            defaults.set(encoded, forKey: "university")
+        }
+    }
+    
+    func removeUniversity() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.university.rawValue)
+    }
+    
+    func getUniversity() -> UniversityModel? {
+            if let savedUniversityData = UserDefaults.standard.object(forKey: UserDefaultsKey.university.rawValue) as? Data {
+                let decoder = JSONDecoder()
+                if let loadedUniversity = try? decoder.decode(UniversityModel.self, from: savedUniversityData) {
+                    return loadedUniversity
+                }
+            }
+            return nil
+        }
 }
 
 enum UserDefaultsKey: String {
     case accessToken
     case refreshToken
+    case university
 }

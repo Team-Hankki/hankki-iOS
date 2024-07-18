@@ -11,9 +11,21 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    var reportedNumberText: String = "" {
+        didSet {
+            reportedNumberLabel.do {
+                $0.attributedText = UILabel.setupAttributedText(
+                    for: PretendardStyle.body4,
+                    withText: reportedNumberText,
+                    color: .hankkiRed
+                )
+            }
+        }
+    }
     var hankkiNameString: String = "" {
         didSet {
             if hankkiNameString != "" {
+                print(hankkiNameString)
                 self.setupStyleForSet()
             } else {
                 self.setupStyleForNotSet()
@@ -56,13 +68,6 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setupStyle() {
-        reportedNumberLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
-                withText: "52번째 제보예요",
-                color: .hankkiRed
-            )
-        }
         descriptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h3,
@@ -105,7 +110,6 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
         searchBarButton.snp.makeConstraints {
             $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().inset(22)
-            $0.width.equalTo(227)
             $0.height.equalTo(48)
         }
         searchBarButton.do {
@@ -123,5 +127,11 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.configuration?.contentInsets = .init(top: 0, leading: 14, bottom: 0, trailing: 14)
             $0.configuration?.imagePadding = 4
         }
+    }
+}
+
+extension SearchBarCollectionViewCell {
+    func bindGuideText(text: String) {
+        self.reportedNumberText = text
     }
 }

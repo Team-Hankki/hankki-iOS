@@ -11,22 +11,14 @@ final class ZipListViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let viewModel: ZipListViewModel = ZipListViewModel()
+    
     private var isEditMode: Bool = false {
          didSet {
              collectionView.reloadData()
              setupNavigationBar()
          }
      }
-    
-    private let dummyZipList: [ZipListCollectionViewCell.DataStruct] = [
-        ZipListCollectionViewCell.DataStruct(title: "박재연 화투 마스터"),
-        ZipListCollectionViewCell.DataStruct(title: "김정욱 토스 슈퍼 디자이너 인턴"),
-        ZipListCollectionViewCell.DataStruct(title: "디지털 신호처리 족보를 원하는 사람"),
-        ZipListCollectionViewCell.DataStruct(title: "아 개강하기 너무 싫다 어떡해요?"),
-        ZipListCollectionViewCell.DataStruct(title: "앱잼이란 것, 재밌는데 슬슬 자고싶다"),
-        ZipListCollectionViewCell.DataStruct(title: "너무 힘들고 피곤한 하루"),
-        ZipListCollectionViewCell.DataStruct(title: "배고파~"),
-    ]
     
     // MARK: - UI Properties
     
@@ -39,13 +31,15 @@ final class ZipListViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
+        
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         setupNavigationBar()
-        // TODO: - 족보리스트 로드 통신 추가
-        print("새롭게 데이터 로드하기")
+        super.viewWillAppear(animated)
+
+        setupNavigationBar()
+        viewModel.getZipList(completion: {_ in})
     }
     
     override func setupStyle() {
@@ -68,6 +62,14 @@ final class ZipListViewController: BaseViewController {
 }
 
 private extension ZipListViewController {
+    private func bindViewModel() {
+        viewModel.reloadCollectionView = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
     func setupRegister() {
         collectionView.register(ZipListCollectionViewCell.self, forCellWithReuseIdentifier: ZipListCollectionViewCell.className)
     }
@@ -124,17 +126,23 @@ private extension ZipListViewController {
         }
     }
     
-    func navigateToHankkiListViewController() {
-        let hankkiListViewController = HankkiListViewController(.myZip)
+    func navigateToHankkiListViewController(zipId: Int) {
+        let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
             navigationController?.pushViewController(hankkiListViewController, animated: true)
     }
     
     func deleteZip() {
-        let selectedItemItems = collectionView.indexPathsForSelectedItems?
-            .map { $0.item }
-            .filter { $0 != 0 } ?? []
+//        print(collectionView.indexPathsForSelectedItems)
+        let selectedItemItems: [Int] = collectionView.indexPathsForSelectedItems?
+            .filter { $0.item != 0 }
+            .map { indexPath in
+                viewModel.zipList[indexPath.item - 1].id
+            } ?? []
         
         print(selectedItemItems, "을 삭제합니다.")
+        
+        let request: PostZipBatchDeleteRequestDTO = PostZipBatchDeleteRequestDTO(favoriteIds: selectedItemItems)
+        viewModel.postZipBatchDelete(requestBody: request, completion: {_ in})
         setIsEditMode()
         dismiss(animated: false)
     }
@@ -172,7 +180,7 @@ private extension ZipListViewController {
 
 extension ZipListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyZipList.count + 1
+        return viewModel.zipList.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -186,11 +194,13 @@ extension ZipListViewController: UICollectionViewDataSource {
             cell.contentView.alpha = alpha
             
             cell.dataBind(ZipListCollectionViewCell.DataStruct(
+                id: -1,
                 title: "새로운\n족보 리스트\n추가하기",
+                imageUrl: "",
                 type: isEditMode ? ZipListCollectionViewCell.CellType.disable : ZipListCollectionViewCell.CellType.create )
             )
         } else {
-            cell.dataBind(dummyZipList[indexPath.item - 1])
+            cell.dataBind(viewModel.zipList[indexPath.item - 1])
         }
         
         return cell
@@ -211,8 +221,9 @@ extension ZipListViewController: UICollectionViewDelegate {
                 if indexPath.item == 0 {
                     navigateToCreateZipViewController()
                 } else {
-                    print(indexPath.item, "번째 셀의 뷰로 이동")
-                    navigateToHankkiListViewController()
+                    print(indexPath.item, "으로 이동합니다.")
+                    // 첫 족보 추가하기 셀은 리스트에 포함하지 않으므로 1을 뺀다
+                    navigateToHankkiListViewController(zipId: self.viewModel.zipList[indexPath.item - 1].id)
                 }
             }
         }

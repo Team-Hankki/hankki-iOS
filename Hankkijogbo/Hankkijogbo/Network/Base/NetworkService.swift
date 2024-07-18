@@ -15,9 +15,9 @@ final class NetworkService {
     
     let hankkiService: HankkiAPIServiceProtocol = HankkiAPIService()
     let authService: AuthAPIServiceProtocol = AuthAPIService()
-//    let userService: UserAPIServiceProtocol = UserAPIService()
-//    let menuService: MenuAPIServiceProtocol = MenuAPIService()
+    let userService: UserAPIServiceProtocol = UserAPIService()
     let universityService: UniversityAPIServiceProtocol = UniversityAPIService()
-//    let locationService: LocationAPIServiceProtocol = LocationAPIService()
-//    let favoriteService: FavoriteAPIServiceProtocol = FavoriteAPIServie()
+    let locationService: LocationAPIServiceProtocol = LocationAPIService()
+    let zipService: ZipAPIServiceProtocol = ZipAPIService()
+    let reportService: ReportAPIServiceProtocol = ReportAPIService()
 }

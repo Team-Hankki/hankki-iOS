@@ -33,7 +33,7 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
                         $0.layer.borderColor = UIColor.hankkiRed.cgColor
                         $0.categoryLabel.textColor = .gray700
                         $0.selectedCategoryString = self.categoryLabel.text
-                        $0.delegate?.passItemData(type: .category, data: selectedCategoryString ?? "")
+//                        $0.delegate?.passItemData(type: .category, data: selectedCategoryString ?? "")
                     }
                 } else {
                     $0.backgroundColor = .hankkiWhite

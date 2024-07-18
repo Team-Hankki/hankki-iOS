@@ -11,6 +11,8 @@ final class CreateZipViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let viewModel: CreateZipViewModel = CreateZipViewModel()
+    
     private let tagMaxCount: Int = 9
     private let titleMaxCount: Int = 16
     
@@ -188,18 +190,10 @@ private extension CreateZipViewController {
     }
     
     func submitButtonDidTap() {
-        let arr = (tagInputTextField.text ?? "").split(separator: " ")
-        self.showAlert(titleText: "제출 확인용 테스트 모달입니다.", 
-                       subText: "\(titleInputTextField.text ?? " ") \n \(arr)",
-                       primaryButtonText: "돌아가기",
-                       primaryButtonHandler: dismissAction)
-    }
-    
-    func dismissAction() {
-        dismiss(animated: false)
-        if let navigationController = navigationController as? HankkiNavigationController {
-            navigationController.popViewController(animated: false)
-        }
+        let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
+        let data = PostZipRequestDTO(title: titleInputTextField.text ?? " ", details: arr)
+        print(arr, data)
+        viewModel.postZip(data)
     }
     
     func isFormValid() {

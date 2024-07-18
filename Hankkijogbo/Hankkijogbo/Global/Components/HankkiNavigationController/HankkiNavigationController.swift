@@ -13,6 +13,7 @@ import Then
 final class HankkiNavigationController: UINavigationController {
 
     typealias ButtonAction = () -> Void
+    
     private var rightButtonAction: ButtonAction? {
         didSet {
             rightButton.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)
@@ -22,6 +23,13 @@ final class HankkiNavigationController: UINavigationController {
     private var backButtonAction: ButtonAction? {
         didSet {
             backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+        }
+    }
+    
+    private var titleButtonAction: ButtonAction? {
+        didSet {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(titleButtonDidTap))
+            titleStackView.addGestureRecognizer(tapGesture)
         }
     }
     
@@ -74,6 +82,8 @@ extension HankkiNavigationController {
         rightButtonAction = forType.rightButtonAction
         backButtonAction = forType.backButtonAction
         
+        titleButtonAction = forType.titleButtonAction
+        
         safeAreaView.backgroundColor = forType.backgroundColor
     }
     
@@ -106,7 +116,7 @@ private extension HankkiNavigationController {
         }
         
         rightButton.do {
-            $0.titleLabel?.font = .setupPretendardStyle(of: .body1)
+            $0.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
             $0.setTitleColor(.gray600, for: .normal)
         }
     }
@@ -202,6 +212,12 @@ private extension HankkiNavigationController {
             return backButtonAction()
         } else {
             popViewController(animated: true)
+        }
+    }
+    
+    @objc func titleButtonDidTap() {
+        if let titleButtonAction {
+            return titleButtonAction()
         }
     }
     

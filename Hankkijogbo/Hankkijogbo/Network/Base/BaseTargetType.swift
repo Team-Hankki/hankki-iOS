@@ -23,6 +23,7 @@ enum HeaderType {
     case tokenHealthHeader(tokenHealthType: TokenHealthType)
     case AuthorizationCode
     case loginHeader(accessToken: String)
+    case withdrawHeader(authorizationCode: String)
 }
 
 /// 각 API에 따라 공통된 Path 값 (존재하지 않는 경우 빈 String 값)
@@ -34,7 +35,7 @@ enum UtilPath: String {
     case zip = "/v1/favorites"
     case report = "/v1/reports"
     case university = "/v1/universities"
-    case location =  "/v1/locations"
+    case location = "/v1/locations"
 }
 
 protocol BaseTargetType: TargetType {
@@ -58,6 +59,10 @@ extension BaseTargetType {
         switch headerType {
         case .loginHeader(let accessToken):
             header["Authorization"] = "\(accessToken)"
+        case .withdrawHeader(let authorizationCode):
+            let accessToken = UserDefaults.standard.getAccesshToken()
+            header["Authorization"] = "Bearer \(accessToken)"
+            header["X-Apple-Code"] = "\(authorizationCode)"
         default:
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"

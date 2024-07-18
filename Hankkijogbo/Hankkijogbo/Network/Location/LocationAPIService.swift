@@ -10,11 +10,14 @@ import Foundation
 import Moya
 
 protocol LocationAPIServiceProtocol {
+    typealias GetSearchedLocationResponseDTO = BaseDTO<GetSearchedLocationResponseData>
     func getSearchedLocation(query: String, completion: @escaping(NetworkResult<GetSearchedLocationResponseDTO>) -> Void)
 }
 
 final class LocationAPIService: BaseAPIService, LocationAPIServiceProtocol {
+    
     private let provider = MoyaProvider<LocationTargetType>(plugins: [MoyaPlugin()])
+    
     func getSearchedLocation(query: String, completion: @escaping (NetworkResult<GetSearchedLocationResponseDTO>) -> Void) {
         provider.request(.getSearchedLocation(query: query)) { result in
             switch result {

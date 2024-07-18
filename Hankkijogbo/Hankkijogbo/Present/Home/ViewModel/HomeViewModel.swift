@@ -157,4 +157,20 @@ final class HomeViewModel {
         }
     }
 
+    
+    func getMeUniversity() {
+        NetworkService.shared.userService.getMeUniversity { result in
+            switch result {
+            case .success(let response):
+                
+//                completion(true)
+                print("SUCCESS")
+            case .unAuthorized, .networkFail:
+//                completion(false)
+                print("FAILED")
+            default:
+                return
+            }
+        }
+    }
 }

@@ -13,23 +13,20 @@ struct SearchResultModel {
 }
 
 protocol PassItemDataDelegate: AnyObject {
-    func passItemData(type: ReportSectionType, data: String)
+    func passSearchItemData(model: GetSearchedLocation)
+//    func passItemData(type: ReportSectionType, data: String)
+//    func passItemData(type: ReportSectionType, data: String)
 }
 
 final class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let searchResultDummy: [SearchResultModel] = [
-        SearchResultModel(name: "고동밥집 1호점고동밥집 1호점고동밥집 1호점고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음"),
-        SearchResultModel(name: "고동밥집 1호점", address: "서울특별시 마포구 갈매기 고양이처럼 울음")
-    ]
+    var viewModel: SearchViewModel = SearchViewModel()
     
-    var selectedHankkiNameString: String?
     weak var delegate: PassItemDataDelegate?
+    private let debouncer = HankkiDebouncer(seconds: 0.5)
+    private var alreadyReportHankkiText: String = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
     
     // MARK: - UI Components
     
@@ -53,6 +50,7 @@ final class SearchViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
+        bindViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -148,11 +146,26 @@ final class SearchViewController: BaseViewController {
             )
             $0.addPadding(left: 40, right: 45)
             $0.changeBorderVisibility(isVisible: false, color: UIColor.gray900.cgColor)
+            $0.autocorrectionType = .no
+            $0.spellCheckingType = .no
+            $0.autocapitalizationType = .none
         }
         
         searchCollectionView.do {
             $0.backgroundColor = .hankkiWhite
             $0.showsVerticalScrollIndicator = false
+        }
+    }
+}
+
+extension SearchViewController {
+    func bindViewModel() {
+        viewModel.updateLocations = {
+            self.searchCollectionView.reloadData()
+        }
+        
+        viewModel.completeLocationSelection = {
+            self.completeLocationSelection()
         }
     }
 }
@@ -212,13 +225,32 @@ private extension SearchViewController {
 private extension SearchViewController {
     
     @objc func searchTextDeleteButtonDidTap() {
-        searchTextField.text = ""
+        searchTextField.text = nil
+        viewModel.removeAllLocations()
     }
     
     @objc func bottomButtonPrimaryHandler() {
-        guard let nameString = selectedHankkiNameString else { return }
-        delegate?.passItemData(type: .search, data: nameString)
-        self.navigationController?.popViewController(animated: true)
+        let request = PostHankkiValidateRequestDTO(universityId: 1, latitude: 36.666, longitude: 126.666)
+        viewModel.postHankkiValidateAPI(req: request)
+    }
+    
+    func completeLocationSelection() {
+        guard let code = viewModel.postHankkiValidateCode else { return }
+        switch code {
+        case 200:
+            // 등록 ㄱ
+            guard let location = viewModel.selectedLocationData else { return }
+            delegate?.passSearchItemData(model: location)
+//            delegate?.passItemData(type: .search, data: viewModel.selectedLocationData)
+            self.navigationController?.popViewController(animated: true)
+        case 409:
+            // 이미 등록된 가게 Alert 띄우기
+            showAlert(titleText: alreadyReportHankkiText, primaryButtonText: "확인")
+        default:
+            // ERROR
+            // TODO: - 공통 에러 Alert 필요
+            break
+        }
     }
 }
 
@@ -252,6 +284,16 @@ extension SearchViewController: UITextFieldDelegate {
         textField.layer.borderColor = nil
     }
     
+    /// 텍스트필드 타이핑이 멈추었을 때 호출되는 함수
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let query = self.searchTextField.text else { return }
+        if !query.isEmpty {
+            debouncer.run {
+                self.viewModel.getSearchedLocationAPI(query: query)
+            }
+        }
+    }
+    
     /// 키보드의 return 키 클릭 시 호출되는 함수
     /// - 키보드를 내려준다
     final func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -263,10 +305,6 @@ extension SearchViewController: UITextFieldDelegate {
 // MARK: - UICollectionView Delegate
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let reusableView = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
@@ -279,14 +317,20 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        searchResultDummy.count
+        viewModel.searchedLocationResponseData?.locations.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell,
+              let locations = viewModel.searchedLocationResponseData?.locations else { return UICollectionViewCell() }
         cell.delegate = self
-        cell.bindData(model: searchResultDummy[indexPath.item])
+        cell.bindLocationData(model: locations[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return }
+        viewModel.selectedLocationData = viewModel.searchedLocationResponseData?.locations[indexPath.item]
     }
 }
 

@@ -11,9 +11,6 @@ final class MypageHeaderView: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    private let profileImage: String = "image"
-    private let profileNameText: String = "한끼 줍쇼"
-    
     // MARK: - UI Properties
     
     private let profileView: UIView = UIView()
@@ -21,15 +18,11 @@ final class MypageHeaderView: BaseCollectionViewCell {
     private let profileNameLabel: UILabel = UILabel()
     
     override func setupStyle() {
-        profileImageView.do {
-            // TODO: - assets: server 에서 받아서 변환하기
-            $0.image = .imgMypageProfileDefault
-        }
-        
+
         profileNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: "\(profileNameText)님\n한끼 잘 챙겨드세요",
+                withText: "cell",
                 color: .gray900
             )
             $0.numberOfLines = 2
@@ -59,5 +52,21 @@ final class MypageHeaderView: BaseCollectionViewCell {
             $0.bottom.equalToSuperview().inset(19)
             $0.centerX.equalToSuperview()
         }
+    }
+}
+
+extension MypageHeaderView {
+    func dataBind(_ data: DataStruct?) {
+        profileImageView.setKFImage(url: data?.image)
+        if let nameString = data?.name {
+            profileNameLabel.text = "\(nameString)님\n한끼 잘 챙겨드세요"
+        } else { profileNameLabel.text = "한끼 줍쇼님\n한끼 잘 챙겨드세요" }
+    }
+}
+
+extension MypageHeaderView {
+    struct DataStruct {
+        let image: String
+        let name: String
     }
 }
