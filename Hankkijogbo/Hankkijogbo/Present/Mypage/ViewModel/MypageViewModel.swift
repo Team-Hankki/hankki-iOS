@@ -12,7 +12,7 @@ final class MypageViewModel {
     
     var reloadCollectionView: (() -> Void)?
     
-    var userInfo: MypageHeaderView.DataStruct? = nil {
+    var userInfo: MypageHeaderView.DataStruct? {
         didSet {
             self.reloadCollectionView?()
         }
@@ -49,7 +49,7 @@ extension MypageViewModel {
                             window.rootViewController = splashViewController
                         }
                     }
-                  }
+                }
             case .unAuthorized, .pathError:
                 print("레전드 에러발생")
             default:

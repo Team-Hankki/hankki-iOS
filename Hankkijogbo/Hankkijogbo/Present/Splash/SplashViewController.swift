@@ -10,6 +10,7 @@ import UIKit
 final class SplashViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        getUniversity()
         pushToNextView()
     }
     
@@ -19,6 +20,24 @@ final class SplashViewController: BaseViewController {
 }
 
 extension SplashViewController {
+    func getUniversity() {
+        NetworkService.shared.userService.getMeUniversity { result in
+            switch result {
+            case .success(let response):
+                if let university = response {
+                    let university: UniversityModel = UniversityModel(id: university.id,
+                                                                      name: university.name,
+                                                                      longitude: university.longitude,
+                                                                      latitude: university.latitude)
+                    UserDefaults.standard.saveUniversity(university)
+                }
+            default:
+                return
+            }
+            
+        }
+    }
+    
     func pushToNextView() {
         let accessToken = UserDefaults.standard.getAccesshToken()
         

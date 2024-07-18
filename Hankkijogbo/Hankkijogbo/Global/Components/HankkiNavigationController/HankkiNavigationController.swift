@@ -13,6 +13,7 @@ import Then
 final class HankkiNavigationController: UINavigationController {
 
     typealias ButtonAction = () -> Void
+    
     private var rightButtonAction: ButtonAction? {
         didSet {
             rightButton.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)

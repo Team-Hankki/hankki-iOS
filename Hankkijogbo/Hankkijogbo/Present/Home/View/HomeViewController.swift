@@ -112,11 +112,12 @@ private extension HomeViewController {
     }
     
     func setupNavigationBar() {
+        let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
-                                                              hasRightButton: false,
-                                                              mainTitle: .stringAndImage("한끼대학교", .btnDropdown),
-                                                              rightButton: .string(""),
-                                                              rightButtonAction: {})
+                                                              hasRightButton: true,
+                                                              mainTitle: .stringAndImage(university, .btnDropdown),
+                                                              rightButton: .string("편지"),
+                                                              rightButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
         }
@@ -318,5 +319,10 @@ extension HomeViewController: DropDownViewDelegate {
             }
         }
         hideDropDown()
+    }
+    
+    func presentUniversity() {
+        let univSelectViewController = UnivSelectViewController()
+        navigationController?.pushViewController(univSelectViewController, animated: true)
     }
 }
