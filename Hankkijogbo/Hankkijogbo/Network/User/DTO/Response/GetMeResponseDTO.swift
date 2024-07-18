@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetMeResponseDTO {
+struct GetMeResponseData: Codable {
     let nickname: String
     let profileImageUrl: String
 }

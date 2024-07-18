@@ -11,9 +11,6 @@ final class MypageHeaderView: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    private let profileImage: String = "image"
-    private let profileNameText: String = "한끼 줍쇼"
-    
     // MARK: - UI Properties
     
     private let profileView: UIView = UIView()
@@ -29,7 +26,7 @@ final class MypageHeaderView: BaseCollectionViewCell {
         profileNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: "\(profileNameText)님\n한끼 잘 챙겨드세요",
+                withText: "cell",
                 color: .gray900
             )
             $0.numberOfLines = 2
@@ -59,5 +56,21 @@ final class MypageHeaderView: BaseCollectionViewCell {
             $0.bottom.equalToSuperview().inset(19)
             $0.centerX.equalToSuperview()
         }
+    }
+}
+
+extension MypageHeaderView {
+    func dataBind(_ data: DataStruct?) {
+        profileImageView.image = data?.image
+        if let nameString = data?.name {
+            profileNameLabel.text = "\(nameString)님\n한끼 잘 챙겨드세요"
+        } else { profileNameLabel.text = "한끼 줍쇼님\n한끼 잘 챙겨드세요" }
+    }
+}
+
+extension MypageHeaderView {
+    struct DataStruct {
+        let image: UIImage
+        let name: String
     }
 }

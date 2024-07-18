@@ -34,7 +34,7 @@ enum UtilPath: String {
     case zip = "/v1/favorites"
     case report = "/v1/reports"
     case university = "/v1/universities"
-    case location =  "/v1/locations"
+    case location = "/v1/locations"
 }
 
 protocol BaseTargetType: TargetType {

@@ -172,4 +172,3 @@ extension UnivSelectViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
-

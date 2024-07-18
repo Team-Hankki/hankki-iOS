@@ -15,6 +15,7 @@ protocol HankkiAPIServiceProtocol {
     func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
     typealias GetHankkiDetailResponseDTO = BaseDTO<GetHankkiDetailResponseData>
     func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
+    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
@@ -72,6 +73,23 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
         }
     }
     
+    /// 이미 등록된 식당인지 판별
+    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postHankkiValidate(req: req)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+  
     /// 메인 페이지 식당 리스트 조회
     func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void) {
         provider.request(.getHankkiList(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
