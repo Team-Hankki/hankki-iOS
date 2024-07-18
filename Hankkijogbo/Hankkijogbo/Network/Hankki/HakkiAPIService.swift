@@ -11,7 +11,8 @@ import Moya
 protocol HankkiAPIServiceProtocol {
     func getCategoryFilter(completion: @escaping(NetworkResult<GetCategoryFilterResponseDTO>) -> Void)
     func getPriceCategoryFilter(completion: @escaping(NetworkResult<GetPriceFilterResponseDTO>) -> Void)
-   func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
+    func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
+    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
@@ -63,6 +64,23 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<GetSortOptionFilterResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    /// 이미 등록된 식당인지 판별
+    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postHankkiValidate(req: req)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

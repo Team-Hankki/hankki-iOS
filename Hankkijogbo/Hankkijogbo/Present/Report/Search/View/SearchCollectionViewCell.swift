@@ -15,12 +15,13 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    var model: GetSearchedLocation?
     weak var delegate: SearchViewController?
     
     var selectedHankkiNameString: String? {
         didSet {
-            delegate?.selectedHankkiNameString = selectedHankkiNameString
-            delegate?.changeBottomButtonView(selectedHankkiNameString != nil)
+//            delegate?.selectedHankkiModel = model
+            delegate?.changeBottomButtonView(model != nil)
         }
     }
     
@@ -111,6 +112,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     func bindLocationData(model: GetSearchedLocation) {
+        self.model = model
         self.hankkiNameLabel.text = model.name
         self.addressLabel.text = model.address
     }

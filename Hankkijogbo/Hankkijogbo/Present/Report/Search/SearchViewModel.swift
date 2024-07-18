@@ -12,21 +12,23 @@ import Moya
 // MARK: - 장소 검색 API 연동
 
 final class SearchViewModel {
-    private let locationAPIService: LocationAPIServiceProtocol
-
-    var model: GetSearchedLocationResponseData? {
+    
+    var selectedLocationData: GetSearchedLocation?
+    var searchedLocationResponseData: GetSearchedLocationResponseData? {
         didSet {
             updateLocations?()
         }
     }
     var updateLocations: (() -> Void)?
-    
-    init(locationAPIService: LocationAPIServiceProtocol = LocationAPIService()) {
-        self.locationAPIService = locationAPIService
+    var postHankkiValidateCode: Int? {
+        didSet {
+            test?()
+        }
     }
+    var test: (() -> Void)?
     
     func removeAllLocations() {
-        model?.locations.removeAll()
+        searchedLocationResponseData?.locations.removeAll()
     }
 
     func getSearchedLocationAPI(query: String) {
@@ -34,7 +36,22 @@ final class SearchViewModel {
             switch result {
             case .success(let response):
                 guard let data = response?.data else { return }
-                self?.model = data
+                self?.searchedLocationResponseData = data
+            case .badRequest, .unAuthorized:
+                print("badRequest")
+            case .serverError:
+                print("serverError")
+            default:
+                return
+            }
+        }
+    }
+    
+    func postHankkiValidateAPI(req: PostHankkiValidateRequestDTO) {
+        NetworkService.shared.hankkiService.postHankkiValidate(req: req) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.postHankkiValidateCode = response?.code
             case .badRequest, .unAuthorized:
                 print("badRequest")
             case .serverError:

@@ -19,7 +19,7 @@ enum HankkiTargetType {
     case getHankkiDetail(id: Int)
     case postHankkiHeart(id: Int)
     case deleteHankkiHeart(id: Int)
-    case getHankkiValidate
+    case postHankkiValidate(req: PostHankkiValidateRequestDTO)
 }
 
 extension HankkiTargetType: BaseTargetType {
@@ -50,7 +50,12 @@ extension HankkiTargetType: BaseTargetType {
     
     var requestBodyParameter: Codable? {
         // Patch, Post 등 Request
-        return .none
+        switch self {
+        case .postHankkiValidate(let req):
+            return req
+        default:
+            return .none
+        }
     }
     
     var path: String {
@@ -73,16 +78,16 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/hearts"
         case .deleteHankkiHeart:
             return utilPath.rawValue + "/hearts"
-        case .getHankkiValidate:
+        case .postHankkiValidate:
             return utilPath.rawValue + "/validate"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail, .getHankkiValidate:
+        case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail:
             return .get
-        case .postHankkiHeart:
+        case .postHankkiHeart, .postHankkiValidate:
             return .post
         case .deleteHankkiHeart:
             return .delete

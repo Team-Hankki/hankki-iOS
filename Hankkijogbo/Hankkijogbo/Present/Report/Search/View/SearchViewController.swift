@@ -13,7 +13,9 @@ struct SearchResultModel {
 }
 
 protocol PassItemDataDelegate: AnyObject {
-    func passItemData(type: ReportSectionType, data: String)
+    func passSearchItemData(model: GetSearchedLocation)
+//    func passItemData(type: ReportSectionType, data: String)
+//    func passItemData(type: ReportSectionType, data: String)
 }
 
 final class SearchViewController: BaseViewController {
@@ -22,9 +24,9 @@ final class SearchViewController: BaseViewController {
     
     var viewModel: SearchViewModel = SearchViewModel()
     
-    var selectedHankkiNameString: String?
     weak var delegate: PassItemDataDelegate?
     private let debouncer = HankkiDebouncer(seconds: 0.5)
+    private var alreadyReportHankkiText: String = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
     
     // MARK: - UI Components
     
@@ -161,6 +163,10 @@ extension SearchViewController {
         viewModel.updateLocations = {
             self.searchCollectionView.reloadData()
         }
+        
+        viewModel.test = {
+            self.test()
+        }
     }
 }
 
@@ -224,9 +230,29 @@ private extension SearchViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
-        guard let nameString = selectedHankkiNameString else { return }
-        delegate?.passItemData(type: .search, data: nameString)
-        self.navigationController?.popViewController(animated: true)
+        let request = PostHankkiValidateRequestDTO(universityId: 1, latitude: 36.666, longitude: 126.666)
+        viewModel.postHankkiValidateAPI(req: request)
+    }
+    
+    func test() {
+        print(viewModel.postHankkiValidateCode)
+        print("rlawlgP")
+        guard let code = viewModel.postHankkiValidateCode else { return }
+        switch code {
+        case 200:
+            // 등록 ㄱ
+            guard let location = viewModel.selectedLocationData else { return }
+            delegate?.passSearchItemData(model: location)
+//            delegate?.passItemData(type: .search, data: viewModel.selectedLocationData)
+            self.navigationController?.popViewController(animated: true)
+        case 409:
+            // 이미 등록된 가게 Alert 띄우기
+            showAlert(titleText: alreadyReportHankkiText, primaryButtonText: "확인")
+        default:
+            // ERROR
+            // TODO: - 공통 에러 Alert 필요
+            break
+        }
     }
 }
 
@@ -293,15 +319,20 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.model?.locations.count ?? 0
+        viewModel.searchedLocationResponseData?.locations.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell,
-              let locations = viewModel.model?.locations else { return UICollectionViewCell() }
+              let locations = viewModel.searchedLocationResponseData?.locations else { return UICollectionViewCell() }
         cell.delegate = self
         cell.bindLocationData(model: locations[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return }
+        viewModel.selectedLocationData = viewModel.searchedLocationResponseData?.locations[indexPath.item]
     }
 }
 
