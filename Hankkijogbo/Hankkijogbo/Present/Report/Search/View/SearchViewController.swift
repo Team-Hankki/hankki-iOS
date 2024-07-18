@@ -164,8 +164,8 @@ extension SearchViewController {
             self.searchCollectionView.reloadData()
         }
         
-        viewModel.test = {
-            self.test()
+        viewModel.completeLocationSelection = {
+            self.completeLocationSelection()
         }
     }
 }
@@ -234,9 +234,7 @@ private extension SearchViewController {
         viewModel.postHankkiValidateAPI(req: request)
     }
     
-    func test() {
-        print(viewModel.postHankkiValidateCode)
-        print("rlawlgP")
+    func completeLocationSelection() {
         guard let code = viewModel.postHankkiValidateCode else { return }
         switch code {
         case 200:

@@ -72,8 +72,8 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue
         case .getHankkiThumbnail:
             return utilPath.rawValue + "/thumbnail"
-        case .getHankkiDetail:
-            return utilPath.rawValue
+        case .getHankkiDetail(let id):
+            return utilPath.rawValue + "/\(id)"
         case .postHankkiHeart:
             return utilPath.rawValue + "/hearts"
         case .deleteHankkiHeart:
