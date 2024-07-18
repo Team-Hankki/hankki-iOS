@@ -21,6 +21,7 @@ final class HomeViewModel {
         }
     }
     var hankkiPins: [GetHankkiPinData] = []
+    var hankkiThumbnail: GetHankkiThumbnailData?
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
     
@@ -111,6 +112,7 @@ final class HomeViewModel {
             switch result {
             case .success(let response):
                 self?.hankkiLists = response?.data.stores ?? []
+                self?.hankkiListsDidChange?(self?.hankkiLists ?? [])
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:

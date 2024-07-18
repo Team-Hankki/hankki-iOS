@@ -22,7 +22,6 @@ final class HomeViewController: BaseViewController {
     private var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
-    var totalListBottomSheetView = TotalListBottomSheetView()
     
     // MARK: - Life cycle
     
@@ -35,8 +34,7 @@ final class HomeViewController: BaseViewController {
         setupaddTarget()
         bindViewModel()
         setupPosition()
-        
-        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
+        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,9 +58,11 @@ final class HomeViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        viewModel.hankkiListsDidChange = { [weak self] _ in
+        viewModel.hankkiListsDidChange = { [weak self] data in
+            guard let self else { return }
             DispatchQueue.main.async {
-                self?.totalListBottomSheetView.totalListCollectionView.reloadData()
+                self.rootView.bottomSheetView.data = data
+                self.rootView.bottomSheetView.totalListCollectionView.reloadData()
             }
         }
     }
@@ -81,7 +81,6 @@ extension HomeViewController {
         
         viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
             markers = self?.viewModel.hankkiPins ?? []
-            
             
             self?.rootView.mapView.positionMode = .direction
             self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
@@ -206,7 +205,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 100, height: 100)
     }
 }
-
 
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
