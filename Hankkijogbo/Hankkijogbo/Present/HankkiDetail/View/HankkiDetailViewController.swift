@@ -11,6 +11,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
     var isImageSet: Bool = true
     var hankkiMenuDummy: [HankkiMenuDummy] = [
         HankkiMenuDummy(menuName: "수육 정식", menuPrice: 7900),
@@ -48,6 +49,10 @@ final class HankkiDetailViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
+        
+        viewModel.getHankkiDetailAPI { isdd in
+            print(isdd)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
