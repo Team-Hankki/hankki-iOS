@@ -11,7 +11,7 @@ class UnivSelectViewModel {
     
     var currentUniv: String = ""
     
-    var universityList: [GetUniversityResponseData] = [] {
+    var universityList: [GetUniversityListData] = [] {
         didSet {
             self.reloadCollectionView?()
         }

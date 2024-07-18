@@ -8,10 +8,10 @@
 import Foundation
 
 struct GetMeZipListResponseData: Codable {
-    let favorites: [GetMeZipResponseData]
+    let favorites: [GetMeZipListData]
 }
 
-struct GetMeZipResponseData: Codable {
+struct GetMeZipListData: Codable {
     let id: Int
     let title: String
     let imageType: String
