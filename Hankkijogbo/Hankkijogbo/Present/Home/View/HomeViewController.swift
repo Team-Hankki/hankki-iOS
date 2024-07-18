@@ -16,12 +16,14 @@ final class HomeViewController: BaseViewController {
     let viewModel = HomeViewModel()
     var isButtonModified = false
     var isDropDownVisible = false
+    var selectedMarkerIndex: Int?
     
     // MARK: - UI Components
     
     private var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
+    var markerInfoCardView: MarkerInfoCardView?
     
     // MARK: - Life cycle
     
@@ -90,12 +92,73 @@ extension HomeViewController {
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
                 marker.touchHandler = { _ in
-                    print("Marker \(index + 1) clicked")
+                    self?.showMarkerInfoCard(at: index)
+//                    print("Marker \(index + 1) clicked")
                     return true
                 }
             }
         })
     }
+    
+//    private func showMarkerInfoCard(at index: Int) {
+//          guard selectedMarkerIndex != index else { return }
+//          selectedMarkerIndex = index
+//          
+//          if markerInfoCardView == nil {
+//              markerInfoCardView = MarkerInfoCardView()
+//              view.addSubview(markerInfoCardView!)
+//              markerInfoCardView?.snp.makeConstraints { make in
+//                  make.width.equalTo(331)
+//                  make.height.equalTo(109)
+//                  make.centerX.equalToSuperview()
+//                  make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(109)
+//              }
+//              view.layoutIfNeeded()
+//          }
+//          
+//        markerInfoCardView?.bindData(model: viewModel.hankkiPins[index])
+//          
+//          UIView.animate(withDuration: 0.3, animations: {
+//              self.markerInfoCardView?.snp.updateConstraints { make in
+//                  make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//              }
+//              self.view.layoutIfNeeded()
+//          })
+//      }
+    private func showMarkerInfoCard(at index: Int) {
+        guard selectedMarkerIndex != index else { return }
+        selectedMarkerIndex = index
+        
+        if markerInfoCardView == nil {
+            markerInfoCardView = MarkerInfoCardView()
+            view.addSubview(markerInfoCardView!)
+            markerInfoCardView?.snp.makeConstraints { make in
+                make.width.equalTo(331)
+                make.height.equalTo(109)
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(109)
+            }
+            view.layoutIfNeeded()
+        }
+        
+        let pinData = viewModel.hankkiPins[index]
+
+        let category = "Category"
+        let lowestPrice = 10000
+        let heartCount = 5
+        let imageUrl = "http://example.com/image.jpg" /
+        
+        let thumbnailData = GetHankkiThumbnailData(from: pinData, category: category, lowestPrice: lowestPrice, heartCount: heartCount, imageUrl: imageUrl)
+        markerInfoCardView?.bindData(model: thumbnailData)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.markerInfoCardView?.snp.updateConstraints { make in
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
+
 }
 
 private extension HomeViewController {
