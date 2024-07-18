@@ -169,6 +169,7 @@
 		A2EC33D12C47938A00809840 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33CE2C47938A00809840 /* ReportCompleteViewController.swift */; };
 		A2EC33D52C47939500809840 /* HankkiInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33D22C47939500809840 /* HankkiInfoCardView.swift */; };
 		A2EC33D62C47939500809840 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33D32C47939500809840 /* ReportCompleteViewController.swift */; };
+		A2EC33D92C47CFA500809840 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33D82C47CFA500809840 /* ReportViewModel.swift */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
@@ -350,6 +351,7 @@
 		A2EC33CE2C47938A00809840 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
 		A2EC33D22C47939500809840 /* HankkiInfoCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HankkiInfoCardView.swift; sourceTree = "<group>"; };
 		A2EC33D32C47939500809840 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
+		A2EC33D82C47CFA500809840 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
 		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
@@ -1086,6 +1088,7 @@
 		A240EA112C3F19F4000FF458 /* ReportMain */ = {
 			isa = PBXGroup;
 			children = (
+				A2EC33D72C47CF6000809840 /* ViewModel */,
 				A2DEBF582C3D257C00DE14A9 /* View */,
 			);
 			path = ReportMain;
@@ -1318,6 +1321,14 @@
 				A2EC33D32C47939500809840 /* ReportCompleteViewController.swift */,
 			);
 			path = Complete;
+			sourceTree = "<group>";
+		};
+		A2EC33D72C47CF6000809840 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A2EC33D82C47CFA500809840 /* ReportViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1558,6 +1569,7 @@
 				864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */,
 				86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */,
 				83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */,
+				A2EC33D92C47CFA500809840 /* ReportViewModel.swift in Sources */,
 				A2EC33C42C47183700809840 /* GetReportedNumberResponseDTO.swift in Sources */,
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
