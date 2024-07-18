@@ -22,10 +22,10 @@ final class SearchViewModel {
     var updateLocations: (() -> Void)?
     var postHankkiValidateCode: Int? {
         didSet {
-            test?()
+            completeLocationSelection?()
         }
     }
-    var test: (() -> Void)?
+    var completeLocationSelection: (() -> Void)?
     
     func removeAllLocations() {
         searchedLocationResponseData?.locations.removeAll()
