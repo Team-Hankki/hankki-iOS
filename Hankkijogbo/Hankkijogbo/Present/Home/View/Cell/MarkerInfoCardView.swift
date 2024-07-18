@@ -134,7 +134,8 @@ final class MarkerInfoCardView: BaseView {
 // MARK: - Network
 
 extension MarkerInfoCardView {
-    func bindData(model: GetHankkiThumbnailData) {
+    func bindData(model: GetHankkiThumbnailResponseData) {
+        thumbnailImageView.setKFImage(url: model.imageUrl)
         menutag.text = model.category
         hankkiTitle.text = model.name
         priceLabel.text = String(model.lowestPrice)

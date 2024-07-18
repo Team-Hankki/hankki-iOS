@@ -7,13 +7,10 @@
 
 import Foundation
 
-/// 메인 페이지 식당 핀 조회
+/// 메인 페이지 식당 단일 조회
 
 struct GetHankkiThumbnailResponseData: Codable {
-    let thumbnails: [GetHankkiThumbnailData]
-}
-
-struct GetHankkiThumbnailData: Codable {
+//    let data: GetHankkiThumbnailData
     let id: Int
     let name: String
     let category: String
@@ -22,7 +19,7 @@ struct GetHankkiThumbnailData: Codable {
     let imageUrl: String
 }
 
-extension GetHankkiThumbnailData {
+extension GetHankkiThumbnailResponseData {
     init(from pinData: GetHankkiPinData, category: String, lowestPrice: Int, heartCount: Int, imageUrl: String) {
         self.id = pinData.id
         self.name = pinData.name
