@@ -3,11 +3,15 @@ import AuthenticationServices
 
 final class LoginViewController: BaseViewController {
 
-    // MARK: - UI Properties
+    // MARK: - Properties
     
-    let viewTitle = UILabel()
-    let imageView = UIImageView()
-    let loginButton = UIButton()
+    let viewModel: LoginViewModel = LoginViewModel()
+    
+    // MARK: - UI Components
+    
+    let viewTitle: UILabel = UILabel()
+    let imageView: UIImageView  = UIImageView()
+    let loginButton: UIButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -86,7 +90,6 @@ private extension LoginViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
-        print("로그인 시도")
     }
 }
 
@@ -99,8 +102,25 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 extension LoginViewController: ASAuthorizationControllerDelegate {
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        //로그인 성공
-        print("로그인 성공")
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            let fullName = appleIDCredential.fullName
+            let fullNameString = "\((fullName?.familyName ?? "") + (fullName?.givenName ?? ""))"
+                         
+            var identityTokenString: String = ""
+            
+            if let identityToken = appleIDCredential.identityToken {
+                identityTokenString =  String(data: identityToken, encoding: .utf8) ?? ""
+            } else { return }
+            
+            let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(identifyToken: identityTokenString, name: fullNameString)
+            viewModel.postLogin(postLoginRequest)
+            
+        default:
+            break
+        }
+        
     }
     
     // 실패 후 동작
