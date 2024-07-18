@@ -42,7 +42,6 @@ final class HankkiDetailViewController: BaseViewController {
         bindViewModel()
         
         viewModel.getHankkiDetailAPI()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -275,9 +274,19 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 ) as? HankkiDetailFooterView else {
                     return UICollectionReusableView()
                 }
+                footer.likedButton.buttonHandler = {
+                    if !footer.isLiked {
+                        self.viewModel.postHankkiHeartAPI(id: 19) { isSucess in
+                            footer.updateLikeButtonStatus()
+                        }
+                    } else {
+                        // TODO: - 좋아요 취소
+                    }
+                }
                 if let data = viewModel.hankkiDetailData {
                     footer.isLiked = data.isLiked
                     footer.likedNumber = data.heartCount
+                    
                 }
                 footer.addMyZipButton.hankkiDetailButton.addTarget(self, action: #selector(addMyZipButtonDidTap), for: .touchUpInside)
                 return footer

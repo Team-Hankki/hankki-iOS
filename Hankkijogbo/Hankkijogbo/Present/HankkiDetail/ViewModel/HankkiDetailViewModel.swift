@@ -34,4 +34,21 @@ final class HankkiDetailViewModel {
         }
     }
     
+    /// 식당 좋아요 추가
+    func postHankkiHeartAPI(id: Int64, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.postHankkiHeart(id: id) { [weak self] result in
+            switch result {
+            case .success(let response):
+                guard let response = response else { return }
+                print("SUCCESS")
+                completion(true)
+            case .unAuthorized, .networkFail:
+                print("FAILED")
+                completion(false)
+            default:
+                completion(false)
+                return
+            }
+        }
+    }
 }

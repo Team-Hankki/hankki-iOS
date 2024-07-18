@@ -13,9 +13,14 @@ protocol HankkiAPIServiceProtocol {
     func getPriceCategoryFilter(completion: @escaping(NetworkResult<BaseDTO<GetPriceFilterResponseData>>) -> Void)
     func getSortOptionFilter(completion: @escaping(NetworkResult<BaseDTO<GetSortOptionFilterResponseData>>) -> Void)
     func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
-    typealias GetHankkiDetailResponseDTO = BaseDTO<GetHankkiDetailResponseData>
     func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
     func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func postHankkiHeart(id: Int64, completion: @escaping(NetworkResult<PostHeartResponseDTO>) -> Void)
+}
+
+extension HankkiAPIServiceProtocol {
+    typealias GetHankkiDetailResponseDTO = BaseDTO<GetHankkiDetailResponseData>
+    typealias PostHeartResponseDTO = BaseDTO<PostHeartResponseData>
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
@@ -118,6 +123,23 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<GetHankkiDetailResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    /// 식당 좋아요 추가
+    func postHankkiHeart(id: Int64, completion: @escaping (NetworkResult<PostHeartResponseDTO>) -> Void) {
+        provider.request(.postHankkiHeart(id: id)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<PostHeartResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<PostHeartResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }
