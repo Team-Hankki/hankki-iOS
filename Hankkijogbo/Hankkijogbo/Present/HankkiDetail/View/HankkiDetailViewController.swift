@@ -24,7 +24,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
-    private let whiteBackgroundView: UIView = UIView()
+    private let lightGrayBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
     private let thumbnailImageView: UIImageView = UIImageView()
     private let topBlackGradientImageView: UIImageView = UIImageView()
@@ -63,7 +63,7 @@ final class HankkiDetailViewController: BaseViewController {
         view.addSubviews(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
-            whiteBackgroundView,
+            lightGrayBackgroundView,
             thumbnailImageView,
             backButton,
             infoCollectionView,
@@ -90,7 +90,7 @@ final class HankkiDetailViewController: BaseViewController {
             $0.top.equalTo(self.scrollView)
             $0.size.equalTo(thumbnailImageView)
         }
-        whiteBackgroundView.snp.makeConstraints {
+        lightGrayBackgroundView.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
@@ -127,8 +127,8 @@ final class HankkiDetailViewController: BaseViewController {
         topBlackGradientImageView.do {
             $0.image = .blackGradient
         }
-        whiteBackgroundView.do {
-            $0.backgroundColor = .white
+        lightGrayBackgroundView.do {
+            $0.backgroundColor = .gray50
         }
         backButton.do {
             $0.setImage(.btnBackWhite, for: .normal)
@@ -142,7 +142,12 @@ private extension HankkiDetailViewController {
     
     func bindViewModel() {
         viewModel.setHankkiDetailData = {
-            self.infoCollectionView.collectionView.reloadData()
+            if let data = self.viewModel.hankkiDetailData {
+                self.thumbnailImageView.setKFImage(url: data.imageUrls.first)
+                self.infoCollectionView.updateLayout(menuSize: data.menus.count)
+                self.infoCollectionView.collectionView.layoutIfNeeded()
+                self.infoCollectionView.collectionView.reloadData()
+            }
         }
     }
     
