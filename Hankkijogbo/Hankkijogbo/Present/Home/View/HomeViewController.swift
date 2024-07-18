@@ -36,6 +36,7 @@ final class HomeViewController: BaseViewController {
         setupaddTarget()
         bindViewModel()
         
+        viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
         viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
     }
     
