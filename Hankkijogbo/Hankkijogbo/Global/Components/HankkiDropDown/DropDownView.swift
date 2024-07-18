@@ -15,7 +15,7 @@ final class DropDownView: BaseView {
     
     // MARK: - Properties
     
-    private let viewModel: HomeViewModel
+    let viewModel: HomeViewModel
     
     weak var delegate: DropDownViewDelegate?
     private var buttonType: ButtonType
@@ -23,7 +23,7 @@ final class DropDownView: BaseView {
     private var numberOfCells: Int = 0
     var tableView = UITableView()
     
-    private var data: [String] = []
+    private var data: [Any] = []
     
     // MARK: - Life Cycle
     
@@ -54,7 +54,7 @@ final class DropDownView: BaseView {
                 guard let self = self else { return }
                 if success {
                     self.numberOfCells = self.viewModel.priceFilters.count
-                    self.data = self.viewModel.priceFilters.map { $0.name }
+                    self.data = self.viewModel.priceFilters
                     self.updateTableView()
                     self.updateDropDownConstraints()
                 }
@@ -64,7 +64,7 @@ final class DropDownView: BaseView {
                 guard let self = self else { return }
                 if success {
                     self.numberOfCells = self.viewModel.sortOptions.count
-                    self.data = self.viewModel.sortOptions.map { $0.name }
+                    self.data = self.viewModel.sortOptions
                     self.updateTableView()
                     self.updateDropDownConstraints()
                 }
@@ -111,7 +111,13 @@ extension DropDownView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.data[indexPath.row]
+        let item = data[indexPath.row]
+        
+        if let priceFilter = item as? GetPriceFilterData {
+            cell.textLabel?.text = priceFilter.name
+        } else if let sortOption = item as? GetSortOptionFilterData {
+            cell.textLabel?.text = sortOption.name
+        }
         cell.textLabel?.textAlignment = .center
         cell.textLabel?.font = .setupPretendardStyle(of: .caption1)
         cell.textLabel?.textColor = .gray600
@@ -120,6 +126,12 @@ extension DropDownView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.dropDownView(self, didSelectItem: data[indexPath.row], buttonType: buttonType)
+        let item = data[indexPath.row]
+        
+        if let priceFilter = item as? GetPriceFilterData {
+            delegate?.dropDownView(self, didSelectItem: priceFilter.tag, buttonType: buttonType)
+        } else if let sortOption = item as? GetSortOptionFilterData {
+            delegate?.dropDownView(self, didSelectItem: sortOption.tag, buttonType: buttonType)
+        }
     }
 }

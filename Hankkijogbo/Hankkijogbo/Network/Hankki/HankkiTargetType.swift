@@ -14,7 +14,7 @@ enum HankkiTargetType {
     case getPriceCategoryFilter
     case getSortOptionFilter
     case getHankkiPin(university: String, category: String, lowestPrice: String, order: String)
-    case getHankkiList(university: String, category: String, lowestPrice: String, order: String)
+    case getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String)
     case getHankkiThumbnail(id: Int)
     case getHankkiDetail(id: Int)
     case postHankkiHeart(id: Int)
@@ -41,8 +41,8 @@ extension HankkiTargetType: BaseTargetType {
         switch self {
         case .getHankkiPin(let university, let category, let lowestPrice, let order):
             return ["university": university, "category": category, "lowestPrice": lowestPrice, "order": order]
-        case .getHankkiList(let university, let category, let lowestPrice, let order):
-            return ["university": university, "category": category, "lowestPrice": lowestPrice, "order": order]
+        case .getHankkiList(let universityid, let storeCategory, let priceCategory, let sortOption):
+            return ["universityid": universityid, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         default:
             return .none
         }
