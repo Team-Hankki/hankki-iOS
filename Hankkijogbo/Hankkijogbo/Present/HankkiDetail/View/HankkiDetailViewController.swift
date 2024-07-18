@@ -276,11 +276,13 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 }
                 footer.likedButton.buttonHandler = {
                     if !footer.isLiked {
-                        self.viewModel.postHankkiHeartAPI(id: 19) { isSucess in
+                        self.viewModel.postHankkiHeartAPI(id: 19) {
                             footer.updateLikeButtonStatus()
                         }
                     } else {
-                        // TODO: - 좋아요 취소
+                        self.viewModel.deleteHankkiHeartAPI(id: 19) {
+                            footer.updateLikeButtonStatus()
+                        }
                     }
                 }
                 if let data = viewModel.hankkiDetailData {

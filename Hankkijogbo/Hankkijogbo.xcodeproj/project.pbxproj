@@ -153,7 +153,7 @@
 		A2C9FC902C48F00D00868DF7 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2C9FC8F2C48F00D00868DF7 /* Config.xcconfig */; };
 		A2C9FC932C48F26B00868DF7 /* HankkiDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FC922C48F26B00868DF7 /* HankkiDetailViewModel.swift */; };
 		A2C9FC952C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FC942C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift */; };
-		A2C9FC972C49237400868DF7 /* PostHeartResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FC962C49237400868DF7 /* PostHeartResponseDTO.swift */; };
+		A2C9FC972C49237400868DF7 /* HeartResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FC962C49237400868DF7 /* HeartResponseDTO.swift */; };
 		A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */; };
 		A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */; };
 		A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */; };
@@ -342,7 +342,7 @@
 		A2C9FC8F2C48F00D00868DF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
 		A2C9FC922C48F26B00868DF7 /* HankkiDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailViewModel.swift; sourceTree = "<group>"; };
 		A2C9FC942C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHankkiDetailResponseDTO.swift; sourceTree = "<group>"; };
-		A2C9FC962C49237400868DF7 /* PostHeartResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeartResponseDTO.swift; sourceTree = "<group>"; };
+		A2C9FC962C49237400868DF7 /* HeartResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartResponseDTO.swift; sourceTree = "<group>"; };
 		A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
 		A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
 		A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -462,7 +462,7 @@
 				839FC71F2C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift */,
 				8302855A2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift */,
 				A2C9FC942C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift */,
-				A2C9FC962C49237400868DF7 /* PostHeartResponseDTO.swift */,
+				A2C9FC962C49237400868DF7 /* HeartResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1654,7 +1654,7 @@
 				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
-				A2C9FC972C49237400868DF7 /* PostHeartResponseDTO.swift in Sources */,
+				A2C9FC972C49237400868DF7 /* HeartResponseDTO.swift in Sources */,
 				A240EA3E2C445D62000FF458 /* HankkiDetailCollectionView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,

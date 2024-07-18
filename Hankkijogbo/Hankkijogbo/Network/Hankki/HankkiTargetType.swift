@@ -18,7 +18,7 @@ enum HankkiTargetType {
     case getHankkiThumbnail(id: Int)
     case getHankkiDetail(id: Int)
     case postHankkiHeart(id: Int64)
-    case deleteHankkiHeart(id: Int)
+    case deleteHankkiHeart(id: Int64)
     case postHankkiValidate(req: PostHankkiValidateRequestDTO)
 }
 
@@ -74,10 +74,8 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/thumbnail"
         case .getHankkiDetail(let id):
             return utilPath.rawValue + "/\(id)"
-        case .postHankkiHeart(let id):
+        case .postHankkiHeart(let id), .deleteHankkiHeart(let id):
             return utilPath.rawValue + "/\(id)/hearts"
-        case .deleteHankkiHeart:
-            return utilPath.rawValue + "/hearts"
         case .postHankkiValidate:
             return utilPath.rawValue + "/validate"
         }
