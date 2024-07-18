@@ -21,3 +21,14 @@ struct GetHankkiThumbnailData: Codable {
     let heartCount: Int
     let imageUrl: String
 }
+
+extension GetHankkiThumbnailData {
+    init(from pinData: GetHankkiPinData, category: String, lowestPrice: Int, heartCount: Int, imageUrl: String) {
+        self.id = pinData.id
+        self.name = pinData.name
+        self.category = category
+        self.lowestPrice = lowestPrice
+        self.heartCount = heartCount
+        self.imageUrl = imageUrl
+    }
+}
