@@ -84,21 +84,19 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension MyZipListCollectionViewCell {
+
+    func getImageForType(_ type: String) -> UIImage {
+        let thumbnailImages: [String: UIImage] = [
+            "TYPE_ONE": .imgZipThumbnail1,
+            "TYPE_TWO": .imgZipThumbnail2,
+            "TYPE_THREE": .imgZipThumbnail3,
+            "TYPE_FOUR": .imgZipThumbnail4
+        ]
+        
+        return thumbnailImages[type] ?? .imgZipThumbnail1
+    }
     
-    func bindData(zipData: GetMyZipFavorite) {
-        isChecked = zipData.isAdded
-        switch zipData.imageType {
-        case "TYPE_ONE":
-            thumbnailImageView.image = .imgZipThumbnail1
-        case "TYPE_TWO":
-            thumbnailImageView.image = .imgZipThumbnail2
-        case "TYPE_THREE":
-            thumbnailImageView.image = .imgZipThumbnail3
-        case "TYPE_FOUR":
-            thumbnailImageView.image = .imgZipThumbnail4
-        default:
-            thumbnailImageView.image = .imgZipThumbnail1
-        }
+    func setupLabelStyleOfData(zipData: GetMyZipFavorite) {
         zipTitleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
@@ -123,6 +121,12 @@ extension MyZipListCollectionViewCell {
                 )
             }
         }
+    }
+    
+    func bindData(zipData: GetMyZipFavorite) {
+        isChecked = zipData.isAdded
+        thumbnailImageView.image = getImageForType(zipData.imageType)
+        setupLabelStyleOfData(zipData: zipData)
     }
     
     @objc func addZipButtonDidTap() {
