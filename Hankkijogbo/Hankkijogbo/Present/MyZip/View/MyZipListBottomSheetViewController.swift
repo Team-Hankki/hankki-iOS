@@ -301,6 +301,8 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
     }
     
     @objc func addZipButtonDidTap() {
+        // TODO: - favoriteId, storeId 연결
+        viewModel.postHankkiToZipAPI(request: PostHankkiToZipRequestDTO(favoriteId: 20, storeId: 20))
         self.dismissMyZipBottomSheet()
     }
 }
