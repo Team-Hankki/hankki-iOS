@@ -20,10 +20,11 @@ final class HomeViewModel {
             hankkiListsDidChange?(hankkiLists)
         }
     }
+    var hankkiPins: [GetHankkiPinData] = []
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
     
-    private let universityid: Int = 1
+    private let universityid: Int = 1 // university api 연결 후 변경 예정
     
     var storeCategory: String? {
         didSet { updateHankkiList() }
@@ -119,6 +120,22 @@ final class HomeViewModel {
                 return
             }
         }
-        
+    }
+    
+    // 식당 핀을 가져오는 메서드
+    func getHankkiPinAPI(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiPin(universityId: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
+            switch result{
+            case .success(let response):
+                self?.hankkiPins = response?.data.pins ?? []
+                completion(true)
+                print("SUCCESS")
+            case .unAuthorized, .networkFail:
+                completion(false)
+                print("FAILED")
+            default:
+                return
+            }
+        }
     }
 }
