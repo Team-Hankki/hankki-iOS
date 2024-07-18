@@ -76,9 +76,6 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/\(id)/hearts"
         case .postHankkiValidate:
             return utilPath.rawValue + "/validate"
-        case .getHankkiDetail(id: let id):
-            return utilPath.rawValue // 추후에 은수가 수정하길
-            
         }
     }
     
