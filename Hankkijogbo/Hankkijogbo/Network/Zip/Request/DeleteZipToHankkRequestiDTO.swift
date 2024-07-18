@@ -11,4 +11,3 @@ struct DeleteZipToHankkiRequestDTO: Codable {
     let favoriteId: Int
     let storeId: Int
 }
-

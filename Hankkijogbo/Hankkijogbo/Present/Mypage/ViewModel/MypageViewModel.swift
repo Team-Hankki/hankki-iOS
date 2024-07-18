@@ -12,7 +12,7 @@ final class MypageViewModel {
     
     var reloadCollectionView: (() -> Void)?
     
-    var userInfo: MypageHeaderView.DataStruct = MypageHeaderView.DataStruct(image: UIImage(), name: "") {
+    var userInfo: MypageHeaderView.DataStruct? = nil {
         didSet {
             self.reloadCollectionView?()
         }
@@ -25,7 +25,7 @@ extension MypageViewModel {
             switch result {
             case .success(let response):
                 if let responseData = response {
-                    self.userInfo = MypageHeaderView.DataStruct(image: UIImage(),
+                    self.userInfo = MypageHeaderView.DataStruct(image: responseData.data.profileImageUrl,
                                                 name: responseData.data.nickname)
                 } else { return }
             case .unAuthorized, .pathError:

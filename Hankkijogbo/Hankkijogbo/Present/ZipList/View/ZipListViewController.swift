@@ -33,12 +33,14 @@ final class ZipListViewController: BaseViewController {
         setupDelegate()
         
         bindVieModel()
-        viewModel.getZipList(completion: {_ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         setupNavigationBar()
+        super.viewWillAppear(animated)
+        
+        print("다시로드~")
+        setupNavigationBar()
+        viewModel.getZipList(completion: {_ in})
     }
     
     override func setupStyle() {
@@ -126,7 +128,7 @@ private extension ZipListViewController {
     }
     
     func navigateToHankkiListViewController(zipId: Int) {
-        let hankkiListViewController = HankkiListViewController(.myZip,zipId: zipId)
+        let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
             navigationController?.pushViewController(hankkiListViewController, animated: true)
     }
     

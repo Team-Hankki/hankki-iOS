@@ -12,7 +12,7 @@ enum URLConstant {
     // MARK: - Base URL
     
 //    static let baseURL = Config.baseURL
-    static let baseURL = "https://dev.hankki.shop/api"
+    static let baseURL = ""
     
     // MARK: - URL Path
     

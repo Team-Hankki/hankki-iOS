@@ -37,4 +37,6 @@ extension ZipListViewModel {
             }
         }
     }
+    
+    func postZip
 }

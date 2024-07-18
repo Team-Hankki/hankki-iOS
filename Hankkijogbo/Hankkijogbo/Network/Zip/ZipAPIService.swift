@@ -11,6 +11,9 @@ import Moya
 
 protocol ZipAPIServiceProtocol {
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<BaseDTO<GetZipDetailResponseData>>) -> Void)
+    func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func postZipToHankki(requestBody: PostZipToHankkiRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
 }
 
 final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
@@ -26,6 +29,52 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<BaseDTO<GetZipDetailResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postZipBatchDelete(requestBody: requesBody)) { result in
+            
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postZip(requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func postZipToHankki(requestBody: PostZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postZipToHankki(requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

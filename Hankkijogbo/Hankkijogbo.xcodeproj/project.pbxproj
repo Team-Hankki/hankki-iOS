@@ -21,7 +21,7 @@
 		830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830285582C4565940004D9F7 /* GetHankkiListRequestDTO.swift */; };
 		8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302855A2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift */; };
 		8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302855C2C4567A30004D9F7 /* BaseTargetType.swift */; };
-		8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8DC2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift */; };
+		8302F8DD2C3D6C0B004ADAA4 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
 		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
 		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
@@ -63,8 +63,8 @@
 		83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCD2C256B180042BA48 /* UIButton+.swift */; };
 		83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */; };
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
-		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
 		83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39732C4644DD00DD7EC3 /* URLConstant.swift */; };
+		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
 		864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertStyle.swift */; };
 		864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */; };
@@ -110,8 +110,9 @@
 		86880C272C47CCE900CAEF58 /* MypageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C262C47CCE900CAEF58 /* MypageViewModel.swift */; };
 		86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C292C47F2DF00CAEF58 /* HankkiListViewModel.swift */; };
 		86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */; };
-		86880C332C48F51C00CAEF58 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 86880C322C48F51C00CAEF58 /* Kingfisher */; };
 		86880C302C48E08A00CAEF58 /* GetZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C2F2C48E08A00CAEF58 /* GetZipListResponseDTO.swift */; };
+		86880C362C49148900CAEF58 /* CreateZipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C352C49148900CAEF58 /* CreateZipViewModel.swift */; };
+		86880C382C4920A700CAEF58 /* PostZipRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C372C4920A700CAEF58 /* PostZipRequestDTO.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -242,8 +243,8 @@
 		83DBEDCD2C256B180042BA48 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		83DBEDCF2C256B4C0042BA48 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
 		83DD39732C4644DD00DD7EC3 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
+		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		864A89BB2C3B350900140B63 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +293,8 @@
 		86880C292C47F2DF00CAEF58 /* HankkiListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewModel.swift; sourceTree = "<group>"; };
 		86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewModel.swift; sourceTree = "<group>"; };
 		86880C2F2C48E08A00CAEF58 /* GetZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZipListResponseDTO.swift; sourceTree = "<group>"; };
+		86880C352C49148900CAEF58 /* CreateZipViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewModel.swift; sourceTree = "<group>"; };
+		86880C372C4920A700CAEF58 /* PostZipRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostZipRequestDTO.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
@@ -817,6 +820,7 @@
 		86784E882C3FC0B900E94A5D /* CreateZip */ = {
 			isa = PBXGroup;
 			children = (
+				86880C342C49147800CAEF58 /* ViewModel */,
 				86784E892C3FC0C100E94A5D /* View */,
 			);
 			path = CreateZip;
@@ -955,6 +959,7 @@
 				86880C0A2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift */,
 				86880C0C2C47106700CAEF58 /* PostZipBatchDeleteRequestDTO.swift */,
 				86880C0E2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift */,
+				86880C372C4920A700CAEF58 /* PostZipRequestDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -995,6 +1000,14 @@
 			isa = PBXGroup;
 			children = (
 				86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86880C342C49147800CAEF58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86880C352C49148900CAEF58 /* CreateZipViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1534,7 +1547,7 @@
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
-				8302F8DD2C3D6C0B004ADAA4 /* TotalListBottomSheetController.swift in Sources */,
+				8302F8DD2C3D6C0B004ADAA4 /* (null) in Sources */,
 				86880BD72C46C55C00CAEF58 /* UserAPIService.swift in Sources */,
 				830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */,
 				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
@@ -1632,6 +1645,7 @@
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				86880BFF2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift in Sources */,
 				86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */,
+				86880C382C4920A700CAEF58 /* PostZipRequestDTO.swift in Sources */,
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
@@ -1668,6 +1682,7 @@
 				86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */,
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */,
+				86880C362C49148900CAEF58 /* CreateZipViewModel.swift in Sources */,
 				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,
 				83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */,
 				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
@@ -1935,14 +1950,6 @@
 				minimumVersion = 15.0.3;
 			};
 		};
-		86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.12.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1965,11 +1972,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
-		};
-		86880C322C48F51C00CAEF58 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

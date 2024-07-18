@@ -190,7 +190,6 @@ extension ZipHeaderTableView {
         headerLabel.text = data?.title
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name
-        // TODO: - 서현 이미지 넣기
-        nameImageView.image = UIImage(named: data?.imageUrl ?? "")
+        nameImageView.setKFImage(url: data?.imageUrl)
     }
 }

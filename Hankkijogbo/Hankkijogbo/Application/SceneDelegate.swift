@@ -17,11 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MjEwNjQ0NTAsImV4cCI6MTcyMjI3NDA1MH0.QE-aSPs8F5D5dYsqTwD03GRNnonTmUqK37PbE3da6Cg"
-        
-        UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: accessToken)
-        
+    
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
