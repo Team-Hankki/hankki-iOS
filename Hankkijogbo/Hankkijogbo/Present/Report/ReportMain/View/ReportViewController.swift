@@ -322,22 +322,8 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 // MARK: - PassSelectedHankkiData Delegate
 
 extension ReportViewController: PassItemDataDelegate {
-    func passItemData(type: ReportSectionType, data: String) {
-        switch type {
-        case .search:
-            self.hankkiNameString = data
-        case .category:
-            self.categoryString = data
-        case .menu:
-            self.oneMenuData = MenuModel(name: data, price: 0)
-        default:
-            return
-        }
-        
-        if self.hankkiNameString != nil,
-           self.categoryString != nil,
-           self.oneMenuData != nil {
-            self.bottomButtonView.setupEnabledDoneButton()
-        }
+    func passSearchItemData(model: GetSearchedLocation) {
+        self.hankkiNameString = model.name
+        self.bottomButtonView.setupEnabledDoneButton()
     }
 }
