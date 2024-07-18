@@ -106,6 +106,7 @@
 		86880C272C47CCE900CAEF58 /* MypageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C262C47CCE900CAEF58 /* MypageViewModel.swift */; };
 		86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C292C47F2DF00CAEF58 /* HankkiListViewModel.swift */; };
 		86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */; };
+		86880C332C48F51C00CAEF58 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 86880C322C48F51C00CAEF58 /* Kingfisher */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -367,6 +368,7 @@
 				83DBEDC12C2569A80042BA48 /* SnapKit in Frameworks */,
 				83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */,
 				1605E7B481E50199F1F65BBE /* Pods_Hankkijogbo.framework in Frameworks */,
+				86880C332C48F51C00CAEF58 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1345,6 +1347,7 @@
 				83DBEDBD2C25698B0042BA48 /* Then */,
 				83DBEDC02C2569A80042BA48 /* SnapKit */,
 				83DBEDC32C256A3B0042BA48 /* Moya */,
+				86880C322C48F51C00CAEF58 /* Kingfisher */,
 			);
 			productName = Hankkijogbo;
 			productReference = 83DBED722C255A180042BA48 /* Hankkijogbo.app */;
@@ -1378,6 +1381,7 @@
 				83DBEDBC2C25698A0042BA48 /* XCRemoteSwiftPackageReference "Then" */,
 				83DBEDBF2C2569A80042BA48 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */,
+				86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 83DBED732C255A180042BA48 /* Products */;
 			projectDirPath = "";
@@ -1888,6 +1892,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1905,6 +1917,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		86880C322C48F51C00CAEF58 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
