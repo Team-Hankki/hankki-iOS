@@ -92,39 +92,14 @@ extension HomeViewController {
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
                 marker.touchHandler = { _ in
+                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                     self?.showMarkerInfoCard(at: index)
-//                    print("Marker \(index + 1) clicked")
                     return true
                 }
             }
         })
     }
     
-//    private func showMarkerInfoCard(at index: Int) {
-//          guard selectedMarkerIndex != index else { return }
-//          selectedMarkerIndex = index
-//          
-//          if markerInfoCardView == nil {
-//              markerInfoCardView = MarkerInfoCardView()
-//              view.addSubview(markerInfoCardView!)
-//              markerInfoCardView?.snp.makeConstraints { make in
-//                  make.width.equalTo(331)
-//                  make.height.equalTo(109)
-//                  make.centerX.equalToSuperview()
-//                  make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(109)
-//              }
-//              view.layoutIfNeeded()
-//          }
-//          
-//        markerInfoCardView?.bindData(model: viewModel.hankkiPins[index])
-//          
-//          UIView.animate(withDuration: 0.3, animations: {
-//              self.markerInfoCardView?.snp.updateConstraints { make in
-//                  make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//              }
-//              self.view.layoutIfNeeded()
-//          })
-//      }
     private func showMarkerInfoCard(at index: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
@@ -142,23 +117,36 @@ extension HomeViewController {
         }
         
         let pinData = viewModel.hankkiPins[index]
-
+        
         let category = "Category"
         let lowestPrice = 10000
         let heartCount = 5
-        let imageUrl = "http://example.com/image.jpg" /
-        
+        let imageUrl = "http://example.com/image.jpg"
         let thumbnailData = GetHankkiThumbnailData(from: pinData, category: category, lowestPrice: lowestPrice, heartCount: heartCount, imageUrl: imageUrl)
         markerInfoCardView?.bindData(model: thumbnailData)
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.markerInfoCardView?.snp.updateConstraints { make in
-                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            self.markerInfoCardView?.snp.updateConstraints {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
             }
             self.view.layoutIfNeeded()
         })
     }
-
+    
+    private func hideMarkerInfoCard() {
+        guard markerInfoCardView != nil else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.markerInfoCardView?.snp.updateConstraints {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.markerInfoCardView?.removeFromSuperview()
+            self.markerInfoCardView = nil
+            self.selectedMarkerIndex = nil
+        })
+    }
 }
 
 private extension HomeViewController {
@@ -198,7 +186,6 @@ private extension HomeViewController {
     // MARK: - @objc Func
     
     @objc func typeButtonDidTap() {
-        //        viewModel.getCategoryFilterAPI(completion: {_ in })
         viewModel.getCategoryFilterAPI { [weak self] success in
             if success {
                 DispatchQueue.main.async {
@@ -236,6 +223,9 @@ extension HomeViewController: NMFMapViewCameraDelegate {}
 
 extension HomeViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+        self.hideMarkerInfoCard()
+        
         print("Map clicked")
     }
 }
