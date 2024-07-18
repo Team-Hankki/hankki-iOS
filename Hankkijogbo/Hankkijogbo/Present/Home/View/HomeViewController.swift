@@ -14,7 +14,6 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     private let viewModel = HomeViewModel()
-    
     private var isButtonModified = false
     var isDropDownVisible = false
     
@@ -23,6 +22,7 @@ final class HomeViewController: BaseViewController {
     private var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
+    var totalListBottomSheetView = TotalListBottomSheetView()
     
     // MARK: - Life cycle
     
@@ -34,8 +34,9 @@ final class HomeViewController: BaseViewController {
         setupDelegate()
         setupRegister()
         setupaddTarget()
+        bindViewModel()
         
-        viewModel.getCategoryFilterAPI(completion: {_ in })
+        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +56,14 @@ final class HomeViewController: BaseViewController {
         rootView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+    
+    private func bindViewModel() {
+        viewModel.hankkiListsDidChange = { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.totalListBottomSheetView.hankkiCollectionView.reloadData()
+            }
         }
     }
 }
@@ -128,6 +137,14 @@ private extension HomeViewController {
     // MARK: - @objc Func
     
     @objc func typeButtonDidTap() {
+        //        viewModel.getCategoryFilterAPI(completion: {_ in })
+        viewModel.getCategoryFilterAPI { [weak self] success in
+            if success {
+                DispatchQueue.main.async {
+                    self?.typeCollectionView.collectionView.reloadData()
+                }
+            }
+        }
         if isButtonModified {
             revertButton(for: rootView.typeButton, filter: "종류")
         } else {
@@ -214,15 +231,15 @@ extension HomeViewController: NMFMapViewTouchDelegate {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         typeCollectionView.isHidden = true
-        let selectedCategory = viewModel.categoryFilters[indexPath.item]
-        changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
-        print("\(selectedCategory.name) 이 클릭되었습니다.")
+        viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
+        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name ?? "")
+        print("\(String(describing: viewModel.storeCategory)) 이 클릭되었습니다.")
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return viewModel.categoryFilters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -230,7 +247,6 @@ extension HomeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.bindData(model: viewModel.categoryFilters[indexPath.item])
-        //        cell.bindData(model: typedata[indexPath.item])
         return cell
     }
 }
@@ -277,6 +293,13 @@ extension HomeViewController {
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.sizeToFit()
         }
+        if button == rootView.priceButton {
+            viewModel.priceCategory = ""
+        } else if button == rootView.sortButton {
+            viewModel.sortOption = ""
+        } else {
+            viewModel.storeCategory = ""
+        }
         isButtonModified = false
     }
 }
@@ -285,11 +308,16 @@ extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
         switch buttonType {
         case .price:
-            changeButtonTitle(for: rootView.priceButton, newTitle: item)
+            if let priceFilter = viewModel.priceFilters.first(where: { $0.tag == item }) {
+                viewModel.priceCategory = priceFilter.tag
+                changeButtonTitle(for: rootView.priceButton, newTitle: priceFilter.name)
+            }
         case .sort:
-            changeButtonTitle(for: rootView.sortButton, newTitle: item)
+            if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
+                viewModel.sortOption = sortOption.tag
+                changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
+            }
         }
         hideDropDown()
     }
 }
-

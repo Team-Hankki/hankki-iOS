@@ -7,11 +7,7 @@
 
 import Foundation
 
-struct GetSortOptionFilterResponseDTO: Codable {
-    let code: Int
-    let message: String
-    let data: GetSortOptionFilterResponseData
-}
+/// 정렬 드롭다운 정보 조회
 
 struct GetSortOptionFilterResponseData: Codable {
     let options: [GetSortOptionFilterData]
