@@ -17,7 +17,7 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         iconImageView.do {
-            $0.backgroundColor = .gray500
+            $0.image = .icArrowRight
         }
         
         titleLabel.do {

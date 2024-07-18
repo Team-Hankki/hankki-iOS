@@ -9,6 +9,8 @@ import UIKit
 
 final class TypeCollectionViewCell: BaseCollectionViewCell {
     
+    private let viewModel = HomeViewModel()
+    
     // MARK: - UI Components
     
     private let thumbnailImageView: UIImageView = UIImageView()
@@ -42,7 +44,6 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
         }
         
         thumbnailImageView.do {
-            $0.backgroundColor = .gray400
             $0.makeRounded(radius: 8)
         }
         
@@ -54,7 +55,8 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension TypeCollectionViewCell {
-    func bindData(model: TypeModel) {
-        typeLabel.text = model.menutype
+    func bindData(model: GetCategoryFilterData) {
+        typeLabel.text = model.name
+        thumbnailImageView.setKFImage(url: model.imageUrl)
     }
 }
