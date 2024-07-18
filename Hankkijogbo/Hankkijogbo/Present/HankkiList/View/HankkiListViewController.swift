@@ -247,6 +247,8 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
 private extension HankkiListViewController {
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
+        let request: DeleteZipToHankkiRequestDTO = DeleteZipToHankkiRequestDTO(favoriteId: zipId ?? 0, storeId: viewModel.hankkiList[indexPath.item].id)
+        viewModel.deleteZipToHankki(requestBody: request, completion: {_ in})
         viewModel.hankkiList.remove(at: indexPath.row)
         
         hankkiTableView.beginUpdates()

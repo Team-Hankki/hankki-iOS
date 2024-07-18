@@ -20,3 +20,7 @@ struct EmptyDTO: Codable {
     let message: String
     let data: [String: String]?
 }
+
+struct CodeDTO: Codable {
+    let code: Int
+}
