@@ -25,20 +25,7 @@ extension CreateZipViewModel {
             }
         }
     }
-    
-    func postZipToHankki(_ data: PostZipToHankkiRequestDTO) {
-        NetworkService.shared.zipService.postZipToHankki(requestBody: data) { result in
-            switch result {
-            case .success(let response):
-                return
-            case .unAuthorized, .pathError:
-                print("레전드 에러발생")
-            default:
-                return
-            }
-        }
-    }
-    
+
     func postZip(_ data: PostZipRequestDTO) {
         NetworkService.shared.zipService.postZip(requestBody: data) { result in
             switch result {

@@ -5,11 +5,11 @@
 //  Created by 심서현 on 7/9/24.
 //
 
+import AuthenticationServices
 import UIKit
 
 import Then
 import SnapKit
-import AuthenticationServices
 
 final class MypageQuitFooterView: BaseCollectionViewCell {
     

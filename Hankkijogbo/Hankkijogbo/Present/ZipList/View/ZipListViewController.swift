@@ -32,7 +32,7 @@ final class ZipListViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         
-        bindVieModel()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +62,7 @@ final class ZipListViewController: BaseViewController {
 }
 
 private extension ZipListViewController {
-    private func bindVieModel() {
+    private func bindViewModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
@@ -223,7 +223,7 @@ extension ZipListViewController: UICollectionViewDelegate {
                 } else {
                     print(indexPath.item, "으로 이동합니다.")
                     // 첫 족보 추가하기 셀은 리스트에 포함하지 않으므로 1을 뺀다
-                    navigateToHankkiListViewController(zipId: self.viewModel.zipList[indexPath.item-1].id)
+                    navigateToHankkiListViewController(zipId: self.viewModel.zipList[indexPath.item - 1].id)
                 }
             }
         }
