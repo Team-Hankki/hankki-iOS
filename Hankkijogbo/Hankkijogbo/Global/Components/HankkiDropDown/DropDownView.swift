@@ -15,7 +15,7 @@ final class DropDownView: BaseView {
     
     // MARK: - Properties
     
-    private let viewModel: HomeViewModel
+    let viewModel: HomeViewModel
     
     weak var delegate: DropDownViewDelegate?
     private var buttonType: ButtonType

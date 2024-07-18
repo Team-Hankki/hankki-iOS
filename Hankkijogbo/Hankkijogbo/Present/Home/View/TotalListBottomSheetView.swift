@@ -21,7 +21,7 @@ final class TotalListBottomSheetView: BaseView {
     
     private let bottomSheetHandlerView = UIView()
     private let flowLayout = UICollectionViewFlowLayout()
-    private lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let containerView = UIView()
     private let cell = TotalListCollectionViewCell()
     
