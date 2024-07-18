@@ -26,10 +26,10 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     // MARK: - UI Components
     
     private lazy var footerButtonStackView: UIStackView = UIStackView()
-    private lazy var likedButton: HankkiDetailButton = HankkiDetailButton(
+    lazy var likedButton: HankkiDetailButton = HankkiDetailButton(
         image: isLiked ? .btnLikeSelected24 : .btnLikeNormal24,
         text: "\(self.likedNumber)",
-        buttonHandler: likedButtonDidTap
+        buttonHandler: nil
     )
     lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton(
         image: .btnAddDetail,
@@ -95,14 +95,12 @@ extension HankkiDetailFooterView {
             for: .normal
         )
     }
-    
-    // MARK: - @objc Func
-    
-    @objc func likedButtonDidTap() {
-        isLiked = !isLiked
-        setupLikedButtonImage()
         
+    func updateLikeButtonStatus() {
+        isLiked = !isLiked
         likedNumber += isLiked ? 1 : -1
+        
+        setupLikedButtonImage()
         setupLikeButtonStyle()
     }
 }
