@@ -33,6 +33,7 @@
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
 		839138D92C48F7FE00611D5C /* GetHankkiPinResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839138D82C48F7FE00611D5C /* GetHankkiPinResponseDTO.swift */; };
 		839138DB2C48F82900611D5C /* GetHankkiPinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839138DA2C48F82900611D5C /* GetHankkiPinRequestDTO.swift */; };
+		839138DD2C4920B600611D5C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8D92C3D2C84004ADAA4 /* Config.swift */; };
 		839FC71C2C46E2AA00B7FEDD /* GetPriceFilterResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839FC71B2C46E2AA00B7FEDD /* GetPriceFilterResponseDTO.swift */; };
 		839FC7202C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839FC71F2C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift */; };
 		839FC7232C47A3DB00B7FEDD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 839FC7222C47A3DB00B7FEDD /* Kingfisher */; };
@@ -1640,6 +1641,7 @@
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */,
 				A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */,
+				839138DD2C4920B600611D5C /* Config.swift in Sources */,
 				83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */,
 				A2FF94102C31660E001ADA03 /* BaseTableViewCell.swift in Sources */,
 			);

@@ -52,7 +52,7 @@ extension HomeViewController {
     
     /// DropDown을 button Type에 따라 표출하는 함수
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
-        customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType)
+        customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType, viewModel: HomeViewModel())
         customDropDown?.delegate = self
         
         guard let customDropDown = customDropDown else { return }
@@ -71,7 +71,7 @@ extension HomeViewController {
         }
         
         customDropDown.snp.updateConstraints {
-            let height = isPriceModel ? self.pricedata.count * 44 : self.sortdata.count * 44
+            let height = isPriceModel ? self.viewModel.priceFilters.count * 44 : self.viewModel.categoryFilters.count * 44
             $0.width.equalTo(112)
             $0.height.equalTo(height)
         }

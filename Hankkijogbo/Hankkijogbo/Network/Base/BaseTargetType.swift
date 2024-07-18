@@ -47,7 +47,7 @@ protocol BaseTargetType: TargetType {
 
 extension BaseTargetType {
     var baseURL: URL {
-        guard let baseURL = URL(string: URLConstant.baseURL) else {
+        guard let baseURL = URL(string: Config.baseURL) else {
             fatalError("ERROR - BASEURL")
         }
         return baseURL
