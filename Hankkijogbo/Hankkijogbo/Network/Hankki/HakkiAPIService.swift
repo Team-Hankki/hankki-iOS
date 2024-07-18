@@ -14,6 +14,7 @@ protocol HankkiAPIServiceProtocol {
     func getSortOptionFilter(completion: @escaping(NetworkResult<BaseDTO<GetSortOptionFilterResponseData>>) -> Void)
     func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
     func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiPinResponseData>>) -> Void)
+    func getHankkiThumbnail(id: Int, completion: @escaping(NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void)
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
@@ -99,6 +100,23 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<BaseDTO<GetHankkiPinResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    /// 식당 썸네일 조회 
+    func getHankkiThumbnail(id: Int, completion: @escaping (NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void) {
+        provider.request(.getHankkiThumbnail(id: id)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }
