@@ -15,12 +15,15 @@ protocol ZipAPIServiceProtocol {
     func getMyZipList(id: Double, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<BaseDTO<GetZipDetailResponseData>>) -> Void)
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
-    func postZipToHankki(requestBody: PostZipToHankkiRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
+    func postHankkiToZip(requestBody: PostHankkiToZipRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
 }
 
 final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
+    
+    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin()])
+    
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
         provider.request(.deleteZipToHankki(requestBody: requestBody)) { result in
             switch result {
@@ -35,9 +38,6 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
             }
         }
     }
-    
-    
-    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin()])
 
     func getMyZipList(id: Double, completion: @escaping (NetworkResult<GetMyZipListResponseDTO>) -> Void) {
         provider.request(.getMyZipList(id: id)) { result in
@@ -100,8 +100,9 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
     
-    func postZipToHankki(requestBody: PostZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
-        provider.request(.postZipToHankki(requestBody: requestBody)) { result in
+    /// 족보에 식당 추가
+    func postHankkiToZip(requestBody: PostHankkiToZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postHankkiToZip(requestBody: requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
