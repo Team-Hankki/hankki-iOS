@@ -16,7 +16,7 @@ extension CreateZipViewModel {
     func postZipBatchDelete(_ zipList: PostZipBatchDeleteRequestDTO) {
         NetworkService.shared.zipService.postZipBatchDelete(requesBody: zipList) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 return
             case .unAuthorized, .pathError:
                 print("레전드 에러발생")
@@ -29,7 +29,7 @@ extension CreateZipViewModel {
     func postZipToHankki(_ data: PostZipToHankkiRequestDTO) {
         NetworkService.shared.zipService.postZipToHankki(requestBody: data) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 return
             case .unAuthorized, .pathError:
                 print("레전드 에러발생")

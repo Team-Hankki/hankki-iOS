@@ -39,6 +39,14 @@ final class UnivSelectViewController: BaseViewController {
         bindVieModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+        
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.isNavigationBarHidden = true
+        }
+     }
+    
     override func setupStyle() {
         headerStackView.do {
             $0.axis = .vertical

@@ -36,7 +36,12 @@ extension UserTargetType: BaseTargetType {
     }
     
     var requestBodyParameter: (any Codable)? {
-        return .none
+        switch self {
+        case .postMeUniversity(requestBody: let requestBody):
+            return requestBody
+        default:
+            return .none
+        }
     }
     
     var path: String {

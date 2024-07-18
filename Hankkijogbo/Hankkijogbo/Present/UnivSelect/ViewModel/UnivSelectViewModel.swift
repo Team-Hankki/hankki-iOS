@@ -49,14 +49,15 @@ extension UnivSelectViewModel {
     
     func postMeUniversity() {
         let currentUniversity: UniversityModel = universityList[currentUnivIndex]
-        let request: PostMeUniversityRequestDTO = PostMeUniversityRequestDTO(universityId: currentUniversity.id, 
+        UserDefaults.standard.saveUniversity(currentUniversity)
+        let request: PostMeUniversityRequestDTO = PostMeUniversityRequestDTO(universityId: currentUniversity.id,
                                                                              name: currentUniversity.name,
                                                                              longitude: currentUniversity.longitude,
                                                                              latitude: currentUniversity.latitude)
         
-        NetworkService.shared.universityService.getUniversityList { result in
+        NetworkService.shared.userService.postMeUniversity(requestBody: request) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 DispatchQueue.main.async {
                     // 홈 뷰로 돌아간다~
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

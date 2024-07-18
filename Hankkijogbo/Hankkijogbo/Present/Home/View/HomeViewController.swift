@@ -114,12 +114,14 @@ private extension HomeViewController {
     func setupNavigationBar() {
         let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
-                                                              hasRightButton: true,
-                                                              mainTitle: .stringAndImage(university, .btnDropdown),
-                                                              rightButton: .string("편지"),
-                                                              rightButtonAction: presentUniversity)
+                                                              hasRightButton: false,
+                                                              mainTitle: .stringAndImage(university, .btnDropdown), 
+                                                              rightButton: .string(""),
+                                                              rightButtonAction: {},
+                                                              titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.isNavigationBarHidden = false
         }
     }
 }

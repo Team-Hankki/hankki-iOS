@@ -61,9 +61,8 @@ extension MypageViewModel {
     func deleteWithdraw(authorizationCode: String) {
         NetworkService.shared.authService.deleteWithdraw(authorizationCode: authorizationCode) { result in
             switch result {
-            case .success:
+            case .success, .decodeError:
                 UserDefaults.standard.removeTokens()
-                
                 DispatchQueue.main.async {
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                         if let window = windowScene.windows.first {

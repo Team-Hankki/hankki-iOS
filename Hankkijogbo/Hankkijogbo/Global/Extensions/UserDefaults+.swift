@@ -29,7 +29,11 @@ extension UserDefaults {
     }
     
     func saveUniversity(_ university: UniversityModel) {
-        UserDefaults.standard.set(university, forKey: UserDefaultsKey.university.rawValue)
+        print("대학정보 저장")
+        let defaults = UserDefaults.standard
+        if let encoded = try? JSONEncoder().encode(university) {
+            defaults.set(encoded, forKey: "university")
+        }
     }
     
     func removeUniversity() {
