@@ -63,9 +63,8 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/pins"
         case .getHankkiList:
             return utilPath.rawValue
-        case .getHankkiThumbnail:
-            return utilPath.rawValue + "/thumbnail"
-        case .getHankkiDetail:
+        case .getHankkiThumbnail(let id):
+            return utilPath.rawValue + "/\(id)/thumbnail"
             return utilPath.rawValue
         case .postHankkiHeart:
             return utilPath.rawValue + "/hearts"
@@ -73,6 +72,9 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/hearts"
         case .getHankkiValidate:
             return utilPath.rawValue + "/validate"
+        case .getHankkiDetail(id: let id):
+            return utilPath.rawValue // 추후에 은수가 수정하길
+            
         }
     }
     
