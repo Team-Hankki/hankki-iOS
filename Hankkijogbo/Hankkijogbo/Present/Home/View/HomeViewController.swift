@@ -29,14 +29,13 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
-        setupPosition()
         
         setupDelegate()
         setupRegister()
         setupaddTarget()
         bindViewModel()
+        setupPosition()
         
-        viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
         viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: {_ in})
     }
     
@@ -77,27 +76,26 @@ extension HomeViewController {
     }
     
     func setupPosition() {
-        var initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        var markers: [GetHankkiPinData] = viewModel.hankkiPins
+        let initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
         
-        rootView.mapView.positionMode = .direction
-        rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
-        
-        let markers = [
-            (lat: 37.5766102, lng: 126.9783881),
-            (lat: 37.5266102, lng: 126.9785881),
-            (lat: 37.5646102, lng: 126.9787881),
-            (lat: 37.5766152, lng: 126.9789881)
-        ]
-        
-        for (index, location) in markers.enumerated() {
-            let marker = NMFMarker()
-            marker.position = NMGLatLng(lat: location.lat, lng: location.lng)
-            marker.mapView = rootView.mapView
-            marker.touchHandler = { _ in
-                print("Marker \(index + 1) clicked")
-                return true
+        viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
+            markers = self?.viewModel.hankkiPins ?? []
+            
+            
+            self?.rootView.mapView.positionMode = .direction
+            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            
+            for (index, location) in markers.enumerated() {
+                let marker = NMFMarker()
+                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+                marker.mapView = self?.rootView.mapView
+                marker.touchHandler = { _ in
+                    print("Marker \(index + 1) clicked")
+                    return true
+                }
             }
-        }
+        })
     }
 }
 

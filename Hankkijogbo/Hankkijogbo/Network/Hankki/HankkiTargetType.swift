@@ -35,12 +35,10 @@ extension HankkiTargetType: BaseTargetType {
         default: return .none
         }
     }
-    
-    // var queryParameter: [String: Any]? { return .none }
-    var queryParameter: [String: Any]? {
+        var queryParameter: [String: Any]? {
         switch self {
-        case .getHankkiPin(let university, let category, let lowestPrice, let order):
-            return ["university": university, "category": category, "lowestPrice": lowestPrice, "order": order]
+        case .getHankkiPin(let universityid, let storeCategory, let priceCategory, let sortOption):
+            return ["universityId": universityid, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         case .getHankkiList(let universityid, let storeCategory, let priceCategory, let sortOption):
             return ["universityid": universityid, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         default:
@@ -62,7 +60,7 @@ extension HankkiTargetType: BaseTargetType {
         case .getSortOptionFilter:
             return utilPath.rawValue + "/sort-options"
         case .getHankkiPin:
-            return utilPath.rawValue
+            return utilPath.rawValue + "/pins"
         case .getHankkiList:
             return utilPath.rawValue
         case .getHankkiThumbnail:
