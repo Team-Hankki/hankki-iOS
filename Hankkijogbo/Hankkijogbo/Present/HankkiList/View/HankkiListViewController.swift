@@ -12,6 +12,8 @@ final class  HankkiListViewController: BaseViewController {
     // MARK: - Properties
     
     let type: HankkiListViewControllerType
+    let zipId: Int?
+    
     let viewModel: HankkiListViewModel = HankkiListViewModel()
 
     // MARK: - UI Properties
@@ -25,8 +27,9 @@ final class  HankkiListViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(_ type: HankkiListViewControllerType) {
+    init(_ type: HankkiListViewControllerType, zipId: Int?) {
         self.type = type
+        self.zipId = zipId
         super.init()
     }
     
@@ -40,8 +43,13 @@ final class  HankkiListViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         
-        setupViewModel()
-        viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+        bindViewModel()
+        
+        if type == .myZip {
+            viewModel.getZipDetail(zipId: zipId ?? 0, completion: {_ in})
+        } else {
+            viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,11 +90,15 @@ final class  HankkiListViewController: BaseViewController {
 }
 
 private extension HankkiListViewController {
-    private func setupViewModel() {
+    private func bindViewModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.emptyView.isHidden = (self?.viewModel.hankkiList.count != 0)
                 self?.hankkiTableView.reloadData()
+            }
+            if self?.type == .myZip {
+                guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
+                headerView.dataBind(self?.viewModel.zipInfo ?? nil)
             }
         }
     }
@@ -235,6 +247,8 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
 private extension HankkiListViewController {
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
+        let request: DeleteZipToHankkiRequestDTO = DeleteZipToHankkiRequestDTO(favoriteId: zipId ?? 0, storeId: viewModel.hankkiList[indexPath.item].id)
+        viewModel.deleteZipToHankki(requestBody: request, completion: {_ in})
         viewModel.hankkiList.remove(at: indexPath.row)
         
         hankkiTableView.beginUpdates()

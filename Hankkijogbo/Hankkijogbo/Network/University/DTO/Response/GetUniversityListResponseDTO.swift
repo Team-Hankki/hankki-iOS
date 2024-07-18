@@ -8,10 +8,10 @@
 import Foundation
 
 struct GetUniversityListResponseData: Codable {
-    let universities: [GetUniversityResponseData]
+    let universities: [GetUniversityListData]
 }
 
-struct GetUniversityResponseData: Codable {
+struct GetUniversityListData: Codable {
     let id: Int
     let name: String
     let longitude: Float

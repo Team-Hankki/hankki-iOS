@@ -37,4 +37,18 @@ extension ZipListViewModel {
             }
         }
     }
+    
+    func postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.zipService.postZipBatchDelete(requesBody: requestBody) { result in
+            switch result {
+            case .unAuthorized, .networkFail:
+                print("족보 삭제 실패")
+                completion(false)
+            default:
+                self.getZipList(completion: {_ in})
+                return
+            }
+            
+        }
+    }
 }
