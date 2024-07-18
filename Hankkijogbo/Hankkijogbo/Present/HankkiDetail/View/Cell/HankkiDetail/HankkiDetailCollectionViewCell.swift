@@ -65,3 +65,22 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
         }
     }
 }
+
+extension HankkiDetailCollectionViewCell {
+    func bindMenuData(_ menuData: MenuData) {
+        hankkiMenuNameLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: menuData.name,
+                color: .gray700
+            )
+        }
+        hankkiMenuPriceLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body1,
+                withText: "\(menuData.price)원",
+                color: .gray500
+            )
+        }
+    }
+}

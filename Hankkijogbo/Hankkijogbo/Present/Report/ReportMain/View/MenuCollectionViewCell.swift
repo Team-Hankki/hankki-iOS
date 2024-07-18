@@ -214,7 +214,7 @@ private extension MenuCollectionViewCell {
             
             guard let menuText = menuTextField.text else { return }
             if !menuText.isEmpty {
-                delegate?.passItemData(type: .menu, data: menuText)
+//                delegate?.passItemData(type: .menu, data: menuText)
             }
         }
     }

@@ -25,6 +25,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     var hankkiNameString: String = "" {
         didSet {
             if hankkiNameString != "" {
+                print(hankkiNameString)
                 self.setupStyleForSet()
             } else {
                 self.setupStyleForNotSet()
@@ -109,7 +110,6 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
         searchBarButton.snp.makeConstraints {
             $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(5)
             $0.leading.equalToSuperview().inset(22)
-            $0.width.equalTo(227)
             $0.height.equalTo(48)
         }
         searchBarButton.do {
