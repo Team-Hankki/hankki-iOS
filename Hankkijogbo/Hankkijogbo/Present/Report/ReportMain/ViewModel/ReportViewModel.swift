@@ -13,10 +13,16 @@ final class ReportViewModel {
     
     var reportedNumberGuideText: String = "" {
         didSet {
-            updateReportedNumber?()
+            updateCollectionView?()
         }
     }
-    var updateReportedNumber: (() -> Void)?
+    var updateCollectionView: (() -> Void)?
+    
+    var categoryFilters: [GetCategoryFilterData] = [] {
+        didSet {
+            updateCollectionView?()
+        }
+    }
 }
 
 extension ReportViewModel {
@@ -38,6 +44,7 @@ extension ReportViewModel {
         }
     }
     
+    /// 식당 제보하기
     func postHankkiAPI(_ data: Data?, request: PostHankkiRequestDTO) {
         let multipartData = createMultipartFormData(image: data, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
@@ -50,6 +57,23 @@ extension ReportViewModel {
                 print("badRequest")
             case .serverError:
                 print("serverError")
+            default:
+                return
+            }
+        }
+    }
+    
+    // 종류 카테고리를 가져오는 메서드
+    func getCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getCategoryFilter { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.categoryFilters = response?.data.categories ?? []
+                completion(true)
+                print("SUCCESS")
+            case .unAuthorized, .networkFail:
+                completion(false)
+                print("FAILED")
             default:
                 return
             }

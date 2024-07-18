@@ -20,14 +20,13 @@ final class ReportViewController: BaseViewController {
     
     var hankkiNameString: String? {
         didSet {
-            collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+            collectionView.reloadData()
         }
     }
     var categoryString: String?
     var oneMenuData: [MenuData]?
 
     /// 다 임의로 넣어둠
-    let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
     let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
     var dummyMenu = [""]
     
@@ -57,6 +56,9 @@ final class ReportViewController: BaseViewController {
         
         setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = true
+        viewModel.getCategoryFilterAPI { isSuccess in
+            print(isSuccess)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -97,8 +99,8 @@ final class ReportViewController: BaseViewController {
 extension ReportViewController {
     
     func bindViewModel() {
-        viewModel.updateReportedNumber = {
-            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        viewModel.updateCollectionView = {
+            self.collectionView.reloadData()
         }
     }
 }
@@ -177,6 +179,16 @@ private extension ReportViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
+        let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
+            name: hankkiNameString ?? "",
+            category: categoryString ?? "",
+            address: "문래동",
+            latitude: 12321.12312,
+            longitude: 213.23,
+            universityId: 1,
+            menus: oneMenuData ?? []
+        )
+        viewModel.postHankkiAPI(self.imageData, request: request)
         let reportCompleteViewController = ReportCompleteViewController()
         self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
     }
@@ -244,7 +256,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .search, .image, .addMenu:
             return 1
         case .category:
-            return dummyCategory.count
+            return viewModel.categoryFilters.count
         case .menu:
             return dummyMenu.count
         default:
@@ -264,7 +276,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.dataBind(dummyCategory[indexPath.row])
+            cell.bindData(viewModel.categoryFilters[indexPath.row])
             return cell
         case .image:
             if isImageSet {

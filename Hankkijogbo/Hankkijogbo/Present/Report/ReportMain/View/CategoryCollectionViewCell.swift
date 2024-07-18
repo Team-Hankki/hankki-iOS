@@ -76,9 +76,6 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray200.cgColor
         }
-        categoryImageView.do {
-            $0.image = .icHeart
-        }
         categoryLabel.do {
             $0.textAlignment = .left
         }
@@ -86,13 +83,16 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension CategoryCollectionViewCell {
-    func dataBind(_ text: String) {
+    func bindData(_ data: GetCategoryFilterData) {
         categoryLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                withText: text,
+                withText: data.name,
                 color: .gray400
             )
+        }
+        categoryImageView.do {
+            $0.setKFImage(url: data.imageUrl)
         }
     }
 }
