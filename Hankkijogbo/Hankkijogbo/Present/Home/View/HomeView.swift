@@ -54,8 +54,7 @@ final class HomeView: BaseView {
         }
         
         bottomSheetView.snp.makeConstraints {
-            $0.height.equalTo(300)
-            $0.bottom.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(UIScreen.getDeviceHeight() * 0.4)
         }
     }
     
