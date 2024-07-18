@@ -11,8 +11,16 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     
     // MARK: - Properties
     
-    var isLiked: Bool = false
-    var likedNumber: Int = 299
+    var isLiked: Bool = false {
+        didSet {
+            setupLikedButtonImage()
+        }
+    }
+    var likedNumber: Int = -1 {
+        didSet {
+            setupLikeButtonStyle()
+        }
+    }
     var addMyZipString: String = "나의 족보에 추가"
     
     // MARK: - UI Components
@@ -70,16 +78,7 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
 
 extension HankkiDetailFooterView {
     
-    // MARK: - @objc Func
-    
-    @objc func likedButtonDidTap() {
-        isLiked = !isLiked
-        likedButton.hankkiDetailButton.setImage(
-            isLiked ? .btnLikeSelected24 : .btnLikeNormal24,
-            for: .normal
-        )
-        
-        likedNumber += isLiked ? 1 : -1
+    func setupLikeButtonStyle() {
         likedButton.hankkiDetailButton.setAttributedTitle(
             UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
@@ -88,5 +87,22 @@ extension HankkiDetailFooterView {
             ),
             for: .normal
         )
+    }
+    
+    func setupLikedButtonImage() {
+        likedButton.hankkiDetailButton.setImage(
+            isLiked ? .btnLikeSelected24 : .btnLikeNormal24,
+            for: .normal
+        )
+    }
+    
+    // MARK: - @objc Func
+    
+    @objc func likedButtonDidTap() {
+        isLiked = !isLiked
+        setupLikedButtonImage()
+        
+        likedNumber += isLiked ? 1 : -1
+        setupLikeButtonStyle()
     }
 }

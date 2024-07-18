@@ -202,7 +202,6 @@ private extension HankkiDetailViewController {
     
     func setupImageStyle() {
         thumbnailImageView.do {
-            $0.image = .btnLikeSelected52
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
         }
@@ -275,6 +274,10 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                     for: indexPath
                 ) as? HankkiDetailFooterView else {
                     return UICollectionReusableView()
+                }
+                if let data = viewModel.hankkiDetailData {
+                    footer.isLiked = data.isLiked
+                    footer.likedNumber = data.heartCount
                 }
                 footer.addMyZipButton.hankkiDetailButton.addTarget(self, action: #selector(addMyZipButtonDidTap), for: .touchUpInside)
                 return footer
