@@ -36,7 +36,7 @@ final class MyZipViewModel {
     
     /// 족보에 식당 추가
     func postHankkiToZipAPI(request: PostHankkiToZipRequestDTO) {
-        NetworkService.shared.zipService.postHankkiToZip(requestBody: request) { [weak self] result in
+        NetworkService.shared.zipService.postHankkiToZip(requestBody: request) { result in
             switch result {
             case .success(let response):
                 print("SUCCESS")

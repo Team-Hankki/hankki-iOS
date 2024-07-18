@@ -21,6 +21,7 @@ final class ReportViewController: BaseViewController {
     
     var isImageSet: Bool = false
     var image: UIImage?
+    var imageData: Data?
     
     var hankkiNameString: String? {
         didSet {
@@ -53,7 +54,10 @@ final class ReportViewController: BaseViewController {
         setupDelegate()
         bindViewModel()
         
-        viewModel.getReportedNumber()
+//        viewModel.getReportedNumberAPI()
+        // 이미지를 Data로 변환
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -309,7 +313,13 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                     if let image = image as? UIImage {
                         self.isImageSet = true
                         self.image = image
+                        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+                            fatalError("Failed to convert UIImage to Data")
+                        }
+                        self.imageData = imageData
                         self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
+                        
+                        self.viewModel.postHankkiAPI(imageData)
                     } else {
                         self.isImageSet = false
                     }

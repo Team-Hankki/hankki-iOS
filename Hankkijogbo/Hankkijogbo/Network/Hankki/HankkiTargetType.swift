@@ -20,10 +20,18 @@ enum HankkiTargetType {
     case postHankkiHeart(id: Int64)
     case deleteHankkiHeart(id: Int64)
     case postHankkiValidate(req: PostHankkiValidateRequestDTO)
+    case postHankki(multipartData: [MultipartFormData])
 }
 
 extension HankkiTargetType: BaseTargetType {
-    var headerType: HeaderType { return .accessTokenHeader }
+    var headerType: HeaderType {
+        switch self {
+        case .postHankki(let multipartData):
+            return .formdataHeader(multipartData: multipartData)
+        default:
+            return .accessTokenHeader
+        }
+    }
     var utilPath: UtilPath { return .hankki }
     
     var pathParameter: String? {
@@ -78,6 +86,8 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/\(id)/hearts"
         case .postHankkiValidate:
             return utilPath.rawValue + "/validate"
+        case .postHankki:
+            return utilPath.rawValue
         }
     }
     
@@ -85,7 +95,7 @@ extension HankkiTargetType: BaseTargetType {
         switch self {
         case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail:
             return .get
-        case .postHankkiHeart, .postHankkiValidate:
+        case .postHankkiHeart, .postHankkiValidate, .postHankki:
             return .post
         case .deleteHankkiHeart:
             return .delete
