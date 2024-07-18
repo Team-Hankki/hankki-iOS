@@ -17,9 +17,9 @@ enum HankkiTargetType {
     case getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String)
     case getHankkiThumbnail(id: Int)
     case getHankkiDetail(id: Int)
-    case postHankkiHeart(id: Int)
-    case deleteHankkiHeart(id: Int)
-    case getHankkiValidate
+    case postHankkiHeart(id: Int64)
+    case deleteHankkiHeart(id: Int64)
+    case postHankkiValidate(req: PostHankkiValidateRequestDTO)
 }
 
 extension HankkiTargetType: BaseTargetType {
@@ -50,7 +50,12 @@ extension HankkiTargetType: BaseTargetType {
     
     var requestBodyParameter: Codable? {
         // Patch, Post 등 Request
-        return .none
+        switch self {
+        case .postHankkiValidate(let req):
+            return req
+        default:
+            return .none
+        }
     }
     
     var path: String {
@@ -67,22 +72,20 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue
         case .getHankkiThumbnail:
             return utilPath.rawValue + "/thumbnail"
-        case .getHankkiDetail:
-            return utilPath.rawValue
-        case .postHankkiHeart:
-            return utilPath.rawValue + "/hearts"
-        case .deleteHankkiHeart:
-            return utilPath.rawValue + "/hearts"
-        case .getHankkiValidate:
+        case .getHankkiDetail(let id):
+            return utilPath.rawValue + "/\(id)"
+        case .postHankkiHeart(let id), .deleteHankkiHeart(let id):
+            return utilPath.rawValue + "/\(id)/hearts"
+        case .postHankkiValidate:
             return utilPath.rawValue + "/validate"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail, .getHankkiValidate:
+        case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail:
             return .get
-        case .postHankkiHeart:
+        case .postHankkiHeart, .postHankkiValidate:
             return .post
         case .deleteHankkiHeart:
             return .delete

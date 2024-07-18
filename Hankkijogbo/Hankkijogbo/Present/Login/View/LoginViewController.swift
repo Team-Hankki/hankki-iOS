@@ -1,5 +1,5 @@
-import UIKit
 import AuthenticationServices
+import UIKit
 
 final class LoginViewController: BaseViewController {
 

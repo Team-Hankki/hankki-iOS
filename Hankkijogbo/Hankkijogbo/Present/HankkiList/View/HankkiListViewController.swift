@@ -43,7 +43,7 @@ final class  HankkiListViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         
-        bindVieModel()
+        bindViewModel()
         
         if type == .myZip {
             viewModel.getZipDetail(zipId: zipId ?? 0, completion: {_ in})
@@ -90,7 +90,7 @@ final class  HankkiListViewController: BaseViewController {
 }
 
 private extension HankkiListViewController {
-    private func bindVieModel() {
+    private func bindViewModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.emptyView.isHidden = (self?.viewModel.hankkiList.count != 0)

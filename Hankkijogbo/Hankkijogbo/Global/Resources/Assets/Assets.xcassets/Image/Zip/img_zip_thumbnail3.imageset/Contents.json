@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "img_zip_thumbnail3.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "img_zip_thumbnail3@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "img_zip_thumbnail3@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "img_zip_thumbnail3.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

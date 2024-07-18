@@ -12,7 +12,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     var isChecked: Bool = false
     // TODO: - literal로 빼기
     var updateStringNotificationName: String = "UpdateAddToMyZipListString"
-
+    
     // MARK: - UI Components
     
     private let thumbnailImageView = UIImageView()
@@ -61,7 +61,6 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         thumbnailImageView.do {
             $0.layer.cornerRadius = 10
-            $0.backgroundColor = .gray
         }
         zipTitleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
@@ -77,17 +76,57 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
                 color: .gray400
             )
         }
-        secondHashtagLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.button,
-                withText: "#꼭가보세요",
-                color: .gray400
-            )
-        }
         addZipButton.do {
             $0.setImage(.btnAddLined, for: .normal)
             $0.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
         }
+    }
+}
+
+extension MyZipListCollectionViewCell {
+
+    func getImageForType(_ type: String) -> UIImage {
+        let thumbnailImages: [String: UIImage] = [
+            "TYPE_ONE": .imgZipThumbnail1,
+            "TYPE_TWO": .imgZipThumbnail2,
+            "TYPE_THREE": .imgZipThumbnail3,
+            "TYPE_FOUR": .imgZipThumbnail4
+        ]
+        
+        return thumbnailImages[type] ?? .imgZipThumbnail1
+    }
+    
+    func setupLabelStyleOfData(zipData: GetMyZipFavorite) {
+        zipTitleLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body2,
+                withText: zipData.title,
+                color: .gray800
+            )
+        }
+        firstHashtagLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.button,
+                withText: zipData.details[0],
+                color: .gray400
+            )
+        }
+        
+        if zipData.details.count > 1 {
+            secondHashtagLabel.do {
+                $0.attributedText = UILabel.setupAttributedText(
+                    for: PretendardStyle.button,
+                    withText: zipData.details[1],
+                    color: .gray400
+                )
+            }
+        }
+    }
+    
+    func bindData(zipData: GetMyZipFavorite) {
+        isChecked = zipData.isAdded
+        thumbnailImageView.image = getImageForType(zipData.imageType)
+        setupLabelStyleOfData(zipData: zipData)
     }
     
     @objc func addZipButtonDidTap() {

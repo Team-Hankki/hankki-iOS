@@ -24,7 +24,7 @@ final class HankkiDetailCollectionView: BaseView {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(339)
-            $0.height.equalTo(349)
+            $0.height.equalTo(278)
         }
     }
     
@@ -41,6 +41,19 @@ final class HankkiDetailCollectionView: BaseView {
             $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = 20
             $0.addShadow(color: .black, alpha: 0.05, blur: 12, spread: 6)
+        }
+    }
+}
+
+extension HankkiDetailCollectionView {
+    
+    /// 메뉴 데이터 불러온 이후에 컬뷰 레이아웃 업데이트 -> 메뉴 개수에 따라 높이 동적으로
+    func updateLayout(menuSize: Int) {
+        collectionView.snp.removeConstraints()
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalTo(339)
+            $0.height.equalTo(240 + (menuSize * 33))
         }
     }
 }

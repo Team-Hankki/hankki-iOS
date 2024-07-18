@@ -5,9 +5,8 @@
 //  Created by 심서현 on 7/8/24.
 //
 
-import UIKit
-
 import AuthenticationServices
+import UIKit
 
 final class MypageViewController: BaseViewController {
     
@@ -41,7 +40,7 @@ final class MypageViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         
-        bindVieModel()
+        bindViewModel()
         
         viewModel.getMe()
     }
@@ -71,7 +70,7 @@ extension MypageViewController {
 }
 
 private extension MypageViewController {
-    private func bindVieModel() {
+    private func bindViewModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 guard let headerView = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? MypageHeaderView else { return }
