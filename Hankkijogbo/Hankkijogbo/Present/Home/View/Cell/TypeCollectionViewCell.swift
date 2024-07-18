@@ -44,7 +44,6 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
         }
         
         thumbnailImageView.do {
-            $0.backgroundColor = .gray400
             $0.makeRounded(radius: 8)
         }
         
@@ -58,5 +57,6 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 extension TypeCollectionViewCell {
     func bindData(model: GetCategoryFilterData) {
         typeLabel.text = model.name
+        thumbnailImageView.setKFImage(url: model.imageUrl)
     }
 }

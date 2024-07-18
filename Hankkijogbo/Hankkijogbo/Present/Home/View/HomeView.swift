@@ -15,6 +15,7 @@ final class HomeView: BaseView {
     // MARK: - UI Components
     
     var mapView = NMFMapView()
+    var bottomSheetView = TotalListBottomSheetView()
     
     let typeButton = UIButton()
     let priceButton = UIButton()
@@ -27,9 +28,10 @@ final class HomeView: BaseView {
     // MARK: - Set UI
     
     override func setupHierarchy() {
-        addSubviews(mapView, 
+        addSubviews(mapView,
                     buttonStackView,
-                    targetButton)
+                    targetButton,
+                    bottomSheetView)
         buttonStackView.addArrangedSubviews(typeButton,
                                             priceButton,
                                             sortButton)
@@ -49,6 +51,11 @@ final class HomeView: BaseView {
         targetButton.snp.makeConstraints {
             $0.top.equalTo(buttonStackView).offset(40)
             $0.leading.equalTo(buttonStackView)
+        }
+        
+        bottomSheetView.snp.makeConstraints {
+            $0.height.equalTo(300)
+            $0.bottom.horizontalEdges.equalToSuperview()
         }
     }
     
@@ -75,6 +82,10 @@ final class HomeView: BaseView {
         
         targetButton.do {
             $0.setImage(.btnTarget, for: .normal)
+        }
+        
+        bottomSheetView.do {
+            $0.backgroundColor = .clear
         }
     }
 }

@@ -10,7 +10,16 @@ import UIKit
 final class SplashViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        pushToNextView()
+    }
+    
+    override func viewDidLoad() {
+        view.backgroundColor = .yellow
+    }
+}
+
+extension SplashViewController {
+    func pushToNextView() {
         let accessToken = UserDefaults.standard.getAccesshToken()
         
         if accessToken.isEmpty {
@@ -23,9 +32,5 @@ final class SplashViewController: BaseViewController {
             self.view.window?.rootViewController = navigationController
             navigationController.popToRootViewController(animated: false)
         }
-    }
-    
-    override func viewDidLoad() {
-        view.backgroundColor = .yellow
     }
 }
