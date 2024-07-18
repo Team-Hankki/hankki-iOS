@@ -39,7 +39,7 @@ extension MypageViewController {
         case .hankki:
             switch itemIndex {
             case 0:
-                navigateToHankkiListViewController(.repoted)
+                navigateToHankkiListViewController(.reported)
             default:
                 navigateToHankkiListViewController(.liked)
             }

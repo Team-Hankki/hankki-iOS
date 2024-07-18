@@ -9,7 +9,9 @@ import UIKit
 
 extension ZipListCollectionViewCell {
     struct DataStruct {
+        let id: Int
         let title: String
+        let imageUrl: String
         var type: CellType = .common
     }
     

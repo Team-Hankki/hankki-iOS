@@ -98,8 +98,7 @@
 		86880BEE2C46E38200CAEF58 /* GetUniversityListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BED2C46E38200CAEF58 /* GetUniversityListResponseDTO.swift */; };
 		86880BF22C46E74700CAEF58 /* GetMeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF12C46E74700CAEF58 /* GetMeResponseDTO.swift */; };
 		86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF32C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift */; };
-		86880BF62C46E93400CAEF58 /* GetMeHankkiHeartListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF52C46E93400CAEF58 /* GetMeHankkiHeartListResponseDTO.swift */; };
-		86880BF82C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF72C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift */; };
+		86880BF62C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF52C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift */; };
 		86880BFA2C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BF92C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift */; };
 		86880BFF2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BFE2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift */; };
 		86880C0B2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C0A2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift */; };
@@ -109,6 +108,9 @@
 		86880C1E2C47A12100CAEF58 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C1D2C47A12100CAEF58 /* UserDefaults+.swift */; };
 		86880C242C47C77900CAEF58 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C232C47C77900CAEF58 /* LoginViewModel.swift */; };
 		86880C272C47CCE900CAEF58 /* MypageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C262C47CCE900CAEF58 /* MypageViewModel.swift */; };
+		86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C292C47F2DF00CAEF58 /* HankkiListViewModel.swift */; };
+		86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */; };
+		86880C332C48F51C00CAEF58 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 86880C322C48F51C00CAEF58 /* Kingfisher */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
 		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
@@ -276,8 +278,7 @@
 		86880BED2C46E38200CAEF58 /* GetUniversityListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUniversityListResponseDTO.swift; sourceTree = "<group>"; };
 		86880BF12C46E74700CAEF58 /* GetMeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeResponseDTO.swift; sourceTree = "<group>"; };
 		86880BF32C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeUniversityResponseDTO.swift; sourceTree = "<group>"; };
-		86880BF52C46E93400CAEF58 /* GetMeHankkiHeartListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeHankkiHeartListResponseDTO.swift; sourceTree = "<group>"; };
-		86880BF72C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeStoresReportsResponseDTO.swift; sourceTree = "<group>"; };
+		86880BF52C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeHankkiListResponseDTO.swift; sourceTree = "<group>"; };
 		86880BF92C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeZipListResponseDTO.swift; sourceTree = "<group>"; };
 		86880BFE2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMeUniversityRequestDTO.swift; sourceTree = "<group>"; };
 		86880C0A2C47084B00CAEF58 /* PostZipToHankkiRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostZipToHankkiRequestDTO.swift; sourceTree = "<group>"; };
@@ -287,6 +288,8 @@
 		86880C1D2C47A12100CAEF58 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		86880C232C47C77900CAEF58 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		86880C262C47CCE900CAEF58 /* MypageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewModel.swift; sourceTree = "<group>"; };
+		86880C292C47F2DF00CAEF58 /* HankkiListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewModel.swift; sourceTree = "<group>"; };
+		86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewModel.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
@@ -553,14 +556,14 @@
 		83DBED8B2C2564670042BA48 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				830285432C4559570004D9F7 /* Base */,
+				86880BCE2C46C0B600CAEF58 /* Auth */,
+				86880BD32C46C53700CAEF58 /* User */,
 				86880BDD2C46CCF500CAEF58 /* University */,
 				86880BD82C46CC6700CAEF58 /* Zip */,
-				86880BD32C46C53700CAEF58 /* User */,
-				86880BCE2C46C0B600CAEF58 /* Auth */,
 				8302854E2C455FB00004D9F7 /* Hankki */,
 				A2EC33A92C4711A000809840 /* Report */,
 				A2EC33AA2C4711A600809840 /* Location */,
-				830285432C4559570004D9F7 /* Base */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -922,8 +925,7 @@
 			children = (
 				86880BF12C46E74700CAEF58 /* GetMeResponseDTO.swift */,
 				86880BF32C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift */,
-				86880BF52C46E93400CAEF58 /* GetMeHankkiHeartListResponseDTO.swift */,
-				86880BF72C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift */,
+				86880BF52C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift */,
 				86880BF92C46EAC600CAEF58 /* GetMeZipListResponseDTO.swift */,
 			);
 			path = Response;
@@ -978,9 +980,26 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		86880C282C47F2D100CAEF58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86880C292C47F2DF00CAEF58 /* HankkiListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86880C2B2C480ADE00CAEF58 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86880C2C2C480AED00CAEF58 /* ZipListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		86B761112C3DC76000413059 /* ZipList */ = {
 			isa = PBXGroup;
 			children = (
+				86880C2B2C480ADE00CAEF58 /* ViewModel */,
 				86B761122C3DC79200413059 /* View */,
 			);
 			path = ZipList;
@@ -1007,6 +1026,7 @@
 		86B761192C3DE03200413059 /* HankkiList */ = {
 			isa = PBXGroup;
 			children = (
+				86880C282C47F2D100CAEF58 /* ViewModel */,
 				86B7611A2C3DE03700413059 /* View */,
 			);
 			path = HankkiList;
@@ -1499,7 +1519,7 @@
 				830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
-				86880BF62C46E93400CAEF58 /* GetMeHankkiHeartListResponseDTO.swift in Sources */,
+				86880BF62C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift in Sources */,
 				86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */,
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
@@ -1573,6 +1593,7 @@
 				A2EC33C42C47183700809840 /* GetReportedNumberResponseDTO.swift in Sources */,
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
+				86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */,
 				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
 				A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */,
 				86E78D1D2C46B67400BE0DC3 /* EmptyView.swift in Sources */,
@@ -1610,6 +1631,7 @@
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
+				86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				86880BDC2C46CCA100CAEF58 /* ZipAPIService.swift in Sources */,
@@ -1639,7 +1661,6 @@
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				A2EC33D02C47938A00809840 /* HankkiInfoCardView.swift in Sources */,
 				A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */,
-				86880BF82C46EA2800CAEF58 /* GetMeStoresReportsResponseDTO.swift in Sources */,
 				86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */,
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */,
@@ -1910,6 +1931,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1932,6 +1961,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		86880C322C48F51C00CAEF58 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86880C312C48F51C00CAEF58 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
