@@ -124,6 +124,6 @@
 ## 🔥 Trouble Shooting
 [🔗 Trouble Shooting](https://fast-kilometer-dbf.notion.site/trouble-shooting-d491565abcb94a72b4a6b36716a6fb05?pvs=4)
 
-### Off The Record
+### 📸 Off The Record
 ![image](https://github.com/user-attachments/assets/eecbe550-5816-4d29-96b9-c654ddef5eae)
 
