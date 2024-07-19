@@ -309,9 +309,19 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         return cell
     }
     
-    @objc func addZipButtonDidTap() {
-        // TODO: - favoriteId, storeId 연결
-        viewModel.postHankkiToZipAPI(request: PostHankkiToZipRequestDTO(favoriteId: 20, storeId: 20))
+    @objc func addZipButtonDidTap(_ sender: UIButton) {
+        // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
+        let itemIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
+
+        guard let data = viewModel.myZipListFavoriteData else { return }
+        
+        viewModel.postHankkiToZipAPI(
+            request: PostHankkiToZipRequestDTO(
+                favoriteId: data[itemIndexPath?.item ?? 0].id,
+                storeId: storeId ?? 0
+            )
+        )
         self.dismissMyZipBottomSheet()
     }
 }
