@@ -20,7 +20,7 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int) {
+    func getHankkiDetailAPI(hankkiId: Int64) {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             switch result {
             case .success(let response):

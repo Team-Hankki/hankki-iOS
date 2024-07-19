@@ -14,8 +14,8 @@ protocol HankkiAPIServiceProtocol {
     func getSortOptionFilter(completion: @escaping(NetworkResult<BaseDTO<GetSortOptionFilterResponseData>>) -> Void)
     func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
     func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiPinResponseData>>) -> Void)
-    func getHankkiThumbnail(id: Int, completion: @escaping(NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void)
-    func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
+    func getHankkiThumbnail(id: Int64, completion: @escaping(NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void)
+    func getHankkiDetail(id: Int64, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
     func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func postHankkiHeart(id: Int64, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
     func postHankki(multipartData: [MultipartFormData], completion: @escaping(NetworkResult<PostHankkiResponseDTO>) -> Void)
@@ -151,7 +151,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 식당 썸네일 조회 
-    func getHankkiThumbnail(id: Int, completion: @escaping (NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void) {
+    func getHankkiThumbnail(id: Int64, completion: @escaping (NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void) {
         provider.request(.getHankkiThumbnail(id: id)) { result in
             switch result {
             case .success(let response):
@@ -167,7 +167,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
         }
     }
     /// 식당 세부 조회
-    func getHankkiDetail(id: Int, completion: @escaping (NetworkResult<GetHankkiDetailResponseDTO>) -> Void) {
+    func getHankkiDetail(id: Int64, completion: @escaping (NetworkResult<GetHankkiDetailResponseDTO>) -> Void) {
         provider.request(.getHankkiDetail(id: id)) { result in
             switch result {
             case .success(let response):

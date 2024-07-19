@@ -12,7 +12,7 @@ import Moya
 protocol ZipAPIServiceProtocol {
     typealias GetMyZipListResponseDTO = BaseDTO<GetMyZipListResponseData>
     
-    func getMyZipList(id: Double, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
+    func getMyZipList(id: Int64, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<BaseDTO<GetZipDetailResponseData>>) -> Void)
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
@@ -39,7 +39,7 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
 
-    func getMyZipList(id: Double, completion: @escaping (NetworkResult<GetMyZipListResponseDTO>) -> Void) {
+    func getMyZipList(id: Int64, completion: @escaping (NetworkResult<GetMyZipListResponseDTO>) -> Void) {
         provider.request(.getMyZipList(id: id)) { result in
             switch result {
             case .success(let response):

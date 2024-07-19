@@ -80,7 +80,7 @@ extension ReportViewModel {
                 self.getMe() { name in
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-                        let reportCompleteViewController = ReportCompleteViewController(hankkiId: Int(response?.data.id ?? 0),
+                        let reportCompleteViewController = ReportCompleteViewController(hankkiId: (response?.data.id ?? 0),
                                                                                         reportedNumber: self.count,
                                                                                         nickname: name,
                                                                                         selectedHankkiName: response?.data.name ?? "")

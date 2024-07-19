@@ -11,7 +11,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let hankkiId: Int
+    let hankkiId: Int64
     
     var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
     var isImageSet: Bool = true
@@ -35,7 +35,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int) {
+    init(hankkiId: Int64) {
         self.hankkiId = hankkiId
         super.init()
     }
@@ -242,7 +242,7 @@ extension HankkiDetailViewController {
     }
     
     @objc func addMyZipButtonDidTap() {
-        presentMyZipListBottomSheet()
+        presentMyZipListBottomSheet(id: hankkiId)
     }
     
     @objc func hankkiReportButtonDidTap() {

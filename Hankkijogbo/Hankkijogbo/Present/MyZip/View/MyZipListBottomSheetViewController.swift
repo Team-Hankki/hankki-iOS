@@ -11,6 +11,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var storeId: Int64?
     var viewModel: MyZipViewModel = MyZipViewModel()
     var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
@@ -39,7 +40,9 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         bindViewModel()
         showMyZipBottomSheet()
         
-        viewModel.getMyZipListAPI(id: 19)
+        if let id = storeId {
+            viewModel.getMyZipListAPI(id: id)
+        }
     }
     
     // MARK: - Set UI

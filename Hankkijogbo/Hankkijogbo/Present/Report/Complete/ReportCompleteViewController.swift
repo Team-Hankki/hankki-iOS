@@ -11,7 +11,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let hankkiId: Int
+    let hankkiId: Int64
     let reportedNumber: Int
     let nickname: String
     let selectedHankkiName: String
@@ -34,7 +34,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int, 
+    init(hankkiId: Int64, 
          reportedNumber: Int,
          nickname: String,
          selectedHankkiName: String)
@@ -192,7 +192,7 @@ private extension ReportCompleteViewController {
     }
     
     @objc func addToMyZipListButtonDidTap() {
-        presentMyZipListBottomSheet()
+        presentMyZipListBottomSheet(id: hankkiId)
     }
     
     @objc func updateAddToMyZipListString() {

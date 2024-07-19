@@ -152,7 +152,7 @@ extension HomeViewController {
         markers.removeAll()
     }
     
-    private func showMarkerInfoCard(at index: Int, pinId: Int) {
+    private func showMarkerInfoCard(at index: Int, pinId: Int64) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
         
@@ -226,8 +226,12 @@ private extension HomeViewController {
         }
     }
     
-    @objc func getNotificationForMyZipList() {
-        self.presentMyZipListBottomSheet()
+    @objc func getNotificationForMyZipList(_ notification: Notification) {
+        if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
+            print("클릭된 셀의 indexPath \(indexPath)")
+            print(viewModel.hankkiLists[indexPath.item])
+            self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
+        }
     }
 }
 

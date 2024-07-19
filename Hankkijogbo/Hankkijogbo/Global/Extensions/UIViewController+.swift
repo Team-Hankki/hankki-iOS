@@ -142,8 +142,9 @@ extension UIViewController {
     
     // MARK: - 고민사항: 이걸 여기에, 이렇게 넣는 게 맞는가
     /// 나의 식당 족보 바텀 시트 띄우기
-    func presentMyZipListBottomSheet() {
+    func presentMyZipListBottomSheet(id: Int64) {
         let viewController = MyZipListBottomSheetViewController()
+        viewController.storeId = id
         viewController.modalTransitionStyle = .crossDissolve
         viewController.modalPresentationStyle = .overFullScreen
         self.present(viewController, animated: false, completion: nil)

@@ -156,8 +156,12 @@ extension TotalListBottomSheetView {
         viewLayoutIfNeededWithDownAnimation()
     }
     
-    @objc func addButtonDidTap() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(presentMyZipBottomSheetNotificationName)))
+    @objc func addButtonDidTap(sender: UIButton) {
+        // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.totalListCollectionView)
+        let itemIndexPath = self.totalListCollectionView.indexPathForItem(at: buttonPosition)
+        
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil, userInfo: ["itemIndexPath": itemIndexPath ?? IndexPath()]))
     }
 }
 

@@ -168,7 +168,7 @@ final class HomeViewModel {
     }
     
     // 식당 썸네일을 가져오는 메서드
-    func getThumbnailAPI(id: Int, completion: @escaping (Bool) -> Void) {
+    func getThumbnailAPI(id: Int64, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiThumbnail(id: id) { result in
             switch result {
             case .success(let response):

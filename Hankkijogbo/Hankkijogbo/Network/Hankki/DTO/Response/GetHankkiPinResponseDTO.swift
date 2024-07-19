@@ -16,6 +16,6 @@ struct GetHankkiPinResponseData: Codable {
 struct GetHankkiPinData: Codable {
     let latitude: Double
     let longitude: Double
-    let id: Int
+    let id: Int64
     let name: String
 }
