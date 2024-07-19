@@ -58,10 +58,10 @@ final class HomeViewModel {
         
         guard let id = UserDefaults.standard.getUniversity()?.id else { return }
 
-        getHankkiListAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
+        getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
                 print("식당 전체 족보 fetch 완료 ")
-                self.getHankkiPinAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
+                self.getHankkiPinAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
                     if pinSuccess {
                         print("지도 핀 fetch 완료 😄")
                         self.hankkiPinsDidChange?(self.hankkiPins)
@@ -130,8 +130,8 @@ final class HomeViewModel {
     }
     
     // 식당 리스트를 가져오는 메서드
-    func getHankkiListAPI(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
-        NetworkService.shared.hankkiService.getHankkiList(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
+    func getHankkiListAPI(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.hankkiLists = response?.data.stores ?? []
@@ -149,8 +149,8 @@ final class HomeViewModel {
     }
     
     // 식당 핀을 가져오는 메서드
-    func getHankkiPinAPI(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
-        NetworkService.shared.hankkiService.getHankkiPin(universityId: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
+    func getHankkiPinAPI(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiPin(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
             switch result{
             case .success(let response):
                 self?.hankkiPins = response?.data.pins ?? []

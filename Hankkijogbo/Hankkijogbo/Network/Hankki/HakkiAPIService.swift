@@ -12,7 +12,7 @@ protocol HankkiAPIServiceProtocol {
     func getCategoryFilter(completion: @escaping(NetworkResult<BaseDTO<GetCategoryFilterResponseData>>) -> Void)
     func getPriceCategoryFilter(completion: @escaping(NetworkResult<BaseDTO<GetPriceFilterResponseData>>) -> Void)
     func getSortOptionFilter(completion: @escaping(NetworkResult<BaseDTO<GetSortOptionFilterResponseData>>) -> Void)
-    func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
+    func getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void)
     func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<BaseDTO<GetHankkiPinResponseData>>) -> Void)
     func getHankkiThumbnail(id: Int, completion: @escaping(NetworkResult<BaseDTO<GetHankkiThumbnailResponseData>>) -> Void)
     func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
@@ -117,8 +117,8 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
   
     /// 메인 페이지 식당 리스트 조회
-    func getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void) {
-        provider.request(.getHankkiList(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
+    func getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void) {
+        provider.request(.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<BaseDTO<GetHankkiListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
