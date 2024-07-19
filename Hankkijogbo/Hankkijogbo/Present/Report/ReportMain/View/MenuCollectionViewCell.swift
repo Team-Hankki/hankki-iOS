@@ -159,7 +159,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
         }
         deleteMenuButton.do {
-            $0.setImage(.icClose, for: .normal)
+            $0.setImage(.btnDeleteSmall, for: .normal)
         }
         errorLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
