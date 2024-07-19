@@ -7,15 +7,8 @@
 
 import UIKit
 
-struct SearchResultModel {
-    var name: String
-    var address: String
-}
-
 protocol PassItemDataDelegate: AnyObject {
     func passSearchItemData(model: GetSearchedLocation)
-//    func passCategoryData(type: ReportSectionType, data: String)
-//    func passItemData(type: ReportSectionType, data: String)
 }
 
 final class SearchViewController: BaseViewController {
@@ -252,7 +245,6 @@ private extension SearchViewController {
             // 등록 ㄱ
             guard let location = viewModel.selectedLocationData else { return }
             delegate?.passSearchItemData(model: location)
-//            delegate?.passItemData(type: .search, data: viewModel.selectedLocationData)
             self.navigationController?.popViewController(animated: true)
         case 409:
             // 이미 등록된 가게 Alert 띄우기

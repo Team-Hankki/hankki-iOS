@@ -24,6 +24,10 @@ final class ReportViewModel {
         }
     }
     var selectedCategory: GetCategoryFilterData?
+    
+    var selectedImageData: Data?
+    
+    var menus: [MenuData] = [MenuData()]
 }
 
 extension ReportViewModel {
@@ -46,8 +50,8 @@ extension ReportViewModel {
     }
     
     /// 식당 제보하기
-    func postHankkiAPI(_ data: Data?, request: PostHankkiRequestDTO, completion: @escaping () -> ()) {
-        let multipartData = createMultipartFormData(image: data, request: request)
+    func postHankkiAPI(request: PostHankkiRequestDTO, completion: @escaping () -> Void) {
+        let multipartData = createMultipartFormData(image: selectedImageData, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             switch result {
             case .success(let response):

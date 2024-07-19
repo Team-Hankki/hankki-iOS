@@ -18,10 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+        let navigationController = HankkiNavigationController(rootViewController: ReportViewController())
     
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = SplashViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     
