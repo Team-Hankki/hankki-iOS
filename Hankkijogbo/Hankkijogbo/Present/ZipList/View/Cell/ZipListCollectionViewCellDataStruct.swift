@@ -31,12 +31,12 @@ extension ZipListCollectionViewCell {
             }
         }
         
-        var image: UIImage {
+        func image(for imageType: ImageType?) -> UIImage {
             switch self {
             case .create:
                 return .imgZipCreateNormal
             case .common:
-                return .imgZipThumbnail1
+                return imageType?.imageForType() ?? .imgZipThumbnail1
             case .disable:
                 return .imgZipCreateDisable
             }
@@ -50,6 +50,41 @@ extension ZipListCollectionViewCell {
                 1.0
             case .disable:
                 0.4
+            }
+        }
+    }
+    
+    enum ImageType {
+        case TYPE_ONE
+        case TYPE_TWO
+        case TYPE_THREE
+        case TYPE_FOUR
+        
+        init?(from string: String) {
+            switch string {
+            case "TYPE_ONE":
+                self = .TYPE_ONE
+            case "TYPE_TWO":
+                self = .TYPE_TWO
+            case "TYPE_THREE":
+                self = .TYPE_THREE
+            case "TYPE_FOUR":
+                self = .TYPE_FOUR
+            default:
+                return nil
+            }
+        }
+        
+        func imageForType() -> UIImage {
+            switch self {
+            case .TYPE_ONE:
+                return .imgZipThumbnail1
+            case .TYPE_TWO:
+                return .imgZipThumbnail2
+            case .TYPE_THREE:
+                return .imgZipThumbnail3
+            case .TYPE_FOUR:
+                return .imgZipThumbnail4
             }
         }
     }

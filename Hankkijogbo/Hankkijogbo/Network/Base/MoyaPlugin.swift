@@ -19,18 +19,18 @@ final class MoyaPlugin: PluginType {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             return
         }
-        let url = httpRequest.description
-        let method = httpRequest.httpMethod ?? "unknown method"
-        var log = "=======================================================\n🍚1️⃣🍚[\(method)] \(url)\n=======================================================\n"
-        log.append("🍚2️⃣🍚API: \(target)\n")
-        if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
-            log.append("header: \(headers)\n")
-        }
-        if let body = httpRequest.httpBody, let bodyString = String(bytes: body, encoding: String.Encoding.utf8) {
-            log.append("\(bodyString)\n")
-        }
-        log.append("========================= 🍚END \(method) =========================")
-        print(log)
+//        let url = httpRequest.description
+//        let method = httpRequest.httpMethod ?? "unknown method"
+//        var log = "=======================================================\n🍚1️⃣🍚[\(method)] \(url)\n=======================================================\n"
+//        log.append("🍚2️⃣🍚API: \(target)\n")
+//        if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
+//            log.append("header: \(headers)\n")
+//        }
+//        if let body = httpRequest.httpBody, let bodyString = String(bytes: body, encoding: String.Encoding.utf8) {
+//            log.append("\(bodyString)\n")
+//        }
+//        log.append("========================= 🍚END \(method) =========================")
+//        print(log)
     }
 
     // MARK: - Response 받을 시 호출
@@ -48,18 +48,18 @@ final class MoyaPlugin: PluginType {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
         let statusCode = response.statusCode
-        var log = "=============== 🍚 네트워크 통신 성공했을까요? 🍚 ==============="
-        log.append("\n🍚3️⃣🍚[\(statusCode)] \(url)\n==========================================================\n")
-        log.append("response: \n")
-        if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
-            log.append("🍚4️⃣🍚\(reString)\n")
-        }
-        log.append("===================== 🍚 내용~~~ 🍚 =====================")
-        if let responseString = String(bytes: response.data, encoding: .utf8) {
-            log.append("\n\(responseString)\n")
-        }
-        log.append("===================== 🍚 END HTTP 🍚 =====================")
-        print(log)
+//        var log = "=============== 🍚 네트워크 통신 성공했을까요? 🍚 ==============="
+//        log.append("\n🍚3️⃣🍚[\(statusCode)] \(url)\n==========================================================\n")
+//        log.append("response: \n")
+//        if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
+//            log.append("🍚4️⃣🍚\(reString)\n")
+//        }
+//        log.append("===================== 🍚 내용~~~ 🍚 =====================")
+//        if let responseString = String(bytes: response.data, encoding: .utf8) {
+//            log.append("\n\(responseString)\n")
+//        }
+//        log.append("===================== 🍚 END HTTP 🍚 =====================")
+//        print(log)
     }
 
     func onFail(_ error: MoyaError) {
