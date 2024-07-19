@@ -16,10 +16,7 @@ final class HomeViewModel {
     var priceFilters: [GetPriceFilterData] = []
     var sortOptions: [GetSortOptionFilterData] = [] {
         didSet {
-            print()
-            print("mcrkgus")
             print(sortOptions)
-            print("mcrkgus")
         }
     }
     var hankkiLists: [GetHankkiListData] = [] {
@@ -46,7 +43,7 @@ final class HomeViewModel {
         self.hankkiAPIService = hankkiAPIService
     }
 
-    private func updateHankkiList() {
+    func updateHankkiList() {
         let storeCategory = storeCategory ?? ""
         let priceCategory = priceCategory ?? ""
         let sortOption = sortOption ?? ""
@@ -54,7 +51,7 @@ final class HomeViewModel {
         guard let id = UserDefaults.standard.getUniversity()?.id else { return }
         getHankkiListAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
-                print("Hankki list fetched successfully")
+                self.getHankkiPinAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { _ in }
             } else {
                 print("Failed to fetch hankki list")
             }
@@ -172,7 +169,7 @@ final class HomeViewModel {
 //                completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
-//                completion(false)
+
                 print("FAILED")
             default:
                 return

@@ -35,15 +35,13 @@ final class HomeViewController: BaseViewController {
         setupRegister()
         setupaddTarget()
         bindViewModel()
-        // setupPosition()
+        
         loadInitialData()
         viewModel.getHankkiListAPI(universityid: UserDefaults.standard.getUniversity()?.id ?? 0, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        print("❤️ ❤️", UserDefaults.standard.getUniversity()?.id)
         setupPosition()
         setupNavigationBar()
         requestLocationAuthorization()
@@ -95,7 +93,6 @@ extension HomeViewController {
     func setupPosition() {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
         guard let university = UserDefaults.standard.getUniversity() else { return }
-        print("☠️ University: \(university.name), lat: \(university.latitude), lng: \(university.longitude)")
         
         let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
         viewModel.getHankkiPinAPI(universityid: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
@@ -108,7 +105,6 @@ extension HomeViewController {
                 let marker = NMFMarker()
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
-                print("☠️ Marker \(index) set at lat: \(location.latitude), lng: \(location.longitude)")
                 marker.touchHandler = { _ in
                     self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                     self?.showMarkerInfoCard(at: index, pinId: location.id)
@@ -250,15 +246,20 @@ extension HomeViewController: DropDownViewDelegate {
             case .price:
                 if item == "K6" {
                     changeButtonTitle(for: rootView.priceButton, newTitle: "6000원 이하")
-                } else { changeButtonTitle(for: rootView.priceButton, newTitle: "6000~8000원")}
+                } else {
+                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000~8000원")
+                }
+                viewModel.priceCategory = item // 필터링 값 업데이트
             case .sort:
                 if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
                     changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
+                    viewModel.sortOption = item // 필터링 값 업데이트
                 }
             }
             hideDropDown()
         }
-    }   
+    }
+    
     func presentUniversity() {
         let univSelectViewController = UnivSelectViewController()
         navigationController?.pushViewController(univSelectViewController, animated: true)

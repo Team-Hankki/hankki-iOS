@@ -29,15 +29,18 @@ extension HomeViewController {
         let filter: String
         if sender == rootView.priceButton {
             filter = "가격대"
+            viewModel.priceCategory = ""
         } else if sender == rootView.sortButton {
             filter = "정렬"
+            
+            viewModel.sortOption = ""
         } else {
             filter = "종류"
+            viewModel.storeCategory = ""
         }
         
-        if sender.tag == 1 {
-            revertButton(for: sender, filter: filter)
-        }
+        revertButton(for: sender, filter: filter)
+        viewModel.updateHankkiList()
     }
     
     /// close Button 클릭 시 다시 원래의 버튼으로 돌아오는 함수
