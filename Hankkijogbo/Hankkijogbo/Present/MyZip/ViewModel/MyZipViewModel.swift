@@ -11,6 +11,8 @@ import Moya
 
 final class MyZipViewModel {
     
+    var showAlert: ((String) -> Void)?
+    
     var myZipListFavoriteData: [GetMyZipFavorite]? {
         didSet {
             setMyZipListFavoriteData?()
@@ -27,6 +29,7 @@ final class MyZipViewModel {
                 self?.myZipListFavoriteData = response.data.favorites
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed")
                 print("FAILED")
             default:
                 return
@@ -41,6 +44,7 @@ final class MyZipViewModel {
             case .success(let response):
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self.showAlert?("Failed")
                 print("FAILED")
             default:
                 return

@@ -101,6 +101,12 @@ private extension HankkiListViewController {
                 headerView.dataBind(self?.viewModel.zipInfo ?? nil)
             }
         }
+        
+        viewModel.showAlert = { [weak self] message in
+            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
+                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
+                            primaryButtonText: "확인")
+        }
     }
     
     func setupRegister() {
@@ -187,6 +193,14 @@ extension HankkiListViewController: UITableViewDataSource {
             return 112
         }
     }
+    
+    func deleteLike(_ id: Int64) {
+        viewModel.deleteHankkiHeartAPI(id: id) {}
+    }
+    
+    func postLike(_ id: Int64) {
+        viewModel.postHankkiHeartAPI(id: id) {}
+    }
 }
 
 extension HankkiListViewController: UITableViewDelegate {
@@ -200,8 +214,6 @@ extension HankkiListViewController: UITableViewDelegate {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { (_, _, completionHandler) in
             self.deleteItem(at: indexPath)
-            // TODO: -api 연동 제대로하기
-            print(indexPath.item, "번째 셀을 삭제했어요!!!!!!!!!!")
             completionHandler(true)
         }
         deleteAction.backgroundColor = .hankkiRed
@@ -224,8 +236,9 @@ extension HankkiListViewController: UITableViewDelegate {
     /// 터치시 식당 디테일로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: - navigation 연결
-        print(indexPath.item, "번째 셀의 식당 디테일 뷰로 이동")
+    
+        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: viewModel.hankkiList[indexPath.item].id)
+        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
     }
 }
 
@@ -233,13 +246,28 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
     
     /// 하트 버튼 눌렀을 때
     func heartButtonDidTap(in cell: HankkiListTableViewCell, isSelected: Bool) {
+        var calc: Int = 1
         if let indexPath = hankkiTableView.indexPath(for: cell) {
+            let hankkiId: Int64 = Int64(viewModel.hankkiList[indexPath.item].id)
             if isSelected {
-                print(indexPath.item, "번째 식당을 삭제합니다.")
+                calc *= -1
+                deleteLike(hankkiId)
+                
             } else {
-                print(indexPath.item, "번째 식당을 추가합니다.")
+                postLike(hankkiId)
             }
-            viewModel.hankkiList[indexPath.item].isDeleted.toggle()
+            let currendData: HankkiListTableViewCell.DataStruct = viewModel.hankkiList[indexPath.item]
+            let newData: HankkiListTableViewCell.DataStruct = HankkiListTableViewCell.DataStruct(
+                id: currendData.id,
+                name: currendData.name,
+                imageURL: currendData.imageURL,
+                category: currendData.category,
+                lowestPrice: currendData.lowestPrice,
+                heartCount: currendData.heartCount + calc,
+                isDeleted: !currendData.isDeleted
+            )
+            
+            viewModel.hankkiList[indexPath.item] = newData
         }
     }
 }

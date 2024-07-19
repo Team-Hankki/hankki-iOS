@@ -9,6 +9,10 @@ import UIKit
 
 final class MarkerInfoCardView: BaseView {
     
+    // MARK: - Properties
+    
+    private var hankkiId: Int = -1
+    
     // MARK: - UI Components
     
     private let thumbnailImageView: UIImageView = UIImageView()
@@ -27,7 +31,7 @@ final class MarkerInfoCardView: BaseView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setupAddTarget()
     }
 
     required init?(coder: NSCoder) {
@@ -131,10 +135,27 @@ final class MarkerInfoCardView: BaseView {
     }
 }
 
+private extension MarkerInfoCardView {
+    func setupAddTarget() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewDidTap))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func ViewDidTap() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
+            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
+        }
+    }
+}
+
 // MARK: - Network
 
 extension MarkerInfoCardView {
     func bindData(model: GetHankkiThumbnailResponseData) {
+        hankkiId = model.id
+        
         thumbnailImageView.setKFImage(url: model.imageUrl)
         menutag.text = model.category
         hankkiTitle.text = model.name

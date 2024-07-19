@@ -8,6 +8,8 @@
 import Foundation
 
 final class ZipListViewModel {
+    var showAlert: ((String) -> Void)?
+    
     var reloadCollectionView: (() -> Void)?
     
     var zipList: [ZipListCollectionViewCell.DataStruct] = [] {
@@ -30,7 +32,7 @@ extension ZipListViewModel {
                 } else { print("레전드 오류 발생") }
                 completion(true)
             case .unAuthorized, .networkFail:
-                print("Failed to fetch university list.")
+                self.showAlert?("Failed")
                 completion(false)
             default:
                 return
@@ -42,6 +44,7 @@ extension ZipListViewModel {
         NetworkService.shared.zipService.postZipBatchDelete(requesBody: requestBody) { result in
             switch result {
             case .unAuthorized, .networkFail:
+                self.showAlert?("Failed")
                 print("족보 삭제 실패")
                 completion(false)
             default:

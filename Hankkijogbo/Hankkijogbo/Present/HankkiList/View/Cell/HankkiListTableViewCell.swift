@@ -116,7 +116,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         heartButton.do {
             $0.setImage(.btnLikeSelected52, for: .selected)
-            $0.setImage(.btnLikeSelected52, for: .normal)
+            $0.setImage(.btnLikeNormal52, for: .normal)
             $0.isSelected = true
         }
     }
@@ -162,6 +162,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 
 extension HankkiListTableViewCell {
     func dataBind(_ data: DataStruct, isLikeButtonDisable: Bool) {
+        print(data.name)
         self.data = data
 
         titleLabel.text = data.name

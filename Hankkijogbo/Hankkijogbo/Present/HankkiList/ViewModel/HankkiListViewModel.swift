@@ -8,6 +8,8 @@
 import Foundation
 
 final class HankkiListViewModel {
+    var showAlert: ((String) -> Void)?
+    
     init() {
         getMe()
     }
@@ -35,7 +37,7 @@ extension HankkiListViewModel {
                     self.imageUrl = responseData.data.profileImageUrl
                 } else { return }
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
             }
@@ -63,7 +65,7 @@ extension HankkiListViewModel {
                 } else { print("레전드 오류 발생") }
                 completion(true)
             case .unAuthorized, .networkFail:
-                print("Failed to fetch university list.")
+                self.showAlert?("Failed")
                 completion(false)
             default:
                 return
@@ -87,6 +89,7 @@ extension HankkiListViewModel {
                 } else { print("레전드 오류 발생") }
                 completion(true)
             case .unAuthorized, .networkFail:
+                self.showAlert?("Failed")
                 print("Failed to fetch university list.")
                 completion(false)
             default:
@@ -98,13 +101,36 @@ extension HankkiListViewModel {
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.zipService.deleteZipToHankki(requestBody: requestBody) { result in
             switch result {
-            case .success(let response):
-                print("dmdkdkdk")
+            case .success(_): return
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
                 
+            }
+        }
+    }
+    
+    func postHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
+            switch result {
+            case .success(_): return
+            case .unAuthorized, .networkFail:
+                self.showAlert?("Failed")
+            default:
+                return
+            }
+        }
+    }
+    
+    func deleteHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
+            switch result {
+            case .success(_): return
+            case .unAuthorized, .networkFail:
+                self.showAlert?("Failed")
+            default:
+                return
             }
         }
     }

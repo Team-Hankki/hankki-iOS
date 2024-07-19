@@ -73,6 +73,12 @@ final class HomeViewController: BaseViewController {
         viewModel.hankkiPinsDidChange = { [weak self] pins in
             self?.setupPosition(with: pins)
         }
+        
+        viewModel.showAlert = { [weak self] message in
+            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
+                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
+                            primaryButtonText: "확인")
+        }
     }
     
     private func loadInitialData() {

@@ -8,8 +8,18 @@
 import Foundation
 
 import Moya
+import UIKit
 
 final class ReportViewModel {
+    var showAlert: ((String) -> Void)?
+    
+    var nickname: String?
+    
+    var count: Int = 0 {
+        didSet {
+            updateCollectionView?()
+        }
+    }
     
     var reportedNumberGuideText: String = "" {
         didSet {
@@ -37,12 +47,22 @@ extension ReportViewModel {
             switch result {
             case .success(let response):
                 guard let count = response?.data.count else { return }
+                self?.count = Int(count)
                 self?.reportedNumberGuideText = "\(count)번째 제보예요"
-            case .badRequest, .unAuthorized:
-                // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+            case .badRequest, .unAuthorized, .serverError:
+                self?.showAlert?("Failed to fetch category filters.")
+            default:
+                return
+            }
+        }
+    }
+    
+    func getMe(completion: @escaping(String) -> Void) {
+        NetworkService.shared.userService.getMe { result in
+            switch result {
+            case .success(let response):
+                self.nickname = response?.data.nickname
+                completion(self.nickname ?? "")
             default:
                 return
             }
@@ -50,19 +70,25 @@ extension ReportViewModel {
     }
     
     /// 식당 제보하기
-    func postHankkiAPI(request: PostHankkiRequestDTO, completion: @escaping () -> Void) {
+    func postHankkiAPI(request: PostHankkiRequestDTO, completion: @escaping (PostHankkiResponseData) -> Void) {
         let multipartData = createMultipartFormData(image: selectedImageData, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             switch result {
             case .success(let response):
                 guard let data = response?.data else { return }
                 print(data)
-                completion()
-            case .badRequest, .unAuthorized:
-                // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+                self.getMe() { name in
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                        let reportCompleteViewController = ReportCompleteViewController(hankkiId: Int(response?.data.id ?? 0),
+                                                                                        reportedNumber: self.count,
+                                                                                        nickname: name,
+                                                                                        selectedHankkiName: response?.data.name ?? "")
+                        rootViewController.pushViewController(reportCompleteViewController, animated: true)
+                    }
+                }
+            case .badRequest, .unAuthorized, .serverError:
+                self.showAlert?("Failed to fetch category filters.")
             default:
                 return
             }
@@ -78,6 +104,7 @@ extension ReportViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 completion(false)
                 print("FAILED")
             default:
