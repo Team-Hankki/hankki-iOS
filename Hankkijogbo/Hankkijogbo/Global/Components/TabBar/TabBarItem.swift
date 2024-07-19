@@ -7,8 +7,6 @@
 
 import UIKit
 
-// TODO: - GUI 나오면 이미지 변경
-
 enum TabBarItem: CaseIterable {
     
     case home, report, mypage
