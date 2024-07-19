@@ -10,7 +10,9 @@ import Foundation
 import Moya
 
 final class HomeViewModel {
+    
     private let hankkiAPIService: HankkiAPIServiceProtocol
+    var showAlert: ((String) -> Void)?
     
     var categoryFilters: [GetCategoryFilterData] = []
     var priceFilters: [GetPriceFilterData] = []
@@ -82,6 +84,7 @@ final class HomeViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed")
                 completion(false)
                 print("FAILED")
             default:
@@ -99,6 +102,7 @@ final class HomeViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 completion(false)
                 print("FAILED")
             default:
@@ -116,6 +120,7 @@ final class HomeViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed")
                 completion(false)
                 print("FAILED")
             default:
@@ -134,6 +139,7 @@ final class HomeViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed")
                 completion(false)
                 print("FAILED")
             default:
@@ -152,6 +158,7 @@ final class HomeViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed")
                 completion(false)
                 print("FAILED")
             default:
@@ -170,6 +177,7 @@ final class HomeViewModel {
                     completion(true)
                 } else { return }
             case .unAuthorized, .networkFail:
+                self.showAlert?("Failed")
                 completion(false)
             default:
                 return
@@ -182,11 +190,9 @@ final class HomeViewModel {
         NetworkService.shared.userService.getMeUniversity { result in
             switch result {
             case .success(let response):
-                
-                //                completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
-                
+                self.showAlert?("Failed")
                 print("FAILED")
             default:
                 return
