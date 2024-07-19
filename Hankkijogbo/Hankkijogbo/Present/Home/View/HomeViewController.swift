@@ -13,14 +13,15 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let viewModel = HomeViewModel()
+    var viewModel = HomeViewModel()
     var isButtonModified = false
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
+    private var markers: [NMFMarker] = []
     
     // MARK: - UI Components
     
-    private var typeCollectionView = TypeCollectionView()
+    var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
     var markerInfoCardView: MarkerInfoCardView?
@@ -35,13 +36,14 @@ final class HomeViewController: BaseViewController {
         setupRegister()
         setupaddTarget()
         bindViewModel()
-        setupPosition()
-        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
+        
+        loadInitialData()
+        viewModel.getHankkiListAPI(universityid: UserDefaults.standard.getUniversity()?.id ?? 0, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setupPosition()
         setupNavigationBar()
         requestLocationAuthorization()
     }
@@ -61,12 +63,27 @@ final class HomeViewController: BaseViewController {
     
     private func bindViewModel() {
         viewModel.hankkiListsDidChange = { [weak self] data in
-            guard let self else { return }
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
             }
         }
+        
+        viewModel.hankkiPinsDidChange = { [weak self] pins in
+            self?.setupPosition(with: pins)
+        }
+    }
+    
+    private func loadInitialData() {
+        let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+        viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+    }
+    
+    func updateUniversityData(universityId: Int) {
+        viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
 }
 
@@ -79,27 +96,52 @@ extension HomeViewController {
     
     func setupPosition() {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
-        let initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        guard let university = UserDefaults.standard.getUniversity() else { return }
         
-        viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
-            markers = self?.viewModel.hankkiPins ?? []
+        let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+        viewModel.getHankkiPinAPI(universityid: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
             
+            markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
             self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            
+            self?.clearMarkers()
             
             for (index, location) in markers.enumerated() {
                 let marker = NMFMarker()
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
-                marker.touchHandler = { _ in
+                marker.touchHandler = { [weak self] _ in
                     self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                     self?.showMarkerInfoCard(at: index, pinId: location.id)
                     return true
                 }
+                self?.markers.append(marker)
             }
         })
     }
+    
+    private func setupPosition(with pins: [GetHankkiPinData]) {
+        clearMarkers()
 
+        for (index, location) in pins.enumerated() {
+            let marker = NMFMarker()
+            marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+            marker.mapView = rootView.mapView
+            marker.touchHandler = { [weak self] _ in
+                self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
+                self?.showMarkerInfoCard(at: index, pinId: location.id)
+                return true
+            }
+            markers.append(marker)
+        }
+    }
+    
+    private func clearMarkers() {
+        markers.forEach { $0.mapView = nil }
+        markers.removeAll()
+    }
+    
     private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
@@ -162,7 +204,7 @@ private extension HomeViewController {
         let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImage(university, .btnDropdown), 
+                                                              mainTitle: .stringAndImage(university, .btnDropdown),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
                                                               titleButtonAction: presentUniversity)
@@ -176,48 +218,12 @@ private extension HomeViewController {
 // MARK: - Filtering 관련 Extension
 
 private extension HomeViewController {
-    
     func setupaddTarget() {
         rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
         rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
     }
-    
-    // MARK: - @objc Func
-    
-    @objc func typeButtonDidTap() {
-        viewModel.getCategoryFilterAPI { [weak self] success in
-            if success {
-                DispatchQueue.main.async {
-                    self?.typeCollectionView.collectionView.reloadData()
-                }
-            }
-        }
-        if isButtonModified {
-            revertButton(for: rootView.typeButton, filter: "종류")
-        } else {
-            typeCollectionView.isHidden = false
-            
-            view.addSubview(typeCollectionView)
-            
-            typeCollectionView.snp.makeConstraints {
-                $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
-                $0.leading.equalTo(rootView).inset(8)
-                $0.trailing.equalToSuperview()
-                $0.centerX.equalToSuperview()
-            }
-        }
-    }
-    
-    @objc func priceButtonDidTap() {
-        toggleDropDown(isPriceModel: true, buttonType: .price)
-    }
-    
-    @objc func sortButtonDidTap() {
-        toggleDropDown(isPriceModel: false, buttonType: .sort)
-    }
-    
 }
 
 extension HomeViewController: NMFMapViewCameraDelegate {}
@@ -262,19 +268,23 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
-        switch buttonType {
-        case .price:
-            if let priceFilter = viewModel.priceFilters.first(where: { $0.tag == item }) {
-                viewModel.priceCategory = priceFilter.tag
-                changeButtonTitle(for: rootView.priceButton, newTitle: priceFilter.name)
+        viewModel.getSortOptionFilterAPI { [self] isSuccess in
+            switch buttonType {
+            case .price:
+                if item == "K6" {
+                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000원 이하")
+                } else {
+                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000~8000원")
+                }
+                viewModel.priceCategory = item // 필터링 값 업데이트
+            case .sort:
+                if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
+                    changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
+                    viewModel.sortOption = item // 필터링 값 업데이트
+                }
             }
-        case .sort:
-            if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
-                viewModel.sortOption = sortOption.tag
-                changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
-            }
+            hideDropDown()
         }
-        hideDropDown()
     }
     
     func presentUniversity() {
