@@ -23,6 +23,7 @@ final class ReportViewModel {
             updateCollectionView?()
         }
     }
+    var selectedCategory: GetCategoryFilterData?
 }
 
 extension ReportViewModel {
@@ -45,13 +46,14 @@ extension ReportViewModel {
     }
     
     /// 식당 제보하기
-    func postHankkiAPI(_ data: Data?, request: PostHankkiRequestDTO) {
+    func postHankkiAPI(_ data: Data?, request: PostHankkiRequestDTO, completion: @escaping () -> ()) {
         let multipartData = createMultipartFormData(image: data, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             switch result {
             case .success(let response):
                 guard let data = response?.data else { return }
                 print(data)
+                completion()
             case .badRequest, .unAuthorized:
                 // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
                 print("badRequest")
@@ -86,15 +88,18 @@ private extension ReportViewModel {
     func createMultipartFormData(image: Data?, request: PostHankkiRequestDTO) -> [MultipartFormData] {
         var multipartData: [MultipartFormData] = []
         multipartData.append(MultipartFormData(provider: .data(image ?? .empty), name: "image", fileName: "image.jpg", mimeType: "image/jpeg"))
-        let jsonData = changeJSONData(request: request)
+        let jsonData = convertToJSON(request: request)
         multipartData.append(MultipartFormData(provider: .data(jsonData), name: "request", fileName: "request.json", mimeType: "application/json"))
         return multipartData
     }
 
-    func changeJSONData(request: PostHankkiRequestDTO) -> Data {
-        let requestData = """
-            \(request)
-            """
-        return requestData.data(using: .utf8)!
+    func convertToJSON(request: PostHankkiRequestDTO) -> Data {
+        do {
+            let jsonData = try JSONEncoder().encode(request)
+            return jsonData
+        } catch {
+            print("JSON 변환 실패", error.localizedDescription)
+        }
+        return Data()
     }
 }

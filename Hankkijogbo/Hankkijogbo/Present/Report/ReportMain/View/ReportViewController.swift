@@ -13,6 +13,7 @@ final class ReportViewController: BaseViewController {
     // MARK: - Properties
     
     var viewModel: ReportViewModel = ReportViewModel()
+    var searchViewModel: SearchViewModel = SearchViewModel()
     
     var isImageSet: Bool = false
     var image: UIImage?
@@ -173,24 +174,27 @@ private extension ReportViewController {
     }
     
     @objc func searchBarButtonDidTap() {
-        let searchViewController = SearchViewController()
+        let searchViewController = SearchViewController(viewModel: searchViewModel)
         searchViewController.delegate = self
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     @objc func bottomButtonPrimaryHandler() {
+        guard let data = searchViewModel.selectedLocationData else { return }
         let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
             name: hankkiNameString ?? "",
-            category: categoryString ?? "",
-            address: "문래동",
-            latitude: 12321.12312,
-            longitude: 213.23,
+            category: viewModel.selectedCategory?.tag ?? "KOREAN",
+            address: data.address ?? "",
+            latitude: data.latitude,
+            longitude: data.longitude,
             universityId: 1,
-            menus: oneMenuData ?? []
+            menus: oneMenuData ?? [MenuData(name: "ㅋㅋ", price: 800)]
         )
-        viewModel.postHankkiAPI(self.imageData, request: request)
-        let reportCompleteViewController = ReportCompleteViewController()
-        self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
+        print(request)
+        viewModel.postHankkiAPI(self.imageData, request: request) {
+            let reportCompleteViewController = ReportCompleteViewController()
+            self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
+        }
     }
     
     /// 메뉴 셀 추가
@@ -218,7 +222,7 @@ private extension ReportViewController {
 
 // MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ReportViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -275,7 +279,6 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.delegate = self
             cell.bindData(viewModel.categoryFilters[indexPath.row])
             return cell
         case .image:
@@ -301,6 +304,20 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         default:
             return UICollectionViewCell()
+        }
+    }
+}
+
+extension ReportViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
+        
+        if let category = viewModel.selectedCategory {
+            cell.updateDefaultStyle()
+            viewModel.selectedCategory = nil
+        } else {
+            cell.updateSelectedStyle()
+            viewModel.selectedCategory = viewModel.categoryFilters[indexPath.item]
         }
     }
 }

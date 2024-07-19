@@ -86,7 +86,7 @@ extension BaseTargetType {
         }
         switch headerType {
         case .formdataHeader(let multipartData):
-            print("최종 \(multipartData)")
+            print("최종 \(multipartData[1])")
             return .uploadMultipart(multipartData)
         default:
             return .requestPlain
