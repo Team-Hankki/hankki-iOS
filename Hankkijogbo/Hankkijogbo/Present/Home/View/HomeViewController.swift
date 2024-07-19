@@ -35,13 +35,16 @@ final class HomeViewController: BaseViewController {
         setupRegister()
         setupaddTarget()
         bindViewModel()
-        setupPosition()
-        viewModel.getHankkiListAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
+        // setupPosition()
+        loadInitialData()
+        viewModel.getHankkiListAPI(universityid: UserDefaults.standard.getUniversity()?.id ?? 0, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        print("❤️ ❤️", UserDefaults.standard.getUniversity()?.id)
+        setupPosition()
         setupNavigationBar()
         requestLocationAuthorization()
     }
@@ -68,6 +71,18 @@ final class HomeViewController: BaseViewController {
             }
         }
     }
+    
+    private func loadInitialData() {
+        let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+        viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+    }
+    
+    func updateUniversityData(universityId: Int) {
+        //            UserDefaults.standard.setUniversityId(universityId)
+        viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+    }
 }
 
 // MARK: - MapView
@@ -79,27 +94,31 @@ extension HomeViewController {
     
     func setupPosition() {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
-        let initialPosition = NMGLatLng(lat: 37.5665, lng: 126.9780)
+        guard let university = UserDefaults.standard.getUniversity() else { return }
+        print("☠️ University: \(university.name), lat: \(university.latitude), lng: \(university.longitude)")
         
-        viewModel.getHankkiPinAPI(universityid: 1, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
-            markers = self?.viewModel.hankkiPins ?? []
+        let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+        viewModel.getHankkiPinAPI(universityid: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
             
+            markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
-            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: university.latitude, lng: university.longitude)))
             
             for (index, location) in markers.enumerated() {
                 let marker = NMFMarker()
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
+                print("☠️ Marker \(index) set at lat: \(location.latitude), lng: \(location.longitude)")
                 marker.touchHandler = { _ in
                     self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                     self?.showMarkerInfoCard(at: index, pinId: location.id)
                     return true
                 }
             }
-        })
+        }
+        )
     }
-
+    
     private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
@@ -162,7 +181,7 @@ private extension HomeViewController {
         let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImage(university, .btnDropdown), 
+                                                              mainTitle: .stringAndImage(university, .btnDropdown),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
                                                               titleButtonAction: presentUniversity)

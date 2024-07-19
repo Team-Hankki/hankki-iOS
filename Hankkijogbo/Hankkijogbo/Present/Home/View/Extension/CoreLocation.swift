@@ -61,9 +61,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 성공
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            moveCameraToLocation(location: location)
-        }
+        // 현재 위치로 이동하지 않도록 비워둡니다.
     }
     
     // 위치 업데이트 실패
@@ -90,10 +88,10 @@ extension HomeViewController: CLLocationManagerDelegate {
         let status = CLLocationManager.authorizationStatus()
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            // 위치 접근 권한이 허용된 경우 현재 위치로 이동
-            if let manager = locationManager, let location = manager.location {
-                print("Moving to current location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                moveCameraToLocation(location: location)
+            // 위치 접근 권한이 허용된 경우 선택한 대학교 위치로 이동
+            if let university = UserDefaults.standard.getUniversity() {
+                print("Moving to university location: \(university.latitude), \(university.longitude)")
+                moveCameraToUniversityLocation()
             }
         case .restricted, .denied:
             // 위치 접근 권한이 거부된 경우 알림 표시
@@ -106,9 +104,13 @@ extension HomeViewController: CLLocationManagerDelegate {
         }
     }
     
-    // 카메라를 현재 위치로 이동
-    func moveCameraToLocation(location: CLLocation) {
-        let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+    // 카메라를 선택한 대학교 위치로 이동
+    func moveCameraToUniversityLocation() {
+        guard let university = UserDefaults.standard.getUniversity() else {
+            print("University not found in UserDefaults")
+            return
+        }
+        let position = NMGLatLng(lat: university.latitude, lng: university.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position)
         rootView.mapView.moveCamera(cameraUpdate)
     }
