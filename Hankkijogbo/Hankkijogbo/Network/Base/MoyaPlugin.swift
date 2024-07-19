@@ -19,18 +19,18 @@ final class MoyaPlugin: PluginType {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             return
         }
-//        let url = httpRequest.description
-//        let method = httpRequest.httpMethod ?? "unknown method"
-//        var log = "=======================================================\n🍚1️⃣🍚[\(method)] \(url)\n=======================================================\n"
-//        log.append("🍚2️⃣🍚API: \(target)\n")
-//        if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
-//            log.append("header: \(headers)\n")
-//        }
-//        if let body = httpRequest.httpBody, let bodyString = String(bytes: body, encoding: String.Encoding.utf8) {
-//            log.append("\(bodyString)\n")
-//        }
-//        log.append("========================= 🍚END \(method) =========================")
-//        print(log)
+        let url = httpRequest.description
+        let method = httpRequest.httpMethod ?? "unknown method"
+        var log = "=======================================================\n🍚1️⃣🍚[\(method)] \(url)\n=======================================================\n"
+        log.append("🍚2️⃣🍚API: \(target)\n")
+        if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
+            log.append("header: \(headers)\n")
+        }
+        if let body = httpRequest.httpBody, let bodyString = String(bytes: body, encoding: String.Encoding.utf8) {
+            log.append("\(bodyString)\n")
+        }
+        log.append("========================= 🍚END \(method) =========================")
+        print(log)
     }
 
     // MARK: - Response 받을 시 호출

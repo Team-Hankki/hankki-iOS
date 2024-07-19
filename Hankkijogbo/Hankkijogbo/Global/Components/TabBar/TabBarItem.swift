@@ -17,11 +17,11 @@ enum TabBarItem: CaseIterable {
     var normalItem: UIImage? {
         switch self {
         case .home:
-            return .icHeart
+            return .icHomeNormal
         case .report:
-            return .icHeart
+            return .icReport
         case .mypage:
-            return .icHeart
+            return .icMypageNormal
         }
     }
     
@@ -29,21 +29,20 @@ enum TabBarItem: CaseIterable {
     var selectedItem: UIImage? {
         switch self {
         case .home:
-            return .icHeart
+            return .icHomeSelected
         case .report:
-            return .icHeart
+            return .icReport
         case .mypage:
-            return .icHeart
+            return .icMypageSelected
         }
     }
     
     // 탭 별 제목
     var itemTitle: String? {
         switch self {
-        case .home: return "Home"
-        case .report: return "Report"
-        case .mypage: return "Mypage"
-        // case .home: return StringLiterals.TabBar.home 의 형태로 변경
+        case .home: return ""
+        case .report: return ""
+        case .mypage: return ""
         }
     }
     
