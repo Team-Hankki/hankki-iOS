@@ -317,6 +317,10 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
 
 extension MyZipListBottomSheetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("CELL CLICK")
+//        print("CELL CLICK")
+        if let data = viewModel.myZipListFavoriteData {
+            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
+            navigationController?.pushViewController(hankkiDetailViewController, animated: true)
+        }
     }
 }

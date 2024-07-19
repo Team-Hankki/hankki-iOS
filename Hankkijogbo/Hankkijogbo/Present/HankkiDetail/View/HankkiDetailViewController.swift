@@ -11,6 +11,8 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Properties
     
+    let hankkiId: Int
+    
     var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
     var isImageSet: Bool = true
     
@@ -33,6 +35,15 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
+    init(hankkiId: Int) {
+        self.hankkiId = hankkiId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +52,7 @@ final class HankkiDetailViewController: BaseViewController {
         setupAddTarget()
         bindViewModel()
         
-        viewModel.getHankkiDetailAPI()
+        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -282,11 +293,11 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 }
                 footer.likedButton.buttonHandler = {
                     if !footer.isLiked {
-                        self.viewModel.postHankkiHeartAPI(id: 19) {
+                        self.viewModel.postHankkiHeartAPI(id: Int64(self.hankkiId)) {
                             footer.updateLikeButtonStatus()
                         }
                     } else {
-                        self.viewModel.deleteHankkiHeartAPI(id: 19) {
+                        self.viewModel.deleteHankkiHeartAPI(id: Int64(self.hankkiId)) {
                             footer.updateLikeButtonStatus()
                         }
                     }

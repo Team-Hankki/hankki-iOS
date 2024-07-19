@@ -161,7 +161,7 @@ private extension ReportViewController {
     /// 사용자가 셀에 입력한 메뉴 데이터 모으기
     /// 빈값 필터링
     func collectMenuCellData() {
-        var sectionNumber: Int = ReportSectionType.menu.rawValue
+        let sectionNumber: Int = ReportSectionType.menu.rawValue
 
         var menuName: String = ""
         var menuPrice: String = ""
@@ -202,10 +202,7 @@ private extension ReportViewController {
             menus: menuCellData
         )
         
-        viewModel.postHankkiAPI(request: request) {
-            let reportCompleteViewController = ReportCompleteViewController()
-            self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
-        }
+        viewModel.postHankkiAPI(request: request) {_ in}
     }
 }
 
