@@ -85,9 +85,12 @@
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
-		8670A78C2C49C6BE0098DCF1 /* onboarding1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78B2C49C6BD0098DCF1 /* onboarding1.json */; };
+		8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78B2C49C6BD0098DCF1 /* onboarding2.json */; };
 		8670A78E2C49C84E0098DCF1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78D2C49C84E0098DCF1 /* Config.xcconfig */; };
-		8670A7902C49C9410098DCF1 /* onboarding2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78F2C49C9410098DCF1 /* onboarding2.json */; };
+		8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78F2C49C9410098DCF1 /* onboarding1.json */; };
+		8670A7922C49CB870098DCF1 /* onboarding3.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A7912C49CB870098DCF1 /* onboarding3.json */; };
+		8670A7942C49CBB50098DCF1 /* onboarding4.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A7932C49CBB50098DCF1 /* onboarding4.json */; };
+		8670A7972C49EFC80098DCF1 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */; };
 		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
 		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
 		86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */; };
@@ -279,9 +282,12 @@
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8670A78B2C49C6BD0098DCF1 /* onboarding1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding1.json; sourceTree = "<group>"; };
+		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
 		8670A78D2C49C84E0098DCF1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
-		8670A78F2C49C9410098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
+		8670A78F2C49C9410098DCF1 /* onboarding1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding1.json; sourceTree = "<group>"; };
+		8670A7912C49CB870098DCF1 /* onboarding3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding3.json; sourceTree = "<group>"; };
+		8670A7932C49CBB50098DCF1 /* onboarding4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding4.json; sourceTree = "<group>"; };
+		8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
 		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIService.swift; sourceTree = "<group>"; };
@@ -569,9 +575,9 @@
 		83DBED8A2C25645B0042BA48 /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				8670A7872C49C34B0098DCF1 /* Onboarding */,
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				86880C1A2C47A0CC00CAEF58 /* Splash */,
+				8670A7872C49C34B0098DCF1 /* Onboarding */,
 				A22D20C92C3165B6001AFAC6 /* Base */,
 				865826032C4170A400265401 /* Login */,
 				86685C4D2C3BC63500C080C4 /* UnivSelect */,
@@ -860,6 +866,7 @@
 		8670A7872C49C34B0098DCF1 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				8670A7952C49EFB90098DCF1 /* Model */,
 				8670A7882C49C3560098DCF1 /* View */,
 			);
 			path = Onboarding;
@@ -868,11 +875,21 @@
 		8670A7882C49C3560098DCF1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8670A78F2C49C9410098DCF1 /* onboarding2.json */,
-				8670A78B2C49C6BD0098DCF1 /* onboarding1.json */,
+				8670A78F2C49C9410098DCF1 /* onboarding1.json */,
+				8670A78B2C49C6BD0098DCF1 /* onboarding2.json */,
+				8670A7912C49CB870098DCF1 /* onboarding3.json */,
+				8670A7932C49CBB50098DCF1 /* onboarding4.json */,
 				8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8670A7952C49EFB90098DCF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		86784E882C3FC0B900E94A5D /* CreateZip */ = {
@@ -1542,6 +1559,8 @@
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
 				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
 				8670A78E2C49C84E0098DCF1 /* Config.xcconfig in Resources */,
+				8670A7922C49CB870098DCF1 /* onboarding3.json in Resources */,
+				8670A7942C49CBB50098DCF1 /* onboarding4.json in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
 				865C3D072C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig in Resources */,
 				838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */,
@@ -1549,8 +1568,8 @@
 				A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */,
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
-				8670A78C2C49C6BE0098DCF1 /* onboarding1.json in Resources */,
-				8670A7902C49C9410098DCF1 /* onboarding2.json in Resources */,
+				8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */,
+				8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
 				865C3D082C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig in Resources */,
 				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
@@ -1683,6 +1702,7 @@
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
+				8670A7972C49EFC80098DCF1 /* OnboardingModel.swift in Sources */,
 				A240EA522C45519B000FF458 /* HankkiReportOptionHeaderView.swift in Sources */,
 				8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */,
 				86880C272C47CCE900CAEF58 /* MypageViewModel.swift in Sources */,

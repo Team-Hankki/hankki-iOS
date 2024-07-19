@@ -9,6 +9,7 @@ final class LoginViewController: BaseViewController {
     
     // MARK: - UI Components
     
+    let logoImageView: UIImageView = UIImageView()
     let viewTitle: UILabel = UILabel()
     let imageView: UIImageView  = UIImageView()
     let loginButton: UIButton = UIButton()
@@ -24,50 +25,66 @@ final class LoginViewController: BaseViewController {
     // MARK: - Set UI
     
     override func setupStyle() {
+        
+        view.do {
+            $0.contentMode = .scaleAspectFill
+            $0.backgroundColor = .hankkiRed
+        }
+        
+        logoImageView.do {
+            $0.image = .imgLoginLogo
+        }
+        
         viewTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.h1, withText: "밥값 고민 끝,\n다함께 한끼족보를 만들어봐요")
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.subtitle2,
+                                                            withText: "밥값 고민 끝,\n다함께 한끼족보를 만들어봐요",
+                                                            color: .hankkiWhite)
             $0.numberOfLines = 2
         }
         
         imageView.do {
-            $0.backgroundColor = .gray100
+            $0.image = .imgLoginScreen1
+            $0.contentMode = .scaleAspectFit
         }
         
         loginButton.do {
-            $0.backgroundColor = .gray900
+            $0.backgroundColor = .hankkiWhite
             $0.makeRounded(radius: 14)
             if let attributedTitle = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
                 withText: "Apple로 계속하기",
-                color: .hankkiWhite
+                color: .gray900
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
-            
-            let image = UIGraphicsImageRenderer(size: CGSize(width: 24, height: 24)).image { _ in
-                UIImage.icHeart.draw(in: CGRect(origin: .zero, size: CGSize(width: 24, height: 24)))
-            }
-
-            $0.setImage(image, for: .normal)
+            $0.setImage(.icApple, for: .normal)
         }
         
     }
     
     override func setupHierarchy() {
-        view.addSubviews(viewTitle, imageView, loginButton)
+        view.addSubviews(imageView, logoImageView, viewTitle, loginButton)
     }
     
     override func setupLayout() {
+        logoImageView.snp.makeConstraints {
+            $0.width.equalTo(180)
+            $0.height.equalTo(41)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(48)
+            $0.left.equalToSuperview().inset(22)
+        }
         viewTitle.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(63)
+            $0.height.equalTo(54)
+            $0.top.equalTo(logoImageView.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(22)
         }
         
         imageView.snp.makeConstraints {
-            $0.top.equalTo(viewTitle.snp.bottom).offset(31)
-            $0.horizontalEdges.equalToSuperview().inset(22)
-            $0.height.equalTo(UIScreen.convertByHeightRatio(411))
+            $0.horizontalEdges.equalToSuperview()
+            $0.top.equalTo(viewTitle.snp.bottom).offset(-20)
+            $0.bottom.equalTo(loginButton.snp.top).offset(-10)
         }
+        
         loginButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(31)
             $0.height.equalTo(54)

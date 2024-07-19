@@ -14,7 +14,7 @@ final class SplashViewController: BaseViewController {
         if isLogin() {
             getUniversity()
         } else {
-            presentLoginVeiw()
+            presentOnboardingView()
         }
     }
     
@@ -34,8 +34,8 @@ private extension SplashViewController {
         navigationController.popToRootViewController(animated: false)
     }
     
-    func presentLoginVeiw() {
-        self.view.window?.rootViewController = LoginViewController()
+    func presentOnboardingView() {
+        self.view.window?.rootViewController = OnboardingViewController()
     }
 }
 
@@ -86,7 +86,7 @@ extension SplashViewController {
                 // Refresh Token 만료
                 // Refresh, Access Token을 다시 발급 받기 위해 로그인 창으로 돌아간다.
                 UserDefaults.standard.removeTokens()
-                self.presentLoginVeiw()
+                self.presentOnboardingView()
                 return
             
             default:
