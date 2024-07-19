@@ -49,7 +49,7 @@ protocol BaseTargetType: TargetType {
 
 extension BaseTargetType {
     var baseURL: URL {
-        guard let baseURL = URL(string: Config.baseURL) else {
+        guard let baseURL = URL(string: URLConstant.baseURL) else {
             fatalError("ERROR - BASEURL")
         }
         return baseURL
@@ -64,11 +64,12 @@ extension BaseTargetType {
         case .withdrawHeader(let authorizationCode):
             header["Content-Type"] = "application/json"
             let accessToken = UserDefaults.standard.getAccesshToken()
-            header["Authorization"] = "Bearer \(accessToken)"
+            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
             header["X-Apple-Code"] = "\(authorizationCode)"
         case .formdataHeader:
             header["Content-Type"] = "multipart/form-data"
-            header["Authorization"] = URLConstant.bearer
+            let accessToken = UserDefaults.standard.getAccesshToken()
+            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         default:
             header["Content-Type"] = "application/json"
             let accessToken = UserDefaults.standard.getAccesshToken()

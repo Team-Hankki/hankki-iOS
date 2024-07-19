@@ -24,7 +24,6 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         cellView.do {
-            $0.backgroundColor = .gray800
             $0.makeRounded(radius: 12)
         }
         
@@ -95,7 +94,15 @@ extension ZipListCollectionViewCell {
             withText: data.title,
             color: .white
         )
-        imageView.image = data.type.image
+
+        if data.type == .common {
+            if let imageType = ImageType(from: data.imageUrl) {
+                imageView.image = data.type.image(for: imageType)
+            }
+        } else {
+            imageView.image = data.type.image(for: nil)
+        }
+
     }
     
     func setSelected(_ selected: Bool) {

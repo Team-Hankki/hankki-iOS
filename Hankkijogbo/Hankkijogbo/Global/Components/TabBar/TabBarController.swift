@@ -23,6 +23,7 @@ final class TabBarController: UITabBarController {
         self.setValue(customTabBar, forKey: "tabBar")
         
         setupStyle()
+        setupDelegate()
         addTabBarController()
     }
 }
@@ -35,6 +36,10 @@ private extension TabBarController {
         tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = .gray600
         tabBar.tintColor = .black
+    }
+    
+    func setupDelegate() {
+        self.delegate = self
     }
     
     func addTabBarController() {
@@ -89,5 +94,19 @@ final class CustomTabBar: UITabBar {
         var size = super.sizeThatFits(size)
         size.height += 11
         return size
+    }
+}
+
+extension TabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
+
+        if index == TabBarItem.allCases.firstIndex(of: .report) {
+            let reportViewController = ReportViewController()
+            navigationController?.pushViewController(reportViewController, animated: true)
+            return false
+        }
+
+        return true
     }
 }

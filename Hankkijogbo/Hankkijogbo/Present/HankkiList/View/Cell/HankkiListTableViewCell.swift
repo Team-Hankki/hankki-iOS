@@ -69,6 +69,9 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         thumbnailView.do {
             $0.makeRounded(radius: 8)
+        
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
         }
         
         infoStackView.do {
@@ -162,7 +165,7 @@ extension HankkiListTableViewCell {
         self.data = data
 
         titleLabel.text = data.name
-        imageView?.setKFImage(url: data.imageURL)
+        thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgHankkiListDefault)
         categoryLabel.text = data.category
         heartButton.isHidden = isLikeButtonDisable
         priceLabel.text = "\(data.lowestPrice)원"
