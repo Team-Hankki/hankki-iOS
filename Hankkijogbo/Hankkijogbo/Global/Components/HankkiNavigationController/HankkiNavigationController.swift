@@ -106,7 +106,7 @@ private extension HankkiNavigationController {
         }
         
         mainTitleLabel.do {
-            $0.font = .setupPretendardStyle(of: .h1)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.h2, withText: " ", color: .gray900)
             $0.textColor = .gray900
         }
         
