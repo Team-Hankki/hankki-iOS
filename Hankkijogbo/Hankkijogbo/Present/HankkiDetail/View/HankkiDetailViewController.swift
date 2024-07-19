@@ -111,7 +111,7 @@ final class HankkiDetailViewController: BaseViewController {
         }
         infoCollectionView.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-40)
-            $0.leading.equalToSuperview().inset(18)
+            $0.centerX.equalToSuperview()
         }
         reportOptionCollectionView.snp.makeConstraints {
             $0.top.equalTo(infoCollectionView.snp.bottom).offset(50)
