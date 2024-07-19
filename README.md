@@ -14,13 +14,16 @@
 ## 🛠 Development Environment
 <img width="77" alt="iOS" src="https://img.shields.io/badge/iOS-17.0-silver"> <img width="95" alt="Xcode" src="https://img.shields.io/badge/Xcode-15.3+-blue">
 
-## View & Feature
-[🔗 View & Feature]()
-![Untitled](https://github.com/user-attachments/assets/aacf202d-c345-412b-8d56-b8f1c9dcd6b0)
+## 🎨 View & Feature
+[🔗 View & Feature](https://fast-kilometer-dbf.notion.site/View-Feature-4372da0d228b47c094022e4dc8b7d1f5?pvs=4)
+
+![Untitled](https://github.com/user-attachments/assets/fe048018-852c-4d9c-8aef-658f61e73a9c)
+
 
 
 ## ✏️ Project Design
 [🔗 Project Design](https://fast-kilometer-dbf.notion.site/Project-Design-ff41dbf4511547efaedef8fb546e7f4e?pvs=4)
+
 ![프로젝트 아키텍쳐](https://github.com/user-attachments/assets/f24bb0da-61f3-4105-b89d-32ed6709e24c)
 
 
@@ -116,3 +119,11 @@
 | [Kingfisher](https://github.com/onevcat/Kingfisher) | `7.12.0` | URL로부터 이미지 다운 중 처리 작업을 간소화할 수 있도록 한다. |
 | [NMFMaps](https://navermaps.github.io/ios-map-sdk/guide-ko/1.html) | `15.0.3` | 다양한 지도 기능을 원활하게 구현할 수 있도록 한다. |
 | [Lottie](https://github.com/airbnb/lottie-ios) | `4.5.0` | 벡터 그래픽 애니메이션을 추가하고 관리한다. |
+
+
+## 🔥 Trouble Shooting
+[🔗 Trouble Shooting](https://fast-kilometer-dbf.notion.site/trouble-shooting-d491565abcb94a72b4a6b36716a6fb05?pvs=4)
+
+### Off The Record
+![image](https://github.com/user-attachments/assets/eecbe550-5816-4d29-96b9-c654ddef5eae)
+
