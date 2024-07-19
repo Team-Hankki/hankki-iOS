@@ -58,6 +58,7 @@ final class MarkerInfoCardView: BaseView {
         backgroundColor = .white
         
         thumbnailImageView.do {
+            $0.clipsToBounds = true
             $0.layer.cornerRadius = 8
             $0.backgroundColor = .gray
         }

@@ -76,8 +76,8 @@ extension UIViewController {
         primaryButtonText: String,
         secondaryButtonHandler: (() -> Void)? = nil,
         primaryButtonHandler: (() -> Void)? = nil,
-        hightlightedText:String = "",
-        hightlightedColor:UIColor? = nil
+        hightlightedText: String = "",
+        hightlightedColor: UIColor? = nil
     ) {
         let alert = AlertViewController()
         alert.modalPresentationStyle = .overFullScreen

@@ -50,7 +50,7 @@ final class AlertViewController: BaseViewController {
     }
     
     override func setupStyle() {
-        let style: AlertStyle = (image != nil) ? .textAlertStyle : .imageAlertStyle
+        let style: AlertStyle = (image == nil) ? .textAlertStyle : .imageAlertStyle
         
         view.backgroundColor = .black.withAlphaComponent(0.67)
         
@@ -62,7 +62,7 @@ final class AlertViewController: BaseViewController {
         imageView.do {
             $0.image = image
             $0.layer.cornerRadius = 10
-            $0.isHidden = (image != nil)
+            $0.isHidden = (image == nil)
         }
         
         labelStackView.do {
@@ -131,7 +131,7 @@ final class AlertViewController: BaseViewController {
             $0.height.equalTo(54)
         }
         
-        if (image != nil) {
+        if image == nil {
             labelStackView.snp.makeConstraints {
                 $0.top.equalToSuperview().offset(24)
                 $0.leading.equalToSuperview().inset(20)
@@ -215,7 +215,6 @@ private extension AlertViewController {
         secondaryButton.addTarget(self, action: #selector(secondaryButtonDidTap), for: .touchUpInside)
         primaryButton.addTarget(self, action: #selector(primaryButtonDidTap), for: .touchUpInside)
     }
-
 }
 
 extension AlertViewController {

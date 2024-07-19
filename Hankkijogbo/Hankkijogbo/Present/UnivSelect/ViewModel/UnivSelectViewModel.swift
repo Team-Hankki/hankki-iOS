@@ -30,7 +30,7 @@ extension UnivSelectViewModel {
             case .success(let response):
                 if let responseData = response {
                     self?.universityList = responseData.data.universities.map {
-                        UniversityModel(id:$0.id,
+                        UniversityModel(id: $0.id,
                                         name: $0.name,
                                         longitude: $0.longitude,
                                         latitude: $0.latitude)
