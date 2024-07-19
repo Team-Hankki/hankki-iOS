@@ -114,4 +114,30 @@ extension HomeViewController: CLLocationManagerDelegate {
         let cameraUpdate = NMFCameraUpdate(scrollTo: position)
         rootView.mapView.moveCamera(cameraUpdate)
     }
+    
+    // MarkerCardInfoView가 노출될 때의 TargetButton Layout
+    func showTargetButtonAtCardView() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            self.rootView.targetButton.snp.remakeConstraints {
+                $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-12)
+                $0.trailing.equalToSuperview().inset(12)
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    // BottomSheet가 노출될 때의 TargetButton Layout
+    func showTargetButtonAtBottomSheet() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            if self.rootView.bottomSheetView.isExpanded {
+                self.rootView.targetButton.isHidden = true
+            } else {
+                self.rootView.targetButton.snp.remakeConstraints {
+                    $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-12)
+                    $0.trailing.equalToSuperview().inset(12)
+                }
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
 }

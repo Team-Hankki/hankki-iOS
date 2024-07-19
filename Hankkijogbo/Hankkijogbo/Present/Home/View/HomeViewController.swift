@@ -123,7 +123,7 @@ extension HomeViewController {
     
     private func setupPosition(with pins: [GetHankkiPinData]) {
         clearMarkers()
-
+        
         for (index, location) in pins.enumerated() {
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
@@ -169,6 +169,7 @@ extension HomeViewController {
                     }
                     self.view.layoutIfNeeded()
                 })
+                self.showTargetButtonAtCardView()
             }
         }
     }
@@ -186,6 +187,7 @@ extension HomeViewController {
             self.markerInfoCardView = nil
             self.selectedMarkerIndex = nil
         })
+        self.showTargetButtonAtBottomSheet()
     }
 }
 
