@@ -18,6 +18,7 @@ final class HomeViewController: BaseViewController {
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
     private var markers: [NMFMarker] = []
+    var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     // MARK: - UI Components
     
@@ -46,6 +47,7 @@ final class HomeViewController: BaseViewController {
         setupPosition()
         setupNavigationBar()
         requestLocationAuthorization()
+        NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
     }
     
     // MARK: - Set UI
@@ -222,6 +224,10 @@ private extension HomeViewController {
             navigationController.setupNavigationBar(forType: type)
             navigationController.isNavigationBarHidden = false
         }
+    }
+    
+    @objc func getNotificationForMyZipList() {
+        self.presentMyZipListBottomSheet()
     }
 }
 

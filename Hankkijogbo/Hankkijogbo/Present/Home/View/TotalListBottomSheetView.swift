@@ -15,6 +15,7 @@ final class TotalListBottomSheetView: BaseView {
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
     var data: [GetHankkiListData] = []
+    var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     // MARK: - UI Components
     
@@ -154,6 +155,10 @@ extension TotalListBottomSheetView {
         isExpanded = false
         viewLayoutIfNeededWithDownAnimation()
     }
+    
+    @objc func addButtonDidTap() {
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(presentMyZipBottomSheetNotificationName)))
+    }
 }
 
 extension TotalListBottomSheetView: UICollectionViewDataSource {
@@ -167,6 +172,7 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         }
         cell.bindData(model: data[indexPath.row])
         cell.makeRounded(radius: 10)
+        cell.addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
         return cell
     }
 }
