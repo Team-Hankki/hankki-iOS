@@ -49,8 +49,12 @@ final class HomeView: BaseView {
         [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
         
         targetButton.snp.makeConstraints {
-            $0.top.equalTo(buttonStackView).offset(40)
-            $0.leading.equalTo(buttonStackView)
+            if bottomSheetView.isExpanded {
+                targetButton.isHidden = true
+            } else {
+                $0.bottom.equalTo(bottomSheetView.snp.top).offset(-12)
+                $0.trailing.equalToSuperview().inset(12)
+            }
         }
         
         bottomSheetView.snp.makeConstraints {
