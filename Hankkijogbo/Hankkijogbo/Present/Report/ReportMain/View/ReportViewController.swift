@@ -8,32 +8,26 @@
 import UIKit
 import PhotosUI
 
-struct MenuModel {
-    var name: String
-    var price: Int
-}
-
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
     var viewModel: ReportViewModel = ReportViewModel()
+    var searchViewModel: SearchViewModel = SearchViewModel()
     
     var isImageSet: Bool = false
     var image: UIImage?
     
     var hankkiNameString: String? {
         didSet {
-            collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+            collectionView.reloadData()
         }
     }
     var categoryString: String?
-    var oneMenuData: MenuModel?
 
     /// 다 임의로 넣어둠
-    let dummyCategory = ["한식", "분식", "중식", "일식", "간편식", "패스트푸드", "양식", "샐러드/샌드위치", "세계음식"]
     let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
-    var dummyMenu = [""]
+    var menuCellData: [MenuData] = []
     
     // MARK: - UI Components
     
@@ -53,7 +47,7 @@ final class ReportViewController: BaseViewController {
         setupDelegate()
         bindViewModel()
         
-        viewModel.getReportedNumber()
+        viewModel.getReportedNumberAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +55,9 @@ final class ReportViewController: BaseViewController {
         
         setupNavigationBar()
         self.tabBarController?.tabBar.isHidden = true
+        viewModel.getCategoryFilterAPI { isSuccess in
+            print(isSuccess)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,8 +98,8 @@ final class ReportViewController: BaseViewController {
 extension ReportViewController {
     
     func bindViewModel() {
-        viewModel.updateReportedNumber = {
-            self.collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        viewModel.updateCollectionView = {
+            self.collectionView.reloadData()
         }
     }
 }
@@ -154,6 +151,56 @@ private extension ReportViewController {
         let footerIndexPath = IndexPath(item: 0, section: ReportSectionType.addMenu.rawValue)
         collectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .bottom, animated: true) // 제보하기의 Footer로 스크롤 이동
     }
+    
+    /// 사용자가 셀에 입력한 메뉴 데이터 모으기
+    /// 빈값 필터링
+    func collectMenuCellData() {
+        var sectionNumber: Int = ReportSectionType.menu.rawValue
+
+        var menuName: String = ""
+        var menuPrice: String = ""
+        
+        for i in 0..<collectionView.numberOfItems(inSection: sectionNumber) {
+            let indexPath = IndexPath(row: i, section: sectionNumber)
+            if let cell = collectionView.cellForItem(at: indexPath) as? MenuCollectionViewCell {
+                for subview in cell.contentView.subviews {
+                    if let textField = subview as? UITextField {
+                        if textField.tag == i * 2 {
+                            menuName = textField.text ?? ""
+                        } else if textField.tag == i * 2 + 1 {
+                            menuPrice = textField.text ?? ""
+                        }
+                    }
+                }
+                
+                let menuData = MenuData(name: menuName, price: Int(menuPrice) ?? 0)
+                menuCellData.append(menuData)
+            }
+        }
+        
+        // 빈값은 버림
+        menuCellData = menuCellData.filter { $0.name != "" && $0.price != 0 }
+    }
+    
+    /// Req 만들어서 제보하기 API 호출
+    /// 성공하면 제보 완료 화면으로 넘어가게
+    func postHankki() {
+        guard let locationData = searchViewModel.selectedLocationData else { return }
+        let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
+            name: hankkiNameString ?? "",
+            category: viewModel.selectedCategory?.tag ?? "KOREAN",
+            address: locationData.address ?? "",
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+            universityId: 1,
+            menus: menuCellData
+        )
+        
+        viewModel.postHankkiAPI(request: request) {
+            let reportCompleteViewController = ReportCompleteViewController()
+            self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
+        }
+    }
 }
 
 // MARK: - @objc Func
@@ -175,34 +222,34 @@ private extension ReportViewController {
     }
     
     @objc func searchBarButtonDidTap() {
-        let searchViewController = SearchViewController()
+        let searchViewController = SearchViewController(viewModel: searchViewModel)
         searchViewController.delegate = self
         self.navigationController?.pushViewController(searchViewController, animated: true)
     }
     
+    /// 메뉴 입력 값 모아서 제보하기 호출
     @objc func bottomButtonPrimaryHandler() {
-        let reportCompleteViewController = ReportCompleteViewController()
-        self.navigationController?.pushViewController(reportCompleteViewController, animated: true)
+        collectMenuCellData()
+        postHankki()
     }
     
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
-        dummyMenu.append("")
-        collectionView.insertItems(at: [IndexPath(item: dummyMenu.count - 1, section: ReportSectionType.menu.rawValue)])
+        viewModel.menus.append(MenuData())
+        collectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: ReportSectionType.menu.rawValue)])
         scrollToFooterView()
     }
     
     /// 메뉴 셀 삭제
     @objc func deleteMenuButtonDidTap(_ sender: UIButton) {
-        if !dummyMenu.isEmpty {
+        if !viewModel.menus.isEmpty {
             // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
             let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
             let itemIndexPath = self.collectionView.indexPathForItem(at: buttonPosition)
             
             guard let item = itemIndexPath?.item else { return }
-            dummyMenu.remove(at: item) // 해당 위치의 데이터 삭제
+            viewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
             collectionView.deleteItems(at: [IndexPath(item: item, section: ReportSectionType.menu.rawValue)]) // item 삭제
-            
             scrollToFooterView()
         }
     }
@@ -210,7 +257,7 @@ private extension ReportViewController {
 
 // MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ReportViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -248,9 +295,9 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .search, .image, .addMenu:
             return 1
         case .category:
-            return dummyCategory.count
+            return viewModel.categoryFilters.count
         case .menu:
-            return dummyMenu.count
+            return viewModel.menus.count
         default:
             return 0
         }
@@ -267,8 +314,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.delegate = self
-            cell.dataBind(dummyCategory[indexPath.row])
+            cell.bindData(viewModel.categoryFilters[indexPath.row])
             return cell
         case .image:
             if isImageSet {
@@ -285,6 +331,8 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
+            cell.menuTextField.tag = indexPath.item * 2
+            cell.priceTextField.tag = indexPath.item * 2 + 1
             cell.deleteMenuButton.addTarget(self, action: #selector(deleteMenuButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
@@ -293,6 +341,20 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         default:
             return UICollectionViewCell()
+        }
+    }
+}
+
+extension ReportViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
+        
+        if viewModel.selectedCategory != nil {
+            cell.updateDefaultStyle()
+            viewModel.selectedCategory = nil
+        } else {
+            cell.updateSelectedStyle()
+            viewModel.selectedCategory = viewModel.categoryFilters[indexPath.item]
         }
     }
 }
@@ -309,6 +371,10 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                     if let image = image as? UIImage {
                         self.isImageSet = true
                         self.image = image
+                        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+                            fatalError("Failed to convert UIImage to Data")
+                        }
+                        self.viewModel.selectedImageData = imageData
                         self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
                     } else {
                         self.isImageSet = false

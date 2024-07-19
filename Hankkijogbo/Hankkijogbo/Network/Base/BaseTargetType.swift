@@ -24,6 +24,7 @@ enum HeaderType {
     case AuthorizationCode
     case loginHeader(accessToken: String)
     case withdrawHeader(authorizationCode: String)
+    case formdataHeader(multipartData: [MultipartFormData])
 }
 
 /// 각 API에 따라 공통된 Path 값 (존재하지 않는 경우 빈 String 값)
@@ -55,15 +56,21 @@ extension BaseTargetType {
     }
     
     var headers: [String: String]? {
-        var header = ["Content-Type": "application/json"]
+        var header: [String: String] = [:]
         switch headerType {
         case .loginHeader(let accessToken):
+            header["Content-Type"] = "application/json"
             header["Authorization"] = "\(accessToken)"
         case .withdrawHeader(let authorizationCode):
+            header["Content-Type"] = "application/json"
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = "Bearer \(accessToken)"
             header["X-Apple-Code"] = "\(authorizationCode)"
+        case .formdataHeader:
+            header["Content-Type"] = "multipart/form-data"
+            header["Authorization"] = URLConstant.bearer
         default:
+            header["Content-Type"] = "application/json"
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         }
@@ -77,14 +84,12 @@ extension BaseTargetType {
         if let requestBodyParameter {
             return .requestJSONEncodable(requestBodyParameter)
         }
-        return .requestPlain
-    }
-    
-    var sampleData: Data {
-        return Data()
-    }
-    
-    var validationType: ValidationType {
-        return .successCodes
+        switch headerType {
+        case .formdataHeader(let multipartData):
+            print("최종 \(multipartData[1])")
+            return .uploadMultipart(multipartData)
+        default:
+            return .requestPlain
+        }
     }
 }

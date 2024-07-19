@@ -20,9 +20,9 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Components
     
     private let menuLabel = UILabel()
-    private let menuTextField = UITextField()
+    let menuTextField = UITextField()
     private let priceLabel = UILabel()
-    private let priceTextField = UITextField()
+    let priceTextField = UITextField()
     private let priceUnitLabel = UILabel()
     let deleteMenuButton = UIButton()
     private let errorLabel = UILabel()
@@ -211,11 +211,6 @@ private extension MenuCollectionViewCell {
                 $0.textColor = .gray800
             }
             errorLabel.isHidden = true
-            
-            guard let menuText = menuTextField.text else { return }
-            if !menuText.isEmpty {
-//                delegate?.passItemData(type: .menu, data: menuText)
-            }
         }
     }
     

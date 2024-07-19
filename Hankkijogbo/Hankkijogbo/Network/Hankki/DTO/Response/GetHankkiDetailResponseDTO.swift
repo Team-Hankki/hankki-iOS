@@ -18,6 +18,6 @@ struct GetHankkiDetailResponseData: Codable {
 }
 
 struct MenuData: Codable {
-    var name: String
-    var price: Int
+    var name: String = ""
+    var price: Int = 0
 }

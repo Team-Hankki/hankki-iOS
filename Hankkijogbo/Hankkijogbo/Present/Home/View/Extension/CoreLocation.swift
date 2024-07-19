@@ -61,9 +61,11 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 성공
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // 현재 위치로 이동하지 않도록 비워둡니다.
         if let location = locations.last {
-            moveCameraToLocation(location: location)
-        }
+              moveCameraToCurrentLocation(location: location)
+              manager.stopUpdatingLocation() // 업데이트 한 번 받은 후 중지
+          }
     }
     
     // 위치 업데이트 실패
@@ -85,31 +87,66 @@ extension HomeViewController: CLLocationManagerDelegate {
         }
     }
     
-    // targetButton 클릭 시의 동작 처리
     @objc func targetButtonDidTap() {
-        let status = CLLocationManager.authorizationStatus()
-        switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            // 위치 접근 권한이 허용된 경우 현재 위치로 이동
-            if let manager = locationManager, let location = manager.location {
-                print("Moving to current location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                moveCameraToLocation(location: location)
-            }
-        case .restricted, .denied:
-            // 위치 접근 권한이 거부된 경우 알림 표시
-            showLocationAccessDeniedAlert()
-        case .notDetermined:
-            // 위치 접근 권한이 아직 결정되지 않은 경우 동의 요청
-            requestLocationAuthorization()
-        @unknown default:
-            break
-        }
-    }
+         let status = CLLocationManager.authorizationStatus()
+         switch status {
+         case .authorizedWhenInUse, .authorizedAlways:
+             // 위치 접근 권한이 허용된 경우 현재 위치로 이동
+             if let manager = locationManager {
+                 manager.startUpdatingLocation()
+             }
+         case .restricted, .denied:
+             // 위치 접근 권한이 거부된 경우 알림 표시
+             showLocationAccessDeniedAlert()
+         case .notDetermined:
+             // 위치 접근 권한이 아직 결정되지 않은 경우 동의 요청
+             requestLocationAuthorization()
+         @unknown default:
+             break
+         }
+     }
     
-    // 카메라를 현재 위치로 이동
-    func moveCameraToLocation(location: CLLocation) {
-        let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+    func moveCameraToCurrentLocation(location: CLLocation) {
+            let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+            let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+            rootView.mapView.moveCamera(cameraUpdate)
+        }
+    
+    // 카메라를 선택한 대학교 위치로 이동
+    func moveCameraToUniversityLocation() {
+        guard let university = UserDefaults.standard.getUniversity() else {
+            print("University not found in UserDefaults")
+            return
+        }
+        let position = NMGLatLng(lat: university.latitude, lng: university.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position)
         rootView.mapView.moveCamera(cameraUpdate)
+    }
+    
+    /// TargetButton Layout
+    // MarkerCardInfoView가 노출될 때의 TargetButton Layout
+    func showTargetButtonAtCardView() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            self.rootView.targetButton.snp.remakeConstraints {
+                $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-12)
+                $0.trailing.equalToSuperview().inset(12)
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    // BottomSheet가 노출될 때의 TargetButton Layout
+    func showTargetButtonAtBottomSheet() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+            if self.rootView.bottomSheetView.isExpanded {
+                self.rootView.targetButton.isHidden = true
+            } else {
+                self.rootView.targetButton.snp.remakeConstraints {
+                    $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-12)
+                    $0.trailing.equalToSuperview().inset(12)
+                }
+            }
+            self.view.layoutIfNeeded()
+        })
     }
 }

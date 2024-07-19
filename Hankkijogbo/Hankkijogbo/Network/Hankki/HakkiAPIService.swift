@@ -18,17 +18,35 @@ protocol HankkiAPIServiceProtocol {
     func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
     func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func postHankkiHeart(id: Int64, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
+    func postHankki(multipartData: [MultipartFormData], completion: @escaping(NetworkResult<PostHankkiResponseDTO>) -> Void)
     func deleteHankkiHeart(id: Int64, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
 }
 
 extension HankkiAPIServiceProtocol {
     typealias GetHankkiDetailResponseDTO = BaseDTO<GetHankkiDetailResponseData>
     typealias HeartResponseDTO = BaseDTO<HeartResponseData>
+    typealias PostHankkiResponseDTO = BaseDTO<PostHankkiResponseData>
 }
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     
     private let provider = MoyaProvider<HankkiTargetType>(plugins: [MoyaPlugin()])
+    
+    func postHankki(multipartData: [MultipartFormData], completion: @escaping (NetworkResult<PostHankkiResponseDTO>) -> Void) {
+        provider.request(.postHankki(multipartData: multipartData)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<PostHankkiResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<PostHankkiResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
     
     /// 카테고리 필터 드롭다운 정보 조회
     func getCategoryFilter(completion: @escaping (NetworkResult<BaseDTO<GetCategoryFilterResponseData>>) -> Void) {
