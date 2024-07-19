@@ -10,6 +10,7 @@ import Foundation
 import Moya
 
 final class HankkiDetailViewModel {
+    var showAlert: ((String) -> Void)?
     
     var hankkiDetailData: GetHankkiDetailResponseData? {
         didSet {
@@ -27,6 +28,7 @@ final class HankkiDetailViewModel {
                 self?.hankkiDetailData = response.data
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 print("FAILED")
             default:
                 return
@@ -43,6 +45,7 @@ final class HankkiDetailViewModel {
                 print("SUCCESS")
                 completion()
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 print("FAILED")
             default:
                 return
@@ -59,6 +62,7 @@ final class HankkiDetailViewModel {
                 print("SUCCESS")
                 completion()
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 print("FAILED")
             default:
                 return

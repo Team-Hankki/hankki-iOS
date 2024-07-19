@@ -10,6 +10,7 @@ import Foundation
 import Moya
 
 final class ReportViewModel {
+    var showAlert: ((String) -> Void)?
     
     var reportedNumberGuideText: String = "" {
         didSet {
@@ -38,11 +39,8 @@ extension ReportViewModel {
             case .success(let response):
                 guard let count = response?.data.count else { return }
                 self?.reportedNumberGuideText = "\(count)번째 제보예요"
-            case .badRequest, .unAuthorized:
-                // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+            case .badRequest, .unAuthorized, .serverError:
+                self?.showAlert?("Failed to fetch category filters.")
             default:
                 return
             }
@@ -58,11 +56,8 @@ extension ReportViewModel {
                 guard let data = response?.data else { return }
                 print(data)
                 completion()
-            case .badRequest, .unAuthorized:
-                // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+            case .badRequest, .unAuthorized, .serverError:
+                self.showAlert?("Failed to fetch category filters.")
             default:
                 return
             }
@@ -78,6 +73,7 @@ extension ReportViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 completion(false)
                 print("FAILED")
             default:

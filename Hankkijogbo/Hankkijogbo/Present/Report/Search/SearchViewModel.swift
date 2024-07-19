@@ -13,6 +13,8 @@ import Moya
 
 final class SearchViewModel {
     
+    var showAlert: ((String) -> Void)?
+    
     var selectedLocationData: GetSearchedLocation?
     var searchedLocationResponseData: GetSearchedLocationResponseData? {
         didSet {
@@ -37,10 +39,8 @@ final class SearchViewModel {
             case .success(let response):
                 guard let data = response?.data else { return }
                 self?.searchedLocationResponseData = data
-            case .badRequest, .unAuthorized:
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+            case .badRequest, .unAuthorized, .serverError:
+                self?.showAlert?("Failed")
             default:
                 return
             }
@@ -52,10 +52,8 @@ final class SearchViewModel {
             switch result {
             case .success(let response):
                 self?.postHankkiValidateCode = response?.code
-            case .badRequest, .unAuthorized:
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+            case .badRequest, .unAuthorized, .serverError:
+                self?.showAlert?("Failed")
             default:
                 return
             }
