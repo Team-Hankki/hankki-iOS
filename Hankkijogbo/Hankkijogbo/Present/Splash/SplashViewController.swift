@@ -89,7 +89,6 @@ private extension SplashViewController {
 
 extension SplashViewController {
     func getUniversity() {
-        print("개큰 스플레시 시작")
         // 사용자의 대학을 조회한다.
         NetworkService.shared.userService.getMeUniversity { result in
             switch result {

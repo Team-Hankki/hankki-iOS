@@ -116,7 +116,7 @@ private extension MypageViewController {
     }
     
     func setupHankkiSection() -> NSCollectionLayoutSection {
-        let itemWidth: CGFloat = ((375 - 22*2) / 2) - 20
+        let itemWidth: CGFloat = ((UIScreen.getDeviceWidth() - 22*2) / 2) - 20
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1.0))
         
@@ -129,7 +129,8 @@ private extension MypageViewController {
             subitem: item,
             count: 2
         )
-        group.interItemSpacing = .flexible(20)
+        
+        group.interItemSpacing = .fixed(20)
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 22, bottom: 10, trailing: 22)

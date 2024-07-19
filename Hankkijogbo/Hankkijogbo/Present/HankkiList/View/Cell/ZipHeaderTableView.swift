@@ -11,6 +11,8 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
+    var showAlert: ((String) -> Void)?
+    
     // MARK: - UI Properties
     
     private let headerView = UIView()
@@ -33,6 +35,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         setupStyle()
         setupHierarchy()
         setupLayout()
+        setupAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -93,7 +96,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     }
     
     private func setupHierarchy() {
-        self.addSubview(headerView)
+        self.contentView.addSubview(headerView)
         headerView.addSubview(headerImageView)
         headerImageView.addSubviews(headerLabel, tagStackView, nameStackView, shareButton)
         nameStackView.addArrangedSubviews(nameImageView, nameLabel)
@@ -142,6 +145,15 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
 }
 
 private extension ZipHeaderTableView {
+    @objc func shareButtonDidTap() {
+        print("print")
+//        self.showAlert?("Failed")
+    }
+    
+    func setupAddTarget() {
+        shareButton.addTarget(self, action: #selector(shareButtonDidTap), for: .touchUpInside)
+    }
+    
     func setupTagStackView(_ tagList: [String]) {
         tagList.forEach { createTagChipView($0) }
     }
