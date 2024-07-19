@@ -60,7 +60,7 @@ extension UIButton {
             self.configuration = UIButton.Configuration.filled()
         }
         guard var configuration = self.configuration else { return }
-        configuration.baseBackgroundColor = .gray100
+        configuration.baseBackgroundColor = color
         self.configuration = configuration
     }
     
