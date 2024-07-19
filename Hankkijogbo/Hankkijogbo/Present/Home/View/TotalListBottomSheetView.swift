@@ -166,7 +166,6 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.bindData(model: data[indexPath.row])
-        cell.makeRounded(radius: 10)
         return cell
     }
 }

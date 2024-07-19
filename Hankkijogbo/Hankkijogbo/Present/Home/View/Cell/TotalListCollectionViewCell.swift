@@ -11,7 +11,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Components
     
-    private let thumbnailImageView: UIImageView = UIImageView()
+    let thumbnailImageView: UIImageView = UIImageView()
     private let menutag: UILabel = UILabel()
     private let hankkiTitle: UILabel = UILabel()
     
@@ -54,8 +54,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         backgroundColor = .white
         
         thumbnailImageView.do {
+            $0.clipsToBounds = true
             $0.layer.cornerRadius = 8
-            $0.backgroundColor = .gray
         }
         
         menutag.do {
