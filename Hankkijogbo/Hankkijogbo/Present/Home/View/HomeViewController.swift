@@ -19,7 +19,9 @@ final class HomeViewController: BaseViewController {
     var selectedMarkerIndex: Int?
     private var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
-    
+ 
+    private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
@@ -39,7 +41,6 @@ final class HomeViewController: BaseViewController {
         bindViewModel()
         
         loadInitialData()
-        viewModel.getHankkiListAPI(universityid: UserDefaults.standard.getUniversity()?.id ?? 0, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +49,7 @@ final class HomeViewController: BaseViewController {
         setupNavigationBar()
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
+        updateUniversityData(universityId: universityId)
     }
     
     // MARK: - Set UI
@@ -84,14 +86,16 @@ final class HomeViewController: BaseViewController {
     }
     
     private func loadInitialData() {
-        let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
-        viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
+        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
     
     func updateUniversityData(universityId: Int) {
-        viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
+        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        rootView.bottomSheetView.totalListCollectionView.reloadData()
     }
 }
 
@@ -107,7 +111,7 @@ extension HomeViewController {
         guard let university = UserDefaults.standard.getUniversity() else { return }
         
         let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
-        viewModel.getHankkiPinAPI(universityid: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
+        viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
             
             markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
