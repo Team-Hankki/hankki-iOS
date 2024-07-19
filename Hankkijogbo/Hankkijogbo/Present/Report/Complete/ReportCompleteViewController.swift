@@ -34,7 +34,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int64, 
+    init(hankkiId: Int64,
          reportedNumber: Int,
          nickname: String,
          selectedHankkiName: String)
@@ -68,6 +68,7 @@ final class ReportCompleteViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(updateStringNotificationName), object: nil)
+        setupNavigationBar()
     }
     
     // MARK: - Setup UI
@@ -160,6 +161,18 @@ final class ReportCompleteViewController: BaseViewController {
 private extension ReportCompleteViewController {
     
     // MARK: - Private Func
+    
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
+                                                              hasRightButton: false,
+                                                              mainTitle: .string(""),
+                                                              rightButton: .string(""),
+                                                              rightButtonAction: {})
+        
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
+        }
+    }
     
     func setupAddTarget() {
         goToHomeButton.addTarget(self, action: #selector(goToHomeButtonDidTap), for: .touchUpInside)

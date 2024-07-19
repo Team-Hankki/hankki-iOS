@@ -43,6 +43,10 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         if let id = storeId {
             viewModel.getMyZipListAPI(id: id)
         }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipStackViewDidTap))
+        addNewZipStackView.addGestureRecognizer(tapGesture)
+        
     }
     
     // MARK: - Set UI
@@ -277,6 +281,15 @@ private extension MyZipListBottomSheetViewController {
     @objc func dimmedViewDidTap() {
         dismissMyZipBottomSheet()
     }
+    
+    @objc func addNewZipStackViewDidTap () {
+        dismissMyZipBottomSheet()
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+            let createZipViewController = CreateZipViewController()
+            rootViewController.pushViewController(createZipViewController, animated: true)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -332,6 +345,7 @@ extension MyZipListBottomSheetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        print("CELL CLICK")
         if let data = viewModel.myZipListFavoriteData {
+            
             let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
             navigationController?.pushViewController(hankkiDetailViewController, animated: true)
         }

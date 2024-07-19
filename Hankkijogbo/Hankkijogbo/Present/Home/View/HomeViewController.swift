@@ -178,6 +178,7 @@ extension HomeViewController {
                         $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
                     }
                     self.view.layoutIfNeeded()
+                    self.markerInfoCardView!.addButton.addTarget(self, action: #selector(self.presentMyZipBottomSheet), for: .touchUpInside)
                 })
                 self.showTargetButtonAtCardView()
             }
@@ -232,6 +233,11 @@ private extension HomeViewController {
             print(viewModel.hankkiLists[indexPath.item])
             self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
         }
+    }
+    
+    @objc func presentMyZipBottomSheet() {
+        guard let thumbnailData = viewModel.hankkiThumbnail else { return }
+        self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
 }
 
