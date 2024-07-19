@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 protocol DropDownViewDelegate: AnyObject {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType)
 }

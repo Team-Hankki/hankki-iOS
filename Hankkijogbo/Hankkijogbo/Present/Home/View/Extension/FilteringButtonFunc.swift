@@ -12,6 +12,7 @@ extension HomeViewController {
     
     /// 필터링 선택 후 ButtonTitle 변경하는 함수
     func changeButtonTitle(for button: UIButton, newTitle: String) {
+        print("Changing button title to: \(newTitle)") // 디버깅 출력
         button.do {
             $0.setTitle(newTitle, for: .normal)
             $0.backgroundColor = .hankkiYellowLight
@@ -20,8 +21,8 @@ extension HomeViewController {
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
             $0.sizeToFit()
+            $0.tag = 1 // 수정된 상태를 나타내기 위해 tag 값을 1로 설정
         }
-        isButtonModified = true
     }
     
     @objc func revertButtonAction(_ sender: UIButton) {
@@ -33,11 +34,15 @@ extension HomeViewController {
         } else {
             filter = "종류"
         }
-        revertButton(for: sender, filter: filter)
+        
+        if sender.tag == 1 {
+            revertButton(for: sender, filter: filter)
+        }
     }
     
     /// close Button 클릭 시 다시 원래의 버튼으로 돌아오는 함수
     func revertButton(for button: UIButton, filter: String) {
+        print("Reverting button title to: \(filter)") // 디버깅 출력
         button.do {
             $0.setTitle(filter, for: .normal)
             $0.backgroundColor = .white
@@ -46,8 +51,46 @@ extension HomeViewController {
             $0.setImage(.icArrowClose, for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.sizeToFit()
+            $0.tag = 0 // 원래 상태를 나타내기 위해 tag 값을 0으로 설정
         }
-        isButtonModified = false
+        
+        if button == rootView.priceButton {
+            button.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
+        } else if button == rootView.sortButton {
+            button.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
+        } else {
+            button.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
+        }
+    }
+    
+    @objc func priceButtonDidTap() {
+        toggleDropDown(isPriceModel: true, buttonType: .price)
+    }
+    
+    @objc func sortButtonDidTap() {
+        toggleDropDown(isPriceModel: false, buttonType: .sort)
+    }
+    
+    @objc func typeButtonDidTap() {
+        viewModel.getCategoryFilterAPI { [weak self] success in
+            if success {
+                DispatchQueue.main.async {
+                    self?.typeCollectionView.collectionView.reloadData()
+                }
+            }
+        }
+        if isButtonModified {
+            revertButton(for: rootView.typeButton, filter: "종류")
+        } else {
+            typeCollectionView.isHidden = false
+            view.addSubview(typeCollectionView)
+            typeCollectionView.snp.makeConstraints {
+                $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
+                $0.leading.equalTo(rootView).inset(8)
+                $0.trailing.equalToSuperview()
+                $0.centerX.equalToSuperview()
+            }
+        }
     }
     
     /// DropDown을 button Type에 따라 표출하는 함수
@@ -71,7 +114,7 @@ extension HomeViewController {
         }
         
         customDropDown.snp.updateConstraints {
-            let height = isPriceModel ? self.viewModel.priceFilters.count * 44 : self.viewModel.categoryFilters.count * 44
+            let height = isPriceModel ? self.viewModel.priceFilters.count * 44 : self.viewModel.sortOptions.count * 44
             $0.width.equalTo(112)
             $0.height.equalTo(height)
         }
@@ -98,6 +141,25 @@ extension HomeViewController {
         }) { _ in
             customDropDown.removeFromSuperview()
             self.customDropDown = nil
+        }
+    }
+    
+    func showTypeCollectionView() {
+        viewModel.getCategoryFilterAPI { [weak self] success in
+            if success {
+                DispatchQueue.main.async {
+                    self?.typeCollectionView.collectionView.reloadData()
+                }
+            }
+        }
+        typeCollectionView.isHidden = false
+        view.addSubview(typeCollectionView)
+        
+        typeCollectionView.snp.makeConstraints {
+            $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
+            $0.leading.equalTo(rootView).inset(8)
+            $0.trailing.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
     }
 }

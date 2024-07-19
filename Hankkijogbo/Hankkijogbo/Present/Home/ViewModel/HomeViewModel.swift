@@ -14,7 +14,14 @@ final class HomeViewModel {
     
     var categoryFilters: [GetCategoryFilterData] = []
     var priceFilters: [GetPriceFilterData] = []
-    var sortOptions: [GetSortOptionFilterData] = []
+    var sortOptions: [GetSortOptionFilterData] = [] {
+        didSet {
+            print()
+            print("mcrkgus")
+            print(sortOptions)
+            print("mcrkgus")
+        }
+    }
     var hankkiLists: [GetHankkiListData] = [] {
         didSet {
             hankkiListsDidChange?(hankkiLists)
@@ -24,9 +31,7 @@ final class HomeViewModel {
     var hankkiThumbnail: GetHankkiThumbnailResponseData?
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
-    
-    private let universityid: Int = 1 // university api 연결 후 변경 예정
-    
+
     var storeCategory: String? {
         didSet { updateHankkiList() }
     }
@@ -46,7 +51,8 @@ final class HomeViewModel {
         let priceCategory = priceCategory ?? ""
         let sortOption = sortOption ?? ""
         
-        getHankkiListAPI(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
+        guard let id = UserDefaults.standard.getUniversity()?.id else { return }
+        getHankkiListAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
                 print("Hankki list fetched successfully")
             } else {

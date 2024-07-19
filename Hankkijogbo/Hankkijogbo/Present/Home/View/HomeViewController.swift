@@ -13,14 +13,14 @@ final class HomeViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let viewModel = HomeViewModel()
+    var viewModel = HomeViewModel()
     var isButtonModified = false
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
     
     // MARK: - UI Components
     
-    private var typeCollectionView = TypeCollectionView()
+    var typeCollectionView = TypeCollectionView()
     var rootView = HomeView()
     var customDropDown: DropDownView?
     var markerInfoCardView: MarkerInfoCardView?
@@ -195,48 +195,12 @@ private extension HomeViewController {
 // MARK: - Filtering 관련 Extension
 
 private extension HomeViewController {
-    
     func setupaddTarget() {
         rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
         rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
     }
-    
-    // MARK: - @objc Func
-    
-    @objc func typeButtonDidTap() {
-        viewModel.getCategoryFilterAPI { [weak self] success in
-            if success {
-                DispatchQueue.main.async {
-                    self?.typeCollectionView.collectionView.reloadData()
-                }
-            }
-        }
-        if isButtonModified {
-            revertButton(for: rootView.typeButton, filter: "종류")
-        } else {
-            typeCollectionView.isHidden = false
-            
-            view.addSubview(typeCollectionView)
-            
-            typeCollectionView.snp.makeConstraints {
-                $0.top.equalTo(rootView.typeButton.snp.bottom).offset(8)
-                $0.leading.equalTo(rootView).inset(8)
-                $0.trailing.equalToSuperview()
-                $0.centerX.equalToSuperview()
-            }
-        }
-    }
-    
-    @objc func priceButtonDidTap() {
-        toggleDropDown(isPriceModel: true, buttonType: .price)
-    }
-    
-    @objc func sortButtonDidTap() {
-        toggleDropDown(isPriceModel: false, buttonType: .sort)
-    }
-    
 }
 
 extension HomeViewController: NMFMapViewCameraDelegate {}
@@ -281,21 +245,20 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
-        switch buttonType {
-        case .price:
-            if let priceFilter = viewModel.priceFilters.first(where: { $0.tag == item }) {
-                viewModel.priceCategory = priceFilter.tag
-                changeButtonTitle(for: rootView.priceButton, newTitle: priceFilter.name)
+        viewModel.getSortOptionFilterAPI { [self] isSuccess in
+            switch buttonType {
+            case .price:
+                if item == "K6" {
+                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000원 이하")
+                } else { changeButtonTitle(for: rootView.priceButton, newTitle: "6000~8000원")}
+            case .sort:
+                if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
+                    changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
+                }
             }
-        case .sort:
-            if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
-                viewModel.sortOption = sortOption.tag
-                changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
-            }
+            hideDropDown()
         }
-        hideDropDown()
-    }
-    
+    }   
     func presentUniversity() {
         let univSelectViewController = UnivSelectViewController()
         navigationController?.pushViewController(univSelectViewController, animated: true)
