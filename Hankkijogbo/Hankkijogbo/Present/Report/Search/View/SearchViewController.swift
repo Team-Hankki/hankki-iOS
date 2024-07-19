@@ -7,22 +7,15 @@
 
 import UIKit
 
-struct SearchResultModel {
-    var name: String
-    var address: String
-}
-
 protocol PassItemDataDelegate: AnyObject {
     func passSearchItemData(model: GetSearchedLocation)
-//    func passItemData(type: ReportSectionType, data: String)
-//    func passItemData(type: ReportSectionType, data: String)
 }
 
 final class SearchViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var viewModel: SearchViewModel = SearchViewModel()
+    var viewModel: SearchViewModel
     
     weak var delegate: PassItemDataDelegate?
     private let debouncer = HankkiDebouncer(seconds: 0.5)
@@ -41,6 +34,17 @@ final class SearchViewController: BaseViewController {
         primaryButtonText: "삭당을 제보해주세요",
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
+    
+    // MARK: - Init
+    
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -241,7 +245,6 @@ private extension SearchViewController {
             // 등록 ㄱ
             guard let location = viewModel.selectedLocationData else { return }
             delegate?.passSearchItemData(model: location)
-//            delegate?.passItemData(type: .search, data: viewModel.selectedLocationData)
             self.navigationController?.popViewController(animated: true)
         case 409:
             // 이미 등록된 가게 Alert 띄우기

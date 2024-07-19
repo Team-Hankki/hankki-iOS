@@ -9,42 +9,6 @@ import UIKit
 
 final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - Properties
-    
-    var selectedCategoryString: String? {
-        didSet {
-            print(selectedCategoryString ?? "")
-        }
-    }
-    
-    weak var delegate: PassItemDataDelegate?
-    
-    override var isSelected: Bool {
-        didSet {
-            self.do {
-                if isSelected {
-                    if selectedCategoryString != nil {
-                        $0.backgroundColor = .hankkiWhite
-                        $0.layer.borderColor = UIColor.gray200.cgColor
-                        $0.categoryLabel.textColor = .gray400
-                        $0.selectedCategoryString = nil
-                    } else {
-                        $0.backgroundColor = .hankkiRedLight
-                        $0.layer.borderColor = UIColor.hankkiRed.cgColor
-                        $0.categoryLabel.textColor = .gray700
-                        $0.selectedCategoryString = self.categoryLabel.text
-//                        $0.delegate?.passItemData(type: .category, data: selectedCategoryString ?? "")
-                    }
-                } else {
-                    $0.backgroundColor = .hankkiWhite
-                    $0.layer.borderColor = UIColor.gray200.cgColor
-                    $0.categoryLabel.textColor = .gray400
-                    $0.selectedCategoryString = nil
-                }
-            }
-        }
-    }
-    
     // MARK: - UI Components
     
     let categoryImageView = UIImageView()
@@ -76,9 +40,6 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray200.cgColor
         }
-        categoryImageView.do {
-            $0.image = .icHeart
-        }
         categoryLabel.do {
             $0.textAlignment = .left
         }
@@ -86,13 +47,28 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension CategoryCollectionViewCell {
-    func dataBind(_ text: String) {
+    func bindData(_ data: GetCategoryFilterData) {
         categoryLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                withText: text,
+                withText: data.name,
                 color: .gray400
             )
         }
+        categoryImageView.do {
+            $0.setKFImage(url: data.imageUrl)
+        }
+    }
+    
+    func updateSelectedStyle() {
+        backgroundColor = .hankkiRedLight
+        layer.borderColor = UIColor.hankkiRed.cgColor
+        categoryLabel.textColor = .gray700
+    }
+    
+    func updateDefaultStyle() {
+        backgroundColor = .hankkiWhite
+        layer.borderColor = UIColor.gray200.cgColor
+        categoryLabel.textColor = .gray400
     }
 }
