@@ -32,7 +32,7 @@ final class OnboardingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupActions()
+        setupAddTarget()
     }
     
     // MARK: - Setup UI
@@ -93,7 +93,7 @@ final class OnboardingViewController: BaseViewController {
 }
 
 private extension OnboardingViewController {
-    func setupActions() {
+    func setupAddTarget() {
         nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
         skipButton.addTarget(self, action: #selector(skipButtonDidTap), for: .touchUpInside)
     }
