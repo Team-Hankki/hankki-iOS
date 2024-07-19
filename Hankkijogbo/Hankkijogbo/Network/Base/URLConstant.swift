@@ -11,7 +11,7 @@ enum URLConstant {
     
     // MARK: - Base URL
     
-    static let baseURL = ""
+    static let baseURL = Config.baseURL
     
     // MARK: - URL Path
     

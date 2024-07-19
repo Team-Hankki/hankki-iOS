@@ -28,6 +28,7 @@
 		8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */; };
 		8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */; };
 		832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownView.swift */; };
+		837F10CF2C4A5ECD00E3CCE6 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 837F10CE2C4A5ECD00E3CCE6 /* Config.xcconfig */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
 		838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB042C382B0700AAA153 /* TabBarController.swift */; };
 		838D09D52C329A0A001400A4 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838D09D42C329A0A001400A4 /* Colors.xcassets */; };
@@ -91,7 +92,6 @@
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
 		8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78B2C49C6BD0098DCF1 /* onboarding2.json */; };
-		8670A78E2C49C84E0098DCF1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78D2C49C84E0098DCF1 /* Config.xcconfig */; };
 		8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A78F2C49C9410098DCF1 /* onboarding1.json */; };
 		8670A7922C49CB870098DCF1 /* onboarding3.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A7912C49CB870098DCF1 /* onboarding3.json */; };
 		8670A7942C49CBB50098DCF1 /* onboarding4.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A7932C49CBB50098DCF1 /* onboarding4.json */; };
@@ -233,6 +233,7 @@
 		8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionView.swift; sourceTree = "<group>"; };
 		8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringModel.swift; sourceTree = "<group>"; };
 		832546EB2C3F28F900B8C3DC /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		837F10CE2C4A5ECD00E3CCE6 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = "../../../../../../Downloads/hankki-iOS2/Hankkijogbo/Hankkijogbo/Global/Resources/Config.xcconfig"; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		838BEB042C382B0700AAA153 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		838D09D42C329A0A001400A4 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -294,7 +295,6 @@
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
-		8670A78D2C49C84E0098DCF1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
 		8670A78F2C49C9410098DCF1 /* onboarding1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding1.json; sourceTree = "<group>"; };
 		8670A7912C49CB870098DCF1 /* onboarding3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding3.json; sourceTree = "<group>"; };
 		8670A7932C49CBB50098DCF1 /* onboarding4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding4.json; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8670A78D2C49C84E0098DCF1 /* Config.xcconfig */,
+				837F10CE2C4A5ECD00E3CCE6 /* Config.xcconfig */,
 				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
@@ -1580,7 +1580,6 @@
 				A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */,
 				A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */,
 				A2F27C002C3500DB001E6514 /* SUITE-Bold.otf in Resources */,
-				8670A78E2C49C84E0098DCF1 /* Config.xcconfig in Resources */,
 				8670A7922C49CB870098DCF1 /* onboarding3.json in Resources */,
 				8670A7942C49CBB50098DCF1 /* onboarding4.json in Resources */,
 				A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */,
@@ -1591,6 +1590,7 @@
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
 				8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */,
+				837F10CF2C4A5ECD00E3CCE6 /* Config.xcconfig in Resources */,
 				8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
 				865C3D082C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig in Resources */,
@@ -1863,7 +1863,7 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8670A78D2C49C84E0098DCF1 /* Config.xcconfig */;
+			baseConfigurationReference = 837F10CE2C4A5ECD00E3CCE6 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1927,7 +1927,7 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8670A78D2C49C84E0098DCF1 /* Config.xcconfig */;
+			baseConfigurationReference = 837F10CE2C4A5ECD00E3CCE6 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
