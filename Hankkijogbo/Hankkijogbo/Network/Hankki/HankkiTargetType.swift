@@ -48,7 +48,7 @@ extension HankkiTargetType: BaseTargetType {
         case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption):
             return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         case .getHankkiList(let universityId, let storeCategory, let priceCategory, let sortOption):
-            return ["universitIid": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
+            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         default:
             return .none
         }

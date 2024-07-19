@@ -58,9 +58,10 @@ final class HomeViewModel {
         
         guard let id = UserDefaults.standard.getUniversity()?.id else { return }
 
-        getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
+        self.getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
                 print("식당 전체 족보 fetch 완료 ")
+                self.hankkiListsDidChange?(self.hankkiLists)
                 self.getHankkiPinAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
                     if pinSuccess {
                         print("지도 핀 fetch 완료 😄")
@@ -184,7 +185,6 @@ final class HomeViewModel {
             }
         }
     }
-    
     
     func getMeUniversity() {
         NetworkService.shared.userService.getMeUniversity { result in

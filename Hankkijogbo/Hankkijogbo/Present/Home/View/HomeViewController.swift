@@ -18,7 +18,8 @@ final class HomeViewController: BaseViewController {
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
     private var markers: [NMFMarker] = []
-    
+    private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
@@ -38,7 +39,6 @@ final class HomeViewController: BaseViewController {
         bindViewModel()
         
         loadInitialData()
-        viewModel.getHankkiListAPI(universityId: UserDefaults.standard.getUniversity()?.id ?? 0, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in})
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +46,7 @@ final class HomeViewController: BaseViewController {
         setupPosition()
         setupNavigationBar()
         requestLocationAuthorization()
+        updateUniversityData(universityId: universityId)
     }
     
     // MARK: - Set UI
@@ -82,14 +83,16 @@ final class HomeViewController: BaseViewController {
     }
     
     private func loadInitialData() {
-        let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
     
     func updateUniversityData(universityId: Int) {
+        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        rootView.bottomSheetView.totalListCollectionView.reloadData()
     }
 }
 
