@@ -19,6 +19,7 @@ final class HankkiListViewModel {
     
     var hankkiList: [HankkiListTableViewCell.DataStruct] = [] {
         didSet {
+            print("다시로드~~~~~~~~~~~~~~~~~~~~~~~~~\n", hankkiList)
             self.reloadCollectionView?()
         }
     }
@@ -105,6 +106,37 @@ extension HankkiListViewModel {
             default:
                 return
                 
+            }
+        }
+    }
+    
+    func postHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
+            switch result {
+            case .success(let response):
+                guard let response = response else { return }
+                print("SUCCESS")
+                completion()
+            case .unAuthorized, .networkFail:
+                print("FAILED")
+            default:
+                return
+            }
+        }
+    }
+    
+
+    func deleteHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
+            switch result {
+            case .success(let response):
+                guard let response = response else { return }
+                print("SUCCESS")
+                completion()
+            case .unAuthorized, .networkFail:
+                print("FAILED")
+            default:
+                return
             }
         }
     }
