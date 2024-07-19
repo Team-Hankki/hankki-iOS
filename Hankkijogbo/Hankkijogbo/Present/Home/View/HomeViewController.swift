@@ -129,6 +129,7 @@ extension HomeViewController {
             marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
             marker.mapView = rootView.mapView
             marker.touchHandler = { [weak self] _ in
+                self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                 self?.showMarkerInfoCard(at: index, pinId: location.id)
                 return true
             }
