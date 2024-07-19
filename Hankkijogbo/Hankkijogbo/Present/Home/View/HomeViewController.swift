@@ -17,6 +17,7 @@ final class HomeViewController: BaseViewController {
     var isButtonModified = false
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
+    private var markers: [NMFMarker] = []
     
     // MARK: - UI Components
     
@@ -62,11 +63,15 @@ final class HomeViewController: BaseViewController {
     
     private func bindViewModel() {
         viewModel.hankkiListsDidChange = { [weak self] data in
-            guard let self else { return }
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
             }
+        }
+        
+        viewModel.hankkiPinsDidChange = { [weak self] pins in
+            self?.setupPosition(with: pins)
         }
     }
     
@@ -77,7 +82,6 @@ final class HomeViewController: BaseViewController {
     }
     
     func updateUniversityData(universityId: Int) {
-        //            UserDefaults.standard.setUniversityId(universityId)
         viewModel.getHankkiListAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         viewModel.getHankkiPinAPI(universityid: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
@@ -99,20 +103,42 @@ extension HomeViewController {
             
             markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
-            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: university.latitude, lng: university.longitude)))
+            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            
+            self?.clearMarkers()
             
             for (index, location) in markers.enumerated() {
                 let marker = NMFMarker()
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
-                marker.touchHandler = { _ in
+                marker.touchHandler = { [weak self] _ in
                     self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                     self?.showMarkerInfoCard(at: index, pinId: location.id)
                     return true
                 }
+                self?.markers.append(marker)
             }
+        })
+    }
+    
+    private func setupPosition(with pins: [GetHankkiPinData]) {
+        clearMarkers()
+
+        for (index, location) in pins.enumerated() {
+            let marker = NMFMarker()
+            marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+            marker.mapView = rootView.mapView
+            marker.touchHandler = { [weak self] _ in
+                self?.showMarkerInfoCard(at: index, pinId: location.id)
+                return true
+            }
+            markers.append(marker)
         }
-        )
+    }
+    
+    private func clearMarkers() {
+        markers.forEach { $0.mapView = nil }
+        markers.removeAll()
     }
     
     private func showMarkerInfoCard(at index: Int, pinId: Int) {
