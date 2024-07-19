@@ -10,12 +10,11 @@ import UIKit
 final class TotalListBottomSheetView: BaseView {
     
     // MARK: - Properties
-
+    
     var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
-    
-    let data = dummyData
+    var data: [GetHankkiListData] = []
     
     // MARK: - UI Components
     
@@ -32,7 +31,6 @@ final class TotalListBottomSheetView: BaseView {
         
         setupDelegate()
         setupGesture()
-        //  showBottomSheet()
     }
     
     required init?(coder: NSCoder) {
@@ -67,7 +65,8 @@ final class TotalListBottomSheetView: BaseView {
         
         totalListCollectionView.do {
             $0.backgroundColor = .white
-            $0.register(TotalListCollectionViewCell.self, forCellWithReuseIdentifier: TotalListCollectionViewCell.className)
+            $0.register(TotalListCollectionViewCell.self,
+                        forCellWithReuseIdentifier: TotalListCollectionViewCell.className)
             $0.dragInteractionEnabled = true
         }
     }
@@ -90,6 +89,11 @@ final class TotalListBottomSheetView: BaseView {
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
+        self.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.getDeviceWidth())
+            $0.height.equalTo(UIScreen.getDeviceHeight() * 0.8)
+        }
+        
     }
 }
 
@@ -109,72 +113,46 @@ extension TotalListBottomSheetView {
         self.addGestureRecognizer(downSwipeGesture)
     }
     
-    /// BottomSheet 표출
-    func showBottomSheet() {
-        self.snp.remakeConstraints {
-            $0.bottom.width.equalToSuperview()
-            $0.height.equalTo(defaultHeight)
-        }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    /// BottomSheet 숨기기
-    func removeBottomSheet() {
-        self.snp.remakeConstraints {
-            $0.bottom.width.equalToSuperview()
-            $0.height.equalTo(0)
-        }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    /// BottomSheet 높이 변경
-    func remakeContainerViewHeight(_ height: CGFloat) {
-        self.snp.remakeConstraints {
-            $0.bottom.width.equalToSuperview()
-            $0.height.equalTo(height)
-        }
-        totalListCollectionView.layoutIfNeeded()
-    }
-    
-    func viewLayoutIfNeededWithAnimation() {
+    func viewLayoutIfNeededWithUpAnimation() {
         UIView.animate(withDuration: 0.3,
                        delay: 0,
                        options: .curveEaseIn,
                        animations: {
-            self.layoutIfNeeded()
+            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
+        })
+    }
+    
+    func viewLayoutIfNeededWithDownAnimation() {
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
+            self.transform = .identity
+        })
+    }
+    
+    func viewLayoutIfNeededWithHiddenAnimation() {
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       options: .curveEaseIn,
+                       animations: {
+            self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.4))
         })
     }
 }
 
-private extension TotalListBottomSheetView {
+extension TotalListBottomSheetView {
     
     // MARK: - @objc
     
     @objc func containerViewDidUpSwipe() {
         isExpanded = true
-        remakeContainerViewHeight(expandedHeight)
-        viewLayoutIfNeededWithAnimation()
+        viewLayoutIfNeededWithUpAnimation()
     }
     
     @objc func containerViewDidDownSwipe() {
-        var updatedHeight = defaultHeight
-        
-        if isExpanded {
-            updatedHeight = defaultHeight
-        } else {
-            updatedHeight = 0
-            removeBottomSheet()
-        }
-        
         isExpanded = false
-        remakeContainerViewHeight(updatedHeight)
-        viewLayoutIfNeededWithAnimation()
+        viewLayoutIfNeededWithDownAnimation()
     }
 }
 
@@ -187,12 +165,10 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalListCollectionViewCell.className, for: indexPath) as? TotalListCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let model = data[indexPath.row]
-        cell.bindData(model: model)
+        cell.bindData(model: data[indexPath.row])
         cell.makeRounded(radius: 10)
         return cell
     }
-    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -210,4 +186,3 @@ extension TotalListBottomSheetView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
 }
-

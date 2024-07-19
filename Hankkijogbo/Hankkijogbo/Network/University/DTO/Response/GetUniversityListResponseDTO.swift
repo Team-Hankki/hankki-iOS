@@ -14,6 +14,6 @@ struct GetUniversityListResponseData: Codable {
 struct GetUniversityListData: Codable {
     let id: Int
     let name: String
-    let longitude: Float
-    let latitude: Float
+    let longitude: Double
+    let latitude: Double
 }

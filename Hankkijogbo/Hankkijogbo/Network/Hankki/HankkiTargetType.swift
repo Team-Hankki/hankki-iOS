@@ -13,7 +13,7 @@ enum HankkiTargetType {
     case getCategoryFilter
     case getPriceCategoryFilter
     case getSortOptionFilter
-    case getHankkiPin(university: String, category: String, lowestPrice: String, order: String)
+    case getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String)
     case getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String)
     case getHankkiThumbnail(id: Int)
     case getHankkiDetail(id: Int)
@@ -43,12 +43,10 @@ extension HankkiTargetType: BaseTargetType {
         default: return .none
         }
     }
-    
-    // var queryParameter: [String: Any]? { return .none }
-    var queryParameter: [String: Any]? {
+        var queryParameter: [String: Any]? {
         switch self {
-        case .getHankkiPin(let university, let category, let lowestPrice, let order):
-            return ["university": university, "category": category, "lowestPrice": lowestPrice, "order": order]
+        case .getHankkiPin(let universityid, let storeCategory, let priceCategory, let sortOption):
+            return ["universityId": universityid, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         case .getHankkiList(let universityid, let storeCategory, let priceCategory, let sortOption):
             return ["universityid": universityid, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         default:
@@ -75,11 +73,11 @@ extension HankkiTargetType: BaseTargetType {
         case .getSortOptionFilter:
             return utilPath.rawValue + "/sort-options"
         case .getHankkiPin:
-            return utilPath.rawValue
+            return utilPath.rawValue + "/pins"
         case .getHankkiList:
             return utilPath.rawValue
-        case .getHankkiThumbnail:
-            return utilPath.rawValue + "/thumbnail"
+        case .getHankkiThumbnail(let id):
+            return utilPath.rawValue + "/\(id)/thumbnail"
         case .getHankkiDetail(let id):
             return utilPath.rawValue + "/\(id)"
         case .postHankkiHeart(let id), .deleteHankkiHeart(let id):

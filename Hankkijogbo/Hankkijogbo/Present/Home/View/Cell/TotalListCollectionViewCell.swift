@@ -134,10 +134,11 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
 // MARK: - Network
 
 extension TotalListCollectionViewCell {
-    func bindData(model: TotalListModel) {
-        menutag.text = "#" + model.menu
-        hankkiTitle.text = model.hankkiTitle
-        priceLabel.text = String(model.price) + "원"
-        likeLabel.text = String(model.liked)
+    func bindData(model: GetHankkiListData) {
+        thumbnailImageView.setKFImage(url: model.imageUrl)
+        menutag.text = model.category
+        hankkiTitle.text = model.name
+        priceLabel.text = String(model.lowestPrice) + "원"
+        likeLabel.text = String(model.heartCount)
     }
 }

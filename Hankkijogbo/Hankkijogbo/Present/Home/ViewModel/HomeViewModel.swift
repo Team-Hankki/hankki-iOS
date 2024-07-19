@@ -14,17 +14,27 @@ final class HomeViewModel {
     
     var categoryFilters: [GetCategoryFilterData] = []
     var priceFilters: [GetPriceFilterData] = []
-    var sortOptions: [GetSortOptionFilterData] = []
+    var sortOptions: [GetSortOptionFilterData] = [] {
+        didSet {
+            print(sortOptions)
+        }
+    }
     var hankkiLists: [GetHankkiListData] = [] {
         didSet {
             hankkiListsDidChange?(hankkiLists)
         }
     }
+    var hankkiPins: [GetHankkiPinData] = [] {
+            didSet {
+                hankkiPinsDidChange?(hankkiPins)
+            }
+        }
+    
+    var hankkiThumbnail: GetHankkiThumbnailResponseData?
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
-    
-    private let universityid: Int = 1
-    
+    var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)?
+
     var storeCategory: String? {
         didSet { updateHankkiList() }
     }
@@ -38,17 +48,27 @@ final class HomeViewModel {
     init(hankkiAPIService: HankkiAPIServiceProtocol = HankkiAPIService()) {
         self.hankkiAPIService = hankkiAPIService
     }
-
-    private func updateHankkiList() {
+    
+    func updateHankkiList() {
         let storeCategory = storeCategory ?? ""
         let priceCategory = priceCategory ?? ""
         let sortOption = sortOption ?? ""
         
-        getHankkiListAPI(universityid: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
+        guard let id = UserDefaults.standard.getUniversity()?.id else { return }
+
+        getHankkiListAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
-                print("Hankki list fetched successfully")
+                print("식당 전체 족보 fetch 완료 ")
+                self.getHankkiPinAPI(universityid: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
+                    if pinSuccess {
+                        print("지도 핀 fetch 완료 😄")
+                        self.hankkiPinsDidChange?(self.hankkiPins)
+                    } else {
+                        print("지도 핀 fetch 실패 😞")
+                    }
+                }
             } else {
-                print("Failed to fetch hankki list")
+                print("식당 족보 fetch 실패 ")
             }
         }
     }
@@ -110,6 +130,7 @@ final class HomeViewModel {
             switch result {
             case .success(let response):
                 self?.hankkiLists = response?.data.stores ?? []
+                self?.hankkiListsDidChange?(self?.hankkiLists ?? [])
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
@@ -119,6 +140,57 @@ final class HomeViewModel {
                 return
             }
         }
-        
+    }
+    
+    // 식당 핀을 가져오는 메서드
+    func getHankkiPinAPI(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiPin(universityId: universityid, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
+            switch result{
+            case .success(let response):
+                self?.hankkiPins = response?.data.pins ?? []
+                self?.hankkiPinsDidChange?(self?.hankkiPins ?? [])
+                completion(true)
+                print("SUCCESS")
+            case .unAuthorized, .networkFail:
+                completion(false)
+                print("FAILED")
+            default:
+                return
+            }
+        }
+    }
+    
+    // 식당 썸네일을 가져오는 메서드
+    func getThumbnailAPI(id: Int, completion: @escaping (Bool) -> Void) {
+        NetworkService.shared.hankkiService.getHankkiThumbnail(id: id) { result in
+            switch result {
+            case .success(let response):
+                if let thumbnailData = response?.data{
+                    self.hankkiThumbnail = thumbnailData
+                    completion(true)
+                } else { return }
+            case .unAuthorized, .networkFail:
+                completion(false)
+            default:
+                return
+            }
+        }
+    }
+    
+    
+    func getMeUniversity() {
+        NetworkService.shared.userService.getMeUniversity { result in
+            switch result {
+            case .success(let response):
+                
+                //                completion(true)
+                print("SUCCESS")
+            case .unAuthorized, .networkFail:
+                
+                print("FAILED")
+            default:
+                return
+            }
+        }
     }
 }

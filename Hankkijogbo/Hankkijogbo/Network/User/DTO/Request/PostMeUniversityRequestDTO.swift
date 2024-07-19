@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostMeUniversityRequestDTO {
+struct PostMeUniversityRequestDTO: Codable {
     let universityId: Int
     let name: String
     let longitude: Double

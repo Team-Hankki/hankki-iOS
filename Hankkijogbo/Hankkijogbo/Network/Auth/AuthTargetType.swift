@@ -18,7 +18,6 @@ enum AuthTargetType {
 
 extension AuthTargetType: BaseTargetType {
     var headerType: HeaderType {
-        // TODO: - Header 타입 Base Target Type 에 추가하기
         switch self {
         case .postReissue:
             return .refreshTokenHeader

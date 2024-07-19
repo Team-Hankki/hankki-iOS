@@ -12,7 +12,7 @@ final class MypageViewModel {
     
     var reloadCollectionView: (() -> Void)?
     
-    var userInfo: MypageHeaderView.DataStruct? = nil {
+    var userInfo: MypageHeaderView.DataStruct? {
         didSet {
             self.reloadCollectionView?()
         }
@@ -49,7 +49,7 @@ extension MypageViewModel {
                             window.rootViewController = splashViewController
                         }
                     }
-                  }
+                }
             case .unAuthorized, .pathError:
                 print("레전드 에러발생")
             default:
@@ -61,9 +61,8 @@ extension MypageViewModel {
     func deleteWithdraw(authorizationCode: String) {
         NetworkService.shared.authService.deleteWithdraw(authorizationCode: authorizationCode) { result in
             switch result {
-            case .success:
+            case .success, .decodeError:
                 UserDefaults.standard.removeTokens()
-                
                 DispatchQueue.main.async {
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                         if let window = windowScene.windows.first {
