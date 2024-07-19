@@ -175,7 +175,13 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
 
 extension TotalListBottomSheetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("CELL CLICK")
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
+            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
+        }
+        
     }
 }
 

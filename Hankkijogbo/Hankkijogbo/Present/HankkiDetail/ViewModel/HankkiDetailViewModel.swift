@@ -19,8 +19,8 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI() {
-        NetworkService.shared.hankkiService.getHankkiDetail(id: 19) { [weak self] result in
+    func getHankkiDetailAPI(hankkiId: Int) {
+        NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             switch result {
             case .success(let response):
                 guard let response = response else { return }

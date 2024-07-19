@@ -11,11 +11,12 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var reportedNumber: Int = 501
-    var nickname: String = "은수"
-    var selectedHankkiName: String = "고봉김밥집 1호점"
+    let hankkiId: Int
+    let reportedNumber: Int
+    let nickname: String
+    let selectedHankkiName: String
     
-    var goToReportedHankkiString: String = "제보한 식당 보러가기"
+    let goToReportedHankkiString: String = "제보한 식당 보러가기"
     var updateStringNotificationName: String = "UpdateAddToMyZipListString"
     
     // MARK: - UI Components
@@ -32,6 +33,23 @@ final class ReportCompleteViewController: BaseViewController {
     private let bottomGradientView: UIView = UIView()
     
     // MARK: - Life Cycle
+    
+    init(hankkiId: Int, 
+         reportedNumber: Int,
+         nickname: String,
+         selectedHankkiName: String)
+    {
+        self.hankkiId = hankkiId
+        self.reportedNumber = reportedNumber
+        self.nickname = nickname
+        self.selectedHankkiName = selectedHankkiName
+        
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,11 +187,11 @@ private extension ReportCompleteViewController {
     // MARK: - @objc Func
     
     @objc func bottomButtonPrimaryHandler() {
-        print(goToReportedHankkiString)
+        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
+        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
     }
     
     @objc func addToMyZipListButtonDidTap() {
-        // TODO: - API 연동하면서 제보한 식당 보러가기 액션 구현
         presentMyZipListBottomSheet()
     }
     
