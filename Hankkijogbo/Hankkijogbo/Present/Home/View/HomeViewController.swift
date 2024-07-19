@@ -109,6 +109,7 @@ extension HomeViewController {
             
             for (index, location) in markers.enumerated() {
                 let marker = NMFMarker()
+                marker.iconImage = NMFOverlayImage(image: .icPin)
                 marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
                 marker.mapView = self?.rootView.mapView
                 marker.touchHandler = { [weak self] _ in
@@ -126,6 +127,7 @@ extension HomeViewController {
         
         for (index, location) in pins.enumerated() {
             let marker = NMFMarker()
+            marker.iconImage = NMFOverlayImage(image: .icPin)
             marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
             marker.mapView = rootView.mapView
             marker.touchHandler = { [weak self] _ in
