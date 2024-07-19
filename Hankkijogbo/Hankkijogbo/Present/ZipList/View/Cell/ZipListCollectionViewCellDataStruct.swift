@@ -20,12 +20,22 @@ extension ZipListCollectionViewCell {
         case common
         case disable
         
+        var fontColor: UIColor {
+            switch self {
+            case .create:
+                    .hankkiWhite
+            case .common:
+                .gray800
+            case .disable:
+                    .hankkiWhite
+            }
+        }
         var backgroundColor: UIColor {
             switch self {
             case .create:
                 .hankkiRed
             case .common:
-                .gray800
+                .gray100
             case .disable:
                 .hankkiRedLight
             }

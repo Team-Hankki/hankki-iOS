@@ -92,7 +92,7 @@ extension ZipListCollectionViewCell {
         titleLabel.attributedText = UILabel.setupAttributedText(
             for: PretendardStyle.subtitle3,
             withText: data.title,
-            color: .white
+            color: data.type.fontColor
         )
 
         if data.type == .common {

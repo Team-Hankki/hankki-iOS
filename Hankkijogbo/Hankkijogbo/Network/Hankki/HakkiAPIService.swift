@@ -118,7 +118,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
   
     /// 메인 페이지 식당 리스트 조회
     func getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<BaseDTO<GetHankkiListResponseData>>) -> Void) {
-        provider.request(.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
+        provider.request(.getHankkiList(universityid: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<BaseDTO<GetHankkiListResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
