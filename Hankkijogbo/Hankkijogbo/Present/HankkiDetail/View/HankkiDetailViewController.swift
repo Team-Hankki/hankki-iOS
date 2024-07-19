@@ -248,7 +248,7 @@ extension HankkiDetailViewController {
     @objc func hankkiReportButtonDidTap() {
         self.showAlert(
             image: .imgModalReport,
-            titleText: "한끼귀염님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!",
+            titleText: "변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!",
             primaryButtonText: "돌아가기",
             primaryButtonHandler: dismissWithFadeOut
         )

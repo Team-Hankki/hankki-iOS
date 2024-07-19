@@ -172,7 +172,7 @@ final class HomeViewModel {
         NetworkService.shared.hankkiService.getHankkiThumbnail(id: id) { result in
             switch result {
             case .success(let response):
-                if let thumbnailData = response?.data{
+                if let thumbnailData = response?.data {
                     self.hankkiThumbnail = thumbnailData
                     completion(true)
                 } else { return }
