@@ -11,7 +11,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let hankkiId: Int
+    let hankkiId: Int64
     let reportedNumber: Int
     let nickname: String
     let selectedHankkiName: String
@@ -34,7 +34,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int, 
+    init(hankkiId: Int64,
          reportedNumber: Int,
          nickname: String,
          selectedHankkiName: String)
@@ -68,6 +68,7 @@ final class ReportCompleteViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(updateStringNotificationName), object: nil)
+        setupNavigationBar()
     }
     
     // MARK: - Setup UI
@@ -161,6 +162,18 @@ private extension ReportCompleteViewController {
     
     // MARK: - Private Func
     
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
+                                                              hasRightButton: false,
+                                                              mainTitle: .string(""),
+                                                              rightButton: .string(""),
+                                                              rightButtonAction: {})
+        
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
+        }
+    }
+    
     func setupAddTarget() {
         goToHomeButton.addTarget(self, action: #selector(goToHomeButtonDidTap), for: .touchUpInside)
         hankkiInfoCardView.addToMyZipListButton.addTarget(self, action: #selector(addToMyZipListButtonDidTap), for: .touchUpInside)
@@ -192,7 +205,7 @@ private extension ReportCompleteViewController {
     }
     
     @objc func addToMyZipListButtonDidTap() {
-        presentMyZipListBottomSheet()
+        presentMyZipListBottomSheet(id: hankkiId)
     }
     
     @objc func updateAddToMyZipListString() {

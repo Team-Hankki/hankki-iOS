@@ -14,6 +14,37 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     let categoryImageView = UIImageView()
     let categoryLabel = UILabel()
     
+    var selectedCategoryString: String? {
+        didSet {
+            print(selectedCategoryString ?? "")
+        }
+    }
+    var data: GetCategoryFilterData?
+    
+    weak var delegate: PassItemDataDelegate?
+    
+    override var isSelected: Bool {
+        didSet {
+            self.do {
+                if isSelected {
+                    if selectedCategoryString != nil {
+                        delegate?.updateViewModelCategoryData(data: nil)
+                        updateDefaultStyle()
+                        $0.selectedCategoryString = nil
+                    } else {
+                        delegate?.updateViewModelCategoryData(data: data)
+                        updateSelectedStyle()
+                        $0.selectedCategoryString = self.categoryLabel.text
+                    }
+                } else {
+                    delegate?.updateViewModelCategoryData(data: nil)
+                    updateDefaultStyle()
+                    $0.selectedCategoryString = nil
+                }
+            }
+        }
+    }
+    
     // MARK: - Setup UI
     
     override func setupHierarchy() {
@@ -58,17 +89,20 @@ extension CategoryCollectionViewCell {
         categoryImageView.do {
             $0.setKFImage(url: data.imageUrl)
         }
+        self.data = data
     }
     
     func updateSelectedStyle() {
-        backgroundColor = .hankkiRedLight
-        layer.borderColor = UIColor.hankkiRed.cgColor
+        backgroundColor = .hankkiYellowLighten
+        layer.borderColor = UIColor.hankkiDarkYellow.cgColor
+        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
         categoryLabel.textColor = .gray700
     }
     
     func updateDefaultStyle() {
         backgroundColor = .hankkiWhite
         layer.borderColor = UIColor.gray200.cgColor
+        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
         categoryLabel.textColor = .gray400
     }
 }

@@ -71,7 +71,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
             ), for: .normal)
         }
         imageXButton.do {
-            $0.setImage(.btnAddFilled, for: .normal)
+            $0.setImage(.btnDeleteBig, for: .normal)
         }
     }
 }

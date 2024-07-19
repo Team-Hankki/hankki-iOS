@@ -7,7 +7,7 @@
 
 extension HankkiListTableViewCell {
     struct DataStruct {
-        let id: Int
+        let id: Int64
         let name: String
         let imageURL: String
         let category: String

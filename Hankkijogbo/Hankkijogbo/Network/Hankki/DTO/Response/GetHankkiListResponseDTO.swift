@@ -19,5 +19,5 @@ struct GetHankkiListData: Codable {
     let name: String
     let lowestPrice: Int
     let heartCount: Int
-    let id: Int
+    let id: Int64
 }

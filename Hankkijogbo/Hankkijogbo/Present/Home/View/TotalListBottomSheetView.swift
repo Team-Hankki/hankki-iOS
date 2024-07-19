@@ -15,6 +15,7 @@ final class TotalListBottomSheetView: BaseView {
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
     var data: [GetHankkiListData] = []
+    var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     // MARK: - UI Components
     
@@ -154,6 +155,14 @@ extension TotalListBottomSheetView {
         isExpanded = false
         viewLayoutIfNeededWithDownAnimation()
     }
+    
+    @objc func addButtonDidTap(sender: UIButton) {
+        // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.totalListCollectionView)
+        let itemIndexPath = self.totalListCollectionView.indexPathForItem(at: buttonPosition)
+        
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil, userInfo: ["itemIndexPath": itemIndexPath ?? IndexPath()]))
+    }
 }
 
 extension TotalListBottomSheetView: UICollectionViewDataSource {
@@ -166,6 +175,8 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.bindData(model: data[indexPath.row])
+        cell.makeRounded(radius: 10)
+        cell.addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
         return cell
     }
 }

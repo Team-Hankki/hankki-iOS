@@ -260,7 +260,7 @@ private extension ReportViewController {
 
 // MARK: - UICollectionView Delegate
 
-extension ReportViewController: UICollectionViewDataSource {
+extension ReportViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -318,6 +318,7 @@ extension ReportViewController: UICollectionViewDataSource {
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
             cell.bindData(viewModel.categoryFilters[indexPath.row])
+            cell.delegate = self
             return cell
         case .image:
             if isImageSet {
@@ -348,20 +349,6 @@ extension ReportViewController: UICollectionViewDataSource {
     }
 }
 
-extension ReportViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell else { return }
-        
-        if viewModel.selectedCategory != nil {
-            cell.updateDefaultStyle()
-            viewModel.selectedCategory = nil
-        } else {
-            cell.updateSelectedStyle()
-            viewModel.selectedCategory = viewModel.categoryFilters[indexPath.item]
-        }
-    }
-}
-
 // MARK: - PHPickerViewController Delegate
 
 extension ReportViewController: PHPickerViewControllerDelegate {
@@ -386,6 +373,21 @@ extension ReportViewController: PHPickerViewControllerDelegate {
             }
         }
     }
+    
+    func checkIsEnabled() {
+        collectMenuCellData()
+        let menuCellDataNotEmpty = menuCellData.filter { $0.name != "" && $0.price != 0 }
+        print("menuCellDataNotEmpty")
+        print(menuCellDataNotEmpty)
+        if let name = self.hankkiNameString,
+           let category = viewModel.selectedCategory {
+            if !menuCellDataNotEmpty.isEmpty {
+                self.bottomButtonView.setupEnabledDoneButton()
+            }
+        } else {
+            self.bottomButtonView.setupDisabledDoneButton()
+        }
+    }
 }
 
 // MARK: - PassSelectedHankkiData Delegate
@@ -393,6 +395,15 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 extension ReportViewController: PassItemDataDelegate {
     func passSearchItemData(model: GetSearchedLocation) {
         self.hankkiNameString = model.name
-        self.bottomButtonView.setupEnabledDoneButton()
+//        self.bottomButtonView.setupEnabledDoneButton()
+        checkIsEnabled()
+    }
+    
+    func updateViewModelCategoryData(data: GetCategoryFilterData?) {
+        guard let data = data else { return }
+        self.viewModel.selectedCategory = data
+        print("클릭된 카테고리 \(data)")
+//        self.bottomButtonView.setupEnabledDoneButton()
+        checkIsEnabled()
     }
 }

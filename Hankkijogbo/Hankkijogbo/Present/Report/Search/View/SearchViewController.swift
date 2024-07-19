@@ -9,6 +9,7 @@ import UIKit
 
 protocol PassItemDataDelegate: AnyObject {
     func passSearchItemData(model: GetSearchedLocation)
+    func updateViewModelCategoryData(data: GetCategoryFilterData?)
 }
 
 final class SearchViewController: BaseViewController {

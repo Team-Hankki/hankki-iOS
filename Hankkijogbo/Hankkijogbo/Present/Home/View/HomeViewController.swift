@@ -18,6 +18,8 @@ final class HomeViewController: BaseViewController {
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
     private var markers: [NMFMarker] = []
+    var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
+ 
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
 
     // MARK: - UI Components
@@ -46,6 +48,7 @@ final class HomeViewController: BaseViewController {
         setupPosition()
         setupNavigationBar()
         requestLocationAuthorization()
+        NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
         updateUniversityData(universityId: universityId)
     }
     
@@ -153,7 +156,7 @@ extension HomeViewController {
         markers.removeAll()
     }
     
-    private func showMarkerInfoCard(at index: Int, pinId: Int) {
+    private func showMarkerInfoCard(at index: Int, pinId: Int64) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
         
@@ -179,6 +182,7 @@ extension HomeViewController {
                         $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
                     }
                     self.view.layoutIfNeeded()
+                    self.markerInfoCardView!.addButton.addTarget(self, action: #selector(self.presentMyZipBottomSheet), for: .touchUpInside)
                 })
                 self.showTargetButtonAtCardView()
             }
@@ -225,6 +229,19 @@ private extension HomeViewController {
             navigationController.setupNavigationBar(forType: type)
             navigationController.isNavigationBarHidden = false
         }
+    }
+    
+    @objc func getNotificationForMyZipList(_ notification: Notification) {
+        if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
+            print("클릭된 셀의 indexPath \(indexPath)")
+            print(viewModel.hankkiLists[indexPath.item])
+            self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
+        }
+    }
+    
+    @objc func presentMyZipBottomSheet() {
+        guard let thumbnailData = viewModel.hankkiThumbnail else { return }
+        self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
 }
 

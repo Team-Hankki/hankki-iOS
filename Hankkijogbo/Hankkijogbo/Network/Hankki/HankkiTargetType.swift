@@ -14,9 +14,9 @@ enum HankkiTargetType {
     case getPriceCategoryFilter
     case getSortOptionFilter
     case getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String)
-    case getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String)
-    case getHankkiThumbnail(id: Int)
-    case getHankkiDetail(id: Int)
+    case getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String)
+    case getHankkiThumbnail(id: Int64)
+    case getHankkiDetail(id: Int64)
     case postHankkiHeart(id: Int64)
     case deleteHankkiHeart(id: Int64)
     case postHankkiValidate(req: PostHankkiValidateRequestDTO)

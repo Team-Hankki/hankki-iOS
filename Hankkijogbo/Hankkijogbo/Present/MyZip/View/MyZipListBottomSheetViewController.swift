@@ -11,6 +11,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var storeId: Int64?
     var viewModel: MyZipViewModel = MyZipViewModel()
     var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
@@ -39,7 +40,13 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         bindViewModel()
         showMyZipBottomSheet()
         
-        viewModel.getMyZipListAPI(id: 19)
+        if let id = storeId {
+            viewModel.getMyZipListAPI(id: id)
+        }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipStackViewDidTap))
+        addNewZipStackView.addGestureRecognizer(tapGesture)
+        
     }
     
     // MARK: - Set UI
@@ -274,6 +281,15 @@ private extension MyZipListBottomSheetViewController {
     @objc func dimmedViewDidTap() {
         dismissMyZipBottomSheet()
     }
+    
+    @objc func addNewZipStackViewDidTap () {
+        dismissMyZipBottomSheet()
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+            let createZipViewController = CreateZipViewController()
+            rootViewController.pushViewController(createZipViewController, animated: true)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -306,9 +322,19 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         return cell
     }
     
-    @objc func addZipButtonDidTap() {
-        // TODO: - favoriteId, storeId 연결
-        viewModel.postHankkiToZipAPI(request: PostHankkiToZipRequestDTO(favoriteId: 20, storeId: 20))
+    @objc func addZipButtonDidTap(_ sender: UIButton) {
+        // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
+        let itemIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
+
+        guard let data = viewModel.myZipListFavoriteData else { return }
+        
+        viewModel.postHankkiToZipAPI(
+            request: PostHankkiToZipRequestDTO(
+                favoriteId: data[itemIndexPath?.item ?? 0].id,
+                storeId: storeId ?? 0
+            )
+        )
         self.dismissMyZipBottomSheet()
     }
 }
@@ -319,6 +345,7 @@ extension MyZipListBottomSheetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        print("CELL CLICK")
         if let data = viewModel.myZipListFavoriteData {
+            
             let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
             navigationController?.pushViewController(hankkiDetailViewController, animated: true)
         }
