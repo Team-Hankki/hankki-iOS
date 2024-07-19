@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class CreateZipViewModel {
-    
+    var showAlert: ((String) -> Void)?
 }
 
 extension CreateZipViewModel {
@@ -19,7 +19,7 @@ extension CreateZipViewModel {
             case .success(_):
                 return
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
             }
@@ -37,7 +37,7 @@ extension CreateZipViewModel {
                   }
                 return
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
             }

@@ -11,6 +11,7 @@ import Moya
 import UIKit
 
 final class ReportViewModel {
+    var showAlert: ((String) -> Void)?
     
     var nickname: String?
     
@@ -48,11 +49,8 @@ extension ReportViewModel {
                 guard let count = response?.data.count else { return }
                 self?.count = Int(count)
                 self?.reportedNumberGuideText = "\(count)번째 제보예요"
-            case .badRequest, .unAuthorized:
-                // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+            case .badRequest, .unAuthorized, .serverError:
+                self?.showAlert?("Failed to fetch category filters.")
             default:
                 return
             }
@@ -78,7 +76,7 @@ extension ReportViewModel {
             switch result {
             case .success(let response):
                 guard let data = response?.data else { return }
-                
+                print(data)
                 self.getMe() { name in
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
@@ -90,11 +88,9 @@ extension ReportViewModel {
                     }
                 }
 
-            case .badRequest, .unAuthorized:
-                // TODO: - 에러 상황에 공통적으로 띄워줄만한 Alert나 Toast가 있어야 하지 않을까?
-                print("badRequest")
-            case .serverError:
-                print("serverError")
+                completion()
+            case .badRequest, .unAuthorized, .serverError:
+                self.showAlert?("Failed to fetch category filters.")
             default:
                 return
             }
@@ -110,6 +106,7 @@ extension ReportViewModel {
                 completion(true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
+                self?.showAlert?("Failed to fetch category filters.")
                 completion(false)
                 print("FAILED")
             default:

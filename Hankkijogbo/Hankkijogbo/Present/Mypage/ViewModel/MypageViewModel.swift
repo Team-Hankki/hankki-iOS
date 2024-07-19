@@ -10,6 +10,8 @@ import UIKit
 
 final class MypageViewModel {
     
+    var showAlert: ((String) -> Void)?
+    
     var reloadCollectionView: (() -> Void)?
     
     var userInfo: MypageHeaderView.DataStruct? {
@@ -29,7 +31,7 @@ extension MypageViewModel {
                                                 name: responseData.data.nickname)
                 } else { return }
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
             }
@@ -51,7 +53,7 @@ extension MypageViewModel {
                     }
                 }
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
             }
@@ -72,7 +74,7 @@ extension MypageViewModel {
                     }
                   }
             case .unAuthorized, .pathError:
-                print("레전드 에러발생")
+                self.showAlert?("Failed")
             default:
                 return
             }
