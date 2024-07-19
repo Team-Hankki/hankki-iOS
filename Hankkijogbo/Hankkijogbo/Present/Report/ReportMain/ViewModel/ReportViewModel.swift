@@ -87,8 +87,6 @@ extension ReportViewModel {
                         rootViewController.pushViewController(reportCompleteViewController, animated: true)
                     }
                 }
-
-                completion()
             case .badRequest, .unAuthorized, .serverError:
                 self.showAlert?("Failed to fetch category filters.")
             default:

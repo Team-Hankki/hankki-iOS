@@ -21,7 +21,6 @@ final class HankkiListViewModel {
     
     var hankkiList: [HankkiListTableViewCell.DataStruct] = [] {
         didSet {
-            print("다시로드~~~~~~~~~~~~~~~~~~~~~~~~~\n", hankkiList)
             self.reloadCollectionView?()
         }
     }
@@ -102,8 +101,7 @@ extension HankkiListViewModel {
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.zipService.deleteZipToHankki(requestBody: requestBody) { result in
             switch result {
-            case .success(let response):
-                print("SUCCESS")
+            case .success(_): return
             case .unAuthorized, .pathError:
                 self.showAlert?("Failed")
             default:
@@ -116,28 +114,21 @@ extension HankkiListViewModel {
     func postHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
             switch result {
-            case .success(let response):
-                guard let response = response else { return }
-                print("SUCCESS")
-                completion()
+            case .success(_): return
             case .unAuthorized, .networkFail:
-                print("FAILED")
+                self.showAlert?("Failed")
             default:
                 return
             }
         }
     }
     
-
     func deleteHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
             switch result {
-            case .success(let response):
-                guard let response = response else { return }
-                print("SUCCESS")
-                completion()
+            case .success(_): return
             case .unAuthorized, .networkFail:
-                print("FAILED")
+                self.showAlert?("Failed")
             default:
                 return
             }

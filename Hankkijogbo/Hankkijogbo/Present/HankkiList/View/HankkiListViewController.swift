@@ -195,16 +195,11 @@ extension HankkiListViewController: UITableViewDataSource {
     }
     
     func deleteLike(_ id: Int64) {
-        viewModel.deleteHankkiHeartAPI(id: id) {
-            print("삭제 성공")
-        }
+        viewModel.deleteHankkiHeartAPI(id: id) {}
     }
     
     func postLike(_ id: Int64) {
-        viewModel.postHankkiHeartAPI(id: id) {
-            print("등록 성공")
-            
-        }
+        viewModel.postHankkiHeartAPI(id: id) {}
     }
 }
 
@@ -255,12 +250,10 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
         if let indexPath = hankkiTableView.indexPath(for: cell) {
             let hankkiId: Int64 = Int64(viewModel.hankkiList[indexPath.item].id)
             if isSelected {
-                print(indexPath.item, "번째 식당을 삭제합니다.")
                 calc *= -1
                 deleteLike(hankkiId)
                 
             } else {
-                print(indexPath.item, "번째 식당을 추가합니다.")
                 postLike(hankkiId)
             }
             let currendData: HankkiListTableViewCell.DataStruct = viewModel.hankkiList[indexPath.item]
