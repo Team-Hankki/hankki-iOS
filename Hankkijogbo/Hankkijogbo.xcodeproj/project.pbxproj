@@ -173,7 +173,7 @@
 		A2C9FCB12C49985800868DF7 /* GetZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FCAF2C49985800868DF7 /* GetZipListResponseDTO.swift */; };
 		A2C9FCB32C49AFF800868DF7 /* PostHankkiRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FCB22C49AFF800868DF7 /* PostHankkiRequestDTO.swift */; };
 		A2C9FCB52C49B15700868DF7 /* PostHankkiResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9FCB42C49B15700868DF7 /* PostHankkiResponseDTO.swift */; };
-		A2C9FCB72C4A5F9400868DF7 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2C9FCB62C4A5F9400868DF7 /* Config.xcconfig */; };
+		A2C9FCBB2C4A62D800868DF7 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2C9FCBA2C4A62D800868DF7 /* Config.xcconfig */; };
 		A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */; };
 		A2DEBF492C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */; };
 		A2DEBF4A2C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */; };
@@ -382,7 +382,7 @@
 		A2C9FCAF2C49985800868DF7 /* GetZipListResponseDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetZipListResponseDTO.swift; sourceTree = "<group>"; };
 		A2C9FCB22C49AFF800868DF7 /* PostHankkiRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiRequestDTO.swift; sourceTree = "<group>"; };
 		A2C9FCB42C49B15700868DF7 /* PostHankkiResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiResponseDTO.swift; sourceTree = "<group>"; };
-		A2C9FCB62C4A5F9400868DF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../Downloads/Config.xcconfig; sourceTree = "<group>"; };
+		A2C9FCBA2C4A62D800868DF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../../../../../Config.xcconfig; sourceTree = "<group>"; };
 		A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+.swift"; sourceTree = "<group>"; };
 		A2DEBF462C3BD7A300DE14A9 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
 		A2DEBF472C3BD7A300DE14A9 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A2C9FCB62C4A5F9400868DF7 /* Config.xcconfig */,
+				A2C9FCBA2C4A62D800868DF7 /* Config.xcconfig */,
 				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
@@ -1590,8 +1590,8 @@
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
 				8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */,
+				A2C9FCBB2C4A62D800868DF7 /* Config.xcconfig in Resources */,
 				8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */,
-				A2C9FCB72C4A5F9400868DF7 /* Config.xcconfig in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
 				865C3D082C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig in Resources */,
 				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
@@ -1863,6 +1863,7 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2C9FCBA2C4A62D800868DF7 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1926,6 +1927,7 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2C9FCBA2C4A62D800868DF7 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
