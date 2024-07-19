@@ -158,7 +158,7 @@ extension BottomButtonView {
     
     func setupDisabledDoneButton() {
         primaryButton.do {
-            $0.backgroundColor = .hankkiRedLight
+            $0.backgroundColor = .hankkiSemiRed
             $0.isEnabled = false
         }
     }
