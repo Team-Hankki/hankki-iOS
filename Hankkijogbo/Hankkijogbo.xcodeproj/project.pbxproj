@@ -643,7 +643,6 @@
 		83DBED8D2C2564790042BA48 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				83DBED902C2564900042BA48 /* Model */,
 				83DBED8F2C25648B0042BA48 /* View */,
 				83DBED8E2C2564820042BA48 /* ViewModel */,
 			);
@@ -668,13 +667,6 @@
 				8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		83DBED902C2564900042BA48 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		83DBEDA52C25656D0042BA48 /* Supporting Files */ = {
