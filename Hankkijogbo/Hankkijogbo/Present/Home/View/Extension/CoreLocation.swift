@@ -150,3 +150,108 @@ extension HomeViewController: CLLocationManagerDelegate {
         })
     }
 }
+
+extension HomeViewController {
+    func setupMap() {
+        rootView.mapView.touchDelegate = self
+    }
+    
+    func setupPosition() {
+        var markers: [GetHankkiPinData] = viewModel.hankkiPins
+        guard let university = UserDefaults.standard.getUniversity() else { return }
+        
+        let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+        viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
+            
+            markers = self?.viewModel.hankkiPins ?? []
+            self?.rootView.mapView.positionMode = .direction
+            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            
+            self?.clearMarkers()
+            
+            for (index, location) in markers.enumerated() {
+                let marker = NMFMarker()
+                marker.iconImage = NMFOverlayImage(image: .icPin)
+                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+                marker.mapView = self?.rootView.mapView
+                marker.touchHandler = { [weak self] _ in
+                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
+                    self?.showMarkerInfoCard(at: index, pinId: location.id)
+                    return true
+                }
+                self?.markers.append(marker)
+            }
+        })
+    }
+    
+    func setupPosition(with pins: [GetHankkiPinData]) {
+        clearMarkers()
+        
+        for (index, location) in pins.enumerated() {
+            let marker = NMFMarker()
+            marker.iconImage = NMFOverlayImage(image: .icPin)
+            marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+            marker.mapView = rootView.mapView
+            marker.touchHandler = { [weak self] _ in
+                self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
+                self?.showMarkerInfoCard(at: index, pinId: location.id)
+                return true
+            }
+            markers.append(marker)
+        }
+    }
+    
+    private func clearMarkers() {
+        markers.forEach { $0.mapView = nil }
+        markers.removeAll()
+    }
+    
+    private func showMarkerInfoCard(at index: Int, pinId: Int64) {
+        guard selectedMarkerIndex != index else { return }
+        selectedMarkerIndex = index
+        
+        if markerInfoCardView == nil {
+            markerInfoCardView = MarkerInfoCardView()
+            view.addSubview(markerInfoCardView!)
+            markerInfoCardView?.snp.makeConstraints { make in
+                make.width.equalTo(331)
+                make.height.equalTo(109)
+                make.centerX.equalToSuperview()
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(22)
+            }
+            view.layoutIfNeeded()
+        }
+        
+        viewModel.getThumbnailAPI(id: pinId) { [weak self] success in
+            guard let self = self, success, let thumbnailData = self.viewModel.hankkiThumbnail else { return }
+            DispatchQueue.main.async {
+                self.markerInfoCardView?.bindData(model: thumbnailData)
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.markerInfoCardView?.snp.updateConstraints {
+                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
+                    }
+                    self.view.layoutIfNeeded()
+                    self.markerInfoCardView!.addButton.addTarget(self, action: #selector(self.presentMyZipBottomSheet), for: .touchUpInside)
+                })
+                self.showTargetButtonAtCardView()
+            }
+        }
+    }
+    
+    func hideMarkerInfoCard() {
+        guard markerInfoCardView != nil else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.markerInfoCardView?.snp.updateConstraints {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.markerInfoCardView?.removeFromSuperview()
+            self.markerInfoCardView = nil
+            self.selectedMarkerIndex = nil
+        })
+        self.showTargetButtonAtBottomSheet()
+    }
+}
