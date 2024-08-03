@@ -29,7 +29,6 @@ extension UserDefaults {
     }
     
     func saveUniversity(_ university: UniversityModel) {
-        print("대학정보 저장")
         let defaults = UserDefaults.standard
         if let encoded = try? JSONEncoder().encode(university) {
             defaults.set(encoded, forKey: "university")

@@ -62,7 +62,7 @@ extension HankkiListViewModel {
                                                                   lowestPrice: $0.lowestPrice,
                                                                   heartCount: $0.heartCount)
                     }
-                } else { print("레전드 오류 발생") }
+                } else { print("Error") }
                 completion(true)
             case .unAuthorized, .networkFail:
                 self.showAlert?("Failed")
@@ -86,7 +86,7 @@ extension HankkiListViewModel {
                                                                   lowestPrice: $0.lowestPrice,
                                                                   heartCount: $0.heartCount)
                     }
-                } else { print("레전드 오류 발생") }
+                } else { print("오류 발생") }
                 completion(true)
             case .unAuthorized, .networkFail:
                 self.showAlert?("Failed")

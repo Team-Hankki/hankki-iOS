@@ -131,10 +131,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 identityTokenString = String(data: identityToken, encoding: .utf8) ?? ""
             } else { return }
             
-            print("이름~~~~~~~~~~~~~~",fullNameString)
-            let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(identifyToken: identityTokenString, name: fullNameString)
+            let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(name: fullNameString)
             
-            viewModel.postLogin(postLoginRequest)
+            viewModel.postLogin(accessToken: identityTokenString, postLoginRequest: postLoginRequest)
             
         default:
             break

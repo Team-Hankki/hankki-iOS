@@ -217,7 +217,7 @@ extension MypageViewController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             if let authorizationCodeData = appleIDCredential.authorizationCode {
-                if let authorizationCodeString = String(data: authorizationCodeData, encoding: .utf8) {print(authorizationCodeString)
+                if let authorizationCodeString = String(data: authorizationCodeData, encoding: .utf8) {
                     dismiss(animated: false)
                     viewModel.deleteWithdraw(authorizationCode: authorizationCodeString)
                 }
