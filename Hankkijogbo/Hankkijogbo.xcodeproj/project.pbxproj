@@ -42,7 +42,6 @@
 		839FC7232C47A3DB00B7FEDD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 839FC7222C47A3DB00B7FEDD /* Kingfisher */; };
 		839FC7252C47A44900B7FEDD /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839FC7242C47A44900B7FEDD /* UIImageView+.swift */; };
 		83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23A412C4010AA00A71ECE /* ButtonType.swift */; };
-		83A41DA52C4AAF74009395E7 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 83A41DA42C4AAF74009395E7 /* Config.xcconfig */; };
 		83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28952C3851BB004819FA /* HankkiNavigationType.swift */; };
 		83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28972C3852C5004819FA /* HankkiNavigationController.swift */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
@@ -195,6 +194,7 @@
 		A2EC33C42C47183700809840 /* GetReportedNumberResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33C32C47183700809840 /* GetReportedNumberResponseDTO.swift */; };
 		A2EC33C82C47184500809840 /* GetSearchedLocationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33C72C47184500809840 /* GetSearchedLocationResponseDTO.swift */; };
 		A2EC33D92C47CFA500809840 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EC33D82C47CFA500809840 /* ReportViewModel.swift */; };
+		A2F240312C5C03B400C204BE /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2F240302C5C03B400C204BE /* Config.xcconfig */; };
 		A2F27BE32C34EED1001E6514 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */; };
 		A2F27BE42C34EED4001E6514 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */; };
 		A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2B5423F2C32A29400A6B225 /* Pretendard-Medium.otf */; };
@@ -243,7 +243,6 @@
 		839FC71F2C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSortOptionFilterResponseDTO.swift; sourceTree = "<group>"; };
 		839FC7242C47A44900B7FEDD /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		83A23A412C4010AA00A71ECE /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
-		83A41DA42C4AAF74009395E7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		83DA28952C3851BB004819FA /* HankkiNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationType.swift; sourceTree = "<group>"; };
 		83DA28972C3852C5004819FA /* HankkiNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiNavigationController.swift; sourceTree = "<group>"; };
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -402,6 +401,7 @@
 		A2EC33C32C47183700809840 /* GetReportedNumberResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReportedNumberResponseDTO.swift; sourceTree = "<group>"; };
 		A2EC33C72C47184500809840 /* GetSearchedLocationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSearchedLocationResponseDTO.swift; sourceTree = "<group>"; };
 		A2EC33D82C47CFA500809840 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		A2F240302C5C03B400C204BE /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Hankkijogbo/Global/Resources/Config.xcconfig; sourceTree = SOURCE_ROOT; };
 		A2F27BFB2C3500DB001E6514 /* SUITE-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-SemiBold.otf"; sourceTree = "<group>"; };
 		A2F27BFC2C3500DB001E6514 /* SUITE-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Bold.otf"; sourceTree = "<group>"; };
 		A2F27BFD2C3500DB001E6514 /* SUITE-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUITE-Regular.otf"; sourceTree = "<group>"; };
@@ -697,7 +697,7 @@
 		83DBEDA62C25657B0042BA48 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				83A41DA42C4AAF74009395E7 /* Config.xcconfig */,
+				A2F240302C5C03B400C204BE /* Config.xcconfig */,
 				8302F8D92C3D2C84004ADAA4 /* Config.swift */,
 				83DBEDAE2C2565E10042BA48 /* Assets */,
 				83DBEDAB2C2565B20042BA48 /* Fonts */,
@@ -1575,8 +1575,8 @@
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
 				8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */,
-				83A41DA52C4AAF74009395E7 /* Config.xcconfig in Resources */,
 				8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */,
+				A2F240312C5C03B400C204BE /* Config.xcconfig in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
 				865C3D082C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig in Resources */,
 				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
@@ -1846,7 +1846,6 @@
 /* Begin XCBuildConfiguration section */
 		83DBED842C255A1A0042BA48 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83A41DA42C4AAF74009395E7 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1910,7 +1909,6 @@
 		};
 		83DBED852C255A1A0042BA48 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83A41DA42C4AAF74009395E7 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

@@ -77,7 +77,7 @@ extension ReportViewModel {
             case .success(let response):
                 guard let data = response?.data else { return }
                 print(data)
-                self.getMe() { name in
+                self.getMe { name in
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
                         let reportCompleteViewController = ReportCompleteViewController(hankkiId: (response?.data.id ?? 0),

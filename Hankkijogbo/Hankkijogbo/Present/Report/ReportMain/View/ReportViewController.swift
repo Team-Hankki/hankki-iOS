@@ -68,10 +68,7 @@ final class ReportViewController: BaseViewController {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        view.addSubviews(
-            collectionView,
-            bottomButtonView
-        )
+        view.addSubviews(collectionView, bottomButtonView)
     }
     
     override func setupLayout() {
@@ -102,7 +99,7 @@ extension ReportViewController {
             self.collectionView.reloadData()
         }
         
-        viewModel.showAlert = { [weak self] message in
+        viewModel.showAlert = { [weak self] _ in
             self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
                             subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
                             primaryButtonText: "확인")
@@ -140,7 +137,6 @@ private extension ReportViewController {
     }
     
     func setupNavigationBar() {
-        // TODO: - 백버튼 액션
         // TODO: - 네비 타이틀 폰트 설정
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: true,
@@ -162,7 +158,6 @@ private extension ReportViewController {
     /// 빈값 필터링
     func collectMenuCellData() {
         let sectionNumber: Int = ReportSectionType.menu.rawValue
-
         var menuName: String = ""
         var menuPrice: String = ""
         
@@ -377,8 +372,6 @@ extension ReportViewController: PHPickerViewControllerDelegate {
     func checkIsEnabled() {
         collectMenuCellData()
         let menuCellDataNotEmpty = menuCellData.filter { $0.name != "" && $0.price != 0 }
-        print("menuCellDataNotEmpty")
-        print(menuCellDataNotEmpty)
         if let name = self.hankkiNameString,
            let category = viewModel.selectedCategory {
             if !menuCellDataNotEmpty.isEmpty {
@@ -395,15 +388,12 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 extension ReportViewController: PassItemDataDelegate {
     func passSearchItemData(model: GetSearchedLocation) {
         self.hankkiNameString = model.name
-//        self.bottomButtonView.setupEnabledDoneButton()
         checkIsEnabled()
     }
     
     func updateViewModelCategoryData(data: GetCategoryFilterData?) {
         guard let data = data else { return }
         self.viewModel.selectedCategory = data
-        print("클릭된 카테고리 \(data)")
-//        self.bottomButtonView.setupEnabledDoneButton()
         checkIsEnabled()
     }
 }
