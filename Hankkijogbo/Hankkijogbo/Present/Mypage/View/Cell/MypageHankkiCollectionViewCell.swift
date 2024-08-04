@@ -20,9 +20,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         self.do {
             $0.backgroundColor = .gray50
-            $0.layer.borderColor = UIColor.gray200.cgColor
-            $0.layer.borderWidth = 1
-            $0.makeRounded(radius: 12)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 1, borderColor: .gray200)
         }
         
         titleLabel.do {

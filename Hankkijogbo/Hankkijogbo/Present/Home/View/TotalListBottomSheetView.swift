@@ -175,7 +175,7 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.bindData(model: data[indexPath.row])
-        cell.makeRounded(radius: 10)
+        cell.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
         cell.addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
         return cell
     }

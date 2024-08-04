@@ -59,7 +59,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         menutag.do {
-            $0.makeRounded(radius: 10)
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             $0.backgroundColor = .hankkiRedLight
             $0.textColor = .hankkiRed
             $0.font = .setupPretendardStyle(of: .caption2)

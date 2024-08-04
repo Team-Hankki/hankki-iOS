@@ -76,7 +76,7 @@ private extension MainButton {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
             $0.backgroundColor = .hankkiSemiRed
-            $0.makeRounded(radius: 16)
+            $0.makeRoundBorder(cornerRadius: 16, borderWidth: 0, borderColor: .clear)
             $0.isEnabled = false
         }
     }

@@ -68,9 +68,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         thumbnailView.do {
-            $0.makeRounded(radius: 8)
-        
-            $0.clipsToBounds = true
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 0, borderColor: .clear)
             $0.contentMode = .scaleAspectFill
         }
         
@@ -90,7 +88,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         categoryChipView.do {
-            $0.makeRounded(radius: 10)
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             $0.backgroundColor = .hankkiRedLight
         }
         
