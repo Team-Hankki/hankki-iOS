@@ -12,7 +12,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Components
     
     let thumbnailImageView: UIImageView = UIImageView()
-    private let menutag: UILabel = UILabel()
+    private let menutag: UILabel = HankkiCategoryTag()
     private let hankkiTitle: UILabel = UILabel()
     
     private let priceImage: UIImageView = UIImageView()
@@ -59,11 +59,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         menutag.do {
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
-            $0.backgroundColor = .hankkiRedLight
-            $0.textColor = .hankkiRed
-            $0.font = .setupPretendardStyle(of: .caption2)
-            $0.textAlignment = .center
+            $0.setNeedsLayout()
+            $0.layoutIfNeeded()
         }
         
         hankkiTitle.do {
@@ -110,7 +107,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         menutag.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.top)
             $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
-            $0.width.equalTo(42)
             $0.height.equalTo(20)
         }
         
