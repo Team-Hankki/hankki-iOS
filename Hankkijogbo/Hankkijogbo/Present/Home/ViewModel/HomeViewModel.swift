@@ -21,22 +21,24 @@ final class HomeViewModel {
             print(sortOptions)
         }
     }
+    
     var hankkiLists: [GetHankkiListData] = [] {
         didSet {
             hankkiListsDidChange?(hankkiLists)
         }
     }
+    
     var hankkiPins: [GetHankkiPinData] = [] {
-            didSet {
-                hankkiPinsDidChange?(hankkiPins)
-            }
+        didSet {
+            hankkiPinsDidChange?(hankkiPins)
         }
+    }
     
     var hankkiThumbnail: GetHankkiThumbnailResponseData?
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
     var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)?
-
+    
     var storeCategory: String? {
         didSet { updateHankkiList() }
     }
@@ -50,7 +52,9 @@ final class HomeViewModel {
     init(hankkiAPIService: HankkiAPIServiceProtocol = HankkiAPIService()) {
         self.hankkiAPIService = hankkiAPIService
     }
-    
+}
+
+extension HomeViewModel {
     func updateHankkiList() {
         let storeCategory = storeCategory ?? ""
         let priceCategory = priceCategory ?? ""
@@ -60,7 +64,7 @@ final class HomeViewModel {
 
         self.getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
-                print("식당 전체 족보 fetch 완료 ")
+                print("식당 전체 족보 fetch 완료 😄")
                 self.hankkiListsDidChange?(self.hankkiLists)
                 self.getHankkiPinAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
                     if pinSuccess {
@@ -71,7 +75,7 @@ final class HomeViewModel {
                     }
                 }
             } else {
-                print("식당 족보 fetch 실패 ")
+                print("식당 족보 fetch 실패 😞")
             }
         }
     }
