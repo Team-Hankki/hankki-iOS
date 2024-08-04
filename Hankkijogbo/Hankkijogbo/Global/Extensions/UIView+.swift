@@ -17,12 +17,12 @@ extension UIView {
         }
     }
     
-    /// UIView 의 모서리가 둥근 정도를 설정
-    /// - Parameter radius: radius 값
-    /// - Parameter maskedCorners: radius를 적용할 코너 지정
-    func makeRounded(radius: CGFloat) {
-        self.clipsToBounds = true
-        self.layer.cornerRadius = radius
+    /// UIView 의 모서리의 색상, 모서리 두께, 둥근 정도
+    func makeRoundBorder(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor ) {
+        layer.masksToBounds = true
+        layer.cornerRadius = cornerRadius
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
     }
     
     /// 애니메이션과 함께 뷰를 제거한다.
