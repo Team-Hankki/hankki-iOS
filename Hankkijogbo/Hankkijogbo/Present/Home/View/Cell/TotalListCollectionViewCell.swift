@@ -138,7 +138,7 @@ extension TotalListCollectionViewCell {
         thumbnailImageView.setKFImage(url: model.imageUrl)
         menutag.text = model.category
         hankkiTitle.text = model.name
-        priceLabel.text = String(model.lowestPrice) + "원"
+        priceLabel.text = String(model.lowestPrice) + StringLiterals.Home.won
         likeLabel.text = String(model.heartCount)
     }
 }

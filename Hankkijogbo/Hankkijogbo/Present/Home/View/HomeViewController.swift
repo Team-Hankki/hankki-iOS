@@ -79,9 +79,9 @@ final class HomeViewController: BaseViewController {
         }
         
         viewModel.showAlert = { [weak self] message in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
+                            subText: StringLiterals.Alert.tryAgain,
+                            primaryButtonText: StringLiterals.Alert.check)
         }
     }
 }
@@ -98,6 +98,7 @@ extension HomeViewController {
     }
     
     private func setupNavigationBar() {
+        // Univ StringLiterals 추가 이후에 반영 예정
         let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
@@ -193,9 +194,9 @@ extension HomeViewController: DropDownViewDelegate {
             switch buttonType {
             case .price:
                 if item == "K6" {
-                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000원 이하")
+                    changeButtonTitle(for: rootView.priceButton, newTitle: StringLiterals.Home.less6000)
                 } else {
-                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000~8000원")
+                    changeButtonTitle(for: rootView.priceButton, newTitle: StringLiterals.Home.more6000)
                 }
                 viewModel.priceCategory = item // 필터링 값 업데이트
             case .sort:

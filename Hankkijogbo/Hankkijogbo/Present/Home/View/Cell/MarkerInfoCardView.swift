@@ -156,7 +156,6 @@ private extension MarkerInfoCardView {
 extension MarkerInfoCardView {
     func bindData(model: GetHankkiThumbnailResponseData) {
         hankkiId = model.id
-        
         thumbnailImageView.setKFImage(url: model.imageUrl)
         menutag.text = model.category
         hankkiTitle.text = model.name
