@@ -46,7 +46,7 @@ final class OnboardingViewController: BaseViewController {
         
         nextButton.do {
             $0.setupPadding(top: 15, leading: 38, bottom: 15, trailing: 38)
-            $0.makeRounded(radius: 16)
+            $0.makeRoundBorder(cornerRadius: 16, borderWidth: 0, borderColor: .clear)
         }
         
         titleLabel.do {
@@ -83,9 +83,7 @@ final class OnboardingViewController: BaseViewController {
         
         animationView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-//            $0.top.equalToSuperview().inset(15)
             let topPadding = 812 / UIScreen.getDeviceHeight() * 110
-            print(topPadding)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(topPadding)
             $0.bottom.equalToSuperview()
         }

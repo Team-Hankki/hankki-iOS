@@ -64,9 +64,7 @@ final class CreateZipViewController: BaseViewController {
     
         titleInputTextField.do {
             $0.tag = 0
-            $0.makeRounded(radius: 10)
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray300.cgColor
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.addPadding(left: 12, right: 14)
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
             $0.changePlaceholderColor(forPlaceHolder: "성대생 추천 맛집 알려주세요", forColor: .gray400)
@@ -90,9 +88,7 @@ final class CreateZipViewController: BaseViewController {
         
         tagInputTextField.do {
             $0.tag = 1
-            $0.makeRounded(radius: 10)
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray300.cgColor
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.addPadding(left: 12)
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
             $0.placeholder = "#든든한 #한끼해장"

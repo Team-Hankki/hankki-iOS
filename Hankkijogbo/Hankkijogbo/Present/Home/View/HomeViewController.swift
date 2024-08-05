@@ -17,7 +17,7 @@ final class HomeViewController: BaseViewController {
     var isButtonModified = false
     var isDropDownVisible = false
     var selectedMarkerIndex: Int?
-    private var markers: [NMFMarker] = []
+    var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
  
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
@@ -79,145 +79,26 @@ final class HomeViewController: BaseViewController {
         }
         
         viewModel.showAlert = { [weak self] message in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
+                            subText: StringLiterals.Alert.tryAgain,
+                            primaryButtonText: StringLiterals.Alert.check)
         }
     }
-    
-    private func loadInitialData() {
-        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-    }
-    
-    func updateUniversityData(universityId: Int) {
-        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        rootView.bottomSheetView.totalListCollectionView.reloadData()
-    }
 }
-
-// MARK: - MapView
 
 extension HomeViewController {
-    func setupMap() {
-        rootView.mapView.touchDelegate = self
-    }
-    
-    func setupPosition() {
-        var markers: [GetHankkiPinData] = viewModel.hankkiPins
-        guard let university = UserDefaults.standard.getUniversity() else { return }
-        
-        let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
-        viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
-            
-            markers = self?.viewModel.hankkiPins ?? []
-            self?.rootView.mapView.positionMode = .direction
-            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
-            
-            self?.clearMarkers()
-            
-            for (index, location) in markers.enumerated() {
-                let marker = NMFMarker()
-                marker.iconImage = NMFOverlayImage(image: .icPin)
-                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
-                marker.mapView = self?.rootView.mapView
-                marker.touchHandler = { [weak self] _ in
-                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
-                    self?.showMarkerInfoCard(at: index, pinId: location.id)
-                    return true
-                }
-                self?.markers.append(marker)
-            }
-        })
-    }
-    
-    private func setupPosition(with pins: [GetHankkiPinData]) {
-        clearMarkers()
-        
-        for (index, location) in pins.enumerated() {
-            let marker = NMFMarker()
-            marker.iconImage = NMFOverlayImage(image: .icPin)
-            marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
-            marker.mapView = rootView.mapView
-            marker.touchHandler = { [weak self] _ in
-                self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
-                self?.showMarkerInfoCard(at: index, pinId: location.id)
-                return true
-            }
-            markers.append(marker)
-        }
-    }
-    
-    private func clearMarkers() {
-        markers.forEach { $0.mapView = nil }
-        markers.removeAll()
-    }
-    
-    private func showMarkerInfoCard(at index: Int, pinId: Int64) {
-        guard selectedMarkerIndex != index else { return }
-        selectedMarkerIndex = index
-        
-        if markerInfoCardView == nil {
-            markerInfoCardView = MarkerInfoCardView()
-            view.addSubview(markerInfoCardView!)
-            markerInfoCardView?.snp.makeConstraints { make in
-                make.width.equalTo(331)
-                make.height.equalTo(109)
-                make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(22)
-            }
-            view.layoutIfNeeded()
-        }
-        
-        viewModel.getThumbnailAPI(id: pinId) { [weak self] success in
-            guard let self = self, success, let thumbnailData = self.viewModel.hankkiThumbnail else { return }
-            DispatchQueue.main.async {
-                self.markerInfoCardView?.bindData(model: thumbnailData)
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.markerInfoCardView?.snp.updateConstraints {
-                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
-                    }
-                    self.view.layoutIfNeeded()
-                    self.markerInfoCardView!.addButton.addTarget(self, action: #selector(self.presentMyZipBottomSheet), for: .touchUpInside)
-                })
-                self.showTargetButtonAtCardView()
-            }
-        }
-    }
-    
-    private func hideMarkerInfoCard() {
-        guard markerInfoCardView != nil else { return }
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.markerInfoCardView?.snp.updateConstraints {
-                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
-            }
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.markerInfoCardView?.removeFromSuperview()
-            self.markerInfoCardView = nil
-            self.selectedMarkerIndex = nil
-        })
-        self.showTargetButtonAtBottomSheet()
-    }
-}
-
-private extension HomeViewController {
-    func setupDelegate() {
+    private func setupDelegate() {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
     }
     
-    func setupRegister() {
+    private func setupRegister() {
         typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
                                                    forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
+        // Univ StringLiterals 추가 이후에 반영 예정
         let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
@@ -231,10 +112,20 @@ private extension HomeViewController {
         }
     }
     
+    private func setupaddTarget() {
+        rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
+        rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
+        rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
+        rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
+    }
+    
+    func presentUniversity() {
+        let univSelectViewController = UnivSelectViewController()
+        navigationController?.pushViewController(univSelectViewController, animated: true)
+    }
+    
     @objc func getNotificationForMyZipList(_ notification: Notification) {
         if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
-            print("클릭된 셀의 indexPath \(indexPath)")
-            print(viewModel.hankkiLists[indexPath.item])
             self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
         }
     }
@@ -245,14 +136,18 @@ private extension HomeViewController {
     }
 }
 
-// MARK: - Filtering 관련 Extension
-
 private extension HomeViewController {
-    func setupaddTarget() {
-        rootView.typeButton.addTarget(self, action: #selector(typeButtonDidTap), for: .touchUpInside)
-        rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
-        rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
-        rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
+    func loadInitialData() {
+        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
+        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+    }
+    
+    func updateUniversityData(universityId: Int) {
+        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
+        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        rootView.bottomSheetView.totalListCollectionView.reloadData()
     }
 }
 
@@ -262,17 +157,15 @@ extension HomeViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
         self.hideMarkerInfoCard()
-        
-        print("Map clicked")
     }
 }
 
+// CollectionViewDelegate, DataSource
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         typeCollectionView.isHidden = true
         viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
         changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name ?? "")
-        print("\(String(describing: viewModel.storeCategory)) 이 클릭되었습니다.")
     }
 }
 
@@ -282,9 +175,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else {
-            return UICollectionViewCell()
-        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
         cell.bindData(model: viewModel.categoryFilters[indexPath.item])
         return cell
     }
@@ -296,15 +187,16 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// DropDownViewDelegate
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
         viewModel.getSortOptionFilterAPI { [self] isSuccess in
             switch buttonType {
             case .price:
                 if item == "K6" {
-                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000원 이하")
+                    changeButtonTitle(for: rootView.priceButton, newTitle: StringLiterals.Home.less6000)
                 } else {
-                    changeButtonTitle(for: rootView.priceButton, newTitle: "6000~8000원")
+                    changeButtonTitle(for: rootView.priceButton, newTitle: StringLiterals.Home.more6000)
                 }
                 viewModel.priceCategory = item // 필터링 값 업데이트
             case .sort:
@@ -315,10 +207,5 @@ extension HomeViewController: DropDownViewDelegate {
             }
             hideDropDown()
         }
-    }
-    
-    func presentUniversity() {
-        let univSelectViewController = UnivSelectViewController()
-        navigationController?.pushViewController(univSelectViewController, animated: true)
     }
 }

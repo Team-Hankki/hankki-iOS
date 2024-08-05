@@ -37,14 +37,12 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         self.do {
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.gray200.cgColor
-            $0.makeRounded(radius: 16)
+            $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray200)
             $0.backgroundColor = .white
         }
         
         thumbnailImageView.do {
-            $0.makeRounded(radius: 8)
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 0, borderColor: .clear)
         }
         
         typeLabel.do {

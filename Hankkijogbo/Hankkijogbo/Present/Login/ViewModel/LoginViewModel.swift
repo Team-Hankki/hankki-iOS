@@ -12,8 +12,8 @@ final class LoginViewModel {
 }
 
 extension LoginViewModel {
-    func postLogin (_ postLoginRequest: PostLoginRequestDTO) {
-        NetworkService.shared.authService.postLogin(requestBody: postLoginRequest) { result in
+    func postLogin (accessToken: String, postLoginRequest: PostLoginRequestDTO) {
+        NetworkService.shared.authService.postLogin(accessToken: accessToken, requestBody: postLoginRequest) { result in
             switch result {
             case .success(let response):
                 if let responseData = response {

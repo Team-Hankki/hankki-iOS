@@ -9,14 +9,6 @@ import UIKit
 
 extension UIButton {
     
-    /// Button 모서리 커스텀 - 색상, 모서리 두께, 둥근 정도
-    func makeRoundBorder(cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor ) {
-        layer.masksToBounds = true
-        layer.cornerRadius = cornerRadius
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor.cgColor
-    }
-    
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         let minimumSize: CGSize = CGSize(width: 1.0, height: 1.0)
         

@@ -23,10 +23,8 @@
 		8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302855C2C4567A30004D9F7 /* BaseTargetType.swift */; };
 		8302F8DD2C3D6C0B004ADAA4 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */; };
-		8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */; };
 		8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */; };
 		8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */; };
-		8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */; };
 		832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownView.swift */; };
 		837F10DB2C4A851A00E3CCE6 /* HankkiInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837F10D92C4A851A00E3CCE6 /* HankkiInfoCardView.swift */; };
 		837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837F10DA2C4A851A00E3CCE6 /* ReportCompleteViewController.swift */; };
@@ -52,13 +50,9 @@
 		83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED912C2564990042BA48 /* HomeViewModel.swift */; };
 		83DBED942C2564A20042BA48 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED932C2564A20042BA48 /* HomeView.swift */; };
 		83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED952C2564AC0042BA48 /* HomeViewController.swift */; };
-		83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED972C2564B40042BA48 /* HomeModel.swift */; };
 		83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDAF2C2566120042BA48 /* UIStackView+.swift */; };
-		83DBEDB22C2566230042BA48 /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB12C2566230042BA48 /* ImageLiterals.swift */; };
 		83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB32C2566300042BA48 /* StringLiterals.swift */; };
-		83DBEDB62C2566380042BA48 /* FontLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB52C2566380042BA48 /* FontLiterals.swift */; };
 		83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB82C25666E0042BA48 /* MainButton.swift */; };
-		83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDBA2C2566830042BA48 /* AuthenticationAdapterProtocol.swift */; };
 		83DBEDBE2C25698B0042BA48 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 83DBEDBD2C25698B0042BA48 /* Then */; };
 		83DBEDC12C2569A80042BA48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 83DBEDC02C2569A80042BA48 /* SnapKit */; };
 		83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 83DBEDC32C256A3B0042BA48 /* Moya */; };
@@ -225,10 +219,8 @@
 		8302855C2C4567A30004D9F7 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		8302F8D92C3D2C84004ADAA4 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListBottomSheetView.swift; sourceTree = "<group>"; };
-		8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalListModel.swift; sourceTree = "<group>"; };
 		8302F8E62C3E991F004ADAA4 /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		8302F8EA2C3EBF77004ADAA4 /* TypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCollectionView.swift; sourceTree = "<group>"; };
-		8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringModel.swift; sourceTree = "<group>"; };
 		832546EB2C3F28F900B8C3DC /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		837F10D92C4A851A00E3CCE6 /* HankkiInfoCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HankkiInfoCardView.swift; sourceTree = "<group>"; };
 		837F10DA2C4A851A00E3CCE6 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
@@ -254,13 +246,9 @@
 		83DBED912C2564990042BA48 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		83DBED932C2564A20042BA48 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		83DBED952C2564AC0042BA48 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		83DBED972C2564B40042BA48 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		83DBEDAF2C2566120042BA48 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
-		83DBEDB12C2566230042BA48 /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		83DBEDB32C2566300042BA48 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
-		83DBEDB52C2566380042BA48 /* FontLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontLiterals.swift; sourceTree = "<group>"; };
 		83DBEDB82C25666E0042BA48 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
-		83DBEDBA2C2566830042BA48 /* AuthenticationAdapterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAdapterProtocol.swift; sourceTree = "<group>"; };
 		83DBEDC52C256A7A0042BA48 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		83DBEDC72C256AD00042BA48 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 		83DBEDC92C256AE70042BA48 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -634,7 +622,6 @@
 		83DBED8C2C25646F0042BA48 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				83DBEDAA2C2565980042BA48 /* Protocols */,
 				83DBEDA92C2565920042BA48 /* Components */,
 				83DBEDA82C25658C0042BA48 /* Consts */,
 				83DBEDA72C2565840042BA48 /* Extensions */,
@@ -647,7 +634,6 @@
 		83DBED8D2C2564790042BA48 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				83DBED902C2564900042BA48 /* Model */,
 				83DBED8F2C25648B0042BA48 /* View */,
 				83DBED8E2C2564820042BA48 /* ViewModel */,
 			);
@@ -672,16 +658,6 @@
 				8302F8E02C3DB43D004ADAA4 /* TotalListBottomSheetView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		83DBED902C2564900042BA48 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				83DBED972C2564B40042BA48 /* HomeModel.swift */,
-				8302F8E22C3DBB48004ADAA4 /* TotalListModel.swift */,
-				8302F8EC2C3F039F004ADAA4 /* FilteringModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		83DBEDA52C25656D0042BA48 /* Supporting Files */ = {
@@ -731,9 +707,7 @@
 		83DBEDA82C25658C0042BA48 /* Consts */ = {
 			isa = PBXGroup;
 			children = (
-				83DBEDB12C2566230042BA48 /* ImageLiterals.swift */,
 				83DBEDB32C2566300042BA48 /* StringLiterals.swift */,
-				83DBEDB52C2566380042BA48 /* FontLiterals.swift */,
 			);
 			path = Consts;
 			sourceTree = "<group>";
@@ -754,14 +728,6 @@
 				83DBEDB72C25664A0042BA48 /* HankkiButtons */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		83DBEDAA2C2565980042BA48 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				83DBEDBA2C2566830042BA48 /* AuthenticationAdapterProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		83DBEDAB2C2565B20042BA48 /* Fonts */ = {
@@ -1655,7 +1621,6 @@
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
 				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
-				83DBEDBB2C2566830042BA48 /* AuthenticationAdapterProtocol.swift in Sources */,
 				86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */,
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
@@ -1671,7 +1636,6 @@
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
 				A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */,
 				A2C9FCB32C49AFF800868DF7 /* PostHankkiRequestDTO.swift in Sources */,
-				8302F8ED2C3F039F004ADAA4 /* FilteringModel.swift in Sources */,
 				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
 				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
 				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
@@ -1696,7 +1660,6 @@
 				86880BF22C46E74700CAEF58 /* GetMeResponseDTO.swift in Sources */,
 				A2DEBF5A2C3D25A800DE14A9 /* ReportViewController.swift in Sources */,
 				865826062C4170BE00265401 /* LoginViewController.swift in Sources */,
-				83DBEDB62C2566380042BA48 /* FontLiterals.swift in Sources */,
 				A240EA262C4176FF000FF458 /* String+.swift in Sources */,
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
@@ -1717,7 +1680,6 @@
 				86880BD52C46C55200CAEF58 /* UserTargetType.swift in Sources */,
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
-				83DBEDB22C2566230042BA48 /* ImageLiterals.swift in Sources */,
 				839FC7202C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift in Sources */,
 				864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */,
 				83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */,
@@ -1731,7 +1693,6 @@
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */,
-				8302F8E32C3DBB48004ADAA4 /* TotalListModel.swift in Sources */,
 				A2C9FCB12C49985800868DF7 /* GetZipListResponseDTO.swift in Sources */,
 				A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */,
 				839138DF2C4962E500611D5C /* GetHankkiThumbnailResponseDTO.swift in Sources */,
@@ -1746,7 +1707,6 @@
 				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
 				8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */,
-				83DBED982C2564B40042BA48 /* HomeModel.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2C9FC972C49237400868DF7 /* HeartResponseDTO.swift in Sources */,
@@ -1972,6 +1932,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2007,6 +1968,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

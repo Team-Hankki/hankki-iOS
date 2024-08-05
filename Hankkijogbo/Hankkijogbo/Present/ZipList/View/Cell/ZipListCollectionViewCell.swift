@@ -24,7 +24,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         cellView.do {
-            $0.makeRounded(radius: 12)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
         }
         
         titleLabel.do {
@@ -40,10 +40,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
         
         redOpacityLayerView.do {
             $0.backgroundColor = .hankkiRed.withAlphaComponent(0.4)
-            $0.makeRounded(radius: 12)
-            $0.layer.borderColor = UIColor.hankkiRed.cgColor
-            $0.layer.borderWidth = 2
-            
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 2, borderColor: .hankkiRed)
             $0.isHidden = true
         }
     }

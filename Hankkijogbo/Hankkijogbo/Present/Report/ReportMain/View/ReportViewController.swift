@@ -388,12 +388,12 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 extension ReportViewController: PassItemDataDelegate {
     func passSearchItemData(model: GetSearchedLocation) {
         self.hankkiNameString = model.name
-        checkIsEnabled()
     }
     
     func updateViewModelCategoryData(data: GetCategoryFilterData?) {
         guard let data = data else { return }
         self.viewModel.selectedCategory = data
-        checkIsEnabled()
+        print("클릭된 카테고리 \(data)")
+        self.bottomButtonView.setupEnabledDoneButton()
     }
 }

@@ -10,7 +10,9 @@ final class HomeView: BaseView {
     
     // MARK: - Properties
     
-    private let buttonType = ["종류", "가격대", "정렬"]
+    private let buttonType = [StringLiterals.Home.storeCategoryFilteringButton,
+                              StringLiterals.Home.priceFilteringButton,
+                              StringLiterals.Home.sortFilteringButton]
     
     // MARK: - UI Components
     
