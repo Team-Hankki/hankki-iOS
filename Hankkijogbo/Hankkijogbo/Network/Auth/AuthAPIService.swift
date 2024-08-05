@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 protocol AuthAPIServiceProtocol {
-    func postLogin(requestBody: PostLoginRequestDTO, completion: @escaping(NetworkResult<BaseDTO<PostLoginResponseData>>) -> Void)
+    func postLogin(accessToken: String, requestBody: PostLoginRequestDTO, completion: @escaping(NetworkResult<BaseDTO<PostLoginResponseData>>) -> Void)
     func patchLogout(completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func deleteWithdraw(authorizationCode: String, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func postReissue(completion: @escaping(NetworkResult<PostReissueResponseData>) -> Void)
@@ -20,8 +20,8 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
     
     private let provider = MoyaProvider<AuthTargetType>(plugins: [MoyaPlugin()])
     
-    func postLogin(requestBody: PostLoginRequestDTO, completion: @escaping (NetworkResult<BaseDTO<PostLoginResponseData>>) -> Void) {
-        provider.request(.postLogin(requestBody: requestBody)) { result in
+    func postLogin(accessToken: String, requestBody: PostLoginRequestDTO, completion: @escaping (NetworkResult<BaseDTO<PostLoginResponseData>>) -> Void) {
+        provider.request(.postLogin(accessToken: accessToken, requestBody: requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<BaseDTO<PostLoginResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)

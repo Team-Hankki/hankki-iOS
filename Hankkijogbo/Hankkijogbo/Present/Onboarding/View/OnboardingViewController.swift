@@ -83,9 +83,7 @@ final class OnboardingViewController: BaseViewController {
         
         animationView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-//            $0.top.equalToSuperview().inset(15)
             let topPadding = 812 / UIScreen.getDeviceHeight() * 110
-            print(topPadding)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(topPadding)
             $0.bottom.equalToSuperview()
         }

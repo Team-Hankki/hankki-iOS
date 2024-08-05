@@ -66,7 +66,7 @@ extension ZipTargetType: BaseTargetType {
         case .postHankkiToZip(let requestBody):
             return utilPath.rawValue + "/\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
         case .deleteZipToHankki(let requestBody):
-            return utilPath.rawValue + "\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
+            return utilPath.rawValue + "/\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
         case .getMyZipList:
             return utilPath.rawValue
         }

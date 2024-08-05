@@ -11,7 +11,7 @@ import Moya
 
 enum AuthTargetType {
     case postReissue
-    case postLogin(requestBody: PostLoginRequestDTO)
+    case postLogin(accessToken: String, requestBody: PostLoginRequestDTO)
     case deleteWithdraw(authorizationCode: String)
     case patchLogout
 }
@@ -21,8 +21,8 @@ extension AuthTargetType: BaseTargetType {
         switch self {
         case .postReissue:
             return .refreshTokenHeader
-        case .postLogin(let requestBody):
-            return .loginHeader(accessToken: requestBody.identifyToken)
+        case .postLogin(let accessToken, _):
+            return .loginHeader(accessToken: accessToken)
         case .deleteWithdraw(let authorizationCode):
             return .withdrawHeader(authorizationCode: authorizationCode)
         case .patchLogout:
@@ -43,7 +43,7 @@ extension AuthTargetType: BaseTargetType {
     var requestBodyParameter: (any Codable)? {
         switch self {
         case .postReissue: return .none
-        case .postLogin(let requestBody): return requestBody
+        case .postLogin(_, let requestBody): return requestBody
         case .deleteWithdraw: return .none
         case .patchLogout: return .none
         }
