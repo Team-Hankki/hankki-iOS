@@ -16,7 +16,7 @@ final class MypageZipCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         self.do {
-            $0.makeRounded(radius: 12)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
             $0.backgroundColor = .hankkiRed
         }
         

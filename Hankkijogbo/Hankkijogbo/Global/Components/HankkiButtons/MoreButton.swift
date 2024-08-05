@@ -39,7 +39,7 @@ final class MoreButton: UIButton {
 private extension MoreButton {
     func setupStyle() {
         self.do {
-            $0.makeRounded(radius: 14)
+            $0.makeRoundBorder(cornerRadius: 14, borderWidth: 0, borderColor: .clear)
             $0.setupPadding(top: 12, leading: 12, bottom: 12, trailing: 12)
             $0.setupBackgroundColor(.gray100)
             $0.setupIcon(.icAddGray, gap: 5)

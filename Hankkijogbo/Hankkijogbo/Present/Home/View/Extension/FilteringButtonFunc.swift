@@ -123,13 +123,13 @@ extension HomeViewController {
     @objc func revertButtonAction(_ sender: UIButton) {
         let filter: String
         if sender == rootView.priceButton {
-            filter = "가격대"
+            filter = StringLiterals.Home.priceFilteringButton
             viewModel.priceCategory = ""
         } else if sender == rootView.sortButton {
-            filter = "정렬"
+            filter = StringLiterals.Home.sortFilteringButton
             viewModel.sortOption = ""
         } else {
-            filter = "종류"
+            filter = StringLiterals.Home.storeCategoryFilteringButton
             viewModel.storeCategory = ""
         }
         revertButton(for: sender, filter: filter)
@@ -153,7 +153,7 @@ extension HomeViewController {
             }
         }
         if isButtonModified {
-            revertButton(for: rootView.typeButton, filter: "종류")
+            revertButton(for: rootView.typeButton, filter: StringLiterals.Home.storeCategoryFilteringButton)
         } else {
             setupTypeCollectionView()
         }

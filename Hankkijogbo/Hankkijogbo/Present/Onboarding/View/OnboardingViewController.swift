@@ -46,7 +46,7 @@ final class OnboardingViewController: BaseViewController {
         
         nextButton.do {
             $0.setupPadding(top: 15, leading: 38, bottom: 15, trailing: 38)
-            $0.makeRounded(radius: 16)
+            $0.makeRoundBorder(cornerRadius: 16, borderWidth: 0, borderColor: .clear)
         }
         
         titleLabel.do {

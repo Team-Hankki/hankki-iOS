@@ -49,7 +49,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
         categoryLabel.do {
             $0.textColor = .hankkiRed
             $0.backgroundColor = .hankkiRedLight
-            $0.makeRounded(radius: 14)
+            $0.makeRoundBorder(cornerRadius: 14, borderWidth: 0, borderColor: .clear)
         }
     }
 }

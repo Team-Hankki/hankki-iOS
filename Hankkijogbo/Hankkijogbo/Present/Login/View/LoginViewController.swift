@@ -49,7 +49,7 @@ final class LoginViewController: BaseViewController {
         
         loginButton.do {
             $0.backgroundColor = .hankkiWhite
-            $0.makeRounded(radius: 14)
+            $0.makeRoundBorder(cornerRadius: 14, borderWidth: 0, borderColor: .clear)
             if let attributedTitle = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
                 withText: "Apple로 계속하기",
