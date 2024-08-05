@@ -14,7 +14,6 @@ final class ReportViewController: BaseViewController {
     
     private let reportViewModel: ReportViewModel = ReportViewModel()
     private let searchViewModel: SearchViewModel = SearchViewModel()
-    private var isImageSet: Bool = false
     private var image: UIImage?
     private let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.menuHeader]
     private var menuCellData: [MenuData] = []
@@ -144,6 +143,11 @@ private extension ReportViewController {
         collectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .bottom, animated: true) // 제보하기의 Footer로 스크롤 이동
     }
     
+    func removeImageData() {
+        image = nil
+        reportViewModel.selectedImageData = nil
+    }
+    
     /// 사용자가 셀에 입력한 메뉴 데이터 모으기
     /// 빈값 필터링
     func collectMenuCellData() {
@@ -205,18 +209,18 @@ private extension ReportViewController {
         configuration.filter = .any(of: [.images])
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-        self.present(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     
     @objc func imageXButtonDidTap() {
-        isImageSet = false
-        self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
+        removeImageData()
+        collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
     }
     
     @objc func searchBarButtonDidTap() {
         let searchViewController = SearchViewController(viewModel: searchViewModel)
         searchViewController.delegate = self
-        self.navigationController?.pushViewController(searchViewController, animated: true)
+        navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     /// 메뉴 입력 값 모아서 제보하기 호출
@@ -310,7 +314,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.delegate = self
             return cell
         case .image:
-            if isImageSet {
+            if let image = image {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.className, for: indexPath) as? ImageCollectionViewCell else { return UICollectionViewCell() }
                 cell.changeImageButton.addTarget(self, action: #selector(selectImageButtonDidTap), for: .touchUpInside)
                 cell.selectedImageView.image = image
@@ -348,7 +352,6 @@ extension ReportViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in
                 DispatchQueue.main.async {
                     if let image = image as? UIImage {
-                        self.isImageSet = true
                         self.image = image
                         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
                             fatalError("Failed to convert UIImage to Data")
@@ -356,7 +359,7 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                         self.reportViewModel.selectedImageData = imageData
                         self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
                     } else {
-                        self.isImageSet = false
+                        self.removeImageData()
                     }
                 }
             }
@@ -366,7 +369,7 @@ extension ReportViewController: PHPickerViewControllerDelegate {
     func checkIsEnabled() {
         collectMenuCellData()
         let menuCellDataNotEmpty = menuCellData.filter { $0.name != "" && $0.price != 0 }
-        if let _ = reportViewModel.selectedCategory {
+        if reportViewModel.selectedCategory != nil {
             if !menuCellDataNotEmpty.isEmpty {
                 self.bottomButtonView.setupEnabledDoneButton()
             }
