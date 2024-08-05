@@ -8,7 +8,6 @@
 import UIKit
 
 protocol PassItemDataDelegate: AnyObject {
-    func passSearchItemData(model: GetSearchedLocation)
     func updateViewModelCategoryData(data: GetCategoryFilterData?)
 }
 
@@ -251,7 +250,6 @@ private extension SearchViewController {
         case 200:
             // 등록 ㄱ
             guard let location = viewModel.selectedLocationData else { return }
-            delegate?.passSearchItemData(model: location)
             self.navigationController?.popViewController(animated: true)
         case 409:
             // 이미 등록된 가게 Alert 띄우기

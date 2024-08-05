@@ -12,22 +12,12 @@ final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var viewModel: ReportViewModel = ReportViewModel()
-    var searchViewModel: SearchViewModel = SearchViewModel()
-    
-    var isImageSet: Bool = false
-    var image: UIImage?
-    
-    var hankkiNameString: String? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    var categoryString: String?
-
-    /// 다 임의로 넣어둠
-    let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.menuHeader]
-    var menuCellData: [MenuData] = []
+    private let reportViewModel: ReportViewModel = ReportViewModel()
+    private let searchViewModel: SearchViewModel = SearchViewModel()
+    private var isImageSet: Bool = false
+    private var image: UIImage?
+    private let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.menuHeader]
+    private var menuCellData: [MenuData] = []
     
     // MARK: - UI Components
     
@@ -47,22 +37,23 @@ final class ReportViewController: BaseViewController {
         setupDelegate()
         bindViewModel()
         
-        viewModel.getReportedNumberAPI()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        setupNavigationBar()
-        self.tabBarController?.tabBar.isHidden = true
-        viewModel.getCategoryFilterAPI { isSuccess in
+        reportViewModel.getReportedNumberAPI()
+        reportViewModel.getCategoryFilterAPI { isSuccess in
             print(isSuccess)
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        
+        setupNavigationBar()
+        collectionView.reloadSections(IndexSet(integer: ReportSectionType.search.rawValue))
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Setup UI
@@ -95,11 +86,11 @@ final class ReportViewController: BaseViewController {
 extension ReportViewController {
     
     func bindViewModel() {
-        viewModel.updateCollectionView = {
+        reportViewModel.updateCollectionView = {
             self.collectionView.reloadData()
         }
         
-        viewModel.showAlert = { [weak self] _ in
+        reportViewModel.showAlert = { [weak self] _ in
             self?.showAlert(titleText: StringLiterals.Alert.unknownError,
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
@@ -183,20 +174,24 @@ private extension ReportViewController {
     }
     
     /// Req 만들어서 제보하기 API 호출
-    /// 성공하면 제보 완료 화면으로 넘어가게
+    /// - 성공하면 제보 완료 화면으로 넘어가게
     func postHankki() {
+        // TODO: - 이 부분 코드 좀 더 고민해보기
         guard let locationData = searchViewModel.selectedLocationData else { return }
+        guard let categoryData = reportViewModel.selectedCategory else { return }
+        let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+
         let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
-            name: hankkiNameString ?? "",
-            category: viewModel.selectedCategory?.tag ?? "",
+            name: locationData.name,
+            category: categoryData.tag,
             address: locationData.address ?? "",
             latitude: locationData.latitude,
             longitude: locationData.longitude,
-            universityId: 1,
+            universityId: universityId,
             menus: menuCellData
         )
         
-        viewModel.postHankkiAPI(request: request) {_ in}
+        reportViewModel.postHankkiAPI(request: request)
     }
 }
 
@@ -232,20 +227,20 @@ private extension ReportViewController {
     
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
-        viewModel.menus.append(MenuData())
-        collectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: ReportSectionType.menu.rawValue)])
+        reportViewModel.menus.append(MenuData())
+        collectionView.insertItems(at: [IndexPath(item: reportViewModel.menus.count - 1, section: ReportSectionType.menu.rawValue)])
         scrollToFooterView()
     }
     
     /// 메뉴 셀 삭제
     @objc func deleteMenuButtonDidTap(_ sender: UIButton) {
-        if !viewModel.menus.isEmpty {
+        if !reportViewModel.menus.isEmpty {
             // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
             let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
             let itemIndexPath = self.collectionView.indexPathForItem(at: buttonPosition)
             
             guard let item = itemIndexPath?.item else { return }
-            viewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
+            reportViewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
             collectionView.deleteItems(at: [IndexPath(item: item, section: ReportSectionType.menu.rawValue)]) // item 삭제
             scrollToFooterView()
         }
@@ -292,9 +287,9 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .search, .image, .addMenu:
             return 1
         case .category:
-            return viewModel.categoryFilters.count
+            return reportViewModel.categoryFilters.count
         case .menu:
-            return viewModel.menus.count
+            return reportViewModel.menus.count
         default:
             return 0
         }
@@ -305,13 +300,13 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         switch sectionType {
         case .search:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchBarCollectionViewCell.className, for: indexPath) as? SearchBarCollectionViewCell else { return UICollectionViewCell() }
-            cell.hankkiNameString = self.hankkiNameString ?? ""
+            cell.hankkiNameString = searchViewModel.selectedLocationData?.name ?? ""
             cell.searchBarButton.addTarget(self, action: #selector(searchBarButtonDidTap), for: .touchUpInside)
-            cell.bindGuideText(text: viewModel.reportedNumberGuideText)
+            cell.bindGuideText(text: reportViewModel.reportedNumberGuideText)
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.bindData(viewModel.categoryFilters[indexPath.row])
+            cell.bindData(reportViewModel.categoryFilters[indexPath.row])
             cell.delegate = self
             return cell
         case .image:
@@ -358,7 +353,7 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
                             fatalError("Failed to convert UIImage to Data")
                         }
-                        self.viewModel.selectedImageData = imageData
+                        self.reportViewModel.selectedImageData = imageData
                         self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
                     } else {
                         self.isImageSet = false
@@ -371,8 +366,7 @@ extension ReportViewController: PHPickerViewControllerDelegate {
     func checkIsEnabled() {
         collectMenuCellData()
         let menuCellDataNotEmpty = menuCellData.filter { $0.name != "" && $0.price != 0 }
-        if let name = self.hankkiNameString,
-           let category = viewModel.selectedCategory {
+        if let _ = reportViewModel.selectedCategory {
             if !menuCellDataNotEmpty.isEmpty {
                 self.bottomButtonView.setupEnabledDoneButton()
             }
@@ -385,13 +379,10 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 // MARK: - PassSelectedHankkiData Delegate
 
 extension ReportViewController: PassItemDataDelegate {
-    func passSearchItemData(model: GetSearchedLocation) {
-        self.hankkiNameString = model.name
-    }
     
     func updateViewModelCategoryData(data: GetCategoryFilterData?) {
         guard let data = data else { return }
-        self.viewModel.selectedCategory = data
+        self.reportViewModel.selectedCategory = data
         print("클릭된 카테고리 \(data)")
         self.bottomButtonView.setupEnabledDoneButton()
     }
