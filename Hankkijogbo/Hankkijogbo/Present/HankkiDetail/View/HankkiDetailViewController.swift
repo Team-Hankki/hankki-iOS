@@ -12,10 +12,7 @@ final class HankkiDetailViewController: BaseViewController {
     // MARK: - Properties
     
     let hankkiId: Int64
-    
     var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
-    var isImageSet: Bool = true
-    
     var reportOptionArray: [String] = [
         "식당이 사라졌어요",
         "더이상 8,000원 이하인 메뉴가 없어요",
@@ -70,7 +67,7 @@ final class HankkiDetailViewController: BaseViewController {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        view.addSubviews(scrollView)
+        view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
             lightGrayBackgroundView,
@@ -124,19 +121,6 @@ final class HankkiDetailViewController: BaseViewController {
         scrollView.do {
             $0.backgroundColor = .clear
         }
-        contentView.do {
-            if !isImageSet {
-                $0.backgroundColor = .gray300
-            }
-        }
-        if isImageSet {
-            setupImageStyle()
-        } else {
-            setupNoImageStyle()
-        }
-        topBlackGradientImageView.do {
-            $0.image = .blackGradient
-        }
         lightGrayBackgroundView.do {
             $0.backgroundColor = .gray50
         }
@@ -151,12 +135,17 @@ private extension HankkiDetailViewController {
     // MARK: - Private Func
     
     func bindViewModel() {
-        viewModel.setHankkiDetailData = {
-            if let data = self.viewModel.hankkiDetailData {
-                self.thumbnailImageView.setKFImage(url: data.imageUrls.first)
-                self.infoCollectionView.updateLayout(menuSize: data.menus.count)
-                self.infoCollectionView.collectionView.layoutIfNeeded()
-                self.infoCollectionView.collectionView.reloadData()
+        viewModel.setHankkiDetailData = { [weak self] in
+            if let data = self?.viewModel.hankkiDetailData {
+                // TODO: - 디폴트 사진일 경우를 구별
+                if let first = data.imageUrls.first {
+                    self?.setupImageStyle(imageUrl: first)
+                } else {
+                    self?.setupNoImageStyle()
+                }
+                self?.infoCollectionView.updateLayout(menuSize: data.menus.count)
+                self?.infoCollectionView.collectionView.layoutIfNeeded()
+                self?.infoCollectionView.collectionView.reloadData()
             }
         }
         
@@ -211,15 +200,25 @@ private extension HankkiDetailViewController {
     }
     
     func setupNoImageStyle() {
+        contentView.do {
+            $0.backgroundColor = .gray300
+        }
         thumbnailImageView.do {
             $0.backgroundColor = .gray300
         }
+        topBlackGradientImageView.do {
+            $0.image = nil
+        }
     }
     
-    func setupImageStyle() {
+    func setupImageStyle(imageUrl: String) {
         thumbnailImageView.do {
+            $0.setKFImage(url: imageUrl)
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
+        }
+        topBlackGradientImageView.do {
+            $0.image = .imgBlackGradient
         }
     }
 }
