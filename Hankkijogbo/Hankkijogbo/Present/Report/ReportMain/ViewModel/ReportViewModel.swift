@@ -12,31 +12,26 @@ import UIKit
 
 final class ReportViewModel {
     var showAlert: ((String) -> Void)?
+    var updateCollectionView: (() -> Void)?
     
     var nickname: String?
-    
-    var count: Int = 0 {
+    var reportedNumber: Int = 0 {
         didSet {
             updateCollectionView?()
         }
     }
-    
     var reportedNumberGuideText: String = "" {
         didSet {
             updateCollectionView?()
         }
     }
-    var updateCollectionView: (() -> Void)?
-    
     var categoryFilters: [GetCategoryFilterData] = [] {
         didSet {
             updateCollectionView?()
         }
     }
     var selectedCategory: GetCategoryFilterData?
-    
     var selectedImageData: Data?
-    
     var menus: [MenuData] = [MenuData()]
 }
 
@@ -46,9 +41,9 @@ extension ReportViewModel {
         NetworkService.shared.reportService.getReportedNumber { [weak self] result in
             switch result {
             case .success(let response):
-                guard let count = response?.data.count else { return }
-                self?.count = Int(count)
-                self?.reportedNumberGuideText = "\(count)번째 제보예요"
+                guard let reportedNumber = response?.data.count else { return }
+                self?.reportedNumber = Int(reportedNumber)
+                self?.reportedNumberGuideText = "\(reportedNumber)번째 제보예요"
             case .badRequest, .unAuthorized, .serverError:
                 self?.showAlert?("Failed to fetch category filters.")
             default:
@@ -70,7 +65,7 @@ extension ReportViewModel {
     }
     
     /// 식당 제보하기
-    func postHankkiAPI(request: PostHankkiRequestDTO, completion: @escaping (PostHankkiResponseData) -> Void) {
+    func postHankkiAPI(request: PostHankkiRequestDTO) {
         let multipartData = createMultipartFormData(image: selectedImageData, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             switch result {
@@ -81,7 +76,7 @@ extension ReportViewModel {
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
                         let reportCompleteViewController = ReportCompleteViewController(hankkiId: (response?.data.id ?? 0),
-                                                                                        reportedNumber: self.count,
+                                                                                        reportedNumber: self.reportedNumber,
                                                                                         nickname: name,
                                                                                         selectedHankkiName: response?.data.name ?? "")
                         rootViewController.pushViewController(reportCompleteViewController, animated: true)
