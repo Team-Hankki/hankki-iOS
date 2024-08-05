@@ -55,7 +55,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
 }
 
 extension HankkiDetailHeaderView {
-    func dataBind(name: String, category: String) {
+    func bindData(name: String, category: String) {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h1,

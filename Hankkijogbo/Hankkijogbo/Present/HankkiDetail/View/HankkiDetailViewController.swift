@@ -279,7 +279,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                     return UICollectionReusableView()
                 }
                 if let data = viewModel.hankkiDetailData {
-                    header.dataBind(name: data.name, category: data.category)
+                    header.bindData(name: data.name, category: data.category)
                 }
                 return header
             case UICollectionView.elementKindSectionFooter:
@@ -362,7 +362,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
         } else if collectionView == reportOptionCollectionView.collectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiReportOptionCollectionViewCell.className, for: indexPath) as? HankkiReportOptionCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.dataBind(text: reportOptionArray[indexPath.item])
+            cell.bindData(text: reportOptionArray[indexPath.item])
             return cell
         }
         return UICollectionViewCell()

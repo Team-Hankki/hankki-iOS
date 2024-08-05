@@ -267,7 +267,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             ) as? ReportHeaderView else {
                 return UICollectionReusableView()
             }
-            header.dataBind(dummyHeader[indexPath.section - 1])
+            header.bindData(dummyHeader[indexPath.section - 1])
             return header
         case UICollectionView.elementKindSectionFooter:
             guard let footer = collectionView.dequeueReusableSupplementaryView(
