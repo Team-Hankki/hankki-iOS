@@ -26,7 +26,7 @@ final class ReportViewController: BaseViewController {
     var categoryString: String?
 
     /// 다 임의로 넣어둠
-    let dummyHeader = ["식당 종류를 알려주세요", "메뉴를 추가해주세요"]
+    let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.menuHeader]
     var menuCellData: [MenuData] = []
     
     // MARK: - UI Components
@@ -34,7 +34,7 @@ final class ReportViewController: BaseViewController {
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: "제보하기",
+        primaryButtonText: StringLiterals.Report.mainButton,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -100,9 +100,9 @@ extension ReportViewController {
         }
         
         viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
+                            subText: StringLiterals.Alert.tryAgain,
+                            primaryButtonText: StringLiterals.Alert.check)
         }
     }
 }
@@ -137,10 +137,9 @@ private extension ReportViewController {
     }
     
     func setupNavigationBar() {
-        // TODO: - 네비 타이틀 폰트 설정
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: true,
-                                                              mainTitle: .string("제보하기"),
+                                                              mainTitle: .string(StringLiterals.Report.mainButton),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {})
         
@@ -189,7 +188,7 @@ private extension ReportViewController {
         guard let locationData = searchViewModel.selectedLocationData else { return }
         let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
             name: hankkiNameString ?? "",
-            category: viewModel.selectedCategory?.tag ?? "KOREAN",
+            category: viewModel.selectedCategory?.tag ?? "",
             address: locationData.address ?? "",
             latitude: locationData.latitude,
             longitude: locationData.longitude,
@@ -267,7 +266,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             ) as? ReportHeaderView else {
                 return UICollectionReusableView()
             }
-            header.bindData(dummyHeader[indexPath.section - 1])
+            header.bindData(headerLiterals[indexPath.section - 1])
             return header
         case UICollectionView.elementKindSectionFooter:
             guard let footer = collectionView.dequeueReusableSupplementaryView(
