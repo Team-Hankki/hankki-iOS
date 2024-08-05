@@ -33,6 +33,7 @@ final class ReportViewModel {
     var selectedCategory: GetCategoryFilterData?
     var selectedImageData: Data?
     var menus: [MenuData] = [MenuData()]
+    var validMenus: [MenuData] = []
 }
 
 extension ReportViewModel {
@@ -64,8 +65,21 @@ extension ReportViewModel {
         }
     }
     
-    /// 식당 제보하기
-    func postHankkiAPI(request: PostHankkiRequestDTO) {
+    /// 데이터 필터링 후 req 만들어서 식당 제보하기
+    /// - 유저가 실제 작성한 데이터(menus)와 실제 API 요청으로 보내는 데이터(validMenus)를 다른 변수로 관리해서 필터링
+    func postHankkiAPI(locationData: GetSearchedLocation) {
+        validMenus = menus.filter { $0.name != "" && $0.price > 0 && $0.price <= 8000 }
+
+        let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
+            name: locationData.name,
+            category: selectedCategory?.tag ?? "",
+            address: locationData.address ?? "",
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+            universityId: UserDefaults.standard.getUniversity()?.id ?? 0,
+            menus: validMenus
+        )
+        
         let multipartData = createMultipartFormData(image: selectedImageData, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             switch result {

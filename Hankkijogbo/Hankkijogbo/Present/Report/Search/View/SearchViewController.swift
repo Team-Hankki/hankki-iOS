@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol PassItemDataDelegate: AnyObject {
-    func updateViewModelCategoryData(data: GetCategoryFilterData?)
-}
-
 final class SearchViewController: BaseViewController {
     
     // MARK: - Properties

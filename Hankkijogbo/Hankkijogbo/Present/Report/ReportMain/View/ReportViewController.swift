@@ -8,6 +8,11 @@
 import UIKit
 import PhotosUI
 
+protocol PassItemDataDelegate: AnyObject {
+    func updateViewModelCategoryData(data: GetCategoryFilterData?)
+    func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String)
+}
+
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
@@ -16,7 +21,6 @@ final class ReportViewController: BaseViewController {
     private let searchViewModel: SearchViewModel = SearchViewModel()
     private var image: UIImage?
     private let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.menuHeader]
-    private var menuCellData: [MenuData] = []
     
     // MARK: - UI Components
     
@@ -148,54 +152,12 @@ private extension ReportViewController {
         reportViewModel.selectedImageData = nil
     }
     
-    /// 사용자가 셀에 입력한 메뉴 데이터 모으기
-    /// 빈값 필터링
-    func collectMenuCellData() {
-        let sectionNumber: Int = ReportSectionType.menu.rawValue
-        var menuName: String = ""
-        var menuPrice: String = ""
-        
-        for i in 0..<collectionView.numberOfItems(inSection: sectionNumber) {
-            let indexPath = IndexPath(row: i, section: sectionNumber)
-            if let cell = collectionView.cellForItem(at: indexPath) as? MenuCollectionViewCell {
-                for subview in cell.contentView.subviews {
-                    if let textField = subview as? UITextField {
-                        if textField.tag == i * 2 {
-                            menuName = textField.text ?? ""
-                        } else if textField.tag == i * 2 + 1 {
-                            menuPrice = textField.text ?? ""
-                        }
-                    }
-                }
-                
-                let menuData = MenuData(name: menuName, price: Int(menuPrice) ?? 0)
-                menuCellData.append(menuData)
-            }
-        }
-        
-        // 빈값은 버림
-        menuCellData = menuCellData.filter { $0.name != "" && $0.price != 0 }
-    }
-    
-    /// Req 만들어서 제보하기 API 호출
+    /// 제보하기 API 호출
     /// - 성공하면 제보 완료 화면으로 넘어가게
     func postHankki() {
         // TODO: - 이 부분 코드 좀 더 고민해보기
         guard let locationData = searchViewModel.selectedLocationData else { return }
-        guard let categoryData = reportViewModel.selectedCategory else { return }
-        let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
-
-        let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
-            name: locationData.name,
-            category: categoryData.tag,
-            address: locationData.address ?? "",
-            latitude: locationData.latitude,
-            longitude: locationData.longitude,
-            universityId: universityId,
-            menus: menuCellData
-        )
-        
-        reportViewModel.postHankkiAPI(request: request)
+        reportViewModel.postHankkiAPI(locationData: locationData)
     }
 }
 
@@ -223,9 +185,8 @@ private extension ReportViewController {
         navigationController?.pushViewController(searchViewController, animated: true)
     }
     
-    /// 메뉴 입력 값 모아서 제보하기 호출
+    /// 제보하기 호출
     @objc func bottomButtonPrimaryHandler() {
-        collectMenuCellData()
         postHankki()
     }
     
@@ -246,7 +207,7 @@ private extension ReportViewController {
             guard let item = itemIndexPath?.item else { return }
             reportViewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
             collectionView.deleteItems(at: [IndexPath(item: item, section: ReportSectionType.menu.rawValue)]) // item 삭제
-            scrollToFooterView()
+            collectionView.reloadSections(IndexSet(integer: ReportSectionType.menu.rawValue))
         }
     }
 }
@@ -328,8 +289,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.menuTextField.tag = indexPath.item * 2
-            cell.priceTextField.tag = indexPath.item * 2 + 1
+            cell.bindData(menu: reportViewModel.menus[indexPath.row])
             cell.deleteMenuButton.addTarget(self, action: #selector(deleteMenuButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
@@ -365,18 +325,6 @@ extension ReportViewController: PHPickerViewControllerDelegate {
             }
         }
     }
-    
-    func checkIsEnabled() {
-        collectMenuCellData()
-        let menuCellDataNotEmpty = menuCellData.filter { $0.name != "" && $0.price != 0 }
-        if reportViewModel.selectedCategory != nil {
-            if !menuCellDataNotEmpty.isEmpty {
-                self.bottomButtonView.setupEnabledDoneButton()
-            }
-        } else {
-            self.bottomButtonView.setupDisabledDoneButton()
-        }
-    }
 }
 
 // MARK: - PassSelectedHankkiData Delegate
@@ -386,7 +334,11 @@ extension ReportViewController: PassItemDataDelegate {
     func updateViewModelCategoryData(data: GetCategoryFilterData?) {
         guard let data = data else { return }
         self.reportViewModel.selectedCategory = data
-        print("클릭된 카테고리 \(data)")
         self.bottomButtonView.setupEnabledDoneButton()
+    }
+    
+    func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        reportViewModel.menus[indexPath.row] = MenuData(name: name, price: Int(price) ?? 0)
     }
 }

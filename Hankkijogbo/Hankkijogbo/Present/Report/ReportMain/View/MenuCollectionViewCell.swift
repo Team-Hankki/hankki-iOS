@@ -220,6 +220,20 @@ private extension MenuCollectionViewCell {
     }
 }
 
+extension MenuCollectionViewCell {
+    
+    // MARK: - Public Func
+    
+    func bindData(menu: MenuData) {
+        menuTextField.text = menu.name
+        if menu.price != 0 {
+            priceTextField.text = "\(menu.price)"
+        } else {
+            priceTextField.text = ""
+        }
+    }
+}
+
 // MARK: - UITextField Delegate
 
 extension MenuCollectionViewCell: UITextFieldDelegate {
@@ -247,8 +261,10 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     
     /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
     /// - border 색 원래대로 변경
+    /// - 뷰 모델의 메뉴 데이터도 여기서 적힌 값으로 업데이트
     final func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.gray300.cgColor
+        delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }
     
     /// 키보드의 return 키 클릭 시 호출되는 함수
