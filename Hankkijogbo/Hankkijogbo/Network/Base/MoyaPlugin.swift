@@ -68,6 +68,7 @@ final class MoyaPlugin: PluginType {
             return
         }
         var log = "❌🍚❌네트워크 오류❌🍚❌"
+        
         log.append("<-- \(error.errorCode)\n")
         log.append("\(error.failureReason ?? error.errorDescription ?? "unknown error")\n")
         log.append("<-- END HTTP 🍚🍚🍚")

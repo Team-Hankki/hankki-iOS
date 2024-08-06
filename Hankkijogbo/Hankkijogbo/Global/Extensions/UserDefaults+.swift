@@ -48,6 +48,11 @@ extension UserDefaults {
             }
             return nil
         }
+    
+    func removeUserInformation() {
+        removeTokens()
+        removeUniversity()
+    }
 }
 
 enum UserDefaultsKey: String {
