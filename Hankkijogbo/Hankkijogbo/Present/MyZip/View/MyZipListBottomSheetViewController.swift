@@ -12,10 +12,11 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     // MARK: - Properties
     
     var storeId: Int64?
-    var viewModel: MyZipViewModel = MyZipViewModel()
-    var isExpanded: Bool = false
-    var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
-    var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
+    
+    private var viewModel: MyZipViewModel = MyZipViewModel()
+    private var isExpanded: Bool = false
+    private var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
+    private var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
     
     // MARK: - UI Components
     
