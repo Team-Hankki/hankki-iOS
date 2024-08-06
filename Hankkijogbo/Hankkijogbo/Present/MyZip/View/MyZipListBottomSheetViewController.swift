@@ -223,10 +223,7 @@ extension MyZipListBottomSheetViewController {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(defaultHeight)
         }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-            self.view.layoutIfNeeded()
-        }
+        viewLayoutIfNeededWithAnimation()
     }
     
     func dismissMyZipBottomSheet() {
@@ -250,12 +247,9 @@ extension MyZipListBottomSheetViewController {
     }
     
     func viewLayoutIfNeededWithAnimation() {
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: .curveEaseIn,
-                       animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             self.view.layoutIfNeeded()
-        })
+        }
     }
 }
 
