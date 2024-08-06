@@ -31,7 +31,7 @@ extension MypageViewModel {
     
     func patchLogout() {
         NetworkService.shared.authService.patchLogout { [self] result in
-           result.handleNetworkResult(result) { response in
+           result.handleNetworkResult(result) { _ in
                resetApp()
            }
        }
@@ -39,7 +39,7 @@ extension MypageViewModel {
     
     func deleteWithdraw(authorizationCode: String) {
         NetworkService.shared.authService.deleteWithdraw(authorizationCode: authorizationCode) { [self] result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult(result) { _ in
                 resetApp()
             }
         }
