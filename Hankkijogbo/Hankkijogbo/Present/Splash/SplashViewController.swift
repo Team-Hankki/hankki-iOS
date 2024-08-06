@@ -125,8 +125,8 @@ extension SplashViewController {
             switch result {
             case .success(let response):
                 // Refresh Token 발급 완료
-                let accessToken = response?.accessToken ?? ""
-                let refreshToken = response?.refreshToken ?? ""
+                let accessToken = response?.data.accessToken ?? ""
+                let refreshToken = response?.data.refreshToken ?? ""
                 UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
     
             case .unAuthorized:

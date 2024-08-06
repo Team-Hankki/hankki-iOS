@@ -8,7 +8,6 @@
 import Foundation
 
 final class ZipListViewModel {
-    var showAlert: ((String) -> Void)?
     
     var reloadCollectionView: (() -> Void)?
     
@@ -22,36 +21,17 @@ final class ZipListViewModel {
 extension ZipListViewModel {
     func getZipList(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.userService.getMeZipList { result in
-            print(result)
-            switch result {
-            case .success(let response):
-                if let responseData = response {
-                    self.zipList = responseData.data.favorites.map {
-                        return ZipListCollectionViewCell.DataStruct(id: $0.id, title: $0.title, imageUrl: $0.imageType)
-                    }
-                } else { print("레전드 오류 발생") }
-                completion(true)
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-                completion(false)
-            default:
-                return
+            result.handleNetworkResult(result) { response in
+                self.zipList = response.data.favorites.map {
+                    return ZipListCollectionViewCell.DataStruct(id: $0.id, title: $0.title, imageUrl: $0.imageType)
+                }
             }
         }
     }
     
     func postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.zipService.postZipBatchDelete(requesBody: requestBody) { result in
-            switch result {
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-                print("족보 삭제 실패")
-                completion(false)
-            default:
-                self.getZipList(completion: {_ in})
-                return
-            }
-            
+            result.handleNetworkResult(result) { _ in }
         }
     }
 }
