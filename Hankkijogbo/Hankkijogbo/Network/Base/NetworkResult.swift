@@ -41,11 +41,11 @@ enum NetworkResult<T> {
 }
 
 extension NetworkResult {
-    func handleNetworkResult(_ result: NetworkResult, onSuccess: (T) -> Void) -> Void {
+    func handleNetworkResult(_ result: NetworkResult, onSuccess: ((T) -> Void)? = nil) {
         switch result {
         case .success(let response):
             if let res = response {
-                onSuccess(res)
+                onSuccess?(res)
             } else {
                 print(result)
             }

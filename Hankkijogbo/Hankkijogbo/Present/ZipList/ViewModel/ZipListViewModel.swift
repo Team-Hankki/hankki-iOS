@@ -31,7 +31,7 @@ extension ZipListViewModel {
     
     func postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.zipService.postZipBatchDelete(requesBody: requestBody) { result in
-            result.handleNetworkResult(result) { _ in }
+            result.handleNetworkResult(result)
         }
     }
 }
