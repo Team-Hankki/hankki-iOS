@@ -93,7 +93,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func dataBind(text: String) {
+    func bindData(text: String) {
         self.optionString = text
         setupNormalStyle()
     }

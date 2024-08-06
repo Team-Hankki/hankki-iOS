@@ -22,4 +22,10 @@ enum StringLiterals {
         static let tryAgain = "네트워크 연결 상태를 확인하고\n다시 시도해주세요"
         static let check = "확인"
     }
+    
+    enum Report {
+        static let mainButton = "제보하기"
+        static let categoryHeader = "식당 종류를 알려주세요"
+        static let menuHeader = "메뉴를 추가해주세요"
+    }
 }

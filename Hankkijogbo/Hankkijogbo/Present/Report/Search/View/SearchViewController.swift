@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol PassItemDataDelegate: AnyObject {
-    func passSearchItemData(model: GetSearchedLocation)
-    func updateViewModelCategoryData(data: GetCategoryFilterData?)
-}
-
 final class SearchViewController: BaseViewController {
     
     // MARK: - Properties
@@ -173,7 +168,7 @@ extension SearchViewController {
             self.completeLocationSelection()
         }
         
-        viewModel.showAlert = { [weak self] message in
+        viewModel.showAlert = { [weak self] _ in
             self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
                             subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
                             primaryButtonText: "확인")
@@ -251,7 +246,6 @@ private extension SearchViewController {
         case 200:
             // 등록 ㄱ
             guard let location = viewModel.selectedLocationData else { return }
-            delegate?.passSearchItemData(model: location)
             self.navigationController?.popViewController(animated: true)
         case 409:
             // 이미 등록된 가게 Alert 띄우기

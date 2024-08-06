@@ -28,7 +28,7 @@ final class ReportHeaderView: BaseCollectionReusableView {
 }
 
 extension ReportHeaderView {
-    func dataBind(_ text: String) {
+    func bindData(_ text: String) {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle1,

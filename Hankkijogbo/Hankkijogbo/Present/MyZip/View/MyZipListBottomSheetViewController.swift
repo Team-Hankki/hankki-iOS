@@ -170,7 +170,7 @@ private extension MyZipListBottomSheetViewController {
             self.myZipCollectionView.reloadData()
         }
         
-        viewModel.showAlert = { [weak self] message in
+        viewModel.showAlert = { [weak self] _ in
             self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
                             subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
                             primaryButtonText: "확인")
@@ -343,7 +343,6 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
 
 extension MyZipListBottomSheetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        print("CELL CLICK")
         if let data = viewModel.myZipListFavoriteData {
             
             let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
