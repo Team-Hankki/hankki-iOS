@@ -14,6 +14,6 @@ struct PostHankkiRequestDTO: Codable {
     var address: String
     var latitude: Double
     var longitude: Double
-    var universityId: Int64
+    var universityId: Int
     var menus: [MenuData]
 }

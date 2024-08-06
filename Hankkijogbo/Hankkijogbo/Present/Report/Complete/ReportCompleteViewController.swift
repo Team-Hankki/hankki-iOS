@@ -37,8 +37,7 @@ final class ReportCompleteViewController: BaseViewController {
     init(hankkiId: Int64,
          reportedNumber: Int,
          nickname: String,
-         selectedHankkiName: String)
-    {
+         selectedHankkiName: String) {
         self.hankkiId = hankkiId
         self.reportedNumber = reportedNumber
         self.nickname = nickname
