@@ -15,21 +15,25 @@ final class MoyaPlugin: PluginType {
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
+
         guard let httpRequest = request.request else {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             return
         }
+        
         let url = httpRequest.description
         let method = httpRequest.httpMethod ?? "unknown method"
-        var log = "=======================================================\n🍚1️⃣🍚[\(method)] \(url)\n=======================================================\n"
-        log.append("🍚2️⃣🍚API: \(target)\n")
+        var log = "🍚 [\(method)] =================================================\n"
+        log.append("1️⃣ [\(method)] \(url)\n")
+        log.append("\n")
+        log.append("2️⃣ API: \(target)\n")
         if let headers = httpRequest.allHTTPHeaderFields, !headers.isEmpty {
-            log.append("header: \(headers)\n")
+            log.append("✏️ header:\n\(headers)\n")
         }
         if let body = httpRequest.httpBody, let bodyString = String(bytes: body, encoding: String.Encoding.utf8) {
-            log.append("\(bodyString)\n")
+            log.append("✏️ body:\n\(bodyString)\n")
         }
-        log.append("========================= 🍚END \(method) =========================")
+        log.append("=======================================================\n\n")
         print(log)
     }
 
@@ -48,17 +52,14 @@ final class MoyaPlugin: PluginType {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
         let statusCode = response.statusCode
-        var log = "=============== 🍚 네트워크 통신 성공했을까요? 🍚 ==============="
-        log.append("\n🍚3️⃣🍚[\(statusCode)] \(url)\n==========================================================\n")
-        log.append("response: \n")
+        
+        var log = "🍚 [RESULT] =============================================\n"
+        log.append("3️⃣ [\(statusCode)] \(url)\n")
+   
         if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
-            log.append("🍚4️⃣🍚\(reString)\n")
+            log.append("\n4️⃣ \(reString)\n")
         }
-        log.append("===================== 🍚 CONTENT 🍚 =====================")
-        if let responseString = String(bytes: response.data, encoding: .utf8) {
-            log.append("\n\(responseString)\n")
-        }
-        log.append("===================== 🍚 END HTTP 🍚 =====================")
+        log.append("=======================================================\n\n")
         print(log)
     }
 

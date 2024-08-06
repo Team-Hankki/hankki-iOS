@@ -42,7 +42,6 @@ enum NetworkResult<T> {
 
 extension NetworkResult {
     func handleNetworkResult(_ result: NetworkResult, onSuccess: (T) -> Void) -> Void {
-        print(result.stateDescription)
         switch result {
         case .success(let response):
             if let res = response {
