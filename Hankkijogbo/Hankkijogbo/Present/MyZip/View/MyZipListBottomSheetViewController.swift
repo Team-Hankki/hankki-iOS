@@ -224,9 +224,9 @@ extension MyZipListBottomSheetViewController {
             $0.height.equalTo(defaultHeight)
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }
     }
     
     func dismissMyZipBottomSheet() {
@@ -238,9 +238,7 @@ extension MyZipListBottomSheetViewController {
             self.dimmedView.alpha = 0.0
             self.view.layoutIfNeeded()
         }, completion: { _ in
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: nil)
-            }
+            self.dismiss(animated: false, completion: nil)
         })
     }
     
@@ -340,7 +338,7 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         viewModel.postHankkiToZipAPI(
             request: PostHankkiToZipRequestDTO(
                 favoriteId: data[itemIndexPath?.item ?? 0].id,
-                storeId: storeId ?? 0
+                storeId: storeId
             )
         )
         self.dismissMyZipBottomSheet()
