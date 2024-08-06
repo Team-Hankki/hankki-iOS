@@ -78,7 +78,6 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         }
         addZipButton.do {
             $0.setImage(.btnAddLined, for: .normal)
-            $0.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
         }
     }
 }

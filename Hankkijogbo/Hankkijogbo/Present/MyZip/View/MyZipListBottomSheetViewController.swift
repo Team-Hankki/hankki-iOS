@@ -290,6 +290,25 @@ private extension MyZipListBottomSheetViewController {
             rootViewController.pushViewController(createZipViewController, animated: true)
         }
     }
+    
+    /// 내 족보 셀의 + 버튼 클릭 시 호출
+    /// - 클릭된 버튼이 속해있는 셀의 IndexPath 계산
+    /// - 내 족보에 식당 추가 POST API 호출
+    @objc func addToMyZipButtonDidTap(_ sender: UIButton) {
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
+        let itemIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
+
+        guard let data = viewModel.myZipListFavoriteData else { return }
+        
+        // TODO: - 이미 추가된 족보일 때 앱 터지는 이슈
+        viewModel.postHankkiToZipAPI(
+            request: PostHankkiToZipRequestDTO(
+                favoriteId: data[itemIndexPath?.item ?? 0].id,
+                storeId: storeId
+            )
+        )
+        self.dismissMyZipBottomSheet()
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -315,27 +334,11 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyZipListCollectionViewCell.className, for: indexPath) as? MyZipListCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.addZipButton.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
+        cell.addZipButton.addTarget(self, action: #selector(addToMyZipButtonDidTap), for: .touchUpInside)
         if let data = viewModel.myZipListFavoriteData {
             cell.bindData(zipData: data[indexPath.item])
         }
         return cell
-    }
-    
-    @objc func addZipButtonDidTap(_ sender: UIButton) {
-        // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
-        let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
-        let itemIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
-
-        guard let data = viewModel.myZipListFavoriteData else { return }
-        
-        viewModel.postHankkiToZipAPI(
-            request: PostHankkiToZipRequestDTO(
-                favoriteId: data[itemIndexPath?.item ?? 0].id,
-                storeId: storeId
-            )
-        )
-        self.dismissMyZipBottomSheet()
     }
 }
 
