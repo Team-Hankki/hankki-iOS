@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HankkiCategoryTag: UILabel {
+class HankkiCategoryTagLabel: UILabel {
     
     private let minimumWidth: CGFloat = 42
     

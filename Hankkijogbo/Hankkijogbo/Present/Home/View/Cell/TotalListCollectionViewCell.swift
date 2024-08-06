@@ -12,7 +12,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Components
     
     let thumbnailImageView: UIImageView = UIImageView()
-    private let menutag: UILabel = HankkiCategoryTag()
+    private let menutagLabel: UILabel = HankkiCategoryTagLabel()
     private let hankkiTitle: UILabel = UILabel()
     
     private let priceImage: UIImageView = UIImageView()
@@ -38,7 +38,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     override func setupHierarchy() {
         addSubviews(thumbnailImageView,
-                    menutag,
+                    menutagLabel,
                     hankkiTitle,
                     hankkiInfoStackView,
                     addButton)
@@ -58,7 +58,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = 8
         }
         
-        menutag.do {
+        menutagLabel.do {
             $0.setNeedsLayout()
             $0.layoutIfNeeded()
         }
@@ -104,20 +104,20 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.width.height.equalTo(72)
         }
         
-        menutag.snp.makeConstraints {
+        menutagLabel.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.top)
             $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
             $0.height.equalTo(20)
         }
         
         hankkiTitle.snp.makeConstraints {
-            $0.top.equalTo(menutag.snp.bottom).offset(4)
-            $0.leading.equalTo(menutag.snp.leading)
+            $0.top.equalTo(menutagLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(menutagLabel.snp.leading)
         }
         
         hankkiInfoStackView.snp.makeConstraints {
             $0.top.equalTo(hankkiTitle.snp.bottom).offset(2)
-            $0.leading.equalTo(menutag.snp.leading)
+            $0.leading.equalTo(menutagLabel.snp.leading)
         }
         
         addButton.snp.makeConstraints {
@@ -132,7 +132,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
 extension TotalListCollectionViewCell {
     func bindData(model: GetHankkiListData) {
         thumbnailImageView.setKFImage(url: model.imageUrl)
-        menutag.text = model.category
+        menutagLabel.text = model.category
         hankkiTitle.text = model.name
         priceLabel.text = String(model.lowestPrice) + StringLiterals.Home.won
         likeLabel.text = String(model.heartCount)
