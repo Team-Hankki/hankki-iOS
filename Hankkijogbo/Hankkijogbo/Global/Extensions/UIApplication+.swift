@@ -17,4 +17,22 @@ extension UIApplication {
         let safeAreaTopSize = window?.safeAreaInsets.top
         return safeAreaTopSize ?? 0
     }
+    
+    /// 어플리케이션에 저장되어있는 모든 user 정보를 초기화한다.
+    /// 이후 Splash 화면으로 넘어간다.
+    static func resetApp() {
+        // 어플리케이션에서 user information 삭제
+        UserDefaults.standard.removeUserInformation()
+        
+        // Splash 화면으로 이동
+        DispatchQueue.main.async {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first {
+                    let splashViewController = SplashViewController()
+                    window.rootViewController = splashViewController
+                }
+            }
+        }
+    }
 }
+

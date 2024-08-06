@@ -30,34 +30,17 @@ extension MypageViewModel {
     }
     
     func patchLogout() {
-        NetworkService.shared.authService.patchLogout { [self] result in
-           result.handleNetworkResult(result) { _ in
-               resetApp()
+        NetworkService.shared.authService.patchLogout { result in
+           result.handleNetworkResult(result) { response in
+               UIApplication.resetApp()
            }
        }
    }
     
     func deleteWithdraw(authorizationCode: String) {
-        NetworkService.shared.authService.deleteWithdraw(authorizationCode: authorizationCode) { [self] result in
-            result.handleNetworkResult(result) { _ in
-                resetApp()
-            }
-        }
-    }
-}
-
-private extension MypageViewModel {
-    func resetApp() {
-        // 어플리케이션에서 user information 삭제
-        UserDefaults.standard.removeUserInformation()
-        
-        // Splash 화면으로 이동
-        DispatchQueue.main.async {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                if let window = windowScene.windows.first {
-                    let splashViewController = SplashViewController()
-                    window.rootViewController = splashViewController
-                }
+        NetworkService.shared.authService.deleteWithdraw(authorizationCode: authorizationCode) { result in
+            result.handleNetworkResult(result) { response in
+                UIApplication.resetApp()
             }
         }
     }
