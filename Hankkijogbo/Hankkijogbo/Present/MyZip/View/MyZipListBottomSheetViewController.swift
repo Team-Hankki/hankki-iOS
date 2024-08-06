@@ -30,6 +30,17 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var myZipCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
+    // MARK: - Init
+    
+    init(storeId: Int64) {
+        super.init()
+        self.storeId = storeId
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
