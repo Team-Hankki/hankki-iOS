@@ -10,7 +10,6 @@ import UIKit
 
 class UnivSelectViewModel {
     
-    var showAlert: ((String) -> Void)?
     var currentUnivIndex: Int = -1
     
     var universityList: [UniversityModel] = [] {
@@ -26,45 +25,35 @@ class UnivSelectViewModel {
 extension UnivSelectViewModel {
     func getUniversityList() {
         NetworkService.shared.universityService.getUniversityList { [weak self] result in
-            switch result {
-            case .success(let response):
-                if let responseData = response {
-                    self?.universityList = responseData.data.universities.map {
-                        UniversityModel(id: $0.id,
-                                        name: $0.name,
-                                        longitude: $0.longitude,
-                                        latitude: $0.latitude)
-                    }
+            result.handleNetworkResult(result) { response in
+                self?.universityList = response.data.universities.map {
+                    UniversityModel(id: $0.id,
+                                    name: $0.name,
+                                    longitude: $0.longitude,
+                                    latitude: $0.latitude)
                 }
-            case .unAuthorized, .networkFail:
-                self?.showAlert?("Failed to fetch category filters.")
-                print("Failed to fetch university list.")
-            default:
-                return
             }
         }
     }
 
     func postMeUniversity() {
         let currentUniversity: UniversityModel = universityList[currentUnivIndex]
-        UserDefaults.standard.saveUniversity(currentUniversity)
         let request: PostMeUniversityRequestDTO = PostMeUniversityRequestDTO(universityId: currentUniversity.id,
                                                                              name: currentUniversity.name,
                                                                              longitude: currentUniversity.longitude,
                                                                              latitude: currentUniversity.latitude)
         
+        
         NetworkService.shared.userService.postMeUniversity(requestBody: request) { result in
-            switch result {
-            case .success(_):
+            result.handleNetworkResult(result) { response in
+                // local에 대학 정보 저장
+                UserDefaults.standard.saveUniversity(currentUniversity)
+                
+                // 홈 뷰로 돌아가기
                 DispatchQueue.main.async {
-                    // 홈 뷰로 돌아간다~
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController { rootViewController.popToRootViewController(animated: true) }
                 }
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed to fetch category filters.")
-            default:
-                return
             }
         }
     }
