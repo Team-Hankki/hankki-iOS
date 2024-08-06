@@ -19,15 +19,15 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - UI Components
     
-    private let dimmedView = UIView()
-    private let containerView = UIView()
-    private let bottomSheetHandlerView = UIView()
-    private let titleLabel = UILabel()
-    private let addNewZipButton = UIButton()
-    private let addNewZipLabel = UILabel()
-    private let addNewZipStackView = UIStackView()
-    private let flowLayout = UICollectionViewFlowLayout()
-    private lazy var myZipCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    private let dimmedView: UIView = UIView()
+    private let containerView: UIView = UIView()
+    private let bottomSheetHandlerView: UIView = UIView()
+    private let titleLabel: UILabel = UILabel()
+    private let addNewZipButton: UIButton = UIButton()
+    private let addNewZipLabel: UILabel = UILabel()
+    private let addNewZipStackView: UIStackView = UIStackView()
+    private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    private lazy var myZipCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     // MARK: - Life Cycle
     
