@@ -20,7 +20,6 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     var selectedHankkiNameString: String? {
         didSet {
-//            delegate?.selectedHankkiModel = model
             delegate?.changeBottomButtonView(model != nil)
         }
     }
@@ -93,7 +92,6 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         hankkiNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.subtitle,
-                withText: "고동밥집 1호점",
                 color: .gray850
             )
         }
@@ -101,7 +99,6 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         addressLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
-                withText: "서울특별시 마포구 갈매기 고양이처럼 울음",
                 color: .gray400
             )
         }

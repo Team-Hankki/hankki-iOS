@@ -15,7 +15,6 @@ final class SearchViewController: BaseViewController {
     
     weak var delegate: PassItemDataDelegate?
     private let debouncer = HankkiDebouncer(seconds: 0.5)
-    private var alreadyReportHankkiText: String = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
     
     // MARK: - UI Components
     
@@ -27,7 +26,7 @@ final class SearchViewController: BaseViewController {
     private let searchTextDeleteButton: UIButton = UIButton()
     private let searchBarBottomGradientView: UIView = UIView()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: "삭당을 제보해주세요",
+        primaryButtonText: StringLiterals.Report.reportHankki,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -120,7 +119,7 @@ final class SearchViewController: BaseViewController {
             $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: "식당 이름으로 검색하면\n주소를 찾아 드릴게요",
+                withText: StringLiterals.Report.searchHankkiByName,
                 color: .gray900
             )
         }
@@ -249,7 +248,7 @@ private extension SearchViewController {
             self.navigationController?.popViewController(animated: true)
         case 409:
             // 이미 등록된 가게 Alert 띄우기
-            showAlert(titleText: alreadyReportHankkiText, primaryButtonText: "확인")
+            showAlert(titleText: StringLiterals.Report.alreadyReportHankki, primaryButtonText: StringLiterals.Alert.check)
         default:
             // ERROR
             // TODO: - 공통 에러 Alert 필요
@@ -333,7 +332,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return }
         viewModel.selectedLocationData = viewModel.searchedLocationResponseData?.locations[indexPath.item]
     }
 }

@@ -131,7 +131,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
-                withText: "나의 식당 족보",
+                withText: StringLiterals.MyZip.myHankkiZip,
                 color: .gray850
             )
         }
@@ -149,7 +149,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         addNewZipLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "새로운 족보 추가하기",
+                withText: StringLiterals.MyZip.addNewZip,
                 color: .gray800
             )
         }
@@ -177,9 +177,9 @@ private extension MyZipListBottomSheetViewController {
         }
         
         viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
+                            subText: StringLiterals.Alert.tryAgain,
+                            primaryButtonText: StringLiterals.Alert.check)
         }
     }
     

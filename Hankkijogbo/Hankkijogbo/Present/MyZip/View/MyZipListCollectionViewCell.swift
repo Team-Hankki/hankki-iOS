@@ -10,8 +10,6 @@ import UIKit
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
     var isChecked: Bool = false
-    // TODO: - literal로 빼기
-    var updateStringNotificationName: String = "UpdateAddToMyZipListString"
     
     // MARK: - UI Components
     
@@ -65,14 +63,12 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         zipTitleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
-                withText: "학교 5년째 다니는 화석의 추천",
                 color: .gray800
             )
         }
         firstHashtagLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.button,
-                withText: "#미친가성비",
                 color: .gray400
             )
         }
@@ -86,10 +82,10 @@ extension MyZipListCollectionViewCell {
 
     func getImageForType(_ type: String) -> UIImage {
         let thumbnailImages: [String: UIImage] = [
-            "TYPE_ONE": .imgZipThumbnail1,
-            "TYPE_TWO": .imgZipThumbnail2,
-            "TYPE_THREE": .imgZipThumbnail3,
-            "TYPE_FOUR": .imgZipThumbnail4
+            StringLiterals.MyZip.zipThumbnailImageType1: .imgZipThumbnail1,
+            StringLiterals.MyZip.zipThumbnailImageType2: .imgZipThumbnail2,
+            StringLiterals.MyZip.zipThumbnailImageType3: .imgZipThumbnail3,
+            StringLiterals.MyZip.zipThumbnailImageType4: .imgZipThumbnail4
         ]
         
         return thumbnailImages[type] ?? .imgZipThumbnail1
@@ -132,7 +128,7 @@ extension MyZipListCollectionViewCell {
         isChecked = !isChecked
         if isChecked {
             addZipButton.setImage(.btnCheckFilled, for: .normal)
-            NotificationCenter.default.post(Notification(name: NSNotification.Name(updateStringNotificationName)))
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
         } else {
             addZipButton.setImage(.btnAddLined, for: .normal)
         }
