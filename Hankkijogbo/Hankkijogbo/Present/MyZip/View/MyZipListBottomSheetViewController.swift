@@ -11,7 +11,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var storeId: Int64?
+    var storeId: Int64
     
     private var viewModel: MyZipViewModel = MyZipViewModel()
     private var isExpanded: Bool = false
@@ -33,8 +33,8 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     // MARK: - Init
     
     init(storeId: Int64) {
-        super.init()
         self.storeId = storeId
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -50,15 +50,9 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         setupDelegate()
         setupRegister()
         bindViewModel()
+        
         showMyZipBottomSheet()
-        
-        if let id = storeId {
-            viewModel.getMyZipListAPI(id: id)
-        }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipStackViewDidTap))
-        addNewZipStackView.addGestureRecognizer(tapGesture)
-        
+        viewModel.getMyZipListAPI(id: storeId)
     }
     
     // MARK: - Set UI
@@ -198,6 +192,8 @@ private extension MyZipListBottomSheetViewController {
         self.containerView.addGestureRecognizer(downSwipeGesture)
         let dimmedTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap))
         self.dimmedView.addGestureRecognizer(dimmedTapGesture)
+        let addNewZipTapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipStackViewDidTap))
+        addNewZipStackView.addGestureRecognizer(addNewZipTapGesture)
     }
     
     func setupDelegate() {
