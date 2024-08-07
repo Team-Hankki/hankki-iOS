@@ -51,8 +51,9 @@ extension NetworkResult {
             }
             
         case .unAuthorized:
-            //TODO: - 리프레쉬 토큰 재발급 하기
-            print("Get Refresh Token")
+            // 401 error
+            // access token이 올바르지 않거나, 만료된 경우
+            self.postReissue()
             
         default:
             // TODO: - 상세한 분기처리 필요 (기디 논의 필요)
@@ -63,6 +64,21 @@ extension NetworkResult {
                 rootViewController.showAlert(titleText: "오류 발생",
                                              subText: result.stateDescription,
                                              primaryButtonText: "확인")
+            }
+        }
+    }
+}
+
+private extension NetworkResult {
+    func postReissue() {
+        NetworkService.shared.authService.postReissue { result in
+            switch result {
+            case .success(let response):
+                UserDefaults.standard.saveTokens(accessToken: response?.data.accessToken ?? "",
+                                                 refreshToken: response?.data.refreshToken ?? "")
+            default:
+                print("🛠️ RESET APPLICATION 🛠️\n\n")
+                UIApplication.resetApp()
             }
         }
     }

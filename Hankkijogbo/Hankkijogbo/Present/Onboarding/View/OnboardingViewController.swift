@@ -39,7 +39,6 @@ final class OnboardingViewController: BaseViewController {
     
     override func setupStyle() {
         animationView.do {
-            
             $0.contentMode = .scaleAspectFill
             $0.loopMode = .loop
         }

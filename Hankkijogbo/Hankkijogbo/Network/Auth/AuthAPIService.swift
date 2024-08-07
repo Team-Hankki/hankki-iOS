@@ -74,6 +74,7 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<PostReissueResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<PostReissueResponseData> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
