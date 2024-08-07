@@ -52,10 +52,6 @@ extension LoginViewModel {
                                 // isRegistered -> false ( 회원가입 )
                                 // -> 온보딩 뷰로 넘어감
                                 window.rootViewController = OnboardingViewController()
-                                
-                                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
-                                window.rootViewController = navigationController
-                                navigationController.pushViewController(UnivSelectViewController(), animated: false)
                             }
                         }
                     }

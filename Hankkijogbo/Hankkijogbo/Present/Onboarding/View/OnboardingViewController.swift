@@ -97,7 +97,7 @@ private extension OnboardingViewController {
     
     @objc func nextButtonDidTap() {
         if isFinal() {
-            // 온보딩의 마지막일 경우, 로그인 페이지로 이동
+            // 온보딩의 마지막일 경우, 대학선택으로 이동
             presentUnivSelectView()
         } else {
             // 온보딩의 마지막 페이지가 아니면, 다음 로티로 이동
@@ -115,6 +115,7 @@ private extension OnboardingViewController {
             if let window = windowScene.windows.first {
                 let navigationController = HankkiNavigationController(rootViewController: TabBarController())
                 window.rootViewController = navigationController
+                navigationController.pushViewController(UnivSelectViewController(), animated: false)
             }
         }
     }
