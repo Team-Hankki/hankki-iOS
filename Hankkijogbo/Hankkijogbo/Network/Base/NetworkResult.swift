@@ -45,7 +45,6 @@ extension NetworkResult {
         switch result {
         case .success(let response):
             if let res = response {
-                print(1)
                 onSuccess?(res)
             } else if T.self == Void.self {
                 onSuccessVoid?()

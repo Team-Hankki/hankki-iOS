@@ -15,7 +15,7 @@ protocol ZipAPIServiceProtocol {
     
     func getMyZipList(id: Int64, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
-    func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<Void>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func postHankkiToZip(requestBody: PostHankkiToZipRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
@@ -70,16 +70,15 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
     
-    func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+    func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping (NetworkResult<Void>) -> Void) {
         provider.request(.postZipBatchDelete(requestBody: requesBody)) { result in
-            
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<Void> = self.fetchNetworkResult(statusCode: response.statusCode)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<Void> = self.fetchNetworkResult(statusCode: response.statusCode)
                     completion(networkResult)
                 }
             }
