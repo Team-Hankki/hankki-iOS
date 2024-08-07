@@ -31,7 +31,6 @@ extension MypageViewController {
     }
     
     func setupAction(_ section: SectionType, itemIndex: Int) {
-        // TODO: - 함수 추후 변경
         switch section {
         case .zip:
             navigateToZipListViewController()
