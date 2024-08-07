@@ -41,13 +41,16 @@ enum NetworkResult<T> {
 }
 
 extension NetworkResult {
-    func handleNetworkResult(_ result: NetworkResult, onSuccess: ((T) -> Void)? = nil) {
+    func handleNetworkResult(_ result: NetworkResult, onSuccess: ((T) -> Void)? = nil, onSuccessVoid: (() -> Void)? = nil) {
         switch result {
         case .success(let response):
             if let res = response {
+                print(1)
                 onSuccess?(res)
+            } else if T.self == Void.self {
+                onSuccessVoid?()
             } else {
-                print(result)
+                print("🚨 RESPONSE IS NIL 🚨")
             }
             
         case .unAuthorized:
