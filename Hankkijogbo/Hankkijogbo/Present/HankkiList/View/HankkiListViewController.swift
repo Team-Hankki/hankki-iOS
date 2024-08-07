@@ -11,6 +11,7 @@ final class  HankkiListViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private var isHeaderSetting: Bool = false
     let type: HankkiListViewControllerType
     let zipId: Int?
     
@@ -96,16 +97,11 @@ private extension HankkiListViewController {
                 self?.emptyView.isHidden = (self?.viewModel.hankkiList.count != 0)
                 self?.hankkiTableView.reloadData()
             }
-            if self?.type == .myZip {
+            if self?.type == .myZip && !(self?.isHeaderSetting ?? false) {
                 guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
                 headerView.dataBind(self?.viewModel.zipInfo ?? nil)
+                self?.isHeaderSetting = true
             }
-        }
-        
-        viewModel.showAlert = { [weak self] message in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
         }
     }
     
