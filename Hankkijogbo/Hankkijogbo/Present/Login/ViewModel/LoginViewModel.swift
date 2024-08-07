@@ -8,44 +8,35 @@
 import Foundation
 import UIKit
 
-final class LoginViewModel {
-}
+final class LoginViewModel { }
 
 extension LoginViewModel {
     func postLogin (accessToken: String, postLoginRequest: PostLoginRequestDTO) {
         NetworkService.shared.authService.postLogin(accessToken: accessToken, requestBody: postLoginRequest) { result in
-            switch result {
-            case .success(let response):
-                if let responseData = response {
-                    let refreshToken = responseData.data.refreshToken
-                    let accessToken = responseData.data.accessToken
-                    
-                    UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
-                    
-                    DispatchQueue.main.async {
-
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                            if let window = windowScene.windows.first {
-                                if responseData.data.isRegistered {
-                                    // isRegistered -> true ( 로그인 )
-                                    // -> 홈 뷰로 넘어감
-                                    let navigationController = HankkiNavigationController(rootViewController: TabBarController())
-                                    window.rootViewController = navigationController
-                                } else {
-                                    // isRegistered -> false ( 회원가입 )
-                                    // -> 대학 선택 뷰로 넘어감
-                                    let navigationController = HankkiNavigationController(rootViewController: TabBarController())
-                                    window.rootViewController = navigationController
-                                    navigationController.pushViewController(UnivSelectViewController(), animated: false)
-                                }
+            result.handleNetworkResult(result) { response in
+                let refreshToken = response.data.refreshToken
+                let accessToken = response.data.accessToken
+                
+                UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
+                
+                DispatchQueue.main.async {
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        if let window = windowScene.windows.first {
+                            if response.data.isRegistered {
+                                // isRegistered -> true ( 로그인 )
+                                // -> 홈 뷰로 넘어감
+                                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+                                window.rootViewController = navigationController
+                            } else {
+                                // isRegistered -> false ( 회원가입 )
+                                // -> 대학 선택 뷰로 넘어감
+                                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+                                window.rootViewController = navigationController
+                                navigationController.pushViewController(UnivSelectViewController(), animated: false)
                             }
                         }
                     }
-                } else { print("POST LOGIN - response data 없음") }
-            case .unAuthorized, .networkFail:
-                print("POST LOGIN - 테스트 실패")
-            default:
-                return
+                }
             }
         }
     }
