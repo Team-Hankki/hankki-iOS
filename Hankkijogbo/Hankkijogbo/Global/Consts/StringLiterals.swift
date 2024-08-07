@@ -22,4 +22,9 @@ enum StringLiterals {
         static let tryAgain = "네트워크 연결 상태를 확인하고\n다시 시도해주세요"
         static let check = "확인"
     }
+    
+    enum ExternalLink {
+        static let OneonOne = "https://tally.so/r/mO0oJY"
+        static let FAQ = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+    }
 }
