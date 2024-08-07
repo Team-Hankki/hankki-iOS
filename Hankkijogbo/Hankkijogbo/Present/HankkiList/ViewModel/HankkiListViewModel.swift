@@ -98,16 +98,9 @@ extension HankkiListViewModel {
         }
     }
     
-    func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (Bool) -> Void) {
+    func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping () -> Void) {
         NetworkService.shared.zipService.deleteZipToHankki(requestBody: requestBody) { result in
-            switch result {
-            case .success(_): return
-            case .unAuthorized, .pathError:
-                self.showAlert?("Failed")
-            default:
-                return
-                
-            }
+            result.handleNetworkResult(result, onSuccessVoid: completion)
         }
     }
     
