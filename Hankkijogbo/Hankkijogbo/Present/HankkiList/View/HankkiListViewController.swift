@@ -46,9 +46,9 @@ final class  HankkiListViewController: BaseViewController {
         bindViewModel()
         
         if type == .myZip {
-            viewModel.getZipDetail(zipId: zipId ?? 0, completion: {_ in})
+            viewModel.getZipDetail(zipId: zipId ?? 0)
         } else {
-            viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+            viewModel.getMeHankkiList(type.userTargetType)
         }
     }
     
@@ -195,11 +195,11 @@ extension HankkiListViewController: UITableViewDataSource {
     }
     
     func deleteLike(_ id: Int64) {
-        viewModel.deleteHankkiHeartAPI(id: id) {}
+        viewModel.deleteHankkiHeart(id: id)
     }
     
     func postLike(_ id: Int64) {
-        viewModel.postHankkiHeartAPI(id: id) {}
+        viewModel.postHankkiHeart(id: id)
     }
 }
 

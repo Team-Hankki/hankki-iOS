@@ -160,7 +160,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 
 extension HankkiListTableViewCell {
     func dataBind(_ data: DataStruct, isLikeButtonDisable: Bool) {
-        print(data.name)
         self.data = data
 
         titleLabel.text = data.name
