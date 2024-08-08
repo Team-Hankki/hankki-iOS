@@ -252,8 +252,8 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
             } else {
                 postLike(hankkiId)
             }
-            let currendData: HankkiListTableViewCell.DataStruct = viewModel.hankkiList[indexPath.item]
-            let newData: HankkiListTableViewCell.DataStruct = HankkiListTableViewCell.DataStruct(
+            let currendData: HankkiListTableViewCell.Model = viewModel.hankkiList[indexPath.item]
+            let newData: HankkiListTableViewCell.Model = HankkiListTableViewCell.Model(
                 id: currendData.id,
                 name: currendData.name,
                 imageURL: currendData.imageURL,

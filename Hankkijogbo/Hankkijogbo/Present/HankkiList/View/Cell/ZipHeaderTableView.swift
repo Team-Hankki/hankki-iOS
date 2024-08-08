@@ -7,6 +7,15 @@
 
 import UIKit
 
+extension ZipHeaderTableView {
+    struct Model {
+        let name: String
+        let imageUrl: String
+        let title: String
+        let details: [String]
+    }
+}
+
 final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
@@ -193,14 +202,7 @@ private extension ZipHeaderTableView {
 }
 
 extension ZipHeaderTableView {
-    struct DataStruct {
-        let name: String
-        let imageUrl: String
-        let title: String
-        let details: [String]
-    }
-    
-    func dataBind(_ data: DataStruct?) {
+    func dataBind(_ data: Model?) {
         headerLabel.text = data?.title
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name

@@ -18,12 +18,12 @@ final class HankkiListViewModel {
 
     var reloadCollectionView: (() -> Void)?
     
-    var hankkiList: [HankkiListTableViewCell.DataStruct] = [] {
+    var hankkiList: [HankkiListTableViewCell.Model] = [] {
         didSet {
             self.reloadCollectionView?()
         }
     }
-    var zipInfo: ZipHeaderTableView.DataStruct?
+    var zipInfo: ZipHeaderTableView.Model?
 }
 
 extension HankkiListViewModel {
@@ -40,13 +40,13 @@ extension HankkiListViewModel {
         NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
             
             result.handleNetworkResult(result) { response in
-                self.zipInfo = ZipHeaderTableView.DataStruct(name: self.name ?? "",
+                self.zipInfo = ZipHeaderTableView.Model(name: self.name ?? "",
                                                              imageUrl: self.imageUrl ?? "",
                                                              title: response.data.title,
                                                              details: response.data.details)
                 
                 self.hankkiList = response.data.stores.map {
-                    return HankkiListTableViewCell.DataStruct(id: $0.id,
+                    return HankkiListTableViewCell.Model(id: $0.id,
                                                               name: $0.name,
                                                               imageURL: $0.imageUrl,
                                                               category: $0.category,
@@ -61,7 +61,7 @@ extension HankkiListViewModel {
         NetworkService.shared.userService.getMeHankkiList(type) { result in
             result.handleNetworkResult(result) { response in
                 self.hankkiList = response.data.stores.map {
-                    return HankkiListTableViewCell.DataStruct(id: $0.id,
+                    return HankkiListTableViewCell.Model(id: $0.id,
                                                               name: $0.name,
                                                               imageURL: $0.imageUrl,
                                                               category: $0.category,

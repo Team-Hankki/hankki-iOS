@@ -11,13 +11,25 @@ protocol HankkiListTableViewCellDelegate: AnyObject {
     func heartButtonDidTap(in cell: HankkiListTableViewCell, isSelected: Bool)
 }
 
+extension HankkiListTableViewCell {
+    struct Model {
+        let id: Int64
+        let name: String
+        let imageURL: String
+        let category: String
+        let lowestPrice: Int
+        let heartCount: Int
+        var isDeleted: Bool = false
+    }
+}
+
 final class HankkiListTableViewCell: BaseTableViewCell {
     
     // MARK: - Properties
     
     weak var delegate: HankkiListTableViewCellDelegate?
     
-    private var data: DataStruct?
+    private var data: Model?
     
     private let dummyTagList = ["#두루미", "#해파리"]
     
@@ -159,7 +171,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 }
 
 extension HankkiListTableViewCell {
-    func dataBind(_ data: DataStruct, isLikeButtonDisable: Bool) {
+    func dataBind(_ data: Model, isLikeButtonDisable: Bool) {
         self.data = data
 
         titleLabel.text = data.name
