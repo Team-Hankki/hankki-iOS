@@ -11,9 +11,10 @@ import Moya
 
 protocol ZipAPIServiceProtocol {
     typealias GetMyZipListResponseDTO = BaseDTO<GetMyZipListResponseData>
+    typealias GetZipDetailResponseDTO = BaseDTO<GetZipDetailResponseData>
     
     func getMyZipList(id: Int64, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
-    func getZipList(zipId: Int, completion: @escaping(NetworkResult<BaseDTO<GetZipDetailResponseData>>) -> Void)
+    func getZipList(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
@@ -54,15 +55,15 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
     
-    func getZipList(zipId: Int, completion: @escaping (NetworkResult<BaseDTO<GetZipDetailResponseData>>) -> Void) {
+    func getZipList(zipId: Int, completion: @escaping (NetworkResult<GetZipDetailResponseDTO>) -> Void) {
         provider.request(.getZipDetail(zipId: zipId)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<BaseDTO<GetZipDetailResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<GetZipDetailResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<BaseDTO<GetZipDetailResponseData>> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<GetZipDetailResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

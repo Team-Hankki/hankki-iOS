@@ -19,7 +19,7 @@ class BaseAPIService {
         case 400: return .badRequest
         case 401: return .unAuthorized
         case 404: return .notFound
-        case 422: return .unProcessable
+        case 405: return .methodNotAllowed
         case 500: return .serverError
         default: return .networkFail
         }
@@ -32,7 +32,7 @@ class BaseAPIService {
         case 400: return .badRequest
         case 401: return .unAuthorized
         case 404: return .notFound
-        case 422: return .unProcessable
+        case 405: return .methodNotAllowed
         case 500: return .serverError
         default: return .networkFail
         }
