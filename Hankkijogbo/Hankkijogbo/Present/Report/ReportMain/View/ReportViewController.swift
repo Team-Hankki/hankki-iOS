@@ -310,16 +310,29 @@ extension ReportViewController: PHPickerViewControllerDelegate {
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in
-                DispatchQueue.main.async {
-                    if let image = image as? UIImage {
-                        self.image = image
-                        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-                            fatalError("Failed to convert UIImage to Data")
+                if let image = image as? UIImage {
+                    self.image = image
+                    ImageCompressor.compress(image: image) { data in
+                        if let compressedData = data {
+                            self.reportViewModel.selectedImageData = compressedData
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
+                            }
+                        } else {
+                            // TODO: - 압축 실패 alert 문구
+                            DispatchQueue.main.async {
+                                self.showAlert(titleText: StringLiterals.Alert.unknownError,
+                                               subText: StringLiterals.Alert.tryAgain,
+                                               primaryButtonText: StringLiterals.Alert.check)
+                            }
                         }
-                        self.reportViewModel.selectedImageData = imageData
-                        self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
-                    } else {
-                        self.removeImageData()
+                    }
+                } else {
+                    // TODO: - 이미지 불러오기 실패 alert 문구
+                    DispatchQueue.main.async {
+                        self.showAlert(titleText: StringLiterals.Alert.unknownError,
+                                       subText: StringLiterals.Alert.tryAgain,
+                                       primaryButtonText: StringLiterals.Alert.check)
                     }
                 }
             }
