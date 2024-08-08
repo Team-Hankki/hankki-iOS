@@ -34,28 +34,17 @@ final class SearchViewModel {
     }
 
     func getSearchedLocationAPI(query: String) {
-        NetworkService.shared.locationService.getSearchedLocation(query: query) { [weak self] result in
-            switch result {
-            case .success(let response):
-                guard let data = response?.data else { return }
-                self?.searchedLocationResponseData = data
-            case .badRequest, .unAuthorized, .serverError:
-                self?.showAlert?("Failed")
-            default:
-                return
+        NetworkService.shared.locationService.getSearchedLocation(query: query) { result in
+            result.handleNetworkResult { [weak self] response in
+                self?.searchedLocationResponseData = response.data
             }
         }
     }
     
     func postHankkiValidateAPI(req: PostHankkiValidateRequestDTO) {
-        NetworkService.shared.hankkiService.postHankkiValidate(req: req) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.postHankkiValidateCode = response?.code
-            case .badRequest, .unAuthorized, .serverError:
-                self?.showAlert?("Failed")
-            default:
-                return
+        NetworkService.shared.hankkiService.postHankkiValidate(req: req) { result in
+            result.handleNetworkResult { [weak self] response in
+                self?.postHankkiValidateCode = response.code
             }
         }
     }
