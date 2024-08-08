@@ -13,6 +13,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     var storeId: Int64
     
+    private var clickedZipIndexPath: IndexPath?
     private var viewModel: MyZipViewModel = MyZipViewModel()
     private var isExpanded: Bool = false
     private var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
@@ -181,6 +182,11 @@ private extension MyZipListBottomSheetViewController {
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
         }
+        
+        viewModel.showAddToZipCompleteToast = { [self] in
+            guard let data = viewModel.myZipListFavoriteData else { return }
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.setupBlackToast), object: nil, userInfo: ["zipId": Int(data[clickedZipIndexPath?.item ?? 0].id)]))
+        }
     }
     
     func setupGesture() {
@@ -296,14 +302,14 @@ private extension MyZipListBottomSheetViewController {
     /// - 내 족보에 식당 추가 POST API 호출
     @objc func addToMyZipButtonDidTap(_ sender: UIButton) {
         let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
-        let itemIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
+        clickedZipIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
 
         guard let data = viewModel.myZipListFavoriteData else { return }
         
         // TODO: - 이미 추가된 족보일 때 앱 터지는 이슈
         viewModel.postHankkiToZipAPI(
             request: PostHankkiToZipRequestDTO(
-                favoriteId: data[itemIndexPath?.item ?? 0].id,
+                favoriteId: data[clickedZipIndexPath?.item ?? 0].id,
                 storeId: storeId
             )
         )

@@ -27,6 +27,13 @@ enum StringLiterals {
         static let check = "확인"
     }
     
+    enum Toast {
+        static let addToMyZipBlack = "나의 족보에 추가되었습니다."
+        static let see = "보기"
+        static let addToMyZipWhite = "내 족보에 추가했어요"
+        static let move = "이동"
+    }
+    
     enum Report {
         static let mainButton = "제보하기"
         static let categoryHeader = "식당 종류를 알려주세요"
@@ -56,5 +63,6 @@ enum StringLiterals {
     
     enum NotificationName {
         static let updateAddToMyZipList = "UpdateAddToMyZipList"
+        static let setupBlackToast = "SetupBlackToast"
     }
 }

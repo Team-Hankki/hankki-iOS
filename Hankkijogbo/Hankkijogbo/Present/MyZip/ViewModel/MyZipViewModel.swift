@@ -12,6 +12,7 @@ import Moya
 final class MyZipViewModel {
     
     var showAlert: ((String) -> Void)?
+    var showAddToZipCompleteToast: (() -> Void)?
     
     var myZipListFavoriteData: [GetMyZipFavorite]? {
         didSet {
@@ -43,6 +44,7 @@ final class MyZipViewModel {
             switch result {
             case .success(let response):
                 print("SUCCESS")
+                self.showAddToZipCompleteToast?()
             case .unAuthorized, .networkFail:
                 self.showAlert?("Failed")
                 print("FAILED")

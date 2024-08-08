@@ -49,6 +49,7 @@ final class HomeViewController: BaseViewController {
         setupNavigationBar()
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupBlackToast), object: nil)
         updateUniversityData(universityId: universityId)
     }
     
@@ -133,6 +134,16 @@ extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
+    }
+    
+    @objc func setupBlackToast(_ notification: Notification) {
+        if let zipId = notification.userInfo?["zipId"] as? Int {
+            
+            self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
+                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                navigationController?.pushViewController(hankkiListViewController, animated: true)
+            }
+        }
     }
 }
 
