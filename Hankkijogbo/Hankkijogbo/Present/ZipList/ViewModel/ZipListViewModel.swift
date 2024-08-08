@@ -21,7 +21,7 @@ final class ZipListViewModel {
 extension ZipListViewModel {
     func getZipList(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.userService.getMeZipList { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult { response in
                 self.zipList = response.data.favorites.map {
                     return ZipListCollectionViewCell.DataStruct(id: $0.id, title: $0.title, imageUrl: $0.imageType)
                 }
@@ -31,7 +31,7 @@ extension ZipListViewModel {
     
     func postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.zipService.postZipBatchDelete(requesBody: requestBody) { result in
-            result.handleNetworkResult(result)
+            result.handleNetworkResult()
         }
     }
 }

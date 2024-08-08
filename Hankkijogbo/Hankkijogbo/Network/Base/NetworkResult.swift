@@ -41,13 +41,13 @@ enum NetworkResult<T> {
 }
 
 extension NetworkResult {
-    func handleNetworkResult(_ result: NetworkResult, onSuccess: ((T) -> Void)? = nil) {
-        switch result {
+    func handleNetworkResult(onSuccess: ((T) -> Void)? = nil) {
+        switch self {
         case .success(let response):
             if let res = response {
                 onSuccess?(res)
             } else {
-                print(result)
+                print(self)
             }
             
         case .unAuthorized:
@@ -61,7 +61,7 @@ extension NetworkResult {
                 let delegate = windowScene.delegate as? SceneDelegate,
                 let rootViewController = delegate.window?.rootViewController {
                 rootViewController.showAlert(titleText: "오류 발생",
-                                             subText: result.stateDescription,
+                                             subText: self.stateDescription,
                                              primaryButtonText: "확인")
             }
         }

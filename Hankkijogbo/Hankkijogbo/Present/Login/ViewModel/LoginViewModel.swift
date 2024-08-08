@@ -13,7 +13,7 @@ final class LoginViewModel { }
 extension LoginViewModel {
     func postLogin (accessToken: String, postLoginRequest: PostLoginRequestDTO) {
         NetworkService.shared.authService.postLogin(accessToken: accessToken, requestBody: postLoginRequest) { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult() { response in
                 let refreshToken = response.data.refreshToken
                 let accessToken = response.data.accessToken
                 

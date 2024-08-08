@@ -25,7 +25,7 @@ class UnivSelectViewModel {
 extension UnivSelectViewModel {
     func getUniversityList() {
         NetworkService.shared.universityService.getUniversityList { [weak self] result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult() { response in
                 self?.universityList = response.data.universities.map {
                     UniversityModel(id: $0.id,
                                     name: $0.name,
@@ -45,7 +45,7 @@ extension UnivSelectViewModel {
         
         
         NetworkService.shared.userService.postMeUniversity(requestBody: request) { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult() { response in
                 // local에 대학 정보 저장
                 UserDefaults.standard.saveUniversity(currentUniversity)
                 
