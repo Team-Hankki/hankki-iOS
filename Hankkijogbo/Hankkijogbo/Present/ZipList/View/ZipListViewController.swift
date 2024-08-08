@@ -196,7 +196,7 @@ extension ZipListViewController: UICollectionViewDataSource {
             let alpha: CGFloat = isEditMode ? 0.2 : 1.0
             cell.contentView.alpha = alpha
             
-            cell.dataBind(ZipListCollectionViewCell.DataStruct(
+            cell.dataBind(ZipListCollectionViewCell.Model(
                 id: -1,
                 title: "새로운\n족보 리스트\n추가하기",
                 imageUrl: "",
@@ -215,7 +215,6 @@ extension ZipListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ZipListCollectionViewCell else { return }
         
-        // TODO: - 뷰나오면 추가
             if isEditMode {
                 if indexPath.item != 0 {
                     cell.setSelected(true)

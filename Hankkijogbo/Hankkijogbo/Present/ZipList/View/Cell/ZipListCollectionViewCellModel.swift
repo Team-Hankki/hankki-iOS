@@ -8,7 +8,7 @@
 import UIKit
 
 extension ZipListCollectionViewCell {
-    struct DataStruct {
+    struct Model {
         let id: Int
         let title: String
         let imageUrl: String
