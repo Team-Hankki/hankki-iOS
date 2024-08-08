@@ -14,15 +14,15 @@ final class MypageViewController: BaseViewController {
     
     let viewModel: MypageViewModel = MypageViewModel()
     
-    private let hankkiList: [MypageHankkiCollectionViewCell.DataStruct] = [
-        MypageHankkiCollectionViewCell.DataStruct(image: .icFood31, title: "내가 제보한 식당"),
-        MypageHankkiCollectionViewCell.DataStruct(image: .icLike, title: "좋아요 누른 식당")
+    private let hankkiList: [MypageHankkiCollectionViewCell.Model] = [
+        MypageHankkiCollectionViewCell.Model(image: .icFood31, title: "내가 제보한 식당"),
+        MypageHankkiCollectionViewCell.Model(image: .icLike, title: "좋아요 누른 식당")
     ]
     
-    private let optionList: [MypageOptionCollectionViewCell.DataStruct] = [
-        MypageOptionCollectionViewCell.DataStruct(title: "FAQ"),
-        MypageOptionCollectionViewCell.DataStruct(title: "1:1 문의"),
-        MypageOptionCollectionViewCell.DataStruct(title: "로그아웃")
+    private let optionList: [MypageOptionCollectionViewCell.Model] = [
+        MypageOptionCollectionViewCell.Model(title: "FAQ"),
+        MypageOptionCollectionViewCell.Model(title: "1:1 문의"),
+        MypageOptionCollectionViewCell.Model(title: "로그아웃")
     ]
     
     // MARK: - UI Properties
@@ -179,7 +179,7 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MypageOptionCollectionViewCell.className, for: indexPath) as? MypageOptionCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.dataBind(data: optionList[indexPath.item])
+            cell.dataBind(optionList[indexPath.item])
             return cell
             
         case .none:

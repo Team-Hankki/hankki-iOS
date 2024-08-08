@@ -7,6 +7,13 @@
 
 import UIKit
 
+extension MypageHeaderView {
+    struct Model {
+        let image: String
+        let name: String
+    }
+}
+
 final class MypageHeaderView: BaseCollectionViewCell {
     
     // MARK: - Properties
@@ -22,13 +29,12 @@ final class MypageHeaderView: BaseCollectionViewCell {
         profileNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: "cell",
+                withText: " ",
                 color: .gray900
             )
             $0.numberOfLines = 2
             $0.textAlignment = .center
         }
-    
     }
     
     override func setupHierarchy() {
@@ -56,17 +62,10 @@ final class MypageHeaderView: BaseCollectionViewCell {
 }
 
 extension MypageHeaderView {
-    func dataBind(_ data: DataStruct?) {
-        profileImageView.setKFImage(url: data?.image)
-        if let nameString = data?.name {
+    func dataBind(_ model: Model?) {
+        profileImageView.setKFImage(url: model?.image)
+        if let nameString = model?.name {
             profileNameLabel.text = "\(nameString)님\n한끼 잘 챙겨드세요"
         } else { profileNameLabel.text = "한끼 줍쇼님\n한끼 잘 챙겨드세요" }
-    }
-}
-
-extension MypageHeaderView {
-    struct DataStruct {
-        let image: String
-        let name: String
     }
 }

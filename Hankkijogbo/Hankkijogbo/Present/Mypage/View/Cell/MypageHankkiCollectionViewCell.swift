@@ -7,6 +7,13 @@
 
 import UIKit
 
+extension MypageHankkiCollectionViewCell {
+    struct Model {
+        let image: UIImage
+        let title: String
+    }
+}
+
 final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
@@ -46,13 +53,8 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension MypageHankkiCollectionViewCell {
-    func dataBind(_ data: DataStruct) {
-        self.imageView.image = data.image
-        self.titleLabel.text = data.title
-    }
-    
-    struct DataStruct {
-        let image: UIImage
-        let title: String
+    func dataBind(_ model: Model) {
+        self.imageView.image = model.image
+        self.titleLabel.text = model.title
     }
 }
