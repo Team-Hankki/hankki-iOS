@@ -21,7 +21,6 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
             setupLikeButtonStyle()
         }
     }
-    var addMyZipString: String = "나의 족보에 추가"
     
     // MARK: - UI Components
     
@@ -33,7 +32,7 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     )
     lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton(
         image: .btnAddDetail,
-        text: self.addMyZipString,
+        text: StringLiterals.MyZip.addToMyZip,
         buttonHandler: nil
     )
     

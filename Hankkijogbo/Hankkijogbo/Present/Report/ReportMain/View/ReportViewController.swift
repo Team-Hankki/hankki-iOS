@@ -20,7 +20,7 @@ final class ReportViewController: BaseViewController {
     private let reportViewModel: ReportViewModel = ReportViewModel()
     private let searchViewModel: SearchViewModel = SearchViewModel()
     private var image: UIImage?
-    private let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.menuHeader]
+    private let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.addMenuTitle]
     
     // MARK: - UI Components
     

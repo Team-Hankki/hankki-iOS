@@ -10,6 +10,7 @@ import Foundation
 enum StringLiterals {
     enum Common {
         static let goToHome = "홈으로"
+        static let won = "원"
     }
     
     enum Home {
@@ -18,7 +19,6 @@ enum StringLiterals {
         static let sortFilteringButton = "정렬"
         static let less6000 = "6000원 이하"
         static let more6000 = "6000~8000원"
-        static let won = "원"
     }
     
     enum Alert {
@@ -35,10 +35,34 @@ enum StringLiterals {
         static let move = "이동"
     }
     
+    enum Toolbar {
+        static let done = "Done"
+    }
+    
+    enum Placeholder {
+        static let menuName = "예) 된장찌개"
+        static let price = "8000"
+    }
+    
+    enum HankkiDetail {
+        static let editMenu = "메뉴 추가/수정하기"
+        static let reportWrongInformation = "내가 알고 있는 정보와 다른가요?"
+    }
+    
     enum Report {
+        static let numberOfReport = "번째 제보예요"
+        static let reportThisLocation = "을 제보할래요"
+        static let searchPlaceHolder = "이름으로 식당 검색"
         static let mainButton = "제보하기"
         static let categoryHeader = "식당 종류를 알려주세요"
-        static let menuHeader = "메뉴를 추가해주세요"
+        static let addMenuTitle = "메뉴를 추가해주세요"
+        static let addMenuSubtitle = "한끼로 적당한 메뉴를 추천해주세요"
+        static let addImage = "대표 음식 이미지 첨부하기 (선택)"
+        static let changeImage = "바꾸기"
+        static let menuName = "메뉴 이름"
+        static let price = "가격"
+        static let priceError = "8000원 이하만 가능해요"
+        static let addMenu = "메뉴 추가하기"
         static let goToReportedHankki = "제보한 식당 보러가기"
         static let hankkiReportComplete = "번째 식당을 등록했어요"
         static let randomThanksMessageVer1 = "님이 모두의 지갑을 지켰어요!"

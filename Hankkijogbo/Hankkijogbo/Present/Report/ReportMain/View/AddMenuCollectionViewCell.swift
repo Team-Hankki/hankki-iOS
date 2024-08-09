@@ -31,7 +31,7 @@ final class AddMenuCollectionViewCell: BaseCollectionViewCell {
             $0.setImage(.btnAddFilled, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: "메뉴 추가하기",
+                withText: StringLiterals.Report.addMenu,
                 color: .gray400
             ), for: .normal)
             $0.configuration = .plain()

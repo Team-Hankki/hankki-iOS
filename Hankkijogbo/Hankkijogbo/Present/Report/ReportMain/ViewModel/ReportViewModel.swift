@@ -43,7 +43,7 @@ extension ReportViewModel {
             result.handleNetworkResult { [weak self] response in
                 let reportedNumber = response.data.count
                 self?.reportedNumber = Int(reportedNumber)
-                self?.reportedNumberGuideText = "\(reportedNumber)번째 제보예요"
+                self?.reportedNumberGuideText = "\(reportedNumber)\(StringLiterals.Report.numberOfReport)"
             }
         }
     }

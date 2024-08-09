@@ -13,8 +13,6 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     private let menuNameMaxLength: Int = 30
     private let priceMaxLength: Int = 5
-    private let menuNamePlaceHolderString: String = "예) 된장찌개"
-    private let pricePlaceHolderString: String = "8000"
     weak var delegate: PassItemDataDelegate?
         
     // MARK: - UI Components
@@ -102,7 +100,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         menuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
-                withText: "메뉴 이름",
+                withText: StringLiterals.Report.menuName,
                 color: .gray500
             )
         }
@@ -117,7 +115,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: menuNamePlaceHolderString,
+                withText: StringLiterals.Placeholder.menuName,
                 color: .gray400
             )
             $0.addPadding(left: 12, right: 12)
@@ -125,7 +123,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
-                withText: "가격",
+                withText: StringLiterals.Report.price,
                 color: .gray500
             )
         }
@@ -140,7 +138,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: pricePlaceHolderString,
+                withText: StringLiterals.Placeholder.price,
                 color: .gray400
             )
             $0.addPadding(left: 12, right: 16)
@@ -150,7 +148,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         priceUnitLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "원",
+                withText: StringLiterals.Common.won,
                 color: .gray800
             )
         }
@@ -160,7 +158,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         errorLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                withText: "8000원 이하만 가능해요",
+                withText: StringLiterals.Report.priceError,
                 color: .hankkiRed
             )
             $0.isHidden = true
@@ -184,7 +182,7 @@ private extension MenuCollectionViewCell {
     func setupToolbar() {
         doneToolbar.items=[
             UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
+            UIBarButtonItem(title: StringLiterals.Toolbar.done, style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
         ]
         doneToolbar.sizeToFit()
     }
