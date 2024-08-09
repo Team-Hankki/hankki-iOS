@@ -13,7 +13,7 @@ protocol HankkiListTableViewCellDelegate: AnyObject {
 
 extension HankkiListTableViewCell {
     struct Model {
-        let id: Int64
+        let id: Int
         let name: String
         let imageURL: String
         let category: String

@@ -8,6 +8,6 @@
 import Foundation
 
 struct PostHankkiToZipRequestDTO: Codable {
-    let favoriteId: Int64
-    let storeId: Int64
+    let favoriteId: Int
+    let storeId: Int
 }

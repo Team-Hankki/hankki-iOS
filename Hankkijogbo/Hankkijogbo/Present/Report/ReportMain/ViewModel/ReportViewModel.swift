@@ -43,7 +43,7 @@ extension ReportViewModel {
             switch result {
             case .success(let response):
                 guard let reportedNumber = response?.data.count else { return }
-                self?.reportedNumber = Int(reportedNumber)
+                self?.reportedNumber = reportedNumber
                 self?.reportedNumberGuideText = "\(reportedNumber)번째 제보예요"
             case .badRequest, .unAuthorized, .serverError:
                 self?.showAlert?("Failed to fetch category filters.")

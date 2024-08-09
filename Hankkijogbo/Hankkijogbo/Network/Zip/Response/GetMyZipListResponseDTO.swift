@@ -13,7 +13,7 @@ struct GetMyZipListResponseData: Codable {
 }
 
 struct GetMyZipFavorite: Codable {
-    var id: Int64
+    var id: Int
     var title: String
     var imageType: String
     var details: [String]

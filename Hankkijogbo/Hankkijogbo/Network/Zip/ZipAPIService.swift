@@ -13,7 +13,7 @@ protocol ZipAPIServiceProtocol {
     typealias GetMyZipListResponseDTO = BaseDTO<GetMyZipListResponseData>
     typealias GetZipDetailResponseDTO = BaseDTO<GetZipDetailResponseData>
     
-    func getMyZipList(id: Int64, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
+    func getMyZipList(id: Int, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<Void>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
@@ -40,7 +40,7 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
 
-    func getMyZipList(id: Int64, completion: @escaping (NetworkResult<GetMyZipListResponseDTO>) -> Void) {
+    func getMyZipList(id: Int, completion: @escaping (NetworkResult<GetMyZipListResponseDTO>) -> Void) {
         provider.request(.getMyZipList(id: id)) { result in
             switch result {
             case .success(let response):

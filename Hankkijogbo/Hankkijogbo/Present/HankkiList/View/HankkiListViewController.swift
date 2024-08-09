@@ -190,11 +190,11 @@ extension HankkiListViewController: UITableViewDataSource {
         }
     }
     
-    func deleteLike(_ id: Int64) {
+    func deleteLike(_ id: Int) {
         viewModel.deleteHankkiHeart(id: id)
     }
     
-    func postLike(_ id: Int64) {
+    func postLike(_ id: Int) {
         viewModel.postHankkiHeart(id: id)
     }
 }
@@ -244,7 +244,7 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
     func heartButtonDidTap(in cell: HankkiListTableViewCell, isSelected: Bool) {
         var calc: Int = 1
         if let indexPath = hankkiTableView.indexPath(for: cell) {
-            let hankkiId: Int64 = Int64(viewModel.hankkiList[indexPath.item].id)
+            let hankkiId: Int = viewModel.hankkiList[indexPath.item].id
             if isSelected {
                 calc *= -1
                 deleteLike(hankkiId)

@@ -20,7 +20,7 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int64) {
+    func getHankkiDetailAPI(hankkiId: Int) {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             switch result {
             case .success(let response):
@@ -37,7 +37,7 @@ final class HankkiDetailViewModel {
     }
     
     /// 식당 좋아요 추가
-    func postHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+    func postHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.postHankkiHeart(id: id) { [weak self] result in
             switch result {
             case .success(let response):
@@ -54,7 +54,7 @@ final class HankkiDetailViewModel {
     }
     
     /// 식당 좋아요 삭제
-    func deleteHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+    func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { [weak self] result in
             switch result {
             case .success(let response):

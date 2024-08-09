@@ -10,5 +10,5 @@ import Foundation
 /// 식당 제보하기 Response
 struct PostHankkiResponseData: Codable {
     var name: String
-    var id: Int64
+    var id: Int
 }

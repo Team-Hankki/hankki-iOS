@@ -10,5 +10,5 @@ import Foundation
 // MARK: - 제보수 조회 API Res
 
 struct GetReportedNumberResponseData: Codable {
-    var count: Int64
+    var count: Int
 }

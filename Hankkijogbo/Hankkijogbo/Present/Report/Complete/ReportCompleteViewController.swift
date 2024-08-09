@@ -11,7 +11,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let hankkiId: Int64
+    let hankkiId: Int
     let reportedNumber: Int
     let nickname: String
     let selectedHankkiName: String
@@ -34,7 +34,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int64,
+    init(hankkiId: Int,
          reportedNumber: Int,
          nickname: String,
          selectedHankkiName: String) {

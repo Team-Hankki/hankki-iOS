@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class HankkiListViewModel {
     
@@ -78,15 +79,20 @@ extension HankkiListViewModel {
         }
     }
     
-    func postHankkiHeart(id: Int64) {
+    func postHankkiHeart(id: Int) {
         NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
             result.handleNetworkResult(result)
         }
     }
     
-    func deleteHankkiHeart(id: Int64) {
+    func deleteHankkiHeart(id: Int) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            result.handleNetworkResult(result) 
+            switch result {
+            case .conflict:
+                UIApplication.showAlert(titleText: "이미 취소한 식당입니다.", primaryButtonText: "확인")
+            default:
+                result.handleNetworkResult(result)
+            }
         }
     }
 }
