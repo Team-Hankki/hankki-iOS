@@ -87,13 +87,13 @@ extension MyZipListCollectionViewCell {
 
     func getImageForType(_ type: String) -> UIImage {
         let thumbnailImages: [String: UIImage] = [
-            "TYPE_ONE": .imgZipThumbnail1,
-            "TYPE_TWO": .imgZipThumbnail2,
-            "TYPE_THREE": .imgZipThumbnail3,
-            "TYPE_FOUR": .imgZipThumbnail4
+            "TYPE_ONE": .imgZipListThumbnail1,
+            "TYPE_TWO": .imgZipListThumbnail2,
+            "TYPE_THREE": .imgZipListThumbnail3,
+            "TYPE_FOUR": .imgZipListThumbnail4
         ]
         
-        return thumbnailImages[type] ?? .imgZipThumbnail1
+        return thumbnailImages[type] ?? .imgZipListThumbnail1
     }
     
     func setupLabelStyleOfData(zipData: GetMyZipFavorite) {

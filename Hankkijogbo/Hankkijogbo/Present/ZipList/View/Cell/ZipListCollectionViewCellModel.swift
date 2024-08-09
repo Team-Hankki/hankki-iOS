@@ -44,11 +44,11 @@ extension ZipListCollectionViewCell {
         func image(for imageType: ImageType?) -> UIImage {
             switch self {
             case .create:
-                return .imgZipCreateNormal
+                return .imgZipListCreateNormal
             case .common:
-                return imageType?.imageForType() ?? .imgZipThumbnail1
+                return imageType?.imageForType() ?? .imgZipListThumbnail1
             case .disable:
-                return .imgZipCreateDisable
+                return .imgZipListCreateDisable
             }
         }
         
@@ -88,13 +88,13 @@ extension ZipListCollectionViewCell {
         func imageForType() -> UIImage {
             switch self {
             case .TYPE_ONE:
-                return .imgZipThumbnail1
+                return .imgZipListThumbnail1
             case .TYPE_TWO:
-                return .imgZipThumbnail2
+                return .imgZipListThumbnail2
             case .TYPE_THREE:
-                return .imgZipThumbnail3
+                return .imgZipListThumbnail3
             case .TYPE_FOUR:
-                return .imgZipThumbnail4
+                return .imgZipListThumbnail4
             }
         }
     }
