@@ -12,6 +12,7 @@ enum StringLiterals {
         static let withdraw = "탈퇴하기"
         static let logout = "로그아웃"
     }
+    
     enum Home {
         static let storeCategoryFilteringButton = "종류"
         static let priceFilteringButton = "가격대"
@@ -36,6 +37,10 @@ enum StringLiterals {
             static let title = "소중한 족보가 사라져요"
             static let secondaryButton = StringLiterals.Common.withdraw
         }
+        enum DeleteZip {
+            static let title = "족보를 삭제할까요?"
+            static let primaryButton = "삭제하기"
+        }
     }
     
     enum Report {
@@ -57,12 +62,20 @@ enum StringLiterals {
         enum Option {
             static let FAQ = "FAQ"
             static let OneonOne = "1:1 문의"
-            static let Logout = "로그아웃"
+            static let Logout = StringLiterals.Common.logout
         }
         
         enum Header {
             static let greeting = "님\n한끼 잘 챙겨드세요"
         }
+    }
+    
+    enum ZipList {
+        static let navigation = "나의 식당 족보"
+        static let navigationEdit = "편집"
+        static let navigationDelete = "삭제"
+        
+        static let createZip = "새로운\n족보 리스트\n추가하기"
     }
     
     enum HankkiList {

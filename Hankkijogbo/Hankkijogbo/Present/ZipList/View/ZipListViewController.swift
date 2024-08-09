@@ -85,8 +85,8 @@ private extension ZipListViewController {
             type = HankkiNavigationType(
                 hasBackButton: true,
                 hasRightButton: true,
-                mainTitle: .string("나의 식당 족보"),
-                rightButton: .string("삭제"),
+                mainTitle: .string(StringLiterals.ZipList.navigation),
+                rightButton: .string(StringLiterals.ZipList.navigationDelete),
                 rightButtonAction: deleteButtonDidTap,
                 backButtonAction: setIsEditMode
             )
@@ -95,8 +95,8 @@ private extension ZipListViewController {
             type = HankkiNavigationType(
                 hasBackButton: true,
                 hasRightButton: true,
-                mainTitle: .string("나의 식당 족보"),
-                rightButton: .string("편집"),
+                mainTitle: .string(StringLiterals.ZipList.navigation),
+                rightButton: .string(StringLiterals.ZipList.navigationEdit),
                 rightButtonAction: editButtonDidTap
             )
         }
@@ -112,9 +112,9 @@ private extension ZipListViewController {
     func deleteButtonDidTap() {
         // 현재 선택된 cell이 1개 이상일 때만 삭제가 가능합니다.
         if collectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
-            showAlert(titleText: "족보를 삭제할까요?",
-                      secondaryButtonText: "돌아가기",
-                      primaryButtonText: "삭제하기",
+            showAlert(titleText: StringLiterals.Alert.DeleteZip.title,
+                      secondaryButtonText: StringLiterals.Alert.back,
+                      primaryButtonText: StringLiterals.Alert.DeleteZip.primaryButton,
                       primaryButtonHandler: deleteZip)
         }
     }
@@ -198,7 +198,7 @@ extension ZipListViewController: UICollectionViewDataSource {
             
             cell.dataBind(ZipListCollectionViewCell.Model(
                 id: -1,
-                title: "새로운\n족보 리스트\n추가하기",
+                title: StringLiterals.ZipList.createZip,
                 imageUrl: "",
                 type: isEditMode ? ZipListCollectionViewCell.CellType.disable : ZipListCollectionViewCell.CellType.create )
             )
