@@ -46,9 +46,9 @@ final class  HankkiListViewController: BaseViewController {
         bindViewModel()
         
         if type == .myZip {
-            viewModel.getZipDetail(zipId: zipId ?? 0, completion: {_ in})
+            viewModel.getZipDetail(zipId: zipId ?? 0)
         } else {
-            viewModel.getMeHankkiList(type.userTargetType, completion: {_ in})
+            viewModel.getMeHankkiList(type.userTargetType)
         }
     }
     
@@ -195,11 +195,11 @@ extension HankkiListViewController: UITableViewDataSource {
     }
     
     func deleteLike(_ id: Int64) {
-        viewModel.deleteHankkiHeartAPI(id: id) {}
+        viewModel.deleteHankkiHeart(id: id)
     }
     
     func postLike(_ id: Int64) {
-        viewModel.postHankkiHeartAPI(id: id) {}
+        viewModel.postHankkiHeart(id: id)
     }
 }
 
@@ -276,7 +276,12 @@ private extension HankkiListViewController {
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
         let request: DeleteZipToHankkiRequestDTO = DeleteZipToHankkiRequestDTO(favoriteId: zipId ?? 0, storeId: viewModel.hankkiList[indexPath.item].id)
-        viewModel.deleteZipToHankki(requestBody: request, completion: {_ in})
+        viewModel.deleteZipToHankki(requestBody: request) {
+            self.removeCellFromCollectionView(indexPath)
+        }
+    }
+    
+    private func removeCellFromCollectionView(_ indexPath: IndexPath) {
         viewModel.hankkiList.remove(at: indexPath.row)
         
         hankkiTableView.beginUpdates()

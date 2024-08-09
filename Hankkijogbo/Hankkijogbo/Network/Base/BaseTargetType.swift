@@ -61,20 +61,29 @@ extension BaseTargetType {
         case .loginHeader(let accessToken):
             header["Content-Type"] = "application/json"
             header["Authorization"] = "\(accessToken)"
+            
         case .withdrawHeader(let authorizationCode):
             header["Content-Type"] = "application/json"
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"
             header["X-Apple-Code"] = "\(authorizationCode)"
+            
+        case .refreshTokenHeader:
+            header["Content-Type"] = "application/json"
+            let refreshToken = UserDefaults.standard.getRefreshToken()
+            header["Authorization"] = URLConstant.bearer + "\(refreshToken)"
+            
         case .formdataHeader:
             header["Content-Type"] = "multipart/form-data"
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"
+            
         default:
             header["Content-Type"] = "application/json"
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         }
+        
         return header
     }
     

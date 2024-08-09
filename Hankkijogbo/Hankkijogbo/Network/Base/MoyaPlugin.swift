@@ -33,7 +33,7 @@ final class MoyaPlugin: PluginType {
         if let body = httpRequest.httpBody, let bodyString = String(bytes: body, encoding: String.Encoding.utf8) {
             log.append("✏️ body:\n\(bodyString)\n")
         }
-        log.append("=======================================================\n\n")
+        log.append("=======================================================\n")
         print(log)
     }
 
@@ -59,7 +59,7 @@ final class MoyaPlugin: PluginType {
         if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
             log.append("\n4️⃣ \(reString)\n")
         }
-        log.append("=======================================================\n\n")
+        log.append("=======================================================\n")
         print(log)
     }
 

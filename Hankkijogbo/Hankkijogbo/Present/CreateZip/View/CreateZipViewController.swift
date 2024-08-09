@@ -188,7 +188,7 @@ private extension CreateZipViewController {
     func submitButtonDidTap() {
         let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
         let data = PostZipRequestDTO(title: titleInputTextField.text ?? " ", details: arr)
-        print(arr, data)
+
         viewModel.postZip(data)
     }
     

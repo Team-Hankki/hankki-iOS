@@ -37,9 +37,8 @@ final class ZipListViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         setupNavigationBar()
-        viewModel.getZipList(completion: {_ in})
+        viewModel.getZipList()
     }
     
     override func setupStyle() {
@@ -132,19 +131,20 @@ private extension ZipListViewController {
     }
     
     func deleteZip() {
-//        print(collectionView.indexPathsForSelectedItems)
         let selectedItemItems: [Int] = collectionView.indexPathsForSelectedItems?
             .filter { $0.item != 0 }
             .map { indexPath in
                 viewModel.zipList[indexPath.item - 1].id
             } ?? []
         
-        print(selectedItemItems, "을 삭제합니다.")
-        
         let request: PostZipBatchDeleteRequestDTO = PostZipBatchDeleteRequestDTO(favoriteIds: selectedItemItems)
-        viewModel.postZipBatchDelete(requestBody: request, completion: {_ in})
-        setIsEditMode()
-        dismiss(animated: false)
+        viewModel.postZipBatchDelete(requestBody: request) {
+            self.setIsEditMode()
+            self.dismiss(animated: false) {
+                self.viewModel.zipList = []
+                self.viewModel.getZipList()
+            }
+        }
     }
     
     func setIsEditMode() {
@@ -221,7 +221,6 @@ extension ZipListViewController: UICollectionViewDelegate {
                 if indexPath.item == 0 {
                     navigateToCreateZipViewController()
                 } else {
-                    print(indexPath.item, "으로 이동합니다.")
                     // 첫 족보 추가하기 셀은 리스트에 포함하지 않으므로 1을 뺀다
                     navigateToHankkiListViewController(zipId: self.viewModel.zipList[indexPath.item - 1].id)
                 }
