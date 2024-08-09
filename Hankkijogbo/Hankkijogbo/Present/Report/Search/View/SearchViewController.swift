@@ -164,13 +164,11 @@ extension SearchViewController {
         }
         
         viewModel.completeLocationSelection = {
-            self.completeLocationSelection()
+            self.navigationController?.popViewController(animated: true)
         }
         
-        viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+        viewModel.showAlert = { title, sub, button in
+            self.showAlert(titleText: title, subText: sub ?? "", primaryButtonText: button)
         }
     }
 }
@@ -239,23 +237,6 @@ private extension SearchViewController {
         guard let hankkiLocation = viewModel.selectedLocationData else { return }
         let request = PostHankkiValidateRequestDTO(universityId: Int64(university.id), latitude: hankkiLocation.latitude, longitude: hankkiLocation.longitude)
         viewModel.postHankkiValidateAPI(req: request)
-    }
-    
-    func completeLocationSelection() {
-        guard let code = viewModel.postHankkiValidateCode else { return }
-        switch code {
-        case 200:
-            // 등록 ㄱ
-            guard let location = viewModel.selectedLocationData else { return }
-            self.navigationController?.popViewController(animated: true)
-        case 409:
-            // 이미 등록된 가게 Alert 띄우기
-            showAlert(titleText: StringLiterals.Report.alreadyReportHankki, primaryButtonText: StringLiterals.Alert.check)
-        default:
-            // ERROR
-            // TODO: - 공통 에러 Alert 필요
-            break
-        }
     }
 }
 

@@ -25,6 +25,7 @@ enum StringLiterals {
         static let unknownError = "알 수 없는 오류가 발생했어요"
         static let tryAgain = "네트워크 연결 상태를 확인하고\n다시 시도해주세요"
         static let check = "확인"
+        static let alreadyReportHankki = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
     }
     
     enum Toast {
@@ -44,7 +45,6 @@ enum StringLiterals {
         static let randomThanksMessageVer2 = "님 덕분에 모두가 저렴하고\n맛있는 식사를 할 수 있어요!"
         static let randomThanksMessageVer3 = "님, 오늘도 저렴하고 든든한 식사하세요!"
         static let hankkiReportedByMe = "내가 등록한 식당"
-        static let alreadyReportHankki = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
         static let reportHankki = "식당을 제보해주세요"
         static let searchHankkiByName = "식당 이름으로 검색하면\n주소를 찾아 드릴게요"
     }
