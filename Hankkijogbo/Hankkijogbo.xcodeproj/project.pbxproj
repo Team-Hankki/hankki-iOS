@@ -607,7 +607,7 @@
 				83DBED8D2C2564790042BA48 /* Home */,
 				A240EA362C444D2D000FF458 /* HankkiDetail */,
 				A2DEBF572C3D257100DE14A9 /* Report */,
-				A2B599192C39D0BC004B7E4E /* MyZip */,
+				A2B599192C39D0BC004B7E4E /* MyZipList */,
 				864FA9002C3D1F650051EA36 /* Mypage */,
 				86B761112C3DC76000413059 /* ZipList */,
 				86784E882C3FC0B900E94A5D /* CreateZip */,
@@ -1324,13 +1324,13 @@
 			path = HankkiToasts;
 			sourceTree = "<group>";
 		};
-		A2B599192C39D0BC004B7E4E /* MyZip */ = {
+		A2B599192C39D0BC004B7E4E /* MyZipList */ = {
 			isa = PBXGroup;
 			children = (
 				A2C9FCA62C4972FA00868DF7 /* ViewModel */,
 				A2DEBF482C3BD7A300DE14A9 /* View */,
 			);
-			path = MyZip;
+			path = MyZipList;
 			sourceTree = "<group>";
 		};
 		A2C9FCA42C49721200868DF7 /* ViewModel */ = {

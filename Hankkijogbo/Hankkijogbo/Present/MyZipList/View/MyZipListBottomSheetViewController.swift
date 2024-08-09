@@ -144,7 +144,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         }
         
         addNewZipButton.do {
-            $0.setImage(.imgZipCreateNormal, for: .normal)
+            $0.setImage(.imgCreateMyZip, for: .normal)
         }
         
         addNewZipLabel.do {
