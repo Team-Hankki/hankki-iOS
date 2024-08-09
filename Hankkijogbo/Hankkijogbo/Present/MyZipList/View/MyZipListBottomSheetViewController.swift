@@ -48,6 +48,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         super.viewDidLoad()
         
         setupGesture()
+        setupAddTarget()
         setupDelegate()
         setupRegister()
         bindViewModel()
@@ -198,8 +199,12 @@ private extension MyZipListBottomSheetViewController {
         self.containerView.addGestureRecognizer(downSwipeGesture)
         let dimmedTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap))
         self.dimmedView.addGestureRecognizer(dimmedTapGesture)
-        let addNewZipTapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipStackViewDidTap))
+        let addNewZipTapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipDidTap))
         addNewZipStackView.addGestureRecognizer(addNewZipTapGesture)
+    }
+    
+    func setupAddTarget() {
+        addNewZipButton.addTarget(self, action: #selector(addNewZipDidTap), for: .touchUpInside)
     }
     
     func setupDelegate() {
@@ -288,7 +293,7 @@ private extension MyZipListBottomSheetViewController {
         dismissMyZipBottomSheet()
     }
     
-    @objc func addNewZipStackViewDidTap () {
+    @objc func addNewZipDidTap () {
         dismissMyZipBottomSheet()
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
