@@ -11,7 +11,7 @@ final class MyZipListHeaderView: BaseCollectionReusableView {
         
     // MARK: - UI Properties
     
-    private let headerLabel = UILabel()
+    private let headerLabel: UILabel = UILabel()
     
     // MARK: - Set UI
     

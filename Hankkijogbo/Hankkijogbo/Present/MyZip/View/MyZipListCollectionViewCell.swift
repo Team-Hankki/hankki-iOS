@@ -13,11 +13,11 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Components
     
-    private let thumbnailImageView = UIImageView()
-    private let zipTitleLabel = UILabel()
-    private let firstHashtagLabel = UILabel()
-    private let secondHashtagLabel = UILabel()
-    let addZipButton = UIButton()
+    private let thumbnailImageView: UIImageView = UIImageView()
+    private let zipTitleLabel: UILabel = UILabel()
+    private let firstHashtagLabel: UILabel = UILabel()
+    private let secondHashtagLabel: UILabel = UILabel()
+    let addZipButton: UIButton = UIButton()
     
     // MARK: - Setup UI
     

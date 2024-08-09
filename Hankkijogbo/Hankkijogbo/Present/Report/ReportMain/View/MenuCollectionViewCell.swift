@@ -17,13 +17,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         
     // MARK: - UI Components
     
-    private let menuLabel = UILabel()
-    let menuTextField = UITextField()
-    private let priceLabel = UILabel()
-    let priceTextField = UITextField()
-    private let priceUnitLabel = UILabel()
-    let deleteMenuButton = UIButton()
-    private let errorLabel = UILabel()
+    private let menuLabel: UILabel = UILabel()
+    let menuTextField: UITextField = UITextField()
+    private let priceLabel: UILabel = UILabel()
+    let priceTextField: UITextField = UITextField()
+    private let priceUnitLabel: UILabel = UILabel()
+    let deleteMenuButton: UIButton = UIButton()
+    private let errorLabel: UILabel = UILabel()
     private let doneToolbar: UIToolbar = UIToolbar()
     
     // MARK: - Init

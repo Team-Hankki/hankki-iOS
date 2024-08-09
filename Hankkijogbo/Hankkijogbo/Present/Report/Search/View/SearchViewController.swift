@@ -14,7 +14,7 @@ final class SearchViewController: BaseViewController {
     var viewModel: SearchViewModel
     
     weak var delegate: PassItemDataDelegate?
-    private let debouncer = HankkiDebouncer(seconds: 0.5)
+    private let debouncer: HankkiDebouncer = HankkiDebouncer(seconds: 0.5)
     
     // MARK: - UI Components
     

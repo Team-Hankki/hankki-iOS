@@ -11,8 +11,8 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
     
-    private let recommendGuideLabel = UILabel()
-    let selectImageButton = UIButton()
+    private let recommendGuideLabel: UILabel = UILabel()
+    let selectImageButton: UIButton = UIButton()
         
     // MARK: - Set UI
     

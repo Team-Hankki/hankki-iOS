@@ -11,7 +11,7 @@ final class AddMenuCollectionViewCell: BaseCollectionViewCell {
         
     // MARK: - UI Components
     
-    let addMenuButton = UIButton()
+    let addMenuButton: UIButton = UIButton()
     
     // MARK: - Setup UI
     
