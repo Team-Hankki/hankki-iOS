@@ -146,8 +146,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
 
 private extension ZipHeaderTableView {
     @objc func shareButtonDidTap() {
-        print("print")
-//        self.showAlert?("Failed")
+        // TODO: - 공유 로직 추가 필요
     }
     
     func setupAddTarget() {

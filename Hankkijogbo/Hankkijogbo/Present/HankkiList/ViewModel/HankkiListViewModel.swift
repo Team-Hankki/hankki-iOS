@@ -30,108 +30,64 @@ final class HankkiListViewModel {
 extension HankkiListViewModel {
     func getMe() {
         NetworkService.shared.userService.getMe { result in
-            switch result {
-            case .success(let response):
-                if let responseData = response {
-                    self.name = responseData.data.nickname
-                    self.imageUrl = responseData.data.profileImageUrl
-                } else { return }
-            case .unAuthorized, .pathError:
-                self.showAlert?("Failed")
-            default:
-                return
+            result.handleNetworkResult(result) { response in
+                self.name = response.data.nickname
+                self.imageUrl = response.data.profileImageUrl
             }
         }
     }
     
-    func getZipDetail(zipId: Int, completion: @escaping(Bool) -> Void) {
+    func getZipDetail(zipId: Int) {
         NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
-            switch result {
-            case .success(let response):
-                if let responseData = response {
-                    self.zipInfo = ZipHeaderTableView.DataStruct(name: self.name ?? "",
-                                                                 imageUrl: self.imageUrl ?? "",
-                                                                 title: responseData.data.title,
-                                                                 details: responseData.data.details)
-                    
-                    self.hankkiList = responseData.data.stores.map {
-                        return HankkiListTableViewCell.DataStruct(id: $0.id,
-                                                                  name: $0.name,
-                                                                  imageURL: $0.imageUrl,
-                                                                  category: $0.category,
-                                                                  lowestPrice: $0.lowestPrice,
-                                                                  heartCount: $0.heartCount)
-                    }
-                } else { print("Error") }
-                completion(true)
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-                completion(false)
-            default:
-                return
-            }
-        }
-    }
-    
-    func getMeHankkiList(_ type: UserTargetType, completion: @escaping (Bool) -> Void) {
-        NetworkService.shared.userService.getMeHankkiList(type) { result in
-            switch result {
-            case .success(let response):
-                if let responseData = response {
-                    self.hankkiList = responseData.data.stores.map {
-                        return HankkiListTableViewCell.DataStruct(id: $0.id,
-                                                                  name: $0.name,
-                                                                  imageURL: $0.imageUrl,
-                                                                  category: $0.category,
-                                                                  lowestPrice: $0.lowestPrice,
-                                                                  heartCount: $0.heartCount)
-                    }
-                } else { print("오류 발생") }
-                completion(true)
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-                print("Failed to fetch university list.")
-                completion(false)
-            default:
-                return
-            }
-        }
-    }
-    
-    func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (Bool) -> Void) {
-        NetworkService.shared.zipService.deleteZipToHankki(requestBody: requestBody) { result in
-            switch result {
-            case .success(_): return
-            case .unAuthorized, .pathError:
-                self.showAlert?("Failed")
-            default:
-                return
+            
+            result.handleNetworkResult(result) { response in
+                self.zipInfo = ZipHeaderTableView.DataStruct(name: self.name ?? "",
+                                                             imageUrl: self.imageUrl ?? "",
+                                                             title: response.data.title,
+                                                             details: response.data.details)
                 
+                self.hankkiList = response.data.stores.map {
+                    return HankkiListTableViewCell.DataStruct(id: $0.id,
+                                                              name: $0.name,
+                                                              imageURL: $0.imageUrl,
+                                                              category: $0.category,
+                                                              lowestPrice: $0.lowestPrice,
+                                                              heartCount: $0.heartCount)
+                }
             }
         }
     }
     
-    func postHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+    func getMeHankkiList(_ type: UserTargetType) {
+        NetworkService.shared.userService.getMeHankkiList(type) { result in
+            result.handleNetworkResult(result) { response in
+                self.hankkiList = response.data.stores.map {
+                    return HankkiListTableViewCell.DataStruct(id: $0.id,
+                                                              name: $0.name,
+                                                              imageURL: $0.imageUrl,
+                                                              category: $0.category,
+                                                              lowestPrice: $0.lowestPrice,
+                                                              heartCount: $0.heartCount)
+                }
+            }
+        }
+    }
+    
+    func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping () -> Void) {
+        NetworkService.shared.zipService.deleteZipToHankki(requestBody: requestBody) { result in
+            result.handleNetworkResult(result, onSuccessVoid: completion)
+        }
+    }
+    
+    func postHankkiHeart(id: Int64) {
         NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
-            switch result {
-            case .success(_): return
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-            default:
-                return
-            }
+            result.handleNetworkResult(result)
         }
     }
     
-    func deleteHankkiHeartAPI(id: Int64, completion: @escaping () -> Void) {
+    func deleteHankkiHeart(id: Int64) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            switch result {
-            case .success(_): return
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-            default:
-                return
-            }
+            result.handleNetworkResult(result) 
         }
     }
 }

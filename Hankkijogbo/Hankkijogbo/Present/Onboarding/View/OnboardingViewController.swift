@@ -39,7 +39,6 @@ final class OnboardingViewController: BaseViewController {
     
     override func setupStyle() {
         animationView.do {
-            
             $0.contentMode = .scaleAspectFill
             $0.loopMode = .loop
         }
@@ -98,8 +97,8 @@ private extension OnboardingViewController {
     
     @objc func nextButtonDidTap() {
         if isFinal() {
-            // 온보딩의 마지막일 경우, 로그인 페이지로 이동
-            presentLoginView()
+            // 온보딩의 마지막일 경우, 대학선택으로 이동
+            presentUnivSelectView()
         } else {
             // 온보딩의 마지막 페이지가 아니면, 다음 로티로 이동
             currentAnimationIndex += 1
@@ -108,11 +107,17 @@ private extension OnboardingViewController {
     }
     
     @objc func skipButtonDidTap() {
-        presentLoginView()
+        presentUnivSelectView()
     }
     
-    func presentLoginView() {
-        self.view.window?.rootViewController = LoginViewController()
+    func presentUnivSelectView() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+                window.rootViewController = navigationController
+                navigationController.pushViewController(UnivSelectViewController(), animated: false)
+            }
+        }
     }
     
     func isFinal() -> Bool {

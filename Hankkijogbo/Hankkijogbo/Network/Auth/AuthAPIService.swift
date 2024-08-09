@@ -15,8 +15,8 @@ protocol AuthAPIServiceProtocol {
     
     func postLogin(accessToken: String, requestBody: PostLoginRequestDTO, completion: @escaping(NetworkResult<PostLoginResponseDTO>) -> Void)
     func patchLogout(completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
-    func deleteWithdraw(authorizationCode: String, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
-    func postReissue(completion: @escaping(NetworkResult<PostReissueResponseDTO>) -> Void)
+    func deleteWithdraw(authorizationCode: String, completion: @escaping(NetworkResult<Void>) -> Void)
+    func postReissue(completion: @escaping (NetworkResult<PostReissueResponseDTO>) -> Void)
 }
 
 final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
@@ -54,15 +54,15 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
         }
     }
     
-    func deleteWithdraw(authorizationCode: String, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+    func deleteWithdraw(authorizationCode: String, completion: @escaping (NetworkResult<Void>) -> Void) {
         provider.request(.deleteWithdraw(authorizationCode: authorizationCode)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<Void> = self.fetchNetworkResult(statusCode: response.statusCode)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<Void> = self.fetchNetworkResult(statusCode: response.statusCode)
                     completion(networkResult)
                 }
             }
@@ -74,9 +74,11 @@ final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<PostReissueResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<PostReissueResponseData> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<PostReissueResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
                 }
             }
         }
