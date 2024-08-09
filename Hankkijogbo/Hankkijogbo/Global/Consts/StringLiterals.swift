@@ -52,7 +52,8 @@ enum StringLiterals {
     enum Report {
         static let numberOfReport = "번째 제보예요"
         static let reportThisLocation = "을 제보할래요"
-        static let searchPlaceHolder = "이름으로 식당 검색"
+        static let searchFirstPlaceHolder = "이름으로 식당 검색"
+        static let searchSecondPlaceHolder = "식당 이름으로 검색"
         static let mainButton = "제보하기"
         static let categoryHeader = "식당 종류를 알려주세요"
         static let addMenuTitle = "메뉴를 추가해주세요"
@@ -69,7 +70,7 @@ enum StringLiterals {
         static let randomThanksMessageVer2 = "님 덕분에 모두가 저렴하고\n맛있는 식사를 할 수 있어요!"
         static let randomThanksMessageVer3 = "님, 오늘도 저렴하고 든든한 식사하세요!"
         static let hankkiReportedByMe = "내가 등록한 식당"
-        static let reportHankki = "식당을 제보해주세요"
+        static let reportHankki = "식당을 선택해주세요"
         static let searchHankkiByName = "식당 이름으로 검색하면\n주소를 찾아 드릴게요"
     }
     

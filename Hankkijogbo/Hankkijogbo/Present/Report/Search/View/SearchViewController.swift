@@ -140,8 +140,7 @@ final class SearchViewController: BaseViewController {
             $0.layer.borderColor = UIColor.gray900.cgColor
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                // TODO: - 통일되면 적용하기
-                withText: "가게 이름으로 검색",
+                withText: StringLiterals.Report.searchSecondPlaceHolder,
                 color: .gray400
             )
             $0.addPadding(left: 40, right: 45)
