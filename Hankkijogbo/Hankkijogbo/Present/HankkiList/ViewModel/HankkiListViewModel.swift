@@ -87,12 +87,7 @@ extension HankkiListViewModel {
     
     func deleteHankkiHeart(id: Int) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            switch result {
-            case .conflict:
-                UIApplication.showAlert(titleText: "이미 취소한 식당입니다.", primaryButtonText: "확인")
-            default:
-                result.handleNetworkResult(result)
-            }
+            result.handleNetworkResult(result)
         }
     }
 }

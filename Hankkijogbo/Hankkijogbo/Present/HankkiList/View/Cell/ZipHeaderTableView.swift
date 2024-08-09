@@ -66,7 +66,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.h2,
-                withText: "성대생 점심 추천 맛집임 많관부",
+                withText: " ",
                 color: .gray900
             )
         }
@@ -101,7 +101,9 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
             
             $0.setImage(.icShare, for: .normal)
             
-            $0.setAttributedTitle(UILabel.setupAttributedText(for: PretendardStyle.body3, withText: "공유", color: .hankkiWhite), for: .normal)
+            $0.setAttributedTitle(UILabel.setupAttributedText(for: PretendardStyle.body3,
+                                                              withText: StringLiterals.HankkiList.Header.shareButton,
+                                                              color: .hankkiWhite), for: .normal)
         }
     }
     
@@ -160,9 +162,9 @@ private extension ZipHeaderTableView {
     }
     
     @objc func shareButtonDidTap() {
-        UIApplication.showAlert(titleText: "조금만 기다려주세요",
-                                       subText: "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요",
-                                       primaryButtonText: "확인")
+        UIApplication.showAlert(titleText: StringLiterals.Alert.DevelopShare.title,
+                                subText: StringLiterals.Alert.DevelopShare.sub,
+                                primaryButtonText: StringLiterals.Alert.check)
     }
     
     func setupTagStackView(_ tagList: [String]) {

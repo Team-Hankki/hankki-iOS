@@ -31,8 +31,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     
     private var data: Model?
     
-    private let dummyTagList = ["#두루미", "#해파리"]
-    
     // MARK: - UI Properties
     
     private let cellStackView = UIStackView()
@@ -96,7 +94,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, withText: "가게 이름", color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, withText: " ", color: .gray900)
         }
         
         categoryChipView.do {
@@ -105,15 +103,15 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, withText: "카테고리", color: .hankkiRed)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, withText: " ", color: .hankkiRed)
         }
         
         priceLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: "가격", color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: " ", color: .gray500)
         }
         
         heartCountLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: "하트수", color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: " ", color: .gray500)
         }
         
         subInfoStackView.do {
@@ -178,7 +176,7 @@ extension HankkiListTableViewCell {
         thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgHankkiListDefault)
         categoryLabel.text = data.category
         heartButton.isHidden = isLikeButtonDisable
-        priceLabel.text = "\(data.lowestPrice)원"
+        priceLabel.text = "\(data.lowestPrice)" + StringLiterals.Common.won
         heartCountLabel.text = "\(data.heartCount)"
         
         heartButton.isSelected = !data.isDeleted

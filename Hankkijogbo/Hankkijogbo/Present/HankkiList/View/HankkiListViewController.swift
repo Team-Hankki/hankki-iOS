@@ -22,7 +22,7 @@ final class  HankkiListViewController: BaseViewController {
     private let hankkiTableView = UITableView(frame: .zero, style: .grouped)
     private lazy var emptyView = EmptyView(
         text: type.emptyViewLabel,
-        buttonText: type == .myZip ? "식당 구경하러 가기" : nil,
+        buttonText: type == .myZip ? StringLiterals.HankkiList.moreButton : nil,
         buttonAction: type == .myZip ? self.navigateToHomeView : nil
     )
     

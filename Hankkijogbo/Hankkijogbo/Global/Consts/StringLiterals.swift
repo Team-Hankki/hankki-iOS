@@ -11,6 +11,10 @@ enum StringLiterals {
     enum Common {
         static let withdraw = "탈퇴하기"
         static let logout = "로그아웃"
+        
+        static let share = "공유"
+        
+        static let won = "원"
     }
     
     enum Home {
@@ -19,7 +23,6 @@ enum StringLiterals {
         static let sortFilteringButton = "정렬"
         static let less6000 = "6000원 이하"
         static let more6000 = "6000~8000원"
-        static let won = "원"
     }
     
     enum Alert {
@@ -29,6 +32,7 @@ enum StringLiterals {
         static let back = "돌아가기"
         static let check = "확인"
         
+        // TODO: - 레전드 고민 이것들은 내 뷰에서만 쓰는 것들인데 Alert에 넣는게 맞나?
         enum Logout {
             static let title = "정말 로그아웃 하실 건가요?"
             static let secondaryButton = StringLiterals.Common.logout
@@ -40,6 +44,11 @@ enum StringLiterals {
         enum DeleteZip {
             static let title = "족보를 삭제할까요?"
             static let primaryButton = "삭제하기"
+        }
+        
+        enum DevelopShare {
+            static let title = "조금만 기다려주세요"
+            static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요"
         }
     }
     
@@ -97,7 +106,17 @@ enum StringLiterals {
     }
     
     enum HankkiList {
+        enum Header {
+            static let shareButton = StringLiterals.Common.share
+        }
         
+        static let moreButton = "식당 구경하러 가기"
+        
+        enum EmptyView {
+            static let myZip = "나의 족보에\n식당을 추가해보세요"
+            static let reported = "아직 제보한 식당이 없어요"
+            static let liked = "아직 좋아요 누른 식당이 없어요"
+        }
     }
     
     enum ExternalLink {

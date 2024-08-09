@@ -38,22 +38,22 @@ extension HankkiListViewController {
         var navigationTitle: String {
             switch self {
             case .myZip:
-                "나의 식당 족보"
+                StringLiterals.Mypage.myZipList
             case .reported:
-                "내가 제보한 식당"
+                StringLiterals.Mypage.HankkiList.reported
             case .liked:
-                "좋아요 누른 식당"
+                StringLiterals.Mypage.HankkiList.liked
             }
         }
         
         var emptyViewLabel: String {
             switch self {
             case .myZip:
-                "나의 족보에\n식당을 추가해보세요"
+                StringLiterals.HankkiList.EmptyView.myZip
             case .reported:
-                "아직 제보한 식당이 없어요"
+                StringLiterals.HankkiList.EmptyView.reported
             case .liked:
-                "아직 좋아요 누른 식당이 없어요"
+                StringLiterals.HankkiList.EmptyView.liked
             }
         }
         
