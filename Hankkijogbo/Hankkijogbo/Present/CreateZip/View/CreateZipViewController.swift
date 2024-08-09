@@ -30,7 +30,8 @@ final class CreateZipViewController: BaseViewController {
     private let tagInputTitle = UILabel()
     private let tagInputTextField = TagTextField()
     
-    private lazy var submitButton = MainButton(titleText: "족보 만들기", buttonHandler: submitButtonDidTap)
+    private lazy var submitButton = MainButton(titleText: StringLiterals.CreateZip.submitButton,
+                                               buttonHandler: submitButtonDidTap)
     
     // MARK: - Life Cycle
     
@@ -52,13 +53,13 @@ final class CreateZipViewController: BaseViewController {
     override func setupStyle() {
         viewTitle.do {
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1, 
-                                                            withText: "새로운 식당 족보", 
+                                                            withText: StringLiterals.CreateZip.viewTitle,
                                                             color: .gray900)
         }
         
         titleInputTitle.do {
             $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.body1,
-                                                            withText: "족보의 제목을 지어주세요",
+                                                            withText: StringLiterals.CreateZip.TitleInput.label,
                                                             color: .gray900)
         }
     
@@ -67,7 +68,7 @@ final class CreateZipViewController: BaseViewController {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.addPadding(left: 12, right: 14)
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
-            $0.changePlaceholderColor(forPlaceHolder: "성대생 추천 맛집 알려주세요", forColor: .gray400)
+            $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TitleInput.placeholder, forColor: .gray400)
             $0.rightViewMode = .always
             $0.rightView = titleCountView
         }
@@ -82,7 +83,7 @@ final class CreateZipViewController: BaseViewController {
         tagInputTitle.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.body1,
-                withText: "족보를 떠올리면?",
+                withText: StringLiterals.CreateZip.TagInput.label,
                 color: .gray900)
         }
         
@@ -91,8 +92,9 @@ final class CreateZipViewController: BaseViewController {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.addPadding(left: 12)
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
-            $0.placeholder = "#든든한 #한끼해장"
-            $0.changePlaceholderColor(forPlaceHolder: "#든든한 #한끼해장", forColor: .gray400)
+            
+            $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TagInput.placeholder,
+                                      forColor: .gray400)
         }
     }
     

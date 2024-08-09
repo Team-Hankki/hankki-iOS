@@ -78,6 +78,24 @@ enum StringLiterals {
         static let createZip = "새로운\n족보 리스트\n추가하기"
     }
     
+    enum CreateZip {
+        static let submitButton = "족보 만들기"
+        
+        // TODO: - 디자인 선생님께 워딩 논의하기
+        static let viewTitle = "새로운 식당 족보"
+        
+        enum TitleInput {
+            static let label = "족보의 제목을 지어주세요"
+            // TODO: - 족보 제목인데 '알려주세요'가 맞나?
+            static let placeholder = "성대생 추천 맛집 알려주세요"
+        }
+        
+        enum TagInput {
+            static let label = "족보를 떠올리면?"
+            static let placeholder = "#든든한 #한끼해장"
+        }
+    }
+    
     enum HankkiList {
         
     }
