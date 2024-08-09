@@ -94,7 +94,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.setImage(.icSearch, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: StringLiterals.Report.searchPlaceHolder,
+                withText: StringLiterals.Report.searchFirstPlaceHolder,
                 color: .gray400
             ), for: .normal)
             $0.titleLabel?.lineBreakMode = .byTruncatingTail
