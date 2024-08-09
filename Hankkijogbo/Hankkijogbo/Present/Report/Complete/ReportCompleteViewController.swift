@@ -183,7 +183,7 @@ private extension ReportCompleteViewController {
     
     func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setupWhiteToast), name: NSNotification.Name(StringLiterals.NotificationName.setupBlackToast), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupWhiteToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
     }
     
     func setupBottomGradientView() {

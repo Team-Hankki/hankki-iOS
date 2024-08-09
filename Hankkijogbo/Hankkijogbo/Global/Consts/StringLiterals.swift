@@ -87,6 +87,6 @@ enum StringLiterals {
     
     enum NotificationName {
         static let updateAddToMyZipList = "UpdateAddToMyZipList"
-        static let setupBlackToast = "SetupBlackToast"
+        static let setupToast = "SetupToast"
     }
 }
