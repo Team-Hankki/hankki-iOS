@@ -69,8 +69,8 @@ final class ReportCompleteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
         setupNavigationBar()
+        setupNotification()
     }
     
     // MARK: - Setup UI
@@ -181,6 +181,11 @@ private extension ReportCompleteViewController {
         hankkiInfoCardView.addToMyZipListButton.addTarget(self, action: #selector(addToMyZipListButtonDidTap), for: .touchUpInside)
     }
     
+    func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupWhiteToast), name: NSNotification.Name(StringLiterals.NotificationName.setupBlackToast), object: nil)
+    }
+    
     func setupBottomGradientView() {
         let gradient = CAGradientLayer()
         
@@ -189,7 +194,7 @@ private extension ReportCompleteViewController {
                 UIColor.hankkiWhite.withAlphaComponent(0).cgColor,
                 UIColor.hankkiWhite.cgColor,
                 UIColor.hankkiWhite.cgColor
-              ]
+            ]
             $0.locations = [0.0, 0.24, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
@@ -202,6 +207,9 @@ private extension ReportCompleteViewController {
     func getRandomThanksMessage() -> String {
         return randomThanksMessages.randomElement() ?? StringLiterals.Report.randomThanksMessageVer1
     }
+}
+
+private extension ReportCompleteViewController {
     
     // MARK: - @objc Func
     
@@ -216,6 +224,16 @@ private extension ReportCompleteViewController {
     
     @objc func updateAddToMyZipListString() {
         hankkiInfoCardView.addToMyZipListString = StringLiterals.MyZip.addToOtherZip
+    }
+    
+    @objc func setupWhiteToast(_ notification: Notification) {
+        if let zipId = notification.userInfo?["zipId"] as? Int {
+            
+            self.showWhiteToast(message: StringLiterals.Toast.addToMyZipWhite) { [self] in
+                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                navigationController?.pushViewController(hankkiListViewController, animated: true)
+            }
+        }
     }
     
     @objc func goToHomeButtonDidTap() {
