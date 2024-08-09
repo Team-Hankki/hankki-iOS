@@ -9,7 +9,16 @@ import UIKit
 
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
-    var isChecked: Bool = false
+    var isChecked: Bool = false {
+        didSet {
+            if isChecked {
+                addZipButton.setImage(.btnAddLinedDisabled, for: .normal)
+            } else {
+                addZipButton.setImage(.btnAddLined, for: .normal)
+            }
+            addZipButton.isUserInteractionEnabled = !isChecked
+        }
+    }
     
     // MARK: - UI Components
     
@@ -96,14 +105,14 @@ extension MyZipListCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: zipData.title,
-                color: .gray800
+                color: isChecked ? .gray200 : .gray800
             )
         }
         firstHashtagLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.button,
                 withText: zipData.details[0],
-                color: .gray400
+                color: isChecked ? .gray200 : .gray400
             )
         }
         
@@ -112,7 +121,7 @@ extension MyZipListCollectionViewCell {
                 $0.attributedText = UILabel.setupAttributedText(
                     for: PretendardStyle.button,
                     withText: zipData.details[1],
-                    color: .gray400
+                    color: isChecked ? .gray200 : .gray400
                 )
             }
         }
@@ -122,15 +131,5 @@ extension MyZipListCollectionViewCell {
         isChecked = zipData.isAdded
         thumbnailImageView.image = getImageForType(zipData.imageType)
         setupLabelStyleOfData(zipData: zipData)
-    }
-    
-    @objc func addZipButtonDidTap() {
-        isChecked = !isChecked
-        if isChecked {
-            addZipButton.setImage(.btnCheckFilled, for: .normal)
-            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
-        } else {
-            addZipButton.setImage(.btnAddLined, for: .normal)
-        }
     }
 }

@@ -303,15 +303,15 @@ private extension MyZipListBottomSheetViewController {
     }
     
     /// 내 족보 셀의 + 버튼 클릭 시 호출
+    /// - 버튼 이미지 변경
     /// - 클릭된 버튼이 속해있는 셀의 IndexPath 계산
     /// - 내 족보에 식당 추가 POST API 호출
     @objc func addToMyZipButtonDidTap(_ sender: UIButton) {
+        sender.setImage(.btnCheckFilled, for: .normal)
         let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
         clickedZipIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
 
         guard let data = viewModel.myZipListFavoriteData else { return }
-        
-        // TODO: - 이미 추가된 족보일 때 앱 터지는 이슈
         viewModel.postHankkiToZipAPI(
             request: PostHankkiToZipRequestDTO(
                 favoriteId: data[clickedZipIndexPath?.item ?? 0].id,
