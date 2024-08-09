@@ -23,6 +23,12 @@ enum StringLiterals {
         static let check = "확인"
     }
     
+    enum Report {
+        static let mainButton = "제보하기"
+        static let categoryHeader = "식당 종류를 알려주세요"
+        static let menuHeader = "메뉴를 추가해주세요"
+    }
+    
     enum ExternalLink {
         static let OneonOne = "https://tally.so/r/mO0oJY"
         static let FAQ = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
