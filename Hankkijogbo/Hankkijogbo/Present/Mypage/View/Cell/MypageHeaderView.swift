@@ -65,7 +65,7 @@ extension MypageHeaderView {
     func dataBind(_ model: Model?) {
         profileImageView.setKFImage(url: model?.image)
         if let nameString = model?.name {
-            profileNameLabel.text = "\(nameString)님\n한끼 잘 챙겨드세요"
-        } else { profileNameLabel.text = "한끼 줍쇼님\n한끼 잘 챙겨드세요" }
+            profileNameLabel.text = nameString + StringLiterals.Mypage.Header.greeting
+        } else { profileNameLabel.text = StringLiterals.Mypage.Header.greeting }
     }
 }

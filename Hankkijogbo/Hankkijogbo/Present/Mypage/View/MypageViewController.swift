@@ -15,14 +15,16 @@ final class MypageViewController: BaseViewController {
     let viewModel: MypageViewModel = MypageViewModel()
     
     private let hankkiList: [MypageHankkiCollectionViewCell.Model] = [
-        MypageHankkiCollectionViewCell.Model(image: .icFood31, title: "내가 제보한 식당"),
-        MypageHankkiCollectionViewCell.Model(image: .icLike, title: "좋아요 누른 식당")
+        MypageHankkiCollectionViewCell.Model(title: StringLiterals.Mypage.HankkiList.reported,
+                                             image: .icFood31),
+        MypageHankkiCollectionViewCell.Model(title: StringLiterals.Mypage.HankkiList.liked, 
+                                             image: .icLike)
     ]
     
     private let optionList: [MypageOptionCollectionViewCell.Model] = [
-        MypageOptionCollectionViewCell.Model(title: "FAQ"),
-        MypageOptionCollectionViewCell.Model(title: "1:1 문의"),
-        MypageOptionCollectionViewCell.Model(title: "로그아웃")
+        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.FAQ),
+        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.OneonOne),
+        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Logout)
     ]
     
     // MARK: - UI Properties
@@ -100,7 +102,7 @@ private extension MypageViewController {
     func setupNavigationBar() {
          let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                                hasRightButton: false,
-                                                               mainTitle: .string("MY"),
+                                                               mainTitle: .string(StringLiterals.Mypage.navigation),
                                                                rightButton: .string(""),
                                                                rightButtonAction: {})
                                                                  
@@ -111,10 +113,10 @@ private extension MypageViewController {
     
     func showQuitAlert() {
         self.showAlert(
-            titleText: "소중한 족보가 사라져요",
-            secondaryButtonText: "돌아가기",
-            primaryButtonText: "탈퇴하기",
-            primaryButtonHandler: handdleWithdraw
+            titleText: StringLiterals.Alert.Withdraw.title,
+            secondaryButtonText: StringLiterals.Alert.Withdraw.secondaryButton,
+            primaryButtonText: StringLiterals.Alert.back,
+            secondaryButtonHandler: handdleWithdraw
         )
     }
 }

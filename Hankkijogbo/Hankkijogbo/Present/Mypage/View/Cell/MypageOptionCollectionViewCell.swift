@@ -28,7 +28,7 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "",
+                withText: " ",
                 color: .gray900
             )
         }

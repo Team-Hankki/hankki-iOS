@@ -9,8 +9,8 @@ import UIKit
 
 extension MypageHankkiCollectionViewCell {
     struct Model {
-        let image: UIImage
         let title: String
+        let image: UIImage
     }
 }
 
@@ -31,7 +31,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body3, withText: "내가 제보한 식당", color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body3, withText: " ", color: .gray900)
         }
     }
     
