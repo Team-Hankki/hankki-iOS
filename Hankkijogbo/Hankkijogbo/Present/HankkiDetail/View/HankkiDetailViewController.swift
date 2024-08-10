@@ -47,6 +47,7 @@ final class HankkiDetailViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
+        setupGesture()
         bindViewModel()
         
         viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
@@ -199,6 +200,12 @@ private extension HankkiDetailViewController {
     
     func setupAddTarget() {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+    }
+    
+    func setupGesture() {
+        let rightSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(backButtonDidTap))
+        rightSwipeGesture.direction = .right
+        self.view.addGestureRecognizer(rightSwipeGesture)
     }
     
     func setupNoImageStyle() {
