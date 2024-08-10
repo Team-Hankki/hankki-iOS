@@ -13,13 +13,16 @@ final class EmptyView: BaseView {
     
     typealias ButtonAction = (() -> Void)
     
-    private let text: String
+    var text: String {
+        didSet {
+            textLabel.text = text
+        }
+    }
     private let buttonText: String?
     private let buttonAction: ButtonAction?
     
     // MARK: - UI Components
     
-    private let view: UIView = UIView()
     private let imageView: UIImageView = UIImageView()
     private let textLabel: UILabel = UILabel()
     private lazy var button: UIButton = MoreButton(buttonText: self.buttonText, buttonAction: self.buttonAction)
@@ -61,19 +64,13 @@ final class EmptyView: BaseView {
     }
     
     override func setupHierarchy() {
-        self.addSubview(view)
-        view.addSubviews(imageView, textLabel)
+        self.addSubviews(imageView, textLabel)
         if buttonText != nil {
-            view.addSubview(button)
+            self.addSubview(button)
         }
     }
 
     override func setupLayout() {
-        view.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.85)
-        }
-        
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
@@ -83,7 +80,7 @@ final class EmptyView: BaseView {
         textLabel.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(imageView.snp.bottom).offset(25)
+            $0.top.equalTo(imageView.snp.bottom).offset(20)
             if buttonText == nil {
                 $0.bottom.equalToSuperview()
             }
