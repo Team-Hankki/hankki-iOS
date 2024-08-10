@@ -67,6 +67,10 @@
 		83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39732C4644DD00DD7EC3 /* URLConstant.swift */; };
 		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
+		8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */; };
+		8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */; };
+		8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */; };
+		8641516D2C67B9AE00E2FD44 /* MyZipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151672C67B9AD00E2FD44 /* MyZipViewModel.swift */; };
 		864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertStyle.swift */; };
 		864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */; };
 		864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */; };
@@ -256,6 +260,10 @@
 		83DD39732C4644DD00DD7EC3 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
+		864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
+		864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
+		864151672C67B9AD00E2FD44 /* MyZipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipViewModel.swift; sourceTree = "<group>"; };
 		864A89BB2C3B350900140B63 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageHankkiCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -595,6 +603,7 @@
 				83DBED8D2C2564790042BA48 /* Home */,
 				A240EA362C444D2D000FF458 /* HankkiDetail */,
 				A2DEBF572C3D257100DE14A9 /* Report */,
+				864151692C67B9AD00E2FD44 /* MyZipList */,
 				864FA9002C3D1F650051EA36 /* Mypage */,
 				86B761112C3DC76000413059 /* ZipList */,
 				86784E882C3FC0B900E94A5D /* CreateZip */,
@@ -766,6 +775,33 @@
 				864A89BB2C3B350900140B63 /* AlertStyle.swift */,
 			);
 			path = HankkiAlerts;
+			sourceTree = "<group>";
+		};
+		864151662C67B9AD00E2FD44 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */,
+				864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */,
+				864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		864151682C67B9AD00E2FD44 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				864151672C67B9AD00E2FD44 /* MyZipViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		864151692C67B9AD00E2FD44 /* MyZipList */ = {
+			isa = PBXGroup;
+			children = (
+				864151662C67B9AD00E2FD44 /* View */,
+				864151682C67B9AD00E2FD44 /* ViewModel */,
+			);
+			path = MyZipList;
 			sourceTree = "<group>";
 		};
 		864FA9002C3D1F650051EA36 /* Mypage */ = {
@@ -1583,6 +1619,7 @@
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2EC33AF2C47166F00809840 /* LocationTargetType.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
+				8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */,
 				830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
@@ -1652,6 +1689,7 @@
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
 				839FC7202C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift in Sources */,
 				864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */,
+				8641516D2C67B9AE00E2FD44 /* MyZipViewModel.swift in Sources */,
 				83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */,
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
 				864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */,
@@ -1663,6 +1701,7 @@
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,
 				83DA28962C3851BB004819FA /* HankkiNavigationType.swift in Sources */,
 				86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */,
+				8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */,
 				A2C9FCB12C49985800868DF7 /* GetZipListResponseDTO.swift in Sources */,
 				A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */,
 				839138DF2C4962E500611D5C /* GetHankkiThumbnailResponseDTO.swift in Sources */,
@@ -1685,6 +1724,7 @@
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
 				830285532C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift in Sources */,
+				8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */,
 				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
 				8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */,
 				86880C0F2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift in Sources */,
