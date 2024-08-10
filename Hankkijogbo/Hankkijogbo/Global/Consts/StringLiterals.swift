@@ -11,6 +11,7 @@ enum StringLiterals {
     enum Common {
         static let goToHome = "홈으로"
         static let won = "원"
+        // TODO: - 제보하기
     }
     
     enum Home {
@@ -24,8 +25,14 @@ enum StringLiterals {
     enum Alert {
         static let unknownError = "알 수 없는 오류가 발생했어요"
         static let tryAgain = "네트워크 연결 상태를 확인하고\n다시 시도해주세요"
-        static let check = "확인"
         static let alreadyReportHankki = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
+        static let waitPlease = "조금만 기다려주세요!"
+        static let prepareForEditMenu = "메뉴를 편집할 수 있도록 준비하고 있어요 :)"
+        static let thanksForReport = "님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!"
+        static let reallyReport = "정말 제보하시겠어요?"
+        static let makeAccurateHannki = "여러분의 제보가 더 정확한 한끼족보를 만들어줘요 :)"
+        static let check = "확인"
+        static let goBack = "돌아가기"
     }
     
     enum Toast {
@@ -47,6 +54,10 @@ enum StringLiterals {
     enum HankkiDetail {
         static let editMenu = "메뉴 추가/수정하기"
         static let reportWrongInformation = "내가 알고 있는 정보와 다른가요?"
+        static let optionDisappear = "식당이 사라졌어요"
+        static let optionIncreasePrice = "더이상 8,000원 이하인 메뉴가 없어요"
+        static let optionImproperReport = "부적절한 제보예요"
+        
     }
     
     enum Report {
@@ -78,7 +89,7 @@ enum StringLiterals {
         static let myHankkiZip = "나의 식당 족보"
         static let addNewZip = "새로운 족보 추가하기"
         static let zipList = "족보 목록"
-        static let addToMyZip = "내 족보에 추가"
+        static let addToMyZip = "나의 족보에 추가"
         static let addToOtherZip = "다른 족보에도 추가"
         static let zipThumbnailImageType1 = "TYPE_ONE"
         static let zipThumbnailImageType2 = "TYPE_TWO"
