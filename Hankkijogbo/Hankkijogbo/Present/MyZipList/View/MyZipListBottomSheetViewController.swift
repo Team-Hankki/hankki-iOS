@@ -11,23 +11,36 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var storeId: Int64?
-    var viewModel: MyZipViewModel = MyZipViewModel()
-    var isExpanded: Bool = false
-    var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
-    var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
+    var storeId: Int64
+    
+    private var clickedZipIndexPath: IndexPath?
+    private var viewModel: MyZipViewModel = MyZipViewModel()
+    private var isExpanded: Bool = false
+    private var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.45
+    private var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.9
     
     // MARK: - UI Components
     
-    private let dimmedView = UIView()
-    private let containerView = UIView()
-    private let bottomSheetHandlerView = UIView()
-    private let titleLabel = UILabel()
-    private let addNewZipButton = UIButton()
-    private let addNewZipLabel = UILabel()
-    private let addNewZipStackView = UIStackView()
-    private let flowLayout = UICollectionViewFlowLayout()
-    private lazy var myZipCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    private let dimmedView: UIView = UIView()
+    private let containerView: UIView = UIView()
+    private let bottomSheetHandlerView: UIView = UIView()
+    private let titleLabel: UILabel = UILabel()
+    private let addNewZipButton: UIButton = UIButton()
+    private let addNewZipLabel: UILabel = UILabel()
+    private let addNewZipStackView: UIStackView = UIStackView()
+    private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    private lazy var myZipCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    
+    // MARK: - Init
+    
+    init(storeId: Int64) {
+        self.storeId = storeId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life Cycle
     
@@ -35,18 +48,13 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         super.viewDidLoad()
         
         setupGesture()
+        setupAddTarget()
         setupDelegate()
         setupRegister()
         bindViewModel()
+        
         showMyZipBottomSheet()
-        
-        if let id = storeId {
-            viewModel.getMyZipListAPI(id: id)
-        }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipStackViewDidTap))
-        addNewZipStackView.addGestureRecognizer(tapGesture)
-        
+        viewModel.getMyZipListAPI(id: storeId)
     }
     
     // MARK: - Set UI
@@ -125,7 +133,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
-                withText: "나의 식당 족보",
+                withText: StringLiterals.MyZip.myHankkiZip,
                 color: .gray850
             )
         }
@@ -137,13 +145,13 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         }
         
         addNewZipButton.do {
-            $0.setImage(.imgZipCreateNormal, for: .normal)
+            $0.setImage(.imgCreateMyZip, for: .normal)
         }
         
         addNewZipLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "새로운 족보 추가하기",
+                withText: StringLiterals.MyZip.addNewZip,
                 color: .gray800
             )
         }
@@ -171,9 +179,15 @@ private extension MyZipListBottomSheetViewController {
         }
         
         viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
+                            subText: StringLiterals.Alert.tryAgain,
+                            primaryButtonText: StringLiterals.Alert.check)
+        }
+        
+        viewModel.showAddToZipCompleteToast = { [self] in
+            guard let data = viewModel.myZipListFavoriteData else { return }
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil, userInfo: ["zipId": Int(data[clickedZipIndexPath?.item ?? 0].id)]))
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
         }
     }
     
@@ -186,6 +200,12 @@ private extension MyZipListBottomSheetViewController {
         self.containerView.addGestureRecognizer(downSwipeGesture)
         let dimmedTapGesture = UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap))
         self.dimmedView.addGestureRecognizer(dimmedTapGesture)
+        let addNewZipTapGesture = UITapGestureRecognizer(target: self, action: #selector(addNewZipDidTap))
+        addNewZipStackView.addGestureRecognizer(addNewZipTapGesture)
+    }
+    
+    func setupAddTarget() {
+        addNewZipButton.addTarget(self, action: #selector(addNewZipDidTap), for: .touchUpInside)
     }
     
     func setupDelegate() {
@@ -215,10 +235,7 @@ extension MyZipListBottomSheetViewController {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(defaultHeight)
         }
-        
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+        viewLayoutIfNeededWithAnimation()
     }
     
     func dismissMyZipBottomSheet() {
@@ -230,9 +247,7 @@ extension MyZipListBottomSheetViewController {
             self.dimmedView.alpha = 0.0
             self.view.layoutIfNeeded()
         }, completion: { _ in
-            if self.presentingViewController != nil {
-                self.dismiss(animated: false, completion: nil)
-            }
+            self.dismiss(animated: false, completion: nil)
         })
     }
     
@@ -244,12 +259,9 @@ extension MyZipListBottomSheetViewController {
     }
     
     func viewLayoutIfNeededWithAnimation() {
-        UIView.animate(withDuration: 0.3,
-                       delay: 0,
-                       options: .curveEaseIn,
-                       animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             self.view.layoutIfNeeded()
-        })
+        }
     }
 }
 
@@ -282,13 +294,32 @@ private extension MyZipListBottomSheetViewController {
         dismissMyZipBottomSheet()
     }
     
-    @objc func addNewZipStackViewDidTap () {
+    @objc func addNewZipDidTap () {
         dismissMyZipBottomSheet()
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
             let createZipViewController = CreateZipViewController()
             rootViewController.pushViewController(createZipViewController, animated: true)
         }
+    }
+    
+    /// 내 족보 셀의 + 버튼 클릭 시 호출
+    /// - 버튼 이미지 변경
+    /// - 클릭된 버튼이 속해있는 셀의 IndexPath 계산
+    /// - 내 족보에 식당 추가 POST API 호출
+    @objc func addToMyZipButtonDidTap(_ sender: UIButton) {
+        sender.setImage(.btnCheckFilled, for: .normal)
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
+        clickedZipIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
+
+        guard let data = viewModel.myZipListFavoriteData else { return }
+        viewModel.postHankkiToZipAPI(
+            request: PostHankkiToZipRequestDTO(
+                favoriteId: data[clickedZipIndexPath?.item ?? 0].id,
+                storeId: storeId
+            )
+        )
+        self.dismissMyZipBottomSheet()
     }
 }
 
@@ -315,27 +346,11 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyZipListCollectionViewCell.className, for: indexPath) as? MyZipListCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.addZipButton.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
+        cell.addZipButton.addTarget(self, action: #selector(addToMyZipButtonDidTap), for: .touchUpInside)
         if let data = viewModel.myZipListFavoriteData {
             cell.bindData(zipData: data[indexPath.item])
         }
         return cell
-    }
-    
-    @objc func addZipButtonDidTap(_ sender: UIButton) {
-        // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
-        let buttonPosition = sender.convert(CGPoint.zero, to: self.myZipCollectionView)
-        let itemIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
-
-        guard let data = viewModel.myZipListFavoriteData else { return }
-        
-        viewModel.postHankkiToZipAPI(
-            request: PostHankkiToZipRequestDTO(
-                favoriteId: data[itemIndexPath?.item ?? 0].id,
-                storeId: storeId ?? 0
-            )
-        )
-        self.dismissMyZipBottomSheet()
     }
 }
 

@@ -9,17 +9,24 @@ import UIKit
 
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
-    var isChecked: Bool = false
-    // TODO: - literal로 빼기
-    var updateStringNotificationName: String = "UpdateAddToMyZipListString"
+    var isChecked: Bool = false {
+        didSet {
+            if isChecked {
+                addZipButton.setImage(.btnAddLinedDisabled, for: .normal)
+            } else {
+                addZipButton.setImage(.btnAddLined, for: .normal)
+            }
+            addZipButton.isUserInteractionEnabled = !isChecked
+        }
+    }
     
     // MARK: - UI Components
     
-    private let thumbnailImageView = UIImageView()
-    private let zipTitleLabel = UILabel()
-    private let firstHashtagLabel = UILabel()
-    private let secondHashtagLabel = UILabel()
-    let addZipButton = UIButton()
+    private let thumbnailImageView: UIImageView = UIImageView()
+    private let zipTitleLabel: UILabel = UILabel()
+    private let firstHashtagLabel: UILabel = UILabel()
+    private let secondHashtagLabel: UILabel = UILabel()
+    let addZipButton: UIButton = UIButton()
     
     // MARK: - Setup UI
     
@@ -65,20 +72,17 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         zipTitleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
-                withText: "학교 5년째 다니는 화석의 추천",
                 color: .gray800
             )
         }
         firstHashtagLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.button,
-                withText: "#미친가성비",
                 color: .gray400
             )
         }
         addZipButton.do {
             $0.setImage(.btnAddLined, for: .normal)
-            $0.addTarget(self, action: #selector(addZipButtonDidTap), for: .touchUpInside)
         }
     }
 }
@@ -87,13 +91,13 @@ extension MyZipListCollectionViewCell {
 
     func getImageForType(_ type: String) -> UIImage {
         let thumbnailImages: [String: UIImage] = [
-            "TYPE_ONE": .imgZipThumbnail1,
-            "TYPE_TWO": .imgZipThumbnail2,
-            "TYPE_THREE": .imgZipThumbnail3,
-            "TYPE_FOUR": .imgZipThumbnail4
+            StringLiterals.MyZip.zipThumbnailImageType1: .imgMyZip1,
+            StringLiterals.MyZip.zipThumbnailImageType2: .imgMyZip2,
+            StringLiterals.MyZip.zipThumbnailImageType3: .imgMyZip3,
+            StringLiterals.MyZip.zipThumbnailImageType4: .imgMyZip4
         ]
         
-        return thumbnailImages[type] ?? .imgZipThumbnail1
+        return thumbnailImages[type] ?? .imgMyZip1
     }
     
     func setupLabelStyleOfData(zipData: GetMyZipFavorite) {
@@ -101,14 +105,14 @@ extension MyZipListCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: zipData.title,
-                color: .gray800
+                color: isChecked ? .gray200 : .gray800
             )
         }
         firstHashtagLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.button,
                 withText: zipData.details[0],
-                color: .gray400
+                color: isChecked ? .gray200 : .gray400
             )
         }
         
@@ -117,7 +121,7 @@ extension MyZipListCollectionViewCell {
                 $0.attributedText = UILabel.setupAttributedText(
                     for: PretendardStyle.button,
                     withText: zipData.details[1],
-                    color: .gray400
+                    color: isChecked ? .gray200 : .gray400
                 )
             }
         }
@@ -127,15 +131,5 @@ extension MyZipListCollectionViewCell {
         isChecked = zipData.isAdded
         thumbnailImageView.image = getImageForType(zipData.imageType)
         setupLabelStyleOfData(zipData: zipData)
-    }
-    
-    @objc func addZipButtonDidTap() {
-        isChecked = !isChecked
-        if isChecked {
-            addZipButton.setImage(.btnCheckFilled, for: .normal)
-            NotificationCenter.default.post(Notification(name: NSNotification.Name(updateStringNotificationName)))
-        } else {
-            addZipButton.setImage(.btnAddLined, for: .normal)
-        }
     }
 }

@@ -53,7 +53,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
         recommendGuideLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                withText: "한끼로 적당한 메뉴를 추천해주세요",
+                withText: StringLiterals.Report.addMenuSubtitle,
                 color: .gray400
             )
         }
@@ -66,7 +66,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
             $0.layer.cornerRadius = 8
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "바꾸기",
+                withText: StringLiterals.Report.changeImage,
                 color: .gray700
             ), for: .normal)
         }

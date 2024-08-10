@@ -11,7 +11,7 @@ final class MyZipListHeaderView: BaseCollectionReusableView {
         
     // MARK: - UI Properties
     
-    private let headerLabel = UILabel()
+    private let headerLabel: UILabel = UILabel()
     
     // MARK: - Set UI
     
@@ -30,7 +30,7 @@ final class MyZipListHeaderView: BaseCollectionReusableView {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                withText: "족보 목록",
+                withText: StringLiterals.MyZip.zipList,
                 color: .gray500
             )
         }

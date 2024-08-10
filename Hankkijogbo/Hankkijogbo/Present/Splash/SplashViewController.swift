@@ -92,7 +92,7 @@ private extension SplashViewController {
         UserDefaults.standard.removeUniversity()
         
         NetworkService.shared.userService.getMeUniversity { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult { response in
                 
                 let university: UniversityModel = UniversityModel(id: response.data.id,
                                                                   name: response.data.name,

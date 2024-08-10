@@ -11,8 +11,8 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Components
     
-    let categoryImageView = UIImageView()
-    let categoryLabel = UILabel()
+    let categoryImageView: UIImageView = UIImageView()
+    let categoryLabel: UILabel = UILabel()
     
     var selectedCategoryString: String? {
         didSet {
