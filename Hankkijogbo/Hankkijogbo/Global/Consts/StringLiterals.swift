@@ -57,7 +57,6 @@ enum StringLiterals {
         static let optionDisappear = "식당이 사라졌어요"
         static let optionIncreasePrice = "더이상 8,000원 이하인 메뉴가 없어요"
         static let optionImproperReport = "부적절한 제보예요"
-        
     }
     
     enum Report {
@@ -65,6 +64,7 @@ enum StringLiterals {
         static let reportThisLocation = "을 제보할래요"
         static let searchFirstPlaceHolder = "이름으로 식당 검색"
         static let searchSecondPlaceHolder = "식당 이름으로 검색"
+        static let emptySearchResult = "에 대한\n검색 결과가 없어요"
         static let categoryHeader = "식당 종류를 알려주세요"
         static let addMenuTitle = "메뉴를 추가해주세요"
         static let addMenuSubtitle = "한끼로 적당한 메뉴를 추천해주세요"

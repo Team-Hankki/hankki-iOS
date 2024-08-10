@@ -15,6 +15,7 @@ final class SearchViewController: BaseViewController {
     
     weak var delegate: PassItemDataDelegate?
     private let debouncer: HankkiDebouncer = HankkiDebouncer(seconds: 0.5)
+    private lazy var currentSearchedText: String? = searchTextField.text
     
     // MARK: - UI Components
     
@@ -28,6 +29,9 @@ final class SearchViewController: BaseViewController {
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.Report.reportHankki,
         primaryButtonHandler: bottomButtonPrimaryHandler
+    )
+    private lazy var emptyView = EmptyView(
+        text: "'\(searchTextField.text ?? "")'" + StringLiterals.Report.emptySearchResult
     )
     
     // MARK: - Init
@@ -68,7 +72,8 @@ final class SearchViewController: BaseViewController {
             searchTextDeleteButton,
             searchCollectionView,
             searchBarBottomGradientView,
-            bottomButtonView
+            bottomButtonView,
+            emptyView
         )
     }
     
@@ -112,6 +117,13 @@ final class SearchViewController: BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(34)
             $0.height.equalTo(154)
         }
+        
+        emptyView.snp.makeConstraints {
+            $0.top.equalTo(searchTextField.snp.bottom).offset(128)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(112)
+            $0.height.equalTo(166)
+        }
     }
     
     override func setupStyle() {
@@ -154,12 +166,17 @@ final class SearchViewController: BaseViewController {
             $0.backgroundColor = .hankkiWhite
             $0.showsVerticalScrollIndicator = false
         }
+        
+        emptyView.do {
+            $0.isHidden = true
+        }
     }
 }
 
 extension SearchViewController {
     func bindViewModel() {
         viewModel.updateLocations = {
+            self.updateEmptyView()
             self.searchCollectionView.reloadData()
         }
         
@@ -221,6 +238,11 @@ private extension SearchViewController {
     func changeSideButtonVisibility(isVisible: Bool) {
         searchTextDeleteButton.isHidden = !isVisible
     }
+    
+    func updateEmptyView() {
+        emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
+        emptyView.text = "'\(currentSearchedText ?? "")'" + StringLiterals.Report.emptySearchResult
+    }
 }
 
 // MARK: - @objc Func
@@ -271,9 +293,13 @@ extension SearchViewController: UITextFieldDelegate {
     }
     
     /// 텍스트필드 타이핑이 멈추었을 때 호출되는 함수
+    /// - currentSearchedText 값 업데이트
+    /// - debouncer 실행해서 API 호출
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let query = self.searchTextField.text else { return }
+        // TODO: - query.isEmpty일 때 보내면(-> 검색창 싹다 지웠을 때 발생함) 초기화를 위해 빈 locations 달라고 요청해야할 것 같다
         if !query.isEmpty {
+            currentSearchedText = query
             debouncer.run {
                 self.viewModel.getSearchedLocationAPI(query: query)
             }
