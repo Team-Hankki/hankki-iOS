@@ -11,7 +11,7 @@ enum StringLiterals {
     enum Common {
         static let goToHome = "홈으로"
         static let won = "원"
-        // TODO: - 제보하기
+        static let report = "제보하기"
     }
     
     enum Home {
@@ -65,7 +65,6 @@ enum StringLiterals {
         static let reportThisLocation = "을 제보할래요"
         static let searchFirstPlaceHolder = "이름으로 식당 검색"
         static let searchSecondPlaceHolder = "식당 이름으로 검색"
-        static let mainButton = "제보하기"
         static let categoryHeader = "식당 종류를 알려주세요"
         static let addMenuTitle = "메뉴를 추가해주세요"
         static let addMenuSubtitle = "한끼로 적당한 메뉴를 추천해주세요"

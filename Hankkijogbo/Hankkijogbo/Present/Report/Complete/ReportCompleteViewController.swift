@@ -170,7 +170,7 @@ private extension ReportCompleteViewController {
     func setupNavigationBar() {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .string("제보하기"),
+                                                              mainTitle: .string(StringLiterals.Common.report),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
                                                               backgroundColor: .clear)
