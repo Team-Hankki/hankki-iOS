@@ -142,6 +142,7 @@ final class ReportCompleteViewController: BaseViewController {
                 withText: nickname + getRandomThanksMessage(),
                 color: .gray500
             )
+            $0.numberOfLines = 0
         }
         hankkiOrangeGradientImageView.do {
             $0.image = .imgOrangeGradient
