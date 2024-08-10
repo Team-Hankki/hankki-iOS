@@ -35,7 +35,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
         categoryLabel.snp.makeConstraints {
             $0.centerY.equalTo(headerLabel)
             $0.leading.equalTo(headerLabel.snp.trailing).offset(8)
-            $0.height.equalTo(36)
+            $0.height.equalTo(28)
         }
     }
     
@@ -60,7 +60,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
                 color: .hankkiRed
             )
             $0.backgroundColor = .hankkiRedLight
-            $0.makeRoundBorder(cornerRadius: 14, borderWidth: 0, borderColor: .clear)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
         }
     }
 }
