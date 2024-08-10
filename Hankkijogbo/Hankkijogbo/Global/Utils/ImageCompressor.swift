@@ -1,6 +1,5 @@
 import UIKit
 
-// TODO: - 이 파일 위치가 좀 애매한데... 우리 Global 안에 Util 폴더를 만들면 어떨까?
 struct ImageCompressor {
     static private var literalFor1MB: Int = 1024 * 1024
     static private var literalFor5MB: Int = 5 * literalFor1MB

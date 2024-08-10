@@ -637,6 +637,7 @@
 				83DBEDA92C2565920042BA48 /* Components */,
 				83DBEDA82C25658C0042BA48 /* Consts */,
 				83DBEDA72C2565840042BA48 /* Extensions */,
+				A2079B952C67344100817651 /* Utils */,
 				83DBEDA62C25657B0042BA48 /* Resources */,
 				83DBEDA52C25656D0042BA48 /* Supporting Files */,
 			);
@@ -728,7 +729,6 @@
 			isa = PBXGroup;
 			children = (
 				8322D03B2C5FB36B00F6D725 /* HankkiCategoryTagLabel */,
-				A23D11982C4811620023480C /* HankkiDebouncer */,
 				A240EA472C45273D000FF458 /* HankkiPaddingLabel */,
 				86E78D1C2C46B67400BE0DC3 /* EmptyView */,
 				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
@@ -1164,6 +1164,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A2079B952C67344100817651 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A23D11992C4811790023480C /* HankkiDebouncer.swift */,
+				A2079B932C656F7D00817651 /* ImageCompressor.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		A22D20C92C3165B6001AFAC6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,14 +1191,6 @@
 				A23D11962C47FFB90023480C /* SearchViewModel.swift */,
 			);
 			name = ViewModel;
-			sourceTree = "<group>";
-		};
-		A23D11982C4811620023480C /* HankkiDebouncer */ = {
-			isa = PBXGroup;
-			children = (
-				A23D11992C4811790023480C /* HankkiDebouncer.swift */,
-			);
-			path = HankkiDebouncer;
 			sourceTree = "<group>";
 		};
 		A240EA092C3EF712000FF458 /* HankkiReusableView */ = {
@@ -1381,7 +1382,6 @@
 		A2DEBF582C3D257C00DE14A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2079B932C656F7D00817651 /* ImageCompressor.swift */,
 				A2DEBF592C3D25A800DE14A9 /* ReportViewController.swift */,
 				A2DEBF5B2C3D2F6600DE14A9 /* ReportCompositionalLayoutFactory.swift */,
 				A240EA182C3F35BC000FF458 /* SearchBarCollectionViewCell.swift */,
