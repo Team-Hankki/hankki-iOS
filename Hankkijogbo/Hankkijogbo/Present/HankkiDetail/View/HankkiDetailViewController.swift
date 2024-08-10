@@ -230,6 +230,12 @@ private extension HankkiDetailViewController {
             $0.image = .imgBlackGradient
         }
     }
+    
+    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
+    func dismissAlertAndPop() {
+        dismissWithFadeOut()
+        backButtonDidTap()
+    }
 }
 
 extension HankkiDetailViewController {
@@ -258,7 +264,7 @@ extension HankkiDetailViewController {
             image: .imgModalReport,
             titleText: StringLiterals.Alert.thanksForReport,
             primaryButtonText: StringLiterals.Alert.goBack,
-            primaryButtonHandler: dismissWithFadeOut
+            primaryButtonHandler: dismissAlertAndPop
         )
     }
 }
