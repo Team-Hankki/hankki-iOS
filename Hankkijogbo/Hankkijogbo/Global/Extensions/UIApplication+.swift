@@ -34,4 +34,33 @@ extension UIApplication {
             }
         }
     }
+    
+    // view controller 외의 곳에서 alert을 호출하려는 경우
+    static func showAlert(
+        image: UIImage? = nil,
+        titleText: String,
+        subText: String = "",
+        secondaryButtonText: String = "",
+        primaryButtonText: String,
+        secondaryButtonHandler: (() -> Void)? = nil,
+        primaryButtonHandler: (() -> Void)? = nil,
+        hightlightedText: String = "",
+        hightlightedColor: UIColor? = nil
+    ) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let delegate = windowScene.delegate as? SceneDelegate,
+           let rootViewController = delegate.window?.rootViewController {
+            rootViewController.showAlert(
+                image: image,
+                titleText: titleText,
+                subText: subText,
+                secondaryButtonText: secondaryButtonText,
+                primaryButtonText: primaryButtonText,
+                secondaryButtonHandler: secondaryButtonHandler,
+                primaryButtonHandler: primaryButtonHandler,
+                hightlightedText: hightlightedText,
+                hightlightedColor: hightlightedColor
+            )
+        }
+    }
 }

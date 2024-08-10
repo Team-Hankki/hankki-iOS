@@ -51,6 +51,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         
         headerImageView.do {
             $0.image = .imgZipScreen1
+            $0.isUserInteractionEnabled = true
         }
         
         headerLabel.do {
@@ -145,12 +146,14 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
 }
 
 private extension ZipHeaderTableView {
-    @objc func shareButtonDidTap() {
-        // TODO: - 공유 로직 추가 필요
-    }
-    
     func setupAddTarget() {
         shareButton.addTarget(self, action: #selector(shareButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc func shareButtonDidTap() {
+        UIApplication.showAlert(titleText: "조금만 기다려주세요",
+                                       subText: "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요",
+                                       primaryButtonText: "확인")
     }
     
     func setupTagStackView(_ tagList: [String]) {
@@ -185,7 +188,7 @@ private extension ZipHeaderTableView {
             $0.horizontalEdges.equalToSuperview().inset(10)
         }
         
-        tagStackView.addArrangedSubviews(tagChipView)
+        tagStackView.addArrangedSubview(tagChipView)
     }
 }
 

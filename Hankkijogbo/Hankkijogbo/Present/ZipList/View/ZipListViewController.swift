@@ -110,10 +110,13 @@ private extension ZipListViewController {
     }
     
     func deleteButtonDidTap() {
-        showAlert(titleText: "족보를 삭제할까요?", 
-                  secondaryButtonText: "돌아가기",
-                  primaryButtonText: "삭제하기",
-                  primaryButtonHandler: deleteZip)
+        // 현재 선택된 cell이 1개 이상일 때만 삭제가 가능합니다.
+        if collectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
+            showAlert(titleText: "족보를 삭제할까요?",
+                      secondaryButtonText: "돌아가기",
+                      primaryButtonText: "삭제하기",
+                      primaryButtonHandler: deleteZip)
+        }
     }
     
     func deselectedAllItems() {

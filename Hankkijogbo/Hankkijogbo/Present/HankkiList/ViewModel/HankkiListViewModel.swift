@@ -8,7 +8,6 @@
 import Foundation
 
 final class HankkiListViewModel {
-    var showAlert: ((String) -> Void)?
     
     init() {
         getMe()
