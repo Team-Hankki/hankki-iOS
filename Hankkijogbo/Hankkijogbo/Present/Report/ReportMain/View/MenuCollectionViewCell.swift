@@ -13,19 +13,17 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     private let menuNameMaxLength: Int = 30
     private let priceMaxLength: Int = 5
-    private let menuNamePlaceHolderString: String = "예) 된장찌개"
-    private let pricePlaceHolderString: String = "8000"
     weak var delegate: PassItemDataDelegate?
         
     // MARK: - UI Components
     
-    private let menuLabel = UILabel()
-    let menuTextField = UITextField()
-    private let priceLabel = UILabel()
-    let priceTextField = UITextField()
-    private let priceUnitLabel = UILabel()
-    let deleteMenuButton = UIButton()
-    private let errorLabel = UILabel()
+    private let menuLabel: UILabel = UILabel()
+    let menuTextField: UITextField = UITextField()
+    private let priceLabel: UILabel = UILabel()
+    let priceTextField: UITextField = UITextField()
+    private let priceUnitLabel: UILabel = UILabel()
+    let deleteMenuButton: UIButton = UIButton()
+    private let errorLabel: UILabel = UILabel()
     private let doneToolbar: UIToolbar = UIToolbar()
     
     // MARK: - Init
@@ -45,11 +43,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        menuTextField.text = ""
-        priceTextField.text = ""
-        errorLabel.text = ""
-        priceLabel.textColor = .gray500
-        priceTextField.layer.borderColor = UIColor.gray300.cgColor
+       setupInitialStyle()
     }
     
     // MARK: - Setup UI
@@ -106,7 +100,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         menuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
-                withText: "메뉴 이름",
+                withText: StringLiterals.Report.menuName,
                 color: .gray500
             )
         }
@@ -121,7 +115,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: menuNamePlaceHolderString,
+                withText: StringLiterals.Placeholder.menuName,
                 color: .gray400
             )
             $0.addPadding(left: 12, right: 12)
@@ -129,7 +123,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,
-                withText: "가격",
+                withText: StringLiterals.Report.price,
                 color: .gray500
             )
         }
@@ -144,7 +138,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             )
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: pricePlaceHolderString,
+                withText: StringLiterals.Placeholder.price,
                 color: .gray400
             )
             $0.addPadding(left: 12, right: 16)
@@ -154,7 +148,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         priceUnitLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "원",
+                withText: StringLiterals.Common.won,
                 color: .gray800
             )
         }
@@ -164,7 +158,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         errorLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                withText: "8000원 이하만 가능해요",
+                withText: StringLiterals.Report.priceError,
                 color: .hankkiRed
             )
             $0.isHidden = true
@@ -188,29 +182,44 @@ private extension MenuCollectionViewCell {
     func setupToolbar() {
         doneToolbar.items=[
             UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
+            UIBarButtonItem(title: StringLiterals.Toolbar.done, style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
         ]
         doneToolbar.sizeToFit()
+    }
+    
+    func setupInitialStyle() {
+        menuLabel.textColor = .gray500
+        menuTextField.text = ""
+        
+        priceLabel.textColor = .gray500
+        priceTextField.text = ""
+        priceTextField.textColor = .gray800
+        priceTextField.layer.borderColor = UIColor.gray300.cgColor
+        
+        errorLabel.isHidden = true
+    }
+    
+    func setupPriceErrorStyle() {
+        priceLabel.textColor = .hankkiRed
+        priceTextField.textColor = .hankkiRed
+        errorLabel.isHidden = false
+    }
+    
+    func setupPriceNonErrorStyle() {
+        priceLabel.textColor = .gray800
+        priceTextField.textColor = .gray800
+        errorLabel.isHidden = true
     }
     
     // MARK: - @objc Func
     
     @objc func priceTextFieldDidEditingChange() {
         if Int(priceTextField.text ?? "") ?? 0 > 8000 {
-            // 에러 스타일 띄우기
-            self.priceLabel.textColor = .hankkiRed
-            priceTextField.do {
-                $0.layer.borderColor = UIColor.hankkiRed.cgColor
-                $0.textColor = .hankkiRed
-            }
-            errorLabel.isHidden = false
+            setupPriceErrorStyle()
+            priceTextField.layer.borderColor = UIColor.hankkiRed.cgColor
         } else {
-            self.priceLabel.textColor = .gray500
-            priceTextField.do {
-                $0.layer.borderColor = UIColor.gray800.cgColor
-                $0.textColor = .gray800
-            }
-            errorLabel.isHidden = true
+            setupPriceNonErrorStyle()
+            priceTextField.layer.borderColor = UIColor.gray800.cgColor
         }
     }
     
@@ -228,6 +237,12 @@ extension MenuCollectionViewCell {
         menuTextField.text = menu.name
         if menu.price != 0 {
             priceTextField.text = "\(menu.price)"
+            
+            if menu.price > 8000 {
+                setupPriceErrorStyle()
+            } else {
+                setupPriceNonErrorStyle()
+            }
         } else {
             priceTextField.text = ""
         }
@@ -238,9 +253,14 @@ extension MenuCollectionViewCell {
 
 extension MenuCollectionViewCell: UITextFieldDelegate {
     /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
-    /// - border 색 검정색으로 변경
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.layer.borderColor = UIColor.gray800.cgColor
+        if textField == menuTextField {
+            menuLabel.textColor = .gray800
+            textField.layer.borderColor = UIColor.gray800.cgColor
+        } else {
+            priceLabel.textColor = .gray800
+            priceTextFieldDidEditingChange()
+        }
         return true
     }
     
@@ -263,6 +283,14 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     /// - border 색 원래대로 변경
     /// - 뷰 모델의 메뉴 데이터도 여기서 적힌 값으로 업데이트
     final func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == menuTextField {
+            menuLabel.textColor = .gray500
+        } else {
+            if Int(priceTextField.text ?? "") ?? 0 <= 8000 {
+                priceLabel.textColor = .gray500
+            }
+        }
+        
         textField.layer.borderColor = UIColor.gray300.cgColor
         delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }

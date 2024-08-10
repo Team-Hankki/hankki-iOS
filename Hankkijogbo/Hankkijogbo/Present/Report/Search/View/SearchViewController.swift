@@ -14,8 +14,7 @@ final class SearchViewController: BaseViewController {
     var viewModel: SearchViewModel
     
     weak var delegate: PassItemDataDelegate?
-    private let debouncer = HankkiDebouncer(seconds: 0.5)
-    private var alreadyReportHankkiText: String = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
+    private let debouncer: HankkiDebouncer = HankkiDebouncer(seconds: 0.5)
     
     // MARK: - UI Components
     
@@ -27,7 +26,7 @@ final class SearchViewController: BaseViewController {
     private let searchTextDeleteButton: UIButton = UIButton()
     private let searchBarBottomGradientView: UIView = UIView()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: "삭당을 제보해주세요",
+        primaryButtonText: StringLiterals.Report.reportHankki,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -120,7 +119,7 @@ final class SearchViewController: BaseViewController {
             $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: "식당 이름으로 검색하면\n주소를 찾아 드릴게요",
+                withText: StringLiterals.Report.searchHankkiByName,
                 color: .gray900
             )
         }
@@ -141,7 +140,7 @@ final class SearchViewController: BaseViewController {
             $0.layer.borderColor = UIColor.gray900.cgColor
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: "가게 이름으로 검색",
+                withText: StringLiterals.Report.searchSecondPlaceHolder,
                 color: .gray400
             )
             $0.addPadding(left: 40, right: 45)
@@ -165,13 +164,11 @@ extension SearchViewController {
         }
         
         viewModel.completeLocationSelection = {
-            self.completeLocationSelection()
+            self.navigationController?.popViewController(animated: true)
         }
         
-        viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+        viewModel.showAlert = { title, sub, button in
+            self.showAlert(titleText: title, subText: sub ?? "", primaryButtonText: button)
         }
     }
 }
@@ -236,25 +233,10 @@ private extension SearchViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
-        let request = PostHankkiValidateRequestDTO(universityId: 1, latitude: 36.666, longitude: 126.666)
+        guard let university = UserDefaults.standard.getUniversity() else { return }
+        guard let hankkiLocation = viewModel.selectedLocationData else { return }
+        let request = PostHankkiValidateRequestDTO(universityId: Int64(university.id), latitude: hankkiLocation.latitude, longitude: hankkiLocation.longitude)
         viewModel.postHankkiValidateAPI(req: request)
-    }
-    
-    func completeLocationSelection() {
-        guard let code = viewModel.postHankkiValidateCode else { return }
-        switch code {
-        case 200:
-            // 등록 ㄱ
-            guard let location = viewModel.selectedLocationData else { return }
-            self.navigationController?.popViewController(animated: true)
-        case 409:
-            // 이미 등록된 가게 Alert 띄우기
-            showAlert(titleText: alreadyReportHankkiText, primaryButtonText: "확인")
-        default:
-            // ERROR
-            // TODO: - 공통 에러 Alert 필요
-            break
-        }
     }
 }
 
@@ -333,7 +315,6 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.className, for: indexPath) as? SearchCollectionViewCell else { return }
         viewModel.selectedLocationData = viewModel.searchedLocationResponseData?.locations[indexPath.item]
     }
 }

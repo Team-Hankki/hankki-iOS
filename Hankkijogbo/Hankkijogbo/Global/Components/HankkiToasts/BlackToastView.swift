@@ -21,8 +21,9 @@ final class BlackToastView: BaseView {
     
     // MARK: - UI Properties
     
-    private let messageLabel = UILabel()
-    private let actionButton = UIButton()
+    private let messageLabel: UILabel = UILabel()
+    private let actionButton: UIButton = UIButton()
+    private let tapDetectView: UIView = UIView()
     
     // MARK: - Life Cycle
     
@@ -31,6 +32,7 @@ final class BlackToastView: BaseView {
         self.action = action
         super.init(frame: .zero)
         
+        addGesture()
         removeViewWithAnimation()
     }
     
@@ -41,7 +43,7 @@ final class BlackToastView: BaseView {
     // MARK: - Func
     
     override func setupHierarchy() {
-        addSubviews(messageLabel, actionButton)
+        addSubviews(messageLabel, actionButton, tapDetectView)
     }
     
     override func setupLayout() {
@@ -57,6 +59,10 @@ final class BlackToastView: BaseView {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(22)
         }
+        tapDetectView.snp.makeConstraints {
+            $0.centerY.trailing.width.equalTo(actionButton)
+            $0.height.equalToSuperview()
+        }
     }
     
     override func setupStyle() {
@@ -70,16 +76,20 @@ final class BlackToastView: BaseView {
             $0.font = .setupPretendardStyle(of: .body3)
         }
         actionButton.do {
-            $0.setTitle("보기", for: .normal)
+            $0.setTitle(StringLiterals.Toast.see, for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.titleLabel?.font = .setupPretendardStyle(of: .body4)
             $0.setUnderline()
-            $0.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
         }
     }
 }
 
 private extension BlackToastView {
+    
+    func addGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionButtonDidTap))
+        tapDetectView.addGestureRecognizer(tapGesture)
+    }
     
     // MARK: - @objc
     

@@ -11,8 +11,8 @@ final class HankkiReportOptionCollectionView: BaseView {
         
     // MARK: - UI Components
     
-    private let flowLayout = UICollectionViewFlowLayout()
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     // MARK: - Setup UI
 

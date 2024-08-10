@@ -16,9 +16,12 @@ final class ReportCompleteViewController: BaseViewController {
     let nickname: String
     let selectedHankkiName: String
     
-    let goToReportedHankkiString: String = "제보한 식당 보러가기"
-    var updateStringNotificationName: String = "UpdateAddToMyZipListString"
-    
+    private let randomThanksMessages: [String] = [
+        StringLiterals.Report.randomThanksMessageVer1,
+        StringLiterals.Report.randomThanksMessageVer2,
+        StringLiterals.Report.randomThanksMessageVer3
+    ]
+        
     // MARK: - UI Components
     
     private let reportedNumberLabel: UILabel = UILabel()
@@ -28,7 +31,7 @@ final class ReportCompleteViewController: BaseViewController {
     private let hankkiOrangeGradientImageView: UIImageView = UIImageView()
     private lazy var hankkiInfoCardView: HankkiInfoCardView = HankkiInfoCardView(hankkiNameString: selectedHankkiName)
     
-    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(primaryButtonText: goToReportedHankkiString, primaryButtonHandler: bottomButtonPrimaryHandler)
+    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(primaryButtonText: StringLiterals.Report.goToReportedHankki, primaryButtonHandler: bottomButtonPrimaryHandler)
     private let goToHomeButton: UIButton = UIButton()
     private let bottomGradientView: UIView = UIView()
     
@@ -66,8 +69,8 @@ final class ReportCompleteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(updateStringNotificationName), object: nil)
         setupNavigationBar()
+        setupNotification()
     }
     
     // MARK: - Setup UI
@@ -129,14 +132,14 @@ final class ReportCompleteViewController: BaseViewController {
         reportedNumberLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: "\(reportedNumber)번째 식당을 등록했어요",
+                withText: "\(reportedNumber)\(StringLiterals.Report.hankkiReportComplete)",
                 color: .gray900
             )
         }
         randomThanksLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.body1,
-                withText: "\(nickname)님이 모두의 지갑을 지켰어요!",
+                withText: nickname + getRandomThanksMessage(),
                 color: .gray500
             )
         }
@@ -150,7 +153,7 @@ final class ReportCompleteViewController: BaseViewController {
         goToHomeButton.do {
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle2,
-                withText: "홈으로",
+                withText: StringLiterals.Common.goToHome,
                 color: .hankkiRed
             ), for: .normal)
         }
@@ -178,6 +181,11 @@ private extension ReportCompleteViewController {
         hankkiInfoCardView.addToMyZipListButton.addTarget(self, action: #selector(addToMyZipListButtonDidTap), for: .touchUpInside)
     }
     
+    func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupWhiteToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
+    }
+    
     func setupBottomGradientView() {
         let gradient = CAGradientLayer()
         
@@ -186,7 +194,7 @@ private extension ReportCompleteViewController {
                 UIColor.hankkiWhite.withAlphaComponent(0).cgColor,
                 UIColor.hankkiWhite.cgColor,
                 UIColor.hankkiWhite.cgColor
-              ]
+            ]
             $0.locations = [0.0, 0.24, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
@@ -195,6 +203,13 @@ private extension ReportCompleteViewController {
         
         self.bottomGradientView.layer.addSublayer(gradient)
     }
+    
+    func getRandomThanksMessage() -> String {
+        return randomThanksMessages.randomElement() ?? StringLiterals.Report.randomThanksMessageVer1
+    }
+}
+
+private extension ReportCompleteViewController {
     
     // MARK: - @objc Func
     
@@ -208,7 +223,17 @@ private extension ReportCompleteViewController {
     }
     
     @objc func updateAddToMyZipListString() {
-        hankkiInfoCardView.addToMyZipListString = "다른 족보에도 추가"
+        hankkiInfoCardView.addToMyZipListString = StringLiterals.MyZip.addToOtherZip
+    }
+    
+    @objc func setupWhiteToast(_ notification: Notification) {
+        if let zipId = notification.userInfo?["zipId"] as? Int {
+            
+            self.showWhiteToast(message: StringLiterals.Toast.addToMyZipWhite) { [self] in
+                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                navigationController?.pushViewController(hankkiListViewController, animated: true)
+            }
+        }
     }
     
     @objc func goToHomeButtonDidTap() {

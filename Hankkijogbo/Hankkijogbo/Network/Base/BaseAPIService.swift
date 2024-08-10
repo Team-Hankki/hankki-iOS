@@ -22,6 +22,7 @@ class BaseAPIService {
         case 401: return .unAuthorized
         case 404: return .notFound
         case 405: return .methodNotAllowed
+        case 409: return .conflict
         case 500: return .serverError
         default: return .networkFail
         }

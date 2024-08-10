@@ -11,8 +11,7 @@ final class HankkiInfoCardView: BaseView {
     
     // MARK: - Properties
         
-    var reportedGuideString: String = "내가 등록한 식당"
-    var hankkiNameString: String = "고봉김밥집 1호점" {
+    var hankkiNameString: String = "" {
         didSet {
             self.hankkiNameLabel.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
@@ -21,7 +20,7 @@ final class HankkiInfoCardView: BaseView {
             )
         }
     }
-    var addToMyZipListString: String = "내 족보에 추가" {
+    var addToMyZipListString: String = StringLiterals.MyZip.addToMyZip {
         didSet {
             self.addToMyZipListButton.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
@@ -83,7 +82,7 @@ final class HankkiInfoCardView: BaseView {
         reportedGuideLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                withText: reportedGuideString,
+                withText: StringLiterals.Report.hankkiReportedByMe,
                 color: .gray500
             )
         }

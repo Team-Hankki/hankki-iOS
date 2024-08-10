@@ -29,10 +29,11 @@ extension UIView {
     func removeViewWithAnimation(duration: Double = 0.5, delay: Double = 2) {
         UIView.animate(withDuration: duration,
                        delay: delay,
-                       options: .curveEaseIn,
+                       options: [.curveEaseIn, .allowUserInteraction],
                        animations: {
-            self.alpha = 0
+            self.alpha = 0.02
         }, completion: { _ in
+            self.alpha = 0
             self.removeFromSuperview()
         })
     }

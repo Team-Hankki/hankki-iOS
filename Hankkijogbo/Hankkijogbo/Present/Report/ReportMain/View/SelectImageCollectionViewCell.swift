@@ -11,8 +11,8 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Properties
     
-    private let recommendGuideLabel = UILabel()
-    let selectImageButton = UIButton()
+    private let recommendGuideLabel: UILabel = UILabel()
+    let selectImageButton: UIButton = UIButton()
         
     // MARK: - Set UI
     
@@ -35,7 +35,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
         recommendGuideLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                withText: "한끼로 적당한 메뉴를 추천해주세요",
+                withText: StringLiterals.Report.addMenuSubtitle,
                 color: .gray400
             )
         }
@@ -45,7 +45,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
             $0.setImage(.icAddPhoto, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "대표 음식 이미지 첨부하기 (선택)",
+                withText: StringLiterals.Report.addImage,
                 color: .gray500
             ), for: .normal)
             $0.configuration = .plain()

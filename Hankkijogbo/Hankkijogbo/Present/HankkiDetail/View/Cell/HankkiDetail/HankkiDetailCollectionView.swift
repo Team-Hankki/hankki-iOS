@@ -11,8 +11,8 @@ final class HankkiDetailCollectionView: BaseView {
 
     // MARK: - UI Components
     
-    private let flowLayout = UICollectionViewFlowLayout()
-    lazy var collectionView = UICollectionView(frame: .init(x: 0, y: 0, width: 339, height: 349), collectionViewLayout: flowLayout)
+    private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    lazy var collectionView: UICollectionView = UICollectionView(frame: .init(x: 0, y: 0, width: 339, height: 349), collectionViewLayout: flowLayout)
     
     // MARK: - Life Cycle
 
