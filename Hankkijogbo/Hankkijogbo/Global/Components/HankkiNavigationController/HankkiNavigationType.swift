@@ -14,10 +14,10 @@ struct HankkiNavigationType {
     var mainTitle: StringOrImageType        // mainTitle
     var rightButton: StringOrImageType      // rightButton
     var rightButtonAction: (() -> Void)?   // rightButton의 액션
-    var backgroundColor: UIColor = .hankkiWhite
     var backButtonAction: (() -> Void)?   // leftButton의 액션
-    
     var titleButtonAction: (() -> Void)?   // 타이틀 버튼을 클릭했을 때 액션
+    
+    var backgroundColor: UIColor = .hankkiWhite
 }
 
 enum StringOrImageType {
