@@ -27,15 +27,11 @@ final class HankkiEditMenuCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setupStyle() {
-        editMenuButton.do {   
-            $0.setAttributedTitle(
-                UILabel.setupAttributedText(
-                    for: PretendardStyle.body5,
-                    withText: StringLiterals.HankkiDetail.editMenu,
-                    color: .gray400
-                ),
-                for: .normal
-            )
+        editMenuButton.do { 
+            // TODO: - 버튼일 때 문제점 또 발견... setUnderline도 attributedTitle 쓰는 거라 UILabel.setupAttributedText랑 같이 쓰는 게 불가능함 쓰면 underline이 적용이 안 돼
+            $0.setTitle(StringLiterals.HankkiDetail.editMenu, for: .normal)
+            $0.titleLabel?.font = .setupPretendardStyle(of: .body5)
+            $0.setTitleColor(.gray400, for: .normal)
             $0.setUnderline()
         }
     }
