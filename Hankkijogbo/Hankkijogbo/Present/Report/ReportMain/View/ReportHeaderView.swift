@@ -25,16 +25,19 @@ final class ReportHeaderView: BaseCollectionReusableView {
             $0.leading.equalToSuperview()
         }
     }
+    
+    override func setupStyle() {
+        headerLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle1,
+                color: .gray900
+            )
+        }
+    }
 }
 
 extension ReportHeaderView {
     func bindData(_ text: String) {
-        headerLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle1,
-                withText: text,
-                color: .gray900
-            )
-        }
+        headerLabel.text = text
     }
 }

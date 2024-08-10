@@ -11,17 +11,6 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    var reportedNumberText: String = "" {
-        didSet {
-            reportedNumberLabel.do {
-                $0.attributedText = UILabel.setupAttributedText(
-                    for: PretendardStyle.body4,
-                    withText: reportedNumberText,
-                    color: .hankkiRed
-                )
-            }
-        }
-    }
     var hankkiNameString: String = "" {
         didSet {
             if hankkiNameString != "" {
@@ -68,6 +57,12 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setupStyle() {
+        reportedNumberLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body4,
+                color: .hankkiRed
+            )
+        }
         descriptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h3,
@@ -132,6 +127,6 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
 
 extension SearchBarCollectionViewCell {
     func bindGuideText(text: String) {
-        self.reportedNumberText = text
+        reportedNumberLabel.text = text
     }
 }

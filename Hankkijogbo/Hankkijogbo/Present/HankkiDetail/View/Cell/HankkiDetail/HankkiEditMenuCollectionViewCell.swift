@@ -28,9 +28,14 @@ final class HankkiEditMenuCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         editMenuButton.do {   
-            $0.setTitle(StringLiterals.HankkiDetail.editMenu, for: .normal)
-            $0.titleLabel?.font = .setupPretendardStyle(of: .body5)
-            $0.setTitleColor(.gray400, for: .normal)
+            $0.setAttributedTitle(
+                UILabel.setupAttributedText(
+                    for: PretendardStyle.body5,
+                    withText: StringLiterals.HankkiDetail.editMenu,
+                    color: .gray400
+                ),
+                for: .normal
+            )
             $0.setUnderline()
         }
     }

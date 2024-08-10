@@ -83,6 +83,7 @@ extension UILabel {
                 
         return NSAttributedString(string: text, attributes: attributes)
     }
+    
     /// 텍스트 부분의 색을 일부 변경합니다.
     func setupTextColorRange(start: Int, end: Int, color: UIColor) {
         guard var attributedText = attributedText else {

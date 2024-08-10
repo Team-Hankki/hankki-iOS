@@ -9,11 +9,6 @@ import UIKit
 
 final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - Properties
-    
-    var hankkiMenuName: String = ""
-    var hankkiMenuPrice: Int = 0
-    
     // MARK: - UI Properties
     
     private var hankkiMenuNameLabel: UILabel = UILabel()
@@ -49,7 +44,6 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
         hankkiMenuNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
-                withText: hankkiMenuName,
                 color: .gray700
             )
         }
@@ -59,7 +53,6 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
         hankkiMenuPriceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "\(hankkiMenuPrice)\(StringLiterals.Common.won)",
                 color: .gray500
             )
         }
@@ -68,19 +61,7 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
 
 extension HankkiDetailCollectionViewCell {
     func bindMenuData(_ menuData: MenuData) {
-        hankkiMenuNameLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
-                withText: menuData.name,
-                color: .gray700
-            )
-        }
-        hankkiMenuPriceLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body1,
-                withText: "\(menuData.price)\(StringLiterals.Common.won)",
-                color: .gray500
-            )
-        }
+        hankkiMenuNameLabel.text = menuData.name
+        hankkiMenuPriceLabel.text = "\(menuData.price)\(StringLiterals.Common.won)"
     }
 }
