@@ -93,7 +93,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
                 color: .gray400
             ), for: .normal)
             $0.titleLabel?.lineBreakMode = .byTruncatingTail
-            $0.titleLabel!.numberOfLines = 1
+            $0.titleLabel?.numberOfLines = 1
             $0.configuration = .plain()
             $0.configuration?.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 14)
             $0.configuration?.imagePadding = 4
