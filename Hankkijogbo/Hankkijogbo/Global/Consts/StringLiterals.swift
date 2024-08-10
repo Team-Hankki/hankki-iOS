@@ -38,7 +38,7 @@ enum StringLiterals {
     enum Toast {
         static let addToMyZipBlack = "나의 족보에 추가되었습니다."
         static let see = "보기"
-        static let addToMyZipWhite = "내 족보에 추가했어요"
+        static let addToMyZipWhite = "나의 족보에 추가했어요"
         static let move = "이동"
     }
     
