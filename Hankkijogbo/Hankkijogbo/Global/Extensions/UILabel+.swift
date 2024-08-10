@@ -50,10 +50,11 @@ extension UILabel {
     }
     
     /// attributedText를 설정하는 메서드
+    /// - 추후 text만 바꿔도 나머지 속성이 적용되도록 하기 위해 withText 기본값을 공백 1개로 설정
     static func setupAttributedText<T: FontStyle>(
         for fontName: T,
-        withText text: String = "",
-        color: UIColor = .gray900
+        withText text: String = " ",
+        color: UIColor = .red
     ) -> NSAttributedString? {
         
         var font: UIFont
