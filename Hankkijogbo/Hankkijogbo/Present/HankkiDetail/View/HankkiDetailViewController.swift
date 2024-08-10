@@ -82,8 +82,7 @@ final class HankkiDetailViewController: BaseViewController {
     override func setupLayout() {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(self.view).offset(-UIApplication.getStatusBarHeight())
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.horizontalEdges.bottom.equalToSuperview()
         }
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -118,6 +117,9 @@ final class HankkiDetailViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.do {
+            $0.backgroundColor = .gray50
+        }
         scrollView.do {
             $0.backgroundColor = .clear
         }
@@ -255,11 +257,10 @@ extension HankkiDetailViewController {
 }
 
 extension HankkiDetailViewController {
+    /// 상단의 bounces만 비활성화
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            scrollView.bounces = false
-        } else {
-            scrollView.bounces = true
+        if scrollView.contentOffset.y < -UIApplication.getStatusBarHeight() {
+            scrollView.contentOffset.y = -UIApplication.getStatusBarHeight()
         }
     }
 }
