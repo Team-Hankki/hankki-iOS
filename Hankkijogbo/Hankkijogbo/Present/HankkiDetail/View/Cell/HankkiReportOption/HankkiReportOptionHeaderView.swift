@@ -9,10 +9,6 @@ import UIKit
 
 final class HankkiReportOptionHeaderView: BaseCollectionReusableView {
     
-    // MARK: - Properties
-    
-    var reportGuideString: String = "내가 알고 있는 정보와 다른가요?"
-    
     // MARK: - UI Components
     
     private let headerLabel: UILabel = UILabel()
@@ -33,7 +29,7 @@ final class HankkiReportOptionHeaderView: BaseCollectionReusableView {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle1,
-                withText: reportGuideString,
+                withText: StringLiterals.HankkiDetail.reportWrongInformation,
                 color: .gray900
             )
         }

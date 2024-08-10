@@ -15,7 +15,7 @@ extension LoginViewModel {
         UserDefaults.standard.removeUniversity()
         
         NetworkService.shared.userService.getMeUniversity { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult { response in
                 let university: UniversityModel = UniversityModel(id: response.data.id,
                                                                   name: response.data.name,
                                                                   longitude: response.data.longitude,
@@ -34,7 +34,7 @@ extension LoginViewModel {
     
     func postLogin (accessToken: String, postLoginRequest: PostLoginRequestDTO) {
         NetworkService.shared.authService.postLogin(accessToken: accessToken, requestBody: postLoginRequest) { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult { response in
                 let refreshToken = response.data.refreshToken
                 let accessToken = response.data.accessToken
                 

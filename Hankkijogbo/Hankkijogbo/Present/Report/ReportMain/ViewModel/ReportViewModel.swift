@@ -39,28 +39,20 @@ final class ReportViewModel {
 extension ReportViewModel {
     
     func getReportedNumberAPI() {
-        NetworkService.shared.reportService.getReportedNumber { [weak self] result in
-            switch result {
-            case .success(let response):
-                guard let reportedNumber = response?.data.count else { return }
+        NetworkService.shared.reportService.getReportedNumber { result in
+            result.handleNetworkResult { [weak self] response in
+                let reportedNumber = response.data.count
                 self?.reportedNumber = Int(reportedNumber)
-                self?.reportedNumberGuideText = "\(reportedNumber)번째 제보예요"
-            case .badRequest, .unAuthorized, .serverError:
-                self?.showAlert?("Failed to fetch category filters.")
-            default:
-                return
+                self?.reportedNumberGuideText = "\(reportedNumber)\(StringLiterals.Report.numberOfReport)"
             }
         }
     }
     
     func getMe(completion: @escaping(String) -> Void) {
         NetworkService.shared.userService.getMe { result in
-            switch result {
-            case .success(let response):
-                self.nickname = response?.data.nickname
-                completion(self.nickname ?? "")
-            default:
-                return
+            result.handleNetworkResult { [weak self] response in
+                self?.nickname = response.data.nickname
+                completion(self?.nickname ?? "")
             }
         }
     }
@@ -82,42 +74,29 @@ extension ReportViewModel {
         
         let multipartData = createMultipartFormData(image: selectedImageData, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
-            switch result {
-            case .success(let response):
-                guard let data = response?.data else { return }
-                print(data)
+            result.handleNetworkResult { [weak self] response in
+                guard let self = self else { return }
+                let data = response.data
                 self.getMe { name in
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                        let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-                        let reportCompleteViewController = ReportCompleteViewController(hankkiId: (response?.data.id ?? 0),
+                        let reportCompleteViewController = ReportCompleteViewController(hankkiId: data.id,
                                                                                         reportedNumber: self.reportedNumber,
                                                                                         nickname: name,
-                                                                                        selectedHankkiName: response?.data.name ?? "")
+                                                                                        selectedHankkiName: data.name)
                         rootViewController.pushViewController(reportCompleteViewController, animated: true)
                     }
                 }
-            case .badRequest, .unAuthorized, .serverError:
-                self.showAlert?("Failed to fetch category filters.")
-            default:
-                return
             }
         }
     }
     
     // 종류 카테고리를 가져오는 메서드
     func getCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
-        NetworkService.shared.hankkiService.getCategoryFilter { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.categoryFilters = response?.data.categories ?? []
+        NetworkService.shared.hankkiService.getCategoryFilter { result in
+            result.handleNetworkResult { [weak self] response in
+                self?.categoryFilters = response.data.categories
                 completion(true)
-                print("SUCCESS")
-            case .unAuthorized, .networkFail:
-                self?.showAlert?("Failed to fetch category filters.")
-                completion(false)
-                print("FAILED")
-            default:
-                return
             }
         }
     }

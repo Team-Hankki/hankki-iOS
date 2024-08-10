@@ -71,7 +71,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
         descriptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h3,
-                withText: "을 제보할래요",
+                withText: StringLiterals.Report.reportThisLocation,
                 color: .gray900
             )
         }
@@ -94,7 +94,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.setImage(.icSearch, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: "이름으로 식당 검색",
+                withText: StringLiterals.Report.searchFirstPlaceHolder,
                 color: .gray400
             ), for: .normal)
             $0.titleLabel?.lineBreakMode = .byTruncatingTail

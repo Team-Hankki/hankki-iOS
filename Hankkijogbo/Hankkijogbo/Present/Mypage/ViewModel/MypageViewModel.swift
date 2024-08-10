@@ -22,7 +22,7 @@ final class MypageViewModel {
 extension MypageViewModel {
     func getMe() {
         NetworkService.shared.userService.getMe { result in
-            result.handleNetworkResult(result) { response in
+            result.handleNetworkResult { response in
                 self.userInfo = MypageHeaderView.DataStruct(image: response.data.profileImageUrl,
                                                             name: response.data.nickname)
             }
@@ -31,7 +31,7 @@ extension MypageViewModel {
     
     func patchLogout() {
         NetworkService.shared.authService.patchLogout { result in
-           result.handleNetworkResult(result) { _ in
+           result.handleNetworkResult { _ in
                print("🛠️ RESTART APPLICATION 🛠️ - LOGOUT")
                UIApplication.resetApp()
            }
@@ -40,10 +40,10 @@ extension MypageViewModel {
     
     func deleteWithdraw(authorizationCode: String) {
         NetworkService.shared.authService.deleteWithdraw(authorizationCode: authorizationCode) { result in
-            result.handleNetworkResult(result, onSuccessVoid: {
+            result.handleNetworkResult { _ in
                 print("🛠️ RESTART APPLICATION 🛠️ - WITHDRAW")
                 UIApplication.resetApp()
-            })
+            }
         }
     }
 }

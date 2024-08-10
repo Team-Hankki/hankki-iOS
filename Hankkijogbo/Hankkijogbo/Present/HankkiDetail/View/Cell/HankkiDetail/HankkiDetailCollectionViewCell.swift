@@ -11,8 +11,8 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    var hankkiMenuName: String = "수육 정식"
-    var hankkiMenuPrice: Int = 7000
+    var hankkiMenuName: String = ""
+    var hankkiMenuPrice: Int = 0
     
     // MARK: - UI Properties
     
@@ -59,7 +59,7 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
         hankkiMenuPriceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "\(hankkiMenuPrice)원",
+                withText: "\(hankkiMenuPrice)\(StringLiterals.Common.won)",
                 color: .gray500
             )
         }
@@ -78,7 +78,7 @@ extension HankkiDetailCollectionViewCell {
         hankkiMenuPriceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: "\(menuData.price)원",
+                withText: "\(menuData.price)\(StringLiterals.Common.won)",
                 color: .gray500
             )
         }
