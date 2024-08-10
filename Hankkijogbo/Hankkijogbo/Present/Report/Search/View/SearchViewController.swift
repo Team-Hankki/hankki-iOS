@@ -31,7 +31,7 @@ final class SearchViewController: BaseViewController {
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     private lazy var emptyView = EmptyView(
-        text: "'\(searchTextField.text ?? "")'" + StringLiterals.Report.emptySearchResult
+        text: "'\(currentSearchedText ?? "")'" + StringLiterals.Report.emptySearchResult
     )
     
     // MARK: - Init
@@ -240,8 +240,11 @@ private extension SearchViewController {
     }
     
     func updateEmptyView() {
-        emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
-        emptyView.text = "'\(currentSearchedText ?? "")'" + StringLiterals.Report.emptySearchResult
+        if let currentSearchedText = currentSearchedText {
+            emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
+            emptyView.text = "'\(currentSearchedText)'" + StringLiterals.Report.emptySearchResult
+            emptyView.setupTextLabelColor(start: 0, end: currentSearchedText.count + 2, color: .gray800)
+        }
     }
 }
 
