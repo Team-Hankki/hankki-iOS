@@ -177,6 +177,7 @@ private extension ReportCompleteViewController {
         
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.interactivePopGestureRecognizer?.isEnabled = false
         }
     }
     
