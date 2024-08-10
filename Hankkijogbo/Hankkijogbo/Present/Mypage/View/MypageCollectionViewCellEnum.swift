@@ -31,7 +31,6 @@ extension MypageViewController {
     }
     
     func setupAction(_ section: SectionType, itemIndex: Int) {
-        // TODO: - 함수 추후 변경
         switch section {
         case .zip:
             navigateToZipListViewController()
@@ -47,9 +46,13 @@ extension MypageViewController {
         case .option:
             switch itemIndex {
             case 0:
-                print("FAQ로 이동")
+                if let url = URL(string: StringLiterals.ExternalLink.FAQ) {
+                    UIApplication.shared.open(url, options: [:])
+                }
             case 1:
-                print("1:1 문의로 이동")
+                if let url = URL(string: StringLiterals.ExternalLink.OneonOne) {
+                    UIApplication.shared.open(url, options: [:])
+                }
             case 2:
                 self.showAlert(
                     titleText: "정말 로그아웃 하실 건가요?",

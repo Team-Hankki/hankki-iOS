@@ -20,7 +20,6 @@ enum NetworkResult<T> {
     case notFound           // 404 ~ 에 대한 정보가 없음
     case methodNotAllowed   // 405 지원하지 않는 HTTP 메소드
     case conflict           // 409 이미 등록된 데이터
-    
     case serverError        // 500 서버 내부 오류
     
     case pathError
@@ -37,7 +36,6 @@ enum NetworkResult<T> {
         case .notFound: return "🍚🔥 404 : NOT FOUND 🔥🍚"
         case .methodNotAllowed: return "🍚🔥 405 : METHOD NOT ALLOWED 🔥🍚"
         case .conflict: return "🍚🔥 409 : CONFLICT 🔥🍚"
-
         case .serverError: return "🍚🔥 500 : INTERNAL SERVER_ERROR 🔥🍚"
         case .pathError: return "🍚🔥 PATH ERROR 🔥🍚"
         }
