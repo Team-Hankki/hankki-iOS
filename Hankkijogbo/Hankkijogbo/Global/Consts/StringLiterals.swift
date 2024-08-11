@@ -7,6 +7,7 @@
 
 import Foundation
 
+// swiftlint:disable nesting
 enum StringLiterals {
     enum Common {
         static let goToHome = "홈으로"
@@ -117,11 +118,6 @@ enum StringLiterals {
         static let setupToast = "SetupToast"
     }
     
-    enum ExternalLink {
-        static let OneonOne = "https://tally.so/r/mO0oJY"
-        static let FAQ = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
-    }
-    
     enum Mypage {
         static let navigation = "MY"
         
@@ -181,5 +177,10 @@ enum StringLiterals {
             static let reported = "아직 제보한 식당이 없어요"
             static let liked = "아직 좋아요 누른 식당이 없어요"
         }
+    }
+    
+    enum ExternalLink {
+        static let OneonOne = "https://tally.so/r/mO0oJY"
+        static let FAQ = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
     }
 }
