@@ -11,6 +11,7 @@ import PhotosUI
 protocol PassItemDataDelegate: AnyObject {
     func updateViewModelCategoryData(data: GetCategoryFilterData?)
     func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String)
+    func updateViewModelLocationData(data: GetSearchedLocation?)
 }
 
 final class ReportViewController: BaseViewController {
@@ -97,6 +98,13 @@ extension ReportViewController {
             self?.showAlert(titleText: StringLiterals.Alert.unknownError,
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
+        }
+        reportViewModel.updateButton = { isActive in
+            if isActive {
+                self.bottomButtonView.setupEnabledDoneButton()
+            } else {
+                self.bottomButtonView.setupDisabledDoneButton()
+            }
         }
     }
 }
@@ -345,13 +353,15 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 extension ReportViewController: PassItemDataDelegate {
     
     func updateViewModelCategoryData(data: GetCategoryFilterData?) {
-        guard let data = data else { return }
-        self.reportViewModel.selectedCategory = data
-        self.bottomButtonView.setupEnabledDoneButton()
+        reportViewModel.selectedCategory = data
     }
     
     func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         reportViewModel.menus[indexPath.row] = MenuData(name: name, price: Int(price) ?? 0)
+    }
+    
+    func updateViewModelLocationData(data: GetSearchedLocation?) {
+        reportViewModel.selectedLocationData = data
     }
 }

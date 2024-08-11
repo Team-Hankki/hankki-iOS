@@ -163,6 +163,10 @@ extension SearchViewController {
             self.searchCollectionView.reloadData()
         }
         
+        viewModel.selectLocation = {
+            self.delegate?.updateViewModelLocationData(data: self.viewModel.selectedLocationData)
+        }
+        
         viewModel.completeLocationSelection = {
             self.navigationController?.popViewController(animated: true)
         }

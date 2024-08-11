@@ -29,15 +29,18 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
                 if isSelected {
                     if selectedCategoryString != nil {
                         delegate?.updateViewModelCategoryData(data: nil)
+                        print("111 nil을 보냄")
                         updateDefaultStyle()
                         $0.selectedCategoryString = nil
                     } else {
                         delegate?.updateViewModelCategoryData(data: data)
+                        print("111 data \(data)을 보냄")
                         updateSelectedStyle()
                         $0.selectedCategoryString = self.categoryLabel.text
                     }
                 } else {
                     delegate?.updateViewModelCategoryData(data: nil)
+                    print("111 nil을 보냄")
                     updateDefaultStyle()
                     $0.selectedCategoryString = nil
                 }

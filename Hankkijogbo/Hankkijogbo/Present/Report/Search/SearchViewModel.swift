@@ -15,13 +15,18 @@ final class SearchViewModel {
     var showAlert: ((String, String?, String) -> Void)?
     var completeLocationSelection: (() -> Void)?
     
-    var selectedLocationData: GetSearchedLocation?
+    var selectedLocationData: GetSearchedLocation? {
+        didSet {
+            selectLocation?()
+        }
+    }
     var searchedLocationResponseData: GetSearchedLocationResponseData? {
         didSet {
             updateLocations?()
         }
     }
     var updateLocations: (() -> Void)?
+    var selectLocation: (() -> Void)?
 }
 
 extension SearchViewModel {

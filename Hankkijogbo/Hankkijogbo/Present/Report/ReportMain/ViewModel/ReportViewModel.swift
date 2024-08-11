@@ -8,11 +8,12 @@
 import Foundation
 
 import Moya
-import UIKit
+import UIKit // todo: 제거
 
 final class ReportViewModel {
     var showAlert: ((String) -> Void)?
     var updateCollectionView: (() -> Void)?
+    var updateButton: ((Bool) -> Void)?
     
     var nickname: String?
     var reportedNumber: Int = 0 {
@@ -25,15 +26,54 @@ final class ReportViewModel {
             updateCollectionView?()
         }
     }
+    var selectedLocationData: GetSearchedLocation? {
+        didSet {
+            checkStatus()
+        }
+    }
     var categoryFilters: [GetCategoryFilterData] = [] {
         didSet {
             updateCollectionView?()
         }
     }
-    var selectedCategory: GetCategoryFilterData?
+    var selectedCategory: GetCategoryFilterData? {
+        didSet {
+            checkStatus()
+        }
+    }
     var selectedImageData: Data?
-    var menus: [MenuData] = [MenuData()]
+    var menus: [MenuData] = [MenuData()] {
+        didSet {
+            checkStatus()
+        }
+    }
     var validMenus: [MenuData] = []
+    var isValid: Bool? {
+        didSet {
+            updateButton?(isValid ?? false)
+        }
+    }
+}
+
+extension ReportViewModel {
+    
+    func checkStatus() {
+        print("0811 selectedLocationData \(selectedLocationData)")
+        print("0811 selectedCategory \(selectedCategory)")
+        print("0811 menus \(menus)")
+        if let _ = selectedLocationData {
+            if let _ = selectedCategory {
+                isValid = menus.contains { menu in
+                    !menu.name.isEmpty && menu.price > 0 && menu.price <= 8000
+                }
+            } else {
+                isValid = false
+            }
+        } else {
+            isValid = false
+        }
+        print("0811 isValid \(isValid)")
+    }
 }
 
 extension ReportViewModel {
