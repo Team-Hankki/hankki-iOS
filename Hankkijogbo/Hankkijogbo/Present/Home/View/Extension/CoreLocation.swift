@@ -206,7 +206,7 @@ extension HomeViewController {
         markers.removeAll()
     }
     
-    private func showMarkerInfoCard(at index: Int, pinId: Int64) {
+    private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
         

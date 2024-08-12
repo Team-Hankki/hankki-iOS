@@ -55,7 +55,7 @@ extension UILabel {
     static func setupAttributedText<T: FontStyle>(
         for fontName: T,
         withText text: String = " ",
-        color: UIColor = .red
+        color: UIColor = .gray900
     ) -> NSAttributedString? {
         
         var font: UIFont

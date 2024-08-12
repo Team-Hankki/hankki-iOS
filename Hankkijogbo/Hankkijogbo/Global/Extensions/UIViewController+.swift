@@ -141,7 +141,7 @@ extension UIViewController {
     }
     
     /// 나의 식당 족보 바텀 시트 띄우기
-    func presentMyZipListBottomSheet(id: Int64) {
+    func presentMyZipListBottomSheet(id: Int) {
         let viewController = MyZipListBottomSheetViewController(storeId: id)
         viewController.modalTransitionStyle = .crossDissolve
         viewController.modalPresentationStyle = .overFullScreen

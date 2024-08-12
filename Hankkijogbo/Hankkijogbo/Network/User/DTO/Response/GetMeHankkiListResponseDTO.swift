@@ -12,7 +12,7 @@ struct GetMeHankkiListResponseData: Codable {
 }
 
 struct GetMeHankkiListData: Codable {
-    let id: Int64
+    let id: Int
     let name: String
     let imageUrl: String
     let category: String

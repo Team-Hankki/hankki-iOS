@@ -22,7 +22,7 @@ final class MyZipViewModel {
     var setMyZipListFavoriteData: (() -> Void)?
     
     /// 내 식당 족보 리스트 조회
-    func getMyZipListAPI(id: Int64) {
+    func getMyZipListAPI(id: Int) {
         NetworkService.shared.zipService.getMyZipList(id: id) { result in
             result.handleNetworkResult { [weak self] response in
                 self?.myZipListFavoriteData = response.data.favorites

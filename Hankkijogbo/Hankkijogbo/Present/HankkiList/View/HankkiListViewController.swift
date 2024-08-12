@@ -22,7 +22,7 @@ final class  HankkiListViewController: BaseViewController {
     private let hankkiTableView = UITableView(frame: .zero, style: .grouped)
     private lazy var emptyView = EmptyView(
         text: type.emptyViewLabel,
-        buttonText: type == .myZip ? "식당 구경하러 가기" : nil,
+        buttonText: type == .myZip ? StringLiterals.HankkiList.moreButton : nil,
         buttonAction: type == .myZip ? self.navigateToHomeView : nil
     )
     
@@ -190,11 +190,11 @@ extension HankkiListViewController: UITableViewDataSource {
         }
     }
     
-    func deleteLike(_ id: Int64) {
+    func deleteLike(_ id: Int) {
         viewModel.deleteHankkiHeart(id: id)
     }
     
-    func postLike(_ id: Int64) {
+    func postLike(_ id: Int) {
         viewModel.postHankkiHeart(id: id)
     }
 }
@@ -244,7 +244,7 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
     func heartButtonDidTap(in cell: HankkiListTableViewCell, isSelected: Bool) {
         var calc: Int = 1
         if let indexPath = hankkiTableView.indexPath(for: cell) {
-            let hankkiId: Int64 = Int64(viewModel.hankkiList[indexPath.item].id)
+            let hankkiId: Int = viewModel.hankkiList[indexPath.item].id
             if isSelected {
                 calc *= -1
                 deleteLike(hankkiId)
@@ -252,8 +252,8 @@ extension HankkiListViewController: HankkiListTableViewCellDelegate {
             } else {
                 postLike(hankkiId)
             }
-            let currendData: HankkiListTableViewCell.DataStruct = viewModel.hankkiList[indexPath.item]
-            let newData: HankkiListTableViewCell.DataStruct = HankkiListTableViewCell.DataStruct(
+            let currendData: HankkiListTableViewCell.Model = viewModel.hankkiList[indexPath.item]
+            let newData: HankkiListTableViewCell.Model = HankkiListTableViewCell.Model(
                 id: currendData.id,
                 name: currendData.name,
                 imageURL: currendData.imageURL,

@@ -14,12 +14,12 @@ protocol HankkiAPIServiceProtocol {
     func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
     func getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiListResponseDTO>) -> Void)
     func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiPinResponseDTO>) -> Void)
-    func getHankkiThumbnail(id: Int64, completion: @escaping(NetworkResult<GetHankkiThumbnailResponseDTO>) -> Void)
-    func getHankkiDetail(id: Int64, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
+    func getHankkiThumbnail(id: Int, completion: @escaping(NetworkResult<GetHankkiThumbnailResponseDTO>) -> Void)
+    func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
     func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
-    func postHankkiHeart(id: Int64, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
+    func postHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
     func postHankki(multipartData: [MultipartFormData], completion: @escaping(NetworkResult<PostHankkiResponseDTO>) -> Void)
-    func deleteHankkiHeart(id: Int64, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
+    func deleteHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
 }
 
 extension HankkiAPIServiceProtocol {
@@ -157,7 +157,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 식당 썸네일 조회 
-    func getHankkiThumbnail(id: Int64, completion: @escaping (NetworkResult<GetHankkiThumbnailResponseDTO>) -> Void) {
+    func getHankkiThumbnail(id: Int, completion: @escaping (NetworkResult<GetHankkiThumbnailResponseDTO>) -> Void) {
         provider.request(.getHankkiThumbnail(id: id)) { result in
             switch result {
             case .success(let response):
@@ -173,7 +173,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
         }
     }
     /// 식당 세부 조회
-    func getHankkiDetail(id: Int64, completion: @escaping (NetworkResult<GetHankkiDetailResponseDTO>) -> Void) {
+    func getHankkiDetail(id: Int, completion: @escaping (NetworkResult<GetHankkiDetailResponseDTO>) -> Void) {
         provider.request(.getHankkiDetail(id: id)) { result in
             switch result {
             case .success(let response):
@@ -190,7 +190,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 식당 좋아요 추가
-    func postHankkiHeart(id: Int64, completion: @escaping (NetworkResult<HeartResponseDTO>) -> Void) {
+    func postHankkiHeart(id: Int, completion: @escaping (NetworkResult<HeartResponseDTO>) -> Void) {
         provider.request(.postHankkiHeart(id: id)) { result in
             switch result {
             case .success(let response):
@@ -207,7 +207,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 식당 좋아요 취소
-    func deleteHankkiHeart(id: Int64, completion: @escaping (NetworkResult<HeartResponseDTO>) -> Void) {
+    func deleteHankkiHeart(id: Int, completion: @escaping (NetworkResult<HeartResponseDTO>) -> Void) {
         provider.request(.deleteHankkiHeart(id: id)) { result in
             switch result {
             case .success(let response):
