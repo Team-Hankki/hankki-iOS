@@ -61,7 +61,7 @@ private extension ReportViewModel {
     func checkStatus() {
         if selectedLocationData != nil {
             if selectedCategory != nil {
-                isValid = menus.contains { menu in
+                isValid = menus.allSatisfy { menu in
                     !menu.name.isEmpty && menu.price > 0 && menu.price <= 8000
                 }
             } else {
