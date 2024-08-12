@@ -75,6 +75,15 @@ private extension ReportViewModel {
 
 extension ReportViewModel {
     
+    /// isChecked가 true인 것만 false로 변경
+    func disableCheckedCategories() {
+        categories.enumerated().forEach { index, category in
+            if category.isChecked {
+                categories[index].isChecked = false
+            }
+        }
+    }
+    
     func getReportedNumberAPI() {
         NetworkService.shared.reportService.getReportedNumber { result in
             result.handleNetworkResult { [weak self] response in

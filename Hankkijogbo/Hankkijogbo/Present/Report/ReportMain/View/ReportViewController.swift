@@ -323,10 +323,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
     /// 다른 카테고리가 이미 선택되어 있다면 이를 해제하고 이번에 클릭된 카테고리를 활성화 시킨다
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
-            collectionView.indexPathsForVisibleItems
-                .filter { reportViewModel.categories[$0.row].isChecked == true }
-                .forEach { reportViewModel.categories[$0.row].isChecked = false }
-            
+            reportViewModel.disableCheckedCategories()
             reportViewModel.categories[indexPath.row].isChecked = true
         }
     }
