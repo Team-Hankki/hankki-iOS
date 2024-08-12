@@ -15,10 +15,10 @@ enum HankkiTargetType {
     case getSortOptionFilter
     case getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String)
     case getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String)
-    case getHankkiThumbnail(id: Int64)
-    case getHankkiDetail(id: Int64)
-    case postHankkiHeart(id: Int64)
-    case deleteHankkiHeart(id: Int64)
+    case getHankkiThumbnail(id: Int)
+    case getHankkiDetail(id: Int)
+    case postHankkiHeart(id: Int)
+    case deleteHankkiHeart(id: Int)
     case postHankkiValidate(req: PostHankkiValidateRequestDTO)
     case postHankki(multipartData: [MultipartFormData])
 }

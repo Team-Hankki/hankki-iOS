@@ -42,7 +42,7 @@ extension ReportViewModel {
         NetworkService.shared.reportService.getReportedNumber { result in
             result.handleNetworkResult { [weak self] response in
                 let reportedNumber = response.data.count
-                self?.reportedNumber = Int(reportedNumber)
+                self?.reportedNumber = reportedNumber
                 self?.reportedNumberGuideText = "\(reportedNumber)\(StringLiterals.Report.numberOfReport)"
             }
         }

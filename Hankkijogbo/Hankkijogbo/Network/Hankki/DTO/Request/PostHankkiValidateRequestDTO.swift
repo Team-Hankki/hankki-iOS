@@ -10,7 +10,7 @@ import Foundation
 // MARK: - 이미 등록된 식당인지 판별
 
 struct PostHankkiValidateRequestDTO: Codable {
-    var universityId: Int64
+    var universityId: Int
     var latitude: Double
     var longitude: Double
 }

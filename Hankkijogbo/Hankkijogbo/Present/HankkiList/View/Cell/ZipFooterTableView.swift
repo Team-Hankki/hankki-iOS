@@ -15,8 +15,8 @@ final class ZipFooterTableView: UITableViewHeaderFooterView {
         
     // MARK: - UI Components
     
-    private lazy var button: MoreButton = MoreButton(buttonText: "식당 구경하러 가기", buttonAction: { [weak self] in
-        self?.viewController?.navigateToHomeView()
+    private lazy var button: MoreButton = MoreButton(buttonText: StringLiterals.HankkiList.moreButton, 
+                                                     buttonAction: { [weak self] in self?.viewController?.navigateToHomeView()
     })
     
     // MARK: - Life Cycle

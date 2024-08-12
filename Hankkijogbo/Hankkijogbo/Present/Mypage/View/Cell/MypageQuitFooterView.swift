@@ -45,7 +45,7 @@ final class MypageQuitFooterView: BaseCollectionViewCell {
         buttonLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                withText: "탈퇴하기",
+                withText: StringLiterals.Common.withdraw,
                 color: .gray400
             )
         }
@@ -70,13 +70,13 @@ final class MypageQuitFooterView: BaseCollectionViewCell {
 }
 
 extension MypageQuitFooterView {
-    @objc func quitButtonDidTap () {
+    @objc func quitButtonDidTap() {
         if let quitButtonHandler {
             quitButtonHandler()
         }
     }
     
-    func setupAction    () {
+    func setupAction() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(quitButtonDidTap))
         buttonStackVIew.addGestureRecognizer(tapGesture)
     }

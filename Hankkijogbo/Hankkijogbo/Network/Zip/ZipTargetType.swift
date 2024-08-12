@@ -16,7 +16,7 @@ enum ZipTargetType {
     case postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO)
     case postHankkiToZip(requestBody: PostHankkiToZipRequestDTO)
     case deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO)
-    case getMyZipList(id: Int64)
+    case getMyZipList(id: Int)
 }
 
 extension ZipTargetType: BaseTargetType {

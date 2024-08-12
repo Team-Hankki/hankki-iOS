@@ -11,7 +11,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let hankkiId: Int64
+    let hankkiId: Int
     var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
     var reportOptionArray: [String] = [
         "식당이 사라졌어요",
@@ -32,7 +32,7 @@ final class HankkiDetailViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int64) {
+    init(hankkiId: Int) {
         self.hankkiId = hankkiId
         super.init()
     }
@@ -292,11 +292,11 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 }
                 footer.likedButton.buttonHandler = {
                     if !footer.isLiked {
-                        self.viewModel.postHankkiHeartAPI(id: Int64(self.hankkiId)) {
+                        self.viewModel.postHankkiHeartAPI(id: self.hankkiId) {
                             footer.updateLikeButtonStatus()
                         }
                     } else {
-                        self.viewModel.deleteHankkiHeartAPI(id: Int64(self.hankkiId)) {
+                        self.viewModel.deleteHankkiHeartAPI(id: self.hankkiId) {
                             footer.updateLikeButtonStatus()
                         }
                     }

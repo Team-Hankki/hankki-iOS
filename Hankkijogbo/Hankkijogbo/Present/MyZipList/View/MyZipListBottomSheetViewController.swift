@@ -11,7 +11,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var storeId: Int64
+    var storeId: Int
     
     private var clickedZipIndexPath: IndexPath?
     private var viewModel: MyZipViewModel = MyZipViewModel()
@@ -33,7 +33,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
     
     // MARK: - Init
     
-    init(storeId: Int64) {
+    init(storeId: Int) {
         self.storeId = storeId
         super.init()
     }
@@ -186,7 +186,7 @@ private extension MyZipListBottomSheetViewController {
         
         viewModel.showAddToZipCompleteToast = { [self] in
             guard let data = viewModel.myZipListFavoriteData else { return }
-            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil, userInfo: ["zipId": Int(data[clickedZipIndexPath?.item ?? 0].id)]))
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil, userInfo: ["zipId": data[clickedZipIndexPath?.item ?? 0].id]))
             NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
         }
     }

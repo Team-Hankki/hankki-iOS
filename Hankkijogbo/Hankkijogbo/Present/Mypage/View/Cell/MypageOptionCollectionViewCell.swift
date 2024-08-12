@@ -6,6 +6,11 @@
 //
 
 import UIKit
+extension MypageOptionCollectionViewCell {
+    struct Model {
+        var title: String
+    }
+}
 
 final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
 
@@ -23,7 +28,6 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: "",
                 color: .gray900
             )
         }
@@ -58,11 +62,7 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension MypageOptionCollectionViewCell {
-    struct DataStruct {
-        var title: String
-    }
-    
-    func dataBind(data: DataStruct) {
-        titleLabel.text = data.title
+    func dataBind(_ model: Model) {
+        titleLabel.text = model.title
     }
 }
