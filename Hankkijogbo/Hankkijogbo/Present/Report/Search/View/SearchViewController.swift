@@ -15,7 +15,6 @@ final class SearchViewController: BaseViewController {
     
     weak var delegate: PassItemDataDelegate?
     private let debouncer: HankkiDebouncer = HankkiDebouncer(seconds: 0.5)
-    private lazy var currentSearchedText: String? = searchTextField.text
     
     // MARK: - UI Components
     
@@ -31,7 +30,7 @@ final class SearchViewController: BaseViewController {
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     private lazy var emptyView = EmptyView(
-        text: "'\(currentSearchedText ?? "")'" + StringLiterals.Report.emptySearchResult
+        text: "'\(searchTextField.text ?? "")'" + StringLiterals.Report.emptySearchResult
     )
     
     // MARK: - Init
@@ -244,10 +243,16 @@ private extension SearchViewController {
     }
     
     func updateEmptyView() {
-        if let currentSearchedText = currentSearchedText {
-            emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
-            emptyView.text = "'\(currentSearchedText)'" + StringLiterals.Report.emptySearchResult
-            emptyView.setupTextLabelColor(start: 0, end: currentSearchedText.count + 2, color: .gray800)
+        if let currentSearchedText = searchTextField.text {
+            if !currentSearchedText.isEmpty {
+                emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
+                emptyView.text = "'\(currentSearchedText)'" + StringLiterals.Report.emptySearchResult
+                emptyView.setupTextLabelColor(start: 0, end: currentSearchedText.count + 2, color: .gray800)
+            } else {
+                emptyView.isHidden = true
+            }
+        } else {
+            emptyView.isHidden = true
         }
     }
 }
@@ -306,7 +311,6 @@ extension SearchViewController: UITextFieldDelegate {
         guard let query = self.searchTextField.text else { return }
         // TODO: - query.isEmpty일 때 보내면(-> 검색창 싹다 지웠을 때 발생함) 초기화를 위해 빈 locations 달라고 요청해야할 것 같다
         if !query.isEmpty {
-            currentSearchedText = query
             debouncer.run {
                 self.viewModel.getSearchedLocationAPI(query: query)
             }
