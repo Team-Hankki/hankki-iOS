@@ -91,6 +91,7 @@ extension HomeViewController {
     private func setupDelegate() {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
+        rootView.bottomSheetView.homeViewController = self
     }
     
     private func setupRegister() {
@@ -159,6 +160,10 @@ private extension HomeViewController {
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         rootView.bottomSheetView.totalListCollectionView.reloadData()
+
+        // 대학 선택 후 홈화면 재진입 시 해당 대학교에 맞게 reset
+        hideMarkerInfoCard()
+        rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
     }
 }
 

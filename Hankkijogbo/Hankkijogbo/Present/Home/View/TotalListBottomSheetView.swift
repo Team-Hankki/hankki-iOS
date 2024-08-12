@@ -14,8 +14,11 @@ final class TotalListBottomSheetView: BaseView {
     var isExpanded: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
+    
     var data: [GetHankkiListData] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
+    
+    weak var homeViewController: HomeViewController?
     
     // MARK: - UI Components
     
@@ -149,6 +152,7 @@ extension TotalListBottomSheetView {
     @objc func containerViewDidUpSwipe() {
         isExpanded = true
         viewLayoutIfNeededWithUpAnimation()
+        homeViewController?.hideAllFiltering()
     }
     
     @objc func containerViewDidDownSwipe() {

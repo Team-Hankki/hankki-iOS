@@ -159,3 +159,10 @@ extension HomeViewController {
         }
     }
 }
+
+extension HomeViewController {
+    func hideAllFiltering() {
+        hideDropDown()
+        typeCollectionView.isHidden = true
+    }
+}
