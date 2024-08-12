@@ -56,7 +56,6 @@ final class ReportCompleteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bottomButtonView.setupEnabledDoneButton()
         setupAddTarget()
     }
     
@@ -142,6 +141,7 @@ final class ReportCompleteViewController: BaseViewController {
                 withText: nickname + getRandomThanksMessage(),
                 color: .gray500
             )
+            $0.numberOfLines = 0
         }
         hankkiOrangeGradientImageView.do {
             $0.image = .imgOrangeGradient
@@ -157,6 +157,9 @@ final class ReportCompleteViewController: BaseViewController {
                 color: .hankkiRed
             ), for: .normal)
         }
+        bottomButtonView.do {
+            $0.setupEnabledDoneButton()
+        }
     }
 }
 
@@ -167,12 +170,14 @@ private extension ReportCompleteViewController {
     func setupNavigationBar() {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .string(""),
+                                                              mainTitle: .string(StringLiterals.Common.report),
                                                               rightButton: .string(""),
-                                                              rightButtonAction: {})
+                                                              rightButtonAction: {},
+                                                              backgroundColor: .clear)
         
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.interactivePopGestureRecognizer?.isEnabled = false
         }
     }
     

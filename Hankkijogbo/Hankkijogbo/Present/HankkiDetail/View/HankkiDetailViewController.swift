@@ -14,9 +14,9 @@ final class HankkiDetailViewController: BaseViewController {
     let hankkiId: Int
     var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
     var reportOptionArray: [String] = [
-        "식당이 사라졌어요",
-        "더이상 8,000원 이하인 메뉴가 없어요",
-        "부적절한 제보예요"
+        StringLiterals.HankkiDetail.optionDisappear,
+        StringLiterals.HankkiDetail.optionIncreasePrice,
+        StringLiterals.HankkiDetail.optionImproperReport
     ]
     
     // MARK: - UI Components
@@ -47,6 +47,7 @@ final class HankkiDetailViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         setupAddTarget()
+        setupGesture()
         bindViewModel()
         
         viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
@@ -82,8 +83,7 @@ final class HankkiDetailViewController: BaseViewController {
     override func setupLayout() {
         scrollView.snp.makeConstraints {
             $0.top.equalTo(self.view).offset(-UIApplication.getStatusBarHeight())
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.horizontalEdges.bottom.equalToSuperview()
         }
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -118,6 +118,9 @@ final class HankkiDetailViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.do {
+            $0.backgroundColor = .gray50
+        }
         scrollView.do {
             $0.backgroundColor = .clear
         }
@@ -150,9 +153,9 @@ private extension HankkiDetailViewController {
         }
         
         viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: "알 수 없는 오류가 발생했어요",
-                            subText: "네트워크 연결 상태를 확인하고\n다시 시도해주세요",
-                            primaryButtonText: "확인")
+            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
+                            subText: StringLiterals.Alert.tryAgain,
+                            primaryButtonText: StringLiterals.Alert.check)
         }
     }
     
@@ -199,6 +202,12 @@ private extension HankkiDetailViewController {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
     }
     
+    func setupGesture() {
+        let rightSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(backButtonDidTap))
+        rightSwipeGesture.direction = .right
+        self.view.addGestureRecognizer(rightSwipeGesture)
+    }
+    
     func setupNoImageStyle() {
         contentView.do {
             $0.backgroundColor = .gray300
@@ -221,6 +230,12 @@ private extension HankkiDetailViewController {
             $0.image = .imgBlackGradient
         }
     }
+    
+    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
+    func dismissAlertAndPop() {
+        dismissWithFadeOut()
+        backButtonDidTap()
+    }
 }
 
 extension HankkiDetailViewController {
@@ -233,9 +248,9 @@ extension HankkiDetailViewController {
     
     @objc func editMenuButtonDidTap() {
         self.showAlert(
-            titleText: "조금만 기다려주세요!",
-            subText: "메뉴를 편집할 수 있도록\n준비하고 있어요",
-            primaryButtonText: "확인",
+            titleText: StringLiterals.Alert.waitPlease,
+            subText: StringLiterals.Alert.prepareForEditMenu,
+            primaryButtonText: StringLiterals.Alert.check,
             primaryButtonHandler: dismissWithFadeOut
         )
     }
@@ -247,19 +262,18 @@ extension HankkiDetailViewController {
     @objc func hankkiReportButtonDidTap() {
         self.showAlert(
             image: .imgModalReport,
-            titleText: "변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!",
-            primaryButtonText: "돌아가기",
-            primaryButtonHandler: dismissWithFadeOut
+            titleText: StringLiterals.Alert.thanksForReport,
+            primaryButtonText: StringLiterals.Alert.back,
+            primaryButtonHandler: dismissAlertAndPop
         )
     }
 }
 
 extension HankkiDetailViewController {
+    /// 상단의 bounces만 비활성화
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            scrollView.bounces = false
-        } else {
-            scrollView.bounces = true
+        if scrollView.contentOffset.y < -UIApplication.getStatusBarHeight() {
+            scrollView.contentOffset.y = -UIApplication.getStatusBarHeight()
         }
     }
 }

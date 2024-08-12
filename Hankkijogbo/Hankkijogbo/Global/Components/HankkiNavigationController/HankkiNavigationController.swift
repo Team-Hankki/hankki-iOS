@@ -84,7 +84,7 @@ extension HankkiNavigationController {
         
         titleButtonAction = forType.titleButtonAction
         
-        safeAreaView.backgroundColor = forType.backgroundColor
+        setupBackgroundColor(forType.backgroundColor)
     }
     
     /// NavigationBar의 배경색을 바꿈

@@ -84,8 +84,8 @@ final class  HankkiListViewController: BaseViewController {
         }
         
         emptyView.snp.makeConstraints {
-            $0.horizontalEdges.bottom.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(type.headrViewHeight)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(type.headrViewHeight + 60)
+            $0.centerX.equalToSuperview()
         }
     }
 }

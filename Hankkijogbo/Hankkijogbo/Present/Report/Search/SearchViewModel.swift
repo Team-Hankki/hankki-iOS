@@ -22,6 +22,7 @@ final class SearchViewModel {
         }
     }
     var updateLocations: (() -> Void)?
+    var emptyResult: (() -> Void)?
 }
 
 extension SearchViewModel {
