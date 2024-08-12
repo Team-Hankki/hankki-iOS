@@ -64,9 +64,9 @@ final class EmptyView: BaseView {
     }
     
     override func setupHierarchy() {
-        self.addSubviews(imageView, textLabel)
+        addSubviews(imageView, textLabel)
         if buttonText != nil {
-            self.addSubview(button)
+            addSubview(button)
         }
     }
 

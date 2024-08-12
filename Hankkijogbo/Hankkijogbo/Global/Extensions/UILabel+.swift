@@ -49,6 +49,7 @@ extension UILabel {
         attributedText = attributedString
     }
     
+    // TODO: - 레전드 고생하였소 소인도 UILabel과 UIButton의 attributedText관련 코드를 분리하는게 좋다는 생각이 드오 왜이리 글자커스텀이 어려운것이오? 화가난다
     /// attributedText를 설정하는 메서드
     /// - 추후 text만 바꿔도 나머지 속성이 적용되도록 하기 위해 withText 기본값을 공백 1개로 설정
     static func setupAttributedText<T: FontStyle>(
