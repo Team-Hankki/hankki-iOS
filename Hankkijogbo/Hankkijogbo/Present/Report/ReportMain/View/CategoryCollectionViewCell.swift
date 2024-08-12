@@ -41,7 +41,14 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
             $0.layer.borderColor = UIColor.gray200.cgColor
         }
         categoryLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body4,
+                color: .gray400
+            )
             $0.textAlignment = .left
+        }
+        categoryImageView.do {
+            $0.contentMode = .scaleAspectFill
         }
     }
 }

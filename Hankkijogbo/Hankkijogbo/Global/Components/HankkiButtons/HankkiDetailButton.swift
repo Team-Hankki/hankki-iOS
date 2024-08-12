@@ -26,7 +26,7 @@ final class HankkiDetailButton: BaseView {
     init(
         image: UIImage,
         text: String,
-        buttonHandler: ButtonAction?
+        buttonHandler: ButtonAction? = nil
     ) {
         self.image = image
         self.text = text

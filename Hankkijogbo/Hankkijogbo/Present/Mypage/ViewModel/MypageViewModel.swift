@@ -12,7 +12,7 @@ final class MypageViewModel {
     
     var reloadCollectionView: (() -> Void)?
     
-    var userInfo: MypageHeaderView.DataStruct? {
+    var userInfo: MypageHeaderView.Model? {
         didSet {
             self.reloadCollectionView?()
         }
@@ -23,8 +23,8 @@ extension MypageViewModel {
     func getMe() {
         NetworkService.shared.userService.getMe { result in
             result.handleNetworkResult { response in
-                self.userInfo = MypageHeaderView.DataStruct(image: response.data.profileImageUrl,
-                                                            name: response.data.nickname)
+                self.userInfo = MypageHeaderView.Model(image: response.data.profileImageUrl,
+                                                       name: response.data.nickname)
             }
         }
     }

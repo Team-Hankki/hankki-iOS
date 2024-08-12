@@ -27,7 +27,7 @@ final class ReportViewController: BaseViewController {
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.Report.mainButton,
+        primaryButtonText: StringLiterals.Common.report,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -87,10 +87,8 @@ final class ReportViewController: BaseViewController {
 extension ReportViewController {
     
     func bindViewModel() {
-        reportViewModel.updateCollectionView = { section in
-            DispatchQueue.main.async {
-                self.collectionView.reloadSections(IndexSet(integer: section))
-            }
+        reportViewModel.updateCollectionView = {
+            self.collectionView.reloadData()
         }
         
         reportViewModel.showAlert = { [weak self] _ in
@@ -141,7 +139,7 @@ private extension ReportViewController {
     func setupNavigationBar() {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: true,
-                                                              mainTitle: .string(StringLiterals.Report.mainButton),
+                                                              mainTitle: .string(StringLiterals.Common.report),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {})
         

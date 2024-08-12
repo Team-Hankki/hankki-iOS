@@ -12,7 +12,7 @@ import UIKit // todo: 제거
 
 final class ReportViewModel {
     var showAlert: ((String) -> Void)?
-    var updateCollectionView: ((Int) -> Void)?
+    var updateCollectionView: (() -> Void)?
     var updateButton: ((Bool) -> Void)?
     
     var nickname: String?
@@ -26,7 +26,7 @@ final class ReportViewModel {
     var categories: [HankkiCategoryModel] = [] {
         didSet {
             updateSelectedCategory()
-            updateCollectionView?(ReportSectionType.category.rawValue)
+            updateCollectionView?()
         }
     }
     var selectedCategory: HankkiCategoryModel? {
@@ -88,9 +88,9 @@ extension ReportViewModel {
         NetworkService.shared.reportService.getReportedNumber { result in
             result.handleNetworkResult { [weak self] response in
                 let reportedNumber = response.data.count
-                self?.reportedNumber = Int(reportedNumber)
+                self?.reportedNumber = reportedNumber
                 self?.reportedNumberGuideText = "\(reportedNumber)\(StringLiterals.Report.numberOfReport)"
-                self?.updateCollectionView?(ReportSectionType.search.rawValue)
+                self?.updateCollectionView?()
             }
         }
     }

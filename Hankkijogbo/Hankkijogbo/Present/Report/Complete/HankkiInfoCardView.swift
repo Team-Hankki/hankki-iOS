@@ -22,6 +22,7 @@ final class HankkiInfoCardView: BaseView {
     }
     var addToMyZipListString: String = StringLiterals.MyZip.addToMyZip {
         didSet {
+            // TODO: - 버튼은 텍스트 하나 바꾸려면 이렇게 다 다시해야 됨..ㅎ 우리 대안책을 나중에 찾아보아요...
             self.addToMyZipListButton.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: addToMyZipListString,

@@ -11,7 +11,7 @@ final class MarkerInfoCardView: BaseView {
     
     // MARK: - Properties
     
-    private var hankkiId: Int64 = -1
+    private var hankkiId: Int = -1
     
     // MARK: - UI Components
     

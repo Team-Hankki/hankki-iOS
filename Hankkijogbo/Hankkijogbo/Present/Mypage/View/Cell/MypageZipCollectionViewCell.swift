@@ -21,7 +21,9 @@ final class MypageZipCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.subtitle1, withText: "나의 족보", color: .hankkiWhite)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.subtitle1,
+                                                            withText: StringLiterals.Mypage.myZipList,
+                                                            color: .hankkiWhite)
         }
         
         imageView.do {

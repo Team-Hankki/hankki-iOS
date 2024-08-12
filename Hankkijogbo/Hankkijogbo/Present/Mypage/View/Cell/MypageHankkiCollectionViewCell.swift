@@ -7,6 +7,13 @@
 
 import UIKit
 
+extension MypageHankkiCollectionViewCell {
+    struct Model {
+        let title: String
+        let image: UIImage
+    }
+}
+
 final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
@@ -24,7 +31,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body3, withText: "내가 제보한 식당", color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body3, color: .gray900)
         }
     }
     
@@ -46,13 +53,8 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension MypageHankkiCollectionViewCell {
-    func dataBind(_ data: DataStruct) {
-        self.imageView.image = data.image
-        self.titleLabel.text = data.title
-    }
-    
-    struct DataStruct {
-        let image: UIImage
-        let title: String
+    func dataBind(_ model: Model) {
+        self.imageView.image = model.image
+        self.titleLabel.text = model.title
     }
 }

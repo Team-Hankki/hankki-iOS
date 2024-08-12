@@ -9,16 +9,7 @@ import UIKit
 
 final class MyZipListCollectionViewCell: BaseCollectionViewCell {
     
-    var isChecked: Bool = false {
-        didSet {
-            if isChecked {
-                addZipButton.setImage(.btnAddLinedDisabled, for: .normal)
-            } else {
-                addZipButton.setImage(.btnAddLined, for: .normal)
-            }
-            addZipButton.isUserInteractionEnabled = !isChecked
-        }
-    }
+    var isChecked: Bool = false
     
     // MARK: - UI Components
     
@@ -69,18 +60,6 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
         thumbnailImageView.do {
             $0.layer.cornerRadius = 10
         }
-        zipTitleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
-                color: .gray800
-            )
-        }
-        firstHashtagLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.button,
-                color: .gray400
-            )
-        }
         addZipButton.do {
             $0.setImage(.btnAddLined, for: .normal)
         }
@@ -129,6 +108,8 @@ extension MyZipListCollectionViewCell {
     
     func bindData(zipData: GetMyZipFavorite) {
         isChecked = zipData.isAdded
+        addZipButton.isUserInteractionEnabled = !isChecked
+        addZipButton.setImage(isChecked ? .btnAddLinedDisabled : .btnAddLined, for: .normal)
         thumbnailImageView.image = getImageForType(zipData.imageType)
         setupLabelStyleOfData(zipData: zipData)
     }

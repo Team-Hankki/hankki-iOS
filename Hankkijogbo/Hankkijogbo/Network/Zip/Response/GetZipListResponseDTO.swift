@@ -14,7 +14,7 @@ struct GetZipDetailResponseData: Codable {
 }
 
 struct GetZipDetailData: Codable {
-    let id: Int64
+    let id: Int
     let name: String
     let imageUrl: String
     let category: String
