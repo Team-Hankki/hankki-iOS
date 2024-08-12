@@ -107,7 +107,7 @@ final class HankkiDetailViewController: BaseViewController {
             $0.size.equalTo(20)
         }
         infoCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-40)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-37)
             $0.centerX.equalToSuperview()
         }
         reportOptionCollectionView.snp.makeConstraints {
@@ -147,7 +147,6 @@ private extension HankkiDetailViewController {
                     self?.setupNoImageStyle()
                 }
                 self?.infoCollectionView.updateLayout(menuSize: data.menus.count)
-                self?.infoCollectionView.collectionView.layoutIfNeeded()
                 self?.infoCollectionView.collectionView.reloadData()
             }
         }
@@ -318,7 +317,6 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 if let data = viewModel.hankkiDetailData {
                     footer.isLiked = data.isLiked
                     footer.likedNumber = data.heartCount
-                    
                 }
                 footer.addMyZipButton.hankkiDetailButton.addTarget(self, action: #selector(addMyZipButtonDidTap), for: .touchUpInside)
                 return footer

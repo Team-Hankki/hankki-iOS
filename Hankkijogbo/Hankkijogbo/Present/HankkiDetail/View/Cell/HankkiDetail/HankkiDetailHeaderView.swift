@@ -24,7 +24,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
     
     override func setupLayout() {
         headerStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(32)
+            $0.top.equalToSuperview().inset(36)
             $0.centerX.equalToSuperview()
         }
         headerLabel.snp.makeConstraints {

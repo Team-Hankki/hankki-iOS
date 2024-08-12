@@ -25,7 +25,7 @@ final class HankkiDetailCollectionView: BaseView {
             $0.itemSize = .init(width: 252, height: 24)
             $0.scrollDirection = .vertical
             $0.minimumLineSpacing = 12
-            $0.headerReferenceSize = .init(width: 252, height: 68)
+            $0.headerReferenceSize = .init(width: 252, height: 65)
             $0.footerReferenceSize = .init(width: 275, height: 42)
             $0.sectionInset = UIEdgeInsets(top: 32, left: 0, bottom: 38, right: 0)
         }
@@ -44,7 +44,7 @@ extension HankkiDetailCollectionView {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(339)
-            $0.height.equalTo(240 + (menuSize * 33))
+            $0.height.equalTo(240 + (menuSize * 36))
         }
         layoutIfNeeded()
         collectionView.addShadow(color: .black, alpha: 0.05, blur: 12, spread: 6)
