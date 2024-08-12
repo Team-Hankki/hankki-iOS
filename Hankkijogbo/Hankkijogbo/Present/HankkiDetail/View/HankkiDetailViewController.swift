@@ -57,6 +57,7 @@ final class HankkiDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -265,6 +266,16 @@ extension HankkiDetailViewController {
             primaryButtonText: StringLiterals.Alert.back,
             primaryButtonHandler: dismissAlertAndPop
         )
+    }
+    
+    @objc func setupBlackToast(_ notification: Notification) {
+        if let zipId = notification.userInfo?["zipId"] as? Int {
+            
+            self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
+                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                navigationController?.pushViewController(hankkiListViewController, animated: true)
+            }
+        }
     }
 }
 
