@@ -110,6 +110,7 @@ extension HomeViewController {
                                                               titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.mainTitleLabel.font = .setupSuiteStyle(of: .subtitle)
             navigationController.isNavigationBarHidden = false
         }
     }

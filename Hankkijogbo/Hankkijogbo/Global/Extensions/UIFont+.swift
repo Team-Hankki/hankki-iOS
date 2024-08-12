@@ -92,7 +92,9 @@ enum SuiteStyle: FontStyle {
             return 20
         case .h3:
             return 18
-        case .subtitle, .body1:
+        case .subtitle:
+            return 17
+        case .body1:
             return 16
         case .body2:
             return 14
