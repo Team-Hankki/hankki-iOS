@@ -4,6 +4,7 @@
 //
 //  Created by Gahyun Kim on 2024/06/21.
 //
+import UIKit
 import NMapsMap
 
 final class HomeView: BaseView {
@@ -92,6 +93,8 @@ final class HomeView: BaseView {
         bottomSheetView.do {
             $0.backgroundColor = .clear
         }
+        
+        mapView.logoAlign = .rightTop
     }
 }
 
