@@ -14,40 +14,6 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     let categoryImageView: UIImageView = UIImageView()
     let categoryLabel: UILabel = UILabel()
     
-    var selectedCategoryString: String? {
-        didSet {
-            print(selectedCategoryString ?? "")
-        }
-    }
-    var data: GetCategoryFilterData?
-    
-    weak var delegate: PassItemDataDelegate?
-    
-    override var isSelected: Bool {
-        didSet {
-            self.do {
-                if isSelected {
-                    if selectedCategoryString != nil {
-                        delegate?.updateViewModelCategoryData(data: nil)
-                        print("111 nil을 보냄")
-                        updateDefaultStyle()
-                        $0.selectedCategoryString = nil
-                    } else {
-                        delegate?.updateViewModelCategoryData(data: data)
-                        print("111 data \(data)을 보냄")
-                        updateSelectedStyle()
-                        $0.selectedCategoryString = self.categoryLabel.text
-                    }
-                } else {
-                    delegate?.updateViewModelCategoryData(data: nil)
-                    print("111 nil을 보냄")
-                    updateDefaultStyle()
-                    $0.selectedCategoryString = nil
-                }
-            }
-        }
-    }
-    
     // MARK: - Setup UI
     
     override func setupHierarchy() {
@@ -81,31 +47,28 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension CategoryCollectionViewCell {
-    func bindData(_ data: GetCategoryFilterData) {
-        categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
-                withText: data.name,
-                color: .gray400
-            )
+    func bindData(_ data: HankkiCategoryModel) {
+        categoryLabel.text = data.categoryData.name
+        categoryImageView.setKFImage(url: data.categoryData.imageUrl)
+        
+        if data.isChecked {
+            updateSelectedStyle()
+        } else {
+            updateDefaultStyle()
         }
-        categoryImageView.do {
-            $0.setKFImage(url: data.imageUrl)
-        }
-        self.data = data
     }
     
     func updateSelectedStyle() {
         backgroundColor = .hankkiYellowLighten
         layer.borderColor = UIColor.hankkiDarkYellow.cgColor
-        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
+        categoryLabel.font = .setupPretendardStyle(of: .body3)
         categoryLabel.textColor = .gray700
     }
     
     func updateDefaultStyle() {
         backgroundColor = .hankkiWhite
         layer.borderColor = UIColor.gray200.cgColor
-        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
+        categoryLabel.font = .setupPretendardStyle(of: .body4)
         categoryLabel.textColor = .gray400
     }
 }

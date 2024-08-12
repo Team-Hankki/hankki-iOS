@@ -9,7 +9,6 @@ import UIKit
 import PhotosUI
 
 protocol PassItemDataDelegate: AnyObject {
-    func updateViewModelCategoryData(data: GetCategoryFilterData?)
     func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String)
     func updateViewModelLocationData(data: GetSearchedLocation?)
 }
@@ -42,9 +41,7 @@ final class ReportViewController: BaseViewController {
         bindViewModel()
         
         reportViewModel.getReportedNumberAPI()
-        reportViewModel.getCategoryFilterAPI { isSuccess in
-            print(isSuccess)
-        }
+        reportViewModel.getCategoryFilterAPI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,8 +87,10 @@ final class ReportViewController: BaseViewController {
 extension ReportViewController {
     
     func bindViewModel() {
-        reportViewModel.updateCollectionView = {
-            self.collectionView.reloadData()
+        reportViewModel.updateCollectionView = { section in
+            DispatchQueue.main.async {
+                self.collectionView.reloadSections(IndexSet(integer: section))
+            }
         }
         
         reportViewModel.showAlert = { [weak self] _ in
@@ -99,6 +98,7 @@ extension ReportViewController {
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
         }
+        
         reportViewModel.updateButton = { isActive in
             if isActive {
                 self.bottomButtonView.setupEnabledDoneButton()
@@ -260,7 +260,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .search, .image, .addMenu:
             return 1
         case .category:
-            return reportViewModel.categoryFilters.count
+            return reportViewModel.categories.count
         case .menu:
             return reportViewModel.menus.count
         default:
@@ -279,8 +279,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.className, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
-            cell.bindData(reportViewModel.categoryFilters[indexPath.row])
-            cell.delegate = self
+            cell.bindData(reportViewModel.categories[indexPath.row])
             return cell
         case .image:
             if let image = image {
@@ -306,6 +305,29 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         default:
             return UICollectionViewCell()
+        }
+    }
+    
+    /// didSelectItemAt 전에 호출되는 메서드
+    /// - 클릭된 카테고리를 한번 더 클릭 시 클릭을 해제시켜주기 위해 필요함
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
+            if reportViewModel.categories[indexPath.row].isChecked {
+                reportViewModel.categories[indexPath.row].isChecked = false
+                return false
+            }
+        }
+        return true
+    }
+    
+    /// 다른 카테고리가 이미 선택되어 있다면 이를 해제하고 이번에 클릭된 카테고리를 활성화 시킨다
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
+            collectionView.indexPathsForVisibleItems
+                .filter { reportViewModel.categories[$0.row].isChecked == true }
+                .forEach { reportViewModel.categories[$0.row].isChecked = false }
+            
+            reportViewModel.categories[indexPath.row].isChecked = true
         }
     }
 }
@@ -351,10 +373,6 @@ extension ReportViewController: PHPickerViewControllerDelegate {
 // MARK: - PassSelectedHankkiData Delegate
 
 extension ReportViewController: PassItemDataDelegate {
-    
-    func updateViewModelCategoryData(data: GetCategoryFilterData?) {
-        reportViewModel.selectedCategory = data
-    }
     
     func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
