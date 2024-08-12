@@ -29,7 +29,6 @@ final class MypageHeaderView: BaseCollectionViewCell {
         profileNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: " ",
                 color: .gray900
             )
             $0.numberOfLines = 2

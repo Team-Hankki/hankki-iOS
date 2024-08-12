@@ -94,7 +94,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, withText: " ", color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, color: .gray900)
         }
         
         categoryChipView.do {
@@ -103,15 +103,15 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, withText: " ", color: .hankkiRed)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, color: .hankkiRed)
         }
         
         priceLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: " ", color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, color: .gray500)
         }
         
         heartCountLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: " ", color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, color: .gray500)
         }
         
         subInfoStackView.do {

@@ -66,7 +66,6 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.h2,
-                withText: " ",
                 color: .gray900
             )
         }
@@ -87,7 +86,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         nameLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, withText: " ", color: .gray600)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, color: .gray600)
         }
         
         shareButton.do {

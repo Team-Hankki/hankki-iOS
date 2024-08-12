@@ -52,7 +52,7 @@ extension UILabel {
     /// attributedText를 설정하는 메서드
     static func setupAttributedText<T: FontStyle>(
         for fontName: T,
-        withText text: String = "",
+        withText text: String = " ",
         color: UIColor = .gray900
     ) -> NSAttributedString? {
         
