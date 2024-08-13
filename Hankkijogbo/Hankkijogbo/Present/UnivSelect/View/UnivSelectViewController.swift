@@ -8,11 +8,16 @@
 import UIKit
 import CoreLocation
 
+protocol UnivSelectViewControllerDelegate: AnyObject {
+    func didRequestLocationFocus()
+}
+
 final class UnivSelectViewController: BaseViewController {
     
     // MARK: - Properties
     
     private let viewModel: UnivSelectViewModel = UnivSelectViewModel()
+    weak var delegate: UnivSelectViewControllerDelegate?
     
     // MARK: - UI Properties
     
@@ -136,28 +141,23 @@ private extension UnivSelectViewController {
     }
     
     func bottomButtonLineHandler() {
-        
-        guard let navigationController = navigationController else { return }
-        
-        let homeVC = navigationController.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController
         let status = CLLocationManager.authorizationStatus()
         
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            // 위치 접근 권한이 허용된 경우 현재 위치로 이동
-            homeVC?.locationManager?.startUpdatingLocation()
-            navigationController.popViewController(animated: true)
-            
+            delegate?.didRequestLocationFocus()
+            navigationController?.popViewController(animated: true)
         case .restricted, .denied:
-            // 위치 접근 권한이 거부된 경우 시립대학교로 포커싱
+            // 위치 정보 접근이 거부된 경우, 서울시립대학교로 포커싱
             viewModel.currentUnivIndex = 24
             viewModel.postMeUniversity()
-            navigationController.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
             
         case .notDetermined:
-            // 위치 접근 권한이 아직 결정되지 않은 경우 동의 요청
-            homeVC?.requestLocationAuthorization()
-            
+            // 위치 정보 접근 권한이 아직 결정되지 않은 경우 동의 요청
+            if let homeVC = self.navigationController?.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController {
+                homeVC.requestLocationAuthorization()
+            }
         @unknown default:
             break
         }
