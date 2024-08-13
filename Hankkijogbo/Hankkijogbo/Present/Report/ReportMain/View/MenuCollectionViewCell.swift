@@ -99,7 +99,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         menuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.Report.menuName,
                 color: .gray500
             )
@@ -122,7 +122,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.Report.price,
                 color: .gray500
             )

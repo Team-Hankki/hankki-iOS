@@ -75,7 +75,7 @@ extension HankkiDetailFooterView {
     func setupLikeButtonStyle() {
         likedButton.hankkiDetailButton.setAttributedTitle(
             UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 withText: "\(likedNumber)",
                 color: .gray500
             ),

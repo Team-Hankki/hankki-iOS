@@ -42,7 +42,7 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
         }
         categoryLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 color: .gray400
             )
             $0.textAlignment = .left
@@ -68,14 +68,14 @@ extension CategoryCollectionViewCell {
     func updateSelectedStyle() {
         backgroundColor = .yellow300
         layer.borderColor = UIColor.yellow500.cgColor
-        categoryLabel.font = UIFont.setupPretendardStyle(of: .body3)
+        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
         categoryLabel.textColor = .gray700
     }
     
     func updateDefaultStyle() {
         backgroundColor = .hankkiWhite
         layer.borderColor = UIColor.gray200.cgColor
-        categoryLabel.font = .setupPretendardStyle(of: .body4)
+        categoryLabel.font = .setupPretendardStyle(of: .body5)
         categoryLabel.textColor = .gray400
     }
 }

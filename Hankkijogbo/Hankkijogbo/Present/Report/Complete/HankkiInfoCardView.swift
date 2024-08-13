@@ -24,7 +24,7 @@ final class HankkiInfoCardView: BaseView {
         didSet {
             // TODO: - 버튼은 텍스트 하나 바꾸려면 이렇게 다 다시해야 됨..ㅎ 우리 대안책을 나중에 찾아보아요...
             self.addToMyZipListButton.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body3,
                 withText: addToMyZipListString,
                 color: .red500
             ), for: .normal)
@@ -96,7 +96,7 @@ final class HankkiInfoCardView: BaseView {
         }
         addToMyZipListButton.do {
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body3,
                 withText: addToMyZipListString,
                 color: .red500
             ), for: .normal)

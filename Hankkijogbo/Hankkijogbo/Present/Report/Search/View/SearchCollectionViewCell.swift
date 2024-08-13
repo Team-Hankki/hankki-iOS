@@ -101,7 +101,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         
         addressLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 color: .gray400
             )
             $0.lineBreakMode = .byTruncatingTail

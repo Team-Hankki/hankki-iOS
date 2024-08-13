@@ -22,13 +22,13 @@ enum PretendardStyle: FontStyle {
     
     var rawValue: String {
         switch self {
-        case .h1, .h2, .body2:
+        case .h1, .h2, .body3:
             return "Pretendard-Bold"
-        case .subtitle1, .subtitle2, .subtitle3, .body3:
+        case .subtitle1, .subtitle2, .subtitle3, .body4:
             return "Pretendard-SemiBold"
-        case .body1, .body6, .caption1:
+        case .body1, .body2, .body5, .caption1:
             return "Pretendard-Medium"
-        case .body4, .body5, .button, .caption2:
+        case .body6, .button, .caption2:
             return "Pretendard-Regular"
         }
     }
@@ -45,12 +45,12 @@ enum PretendardStyle: FontStyle {
             return 17
         case .subtitle3, .body1:
             return 16
-        case .body2, .body3, .body4:
-            return 14
-        case .body5:
-            return 13
-        case .body6:
+        case .body2:
             return 15
+        case .body3, .body4, .body5:
+            return 14
+        case .body6:
+            return 13
         case .button, .caption1:
             return 12
         case .caption2:
