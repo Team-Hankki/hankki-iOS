@@ -9,6 +9,6 @@ import Foundation
 
 /// 타학교에 있던 식당 우리 학교에 제보하기 Request
 struct PostHankkiFromOtherRequestDTO: Codable {
-    var storeId: Int
-    var universityId: Int
+    let storeId: Int
+    let universityId: Int
 }
