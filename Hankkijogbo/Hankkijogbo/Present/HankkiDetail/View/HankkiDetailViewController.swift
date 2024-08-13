@@ -235,6 +235,13 @@ private extension HankkiDetailViewController {
         dismissWithFadeOut()
         backButtonDidTap()
     }
+    
+    /// 제보를 통한 식당 삭제
+    func deleteHankkiByReport() {
+        viewModel.deleteHankkiAPI(id: hankkiId) { [self] in
+            dismissAlertAndPop()
+        }
+    }
 }
 
 extension HankkiDetailViewController {
@@ -265,7 +272,7 @@ extension HankkiDetailViewController {
             image: .imgModalReport,
             titleText: nickname + StringLiterals.Alert.thanksForReport,
             primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: dismissAlertAndPop,
+            primaryButtonHandler: deleteHankkiByReport,
             hightlightedText: nickname,
             hightlightedColor: .red500
         )
