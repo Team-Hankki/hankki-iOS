@@ -162,6 +162,7 @@
 		A240EA592C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */; };
 		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
 		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
+		A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -359,6 +360,7 @@
 		A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiEditMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
 		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLineView.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -600,8 +602,6 @@
 			children = (
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				A22D20C92C3165B6001AFAC6 /* Base */,
-				86880C1A2C47A0CC00CAEF58 /* Splash */,
-				8670A7872C49C34B0098DCF1 /* Onboarding */,
 				865826032C4170A400265401 /* Login */,
 				86880C1A2C47A0CC00CAEF58 /* Splash */,
 				8670A7872C49C34B0098DCF1 /* Onboarding */,
@@ -732,6 +732,7 @@
 			children = (
 				8322D03B2C5FB36B00F6D725 /* HankkiCategoryTagLabel */,
 				A240EA472C45273D000FF458 /* HankkiPaddingLabel */,
+				A29A441C2C6ADC11002B8D36 /* HankkiLineView */,
 				86E78D1C2C46B67400BE0DC3 /* EmptyView */,
 				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
 				A240EA092C3EF712000FF458 /* HankkiReusableView */,
@@ -1331,6 +1332,14 @@
 			path = HankkiReportOption;
 			sourceTree = "<group>";
 		};
+		A29A441C2C6ADC11002B8D36 /* HankkiLineView */ = {
+			isa = PBXGroup;
+			children = (
+				A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */,
+			);
+			path = HankkiLineView;
+			sourceTree = "<group>";
+		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,15 +1369,6 @@
 				A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */,
 			);
 			path = HankkiToasts;
-			sourceTree = "<group>";
-		};
-		A2B599192C39D0BC004B7E4E /* MyZipList */ = {
-			isa = PBXGroup;
-			children = (
-				A2C9FCA62C4972FA00868DF7 /* ViewModel */,
-				A2DEBF482C3BD7A300DE14A9 /* View */,
-			);
-			path = MyZipList;
 			sourceTree = "<group>";
 		};
 		A2C9FCA42C49721200868DF7 /* ViewModel */ = {
@@ -1655,6 +1655,7 @@
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
 				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
 				86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */,
+				A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */,
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,

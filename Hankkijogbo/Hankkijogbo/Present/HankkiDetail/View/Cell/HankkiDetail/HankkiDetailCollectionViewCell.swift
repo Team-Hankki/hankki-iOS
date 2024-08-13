@@ -12,7 +12,7 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Properties
     
     private var hankkiMenuNameLabel: UILabel = UILabel()
-    private let separatorView: UIView = UIView()
+    private let dottedLineView: DottedLineView = DottedLineView(frame: CGRect(x: 0, y: 0, width: 0, height: 4))
     private let hankkiMenuPriceLabel: UILabel = UILabel()
     
     // MARK: - Setup UI
@@ -20,7 +20,7 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         addSubviews(
             hankkiMenuNameLabel,
-            separatorView,
+            dottedLineView,
             hankkiMenuPriceLabel
         )
     }
@@ -29,7 +29,7 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
         hankkiMenuNameLabel.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview()
         }
-        separatorView.snp.makeConstraints {
+        dottedLineView.snp.makeConstraints {
             $0.leading.equalTo(hankkiMenuNameLabel.snp.trailing).offset(27)
             $0.trailing.equalTo(hankkiMenuPriceLabel.snp.leading).offset(-27)
             $0.centerY.equalToSuperview()
@@ -47,8 +47,8 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
                 color: .gray700
             )
         }
-        separatorView.do {
-            $0.backgroundColor = .gray100
+        dottedLineView.do {
+            $0.clipsToBounds = true
         }
         hankkiMenuPriceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
