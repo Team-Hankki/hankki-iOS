@@ -141,7 +141,6 @@ private extension HankkiDetailViewController {
     func bindViewModel() {
         viewModel.setHankkiDetailData = { [weak self] in
             if let data = self?.viewModel.hankkiDetailData {
-                // TODO: - 디폴트 사진일 경우를 구별
                 if let first = data.imageUrls.first {
                     self?.setupImageStyle(imageUrl: first)
                 } else {
@@ -213,7 +212,7 @@ private extension HankkiDetailViewController {
             $0.backgroundColor = .gray300
         }
         thumbnailImageView.do {
-            $0.backgroundColor = .gray300
+            $0.image = .imgDetailDefault
         }
         topBlackGradientImageView.do {
             $0.image = nil
