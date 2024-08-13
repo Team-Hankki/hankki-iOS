@@ -31,7 +31,7 @@ extension UserDefaults {
     func saveUniversity(_ university: UniversityModel) {
         let defaults = UserDefaults.standard
         if let encoded = try? JSONEncoder().encode(university) {
-            defaults.set(encoded, forKey: "university")
+            defaults.set(encoded, forKey: UserDefaultsKey.university.rawValue)
         }
     }
     
@@ -40,14 +40,22 @@ extension UserDefaults {
     }
     
     func getUniversity() -> UniversityModel? {
-            if let savedUniversityData = UserDefaults.standard.object(forKey: UserDefaultsKey.university.rawValue) as? Data {
-                let decoder = JSONDecoder()
-                if let loadedUniversity = try? decoder.decode(UniversityModel.self, from: savedUniversityData) {
-                    return loadedUniversity
-                }
+        if let savedUniversityData = UserDefaults.standard.object(forKey: UserDefaultsKey.university.rawValue) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedUniversity = try? decoder.decode(UniversityModel.self, from: savedUniversityData) {
+                return loadedUniversity
             }
-            return nil
         }
+        return nil
+    }
+    
+    func saveNickname(_ nickname: String) {
+        UserDefaults.standard.set(nickname, forKey: UserDefaultsKey.nickname.rawValue)
+    }
+    
+    func removeNickname() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.nickname.rawValue)
+    }
     
     func removeUserInformation() {
         removeTokens()
@@ -59,4 +67,5 @@ enum UserDefaultsKey: String {
     case accessToken
     case refreshToken
     case university
+    case nickname
 }
