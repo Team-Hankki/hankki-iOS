@@ -22,6 +22,8 @@ final class HomeViewController: BaseViewController {
     
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
     
+    let univVC = UnivSelectViewController()
+    
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
@@ -125,6 +127,7 @@ extension HomeViewController {
     
     func presentUniversity() {
         let univSelectViewController = UnivSelectViewController()
+        univSelectViewController.delegate = self
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
     
@@ -246,5 +249,11 @@ extension HomeViewController: DropDownViewDelegate {
             }
             hideDropDown()
         }
+    }
+}
+
+extension HomeViewController: UnivSelectViewControllerDelegate {
+    func didRequestLocationFocus() {
+        targetButtonDidTap()
     }
 }
