@@ -71,4 +71,22 @@ extension UIApplication {
             rootViewController.showBlackToast(message: message, action: action)
         }
     }
+    
+    static func showLoadingView() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let delegate = windowScene.delegate as? SceneDelegate,
+                          let rootViewController = delegate.window?.rootViewController as? UINavigationController,
+                          let currentViewController = rootViewController.topViewController as? BaseViewController {
+                           currentViewController.showLoadingView()
+        }
+    }
+    
+    static func dismissLoadingView() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let delegate = windowScene.delegate as? SceneDelegate,
+                          let rootViewController = delegate.window?.rootViewController as? UINavigationController,
+                          let currentViewController = rootViewController.topViewController as? BaseViewController {
+                           currentViewController.dismissLoadingView()
+        }
+    }
 }

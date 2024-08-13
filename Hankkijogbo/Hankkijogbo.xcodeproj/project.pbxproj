@@ -71,6 +71,7 @@
 		8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */; };
 		8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */; };
 		8641516D2C67B9AE00E2FD44 /* MyZipViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151672C67B9AD00E2FD44 /* MyZipViewModel.swift */; };
+		864151702C6B471A00E2FD44 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8641516F2C6B471A00E2FD44 /* loading.json */; };
 		864A89BC2C3B350900140B63 /* AlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A89BB2C3B350900140B63 /* AlertStyle.swift */; };
 		864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */; };
 		864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */; };
@@ -265,6 +266,7 @@
 		864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
 		864151672C67B9AD00E2FD44 /* MyZipViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipViewModel.swift; sourceTree = "<group>"; };
+		8641516F2C6B471A00E2FD44 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		864A89BB2C3B350900140B63 /* AlertStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStyle.swift; sourceTree = "<group>"; };
 		864FA9022C3D1F7B0051EA36 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageHankkiCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -598,8 +600,6 @@
 			children = (
 				83DBED792C255A180042BA48 /* ViewController.swift */,
 				A22D20C92C3165B6001AFAC6 /* Base */,
-				86880C1A2C47A0CC00CAEF58 /* Splash */,
-				8670A7872C49C34B0098DCF1 /* Onboarding */,
 				865826032C4170A400265401 /* Login */,
 				86880C1A2C47A0CC00CAEF58 /* Splash */,
 				8670A7872C49C34B0098DCF1 /* Onboarding */,
@@ -755,6 +755,7 @@
 		83DBEDAE2C2565E10042BA48 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				8641516E2C6B470800E2FD44 /* Gifs */,
 				83DBED7E2C255A1A0042BA48 /* Assets.xcassets */,
 				838D09D42C329A0A001400A4 /* Colors.xcassets */,
 			);
@@ -806,6 +807,14 @@
 				864151682C67B9AD00E2FD44 /* ViewModel */,
 			);
 			path = MyZipList;
+			sourceTree = "<group>";
+		};
+		8641516E2C6B470800E2FD44 /* Gifs */ = {
+			isa = PBXGroup;
+			children = (
+				8641516F2C6B471A00E2FD44 /* loading.json */,
+			);
+			path = Gifs;
 			sourceTree = "<group>";
 		};
 		864FA9002C3D1F650051EA36 /* Mypage */ = {
@@ -1351,15 +1360,6 @@
 			path = HankkiToasts;
 			sourceTree = "<group>";
 		};
-		A2B599192C39D0BC004B7E4E /* MyZipList */ = {
-			isa = PBXGroup;
-			children = (
-				A2C9FCA62C4972FA00868DF7 /* ViewModel */,
-				A2DEBF482C3BD7A300DE14A9 /* View */,
-			);
-			path = MyZipList;
-			sourceTree = "<group>";
-		};
 		A2C9FCA42C49721200868DF7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1555,6 +1555,7 @@
 				8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */,
 				A2F240312C5C03B400C204BE /* Config.xcconfig in Resources */,
 				A2F27BE52C34EED6001E6514 /* Pretendard-Medium.otf in Resources */,
+				864151702C6B471A00E2FD44 /* loading.json in Resources */,
 				865C3D082C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig in Resources */,
 				A2F27BFF2C3500DB001E6514 /* SUITE-SemiBold.otf in Resources */,
 			);

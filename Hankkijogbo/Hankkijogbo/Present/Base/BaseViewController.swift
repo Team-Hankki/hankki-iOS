@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Lottie
 import SnapKit
 import Then
 
@@ -14,6 +15,11 @@ import Then
 /// - 각 함수를 override하여 각 VC에 맞게 함수 내용을 작성한다.
 /// - 각 VC에서는 해당 함수들을 호출하지 않아도 된다.
 class BaseViewController: UIViewController {
+    
+    // MARK: - UI Components
+    
+    private let spinner: LottieAnimationView = LottieAnimationView()
+    private let loadingView: UIView = UIView()
     
     // MARK: - Init
     
@@ -39,6 +45,8 @@ class BaseViewController: UIViewController {
         setupLayout()
         setupStyle()
         
+        setupLoadingView()
+        
         setUpKeyboard()
         hideKeyboard()
     }
@@ -50,4 +58,56 @@ class BaseViewController: UIViewController {
     func setupLayout() { }
     
     func setupStyle() { }
+}
+
+private extension BaseViewController {
+    func setupLoadingView() {
+        loadingView.do {
+            $0.backgroundColor = .white.withAlphaComponent(0.5)
+            $0.isHidden = true
+        }
+        
+        spinner.do {
+            $0.animation = LottieAnimation.named("loading")
+            $0.contentMode = .scaleAspectFill
+            $0.loopMode = .loop
+            $0.stop()
+        }
+        
+        view.addSubview(loadingView)
+        loadingView.addSubview(spinner)
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        spinner.snp.makeConstraints {
+            $0.size.equalTo(120)
+            $0.center.equalToSuperview()
+        }
+    }
+}
+
+extension BaseViewController {
+    func showLoadingView() {
+        loadingView.do {
+            print("✏️✏️✏️ 로딩뷰 쇼")
+            $0.isHidden = false
+        }
+        
+        spinner.do {
+            $0.play()
+        }
+    }
+    
+    func dismissLoadingView() {
+        loadingView.do {
+            print("✏️✏️✏️ 로딩뷰 클로즈")
+            $0.isHidden = true
+        }
+        
+        spinner.do {
+            $0.stop()
+        }
+    }
 }
