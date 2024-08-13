@@ -14,7 +14,7 @@ import NMapsMap
 extension HomeViewController: CLLocationManagerDelegate {
     
     // CLLocationManager 인스턴스
-    private var locationManager: CLLocationManager? {
+    var locationManager: CLLocationManager? {
         get {
             return objc_getAssociatedObject(self, &HomeViewController.locationManagerKey) as? CLLocationManager
         }
@@ -31,6 +31,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             locationManager = CLLocationManager()
             locationManager?.delegate = self
             locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.distanceFilter = kCLDistanceFilterNone
         }
         
         // 위치 서비스 사용 가능 여부 확인
@@ -61,11 +62,14 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 성공
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // 현재 위치로 이동하지 않도록 비워둡니다.
+        print("🌍 위치가 업데이트되었습니다.🌍")
         if let location = locations.last {
-              moveCameraToCurrentLocation(location: location)
-              manager.stopUpdatingLocation() // 업데이트 한 번 받은 후 중지
-          }
+            print("🌍 현재 위치: 위도 \(location.coordinate.latitude), 경도 \(location.coordinate.longitude) 🌍")
+            moveCameraToCurrentLocation(location: location)
+            manager.stopUpdatingLocation()
+        } else {
+            print("🌍 유효한 위치를 찾을 수 없습니다.🌍")
+        }
     }
     
     // 위치 업데이트 실패
@@ -74,7 +78,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     // 위치 접근 거부 경고 알림 표시
-    private func showLocationAccessDeniedAlert() {
+    func showLocationAccessDeniedAlert() {
         showAlert(titleText: "설정 > 개인정보보호 >\n위치서비스와 설정 > 한끼족보에서\n위치 정보 접근을 모두 허용해 주세요. ",
                   secondaryButtonText: "닫기",
                   primaryButtonText: "설정하기",
@@ -88,29 +92,31 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     @objc func targetButtonDidTap() {
-         let status = CLLocationManager.authorizationStatus()
-         switch status {
-         case .authorizedWhenInUse, .authorizedAlways:
-             // 위치 접근 권한이 허용된 경우 현재 위치로 이동
-             if let manager = locationManager {
-                 manager.startUpdatingLocation()
-             }
-         case .restricted, .denied:
-             // 위치 접근 권한이 거부된 경우 알림 표시
-             showLocationAccessDeniedAlert()
-         case .notDetermined:
-             // 위치 접근 권한이 아직 결정되지 않은 경우 동의 요청
-             requestLocationAuthorization()
-         @unknown default:
-             break
-         }
-     }
+        let status = CLLocationManager.authorizationStatus()
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            // 위치 접근 권한이 허용된 경우 현재 위치로 이동
+            print("🌍🌍🌍위치 접근이 허용🌍🌍🌍")
+            if let manager = locationManager {
+                manager.startUpdatingLocation()
+            }
+        case .restricted, .denied:
+            // 위치 접근 권한이 거부된 경우 알림 표시
+            showLocationAccessDeniedAlert()
+        case .notDetermined:
+            // 위치 접근 권한이 아직 결정되지 않은 경우 동의 요청
+            requestLocationAuthorization()
+        @unknown default:
+            break
+        }
+    }
     
     func moveCameraToCurrentLocation(location: CLLocation) {
-            let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
-            let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-            rootView.mapView.moveCamera(cameraUpdate)
-        }
+        guard isViewLoaded else { return }
+        let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+        rootView.mapView.moveCamera(cameraUpdate)
+    }
     
     // 카메라를 선택한 대학교 위치로 이동
     func moveCameraToUniversityLocation() {
@@ -134,7 +140,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             self.view.layoutIfNeeded()
         })
     }
-
+    
     // BottomSheet가 노출될 때의 TargetButton Layout
     func showTargetButtonAtBottomSheet() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
