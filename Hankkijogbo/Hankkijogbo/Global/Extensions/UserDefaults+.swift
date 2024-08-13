@@ -57,6 +57,10 @@ extension UserDefaults {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKey.nickname.rawValue)
     }
     
+    func getNickname() -> String? {
+        return UserDefaults.standard.string(forKey: UserDefaultsKey.nickname.rawValue)
+    }
+    
     func removeUserInformation() {
         removeTokens()
         removeUniversity()

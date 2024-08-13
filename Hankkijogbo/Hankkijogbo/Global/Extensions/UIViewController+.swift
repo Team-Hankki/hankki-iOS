@@ -94,7 +94,7 @@ extension UIViewController {
             $0.primaryButtonHandler = primaryButtonHandler
             
             if hightlightedColor != nil {
-                $0.setupTitleText(start: 0, end: hightlightedText.count, color: hightlightedColor!)
+                $0.setupHighlightedTitle(start: 0, end: hightlightedText.count, color: hightlightedColor!)
             }
         }
         present(alert, animated: false, completion: nil)

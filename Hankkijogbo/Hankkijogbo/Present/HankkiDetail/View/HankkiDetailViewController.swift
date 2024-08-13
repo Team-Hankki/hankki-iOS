@@ -259,11 +259,15 @@ extension HankkiDetailViewController {
     }
     
     @objc func hankkiReportButtonDidTap() {
+        var nickname = UserDefaults.standard.getNickname() ?? "한끼귀염"
+        if nickname.isEmpty { nickname = "한끼귀염" }
         self.showAlert(
             image: .imgModalReport,
-            titleText: StringLiterals.Alert.thanksForReport,
+            titleText: nickname + StringLiterals.Alert.thanksForReport,
             primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: dismissAlertAndPop
+            primaryButtonHandler: dismissAlertAndPop,
+            hightlightedText: nickname,
+            hightlightedColor: .red500
         )
     }
     
