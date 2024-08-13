@@ -225,6 +225,7 @@ extension HomeViewController {
                 make.centerX.equalToSuperview()
                 make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(22)
             }
+            markerInfoCardView?.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             view.layoutIfNeeded()
         }
         
