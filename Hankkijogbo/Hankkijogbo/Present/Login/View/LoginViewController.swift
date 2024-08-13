@@ -28,7 +28,7 @@ final class LoginViewController: BaseViewController {
         
         view.do {
             $0.contentMode = .scaleAspectFill
-            $0.backgroundColor = .hankkiRed
+            $0.backgroundColor = .red500
         }
         
         logoImageView.do {

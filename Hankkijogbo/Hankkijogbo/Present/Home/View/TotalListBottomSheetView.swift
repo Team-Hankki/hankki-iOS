@@ -84,7 +84,7 @@ final class TotalListBottomSheetView: BaseView {
         
         emptyLabel.do {
             $0.text = StringLiterals.Home.emptyNotice
-            $0.font = .setupPretendardStyle(of: .body6)
+            $0.font = .setupPretendardStyle(of: .body2)
             $0.textColor = .gray400
             $0.textAlignment = .center
             $0.isHidden = true

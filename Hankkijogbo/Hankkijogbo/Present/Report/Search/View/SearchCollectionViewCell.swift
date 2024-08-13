@@ -33,9 +33,9 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
                     self.backgroundColor = .hankkiWhite
                     self.selectedHankkiNameString = nil
                 } else {
-                    hankkiNameLabel.textColor = .hankkiRed
+                    hankkiNameLabel.textColor = .red500
                     checkButton.setImage(.btnCheckFilled, for: .normal)
-                    self.backgroundColor = .hankkiRedLight
+                    self.backgroundColor = .red100
                     self.selectedHankkiNameString = hankkiNameLabel.text
                 }
             } else {
@@ -101,7 +101,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         
         addressLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 color: .gray400
             )
             $0.lineBreakMode = .byTruncatingTail

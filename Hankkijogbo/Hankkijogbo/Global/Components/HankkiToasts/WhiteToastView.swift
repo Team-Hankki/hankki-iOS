@@ -72,7 +72,7 @@ final class WhiteToastView: BaseView {
         }
         actionButton.do {
             $0.setTitle(StringLiterals.Toast.move, for: .normal)
-            $0.setTitleColor(.hankkiRed, for: .normal)
+            $0.setTitleColor(.red500, for: .normal)
             $0.titleLabel?.font = .setupPretendardStyle(of: .subtitle3)
             $0.addTarget(self, action: #selector(actionButtonDidTap), for: .touchUpInside)
         }

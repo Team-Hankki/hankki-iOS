@@ -99,11 +99,11 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         categoryChipView.do {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
-            $0.backgroundColor = .hankkiRedLight
+            $0.backgroundColor = .red100
         }
         
         categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, color: .hankkiRed)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, color: .red500)
         }
         
         priceLabel.do {

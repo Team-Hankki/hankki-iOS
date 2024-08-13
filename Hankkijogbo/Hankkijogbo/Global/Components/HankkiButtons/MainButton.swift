@@ -14,9 +14,9 @@ enum MainButtonType {
     var style: MainButton.Style {
         switch self {
         case .secondary:
-            MainButton.Style(ableBackgroundColor: .white, disableBackgroundColor: .white, textColor: .hankkiRed)
+            MainButton.Style(ableBackgroundColor: .white, disableBackgroundColor: .white, textColor: .red500)
         default:
-            MainButton.Style(ableBackgroundColor: .hankkiRed, disableBackgroundColor: .hankkiSemiRed, textColor: .white)
+            MainButton.Style(ableBackgroundColor: .red500, disableBackgroundColor: .red400, textColor: .white)
         }
     }
 }

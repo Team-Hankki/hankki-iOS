@@ -65,8 +65,8 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         reportedNumberLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
-                color: .hankkiRed
+                for: PretendardStyle.body5,
+                color: .red500
             )
         }
         descriptionLabel.do {
@@ -92,7 +92,7 @@ private extension SearchBarCollectionViewCell {
             $0.layer.cornerRadius = 10
             $0.setImage(.icSearch, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body6,
+                for: PretendardStyle.body2,
                 withText: StringLiterals.Report.searchFirstPlaceHolder,
                 color: .gray400
             ), for: .normal)
@@ -104,8 +104,13 @@ private extension SearchBarCollectionViewCell {
     
     func setupStyleForSet() {
         searchBarButton.do {
-            $0.backgroundColor = .hankkiRedLight
+            $0.backgroundColor = .red100
             $0.layer.cornerRadius = 10
+            $0.setAttributedTitle(UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: hankkiNameString,
+                color: .red500
+            ), for: .normal)
             $0.setImage(.icArrowClose, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft
             $0.configuration = .plain()
@@ -123,7 +128,7 @@ private extension SearchBarCollectionViewCell {
         let attributedTitle = UILabel.setupAttributedText(
             for: PretendardStyle.subtitle3,
             withText: title,
-            color: .hankkiRed
+            color: .red500
         )
         
         searchBarButton.setAttributedTitle(attributedTitle, for: .normal)

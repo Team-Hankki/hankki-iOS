@@ -82,7 +82,7 @@ extension MyZipListCollectionViewCell {
     func setupLabelStyleOfData(zipData: GetMyZipFavorite) {
         zipTitleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body3,
                 withText: zipData.title,
                 color: isChecked ? .gray200 : .gray800
             )

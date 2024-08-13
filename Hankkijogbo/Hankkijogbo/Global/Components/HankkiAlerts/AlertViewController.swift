@@ -84,7 +84,7 @@ final class AlertViewController: BaseViewController {
         
         subLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 withText: subText,
                 color: .gray500
             )
@@ -101,11 +101,11 @@ final class AlertViewController: BaseViewController {
         
         setupButtonStyle(button: secondaryButton,
                          title: secondaryButtonText,
-                         backgroundColor: .hankkiWhite, titleColor: .hankkiRed)
+                         backgroundColor: .hankkiWhite, titleColor: .red500)
         
         setupButtonStyle(button: primaryButton,
                          title: primaryButtonText,
-                         backgroundColor: .hankkiRed, titleColor: .hankkiWhite)
+                         backgroundColor: .red500, titleColor: .hankkiWhite)
     }
     
     override func setupHierarchy() {

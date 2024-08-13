@@ -154,7 +154,7 @@ final class ReportCompleteViewController: BaseViewController {
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle2,
                 withText: StringLiterals.Common.goToHome,
-                color: .hankkiRed
+                color: .red500
             ), for: .normal)
         }
         bottomButtonView.do {

@@ -87,7 +87,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
         reportOptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body3,
+                for: PretendardStyle.body4,
                 color: .gray400
             )
         }
@@ -104,9 +104,9 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
 private extension HankkiReportOptionCollectionViewCell {
     
     func setupSelectedStyle() {
-        self.layer.borderColor = UIColor.hankkiRed.cgColor
+        self.layer.borderColor = UIColor.red500.cgColor
         self.radioButton.setImage(.btnRadioSelected, for: .normal)
-        self.reportOptionLabel.textColor = .hankkiRed
+        self.reportOptionLabel.textColor = .red500
     }
     
     func setupNormalStyle() {

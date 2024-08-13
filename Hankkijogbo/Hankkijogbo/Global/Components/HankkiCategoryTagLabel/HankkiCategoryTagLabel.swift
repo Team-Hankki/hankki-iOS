@@ -25,8 +25,8 @@ class HankkiCategoryTagLabel: UILabel {
     
     private func setupTagStyle() {
         self.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
-        self.backgroundColor = .hankkiRedLight
-        self.textColor = .hankkiRed
+        self.backgroundColor = .red100
+        self.textColor = .red500
         self.font = .setupPretendardStyle(of: .caption2)
         self.textAlignment = .center
     }
