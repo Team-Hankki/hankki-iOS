@@ -19,6 +19,7 @@ protocol HankkiAPIServiceProtocol {
     func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<PostHankkiValidateResponseDTO>) -> Void)
     func postHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
     func postHankki(multipartData: [MultipartFormData], completion: @escaping(NetworkResult<PostHankkiResponseDTO>) -> Void)
+    func postHankkiFromOther(request: PostHankkiFromOtherRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func deleteHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
 }
 
@@ -218,6 +219,23 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<HeartResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    /// 타학교에 있던 식당 우리 학교에도 제보하기
+    func postHankkiFromOther(request: PostHankkiFromOtherRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postHankkiFromOther(request: request)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                print(networkResult.stateDescription)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

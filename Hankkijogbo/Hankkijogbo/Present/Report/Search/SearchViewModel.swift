@@ -12,9 +12,14 @@ import Moya
 // MARK: - 장소 검색 API 연동
 
 final class SearchViewModel {
+    
+    var storeId: Int?
+    private var universityId: Int?
+    
     var showAlertToMove: (() -> Void)?
     var showAlertToAdd: (() -> Void)?
     var completeLocationSelection: (() -> Void)?
+    var moveToDetail: (() -> Void)?
     
     var selectedLocationData: GetSearchedLocation? {
         didSet {
@@ -51,12 +56,25 @@ extension SearchViewModel {
                 if data.id == nil {
                     self?.completeLocationSelection?()
                 } else {
+                    self?.storeId = data.id
                     if data.isRegistered {
                         self?.showAlertToMove?()
                     } else {
+                        self?.universityId = req.universityId
                         self?.showAlertToAdd?()
                     }
                 }
+            }
+        }
+    }
+    
+    func postHankkiFromOtherAPI() {
+        guard let storeId = storeId else { return }
+        guard let universityId = universityId else { return }
+        let request = PostHankkiFromOtherRequestDTO(storeId: storeId, universityId: universityId)
+        NetworkService.shared.hankkiService.postHankkiFromOther(request: request) { result in
+            result.handleNetworkResult { _ in
+                self.moveToDetail?()
             }
         }
     }

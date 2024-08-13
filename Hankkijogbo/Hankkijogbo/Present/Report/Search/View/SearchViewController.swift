@@ -48,17 +48,12 @@ final class SearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.removeAllLocations()
+
         setupRegister()
         setupDelegate()
         setupAddTarget()
         bindViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.removeAllLocations()
     }
     
     override func viewDidLayoutSubviews() {
@@ -197,7 +192,8 @@ extension SearchViewController {
             self.showAlert(
                 titleText: StringLiterals.Alert.alreadyReportHankki,
                 secondaryButtonText: StringLiterals.Alert.no,
-                primaryButtonText: StringLiterals.Alert.move
+                primaryButtonText: StringLiterals.Alert.move,
+                primaryButtonHandler: self.pushToHankkiDetail
             )
         }
         
@@ -205,8 +201,13 @@ extension SearchViewController {
             self.showAlert(
                 titleText: StringLiterals.Alert.alreadyReportHankkiByOther,
                 secondaryButtonText: StringLiterals.Alert.back,
-                primaryButtonText: StringLiterals.Alert.add
+                primaryButtonText: StringLiterals.Alert.add,
+                primaryButtonHandler: self.viewModel.postHankkiFromOtherAPI
             )
+        }
+        
+        viewModel.moveToDetail = {
+            self.pushToHankkiDetail()
         }
     }
 }
@@ -272,6 +273,12 @@ private extension SearchViewController {
         } else {
             emptyView.isHidden = true
         }
+    }
+    
+    func pushToHankkiDetail() {
+        guard let hankkiId = viewModel.storeId else { return }
+        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
+        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
     }
 }
 
