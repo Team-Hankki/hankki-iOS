@@ -60,20 +60,15 @@ extension NetworkResult {
             self.postReissue()
             
         default:
-            // TODO: - 상세한 분기처리 필요 (기디 논의 필요)
-            // 프로그램 로직 내부에 오류가 발생했을 경우, 모달창을 띄웁니다.
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                let delegate = windowScene.delegate as? SceneDelegate,
-                let rootViewController = delegate.window?.rootViewController {
-                rootViewController.showAlert(titleText: "오류 발생",
-                                             subText: self.stateDescription,
-                                             primaryButtonText: "확인")
-            }
+            UIApplication.showBlackToast(message: StringLiterals.Toast.serverError, action: {})
         }
     }
 }
 
 private extension NetworkResult {
+    // 401 error
+    // access token이 올바르지 않거나, 만료된 경우
+    // access token을 재발급 받는다
     func postReissue() {
         NetworkService.shared.authService.postReissue { result in
             switch result {
@@ -81,8 +76,17 @@ private extension NetworkResult {
                 UserDefaults.standard.saveTokens(accessToken: response?.data.accessToken ?? "",
                                                  refreshToken: response?.data.refreshToken ?? "")
             default:
+                // 401, 404 ...
+                // access token을 재발급 받는 중 error가 났을 경우
+                // refresh token이 정상적이지 않을 경우
+                // 로그인을 다시 진행해 refresh token을 재발급 받는다.
                 print("🛠️ RESET APPLICATION 🛠️\n\n")
-                UIApplication.resetApp()
+                UserDefaults.standard.removeUserInformation()
+
+                UIApplication.showAlert(titleText: StringLiterals.Alert.AccessError.title,
+                                        subText: StringLiterals.Alert.AccessError.sub,
+                                        primaryButtonText: StringLiterals.Alert.check,
+                                        primaryButtonHandler: { UIApplication.resetApp() })
             }
         }
     }

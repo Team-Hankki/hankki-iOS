@@ -60,8 +60,13 @@ enum StringLiterals {
         }
         
         enum NetworkError {
-            static let title = "네트워크 오류가 발생했어요."
+            static let title = "네트워크 오류가 발생했어요"
             static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"
+        }
+        
+        enum AccessError {
+            static let title = "로그인 유효기간이 만료되었어요"
+            static let sub = "처음부터 다시 로그인해주세요"
         }
     }
     
@@ -70,6 +75,8 @@ enum StringLiterals {
         static let see = "보기"
         static let addToMyZipWhite = "나의 족보에 추가했어요"
         static let move = "이동"
+        
+        static let serverError = "오류가 발생했어요. 다시 시도해주세요."
     }
     
     enum Toolbar {
