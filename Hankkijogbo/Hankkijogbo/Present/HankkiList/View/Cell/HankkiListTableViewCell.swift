@@ -163,13 +163,13 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         heartButton.snp.makeConstraints {
-            $0.size.equalTo(38)
+            $0.size.equalTo(52)
         }
     }
 }
 
 extension HankkiListTableViewCell {
-    func dataBind(_ data: Model, isLikeButtonDisable: Bool) {
+    func dataBind(_ data: Model, isFinal: Bool, isLikeButtonDisable: Bool) {
         self.data = data
 
         titleLabel.text = data.name
@@ -178,6 +178,7 @@ extension HankkiListTableViewCell {
         heartButton.isHidden = isLikeButtonDisable
         priceLabel.text = "\(data.lowestPrice)" + StringLiterals.Common.won
         heartCountLabel.text = "\(data.heartCount)"
+        line.isHidden = isFinal
         
         heartButton.isSelected = !data.isDeleted
     }
