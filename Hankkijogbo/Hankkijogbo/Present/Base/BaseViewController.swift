@@ -63,7 +63,6 @@ class BaseViewController: UIViewController {
 private extension BaseViewController {
     func setupLoadingView() {
         loadingView.do {
-            $0.backgroundColor = .white.withAlphaComponent(0.5)
             $0.isHidden = true
         }
         
@@ -78,7 +77,7 @@ private extension BaseViewController {
         loadingView.addSubview(spinner)
         
         loadingView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
         spinner.snp.makeConstraints {
@@ -91,7 +90,6 @@ private extension BaseViewController {
 extension BaseViewController {
     func showLoadingView() {
         loadingView.do {
-            print("✏️✏️✏️ 로딩뷰 쇼")
             $0.isHidden = false
         }
         
@@ -102,7 +100,6 @@ extension BaseViewController {
     
     func dismissLoadingView() {
         loadingView.do {
-            print("✏️✏️✏️ 로딩뷰 클로즈")
             $0.isHidden = true
         }
         
