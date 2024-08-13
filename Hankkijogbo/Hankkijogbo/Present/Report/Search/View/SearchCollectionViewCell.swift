@@ -33,9 +33,9 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
                     self.backgroundColor = .hankkiWhite
                     self.selectedHankkiNameString = nil
                 } else {
-                    hankkiNameLabel.textColor = .hankkiRed
+                    hankkiNameLabel.textColor = .red500
                     checkButton.setImage(.btnCheckFilled, for: .normal)
-                    self.backgroundColor = .hankkiRedLight
+                    self.backgroundColor = .red100
                     self.selectedHankkiNameString = hankkiNameLabel.text
                 }
             } else {

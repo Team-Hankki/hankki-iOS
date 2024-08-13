@@ -55,7 +55,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     private func setupStyle() {
         headerView.do {
-            $0.backgroundColor = .hankkiRed
+            $0.backgroundColor = .red500
         }
         
         headerImageView.do {

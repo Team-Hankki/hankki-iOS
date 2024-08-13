@@ -39,8 +39,8 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
         }
         
         redOpacityLayerView.do {
-            $0.backgroundColor = .hankkiRed.withAlphaComponent(0.4)
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 2, borderColor: .hankkiRed)
+            $0.backgroundColor = .red500.withAlphaComponent(0.4)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 2, borderColor: .red500)
             $0.isHidden = true
         }
     }

@@ -57,9 +57,9 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
         categoryLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                color: .hankkiRed
+                color: .red500
             )
-            $0.backgroundColor = .hankkiRedLight
+            $0.backgroundColor = .red100
             $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
         }
     }

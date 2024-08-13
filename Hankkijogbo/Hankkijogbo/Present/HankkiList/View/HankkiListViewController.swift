@@ -215,7 +215,7 @@ extension HankkiListViewController: UITableViewDelegate {
             self.deleteItem(at: indexPath)
             completionHandler(true)
         }
-        deleteAction.backgroundColor = .hankkiRed
+        deleteAction.backgroundColor = .red500
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         configuration.performsFirstActionWithFullSwipe = false

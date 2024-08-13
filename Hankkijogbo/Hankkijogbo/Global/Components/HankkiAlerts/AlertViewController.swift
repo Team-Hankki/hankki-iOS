@@ -101,11 +101,11 @@ final class AlertViewController: BaseViewController {
         
         setupButtonStyle(button: secondaryButton,
                          title: secondaryButtonText,
-                         backgroundColor: .hankkiWhite, titleColor: .hankkiRed)
+                         backgroundColor: .hankkiWhite, titleColor: .red500)
         
         setupButtonStyle(button: primaryButton,
                          title: primaryButtonText,
-                         backgroundColor: .hankkiRed, titleColor: .hankkiWhite)
+                         backgroundColor: .red500, titleColor: .hankkiWhite)
     }
     
     override func setupHierarchy() {

@@ -61,7 +61,7 @@ final class BottomButtonView: BaseView {
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
-            $0.backgroundColor = .hankkiSemiRed
+            $0.backgroundColor = .red400
             $0.layer.cornerRadius = 16
             $0.isEnabled = false
         }
@@ -151,14 +151,14 @@ private extension BottomButtonView {
 extension BottomButtonView {
     func setupEnabledDoneButton() {
         primaryButton.do {
-            $0.backgroundColor = .hankkiRed
+            $0.backgroundColor = .red500
             $0.isEnabled = true
         }
     }
     
     func setupDisabledDoneButton() {
         primaryButton.do {
-            $0.backgroundColor = .hankkiSemiRed
+            $0.backgroundColor = .red400
             $0.isEnabled = false
         }
     }

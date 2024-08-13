@@ -26,7 +26,7 @@ final class HankkiInfoCardView: BaseView {
             self.addToMyZipListButton.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: addToMyZipListString,
-                color: .hankkiRed
+                color: .red500
             ), for: .normal)
         }
     }
@@ -98,7 +98,7 @@ final class HankkiInfoCardView: BaseView {
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: addToMyZipListString,
-                color: .hankkiRed
+                color: .red500
             ), for: .normal)
             $0.setImage(.icAddRed, for: .normal)
             $0.configuration = .plain()

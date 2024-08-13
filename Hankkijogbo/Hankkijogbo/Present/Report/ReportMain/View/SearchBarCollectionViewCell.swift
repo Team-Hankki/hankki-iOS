@@ -60,7 +60,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
         reportedNumberLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
-                color: .hankkiRed
+                color: .red500
             )
         }
         descriptionLabel.do {
@@ -108,12 +108,12 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.height.equalTo(48)
         }
         searchBarButton.do {
-            $0.backgroundColor = .hankkiRedLight
+            $0.backgroundColor = .red100
             $0.layer.cornerRadius = 10
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
                 withText: hankkiNameString,
-                color: .hankkiRed
+                color: .red500
             ), for: .normal)
             $0.setImage(.icArrowClose, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft

@@ -33,11 +33,11 @@ extension ZipListCollectionViewCell {
         var backgroundColor: UIColor {
             switch self {
             case .create:
-                .hankkiRed
+                .red500
             case .common:
                 .gray100
             case .disable:
-                .hankkiRedLight
+                .red100
             }
         }
         

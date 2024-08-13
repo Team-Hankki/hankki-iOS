@@ -65,8 +65,8 @@ final class MarkerInfoCardView: BaseView {
         
         menutag.do {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
-            $0.backgroundColor = .hankkiRedLight
-            $0.textColor = .hankkiRed
+            $0.backgroundColor = .red100
+            $0.textColor = .red500
             $0.font = .setupPretendardStyle(of: .caption2)
             $0.textAlignment = .center
         }
