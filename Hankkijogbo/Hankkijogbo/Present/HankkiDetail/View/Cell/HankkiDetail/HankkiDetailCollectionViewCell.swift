@@ -11,7 +11,7 @@ final class HankkiDetailCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    private let menuNameMaxLength = 12
+    private let menuNameMaxLength = 11
     
     // MARK: - UI Components
     
