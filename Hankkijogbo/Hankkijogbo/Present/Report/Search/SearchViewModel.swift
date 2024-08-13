@@ -12,7 +12,8 @@ import Moya
 // MARK: - 장소 검색 API 연동
 
 final class SearchViewModel {
-    var showAlert: ((String, String?, String) -> Void)?
+    var showAlertToMove: (() -> Void)?
+    var showAlertToAdd: (() -> Void)?
     var completeLocationSelection: (() -> Void)?
     
     var selectedLocationData: GetSearchedLocation? {
@@ -45,12 +46,16 @@ extension SearchViewModel {
     
     func postHankkiValidateAPI(req: PostHankkiValidateRequestDTO) {
         NetworkService.shared.hankkiService.postHankkiValidate(req: req) { result in
-            switch result {
-            case .conflict:
-                self.showAlert?(StringLiterals.Alert.alreadyReportHankki, nil, StringLiterals.Alert.check)
-            default:
-                result.handleNetworkResult { _ in
-                    self.completeLocationSelection?()
+            result.handleNetworkResult { [weak self] response in
+                let data = response.data
+                if data.id == nil {
+                    self?.completeLocationSelection?()
+                } else {
+                    if data.isRegistered {
+                        self?.showAlertToMove?()
+                    } else {
+                        self?.showAlertToAdd?()
+                    }
                 }
             }
         }

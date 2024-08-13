@@ -16,7 +16,7 @@ protocol HankkiAPIServiceProtocol {
     func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiPinResponseDTO>) -> Void)
     func getHankkiThumbnail(id: Int, completion: @escaping(NetworkResult<GetHankkiThumbnailResponseDTO>) -> Void)
     func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
-    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<PostHankkiValidateResponseDTO>) -> Void)
     func postHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
     func postHankki(multipartData: [MultipartFormData], completion: @escaping(NetworkResult<PostHankkiResponseDTO>) -> Void)
     func deleteHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
@@ -31,6 +31,7 @@ extension HankkiAPIServiceProtocol {
     typealias GetHankkiThumbnailResponseDTO = BaseDTO<GetHankkiThumbnailResponseData>
     typealias GetHankkiDetailResponseDTO = BaseDTO<GetHankkiDetailResponseData>
     typealias HeartResponseDTO = BaseDTO<HeartResponseData>
+    typealias PostHankkiValidateResponseDTO = BaseDTO<PostHankkiValidateResponseData>
     typealias PostHankkiResponseDTO = BaseDTO<PostHankkiResponseData>
 }
 
@@ -106,16 +107,16 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 이미 등록된 식당인지 판별
-    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+    func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping (NetworkResult<PostHankkiValidateResponseDTO>) -> Void) {
         provider.request(.postHankkiValidate(req: req)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<PostHankkiValidateResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 print(networkResult.stateDescription)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<PostHankkiValidateResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

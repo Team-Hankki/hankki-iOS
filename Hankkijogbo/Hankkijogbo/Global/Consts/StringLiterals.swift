@@ -31,7 +31,8 @@ enum StringLiterals {
     enum Alert {
         static let unknownError = "알 수 없는 오류가 발생했어요"
         static let tryAgain = "네트워크 연결 상태를 확인하고\n다시 시도해주세요"
-        static let alreadyReportHankki = "이미 등록된 식당이에요\n다른 식당을 제보해주세요 :)"
+        static let alreadyReportHankki = "등록된 식당이 있어요\n식당으로 이동할까요?"
+        static let alreadyReportHankkiByOther = "다른 학교에 제보된 식당이에요\n우리 학교에도 추가할까요?"
         static let waitPlease = "조금만 기다려주세요!"
         static let prepareForEditMenu = "메뉴를 편집할 수 있도록 준비하고 있어요 :)"
         static let thanksForReport = "님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!"
@@ -39,6 +40,9 @@ enum StringLiterals {
         static let makeAccurateHannki = "여러분의 제보가 더 정확한 한끼족보를 만들어줘요 :)"
         static let check = "확인"
         static let back = "돌아가기"
+        static let no = "아니요"
+        static let move = "이동하기"
+        static let add = "추가하기"
         
         // TODO: - 레전드 고민 이것들은 내 뷰에서만 쓰는 것들인데 Alert에 넣는게 맞나?
         enum Logout {

@@ -163,6 +163,7 @@
 		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
 		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
 		A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */; };
+		A29ADF9E2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -361,6 +362,7 @@
 		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
 		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLineView.swift; sourceTree = "<group>"; };
+		A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiValidateResponseDTO.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				839138DE2C4962E500611D5C /* GetHankkiThumbnailResponseDTO.swift */,
 				A2C9FC942C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift */,
 				A2C9FC962C49237400868DF7 /* HeartResponseDTO.swift */,
+				A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */,
 				A2C9FCB42C49B15700868DF7 /* PostHankkiResponseDTO.swift */,
 			);
 			path = Response;
@@ -1743,6 +1746,7 @@
 				839FC7252C47A44900B7FEDD /* UIImageView+.swift in Sources */,
 				A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */,
 				86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */,
+				A29ADF9E2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift in Sources */,
 				8302854D2C455EC70004D9F7 /* MoyaPlugin.swift in Sources */,
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,

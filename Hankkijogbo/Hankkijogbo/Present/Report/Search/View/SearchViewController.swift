@@ -193,8 +193,20 @@ extension SearchViewController {
             self.navigationController?.popViewController(animated: true)
         }
         
-        viewModel.showAlert = { title, sub, button in
-            self.showAlert(titleText: title, subText: sub ?? "", primaryButtonText: button)
+        viewModel.showAlertToMove = {
+            self.showAlert(
+                titleText: StringLiterals.Alert.alreadyReportHankki,
+                secondaryButtonText: StringLiterals.Alert.no,
+                primaryButtonText: StringLiterals.Alert.move
+            )
+        }
+        
+        viewModel.showAlertToAdd = {
+            self.showAlert(
+                titleText: StringLiterals.Alert.alreadyReportHankkiByOther,
+                secondaryButtonText: StringLiterals.Alert.back,
+                primaryButtonText: StringLiterals.Alert.add
+            )
         }
     }
 }
