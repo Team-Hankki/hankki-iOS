@@ -25,4 +25,10 @@ extension String {
         }
         return false
     }
+    
+    /// limit까지 자르고 "..." 추가해줌
+    func getTruncatedTailString(limit: Int) -> String {
+        let index = self.index(self.startIndex, offsetBy: limit)
+        return String(self[..<index]) + "..."
+    }
 }
