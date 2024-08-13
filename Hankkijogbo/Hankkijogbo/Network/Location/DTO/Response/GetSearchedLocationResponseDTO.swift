@@ -14,8 +14,8 @@ struct GetSearchedLocationResponseData: Codable {
 }
 
 struct GetSearchedLocation: Codable {
-    var latitude: Double
-    var longitude: Double
-    var name: String
-    var address: String?
+    let latitude: Double
+    let longitude: Double
+    let name: String
+    let address: String?
 }

@@ -93,4 +93,11 @@ extension UILabel {
         mutableAttributedText.addAttribute(.foregroundColor, value: color, range: range)
         attributedText = mutableAttributedText
     }
+    
+    /// 가격 1000 단위로 구분 기호(,) 삽입 포맷팅
+    func formattingPrice(price: Int) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        self.text = (formatter.string(from: NSNumber(value: price)) ?? "\(price)") + StringLiterals.Common.won
+    }
 }

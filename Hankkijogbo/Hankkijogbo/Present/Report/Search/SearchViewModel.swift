@@ -12,16 +12,27 @@ import Moya
 // MARK: - 장소 검색 API 연동
 
 final class SearchViewModel {
-    var showAlert: ((String, String?, String) -> Void)?
-    var completeLocationSelection: (() -> Void)?
     
-    var selectedLocationData: GetSearchedLocation?
+    var storeId: Int?
+    private var universityId: Int?
+    
+    var showAlertToMove: (() -> Void)?
+    var showAlertToAdd: (() -> Void)?
+    var completeLocationSelection: (() -> Void)?
+    var moveToDetail: (() -> Void)?
+    
+    var selectedLocationData: GetSearchedLocation? {
+        didSet {
+            selectLocation?()
+        }
+    }
     var searchedLocationResponseData: GetSearchedLocationResponseData? {
         didSet {
             updateLocations?()
         }
     }
     var updateLocations: (() -> Void)?
+    var selectLocation: (() -> Void)?
     var emptyResult: (() -> Void)?
 }
 
@@ -40,13 +51,30 @@ extension SearchViewModel {
     
     func postHankkiValidateAPI(req: PostHankkiValidateRequestDTO) {
         NetworkService.shared.hankkiService.postHankkiValidate(req: req) { result in
-            switch result {
-            case .conflict:
-                self.showAlert?(StringLiterals.Alert.alreadyReportHankki, nil, StringLiterals.Alert.check)
-            default:
-                result.handleNetworkResult { _ in
-                    self.completeLocationSelection?()
+            result.handleNetworkResult { [weak self] response in
+                let data = response.data
+                if data.id == nil {
+                    self?.completeLocationSelection?()
+                } else {
+                    self?.storeId = data.id
+                    if data.isRegistered {
+                        self?.showAlertToMove?()
+                    } else {
+                        self?.universityId = req.universityId
+                        self?.showAlertToAdd?()
+                    }
                 }
+            }
+        }
+    }
+    
+    func postHankkiFromOtherAPI() {
+        guard let storeId = storeId else { return }
+        guard let universityId = universityId else { return }
+        let request = PostHankkiFromOtherRequestDTO(storeId: storeId, universityId: universityId)
+        NetworkService.shared.hankkiService.postHankkiFromOther(request: request) { result in
+            result.handleNetworkResult { _ in
+                self.moveToDetail?()
             }
         }
     }

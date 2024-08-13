@@ -21,6 +21,7 @@ enum HankkiTargetType {
     case deleteHankkiHeart(id: Int)
     case postHankkiValidate(req: PostHankkiValidateRequestDTO)
     case postHankki(multipartData: [MultipartFormData])
+    case postHankkiFromOther(request: PostHankkiFromOtherRequestDTO)
 }
 
 extension HankkiTargetType: BaseTargetType {
@@ -32,7 +33,15 @@ extension HankkiTargetType: BaseTargetType {
             return .accessTokenHeader
         }
     }
-    var utilPath: UtilPath { return .hankki }
+    
+    var utilPath: UtilPath {
+        switch self {
+        case .postHankkiFromOther:
+            return .universityStores
+        default:
+            return .hankki
+        }
+    }
     
     var pathParameter: String? {
         switch self {
@@ -43,7 +52,8 @@ extension HankkiTargetType: BaseTargetType {
         default: return .none
         }
     }
-        var queryParameter: [String: Any]? {
+    
+    var queryParameter: [String: Any]? {
         switch self {
         case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption):
             return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
@@ -58,6 +68,8 @@ extension HankkiTargetType: BaseTargetType {
         // Patch, Post 등 Request
         switch self {
         case .postHankkiValidate(let req):
+            return req
+        case .postHankkiFromOther(let req):
             return req
         default:
             return .none
@@ -86,6 +98,8 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue + "/validate"
         case .postHankki:
             return utilPath.rawValue
+        case .postHankkiFromOther:
+            return utilPath.rawValue
         }
     }
     
@@ -93,7 +107,7 @@ extension HankkiTargetType: BaseTargetType {
         switch self {
         case .getCategoryFilter, .getPriceCategoryFilter, .getSortOptionFilter, .getHankkiPin, .getHankkiList, .getHankkiThumbnail, .getHankkiDetail:
             return .get
-        case .postHankkiHeart, .postHankkiValidate, .postHankki:
+        case .postHankkiHeart, .postHankkiValidate, .postHankki, .postHankkiFromOther:
             return .post
         case .deleteHankkiHeart:
             return .delete

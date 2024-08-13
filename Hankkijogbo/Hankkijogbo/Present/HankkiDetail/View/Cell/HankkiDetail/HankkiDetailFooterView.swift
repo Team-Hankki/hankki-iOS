@@ -43,7 +43,7 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     
     override func setupLayout() {
         footerButtonStackView.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(10)
             $0.leading.equalToSuperview().inset(32)
             $0.height.equalTo(42)
         }

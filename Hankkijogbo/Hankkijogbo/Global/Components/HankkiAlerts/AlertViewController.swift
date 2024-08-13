@@ -215,6 +215,7 @@ private extension AlertViewController {
     @objc func primaryButtonDidTap() {
         if let primaryButtonHandler {
             primaryButtonHandler()
+            cancelAction()
         } else {
             cancelAction()
         }

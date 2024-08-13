@@ -9,11 +9,11 @@ import Foundation
 
 /// 식당 제보하기 Request
 struct PostHankkiRequestDTO: Codable {
-    var name: String
-    var category: String
-    var address: String
-    var latitude: Double
-    var longitude: Double
-    var universityId: Int
-    var menus: [MenuData]
+    let name: String
+    let category: String
+    let address: String
+    let latitude: Double
+    let longitude: Double
+    let universityId: Int
+    let menus: [MenuData]
 }
