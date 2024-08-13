@@ -28,6 +28,9 @@ final class TotalListBottomSheetView: BaseView {
     private let containerView = UIView()
     private let cell = TotalListCollectionViewCell()
     
+    private let emptyLabel: UILabel = UILabel()
+    private let emptyView: UIImageView = UIImageView()
+    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
@@ -43,7 +46,7 @@ final class TotalListBottomSheetView: BaseView {
     
     override func setupHierarchy() {
         self.addSubviews(containerView)
-        containerView.addSubviews(bottomSheetHandlerView, totalListCollectionView)
+        containerView.addSubviews(bottomSheetHandlerView, totalListCollectionView, emptyView, emptyLabel)
     }
     
     override func setupStyle() {
@@ -73,6 +76,18 @@ final class TotalListBottomSheetView: BaseView {
                         forCellWithReuseIdentifier: TotalListCollectionViewCell.className)
             $0.dragInteractionEnabled = true
         }
+        
+        emptyLabel.do {
+            $0.text = "조건에 맞는 식당이 없어요"
+            $0.font = .setupPretendardStyle(of: .body6)
+            $0.textColor = .gray400
+            $0.textAlignment = .center
+            $0.isHidden = true
+        }
+        
+        emptyView.do {
+            $0.image = .imgEmpty
+        }
     }
     
     override func setupLayout() {
@@ -91,6 +106,16 @@ final class TotalListBottomSheetView: BaseView {
         totalListCollectionView.snp.makeConstraints {
             $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(10)
             $0.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        emptyView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(59)
+        }
+        
+        emptyLabel.snp.makeConstraints {
+            $0.top.equalTo(emptyView.snp.bottom).offset(5)
+            $0.centerX.equalToSuperview()
         }
         
         self.snp.makeConstraints {
@@ -142,6 +167,13 @@ extension TotalListBottomSheetView {
                        animations: {
             self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.4))
         })
+    }
+    
+    // Hankki List가 비어있을 경우 empty View 표출
+    func showEmptyLabel(_ show: Bool) {
+        emptyView.isHidden = !show
+        emptyLabel.isHidden = !show
+        totalListCollectionView.isHidden = show
     }
 }
 
