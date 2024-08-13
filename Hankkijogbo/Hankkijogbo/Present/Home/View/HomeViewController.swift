@@ -113,6 +113,11 @@ extension HomeViewController {
                                                               titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.titleStackView.snp.removeConstraints()
+            navigationController.titleStackView.snp.makeConstraints {
+                $0.leading.equalToSuperview().inset(22)
+                $0.centerY.equalToSuperview()
+            }
             navigationController.mainTitleLabel.font = .setupSuiteStyle(of: .subtitle)
             navigationController.isNavigationBarHidden = false
         }
@@ -165,11 +170,11 @@ private extension HomeViewController {
     
     func updateUniversityData(universityId: Int) {
         guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-
+        
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
-              let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
-              self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
-          }
+            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
+            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
+        }
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         rootView.bottomSheetView.totalListCollectionView.reloadData()
         
@@ -179,13 +184,13 @@ private extension HomeViewController {
     }
     
     func handleHankkiListResult(success: Bool, isEmpty: Bool) {
-           if success {
-               rootView.bottomSheetView.showEmptyView(isEmpty)
-           } else {
-               rootView.bottomSheetView.showEmptyView(true)
-           }
-       }
-
+        if success {
+            rootView.bottomSheetView.showEmptyView(isEmpty)
+        } else {
+            rootView.bottomSheetView.showEmptyView(true)
+        }
+    }
+    
     func setupHankkiListResult() {
         viewModel.onHankkiListFetchCompletion = { [weak self] success, isEmpty in
             self?.handleHankkiListResult(success: success, isEmpty: isEmpty)
