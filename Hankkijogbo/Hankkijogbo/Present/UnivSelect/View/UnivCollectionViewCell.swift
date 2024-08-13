@@ -14,7 +14,7 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                univLabel.textColor = .hankkiRed
+                univLabel.textColor = .red500
             } else {
                 univLabel.textColor = .gray900
             }

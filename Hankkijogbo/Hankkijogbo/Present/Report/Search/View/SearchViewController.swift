@@ -151,7 +151,7 @@ final class SearchViewController: BaseViewController {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray900.cgColor
             $0.attributedPlaceholder = UILabel.setupAttributedText(
-                for: PretendardStyle.body6,
+                for: PretendardStyle.body2,
                 withText: StringLiterals.Report.searchSecondPlaceHolder,
                 color: .gray400
             )

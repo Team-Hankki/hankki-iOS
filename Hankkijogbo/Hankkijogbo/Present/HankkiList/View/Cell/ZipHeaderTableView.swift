@@ -55,7 +55,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     private func setupStyle() {
         headerView.do {
-            $0.backgroundColor = .hankkiRed
+            $0.backgroundColor = .red500
         }
         
         headerImageView.do {
@@ -86,7 +86,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         nameLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, color: .gray600)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body5, color: .gray600)
         }
         
         shareButton.do {
@@ -100,7 +100,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
             
             $0.setImage(.icShare, for: .normal)
             
-            $0.setAttributedTitle(UILabel.setupAttributedText(for: PretendardStyle.body3,
+            $0.setAttributedTitle(UILabel.setupAttributedText(for: PretendardStyle.body4,
                                                               withText: StringLiterals.HankkiList.Header.shareButton,
                                                               color: .hankkiWhite), for: .normal)
         }

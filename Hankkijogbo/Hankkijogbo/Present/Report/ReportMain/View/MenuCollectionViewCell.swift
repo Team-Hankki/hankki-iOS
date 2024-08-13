@@ -99,7 +99,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         menuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.Report.menuName,
                 color: .gray500
             )
@@ -122,7 +122,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.Report.price,
                 color: .gray500
             )
@@ -159,7 +159,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
                 withText: StringLiterals.Report.priceError,
-                color: .hankkiRed
+                color: .red500
             )
             $0.isHidden = true
         }
@@ -200,8 +200,8 @@ private extension MenuCollectionViewCell {
     }
     
     func setupPriceErrorStyle() {
-        priceLabel.textColor = .hankkiRed
-        priceTextField.textColor = .hankkiRed
+        priceLabel.textColor = .red500
+        priceTextField.textColor = .red500
         errorLabel.isHidden = false
     }
     
@@ -216,7 +216,7 @@ private extension MenuCollectionViewCell {
     @objc func priceTextFieldDidEditingChange() {
         if Int(priceTextField.text ?? "") ?? 0 > 8000 {
             setupPriceErrorStyle()
-            priceTextField.layer.borderColor = UIColor.hankkiRed.cgColor
+            priceTextField.layer.borderColor = UIColor.red500.cgColor
         } else {
             setupPriceNonErrorStyle()
             priceTextField.layer.borderColor = UIColor.gray800.cgColor

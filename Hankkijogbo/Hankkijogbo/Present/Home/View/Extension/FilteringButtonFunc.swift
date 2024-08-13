@@ -14,8 +14,8 @@ extension HomeViewController {
     func changeButtonTitle(for button: UIButton, newTitle: String) {
         button.do {
             $0.setTitle(newTitle, for: .normal)
-            $0.backgroundColor = .hankkiYellowLighten
-            $0.layer.borderColor = UIColor.hankkiDarkYellow.cgColor
+            $0.backgroundColor = .yellow300
+            $0.layer.borderColor = UIColor.yellow500.cgColor
             $0.setTitleColor(.gray700, for: .normal)
             $0.setImage(.icClose.withTintColor(.gray700), for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)

@@ -44,7 +44,7 @@ private extension MoreButton {
             $0.setupBackgroundColor(.gray100)
             $0.setupIcon(.icAddGray, gap: 5)
             
-            if let attributedTitle = UILabel.setupAttributedText(for: PretendardStyle.body2, withText: buttonText ?? "", color: .gray500) {
+            if let attributedTitle = UILabel.setupAttributedText(for: PretendardStyle.body3, withText: buttonText ?? "", color: .gray500) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
         }

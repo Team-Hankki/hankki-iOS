@@ -44,7 +44,7 @@ final class MypageQuitFooterView: BaseCollectionViewCell {
         
         buttonLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 withText: StringLiterals.Common.withdraw,
                 color: .gray400
             )

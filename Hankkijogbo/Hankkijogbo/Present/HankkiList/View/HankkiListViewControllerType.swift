@@ -16,7 +16,7 @@ extension HankkiListViewController {
         var navigationColor: UIColor {
             switch self {
             case .myZip:
-                .hankkiRed
+                .red500
             case .reported, .liked:
                 .white
             }

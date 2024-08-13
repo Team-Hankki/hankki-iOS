@@ -150,7 +150,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         
         addNewZipLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body3,
+                for: PretendardStyle.body4,
                 withText: StringLiterals.MyZip.addNewZip,
                 color: .gray800
             )
