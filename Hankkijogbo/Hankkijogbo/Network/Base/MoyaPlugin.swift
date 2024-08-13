@@ -21,7 +21,6 @@ final class MoyaPlugin: PluginType {
             return
         }
         DispatchQueue.main.async {
-//            print("✏️✏️✏️ 로딩뷰 쇼")
             UIApplication.showLoadingView()
         }
         
@@ -45,7 +44,6 @@ final class MoyaPlugin: PluginType {
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         DispatchQueue.main.async {
-//            print("✏️✏️✏️ 로딩뷰 클로즈")
             UIApplication.dismissLoadingView()
         }
         
