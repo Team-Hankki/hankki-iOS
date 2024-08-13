@@ -58,6 +58,11 @@ enum StringLiterals {
             static let title = "조금만 기다려주세요"
             static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요"
         }
+        
+        enum NetworkError {
+            static let title = "네트워크 오류가 발생했어요."
+            static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"
+        }
     }
     
     enum Toast {
