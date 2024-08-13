@@ -92,7 +92,7 @@ private extension TabBarController {
 final class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
-        size.height += 11
+        size.height += 14
         return size
     }
 }

@@ -54,8 +54,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         backgroundColor = .white
         
         thumbnailImageView.do {
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 8
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 0, borderColor: .clear)
+            $0.contentMode = .scaleAspectFill
         }
         
         menutagLabel.do {
@@ -100,8 +100,9 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     override func setupLayout() {
         thumbnailImageView.snp.makeConstraints {
-            $0.verticalEdges.leading.equalToSuperview().inset(16)
-            $0.width.height.equalTo(72)
+            $0.leading.equalToSuperview().inset(22)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(72)
         }
         
         menutagLabel.snp.makeConstraints {

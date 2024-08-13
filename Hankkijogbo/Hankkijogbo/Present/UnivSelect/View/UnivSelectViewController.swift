@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import CoreLocation
+
+protocol UnivSelectViewControllerDelegate: AnyObject {
+    func didRequestLocationFocus()
+}
 
 final class UnivSelectViewController: BaseViewController {
     
     // MARK: - Properties
     
     private let viewModel: UnivSelectViewModel = UnivSelectViewModel()
-
+    weak var delegate: UnivSelectViewControllerDelegate?
+    
     // MARK: - UI Properties
     
     private let headerStackView: UIStackView = UIStackView()
@@ -40,12 +46,12 @@ final class UnivSelectViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.isNavigationBarHidden = true
         }
-     }
+    }
     
     override func setupStyle() {
         headerStackView.do {
@@ -135,7 +141,26 @@ private extension UnivSelectViewController {
     }
     
     func bottomButtonLineHandler() {
-        navigationController?.popToRootViewController(animated: true)
+        let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            delegate?.didRequestLocationFocus()
+            navigationController?.popViewController(animated: true)
+        case .restricted, .denied:
+            // 위치 정보 접근이 거부된 경우, 서울시립대학교로 포커싱
+            viewModel.currentUnivIndex = 24
+            viewModel.postMeUniversity()
+            navigationController?.popViewController(animated: true)
+            
+        case .notDetermined:
+            // 위치 정보 접근 권한이 아직 결정되지 않은 경우 동의 요청
+            if let homeVC = self.navigationController?.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController {
+                homeVC.requestLocationAuthorization()
+            }
+        @unknown default:
+            break
+        }
     }
     
     func setupRegister() {

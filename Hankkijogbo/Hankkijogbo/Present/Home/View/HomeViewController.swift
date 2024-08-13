@@ -19,9 +19,11 @@ final class HomeViewController: BaseViewController {
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
- 
+    
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
-
+    
+    let univVC = UnivSelectViewController()
+    
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
@@ -40,6 +42,7 @@ final class HomeViewController: BaseViewController {
         setupaddTarget()
         bindViewModel()
         
+        setupHankkiListResult()
         loadInitialData()
     }
     
@@ -110,6 +113,7 @@ extension HomeViewController {
                                                               titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.mainTitleLabel.font = .setupSuiteStyle(of: .subtitle)
             navigationController.isNavigationBarHidden = false
         }
     }
@@ -123,6 +127,7 @@ extension HomeViewController {
     
     func presentUniversity() {
         let univSelectViewController = UnivSelectViewController()
+        univSelectViewController.delegate = self
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
     
@@ -151,19 +156,40 @@ extension HomeViewController {
 private extension HomeViewController {
     func loadInitialData() {
         guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
+            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
+            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
+        }
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
     
     func updateUniversityData(universityId: Int) {
         guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
+
+        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
+              let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
+              self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
+          }
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         rootView.bottomSheetView.totalListCollectionView.reloadData()
-
+        
         // 대학 선택 후 홈화면 재진입 시 해당 대학교에 맞게 reset
         hideMarkerInfoCard()
         rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+    }
+    
+    func handleHankkiListResult(success: Bool, isEmpty: Bool) {
+           if success {
+               rootView.bottomSheetView.showEmptyView(isEmpty)
+           } else {
+               rootView.bottomSheetView.showEmptyView(true)
+           }
+       }
+
+    func setupHankkiListResult() {
+        viewModel.onHankkiListFetchCompletion = { [weak self] success, isEmpty in
+            self?.handleHankkiListResult(success: success, isEmpty: isEmpty)
+        }
     }
 }
 
@@ -223,5 +249,11 @@ extension HomeViewController: DropDownViewDelegate {
             }
             hideDropDown()
         }
+    }
+}
+
+extension HomeViewController: UnivSelectViewControllerDelegate {
+    func didRequestLocationFocus() {
+        targetButtonDidTap()
     }
 }

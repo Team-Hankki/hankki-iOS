@@ -14,9 +14,10 @@ extension HomeViewController {
     func changeButtonTitle(for button: UIButton, newTitle: String) {
         button.do {
             $0.setTitle(newTitle, for: .normal)
-            $0.backgroundColor = .hankkiYellowLight
-            $0.layer.borderColor = UIColor.hankkiYellow.cgColor
-            $0.setImage(.icClose, for: .normal)
+            $0.backgroundColor = .hankkiYellowLighten
+            $0.layer.borderColor = UIColor.hankkiDarkYellow.cgColor
+            $0.setTitleColor(.gray700, for: .normal)
+            $0.setImage(.icClose.withTintColor(.gray700), for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
             $0.sizeToFit()
@@ -30,8 +31,8 @@ extension HomeViewController {
             $0.setTitle(filter, for: .normal)
             $0.backgroundColor = .white
             $0.layer.borderColor = UIColor.gray300.cgColor
-            $0.setTitleColor(.gray400, for: .normal)
-            $0.setImage(.icArrowClose, for: .normal)
+            $0.setTitleColor(.gray500, for: .normal)
+            $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.sizeToFit()
             $0.tag = 0
@@ -57,8 +58,12 @@ extension HomeViewController {
             $0.top.equalTo(isPriceModel ? rootView.priceButton.snp.bottom : rootView.sortButton.snp.bottom).offset(10)
             switch buttonType {
             case .price:
+                rootView.priceButton.setTitleColor(.gray700, for: .normal)
+                rootView.priceButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
                 $0.centerX.equalTo(rootView.priceButton)
             case .sort:
+                rootView.sortButton.setTitleColor(.gray700, for: .normal)
+                rootView.sortButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
                 $0.centerX.equalTo(rootView.sortButton)
             }
             $0.width.height.equalTo(0)
@@ -114,6 +119,8 @@ extension HomeViewController {
             $0.leading.equalTo(rootView).inset(8)
             $0.trailing.centerX.equalToSuperview()
         }
+        rootView.typeButton.setTitleColor(.gray700, for: .normal)
+        rootView.typeButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
     }
 }
 

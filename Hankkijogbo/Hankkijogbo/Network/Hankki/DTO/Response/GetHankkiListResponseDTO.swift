@@ -14,7 +14,7 @@ struct GetHankkiListResponseData: Codable {
 }
 
 struct GetHankkiListData: Codable {
-    let imageUrl: String
+    var imageUrl: String?
     let category: String
     let name: String
     let lowestPrice: Int

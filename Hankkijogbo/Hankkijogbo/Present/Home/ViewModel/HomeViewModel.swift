@@ -38,6 +38,7 @@ final class HomeViewModel {
     
     var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
     var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)?
+    var onHankkiListFetchCompletion: ((Bool, Bool) -> Void)?
     
     var storeCategory: String? {
         didSet { updateHankkiList() }
@@ -139,13 +140,19 @@ extension HomeViewModel {
         NetworkService.shared.hankkiService.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.hankkiLists = response?.data.stores ?? []
+                self?.hankkiLists = response?.data.stores.map { store in
+                    var modifiedStore = store
+                    modifiedStore.imageUrl = store.imageUrl ?? "img_detail_default"
+                    return modifiedStore
+                } ?? []
                 self?.hankkiListsDidChange?(self?.hankkiLists ?? [])
                 completion(true)
+                self?.onHankkiListFetchCompletion?(true, self?.hankkiLists.isEmpty ?? true)
                 print("SUCCESS")
             case .unAuthorized, .networkFail:
                 self?.showAlert?("Failed")
                 completion(false)
+                self?.onHankkiListFetchCompletion?(false, true)
                 print("FAILED")
             default:
                 return
