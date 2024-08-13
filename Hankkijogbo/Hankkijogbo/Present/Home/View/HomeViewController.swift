@@ -42,7 +42,7 @@ final class HomeViewController: BaseViewController {
         setupaddTarget()
         bindViewModel()
         
-        setupBindings()
+        setupHankkiListResult()
         loadInitialData()
     }
     
@@ -186,7 +186,7 @@ private extension HomeViewController {
            }
        }
 
-    func setupBindings() {
+    func setupHankkiListResult() {
         viewModel.onHankkiListFetchCompletion = { [weak self] success, isEmpty in
             self?.handleHankkiListResult(success: success, isEmpty: isEmpty)
         }

@@ -26,6 +26,7 @@ enum StringLiterals {
         static let sortFilteringButton = "정렬"
         static let less6000 = "6000원 이하"
         static let more6000 = "6000~8000원"
+        static let emptyNotice = "조건에 맞는 식당이 없어요"
     }
     
     enum Alert {

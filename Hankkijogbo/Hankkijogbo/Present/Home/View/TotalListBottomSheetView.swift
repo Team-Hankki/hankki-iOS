@@ -46,7 +46,12 @@ final class TotalListBottomSheetView: BaseView {
     
     override func setupHierarchy() {
         self.addSubviews(containerView)
-        containerView.addSubviews(bottomSheetHandlerView, totalListCollectionView, emptyView, emptyLabel)
+        containerView.addSubviews(
+            bottomSheetHandlerView,
+            totalListCollectionView,
+            emptyView,
+            emptyLabel
+        )
     }
     
     override func setupStyle() {
@@ -78,7 +83,7 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         emptyLabel.do {
-            $0.text = "조건에 맞는 식당이 없어요"
+            $0.text = StringLiterals.Home.emptyNotice
             $0.font = .setupPretendardStyle(of: .body6)
             $0.textColor = .gray400
             $0.textAlignment = .center
