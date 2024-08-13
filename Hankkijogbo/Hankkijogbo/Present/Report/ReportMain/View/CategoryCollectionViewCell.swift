@@ -92,8 +92,8 @@ extension CategoryCollectionViewCell {
     }
     
     func updateSelectedStyle() {
-        backgroundColor = .hankkiYellowLighten
-        layer.borderColor = UIColor.hankkiDarkYellow.cgColor
+        backgroundColor = .yellow300
+        layer.borderColor = UIColor.yellow500.cgColor
         categoryLabel.font = UIFont.setupPretendardStyle(of: .body3)
         categoryLabel.textColor = .gray700
     }
