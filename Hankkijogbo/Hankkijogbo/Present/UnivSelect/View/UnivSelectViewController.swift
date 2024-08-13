@@ -10,6 +10,7 @@ import CoreLocation
 
 protocol UnivSelectViewControllerDelegate: AnyObject {
     func didRequestLocationFocus()
+    func didSelectUniversity(name: String)
 }
 
 final class UnivSelectViewController: BaseViewController {
@@ -138,6 +139,9 @@ private extension UnivSelectViewController {
     
     func bottomButtonPrimaryHandler() {
         viewModel.postMeUniversity()
+        
+        let selectedUniversityName = viewModel.universityList[viewModel.currentUnivIndex].name
+        delegate?.didSelectUniversity(name: selectedUniversityName)
     }
     
     func bottomButtonLineHandler() {

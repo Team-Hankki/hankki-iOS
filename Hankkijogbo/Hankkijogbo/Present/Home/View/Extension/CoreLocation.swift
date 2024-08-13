@@ -112,10 +112,15 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func moveCameraToCurrentLocation(location: CLLocation) {
+        print("🌍🌍🌍🌍🌍🌍🌍")
         guard isViewLoaded else { return }
         let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position)
-        rootView.mapView.moveCamera(cameraUpdate)
+
+        DispatchQueue.main.async {
+            self.rootView.mapView.moveCamera(cameraUpdate)
+            print("🌍🌍Camera moved to current location: \(position.lat), \(position.lng)🌍🌍")
+        }
     }
     
     // 카메라를 선택한 대학교 위치로 이동
