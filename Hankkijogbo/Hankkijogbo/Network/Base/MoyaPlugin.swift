@@ -76,13 +76,9 @@ final class MoyaPlugin: PluginType {
         print(log)
         
         // 네트워크 연결 오류 Alert창 표출
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let delegate = windowScene.delegate as? SceneDelegate,
-           let rootViewController = delegate.window?.rootViewController {
-            rootViewController.showAlert(
-                titleText: "네트워크 연결 오류",
-                subText: "네트워크 오류로 \n서비스 접속이 불가능해요",
-                primaryButtonText: "확인")
-        }
+        UIApplication.showAlert(titleText: StringLiterals.Alert.NetworkError.title,
+                                subText: StringLiterals.Alert.NetworkError.sub,
+                                primaryButtonText: StringLiterals.Alert.check,
+                                primaryButtonHandler: { exit(0) })
     }
 }

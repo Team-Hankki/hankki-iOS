@@ -63,4 +63,12 @@ extension UIApplication {
             )
         }
     }
+    
+    static func showBlackToast(message: String, action: (() -> Void)? = nil) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let delegate = windowScene.delegate as? SceneDelegate,
+           let rootViewController = delegate.window?.rootViewController {
+            rootViewController.showBlackToast(message: message, action: action)
+        }
+    }
 }

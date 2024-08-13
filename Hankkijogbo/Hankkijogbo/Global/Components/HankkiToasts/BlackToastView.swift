@@ -17,7 +17,7 @@ final class BlackToastView: BaseView {
     typealias ButtonAction = (() -> Void)
     
     var message: String
-    @objc var action: ButtonAction
+    @objc var action: ButtonAction?
     
     // MARK: - UI Properties
     
@@ -27,7 +27,7 @@ final class BlackToastView: BaseView {
     
     // MARK: - Life Cycle
     
-    init(message: String, action: @escaping ButtonAction) {
+    init(message: String, action: ButtonAction? = nil) {
         self.message = message
         self.action = action
         super.init(frame: .zero)
@@ -43,25 +43,38 @@ final class BlackToastView: BaseView {
     // MARK: - Func
     
     override func setupHierarchy() {
-        addSubviews(messageLabel, actionButton, tapDetectView)
+        if action == nil {
+            addSubview(messageLabel)
+        } else {
+            addSubviews(messageLabel, actionButton, tapDetectView)
+        }
     }
     
     override func setupLayout() {
         self.snp.makeConstraints {
-            $0.width.equalTo(343)
+            $0.width.equalTo(UIScreen.getDeviceWidth() - 16*2)
             $0.height.equalTo(49)
         }
+        
         messageLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(22)
+            if action == nil {
+                $0.centerX.equalToSuperview()
+            } else {
+                $0.leading.equalToSuperview().inset(22)
+            }
         }
-        actionButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(22)
-        }
-        tapDetectView.snp.makeConstraints {
-            $0.centerY.trailing.width.equalTo(actionButton)
-            $0.height.equalToSuperview()
+        
+        if action != nil {
+            actionButton.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.trailing.equalToSuperview().inset(22)
+            }
+            
+            tapDetectView.snp.makeConstraints {
+                $0.centerY.trailing.width.equalTo(actionButton)
+                $0.height.equalToSuperview()
+            }
         }
     }
     
@@ -94,6 +107,6 @@ private extension BlackToastView {
     // MARK: - @objc
     
     @objc func actionButtonDidTap() {
-        action()
+        action?()
     }
 }
