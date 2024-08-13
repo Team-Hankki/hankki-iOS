@@ -8,35 +8,77 @@
 import Foundation
 
 import Moya
-import UIKit
+import UIKit // todo: 제거
 
 final class ReportViewModel {
     var showAlert: ((String) -> Void)?
     var updateCollectionView: (() -> Void)?
+    var updateButton: ((Bool) -> Void)?
     
     var nickname: String?
-    var reportedNumber: Int = 0 {
+    var reportedNumber: Int = 0
+    var reportedNumberGuideText: String = ""
+    var selectedLocationData: GetSearchedLocation? {
         didSet {
+            checkStatus()
+        }
+    }
+    var categories: [HankkiCategoryModel] = [] {
+        didSet {
+            updateSelectedCategory()
             updateCollectionView?()
         }
     }
-    var reportedNumberGuideText: String = "" {
+    var selectedCategory: HankkiCategoryModel? {
         didSet {
-            updateCollectionView?()
+            checkStatus()
         }
     }
-    var categoryFilters: [GetCategoryFilterData] = [] {
-        didSet {
-            updateCollectionView?()
-        }
-    }
-    var selectedCategory: GetCategoryFilterData?
     var selectedImageData: Data?
-    var menus: [MenuData] = [MenuData()]
+    var menus: [MenuData] = [MenuData()] {
+        didSet {
+            checkStatus()
+        }
+    }
     var validMenus: [MenuData] = []
+    var isValid: Bool? {
+        didSet {
+            updateButton?(isValid ?? false)
+        }
+    }
+}
+
+private extension ReportViewModel {
+    
+    func updateSelectedCategory() {
+        if let selectedCategory = categories.first(where: { $0.isChecked }) {
+            self.selectedCategory = selectedCategory
+        } else {
+            selectedCategory = nil
+        }
+    }
+    
+    func checkStatus() {
+        if selectedLocationData != nil && selectedCategory != nil && !menus.isEmpty {
+            isValid = menus.allSatisfy { menu in
+                !menu.name.isEmpty && menu.price > 0 && menu.price <= 8000
+            }
+        } else {
+            isValid = false
+        }
+    }
 }
 
 extension ReportViewModel {
+    
+    /// isChecked가 true인 것만 false로 변경
+    func disableCheckedCategories() {
+        categories.enumerated().forEach { index, category in
+            if category.isChecked {
+                categories[index].isChecked = false
+            }
+        }
+    }
     
     func getReportedNumberAPI() {
         NetworkService.shared.reportService.getReportedNumber { result in
@@ -44,6 +86,7 @@ extension ReportViewModel {
                 let reportedNumber = response.data.count
                 self?.reportedNumber = reportedNumber
                 self?.reportedNumberGuideText = "\(reportedNumber)\(StringLiterals.Report.numberOfReport)"
+                self?.updateCollectionView?()
             }
         }
     }
@@ -64,7 +107,7 @@ extension ReportViewModel {
 
         let request: PostHankkiRequestDTO = PostHankkiRequestDTO(
             name: locationData.name,
-            category: selectedCategory?.tag ?? "",
+            category: selectedCategory?.categoryData.tag ?? "",
             address: locationData.address ?? "",
             latitude: locationData.latitude,
             longitude: locationData.longitude,
@@ -92,11 +135,12 @@ extension ReportViewModel {
     }
     
     // 종류 카테고리를 가져오는 메서드
-    func getCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
+    func getCategoryFilterAPI() {
         NetworkService.shared.hankkiService.getCategoryFilter { result in
             result.handleNetworkResult { [weak self] response in
-                self?.categoryFilters = response.data.categories
-                completion(true)
+                self?.categories = response.data.categories.map {
+                    HankkiCategoryModel(categoryData: $0, isChecked: false)
+                }
             }
         }
     }

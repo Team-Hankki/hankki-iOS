@@ -11,6 +11,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
+    private var hankkiNameMaxLength: Int = 12
     var hankkiNameString: String = "" {
         didSet {
             if hankkiNameString != "" {
@@ -45,6 +46,11 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(26)
         }
+        searchBarButton.snp.makeConstraints {
+            $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().inset(22)
+            $0.height.equalTo(48)
+        }
         descriptionLabel.snp.makeConstraints {
             $0.centerY.equalTo(searchBarButton)
             $0.leading.equalTo(searchBarButton.snp.trailing).offset(6)
@@ -74,15 +80,13 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .gray100
         }
     }
+}
+
+private extension SearchBarCollectionViewCell {
     
-    private func setupStyleForNotSet() {   
-        searchBarButton.snp.removeConstraints()
-        searchBarButton.snp.makeConstraints {
-            $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(5)
-            $0.leading.equalToSuperview().inset(22)
-            $0.width.equalTo(164)
-            $0.height.equalTo(48)
-        }
+    // MARK: - Private Func
+    
+    func setupStyleForNotSet() {
         searchBarButton.do {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 10
@@ -92,21 +96,13 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
                 withText: StringLiterals.Report.searchFirstPlaceHolder,
                 color: .gray400
             ), for: .normal)
-            $0.titleLabel?.lineBreakMode = .byTruncatingTail
-            $0.titleLabel?.numberOfLines = 1
             $0.configuration = .plain()
             $0.configuration?.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 14)
             $0.configuration?.imagePadding = 4
         }
     }
     
-    private func setupStyleForSet() {
-        searchBarButton.snp.removeConstraints()
-        searchBarButton.snp.makeConstraints {
-            $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(5)
-            $0.leading.equalToSuperview().inset(22)
-            $0.height.equalTo(48)
-        }
+    func setupStyleForSet() {
         searchBarButton.do {
             $0.backgroundColor = .red100
             $0.layer.cornerRadius = 10
@@ -118,10 +114,24 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             $0.setImage(.icArrowClose, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft
             $0.configuration = .plain()
-            $0.configuration?.titleLineBreakMode = .byTruncatingTail
             $0.configuration?.contentInsets = .init(top: 0, leading: 14, bottom: 0, trailing: 14)
             $0.configuration?.imagePadding = 4
         }
+        setupSearchBarButtonTitle()
+    }
+    
+    func setupSearchBarButtonTitle() {
+        let title = hankkiNameString.count > hankkiNameMaxLength
+        ? hankkiNameString.getTruncatedTailString(limit: hankkiNameMaxLength)
+        : hankkiNameString
+        
+        let attributedTitle = UILabel.setupAttributedText(
+            for: PretendardStyle.subtitle3,
+            withText: title,
+            color: .hankkiRed
+        )
+        
+        searchBarButton.setAttributedTitle(attributedTitle, for: .normal)
     }
 }
 

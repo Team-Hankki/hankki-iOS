@@ -14,37 +14,6 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
     let categoryImageView: UIImageView = UIImageView()
     let categoryLabel: UILabel = UILabel()
     
-    var selectedCategoryString: String? {
-        didSet {
-            print(selectedCategoryString ?? "")
-        }
-    }
-    var data: GetCategoryFilterData?
-    
-    weak var delegate: PassItemDataDelegate?
-    
-    override var isSelected: Bool {
-        didSet {
-            self.do {
-                if isSelected {
-                    if selectedCategoryString != nil {
-                        delegate?.updateViewModelCategoryData(data: nil)
-                        updateDefaultStyle()
-                        $0.selectedCategoryString = nil
-                    } else {
-                        delegate?.updateViewModelCategoryData(data: data)
-                        updateSelectedStyle()
-                        $0.selectedCategoryString = self.categoryLabel.text
-                    }
-                } else {
-                    delegate?.updateViewModelCategoryData(data: nil)
-                    updateDefaultStyle()
-                    $0.selectedCategoryString = nil
-                }
-            }
-        }
-    }
-    
     // MARK: - Setup UI
     
     override func setupHierarchy() {
@@ -78,17 +47,22 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
             )
             $0.textAlignment = .left
         }
+        categoryImageView.do {
+            $0.contentMode = .scaleAspectFill
+        }
     }
 }
 
 extension CategoryCollectionViewCell {
-    func bindData(_ data: GetCategoryFilterData) {
-        categoryLabel.text = data.name
-        categoryImageView.do {
-            $0.contentMode = .scaleAspectFill
-            $0.setKFImage(url: data.imageUrl)
+    func bindData(_ data: HankkiCategoryModel) {
+        categoryLabel.text = data.categoryData.name
+        categoryImageView.setKFImage(url: data.categoryData.imageUrl)
+        
+        if data.isChecked {
+            updateSelectedStyle()
+        } else {
+            updateDefaultStyle()
         }
-        self.data = data
     }
     
     func updateSelectedStyle() {
@@ -101,7 +75,7 @@ extension CategoryCollectionViewCell {
     func updateDefaultStyle() {
         backgroundColor = .hankkiWhite
         layer.borderColor = UIColor.gray200.cgColor
-        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
+        categoryLabel.font = .setupPretendardStyle(of: .body4)
         categoryLabel.textColor = .gray400
     }
 }

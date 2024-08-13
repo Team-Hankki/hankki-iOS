@@ -26,7 +26,7 @@ extension UIView {
     }
     
     /// 애니메이션과 함께 뷰를 제거한다.
-    func removeViewWithAnimation(duration: Double = 0.5, delay: Double = 2) {
+    func removeViewWithAnimation(duration: Double = 1.5, delay: Double = 1) {
         UIView.animate(withDuration: duration,
                        delay: delay,
                        options: [.curveEaseIn, .allowUserInteraction],

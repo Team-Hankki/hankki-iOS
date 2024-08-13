@@ -37,6 +37,7 @@ enum UtilPath: String {
     case report = "/v1/reports"
     case university = "/v1/universities"
     case location = "/v1/locations"
+    case universityStores = "/v1/university-stores"
 }
 
 protocol BaseTargetType: TargetType {

@@ -57,6 +57,7 @@ final class HankkiDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -107,7 +108,7 @@ final class HankkiDetailViewController: BaseViewController {
             $0.size.equalTo(20)
         }
         infoCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-40)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-37)
             $0.centerX.equalToSuperview()
         }
         reportOptionCollectionView.snp.makeConstraints {
@@ -147,7 +148,6 @@ private extension HankkiDetailViewController {
                     self?.setupNoImageStyle()
                 }
                 self?.infoCollectionView.updateLayout(menuSize: data.menus.count)
-                self?.infoCollectionView.collectionView.layoutIfNeeded()
                 self?.infoCollectionView.collectionView.reloadData()
             }
         }
@@ -267,6 +267,16 @@ extension HankkiDetailViewController {
             primaryButtonHandler: dismissAlertAndPop
         )
     }
+    
+    @objc func setupBlackToast(_ notification: Notification) {
+        if let zipId = notification.userInfo?["zipId"] as? Int {
+            
+            self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
+                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                navigationController?.pushViewController(hankkiListViewController, animated: true)
+            }
+        }
+    }
 }
 
 extension HankkiDetailViewController {
@@ -318,7 +328,6 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
                 if let data = viewModel.hankkiDetailData {
                     footer.isLiked = data.isLiked
                     footer.likedNumber = data.heartCount
-                    
                 }
                 footer.addMyZipButton.hankkiDetailButton.addTarget(self, action: #selector(addMyZipButtonDidTap), for: .touchUpInside)
                 return footer
