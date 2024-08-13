@@ -82,7 +82,7 @@ private extension BaseViewController {
         }
         
         spinner.snp.makeConstraints {
-            $0.size.equalTo(120)
+            $0.size.equalTo(68)
             $0.center.equalToSuperview()
         }
     }

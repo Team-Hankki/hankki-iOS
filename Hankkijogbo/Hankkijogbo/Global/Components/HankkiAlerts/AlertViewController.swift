@@ -73,7 +73,7 @@ final class AlertViewController: BaseViewController {
         
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle3,
+                for: style.titleFont,
                 withText: titleText,
                 color: .gray900
             )
@@ -117,10 +117,18 @@ final class AlertViewController: BaseViewController {
     
     override func setupLayout() {
         alertView.snp.makeConstraints {
-            $0.width.equalTo(330)
+            // margin 22px
+            // max-width 331px
+            if UIScreen.getDeviceWidth() > 331 {
+                $0.width.equalTo(331)
+            } else {
+                $0.horizontalEdges.equalToSuperview().inset(22)
+            }
             $0.center.equalToSuperview()
         }
         
+        
+        // TODO: - 버튼 패딩 값으로 바꾸기
         secondaryButton.snp.makeConstraints {
             $0.width.equalTo(100)
             $0.height.equalTo(54)
@@ -131,18 +139,21 @@ final class AlertViewController: BaseViewController {
             $0.height.equalTo(54)
         }
         
+        
         if image == nil {
+            // 이미지가 없는 모달창일 경우
             labelStackView.snp.makeConstraints {
                 $0.top.equalToSuperview().offset(24)
                 $0.leading.equalToSuperview().inset(20)
             }
             
             buttonStackView.snp.makeConstraints {
+                $0.trailing.equalToSuperview().inset(18)
+                $0.bottom.equalToSuperview().inset(18)
                 $0.top.equalTo(labelStackView.snp.bottom).offset(16)
-                $0.trailing.equalToSuperview().inset(20)
-                $0.bottom.equalToSuperview().inset(24)
             }
         } else {
+            // 이미지가 있는 모달창일 경우
             imageView.snp.makeConstraints {
                 $0.centerX.equalToSuperview()
                 $0.size.equalTo(140)
@@ -150,14 +161,14 @@ final class AlertViewController: BaseViewController {
             }
             
             labelStackView.snp.makeConstraints {
-                $0.top.equalTo(imageView.snp.bottom).offset(20)
+                $0.top.equalTo(imageView.snp.bottom).offset(24)
                 $0.centerX.equalToSuperview()
             }
             
             buttonStackView.snp.makeConstraints {
-                $0.top.equalTo(labelStackView.snp.bottom).offset(36)
                 $0.centerX.equalToSuperview()
                 $0.bottom.equalToSuperview().inset(24)
+                $0.top.equalTo(labelStackView.snp.bottom).offset(26)
             }
         }
     }
