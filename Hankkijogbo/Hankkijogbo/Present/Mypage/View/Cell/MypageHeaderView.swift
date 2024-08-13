@@ -9,14 +9,11 @@ import UIKit
 
 extension MypageHeaderView {
     struct Model {
-        let image: String
         let name: String
     }
 }
 
 final class MypageHeaderView: BaseCollectionViewCell {
-    
-    // MARK: - Properties
     
     // MARK: - UI Properties
     
@@ -25,7 +22,10 @@ final class MypageHeaderView: BaseCollectionViewCell {
     private let profileNameLabel: UILabel = UILabel()
     
     override func setupStyle() {
-
+        profileImageView.do {
+            $0.image = UIImage.imgMypageProfileDefault
+        }
+        
         profileNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
@@ -62,7 +62,6 @@ final class MypageHeaderView: BaseCollectionViewCell {
 
 extension MypageHeaderView {
     func dataBind(_ model: Model?) {
-        profileImageView.setKFImage(url: model?.image)
         if let nameString = model?.name {
             profileNameLabel.text = nameString + StringLiterals.Mypage.Header.greeting
         } else { profileNameLabel.text = StringLiterals.Mypage.Header.greeting }

@@ -67,8 +67,11 @@ final class CreateZipViewController: BaseViewController {
             $0.tag = 0
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.addPadding(left: 12, right: 14)
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
+            $0.font = UIFont.setupPretendardStyle(of: .body1)
+            $0.textColor = .gray800
+            
             $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TitleInput.placeholder, forColor: .gray400)
+            
             $0.rightViewMode = .always
             $0.rightView = titleCountView
         }
@@ -91,7 +94,8 @@ final class CreateZipViewController: BaseViewController {
             $0.tag = 1
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.addPadding(left: 12)
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, color: .gray900)
+            $0.font = UIFont.setupPretendardStyle(of: .body1)
+            $0.textColor = .gray800
             
             $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TagInput.placeholder,
                                       forColor: .gray400)
@@ -223,12 +227,12 @@ extension CreateZipViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.gray200.cgColor
+        textField.layer.borderColor = UIColor.gray300.cgColor
         
         let currentText = textField.text ?? ""
         
         if textField.tag == 0 {
-            titleCountLabel.textColor = .gray200
+            titleCountLabel.textColor = .gray400
             titleInputTextField.text = String(currentText.prefix(titleMaxCount))
             return
         }

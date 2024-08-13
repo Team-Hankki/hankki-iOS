@@ -67,6 +67,7 @@ final class  HankkiListViewController: BaseViewController {
             $0.isEditing = false
             $0.bounces = true
             $0.alwaysBounceVertical = true
+            $0.separatorStyle = .none
         }
         
         emptyView.do {
@@ -144,7 +145,9 @@ extension HankkiListViewController: UITableViewDataSource {
         for: indexPath
         ) as? HankkiListTableViewCell else { return UITableViewCell() }
         
-        cell.dataBind(viewModel.hankkiList[indexPath.item], isLikeButtonDisable: self.type != .liked)
+        cell.dataBind(viewModel.hankkiList[indexPath.item],
+                      isFinal: viewModel.hankkiList.count - 1 == indexPath.item,
+                      isLikeButtonDisable: self.type != .liked)
         cell.delegate = self
         return cell
     }

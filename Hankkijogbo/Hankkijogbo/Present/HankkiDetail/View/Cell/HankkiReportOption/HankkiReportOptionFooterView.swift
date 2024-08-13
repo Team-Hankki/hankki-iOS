@@ -11,7 +11,7 @@ final class HankkiReportOptionFooterView: BaseCollectionReusableView {
     
     // MARK: - UI Components
     
-    let hankkiReportButton: MainButton = MainButton(titleText: StringLiterals.Common.report)
+    let hankkiReportButton: MainButton = MainButton(titleText: StringLiterals.Common.report, isDisable: true)
     
     // MARK: - Setup UI
     

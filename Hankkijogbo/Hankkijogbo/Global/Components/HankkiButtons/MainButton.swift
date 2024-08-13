@@ -7,23 +7,55 @@
 
 import UIKit
 
+enum MainButtonType {
+    case primary
+    case secondary
+    
+    var style: MainButton.Style {
+        switch self {
+        case .secondary:
+            MainButton.Style(ableBackgroundColor: .white, disableBackgroundColor: .white, textColor: .hankkiRed)
+        default:
+            MainButton.Style(ableBackgroundColor: .hankkiRed, disableBackgroundColor: .hankkiSemiRed, textColor: .white)
+        }
+    }
+}
+
 final class MainButton: UIButton {
     
     // MARK: - Properties
     
+    struct Style {
+        let ableBackgroundColor: UIColor
+        let disableBackgroundColor: UIColor
+        let textColor: UIColor
+    }
+    
     typealias ButtonAction = () -> Void
     
+    let style: Style
     let titleText: String
+    
+    // disable이 가능한 버튼인지 결정합니다.
+    // disable이 가능하면, 초기 설졍을 diable로 진행합니다.
+    let isDisable: Bool
+    
     var buttonHandler: ButtonAction?
     
     // MARK: - Life Cycle
     
     init(
+        type: MainButtonType = .primary,
         frame: CGRect = .zero,
         titleText: String,
+        isDisable: Bool = false,
         buttonHandler: ButtonAction? = nil
     ) {
+        self.style = type.style
         self.titleText = titleText
+        
+        self.isDisable = isDisable
+        
         self.buttonHandler = buttonHandler
         
         super.init(frame: frame)
@@ -52,14 +84,14 @@ extension MainButton {
 extension MainButton {
     func setupEnabledButton() {
         self.do {
-            $0.backgroundColor = .hankkiRed
+            $0.backgroundColor = style.ableBackgroundColor
             $0.isEnabled = true
         }
     }
     
     func setupDisabledButton() {
         self.do {
-            $0.backgroundColor = .hankkiSemiRed
+            $0.backgroundColor = style.disableBackgroundColor
             $0.isEnabled = false
         }
     }
@@ -71,13 +103,20 @@ private extension MainButton {
             if let attributedTitle = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
                 withText: titleText,
-                color: .hankkiWhite
+                color: style.textColor
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
-            $0.backgroundColor = .hankkiSemiRed
+            
+            if isDisable {
+                $0.backgroundColor = style.disableBackgroundColor
+                $0.isEnabled = false
+            } else {
+                $0.backgroundColor = style.ableBackgroundColor
+                $0.isEnabled = true
+            }
+            
             $0.makeRoundBorder(cornerRadius: 16, borderWidth: 0, borderColor: .clear)
-            $0.isEnabled = false
         }
     }
 }

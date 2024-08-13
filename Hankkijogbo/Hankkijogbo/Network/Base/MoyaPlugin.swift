@@ -20,6 +20,9 @@ final class MoyaPlugin: PluginType {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             return
         }
+        DispatchQueue.main.async {
+            UIApplication.showLoadingView()
+        }
         
         let url = httpRequest.description
         let method = httpRequest.httpMethod ?? "unknown method"
@@ -40,6 +43,10 @@ final class MoyaPlugin: PluginType {
     // MARK: - Response 받을 시 호출
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
+        DispatchQueue.main.async {
+            UIApplication.dismissLoadingView()
+        }
+        
         switch result {
         case let .success(response):
             self.onSucceed(response)
