@@ -53,7 +53,7 @@ final class HankkiNavigationController: UINavigationController {
     
     private let titleStackView: UIStackView = UIStackView()
     private let mainImageView: UIImageView = UIImageView()
-    private let mainTitleLabel: UILabel = UILabel()
+    let mainTitleLabel: UILabel = UILabel()
     private let backButton: UIButton = UIButton()
     private var rightButton: UIButton = UIButton()
     
