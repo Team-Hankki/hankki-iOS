@@ -103,7 +103,7 @@ extension UIViewController {
     /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
     func showBlackToast(
         message: String,
-        action: @escaping (() -> Void)
+        action: (() -> Void)? = nil
     ) {
         let toastView = BlackToastView(message: message, action: action)
         view.addSubview(toastView)

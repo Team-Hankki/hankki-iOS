@@ -60,7 +60,7 @@ extension NetworkResult {
             self.postReissue()
             
         default:
-            UIApplication.showBlackToast(message: StringLiterals.Toast.serverError, action: {})
+            UIApplication.showBlackToast(message: StringLiterals.Toast.serverError)
         }
     }
 }
@@ -81,12 +81,8 @@ private extension NetworkResult {
                 // refresh token이 정상적이지 않을 경우
                 // 로그인을 다시 진행해 refresh token을 재발급 받는다.
                 print("🛠️ RESET APPLICATION 🛠️\n\n")
-                UserDefaults.standard.removeUserInformation()
-
-                UIApplication.showAlert(titleText: StringLiterals.Alert.AccessError.title,
-                                        subText: StringLiterals.Alert.AccessError.sub,
-                                        primaryButtonText: StringLiterals.Alert.check,
-                                        primaryButtonHandler: { UIApplication.resetApp() })
+                UIApplication.resetApp()
+                UIApplication.showBlackToast(message: StringLiterals.Toast.accessError)
             }
         }
     }
