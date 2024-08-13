@@ -173,7 +173,7 @@ extension HankkiListTableViewCell {
         self.data = data
 
         titleLabel.text = data.name
-        thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgHankkiListDefault)
+        thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgDetailDefault)
         categoryLabel.text = data.category
         heartButton.isHidden = isLikeButtonDisable
         priceLabel.text = "\(data.lowestPrice)" + StringLiterals.Common.won
