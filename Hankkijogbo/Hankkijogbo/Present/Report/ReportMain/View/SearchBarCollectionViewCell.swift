@@ -128,7 +128,7 @@ private extension SearchBarCollectionViewCell {
         let attributedTitle = UILabel.setupAttributedText(
             for: PretendardStyle.subtitle3,
             withText: title,
-            color: .hankkiRed
+            color: .red500
         )
         
         searchBarButton.setAttributedTitle(attributedTitle, for: .normal)
