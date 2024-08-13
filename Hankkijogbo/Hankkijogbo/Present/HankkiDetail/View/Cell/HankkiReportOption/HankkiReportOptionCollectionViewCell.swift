@@ -42,7 +42,11 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    var optionString: String = ""
+    var optionString: String = "" {
+        didSet {
+            reportOptionLabel.text = optionString
+        }
+    }
     
     weak var delegate: UpdateReportButtonStyleDelegate?
     
@@ -84,7 +88,6 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         reportOptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body3,
-                withText: optionString,
                 color: .gray400
             )
         }
@@ -95,7 +98,6 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     
     func bindData(text: String) {
         self.optionString = text
-        setupNormalStyle()
     }
 }
 
@@ -104,20 +106,12 @@ private extension HankkiReportOptionCollectionViewCell {
     func setupSelectedStyle() {
         self.layer.borderColor = UIColor.hankkiRed.cgColor
         self.radioButton.setImage(.btnRadioSelected, for: .normal)
-        self.reportOptionLabel.attributedText = UILabel.setupAttributedText(
-            for: PretendardStyle.body3,
-            withText: optionString,
-            color: .hankkiRed
-        )
+        self.reportOptionLabel.textColor = .hankkiRed
     }
     
     func setupNormalStyle() {
         self.layer.borderColor = UIColor.gray200.cgColor
         self.radioButton.setImage(.btnRadioNormal, for: .normal)
-        self.reportOptionLabel.attributedText = UILabel.setupAttributedText(
-            for: PretendardStyle.body3,
-            withText: optionString,
-            color: .gray400
-        )
+        self.reportOptionLabel.textColor = .gray400
     }
 }

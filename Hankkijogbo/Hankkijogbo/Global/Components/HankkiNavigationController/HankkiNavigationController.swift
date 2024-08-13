@@ -84,7 +84,7 @@ extension HankkiNavigationController {
         
         titleButtonAction = forType.titleButtonAction
         
-        safeAreaView.backgroundColor = forType.backgroundColor
+        setupBackgroundColor(forType.backgroundColor)
     }
     
     /// NavigationBar의 배경색을 바꿈
@@ -106,7 +106,7 @@ private extension HankkiNavigationController {
         }
         
         mainTitleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.h2, withText: " ", color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.h2, color: .gray900)
             $0.textColor = .gray900
         }
         

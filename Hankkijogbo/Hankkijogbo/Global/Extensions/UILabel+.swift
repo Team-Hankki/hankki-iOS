@@ -49,10 +49,12 @@ extension UILabel {
         attributedText = attributedString
     }
     
+    // TODO: - 레전드 고생하였소 소인도 UILabel과 UIButton의 attributedText관련 코드를 분리하는게 좋다는 생각이 드오 왜이리 글자커스텀이 어려운것이오? 화가난다
     /// attributedText를 설정하는 메서드
+    /// - 추후 text만 바꿔도 나머지 속성이 적용되도록 하기 위해 withText 기본값을 공백 1개로 설정
     static func setupAttributedText<T: FontStyle>(
         for fontName: T,
-        withText text: String = "",
+        withText text: String = " ",
         color: UIColor = .gray900
     ) -> NSAttributedString? {
         
@@ -82,13 +84,12 @@ extension UILabel {
                 
         return NSAttributedString(string: text, attributes: attributes)
     }
+    
     /// 텍스트 부분의 색을 일부 변경합니다.
     func setupTextColorRange(start: Int, end: Int, color: UIColor) {
-        guard var attributedText = attributedText else {
-            return
-        }
-        let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText)
-        let range = NSRange(location: start, length: min(end, text?.count ?? 0))
+        guard let text = text, start < end, start >= 0, end <= text.count else { return }
+        let range = NSRange(location: start, length: end - start)
+        let mutableAttributedText = NSMutableAttributedString(attributedString: attributedText ?? NSAttributedString())
         mutableAttributedText.addAttribute(.foregroundColor, value: color, range: range)
         attributedText = mutableAttributedText
     }

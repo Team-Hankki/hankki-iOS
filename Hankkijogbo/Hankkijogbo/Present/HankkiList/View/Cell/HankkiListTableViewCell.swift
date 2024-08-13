@@ -11,15 +11,25 @@ protocol HankkiListTableViewCellDelegate: AnyObject {
     func heartButtonDidTap(in cell: HankkiListTableViewCell, isSelected: Bool)
 }
 
+extension HankkiListTableViewCell {
+    struct Model {
+        let id: Int
+        let name: String
+        let imageURL: String
+        let category: String
+        let lowestPrice: Int
+        let heartCount: Int
+        var isDeleted: Bool = false
+    }
+}
+
 final class HankkiListTableViewCell: BaseTableViewCell {
     
     // MARK: - Properties
     
     weak var delegate: HankkiListTableViewCellDelegate?
     
-    private var data: DataStruct?
-    
-    private let dummyTagList = ["#두루미", "#해파리"]
+    private var data: Model?
     
     // MARK: - UI Properties
     
@@ -84,7 +94,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, withText: "가게 이름", color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, color: .gray900)
         }
         
         categoryChipView.do {
@@ -93,15 +103,15 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, withText: "카테고리", color: .hankkiRed)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption2, color: .hankkiRed)
         }
         
         priceLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: "가격", color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, color: .gray500)
         }
         
         heartCountLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, withText: "하트수", color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.button, color: .gray500)
         }
         
         subInfoStackView.do {
@@ -159,14 +169,14 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 }
 
 extension HankkiListTableViewCell {
-    func dataBind(_ data: DataStruct, isLikeButtonDisable: Bool) {
+    func dataBind(_ data: Model, isLikeButtonDisable: Bool) {
         self.data = data
 
         titleLabel.text = data.name
         thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgHankkiListDefault)
         categoryLabel.text = data.category
         heartButton.isHidden = isLikeButtonDisable
-        priceLabel.text = "\(data.lowestPrice)원"
+        priceLabel.text = "\(data.lowestPrice)" + StringLiterals.Common.won
         heartCountLabel.text = "\(data.heartCount)"
         
         heartButton.isSelected = !data.isDeleted

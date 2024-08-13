@@ -72,6 +72,10 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
             $0.layer.borderColor = UIColor.gray200.cgColor
         }
         categoryLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body4,
+                color: .gray400
+            )
             $0.textAlignment = .left
         }
     }
@@ -79,14 +83,9 @@ final class CategoryCollectionViewCell: BaseCollectionViewCell {
 
 extension CategoryCollectionViewCell {
     func bindData(_ data: GetCategoryFilterData) {
-        categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
-                withText: data.name,
-                color: .gray400
-            )
-        }
+        categoryLabel.text = data.name
         categoryImageView.do {
+            $0.contentMode = .scaleAspectFill
             $0.setKFImage(url: data.imageUrl)
         }
         self.data = data
@@ -95,7 +94,7 @@ extension CategoryCollectionViewCell {
     func updateSelectedStyle() {
         backgroundColor = .hankkiYellowLighten
         layer.borderColor = UIColor.hankkiDarkYellow.cgColor
-        categoryLabel.font = UIFont.setupPretendardStyle(of: .body4)
+        categoryLabel.font = UIFont.setupPretendardStyle(of: .body3)
         categoryLabel.textColor = .gray700
     }
     

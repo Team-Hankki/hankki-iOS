@@ -16,7 +16,7 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
             setupLikedButtonImage()
         }
     }
-    var likedNumber: Int = -1 {
+    var likedNumber: Int = 0 {
         didSet {
             setupLikeButtonStyle()
         }
@@ -27,23 +27,18 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     private lazy var footerButtonStackView: UIStackView = UIStackView()
     lazy var likedButton: HankkiDetailButton = HankkiDetailButton(
         image: isLiked ? .btnLikeSelected24 : .btnLikeNormal24,
-        text: "\(self.likedNumber)",
-        buttonHandler: nil
+        text: "\(self.likedNumber)"
     )
     lazy var addMyZipButton: HankkiDetailButton = HankkiDetailButton(
         image: .btnAddDetail,
-        text: StringLiterals.MyZip.addToMyZip,
-        buttonHandler: nil
+        text: StringLiterals.MyZip.addToMyZip
     )
     
     // MARK: - Setup UI
     
     override func setupHierarchy() {
         self.addSubview(footerButtonStackView)
-        footerButtonStackView.addArrangedSubviews(
-            likedButton,
-            addMyZipButton
-        )
+        footerButtonStackView.addArrangedSubviews(likedButton, addMyZipButton)
     }
     
     override func setupLayout() {
@@ -98,8 +93,5 @@ extension HankkiDetailFooterView {
     func updateLikeButtonStatus() {
         isLiked = !isLiked
         likedNumber += isLiked ? 1 : -1
-        
-        setupLikedButtonImage()
-        setupLikeButtonStyle()
     }
 }

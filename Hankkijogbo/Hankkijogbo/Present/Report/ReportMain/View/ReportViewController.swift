@@ -27,7 +27,7 @@ final class ReportViewController: BaseViewController {
     private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.Report.mainButton,
+        primaryButtonText: StringLiterals.Common.report,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -133,7 +133,7 @@ private extension ReportViewController {
     func setupNavigationBar() {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: true,
-                                                              mainTitle: .string(StringLiterals.Report.mainButton),
+                                                              mainTitle: .string(StringLiterals.Common.report),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {})
         

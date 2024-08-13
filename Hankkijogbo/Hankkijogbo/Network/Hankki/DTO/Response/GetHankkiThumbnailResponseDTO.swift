@@ -11,7 +11,7 @@ import Foundation
 
 struct GetHankkiThumbnailResponseData: Codable {
 //    let data: GetHankkiThumbnailData
-    let id: Int64
+    let id: Int
     let name: String
     let category: String
     let lowestPrice: Int

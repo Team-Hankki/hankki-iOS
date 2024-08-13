@@ -55,10 +55,10 @@ extension MypageViewController {
                 }
             case 2:
                 self.showAlert(
-                    titleText: "정말 로그아웃 하실 건가요?",
-                    secondaryButtonText: "돌아가기",
-                    primaryButtonText: "로그아웃",
-                    primaryButtonHandler: viewModel.patchLogout
+                    titleText: StringLiterals.Alert.Logout.title,
+                    secondaryButtonText: StringLiterals.Alert.Logout.secondaryButton,
+                    primaryButtonText: StringLiterals.Alert.back,
+                    secondaryButtonHandler: viewModel.patchLogout
                 )
             default:
                 return

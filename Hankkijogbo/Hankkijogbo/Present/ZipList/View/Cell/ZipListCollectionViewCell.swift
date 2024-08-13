@@ -11,7 +11,7 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
-    var data: DataStruct?
+    var model: Model?
     
     // MARK: - UI Properties
     
@@ -82,22 +82,22 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension ZipListCollectionViewCell {
-    func dataBind(_ data: DataStruct) {
-        self.data = data
+    func dataBind(_ model: Model) {
+        self.model = model
         
-        cellView.backgroundColor = data.type.backgroundColor
+        cellView.backgroundColor = model.type.backgroundColor
         titleLabel.attributedText = UILabel.setupAttributedText(
             for: PretendardStyle.subtitle3,
-            withText: data.title,
-            color: data.type.fontColor
+            withText: model.title,
+            color: model.type.fontColor
         )
 
-        if data.type == .common {
-            if let imageType = ImageType(from: data.imageUrl) {
-                imageView.image = data.type.image(for: imageType)
+        if model.type == .common {
+            if let imageType = ImageType(from: model.imageUrl) {
+                imageView.image = model.type.image(for: imageType)
             }
         } else {
-            imageView.image = data.type.image(for: nil)
+            imageView.image = model.type.image(for: nil)
         }
 
     }

@@ -69,11 +69,13 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         hankkiNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(24)
             $0.leading.equalToSuperview().inset(22)
+            $0.trailing.equalTo(checkButton.snp.leading).offset(-16)
         }
         
         addressLabel.snp.makeConstraints {
             $0.top.equalTo(hankkiNameLabel.snp.bottom).offset(4)
             $0.leading.equalTo(hankkiNameLabel)
+            $0.trailing.equalTo(checkButton.snp.leading).offset(-16)
         }
         
         checkButton.snp.makeConstraints {
@@ -94,6 +96,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
                 for: SuiteStyle.subtitle,
                 color: .gray850
             )
+            $0.lineBreakMode = .byTruncatingTail
         }
         
         addressLabel.do {
@@ -101,6 +104,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
                 for: PretendardStyle.body5,
                 color: .gray400
             )
+            $0.lineBreakMode = .byTruncatingTail
         }
         
         separatorView.do {

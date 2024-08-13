@@ -35,7 +35,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
         categoryLabel.snp.makeConstraints {
             $0.centerY.equalTo(headerLabel)
             $0.leading.equalTo(headerLabel.snp.trailing).offset(8)
-            $0.height.equalTo(36)
+            $0.height.equalTo(28)
         }
     }
     
@@ -46,20 +46,9 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
             $0.alignment = .top
             $0.distribution = .equalSpacing
         }
-        categoryLabel.do {
-            $0.textColor = .hankkiRed
-            $0.backgroundColor = .hankkiRedLight
-            $0.makeRoundBorder(cornerRadius: 14, borderWidth: 0, borderColor: .clear)
-        }
-    }
-}
-
-extension HankkiDetailHeaderView {
-    func bindData(name: String, category: String) {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h1,
-                withText: name,
                 color: .gray900
             )
             $0.lineBreakMode = .byTruncatingTail // attributedText 설정 이후에 적어야만 적용이 된다고 함
@@ -68,9 +57,17 @@ extension HankkiDetailHeaderView {
         categoryLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
-                withText: category,
                 color: .hankkiRed
             )
+            $0.backgroundColor = .hankkiRedLight
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
         }
+    }
+}
+
+extension HankkiDetailHeaderView {
+    func bindData(name: String, category: String) {
+        headerLabel.text = name
+        categoryLabel.text = category
     }
 }
