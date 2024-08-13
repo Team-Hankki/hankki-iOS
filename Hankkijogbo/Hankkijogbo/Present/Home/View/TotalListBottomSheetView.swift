@@ -170,7 +170,7 @@ extension TotalListBottomSheetView {
     }
     
     // Hankki List가 비어있을 경우 empty View 표출
-    func showEmptyLabel(_ show: Bool) {
+    func showEmptyView(_ show: Bool) {
         emptyView.isHidden = !show
         emptyLabel.isHidden = !show
         totalListCollectionView.isHidden = show
