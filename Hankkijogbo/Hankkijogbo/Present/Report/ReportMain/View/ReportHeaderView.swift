@@ -21,7 +21,7 @@ final class ReportHeaderView: BaseCollectionReusableView {
     
     override func setupLayout() {
         headerLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.equalToSuperview()
         }
     }
@@ -29,7 +29,7 @@ final class ReportHeaderView: BaseCollectionReusableView {
     override func setupStyle() {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.subtitle1,
+                for: PretendardStyle.subtitle2,
                 color: .gray900
             )
         }
