@@ -84,19 +84,12 @@ private extension HankkiDetailCollectionViewCell {
             $0.height.equalTo(2)
         }
     }
-    
-    /// 1000 단위로 구분 기호(,) 삽입 포맷팅
-    func formattingMenuPrice(price: Int) {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        hankkiMenuPriceLabel.text = (formatter.string(from: NSNumber(value: price)) ?? "\(price)") + StringLiterals.Common.won
-    }
 }
 
 extension HankkiDetailCollectionViewCell {
     func bindMenuData(_ menuData: MenuData) {
         updateMenuNameLabel(name: menuData.name)
-        formattingMenuPrice(price: menuData.price)
+        hankkiMenuPriceLabel.formattingPrice(price: menuData.price)
         updateDottedLineViewLayout(by: menuData.name)
     }
 }
