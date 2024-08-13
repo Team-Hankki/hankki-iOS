@@ -79,6 +79,6 @@ final class MoyaPlugin: PluginType {
         UIApplication.showAlert(titleText: StringLiterals.Alert.NetworkError.title,
                                 subText: StringLiterals.Alert.NetworkError.sub,
                                 primaryButtonText: StringLiterals.Alert.check,
-                                primaryButtonHandler: { fatalError("❌ NETWORK ERROR ❌\n\n") })
+                                primaryButtonHandler: { exit(0) })
     }
 }
