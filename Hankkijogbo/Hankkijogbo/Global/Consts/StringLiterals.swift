@@ -38,7 +38,7 @@ enum StringLiterals {
         static let prepareForEditMenu = "메뉴를 편집할 수 있도록 준비하고 있어요 :)"
         static let thanksForReport = "님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!"
         static let reallyReport = "정말 제보하시겠어요?"
-        static let makeAccurateHannki = "여러분의 제보가 더 정확한 한끼족보를 만들어줘요 :)"
+        static let disappearInfoByReport = "제보시 식당 정보가 앱에서 사라져요"
         static let check = "확인"
         static let back = "돌아가기"
         static let no = "아니요"

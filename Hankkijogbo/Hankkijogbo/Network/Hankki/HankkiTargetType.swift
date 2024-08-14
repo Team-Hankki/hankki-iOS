@@ -22,6 +22,7 @@ enum HankkiTargetType {
     case postHankkiValidate(req: PostHankkiValidateRequestDTO)
     case postHankki(multipartData: [MultipartFormData])
     case postHankkiFromOther(request: PostHankkiFromOtherRequestDTO)
+    case deleteHankki(id: Int)
 }
 
 extension HankkiTargetType: BaseTargetType {
@@ -43,12 +44,15 @@ extension HankkiTargetType: BaseTargetType {
         }
     }
     
+    // TODO: - 근데 얜 왜 있는거지 안 쓰이는 거 같은데
     var pathParameter: String? {
         switch self {
-        case .getHankkiThumbnail(let id): return "\(id)"
-        case .getHankkiDetail(let id): return "\(id)"
-        case .postHankkiHeart(let id): return "\(id)"
-        case .deleteHankkiHeart(let id): return "\(id)"
+        case .getHankkiThumbnail(let id),
+                .getHankkiDetail(let id),
+                .postHankkiHeart(let id),
+                .deleteHankkiHeart(let id),
+                .deleteHankki(let id):
+            return "\(id)"
         default: return .none
         }
     }
@@ -100,6 +104,8 @@ extension HankkiTargetType: BaseTargetType {
             return utilPath.rawValue
         case .postHankkiFromOther:
             return utilPath.rawValue
+        case .deleteHankki(let id):
+            return utilPath.rawValue + "/\(id)"
         }
     }
     
@@ -109,7 +115,7 @@ extension HankkiTargetType: BaseTargetType {
             return .get
         case .postHankkiHeart, .postHankkiValidate, .postHankki, .postHankkiFromOther:
             return .post
-        case .deleteHankkiHeart:
+        case .deleteHankkiHeart, .deleteHankki:
             return .delete
         }
     }

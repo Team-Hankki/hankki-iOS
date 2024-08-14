@@ -127,7 +127,6 @@ final class AlertViewController: BaseViewController {
             $0.center.equalToSuperview()
         }
         
-        
         // TODO: - 버튼 패딩 값으로 바꾸기
         secondaryButton.snp.makeConstraints {
             $0.width.equalTo(100)
@@ -138,7 +137,6 @@ final class AlertViewController: BaseViewController {
             $0.width.equalTo(100)
             $0.height.equalTo(54)
         }
-        
         
         if image == nil {
             // 이미지가 없는 모달창일 경우
@@ -230,7 +228,7 @@ private extension AlertViewController {
 }
 
 extension AlertViewController {
-    func setupTitleText(start: Int, end: Int, color: UIColor) {
+    func setupHighlightedTitle(start: Int, end: Int, color: UIColor) {
         titleLabel.setupTextColorRange(start: start, end: end, color: color)
     }
 }

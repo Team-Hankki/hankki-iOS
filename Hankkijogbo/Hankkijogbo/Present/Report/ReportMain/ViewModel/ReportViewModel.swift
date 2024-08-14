@@ -15,7 +15,7 @@ final class ReportViewModel {
     var updateCollectionView: (() -> Void)?
     var updateButton: ((Bool) -> Void)?
     
-    var nickname: String?
+    var nickname: String? = UserDefaults.standard.getNickname()
     var reportedNumber: Int = 0
     var reportedNumberGuideText: String = ""
     var selectedLocationData: GetSearchedLocation? {
@@ -91,15 +91,6 @@ extension ReportViewModel {
         }
     }
     
-    func getMe(completion: @escaping(String) -> Void) {
-        NetworkService.shared.userService.getMe { result in
-            result.handleNetworkResult { [weak self] response in
-                self?.nickname = response.data.nickname
-                completion(self?.nickname ?? "")
-            }
-        }
-    }
-    
     /// 데이터 필터링 후 req 만들어서 식당 제보하기
     /// - 유저가 실제 작성한 데이터(menus)와 실제 API 요청으로 보내는 데이터(validMenus)를 다른 변수로 관리해서 필터링
     func postHankkiAPI(locationData: GetSearchedLocation) {
@@ -118,17 +109,15 @@ extension ReportViewModel {
         let multipartData = createMultipartFormData(image: selectedImageData, request: request)
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             result.handleNetworkResult { [weak self] response in
-                guard let self = self else { return }
+                guard let self = self, let nickname = nickname else { return }
                 let data = response.data
-                self.getMe { name in
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                       let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-                        let reportCompleteViewController = ReportCompleteViewController(hankkiId: data.id,
-                                                                                        reportedNumber: self.reportedNumber,
-                                                                                        nickname: name,
-                                                                                        selectedHankkiName: data.name)
-                        rootViewController.pushViewController(reportCompleteViewController, animated: true)
-                    }
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                    let reportCompleteViewController = ReportCompleteViewController(hankkiId: data.id,
+                                                                                    reportedNumber: self.reportedNumber,
+                                                                                    nickname: nickname,
+                                                                                    selectedHankkiName: data.name)
+                    rootViewController.pushViewController(reportCompleteViewController, animated: true)
                 }
             }
         }
