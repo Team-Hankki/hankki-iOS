@@ -51,7 +51,7 @@ final class HankkiNavigationController: UINavigationController {
     private let safeAreaView: UIView = UIView()
     private let customNavigationBar: UIView = UINavigationBar()
     
-    private let titleStackView: UIStackView = UIStackView()
+    let titleStackView: UIStackView = UIStackView()
     private let mainImageView: UIImageView = UIImageView()
     let mainTitleLabel: UILabel = UILabel()
     private let backButton: UIButton = UIButton()

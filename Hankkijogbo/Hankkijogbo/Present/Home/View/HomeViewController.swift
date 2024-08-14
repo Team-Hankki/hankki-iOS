@@ -22,7 +22,7 @@ final class HomeViewController: BaseViewController {
     
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
     
-    let univVC = UnivSelectViewController()
+    var shouldUpdateNavigationBar = true
     
     // MARK: - UI Components
     
@@ -49,7 +49,11 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupPosition()
-        setupNavigationBar()
+        
+        if shouldUpdateNavigationBar {
+            setupNavigationBar()
+        }
+        
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
@@ -102,17 +106,24 @@ extension HomeViewController {
                                                    forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
     
-    private func setupNavigationBar() {
+    private func setupNavigationBar(mainTitle: String? = nil) {
         // Univ StringLiterals 추가 이후에 반영 예정
-        let university = UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
+        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
+        print("Setting up navigation bar with title: \(title)")
+        
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImage(university, .btnDropdown),
+                                                              mainTitle: .stringAndImage(title, .btnDropdown),
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
                                                               titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
+            navigationController.titleStackView.snp.removeConstraints()
+            navigationController.titleStackView.snp.makeConstraints {
+                $0.leading.equalToSuperview().inset(22)
+                $0.centerY.equalToSuperview()
+            }
             navigationController.mainTitleLabel.font = .setupSuiteStyle(of: .subtitle)
             navigationController.isNavigationBarHidden = false
         }
@@ -165,11 +176,11 @@ private extension HomeViewController {
     
     func updateUniversityData(universityId: Int) {
         guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-
+        
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
-              let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
-              self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
-          }
+            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
+            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
+        }
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
         rootView.bottomSheetView.totalListCollectionView.reloadData()
         
@@ -179,13 +190,13 @@ private extension HomeViewController {
     }
     
     func handleHankkiListResult(success: Bool, isEmpty: Bool) {
-           if success {
-               rootView.bottomSheetView.showEmptyView(isEmpty)
-           } else {
-               rootView.bottomSheetView.showEmptyView(true)
-           }
-       }
-
+        if success {
+            rootView.bottomSheetView.showEmptyView(isEmpty)
+        } else {
+            rootView.bottomSheetView.showEmptyView(true)
+        }
+    }
+    
     func setupHankkiListResult() {
         viewModel.onHankkiListFetchCompletion = { [weak self] success, isEmpty in
             self?.handleHankkiListResult(success: success, isEmpty: isEmpty)
@@ -254,6 +265,20 @@ extension HomeViewController: DropDownViewDelegate {
 
 extension HomeViewController: UnivSelectViewControllerDelegate {
     func didRequestLocationFocus() {
-        targetButtonDidTap()
+        startLocationUpdates()
     }
+    
+    func startLocationUpdates() {
+        guard let manager = locationManager else { return }
+        manager.startUpdatingLocation()
+        
+        shouldUpdateNavigationBar = false
+        setupNavigationBar(mainTitle: "전체")
+    }
+    
+    func didSelectUniversity(name: String) {
+           // 네비게이션 바를 선택한 대학교 이름으로 변경
+           shouldUpdateNavigationBar = true
+           setupNavigationBar(mainTitle: name)
+       }
 }

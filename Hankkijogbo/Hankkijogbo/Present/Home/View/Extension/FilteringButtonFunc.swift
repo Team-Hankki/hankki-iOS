@@ -66,15 +66,21 @@ extension HomeViewController {
                 rootView.sortButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
                 $0.centerX.equalTo(rootView.sortButton)
             }
-            $0.width.height.equalTo(0)
-        }
-        
-        customDropDown.snp.updateConstraints {
-            let height = isPriceModel ? self.viewModel.priceFilters.count * 44 : self.viewModel.sortOptions.count * 44
             $0.width.equalTo(112)
-            $0.height.equalTo(height)
+            $0.height.equalTo(0)
         }
         self.view.layoutIfNeeded()
+        let height = isPriceModel ? self.viewModel.priceFilters.count * 44 : self.viewModel.sortOptions.count * 44
+        
+        UIView.animate(withDuration: 0.1,
+                       delay: 0,
+                       options: .curveEaseOut,
+                       animations: {
+            customDropDown.snp.updateConstraints {
+                $0.height.equalTo(height)
+            }
+            self.view.layoutIfNeeded()
+        })
     }
     
     func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
@@ -89,7 +95,10 @@ extension HomeViewController {
     func hideDropDown() {
         guard let customDropDown = customDropDown else { return }
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.1,
+                       delay: 0,
+                       options: .curveEaseOut,
+                       animations: {
             customDropDown.snp.updateConstraints {
                 $0.height.equalTo(0)
             }

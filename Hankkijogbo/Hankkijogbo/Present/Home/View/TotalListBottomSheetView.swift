@@ -150,7 +150,7 @@ extension TotalListBottomSheetView {
     func viewLayoutIfNeededWithUpAnimation() {
         UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       options: .curveEaseIn,
+                       options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
         })
@@ -159,7 +159,7 @@ extension TotalListBottomSheetView {
     func viewLayoutIfNeededWithDownAnimation() {
         UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       options: .curveEaseIn,
+                       options: .curveEaseOut,
                        animations: {
             self.transform = .identity
         })
@@ -168,7 +168,7 @@ extension TotalListBottomSheetView {
     func viewLayoutIfNeededWithHiddenAnimation() {
         UIView.animate(withDuration: 0.3,
                        delay: 0,
-                       options: .curveEaseIn,
+                       options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.4))
         })
