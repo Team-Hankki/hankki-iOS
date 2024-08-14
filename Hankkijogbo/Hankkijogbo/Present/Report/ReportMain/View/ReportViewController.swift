@@ -19,12 +19,17 @@ final class ReportViewController: BaseViewController {
     
     private let reportViewModel: ReportViewModel = ReportViewModel()
     private let searchViewModel: SearchViewModel = SearchViewModel()
-    private var image: UIImage?
+    private var image: UIImage? {
+        didSet {
+            compositionalfactory.isImageSelected = (image != nil)
+        }
+    }
     private let headerLiterals = [StringLiterals.Report.categoryHeader, StringLiterals.Report.addMenuTitle]
     
     // MARK: - UI Components
     
-    private let compositionalLayout: UICollectionViewCompositionalLayout = ReportCompositionalLayoutFactory.create()
+    private let compositionalfactory: ReportCompositionalLayoutFactory = ReportCompositionalLayoutFactory()
+    private lazy var compositionalLayout: UICollectionViewCompositionalLayout = compositionalfactory.create()
     private lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: compositionalLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.Common.report,
