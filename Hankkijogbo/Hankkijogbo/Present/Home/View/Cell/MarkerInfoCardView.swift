@@ -58,9 +58,8 @@ final class MarkerInfoCardView: BaseView {
         backgroundColor = .white
         
         thumbnailImageView.do {
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 8
-            $0.backgroundColor = .gray
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 0, borderColor: .clear)
+            $0.contentMode = .scaleAspectFill
         }
 
         menutagLabel.do {
@@ -152,7 +151,7 @@ private extension MarkerInfoCardView {
 extension MarkerInfoCardView {
     func bindData(model: GetHankkiThumbnailResponseData) {
         hankkiId = model.id
-        thumbnailImageView.setKFImage(url: model.imageUrl)
+        thumbnailImageView.setKFImage(url: model.imageUrl, placeholder: .imgDetailDefault)
         menutagLabel.text = model.category
         hankkiTitle.text = model.name
         priceLabel.text = String(model.lowestPrice)
