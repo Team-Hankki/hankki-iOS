@@ -132,7 +132,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
 
 extension TotalListCollectionViewCell {
     func bindData(model: GetHankkiListData) {
-        thumbnailImageView.setKFImage(url: model.imageUrl)
+        thumbnailImageView.setKFImage(url: model.imageUrl, placeholder: .imgDetailDefault)
         menutagLabel.text = model.category
         hankkiTitle.text = model.name
         priceLabel.text = String(model.lowestPrice) + StringLiterals.Common.won
