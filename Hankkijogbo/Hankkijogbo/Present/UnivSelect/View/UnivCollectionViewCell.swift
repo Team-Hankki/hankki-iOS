@@ -61,16 +61,8 @@ extension UnivCollectionViewCell {
     func dataBind(_ univText: String, isFinal: Bool) {
         univLabel.text = univText
     
-        if isFinal {
-            setupFinalStyle()
-        }
-    }
-}
-
-private extension UnivCollectionViewCell {
-    func setupFinalStyle() {
         line.do {
-            $0.isHidden = true
+            $0.isHidden = isFinal
         }
     }
 }

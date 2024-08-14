@@ -95,6 +95,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, color: .gray900)
+            $0.lineBreakMode = .byTruncatingTail
         }
         
         categoryChipView.do {
@@ -140,7 +141,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     
     override func setupLayout() {
         cellStackView.snp.makeConstraints {
-            $0.width.equalToSuperview().offset(11)
+            $0.horizontalEdges.equalToSuperview()
         }
         
         thumbnailView.snp.makeConstraints {
@@ -163,7 +164,8 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         heartButton.snp.makeConstraints {
-            $0.size.equalTo(52)
+            $0.width.equalTo(39)
+            $0.height.equalTo(52)
         }
     }
 }
@@ -176,7 +178,7 @@ extension HankkiListTableViewCell {
         thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgDetailDefault)
         categoryLabel.text = data.category
         heartButton.isHidden = isLikeButtonDisable
-        priceLabel.text = "\(data.lowestPrice)" + StringLiterals.Common.won
+        priceLabel.formattingPrice(price: data.lowestPrice)
         heartCountLabel.text = "\(data.heartCount)"
         line.isHidden = isFinal
         

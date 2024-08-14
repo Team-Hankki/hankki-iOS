@@ -245,12 +245,17 @@ extension CreateZipViewController: UITextFieldDelegate {
         if !currentText.contains(" ") {
             tagInputTextField.text = String(currentText.prefix(tagMaxCount))
         } else {
+            if currentText.hasSuffix("#") {
+                let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
+                tagInputTextField.text = arr[0]
+                return
+            }
+            
             tagInputTextField.text = String(currentText.prefix(firstTagCount + 1 + tagMaxCount))
         }
     }
     
-    func isValidString(_ s: String) -> Bool {
-        let regex = "^[ㄱ-힣a-zA-Z0-9]+$"
+    func isValidString(_ s: String, regex: String) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         return predicate.evaluate(with: s)
     }
@@ -260,8 +265,11 @@ extension CreateZipViewController: UITextFieldDelegate {
         let currentText = (textField.text ?? "")
         let updatedText = currentText+string
         
+        let titleRegex = "^[ㄱ-힣a-zA-Z0-9{}\\[\\]/?.,;:|)*~`!^\\-_+<>@#\\$%&\\\\=\\('\"\"\\\\]*$"
+        let tagRegex = "^[ㄱ-힣a-zA-Z0-9]+$"
+        
         // 정규식에 맞는 텍스트만 입력되도록 합니다. (+ 스페이스 바, 백스페이스)
-        if !isValidString(string) && string != " " && !string.isEmpty {
+        if !isValidString(string, regex: textField.tag == 0 ? titleRegex : tagRegex) && string != " " && !string.isEmpty {
             return false
         }
         

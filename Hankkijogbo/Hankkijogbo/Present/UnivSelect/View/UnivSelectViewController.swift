@@ -187,7 +187,9 @@ extension UnivSelectViewController: UICollectionViewDataSource {
             withReuseIdentifier: UnivCollectionViewCell.className,
             for: indexPath
         ) as? UnivCollectionViewCell else { return UICollectionViewCell() }
-        cell.dataBind(viewModel.universityList[indexPath.item].name, isFinal: viewModel.universityList.count == indexPath.item + 1)
+        
+        cell.dataBind(viewModel.universityList[indexPath.item].name,
+                      isFinal: indexPath.item == viewModel.universityList.count - 1)
         return cell
     }
 }
