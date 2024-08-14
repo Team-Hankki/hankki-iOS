@@ -114,17 +114,13 @@ extension HomeViewController {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
                                                               mainTitle: .stringAndImage(title, .btnDropdown),
+                                                              mainTitleFont: SuiteStyle.subtitle,
+                                                              mainTitlePosition: "left",
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
                                                               titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
-            navigationController.titleStackView.snp.removeConstraints()
-            navigationController.titleStackView.snp.makeConstraints {
-                $0.leading.equalToSuperview().inset(22)
-                $0.centerY.equalToSuperview()
-            }
-            navigationController.mainTitleLabel.font = .setupSuiteStyle(of: .subtitle)
             navigationController.isNavigationBarHidden = false
         }
     }

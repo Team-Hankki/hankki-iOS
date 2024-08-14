@@ -8,14 +8,17 @@
 import UIKit
 
 struct HankkiNavigationType {
-    var hasBackButton: Bool     // backButton 존재 여부
-    var hasRightButton: Bool    // rightButton 존재 여부
+    var hasBackButton: Bool                 // backButton 존재 여부
+    var hasRightButton: Bool                // rightButton 존재 여부
 
-    var mainTitle: StringOrImageType        // mainTitle
+    var mainTitle: StringOrImageType        // title
+    var mainTitleFont: FontStyle = PretendardStyle.subtitle3   // titleFont
+    var mainTitlePosition: String = "center"                   // title의 위치 여부
+    
     var rightButton: StringOrImageType      // rightButton
-    var rightButtonAction: (() -> Void)?   // rightButton의 액션
-    var backButtonAction: (() -> Void)?   // leftButton의 액션
-    var titleButtonAction: (() -> Void)?   // 타이틀 버튼을 클릭했을 때 액션
+    var rightButtonAction: (() -> Void)?    // rightButton의 액션
+    var backButtonAction: (() -> Void)?     // leftButton의 액션
+    var titleButtonAction: (() -> Void)?    // 타이틀 버튼을 클릭했을 때 액션
     
     var backgroundColor: UIColor = .hankkiWhite
 }
