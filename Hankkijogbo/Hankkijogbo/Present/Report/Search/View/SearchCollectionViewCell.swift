@@ -20,7 +20,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     var selectedHankkiNameString: String? {
         didSet {
-            delegate?.changeBottomButtonView(model != nil)
+            delegate?.changeBottomButtonView(selectedHankkiNameString != nil)
         }
     }
     
