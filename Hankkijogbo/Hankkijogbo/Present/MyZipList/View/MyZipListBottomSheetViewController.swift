@@ -140,7 +140,7 @@ final class MyZipListBottomSheetViewController: BaseViewController {
         
         addNewZipStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 18
+            $0.spacing = 12
             $0.alignment = .center
         }
         
