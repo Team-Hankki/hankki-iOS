@@ -45,7 +45,7 @@ final class HankkiDetailViewModel {
     /// 식당 삭제
     func deleteHankkiAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.deleteHankki(id: id) { result in
-            result.handleNetworkResult(onSuccessVoid:  { completion() })
+            result.handleNetworkResult(onSuccessVoid: { completion() })
         }
     }
 }

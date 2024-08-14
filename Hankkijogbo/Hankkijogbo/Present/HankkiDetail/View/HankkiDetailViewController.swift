@@ -230,17 +230,42 @@ private extension HankkiDetailViewController {
         }
     }
     
-    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
-    func dismissAlertAndPop() {
-        dismissWithFadeOut()
-        backButtonDidTap()
+    /// 정말 제보하시겠어요? Alert 띄우기
+    func showCheckAlertForReport() {
+        self.showAlert(
+            titleText: StringLiterals.Alert.reallyReport,
+            subText: StringLiterals.Alert.disappearInfoByReport,
+            secondaryButtonText: StringLiterals.Alert.back,
+            primaryButtonText: StringLiterals.Common.report,
+            primaryButtonHandler: deleteHankkiByReport
+        )
     }
     
     /// 제보를 통한 식당 삭제
     func deleteHankkiByReport() {
         viewModel.deleteHankkiAPI(id: hankkiId) { [self] in
-            dismissAlertAndPop()
+            showThanksAlert()
         }
+    }
+    
+    /// 제보 감사 Alert 띄우기
+    func showThanksAlert() {
+        var nickname = UserDefaults.standard.getNickname() ?? "한끼귀염"
+        if nickname.isEmpty { nickname = "한끼귀염" }
+        self.showAlert(
+            image: .imgModalReport,
+            titleText: nickname + StringLiterals.Alert.thanksForReport,
+            primaryButtonText: StringLiterals.Alert.back,
+            primaryButtonHandler: dismissAlertAndPop,
+            hightlightedText: nickname,
+            hightlightedColor: .red500
+        )
+    }
+    
+    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
+    func dismissAlertAndPop() {
+        dismissWithFadeOut()
+        backButtonDidTap()
     }
 }
 
@@ -266,16 +291,7 @@ extension HankkiDetailViewController {
     }
     
     @objc func hankkiReportButtonDidTap() {
-        var nickname = UserDefaults.standard.getNickname() ?? "한끼귀염"
-        if nickname.isEmpty { nickname = "한끼귀염" }
-        self.showAlert(
-            image: .imgModalReport,
-            titleText: nickname + StringLiterals.Alert.thanksForReport,
-            primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: deleteHankkiByReport,
-            hightlightedText: nickname,
-            hightlightedColor: .red500
-        )
+        showCheckAlertForReport()
     }
     
     @objc func setupBlackToast(_ notification: Notification) {
