@@ -162,7 +162,7 @@ private extension ReportViewController {
     /// - 성공하면 제보 완료 화면으로 넘어가게
     func postHankki() {
         // TODO: - 이 부분 코드 좀 더 고민해보기
-        guard let locationData = searchViewModel.selectedLocationData else { return }
+        guard let locationData = reportViewModel.selectedLocationData else { return }
         reportViewModel.postHankkiAPI(locationData: locationData)
     }
 }
@@ -271,7 +271,9 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         switch sectionType {
         case .search:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchBarCollectionViewCell.className, for: indexPath) as? SearchBarCollectionViewCell else { return UICollectionViewCell() }
-            cell.hankkiNameString = searchViewModel.selectedLocationData?.name ?? ""
+            if searchViewModel.isFinalSelected {
+                cell.hankkiNameString = reportViewModel.selectedLocationData?.name
+            }
             cell.searchBarButton.addTarget(self, action: #selector(searchBarButtonDidTap), for: .touchUpInside)
             cell.bindGuideText(text: reportViewModel.reportedNumberGuideText)
             return cell
