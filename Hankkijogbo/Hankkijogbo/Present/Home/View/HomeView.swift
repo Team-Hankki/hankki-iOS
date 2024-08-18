@@ -77,7 +77,7 @@ final class HomeView: BaseView {
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
-                $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 0)
+                $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 3)
             }
         }
         
