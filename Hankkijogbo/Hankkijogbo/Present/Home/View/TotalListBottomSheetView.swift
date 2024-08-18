@@ -23,6 +23,7 @@ final class TotalListBottomSheetView: BaseView {
     // MARK: - UI Components
     
     private let bottomSheetHandlerView = UIView()
+     private let bottomGradientView: UIView = UIView()
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let containerView = UIView()
@@ -42,6 +43,11 @@ final class TotalListBottomSheetView: BaseView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupBottomGradientView()
     }
     
     override func setupHierarchy() {
@@ -127,7 +133,6 @@ final class TotalListBottomSheetView: BaseView {
             $0.width.equalTo(UIScreen.getDeviceWidth())
             $0.height.equalTo(UIScreen.getDeviceHeight() * 0.8)
         }
-        
     }
 }
 
@@ -179,6 +184,27 @@ extension TotalListBottomSheetView {
         emptyView.isHidden = !show
         emptyLabel.isHidden = !show
         totalListCollectionView.isHidden = show
+    }
+    
+    func setupBottomGradientView() {
+        
+        bottomGradientView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        
+        let gradient = CAGradientLayer()
+        
+        gradient.do {
+            $0.colors = [
+                UIColor.gray700.withAlphaComponent(0).cgColor,
+                UIColor.hankkiWhite.cgColor,
+                UIColor.hankkiWhite.cgColor
+            ]
+            $0.locations = [0.0, 0.1, 1.0]
+            $0.startPoint = CGPoint(x: 0.5, y: 0.0)
+            $0.endPoint = CGPoint(x: 0.5, y: 1.0)
+            $0.frame = bottomGradientView.bounds
+        }
+        
+        bottomGradientView.layer.addSublayer(gradient)
     }
 }
 
