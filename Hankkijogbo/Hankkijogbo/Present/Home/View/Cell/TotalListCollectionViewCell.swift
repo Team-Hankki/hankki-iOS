@@ -121,7 +121,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         addButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview().inset(22)
         }
     }
 }
