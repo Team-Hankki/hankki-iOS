@@ -22,6 +22,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     private let likeLabel: UILabel = UILabel()
     
     private let hankkiInfoStackView: UIStackView = UIStackView()
+    private let hankkiDetailStackView: UIStackView = UIStackView()
     
     let addButton: UIButton = UIButton()
     
@@ -38,13 +39,15 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     override func setupHierarchy() {
         addSubviews(thumbnailImageView,
-                    menutagLabel,
-                    hankkiTitle,
                     hankkiInfoStackView,
                     addButton)
         
-        hankkiInfoStackView.addArrangedSubviews(priceImage,
-                                                priceLabel, 
+        hankkiInfoStackView.addArrangedSubviews(menutagLabel,
+                                                hankkiTitle,
+                                                hankkiDetailStackView)
+        
+        hankkiDetailStackView.addArrangedSubviews(priceImage,
+                                                priceLabel,
                                                 dotImage, 
                                                 likeImage,
                                                 likeLabel)
@@ -86,8 +89,14 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         likeImage.do {
             $0.image = .icHeart
         }
-            
+           
         hankkiInfoStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 3
+            $0.alignment = .leading
+        }
+        
+        hankkiDetailStackView.do {
             $0.axis = .horizontal
             $0.spacing = 2
             $0.alignment = .center
@@ -105,20 +114,9 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.size.equalTo(72)
         }
         
-        menutagLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.top)
-            $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
-            $0.height.equalTo(20)
-        }
-        
-        hankkiTitle.snp.makeConstraints {
-            $0.top.equalTo(menutagLabel.snp.bottom).offset(4)
-            $0.leading.equalTo(menutagLabel.snp.leading)
-        }
-        
         hankkiInfoStackView.snp.makeConstraints {
-            $0.top.equalTo(hankkiTitle.snp.bottom).offset(2)
-            $0.leading.equalTo(menutagLabel.snp.leading)
+            $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
+            $0.centerY.equalTo(thumbnailImageView)
         }
         
         addButton.snp.makeConstraints {

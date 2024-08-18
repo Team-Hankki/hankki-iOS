@@ -23,7 +23,7 @@ final class TotalListBottomSheetView: BaseView {
     // MARK: - UI Components
     
     private let bottomSheetHandlerView = UIView()
-     private let bottomGradientView: UIView = UIView()
+    private let bottomGradientView: UIView = UIView()
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let containerView = UIView()
