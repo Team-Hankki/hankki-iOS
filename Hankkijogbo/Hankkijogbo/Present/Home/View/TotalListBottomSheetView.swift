@@ -125,7 +125,7 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         emptyLabel.snp.makeConstraints {
-            $0.top.equalTo(emptyView.snp.bottom).offset(5)
+            $0.top.equalTo(emptyView.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
         }
         
