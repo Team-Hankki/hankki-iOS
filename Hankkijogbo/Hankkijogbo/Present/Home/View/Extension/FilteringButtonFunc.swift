@@ -47,6 +47,25 @@ extension HomeViewController {
         }
     }
     
+    /// 필터링 Button을 재클릭 했을 경우 hide, show
+    func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
+        if isDropDownVisible {
+            hideDropDown(buttonType: buttonType)
+        } else {
+            showDropDown(isPriceModel: isPriceModel, buttonType: buttonType)
+        }
+        isDropDownVisible.toggle()
+    }
+    
+    func toggleCollectionView() {
+        if isTypeCollectionViewVisible {
+            hideTypeCollectionView()
+        } else {
+            showTypeCollectionView()
+        }
+        isTypeCollectionViewVisible.toggle()
+    }
+    
     /// DropDown을 button Type에 따라 표출하는 함수
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType, viewModel: HomeViewModel())
@@ -83,16 +102,8 @@ extension HomeViewController {
         })
     }
     
-    func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
-        if isDropDownVisible {
-            hideDropDown()
-        } else {
-            showDropDown(isPriceModel: isPriceModel, buttonType: buttonType)
-        }
-        isDropDownVisible.toggle()
-    }
-    
-    func hideDropDown() {
+    /// DropDown을 button Type에 따라 숨기는 함수
+    func hideDropDown(buttonType: ButtonType? = nil) {
         guard let customDropDown = customDropDown else { return }
         
         UIView.animate(withDuration: 0.1,
@@ -107,8 +118,20 @@ extension HomeViewController {
             customDropDown.removeFromSuperview()
             self.customDropDown = nil
         }
+        
+        switch buttonType {
+        case .price:
+            rootView.priceButton.setTitleColor(.gray500, for: .normal)
+            rootView.priceButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+        case .sort:
+            rootView.sortButton.setTitleColor(.gray500, for: .normal)
+            rootView.sortButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+        case .none:
+            return
+        }
     }
     
+    /// TypeCollectionView를 표출
     func showTypeCollectionView() {
         viewModel.getCategoryFilterAPI { [weak self] success in
             if success {
@@ -130,6 +153,15 @@ extension HomeViewController {
         }
         rootView.typeButton.setTitleColor(.gray700, for: .normal)
         rootView.typeButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
+    }
+    
+    /// TypeCollectionView를 숨김
+    func hideTypeCollectionView() {
+        typeCollectionView.isHidden = true
+        rootView.typeButton.setTitleColor(.gray500, for: .normal)
+        rootView.typeButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+        rootView.typeButton.backgroundColor = .hankkiWhite
+        rootView.layer.borderColor = UIColor.gray300.cgColor
     }
 }
 
@@ -168,11 +200,7 @@ extension HomeViewController {
                 }
             }
         }
-        if isButtonModified {
-            revertButton(for: rootView.typeButton, filter: StringLiterals.Home.storeCategoryFilteringButton)
-        } else {
-            setupTypeCollectionView()
-        }
+        toggleCollectionView()
     }
 }
 

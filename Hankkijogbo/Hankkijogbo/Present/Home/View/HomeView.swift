@@ -69,11 +69,11 @@ final class HomeView: BaseView {
         let buttons = [typeButton, priceButton, sortButton]
         for (index, button) in buttons.enumerated() {
             button.do {
-                $0.backgroundColor = .white
+                $0.backgroundColor = .hankkiWhite
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
                 $0.setTitle(buttonType[index], for: .normal)
-                $0.setTitleColor(.gray400, for: .normal)
-                $0.setImage(.icArrowClose, for: .normal)
+                $0.setTitleColor(.gray500, for: .normal)
+                $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
