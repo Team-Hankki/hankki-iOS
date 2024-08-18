@@ -77,7 +77,7 @@ final class TotalListBottomSheetView: BaseView {
         
         flowLayout.do {
             $0.estimatedItemSize = .init(width: UIScreen.getDeviceWidth(), height: 56)
-            $0.minimumLineSpacing = 12
+            $0.minimumLineSpacing = 0
             $0.scrollDirection = .vertical
         }
         
