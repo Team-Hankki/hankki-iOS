@@ -26,6 +26,7 @@ final class MarkerInfoCardView: BaseView {
     private let likeLabel: UILabel = UILabel()
     
     private let hankkiInfoStackView: UIStackView = UIStackView()
+    private let hankkiDetailStackView: UIStackView = UIStackView()
     
     let addButton: UIButton = UIButton()
     
@@ -42,12 +43,14 @@ final class MarkerInfoCardView: BaseView {
     
     override func setupHierarchy() {
         addSubviews(thumbnailImageView,
-                    menutagLabel,
-                    hankkiTitle,
                     hankkiInfoStackView,
                     addButton)
         
-        hankkiInfoStackView.addArrangedSubviews(priceImage,
+        hankkiInfoStackView.addArrangedSubviews(menutagLabel,
+                                                hankkiTitle,
+                                                hankkiDetailStackView)
+        
+        hankkiDetailStackView.addArrangedSubviews(priceImage,
                                                 priceLabel,
                                                 dotImage,
                                                 likeImage,
@@ -58,8 +61,7 @@ final class MarkerInfoCardView: BaseView {
         backgroundColor = .white
         
         thumbnailImageView.do {
-            $0.clipsToBounds = true
-            $0.layer.cornerRadius = 8
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 0, borderColor: .clear)
             $0.backgroundColor = .gray
         }
 
@@ -93,6 +95,12 @@ final class MarkerInfoCardView: BaseView {
         }
             
         hankkiInfoStackView.do {
+            $0.axis = .vertical
+            $0.spacing = 3
+            $0.alignment = .leading
+        }
+        
+        hankkiDetailStackView.do {
             $0.axis = .horizontal
             $0.spacing = 2
             $0.alignment = .center
@@ -105,26 +113,16 @@ final class MarkerInfoCardView: BaseView {
     
     override func setupLayout() {
         thumbnailImageView.snp.makeConstraints {
-            $0.verticalEdges.leading.equalToSuperview().inset(16)
-            $0.width.height.equalTo(72)
-        }
-        
-        menutagLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.top)
-            $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
-            $0.height.equalTo(20)
-        }
-        
-        hankkiTitle.snp.makeConstraints {
-            $0.top.equalTo(menutagLabel.snp.bottom).offset(4)
-            $0.leading.equalTo(menutagLabel.snp.leading)
+            $0.verticalEdges.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(22)
+            $0.size.equalTo(72)
         }
         
         hankkiInfoStackView.snp.makeConstraints {
-            $0.top.equalTo(hankkiTitle.snp.bottom).offset(2)
-            $0.leading.equalTo(menutagLabel.snp.leading)
+            $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
+            $0.centerY.equalTo(thumbnailImageView)
         }
-        
+
         addButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(16)
