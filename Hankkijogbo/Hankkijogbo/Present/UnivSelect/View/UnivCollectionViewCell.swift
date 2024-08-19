@@ -14,9 +14,13 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                univLabel.textColor = .red500
+                univLabel.attributedText = UILabel.setupAttributedText(for: PretendardStyle.subtitle3, 
+                                                                       withText: univLabel.text ?? "",
+                                                                       color: .red500)
             } else {
-                univLabel.textColor = .gray900
+                univLabel.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body1, 
+                                                                       withText: univLabel.text ?? "",
+                                                                       color: .gray800)
             }
         }
     }
@@ -30,7 +34,7 @@ final class UnivCollectionViewCell: BaseCollectionViewCell {
         univLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                color: .gray900
+                color: .gray800
             )
         }
         
