@@ -14,15 +14,16 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     var viewModel = HomeViewModel()
-    var isButtonModified = false
-    var isDropDownVisible = false
+    var isButtonModified: Bool = false
+    var isDropDownVisible: Bool = false
+    var isTypeCollectionViewVisible: Bool = false
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
     
-    var shouldUpdateNavigationBar = true
+    var shouldUpdateNavigationBar: Bool = true
     
     // MARK: - UI Components
     

@@ -224,11 +224,10 @@ extension HomeViewController {
         if markerInfoCardView == nil {
             markerInfoCardView = MarkerInfoCardView()
             view.addSubview(markerInfoCardView!)
-            markerInfoCardView?.snp.makeConstraints { make in
-                make.width.equalTo(331)
-                make.height.equalTo(109)
-                make.centerX.equalToSuperview()
-                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(22)
+            markerInfoCardView?.snp.makeConstraints {
+                $0.height.equalTo(109)
+                $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(12)
+                $0.horizontalEdges.equalToSuperview().inset(22)
             }
             markerInfoCardView?.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             view.layoutIfNeeded()

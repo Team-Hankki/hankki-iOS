@@ -20,13 +20,13 @@ final class HomeView: BaseView {
     var mapView = NMFMapView()
     var bottomSheetView = TotalListBottomSheetView()
     
-    let typeButton = UIButton()
-    let priceButton = UIButton()
-    let sortButton = UIButton()
+    let typeButton: UIButton = UIButton()
+    let priceButton: UIButton = UIButton()
+    let sortButton: UIButton = UIButton()
     
-    private let buttonStackView = UIStackView()
+    private let buttonStackView: UIStackView = UIStackView()
     
-    let targetButton = UIButton()
+    let targetButton: UIButton = UIButton()
     
     // MARK: - Set UI
     
@@ -69,15 +69,15 @@ final class HomeView: BaseView {
         let buttons = [typeButton, priceButton, sortButton]
         for (index, button) in buttons.enumerated() {
             button.do {
-                $0.backgroundColor = .white
+                $0.backgroundColor = .hankkiWhite
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
                 $0.setTitle(buttonType[index], for: .normal)
-                $0.setTitleColor(.gray400, for: .normal)
-                $0.setImage(.icArrowClose, for: .normal)
+                $0.setTitleColor(.gray500, for: .normal)
+                $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
-                $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 0)
+                $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 3)
             }
         }
         

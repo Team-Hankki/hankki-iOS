@@ -22,10 +22,11 @@ final class TotalListBottomSheetView: BaseView {
     
     // MARK: - UI Components
     
-    private let bottomSheetHandlerView = UIView()
+    private let bottomSheetHandlerView: UIView = UIView()
+    private let bottomGradientView: UIView = UIView()
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-    private let containerView = UIView()
+    private let containerView: UIView = UIView()
     private let cell = TotalListCollectionViewCell()
     
     private let emptyLabel: UILabel = UILabel()
@@ -42,6 +43,11 @@ final class TotalListBottomSheetView: BaseView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupBottomGradientView()
     }
     
     override func setupHierarchy() {
@@ -71,7 +77,7 @@ final class TotalListBottomSheetView: BaseView {
         
         flowLayout.do {
             $0.estimatedItemSize = .init(width: UIScreen.getDeviceWidth(), height: 56)
-            $0.minimumLineSpacing = 12
+            $0.minimumLineSpacing = 0
             $0.scrollDirection = .vertical
         }
         
@@ -119,7 +125,7 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         emptyLabel.snp.makeConstraints {
-            $0.top.equalTo(emptyView.snp.bottom).offset(5)
+            $0.top.equalTo(emptyView.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
         }
         
@@ -127,7 +133,6 @@ final class TotalListBottomSheetView: BaseView {
             $0.width.equalTo(UIScreen.getDeviceWidth())
             $0.height.equalTo(UIScreen.getDeviceHeight() * 0.8)
         }
-        
     }
 }
 
@@ -180,6 +185,27 @@ extension TotalListBottomSheetView {
         emptyLabel.isHidden = !show
         totalListCollectionView.isHidden = show
     }
+    
+    func setupBottomGradientView() {
+        
+        bottomGradientView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        
+        let gradient = CAGradientLayer()
+        
+        gradient.do {
+            $0.colors = [
+                UIColor.gray700.withAlphaComponent(0).cgColor,
+                UIColor.hankkiWhite.cgColor,
+                UIColor.hankkiWhite.cgColor
+            ]
+            $0.locations = [0.0, 0.1, 1.0]
+            $0.startPoint = CGPoint(x: 0.5, y: 0.0)
+            $0.endPoint = CGPoint(x: 0.5, y: 1.0)
+            $0.frame = bottomGradientView.bounds
+        }
+        
+        bottomGradientView.layer.addSublayer(gradient)
+    }
 }
 
 extension TotalListBottomSheetView {
@@ -215,6 +241,14 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalListCollectionViewCell.className, for: indexPath) as? TotalListCollectionViewCell else {
             return UICollectionViewCell()
         }
+//        let store = data[indexPath.row]
+//        if let imageUrl = store.imageUrl, imageUrl != "img_detail_default" {
+//                   // URL에서 이미지를 로드
+//            cell.thumbnailImageView.sd_setImage(with: URL(string: imageUrl))
+//               } else {
+//                   // 기본 이미지 설정
+//                   cell.thumbnailImageView?.image = UIImage(named: "img_detail_default")
+//               }
         cell.bindData(model: data[indexPath.row])
         cell.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
         cell.addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)

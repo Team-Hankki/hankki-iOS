@@ -36,6 +36,11 @@ private extension TabBarController {
         tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = .gray600
         tabBar.tintColor = .black
+        
+        let customBorder = CALayer()
+        customBorder.frame = CGRect(x: 0, y: 0, width: tabBar.frame.width, height: 1)
+        customBorder.backgroundColor = UIColor.gray100.cgColor
+        tabBar.layer.addSublayer(customBorder)
     }
     
     func setupDelegate() {
@@ -100,13 +105,13 @@ final class CustomTabBar: UITabBar {
 extension TabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
-
+        
         if index == TabBarItem.allCases.firstIndex(of: .report) {
             let reportViewController = ReportViewController()
             navigationController?.pushViewController(reportViewController, animated: true)
             return false
         }
-
+        
         return true
     }
 }

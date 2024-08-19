@@ -8,6 +8,7 @@
 import Foundation
 
 import Moya
+import UIKit
 
 final class HomeViewModel {
     
@@ -62,7 +63,7 @@ extension HomeViewModel {
         let sortOption = sortOption ?? ""
         
         guard let id = UserDefaults.standard.getUniversity()?.id else { return }
-
+        
         self.getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
                 print("식당 전체 족보 fetch 완료 😄")
@@ -135,7 +136,7 @@ extension HomeViewModel {
         }
     }
     
-    // 식당 리스트를 가져오는 메서드
+  //   식당 리스트를 가져오는 메서드
     func getHankkiListAPI(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
             switch result {
@@ -159,6 +160,30 @@ extension HomeViewModel {
             }
         }
     }
+//    func getHankkiListAPI(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
+//        NetworkService.shared.hankkiService.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
+//            switch result {
+//            case .success(let response):
+//                self?.hankkiLists = response?.data.stores.map { store in
+//                    var modifiedStore = store
+//                    modifiedStore.imageUrl = store.imageUrl ?? "img_detail_default"
+//                    return modifiedStore
+//                } ?? []
+//                self?.hankkiListsDidChange?(self?.hankkiLists ?? [])
+//                completion(true)
+//                self?.onHankkiListFetchCompletion?(true, self?.hankkiLists.isEmpty ?? true)
+//                print("SUCCESS")
+//            case .unAuthorized, .networkFail:
+//                self?.showAlert?("Failed")
+//                completion(false)
+//                self?.onHankkiListFetchCompletion?(false, true)
+//                print("FAILED")
+//            default:
+//                return
+//            }
+//        }
+//    }
+
     
     // 식당 핀을 가져오는 메서드
     func getHankkiPinAPI(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {

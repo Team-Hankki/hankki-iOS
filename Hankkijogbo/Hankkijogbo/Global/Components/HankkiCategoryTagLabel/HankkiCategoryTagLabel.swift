@@ -10,6 +10,7 @@ import UIKit
 class HankkiCategoryTagLabel: UILabel {
     
     private let minimumWidth: CGFloat = 42
+    private let defaultHeight: CGFloat = 20
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +36,7 @@ class HankkiCategoryTagLabel: UILabel {
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
         let width = max(size.width + 20, minimumWidth)
-        let height = size.height + 10
+        let height = defaultHeight
         return CGSize(width: width, height: height)
     }
 }
