@@ -28,7 +28,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
-    var rootView: UIView = HomeView()
+    var rootView = HomeView()
     var customDropDown: DropDownView?
     var markerInfoCardView: MarkerInfoCardView?
     
