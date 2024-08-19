@@ -165,11 +165,11 @@ enum StringLiterals {
     }
     
     enum ZipList {
-        static let navigation = "나의 식당 족보"
+        static let navigation = "나의 족보"
         static let navigationEdit = "편집"
         static let navigationDelete = "삭제"
         
-        static let createZip = "새로운\n족보 리스트\n추가하기"
+        static let createZip = "새로운\n식당 족보\n추가하기"
     }
     
     enum CreateZip {
