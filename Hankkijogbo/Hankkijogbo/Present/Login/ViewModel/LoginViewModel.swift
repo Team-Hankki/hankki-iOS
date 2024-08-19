@@ -39,20 +39,26 @@ extension LoginViewModel {
                 let accessToken = response.data.accessToken
                 
                 UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
-                UserDefaults.standard.saveNickname(postLoginRequest.name)
                 
-                DispatchQueue.main.async {
-                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                        if let window = windowScene.windows.first {
-                            if response.data.isRegistered {
-                                // isRegistered -> true ( 로그인 )
-                                // -> 사용자의 대학정보 가져오기
-                                // -> 홈 뷰로 이동
-                                self.getUniversity()
-                            } else {
-                                // isRegistered -> false ( 회원가입 )
-                                // -> 온보딩 뷰로 넘어감
-                                window.rootViewController = OnboardingViewController()
+                // TODO: - 서현) api 호출 안에 api 호출... 코드 고민 해보기
+                NetworkService.shared.userService.getMe { result in
+                    result.handleNetworkResult { res in
+                        UserDefaults.standard.saveNickname(res.data.nickname)
+                        
+                        DispatchQueue.main.async {
+                            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                                if let window = windowScene.windows.first {
+                                    if response.data.isRegistered {
+                                        // isRegistered -> true ( 로그인 )
+                                        // -> 사용자의 대학정보 가져오기
+                                        // -> 홈 뷰로 이동
+                                        self.getUniversity()
+                                    } else {
+                                        // isRegistered -> false ( 회원가입 )
+                                        // -> 온보딩 뷰로 넘어감
+                                        window.rootViewController = OnboardingViewController()
+                                    }
+                                }
                             }
                         }
                     }
