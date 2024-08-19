@@ -116,7 +116,7 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         totalListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(10)
+            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(15)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
