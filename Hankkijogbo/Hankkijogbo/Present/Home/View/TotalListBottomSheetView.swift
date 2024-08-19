@@ -12,6 +12,7 @@ final class TotalListBottomSheetView: BaseView {
     // MARK: - Properties
     
     var isExpanded: Bool = false
+    var isBottomSheetUp: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
     
@@ -158,6 +159,8 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
+        }, completion: { _ in
+            self.isBottomSheetUp = true
         })
     }
     
@@ -167,6 +170,8 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .identity
+        }, completion: { _ in
+            self.isBottomSheetUp = false
         })
     }
     
@@ -176,6 +181,8 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.4))
+        }, completion: { _ in
+            self.isBottomSheetUp = false
         })
     }
     
