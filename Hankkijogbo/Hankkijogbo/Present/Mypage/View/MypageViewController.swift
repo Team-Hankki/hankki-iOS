@@ -102,7 +102,7 @@ private extension MypageViewController {
         self.showAlert(
             titleText: StringLiterals.Alert.Withdraw.title,
             secondaryButtonText: StringLiterals.Alert.Withdraw.secondaryButton,
-            primaryButtonText: StringLiterals.Alert.back,
+            primaryButtonText: StringLiterals.Alert.Withdraw.primaryButton,
             secondaryButtonHandler: handdleWithdraw
         )
     }

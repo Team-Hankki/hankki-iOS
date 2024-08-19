@@ -41,18 +41,20 @@ enum StringLiterals {
         static let disappearInfoByReport = "제보시 식당 정보가 앱에서 사라져요"
         static let check = "확인"
         static let back = "돌아가기"
+        static let stay = "유지하기"
         static let no = "아니요"
         static let move = "이동하기"
         static let add = "추가하기"
         
-        // TODO: - 레전드 고민 이것들은 내 뷰에서만 쓰는 것들인데 Alert에 넣는게 맞나?
         enum Logout {
             static let title = "정말 로그아웃 하실 건가요?"
             static let secondaryButton = StringLiterals.Common.logout
+            static let primaryButton = StringLiterals.Alert.stay
         }
         enum Withdraw {
             static let title = "소중한 족보가 사라져요"
             static let secondaryButton = StringLiterals.Common.withdraw
+            static let primaryButton = StringLiterals.Alert.stay
         }
         enum DeleteZip {
             static let title = "족보를 삭제할까요?"
@@ -62,11 +64,13 @@ enum StringLiterals {
         enum DevelopShare {
             static let title = "조금만 기다려주세요"
             static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요"
+            static let primaryButton = StringLiterals.Alert.check
         }
         
         enum NetworkError {
             static let title = "네트워크 오류가 발생했어요"
             static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"
+            static let primaryButton = StringLiterals.Alert.check
         }
     }
     

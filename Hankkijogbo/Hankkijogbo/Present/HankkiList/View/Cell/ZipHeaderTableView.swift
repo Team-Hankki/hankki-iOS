@@ -163,7 +163,7 @@ private extension ZipHeaderTableView {
     @objc func shareButtonDidTap() {
         UIApplication.showAlert(titleText: StringLiterals.Alert.DevelopShare.title,
                                 subText: StringLiterals.Alert.DevelopShare.sub,
-                                primaryButtonText: StringLiterals.Alert.check)
+                                primaryButtonText: StringLiterals.Alert.DevelopShare.primaryButton)
     }
     
     func setupTagStackView(_ tagList: [String]) {

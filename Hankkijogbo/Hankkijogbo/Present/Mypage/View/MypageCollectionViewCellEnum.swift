@@ -57,7 +57,7 @@ extension MypageViewController {
                 self.showAlert(
                     titleText: StringLiterals.Alert.Logout.title,
                     secondaryButtonText: StringLiterals.Alert.Logout.secondaryButton,
-                    primaryButtonText: StringLiterals.Alert.back,
+                    primaryButtonText: StringLiterals.Alert.Logout.primaryButton,
                     secondaryButtonHandler: viewModel.patchLogout
                 )
             default:
