@@ -17,6 +17,8 @@ final class HomeViewController: BaseViewController {
     var isButtonModified: Bool = false
     var isDropDownVisible: Bool = false
     var isTypeCollectionViewVisible: Bool = false
+    var currentDropDownButtonType: ButtonType?
+    
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
