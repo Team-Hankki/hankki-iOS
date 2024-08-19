@@ -62,22 +62,41 @@ extension HomeViewController {
 
     /// 필터링 Button을 재클릭 했을 경우 hide, show
     func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
+        if isTypeCollectionViewVisible {
+            hideTypeCollectionView()
+            isTypeCollectionViewVisible = false
+        }
+        
         if isDropDownVisible {
-            hideDropDown(buttonType: buttonType)
+            hideDropDown(buttonType: currentDropDownButtonType) { [weak self] in
+                self?.showDropDown(isPriceModel: isPriceModel, buttonType: buttonType)
+                self?.currentDropDownButtonType = buttonType
+                self?.isDropDownVisible = true
+            }
         } else {
             showDropDown(isPriceModel: isPriceModel, buttonType: buttonType)
+            currentDropDownButtonType = buttonType
+            isDropDownVisible = true
         }
-        isDropDownVisible.toggle()
     }
     
     func toggleCollectionView() {
-        if isTypeCollectionViewVisible {
-            hideTypeCollectionView()
+        if isDropDownVisible {
+            hideDropDown(buttonType: currentDropDownButtonType) { [weak self] in
+                self?.showTypeCollectionView()
+                self?.isTypeCollectionViewVisible = true
+                self?.isDropDownVisible = false
+            }
         } else {
-            showTypeCollectionView()
+            if isTypeCollectionViewVisible {
+                hideTypeCollectionView()
+            } else {
+                showTypeCollectionView()
+            }
+            isTypeCollectionViewVisible.toggle()
         }
-        isTypeCollectionViewVisible.toggle()
     }
+    
     
     /// DropDown을 button Type에 따라 표출하는 함수
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
@@ -120,7 +139,7 @@ extension HomeViewController {
     }
     
     /// DropDown을 button Type에 따라 숨기는 함수
-    func hideDropDown(buttonType: ButtonType? = nil) {
+    func hideDropDown(buttonType: ButtonType? = nil, completion: (() -> Void)? = nil) {
         guard let customDropDown = customDropDown else { return }
         
         UIView.animate(withDuration: 0.1,
@@ -134,17 +153,18 @@ extension HomeViewController {
         }) { _ in
             customDropDown.removeFromSuperview()
             self.customDropDown = nil
-        }
-        
-        switch buttonType {
-        case .price:
-            rootView.priceButton.setTitleColor(.gray500, for: .normal)
-            rootView.priceButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
-        case .sort:
-            rootView.sortButton.setTitleColor(.gray500, for: .normal)
-            rootView.sortButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
-        case .none:
-            return
+            
+            switch buttonType {
+            case .price:
+                self.rootView.priceButton.setTitleColor(.gray500, for: .normal)
+                self.rootView.priceButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+            case .sort:
+                self.rootView.sortButton.setTitleColor(.gray500, for: .normal)
+                self.rootView.sortButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+            case .none:
+                return
+            }
+            completion?()
         }
     }
     
