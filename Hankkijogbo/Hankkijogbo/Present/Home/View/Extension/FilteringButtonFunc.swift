@@ -47,6 +47,19 @@ extension HomeViewController {
         }
     }
     
+    /// filtering이 되지 않았을 경우 원래의 버튼으로 돌아오는 함수
+    func resetButtonToDefaultState(_ button: UIButton, defaultTitle: String) {
+        if button.tag == 0 {
+            button.do {
+                $0.setTitle(defaultTitle, for: .normal)
+                $0.backgroundColor = .white
+                $0.layer.borderColor = UIColor.gray300.cgColor
+                $0.setTitleColor(.gray500, for: .normal)
+                $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+            }
+        }
+    }
+
     /// 필터링 Button을 재클릭 했을 경우 hide, show
     func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         if isDropDownVisible {
@@ -68,6 +81,10 @@ extension HomeViewController {
     
     /// DropDown을 button Type에 따라 표출하는 함수
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
+        if rootView.bottomSheetView.isBottomSheetUp {
+            rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+        }
+        
         customDropDown = DropDownView(isPriceModel: isPriceModel, buttonType: buttonType, viewModel: HomeViewModel())
         customDropDown?.delegate = self
         
@@ -133,6 +150,10 @@ extension HomeViewController {
     
     /// TypeCollectionView를 표출
     func showTypeCollectionView() {
+        if rootView.bottomSheetView.isBottomSheetUp {
+            rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+        }
+        
         viewModel.getCategoryFilterAPI { [weak self] success in
             if success {
                 DispatchQueue.main.async {
@@ -167,7 +188,7 @@ extension HomeViewController {
 
 extension HomeViewController {
     // objc 함수
-
+    
     @objc func revertButtonAction(_ sender: UIButton) {
         let filter: String
         if sender == rootView.priceButton {
@@ -208,5 +229,8 @@ extension HomeViewController {
     func hideAllFiltering() {
         hideDropDown()
         typeCollectionView.isHidden = true
+        resetButtonToDefaultState(rootView.priceButton, defaultTitle: StringLiterals.Home.priceFilteringButton)
+        resetButtonToDefaultState(rootView.sortButton, defaultTitle: StringLiterals.Home.sortFilteringButton)
+        resetButtonToDefaultState(rootView.typeButton, defaultTitle: StringLiterals.Home.storeCategoryFilteringButton)
     }
 }
