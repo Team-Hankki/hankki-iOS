@@ -101,7 +101,7 @@ private extension MypageViewController {
     func setupZipSection() -> NSCollectionLayoutSection {
         let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
             itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22*2, width: 331, height: 72)))
+            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72))
         )
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(196))
@@ -125,7 +125,7 @@ private extension MypageViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(95))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(94))
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
@@ -136,7 +136,7 @@ private extension MypageViewController {
         group.interItemSpacing = .fixed(20)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 22, bottom: 10, trailing: 22)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 22, bottom: 10, trailing: 22)
         
         return section
     }
