@@ -14,7 +14,7 @@ final class HomeViewController: BaseViewController {
     // MARK: - Properties
     
     var viewModel = HomeViewModel()
-    var isButtonModified = false
+    var isButtonModified: Bool = false
     var isDropDownVisible: Bool = false
     var isTypeCollectionViewVisible: Bool = false
     var selectedMarkerIndex: Int?
@@ -23,12 +23,12 @@ final class HomeViewController: BaseViewController {
     
     private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
     
-    var shouldUpdateNavigationBar = true
+    var shouldUpdateNavigationBar: Bool = true
     
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
-    var rootView = HomeView()
+    var rootView: UIView = HomeView()
     var customDropDown: DropDownView?
     var markerInfoCardView: MarkerInfoCardView?
     

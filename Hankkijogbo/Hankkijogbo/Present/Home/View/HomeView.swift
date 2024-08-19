@@ -20,13 +20,13 @@ final class HomeView: BaseView {
     var mapView = NMFMapView()
     var bottomSheetView = TotalListBottomSheetView()
     
-    let typeButton = UIButton()
-    let priceButton = UIButton()
-    let sortButton = UIButton()
+    let typeButton: UIButton = UIButton()
+    let priceButton: UIButton = UIButton()
+    let sortButton: UIButton = UIButton()
     
-    private let buttonStackView = UIStackView()
+    private let buttonStackView: UIStackView = UIStackView()
     
-    let targetButton = UIButton()
+    let targetButton: UIButton = UIButton()
     
     // MARK: - Set UI
     
