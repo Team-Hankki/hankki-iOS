@@ -94,7 +94,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle2, color: .gray900)
             $0.lineBreakMode = .byTruncatingTail
         }
         

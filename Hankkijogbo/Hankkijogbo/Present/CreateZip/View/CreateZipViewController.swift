@@ -58,7 +58,7 @@ final class CreateZipViewController: BaseViewController {
         }
         
         titleInputTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.body1,
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle2,
                                                             withText: StringLiterals.CreateZip.TitleInput.label,
                                                             color: .gray900)
         }
@@ -85,7 +85,7 @@ final class CreateZipViewController: BaseViewController {
         
         tagInputTitle.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.body1,
+                for: SuiteStyle.subtitle2,
                 withText: StringLiterals.CreateZip.TagInput.label,
                 color: .gray900)
         }
@@ -211,7 +211,8 @@ private extension CreateZipViewController {
 
 extension CreateZipViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.gray400.cgColor
+        textField.layer.borderColor = UIColor.gray600.cgColor
+        textField.layer.borderWidth = 1.5
         
         switch textField.tag {
         case 0:
@@ -228,6 +229,7 @@ extension CreateZipViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.gray300.cgColor
+        textField.layer.borderWidth = 1
         
         let currentText = textField.text ?? ""
         

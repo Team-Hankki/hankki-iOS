@@ -173,10 +173,8 @@ enum StringLiterals {
     }
     
     enum CreateZip {
-        static let submitButton = "족보 만들기"
-        
-        // TODO: - 디자인 선생님께 워딩 논의하기
         static let viewTitle = "새로운 식당 족보"
+        static let submitButton = "족보 만들기"
         
         enum TitleInput {
             static let label = "족보의 제목을 지어주세요"

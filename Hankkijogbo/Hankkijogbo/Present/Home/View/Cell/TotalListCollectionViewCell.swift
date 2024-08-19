@@ -65,7 +65,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         hankkiTitle.do {
             $0.textColor = .gray900
-            $0.font = .setupSuiteStyle(of: .subtitle)
+            $0.font = .setupSuiteStyle(of: .subtitle2)
         }
         
         [priceLabel, likeLabel].forEach {
