@@ -214,7 +214,7 @@ private extension HankkiListTableViewCell {
         stackView.addArrangedSubviews(subInfoSeparatorView, subInfoImageView)
         
         subInfoSeparatorView.snp.makeConstraints {
-            $0.width.equalTo(10)
+            $0.width.equalTo(7)
             $0.height.equalTo(18)
         }
         
