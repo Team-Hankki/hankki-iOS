@@ -39,6 +39,7 @@ extension LoginViewModel {
                 let accessToken = response.data.accessToken
                 
                 UserDefaults.standard.saveTokens(accessToken: accessToken, refreshToken: refreshToken)
+                UserDefaults.standard.saveNickname(postLoginRequest.name)
                 
                 DispatchQueue.main.async {
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {

@@ -49,7 +49,7 @@ extension HankkiListViewModel {
                 self.hankkiList = response.data.stores.map {
                     return HankkiListTableViewCell.Model(id: $0.id,
                                                               name: $0.name,
-                                                              imageURL: $0.imageUrl,
+                                                         imageURL: $0.imageUrl ?? "",
                                                               category: $0.category,
                                                               lowestPrice: $0.lowestPrice,
                                                               heartCount: $0.heartCount)
@@ -64,7 +64,7 @@ extension HankkiListViewModel {
                 self.hankkiList = response.data.stores.map {
                     return HankkiListTableViewCell.Model(id: $0.id,
                                                               name: $0.name,
-                                                              imageURL: $0.imageUrl,
+                                                         imageURL: $0.imageUrl ?? "",
                                                               category: $0.category,
                                                               lowestPrice: $0.lowestPrice,
                                                               heartCount: $0.heartCount)

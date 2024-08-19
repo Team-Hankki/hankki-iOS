@@ -13,7 +13,13 @@ final class ReportCompleteViewController: BaseViewController {
     
     let hankkiId: Int
     let reportedNumber: Int
-    let nickname: String
+    var nickname: String {
+        didSet {
+            if nickname.isEmpty {
+                nickname = "한끼귀욤"
+            }
+        }
+    }
     let selectedHankkiName: String
     
     private let randomThanksMessages: [String] = [

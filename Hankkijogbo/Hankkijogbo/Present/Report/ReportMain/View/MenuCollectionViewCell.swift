@@ -203,6 +203,7 @@ private extension MenuCollectionViewCell {
         priceLabel.textColor = .red500
         priceTextField.textColor = .red500
         errorLabel.isHidden = false
+        priceTextField.layer.borderColor = UIColor.red500.cgColor
     }
     
     func setupPriceNonErrorStyle() {
@@ -216,7 +217,6 @@ private extension MenuCollectionViewCell {
     @objc func priceTextFieldDidEditingChange() {
         if Int(priceTextField.text ?? "") ?? 0 > 8000 {
             setupPriceErrorStyle()
-            priceTextField.layer.borderColor = UIColor.red500.cgColor
         } else {
             setupPriceNonErrorStyle()
             priceTextField.layer.borderColor = UIColor.gray800.cgColor
@@ -285,13 +285,14 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     final func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == menuTextField {
             menuLabel.textColor = .gray500
+            textField.layer.borderColor = UIColor.gray300.cgColor
         } else {
             if Int(priceTextField.text ?? "") ?? 0 <= 8000 {
                 priceLabel.textColor = .gray500
+                textField.layer.borderColor = UIColor.gray300.cgColor
             }
         }
         
-        textField.layer.borderColor = UIColor.gray300.cgColor
         delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }
     
