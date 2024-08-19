@@ -170,8 +170,11 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .identity
-        }, completion: { _ in
-            self.isBottomSheetUp = false
+        }, completion: { [weak self] _ in
+            self?.isBottomSheetUp = false
+            if let collectionView = self?.totalListCollectionView {
+                collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
         })
     }
     
