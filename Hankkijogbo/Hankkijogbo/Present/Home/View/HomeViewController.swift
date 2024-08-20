@@ -23,7 +23,7 @@ final class HomeViewController: BaseViewController {
     var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
-    private let universityId = UserDefaults.standard.getUniversity()?.id ?? 0
+    private var universityId: Int? = UserDefaults.standard.getUniversity()?.id
     
     var shouldUpdateNavigationBar: Bool = true
     
@@ -177,7 +177,7 @@ private extension HomeViewController {
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
     
-    func updateUniversityData(universityId: Int) {
+    func updateUniversityData(universityId: Int?) {
         guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
         
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
@@ -277,11 +277,17 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         
         shouldUpdateNavigationBar = false
         setupNavigationBar(mainTitle: "전체")
+        fetchAllRestaurantsAndPins()
+    }
+    
+    
+    func fetchAllRestaurantsAndPins() {
+        viewModel.getHankkiListAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
+        viewModel.getHankkiPinAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
     }
     
     func didSelectUniversity(name: String) {
-           // 네비게이션 바를 선택한 대학교 이름으로 변경
-           shouldUpdateNavigationBar = true
-           setupNavigationBar(mainTitle: name)
-       }
+        shouldUpdateNavigationBar = true
+        setupNavigationBar(mainTitle: name)
+    }
 }
