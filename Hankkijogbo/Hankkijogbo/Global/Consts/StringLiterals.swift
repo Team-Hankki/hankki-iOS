@@ -41,18 +41,20 @@ enum StringLiterals {
         static let disappearInfoByReport = "제보시 식당 정보가 앱에서 사라져요"
         static let check = "확인"
         static let back = "돌아가기"
+        static let stay = "유지하기"
         static let no = "아니요"
         static let move = "이동하기"
         static let add = "추가하기"
         
-        // TODO: - 레전드 고민 이것들은 내 뷰에서만 쓰는 것들인데 Alert에 넣는게 맞나?
         enum Logout {
             static let title = "정말 로그아웃 하실 건가요?"
             static let secondaryButton = StringLiterals.Common.logout
+            static let primaryButton = StringLiterals.Alert.stay
         }
         enum Withdraw {
             static let title = "소중한 족보가 사라져요"
             static let secondaryButton = StringLiterals.Common.withdraw
+            static let primaryButton = StringLiterals.Alert.stay
         }
         enum DeleteZip {
             static let title = "족보를 삭제할까요?"
@@ -62,11 +64,19 @@ enum StringLiterals {
         enum DevelopShare {
             static let title = "조금만 기다려주세요"
             static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요"
+            static let primaryButton = StringLiterals.Alert.check
         }
         
         enum NetworkError {
             static let title = "네트워크 오류가 발생했어요"
             static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"
+            static let primaryButton = StringLiterals.Alert.check
+        }
+        
+        enum CreateZipConflict {
+            static let title = "동일이름 족보 생성 불가"
+            static let sub = "같은 이름의 족보는 생성할 수 없어요"
+            static let primaryButton = StringLiterals.Alert.check
         }
     }
     
@@ -150,7 +160,7 @@ enum StringLiterals {
         }
         
         enum Option {
-            static let FAQ = "FAQ"
+            static let Terms = "약관 및 정책"
             static let OneonOne = "1:1 문의"
             static let Logout = StringLiterals.Common.logout
         }
@@ -161,23 +171,20 @@ enum StringLiterals {
     }
     
     enum ZipList {
-        static let navigation = "나의 식당 족보"
+        static let navigation = "나의 족보"
         static let navigationEdit = "편집"
         static let navigationDelete = "삭제"
         
-        static let createZip = "새로운\n족보 리스트\n추가하기"
+        static let createZip = "새로운\n식당 족보\n추가하기"
     }
     
     enum CreateZip {
-        static let submitButton = "족보 만들기"
-        
-        // TODO: - 디자인 선생님께 워딩 논의하기
         static let viewTitle = "새로운 식당 족보"
+        static let submitButton = "족보 만들기"
         
         enum TitleInput {
             static let label = "족보의 제목을 지어주세요"
-            // TODO: - 족보 제목인데 '알려주세요'가 맞나?
-            static let placeholder = "성대생 추천 맛집 알려주세요"
+            static let placeholder = "한끼대학교 든든한 식당 모음"
         }
         
         enum TagInput {
@@ -202,6 +209,6 @@ enum StringLiterals {
     
     enum ExternalLink {
         static let OneonOne = "https://tally.so/r/mO0oJY"
-        static let FAQ = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
     }
 }

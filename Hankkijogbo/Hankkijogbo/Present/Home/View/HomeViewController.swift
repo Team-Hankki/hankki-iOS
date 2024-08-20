@@ -115,7 +115,7 @@ extension HomeViewController {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
                                                               mainTitle: .stringAndImage(title, .btnDropdown),
-                                                              mainTitleFont: SuiteStyle.subtitle,
+                                                              mainTitleFont: SuiteStyle.subtitle1,
                                                               mainTitlePosition: "left",
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},

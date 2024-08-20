@@ -20,11 +20,10 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
     private let imageView: UIImageView = UIImageView()
     
     private let selectButton: UIImageView = UIImageView()
-    private let redOpacityLayerView: UIView = UIView()
     
     override func setupStyle() {
         cellView.do {
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .red500)
         }
         
         titleLabel.do {
@@ -37,19 +36,12 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
             $0.image = .btnCheckFilled
             $0.isHidden = true
         }
-        
-        redOpacityLayerView.do {
-            $0.backgroundColor = .red500.withAlphaComponent(0.4)
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 2, borderColor: .red500)
-            $0.isHidden = true
-        }
     }
     
     override func setupHierarchy() {
         self.addSubview(cellView)
         cellView.addSubviews(titleLabel,
                              imageView,
-                             redOpacityLayerView,
                              selectButton)
     }
     
@@ -73,10 +65,6 @@ final class ZipListCollectionViewCell: BaseCollectionViewCell {
             $0.size.equalTo(24)
             $0.trailing.equalToSuperview().inset(10)
             $0.top.equalToSuperview().inset(12)
-        }
-        
-        redOpacityLayerView.snp.makeConstraints {
-            $0.size.equalToSuperview()
         }
     }
 }
@@ -104,6 +92,6 @@ extension ZipListCollectionViewCell {
     
     func setSelected(_ selected: Bool) {
         selectButton.isHidden = !selected
-        redOpacityLayerView.isHidden = !selected
+        cellView.layer.borderWidth = selected ? 2 : 0
     }
 }

@@ -87,7 +87,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         hankkiNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.subtitle,
+                for: SuiteStyle.subtitle2,
                 color: .gray850
             )
             $0.lineBreakMode = .byTruncatingTail

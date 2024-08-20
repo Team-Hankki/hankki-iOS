@@ -10,13 +10,6 @@ import UIKit
 
 final class HankkiListViewModel {
     
-    init() {
-        getMe()
-    }
-    
-    var name: String?
-    var imageUrl: String?
-
     var reloadCollectionView: (() -> Void)?
     
     var hankkiList: [HankkiListTableViewCell.Model] = [] {
@@ -28,31 +21,21 @@ final class HankkiListViewModel {
 }
 
 extension HankkiListViewModel {
-    func getMe() {
-        NetworkService.shared.userService.getMe { result in
-            result.handleNetworkResult { response in
-                self.name = response.data.nickname
-                self.imageUrl = response.data.profileImageUrl
-            }
-        }
-    }
-    
     func getZipDetail(zipId: Int) {
         NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
             
             result.handleNetworkResult { response in
-                self.zipInfo = ZipHeaderTableView.Model(name: self.name ?? "",
-                                                             imageUrl: self.imageUrl ?? "",
-                                                             title: response.data.title,
-                                                             details: response.data.details)
+                self.zipInfo = ZipHeaderTableView.Model(name: UserDefaults.standard.getNickname(),
+                                                        title: response.data.title,
+                                                        details: response.data.details)
                 
                 self.hankkiList = response.data.stores.map {
                     return HankkiListTableViewCell.Model(id: $0.id,
-                                                              name: $0.name,
+                                                         name: $0.name,
                                                          imageURL: $0.imageUrl ?? "",
-                                                              category: $0.category,
-                                                              lowestPrice: $0.lowestPrice,
-                                                              heartCount: $0.heartCount)
+                                                         category: $0.category,
+                                                         lowestPrice: $0.lowestPrice,
+                                                         heartCount: $0.heartCount)
                 }
             }
         }
@@ -63,11 +46,11 @@ extension HankkiListViewModel {
             result.handleNetworkResult { response in
                 self.hankkiList = response.data.stores.map {
                     return HankkiListTableViewCell.Model(id: $0.id,
-                                                              name: $0.name,
+                                                         name: $0.name,
                                                          imageURL: $0.imageUrl ?? "",
-                                                              category: $0.category,
-                                                              lowestPrice: $0.lowestPrice,
-                                                              heartCount: $0.heartCount)
+                                                         category: $0.category,
+                                                         lowestPrice: $0.lowestPrice,
+                                                         heartCount: $0.heartCount)
                 }
             }
         }

@@ -26,6 +26,8 @@ final class UnivSelectViewController: BaseViewController {
     private let headerTitleLabel: UILabel = UILabel()
     private let headerContentLabel: UILabel = UILabel()
     
+    private let topGradientView: UIView = UIView()
+    
     lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: "선택하기",
         lineButtonText: "찾는 대학교가 없어요. 우선 둘러볼게요!",
@@ -44,6 +46,11 @@ final class UnivSelectViewController: BaseViewController {
         
         viewModel.getUniversityList()
         bindViewModel()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupGradient()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +96,7 @@ final class UnivSelectViewController: BaseViewController {
         view.addSubviews(
             headerStackView,
             univCollectionView,
+            topGradientView,
             bottomButtonView
         )
         headerStackView.addArrangedSubviews(headerTitleLabel, headerContentLabel)
@@ -97,6 +105,12 @@ final class UnivSelectViewController: BaseViewController {
     override func setupLayout() {
         headerStackView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        topGradientView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.top.equalTo(headerStackView.snp.bottom).inset(10)
+            $0.height.equalTo(35)
         }
         
         univCollectionView.snp.makeConstraints {
@@ -135,6 +149,24 @@ private extension UnivSelectViewController {
         }
         
         return layout
+    }
+    
+    func setupGradient() {
+       let gradient = CAGradientLayer()
+        // TODO: - 서현) 윤정이가 그라디언트 수정해주면 값 반영하기
+        gradient.do {
+            $0.colors = [
+                UIColor.white.cgColor,
+                UIColor.white.withAlphaComponent(0.8).cgColor,
+                UIColor.white.withAlphaComponent(0).cgColor,
+              ]
+            $0.locations = [0.0, 0.2, 1.0]
+            $0.startPoint = CGPoint(x: 0.5, y: 0.0)
+            $0.endPoint = CGPoint(x: 0.5, y: 1.0)
+            $0.frame = topGradientView.bounds
+        }
+        
+        topGradientView.layer.addSublayer(gradient)
     }
     
     func bottomButtonPrimaryHandler() {

@@ -10,7 +10,6 @@ import UIKit
 extension ZipHeaderTableView {
     struct Model {
         let name: String
-        let imageUrl: String
         let title: String
         let details: [String]
     }
@@ -125,8 +124,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
             $0.horizontalEdges.equalToSuperview().inset(22)
             $0.top.equalToSuperview()
             $0.height.equalTo(
-                UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2,
-                                                  width: 329, height: 231)
+                UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2, width: 329, height: 231)
             )
             $0.bottom.equalToSuperview().inset(22)
         }
@@ -165,7 +163,7 @@ private extension ZipHeaderTableView {
     @objc func shareButtonDidTap() {
         UIApplication.showAlert(titleText: StringLiterals.Alert.DevelopShare.title,
                                 subText: StringLiterals.Alert.DevelopShare.sub,
-                                primaryButtonText: StringLiterals.Alert.check)
+                                primaryButtonText: StringLiterals.Alert.DevelopShare.primaryButton)
     }
     
     func setupTagStackView(_ tagList: [String]) {
@@ -209,6 +207,5 @@ extension ZipHeaderTableView {
         headerLabel.text = data?.title
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name
-        nameImageView.setKFImage(url: data?.imageUrl)
     }
 }

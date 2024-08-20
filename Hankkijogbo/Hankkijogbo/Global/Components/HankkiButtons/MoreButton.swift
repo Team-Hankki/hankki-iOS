@@ -40,7 +40,7 @@ private extension MoreButton {
     func setupStyle() {
         self.do {
             $0.makeRoundBorder(cornerRadius: 14, borderWidth: 0, borderColor: .clear)
-            $0.setupPadding(top: 12, leading: 12, bottom: 12, trailing: 12)
+            $0.setupPadding(top: 10 + 1.5, leading: 18, bottom: 10 + 1.5, trailing: 18)
             $0.setupBackgroundColor(.gray100)
             $0.setupIcon(.icAddGray, gap: 5)
             

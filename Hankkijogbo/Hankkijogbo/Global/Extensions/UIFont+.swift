@@ -68,14 +68,14 @@ enum PretendardStyle: FontStyle {
 
 enum SuiteStyle: FontStyle {
     case h1, h2, h3
-    case subtitle
+    case subtitle1, subtitle2
     case body1, body2
     
     var rawValue: String {
         switch self {
-        case .h1, .h2, .h3:
+        case .h1, .h2, .h3, .subtitle1:
             return "SUITE-Bold"
-        case .subtitle:
+        case .subtitle2:
             return "SUITE-SemiBold"
         case .body1:
             return "SUITE-Medium"
@@ -92,8 +92,10 @@ enum SuiteStyle: FontStyle {
             return 20
         case .h3:
             return 18
-        case .subtitle:
+        case .subtitle1:
             return 17
+        case .subtitle2:
+            return 16
         case .body1:
             return 16
         case .body2:
