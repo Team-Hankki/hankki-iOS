@@ -13,8 +13,8 @@ enum HankkiTargetType {
     case getCategoryFilter
     case getPriceCategoryFilter
     case getSortOptionFilter
-    case getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String)
-    case getHankkiList(universityid: Int, storeCategory: String, priceCategory: String, sortOption: String)
+    case getHankkiPin(universityId: Int?, storeCategory: String, priceCategory: String, sortOption: String)
+    case getHankkiList(universityid: Int?, storeCategory: String, priceCategory: String, sortOption: String)
     case getHankkiThumbnail(id: Int)
     case getHankkiDetail(id: Int)
     case postHankkiHeart(id: Int)
@@ -55,10 +55,25 @@ extension HankkiTargetType: BaseTargetType {
     
     var queryParameter: [String: Any]? {
         switch self {
-        case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption):
-            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
-        case .getHankkiList(let universityId, let storeCategory, let priceCategory, let sortOption):
-            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
+            //        case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption):
+            //            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
+            //        case .getHankkiList(let universityId, let storeCategory, let priceCategory, let sortOption):
+            //            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
+        case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption),
+                .getHankkiList(let universityId, let storeCategory, let priceCategory, let sortOption):
+            
+            var params: [String: Any] = [
+                "storeCategory": storeCategory,
+                "priceCategory": priceCategory,
+                "sortOption": sortOption
+            ]
+            
+            // universityId가 nil이 아닌 경우에만 추가
+            if let universityId = universityId {
+                params["universityId"] = universityId
+            }
+            
+            return params
         default:
             return .none
         }
