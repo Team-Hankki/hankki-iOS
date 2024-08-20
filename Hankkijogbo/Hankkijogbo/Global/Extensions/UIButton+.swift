@@ -69,4 +69,15 @@ extension UIButton {
         configuration.imagePadding = gap
         self.configuration = configuration
     }
+    
+    /// 홈화면 필터링 버튼 - 기본 스타일로 버튼을 설정하는 함수
+    func applyDefaultStyle(title: String) {
+        self.do {
+            $0.setTitle(title, for: .normal)
+            $0.backgroundColor = .hankkiWhite
+            $0.layer.borderColor = UIColor.gray300.cgColor
+            $0.setTitleColor(.gray500, for: .normal)
+            $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+        }
+    }
 }
