@@ -72,6 +72,12 @@ enum StringLiterals {
             static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"
             static let primaryButton = StringLiterals.Alert.check
         }
+        
+        enum CreateZipConflict {
+            static let title = "동일이름 족보 생성 불가"
+            static let sub = "같은 이름의 족보는 생성할 수 없어요"
+            static let primaryButton = StringLiterals.Alert.check
+        }
     }
     
     enum Toast {
