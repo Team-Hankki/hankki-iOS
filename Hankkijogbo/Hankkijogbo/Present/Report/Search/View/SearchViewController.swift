@@ -180,11 +180,11 @@ extension SearchViewController {
             self.searchCollectionView.reloadData()
         }
         
-        viewModel.selectLocation = {
-            self.delegate?.updateViewModelLocationData(data: self.viewModel.selectedLocationData)
-        }
-        
+        /// 버튼으로 최종 식당 선택 시 실행
+        /// - ReportViewModel에 데이터 전달
+        /// - pop
         viewModel.completeLocationSelection = {
+            self.delegate?.updateViewModelLocationData(data: self.viewModel.selectedLocationData)
             self.navigationController?.popViewController(animated: true)
         }
         
@@ -374,6 +374,18 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.delegate = self
         cell.bindLocationData(model: locations[indexPath.item])
         return cell
+    }
+    
+    /// didSelectItemAt 전에 호출되는 메서드
+    /// - 한번 더 클릭 시 클릭을 해제시켜주기 위해 필요
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView.cellForItem(at: indexPath) as? SearchCollectionViewCell != nil {
+            if viewModel.selectedLocationData != nil {
+                viewModel.selectedLocationData = nil
+                return false
+            }
+        }
+        return true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

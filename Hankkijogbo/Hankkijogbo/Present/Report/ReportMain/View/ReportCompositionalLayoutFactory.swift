@@ -18,8 +18,11 @@ enum ReportSectionType: Int {
 }
 
 final class ReportCompositionalLayoutFactory: CompositionalLayoutFactory {
-    static func create() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
+    
+    var isImageSelected: Bool = false
+    
+    func create() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { [self] (sectionIndex, _) -> NSCollectionLayoutSection? in
             guard let sectionType: ReportSectionType = ReportSectionType(rawValue: sectionIndex) else {
                 return nil
             }
@@ -45,7 +48,7 @@ extension ReportCompositionalLayoutFactory {
     
     // MARK: - Search Section
     
-    static func getSearchLayoutSection() -> NSCollectionLayoutSection {
+    func getSearchLayoutSection() -> NSCollectionLayoutSection {
         let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(112))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(112))
         let section = createLayoutSection(group: group, orthogonalScrollingBehavior: .groupPaging)
@@ -54,7 +57,7 @@ extension ReportCompositionalLayoutFactory {
     
     // MARK: - Category Section
 
-    static func getCategoryLayoutSection() -> NSCollectionLayoutSection {
+    func getCategoryLayoutSection() -> NSCollectionLayoutSection {
         let header = createBoundarySupplementaryItem(type: .header, widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50), alignment: .topLeading)
         let item = createItem(widthDimension: .estimated(50), heightDimension: .fractionalHeight(1))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(36))
@@ -67,17 +70,17 @@ extension ReportCompositionalLayoutFactory {
     
     // MARK: - Image Section
 
-    static func getImageLayoutSection() -> NSCollectionLayoutSection {
+    func getImageLayoutSection() -> NSCollectionLayoutSection {
         let header = createBoundarySupplementaryItem(type: .header, widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(53), alignment: .topLeading)
-        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(127))
-        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(127))
+        let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(21 + 24 + (isImageSelected ? 84 : 58) + 24))
+        let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(21 + 24 + (isImageSelected ? 84 : 58) + 24))
         let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 0, leading: 22, bottom: 0, trailing: 22), boundarySupplementaryItems: [header])
         return section
     }
     
     // MARK: - Menu Section
     
-    static func getMenuLayoutSection() -> NSCollectionLayoutSection {
+    func getMenuLayoutSection() -> NSCollectionLayoutSection {
         let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(95))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(95))
         let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 0, leading: 22, bottom: 0, trailing: 14))
@@ -87,7 +90,7 @@ extension ReportCompositionalLayoutFactory {
     
     // MARK: - Add Menu Section
     
-    static func getAddMenuLayoutSection() -> NSCollectionLayoutSection {
+    func getAddMenuLayoutSection() -> NSCollectionLayoutSection {
         let footer = createBoundarySupplementaryItem(type: .footer, widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80), alignment: .bottom)
         let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
