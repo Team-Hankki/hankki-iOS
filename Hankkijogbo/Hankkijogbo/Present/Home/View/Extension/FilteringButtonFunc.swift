@@ -28,11 +28,7 @@ extension HomeViewController {
     /// close Button 클릭 시 다시 원래의 버튼으로 돌아오는 함수
     func revertButton(for button: UIButton, filter: String) {
         button.do {
-            $0.setTitle(filter, for: .normal)
-            $0.backgroundColor = .white
-            $0.layer.borderColor = UIColor.gray300.cgColor
-            $0.setTitleColor(.gray500, for: .normal)
-            $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+            $0.applyDefaultStyle(title: filter)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.sizeToFit()
             $0.tag = 0
@@ -50,16 +46,10 @@ extension HomeViewController {
     /// filtering이 되지 않았을 경우 원래의 버튼으로 돌아오는 함수
     func resetButtonToDefaultState(_ button: UIButton, defaultTitle: String) {
         if button.tag == 0 {
-            button.do {
-                $0.setTitle(defaultTitle, for: .normal)
-                $0.backgroundColor = .white
-                $0.layer.borderColor = UIColor.gray300.cgColor
-                $0.setTitleColor(.gray500, for: .normal)
-                $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
-            }
+            button.applyDefaultStyle(title: defaultTitle)
         }
     }
-
+    
     /// 필터링 Button을 재클릭 했을 경우 hide, show
     func toggleDropDown(isPriceModel: Bool, buttonType: ButtonType) {
         if isTypeCollectionViewVisible {
@@ -96,7 +86,6 @@ extension HomeViewController {
             isTypeCollectionViewVisible.toggle()
         }
     }
-    
     
     /// DropDown을 button Type에 따라 표출하는 함수
     func showDropDown(isPriceModel: Bool, buttonType: ButtonType) {
@@ -140,7 +129,10 @@ extension HomeViewController {
     
     /// DropDown을 button Type에 따라 숨기는 함수
     func hideDropDown(buttonType: ButtonType? = nil, completion: (() -> Void)? = nil) {
-        guard let customDropDown = customDropDown else { return }
+        guard let customDropDown = customDropDown else {
+            completion?()
+            return
+        }
         
         UIView.animate(withDuration: 0.1,
                        delay: 0,
@@ -154,16 +146,11 @@ extension HomeViewController {
             customDropDown.removeFromSuperview()
             self.customDropDown = nil
             
-            switch buttonType {
-            case .price:
-                self.rootView.priceButton.setTitleColor(.gray500, for: .normal)
-                self.rootView.priceButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
-            case .sort:
-                self.rootView.sortButton.setTitleColor(.gray500, for: .normal)
-                self.rootView.sortButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
-            case .none:
-                return
+            if let buttonType = buttonType {
+                self.resetDropDownButtonIfNotChanged(buttonType: buttonType)
             }
+            
+            self.isDropDownVisible = false
             completion?()
         }
     }
@@ -199,10 +186,35 @@ extension HomeViewController {
     /// TypeCollectionView를 숨김
     func hideTypeCollectionView() {
         typeCollectionView.isHidden = true
-        rootView.typeButton.setTitleColor(.gray500, for: .normal)
-        rootView.typeButton.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
-        rootView.typeButton.backgroundColor = .hankkiWhite
-        rootView.layer.borderColor = UIColor.gray300.cgColor
+        resetTypeButtonIfNotChanged()
+        self.isTypeCollectionViewVisible = false
+    }
+    
+    private func resetDropDownButtonIfNotChanged(buttonType: ButtonType) {
+        let button: UIButton
+        let defaultTitle: String
+        
+        switch buttonType {
+        case .price:
+            button = rootView.priceButton
+            defaultTitle = StringLiterals.Home.priceFilteringButton
+        case .sort:
+            button = rootView.sortButton
+            defaultTitle = StringLiterals.Home.sortFilteringButton
+        }
+        
+        if button.tag == 0 {
+            button.applyDefaultStyle(title: defaultTitle)
+        }
+    }
+    
+    private func resetTypeButtonIfNotChanged() {
+        let button = rootView.typeButton
+        let defaultTitle = StringLiterals.Home.storeCategoryFilteringButton
+        
+        if button.tag == 0 {
+            button.applyDefaultStyle(title: defaultTitle)
+        }
     }
 }
 
