@@ -46,7 +46,7 @@ extension MypageViewController {
         case .option:
             switch itemIndex {
             case 0:
-                if let url = URL(string: StringLiterals.ExternalLink.FAQ) {
+                if let url = URL(string: StringLiterals.ExternalLink.Terms) {
                     UIApplication.shared.open(url, options: [:])
                 }
             case 1:

@@ -154,7 +154,7 @@ enum StringLiterals {
         }
         
         enum Option {
-            static let FAQ = "FAQ"
+            static let Terms = "약관 및 정책"
             static let OneonOne = "1:1 문의"
             static let Logout = StringLiterals.Common.logout
         }
@@ -178,8 +178,7 @@ enum StringLiterals {
         
         enum TitleInput {
             static let label = "족보의 제목을 지어주세요"
-            // TODO: - 족보 제목인데 '알려주세요'가 맞나?
-            static let placeholder = "성대생 추천 맛집 알려주세요"
+            static let placeholder = "한끼대학교 든든한 식당 모음"
         }
         
         enum TagInput {
@@ -204,6 +203,6 @@ enum StringLiterals {
     
     enum ExternalLink {
         static let OneonOne = "https://tally.so/r/mO0oJY"
-        static let FAQ = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
     }
 }

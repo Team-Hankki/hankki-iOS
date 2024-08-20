@@ -11,12 +11,6 @@ import UIKit
 final class MypageViewModel {
     
     var reloadCollectionView: (() -> Void)?
-    
-//    var userInfo: MypageHeaderView.Model? {
-//        didSet {
-//            self.reloadCollectionView?()
-//        }
-//    }
 }
 
 extension MypageViewModel {
