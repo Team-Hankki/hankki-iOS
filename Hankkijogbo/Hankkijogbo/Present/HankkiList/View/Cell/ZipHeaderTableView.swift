@@ -91,8 +91,8 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         shareButton.do {
             var configuration = UIButton.Configuration.tinted()
             
-            configuration.contentInsets = NSDirectionalEdgeInsets(top: 7, leading: 9, bottom: 9, trailing: 16)
-            configuration.background.cornerRadius = 20
+            configuration.contentInsets = NSDirectionalEdgeInsets(top: 7, leading: 9, bottom: 7, trailing: 16)
+            configuration.background.cornerRadius = 19
             configuration.background.backgroundColor = .gray800
             
             configuration.imagePadding = 2
@@ -149,7 +149,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
         }
         
         shareButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(UIScreen.convertByHeightRatio(17))
+            $0.centerY.equalTo(nameStackView)
             $0.trailing.equalToSuperview().inset(UIScreen.convertByWidthRatio(20))
         }
     }
