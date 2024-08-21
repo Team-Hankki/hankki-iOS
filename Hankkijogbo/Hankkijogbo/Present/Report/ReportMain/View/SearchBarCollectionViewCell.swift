@@ -17,6 +17,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
             if hankkiNameString != "" {
                 print(hankkiNameString)
                 self.setupStyleForSet()
+                reportedNumberLabel.textColor = .gray600
             } else {
                 self.setupStyleForNotSet()
             }
