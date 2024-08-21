@@ -92,12 +92,14 @@ extension UIViewController {
             
             $0.secondaryButtonHandler = secondaryButtonHandler
             $0.primaryButtonHandler = primaryButtonHandler
-            
-            if hightlightedColor != nil {
-                $0.setupHighlightedTitle(start: 0, end: hightlightedText.count, color: hightlightedColor!)
-            }
         }
+
         present(alert, animated: false, completion: nil)
+        if hightlightedColor != nil {
+            alert.setupHighlightedTitle(start: 0,
+                                     end: hightlightedText.count,
+                                     color: hightlightedColor ?? .red500)
+        }
     }
     
     /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수

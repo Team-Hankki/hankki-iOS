@@ -250,8 +250,8 @@ private extension HankkiDetailViewController {
     
     /// 제보 감사 Alert 띄우기
     func showThanksAlert() {
-        var nickname = UserDefaults.standard.getNickname() ?? "한끼귀염"
-        if nickname.isEmpty { nickname = "한끼귀염" }
+        let nickname = UserDefaults.standard.getNickname()
+
         self.showAlert(
             image: .imgModalReport,
             titleText: nickname + StringLiterals.Alert.thanksForReport,

@@ -57,6 +57,11 @@ final class  HankkiListViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
+        
+        // detail같은, 이전 뷰에서 좋아요가 취소되는 경우를 고려합니다.
+        if type == .liked && !viewModel.hankkiList.isEmpty {
+            viewModel.updateMeHankkiList()
+        }
     }
     
     // MARK: - setup UI

@@ -18,7 +18,7 @@ extension HankkiListTableViewCell {
         let imageURL: String
         let category: String
         let lowestPrice: Int
-        let heartCount: Int
+        var heartCount: Int
         var isDeleted: Bool = false
     }
 }

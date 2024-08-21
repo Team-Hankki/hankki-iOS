@@ -153,14 +153,13 @@ private extension UnivSelectViewController {
     
     func setupGradient() {
        let gradient = CAGradientLayer()
-        // TODO: - 서현) 윤정이가 그라디언트 수정해주면 값 반영하기
         gradient.do {
             $0.colors = [
                 UIColor.white.cgColor,
-                UIColor.white.withAlphaComponent(0.8).cgColor,
+                UIColor.white.withAlphaComponent(0.3).cgColor,
                 UIColor.white.withAlphaComponent(0).cgColor,
               ]
-            $0.locations = [0.0, 0.2, 1.0]
+            $0.locations = [0.0, 0.7, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
             $0.frame = topGradientView.bounds
