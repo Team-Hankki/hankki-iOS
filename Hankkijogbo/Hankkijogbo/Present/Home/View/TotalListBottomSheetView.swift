@@ -61,13 +61,17 @@ final class TotalListBottomSheetView: BaseView {
     }
     
     override func setupStyle() {
-        backgroundColor = .white
-        
+
         containerView.do {
             $0.backgroundColor = .white
+            
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOpacity = 0.08
+            $0.layer.shadowOffset = CGSize(width: 0, height: -10)
+            $0.layer.shadowRadius = 30
+            
             $0.layer.cornerRadius = 30
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            $0.layer.masksToBounds = true
         }
         
         bottomSheetHandlerView.do {
@@ -241,14 +245,14 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalListCollectionViewCell.className, for: indexPath) as? TotalListCollectionViewCell else {
             return UICollectionViewCell()
         }
-//        let store = data[indexPath.row]
-//        if let imageUrl = store.imageUrl, imageUrl != "img_detail_default" {
-//                   // URL에서 이미지를 로드
-//            cell.thumbnailImageView.sd_setImage(with: URL(string: imageUrl))
-//               } else {
-//                   // 기본 이미지 설정
-//                   cell.thumbnailImageView?.image = UIImage(named: "img_detail_default")
-//               }
+        //        let store = data[indexPath.row]
+        //        if let imageUrl = store.imageUrl, imageUrl != "img_detail_default" {
+        //                   // URL에서 이미지를 로드
+        //            cell.thumbnailImageView.sd_setImage(with: URL(string: imageUrl))
+        //               } else {
+        //                   // 기본 이미지 설정
+        //                   cell.thumbnailImageView?.image = UIImage(named: "img_detail_default")
+        //               }
         cell.bindData(model: data[indexPath.row])
         cell.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
         cell.addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)

@@ -99,11 +99,18 @@ extension HankkiNavigationController {
 
 private extension HankkiNavigationController {
     
-    func setupStyle() {        
+    func setupStyle() {    
+        // TODO: - 서현) 이 그라디언트가 Home 에만 들어가는 듯...
+//        safeAreaView.do {
+//            $0.layer.shadowColor = UIColor.black.cgColor
+//            $0.layer.shadowOpacity = 0.12
+//            $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+//            $0.layer.shadowRadius = 32
+//        }
+        
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
-            $0.spacing = 4
         }
         
         mainTitleLabel.do {
@@ -129,6 +136,7 @@ private extension HankkiNavigationController {
     }
     
     func setupLayout() {
+        
         customNavigationBar.snp.makeConstraints {
             $0.height.equalTo(navigationHeight)
             $0.bottom.equalTo(view.snp.topMargin)
