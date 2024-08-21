@@ -68,13 +68,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         menuTextField.snp.makeConstraints {
             $0.top.equalTo(menuLabel.snp.bottom).offset(3)
             $0.leading.equalToSuperview()
-            $0.width.equalTo(178)
-            $0.height.equalTo(48)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(178))
+            $0.height.equalTo(UIScreen.convertByHeightRatio(48))
         }
         priceTextField.snp.makeConstraints {
             $0.top.equalTo(menuTextField)
             $0.leading.equalTo(menuTextField.snp.trailing).offset(8)
-            $0.width.equalTo(118)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(118))
             $0.height.equalTo(menuTextField)
         }
         priceLabel.snp.makeConstraints {
@@ -87,7 +87,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         deleteMenuButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
-            $0.leading.equalTo(priceTextField.snp.trailing).offset(3)          
+            $0.trailing.equalToSuperview()
             $0.size.equalTo(32)
         }
         errorLabel.snp.makeConstraints {
