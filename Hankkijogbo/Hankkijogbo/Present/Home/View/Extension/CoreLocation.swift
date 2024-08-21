@@ -140,7 +140,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
             self.rootView.targetButton.snp.remakeConstraints {
                 $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-12)
-                $0.trailing.equalToSuperview().inset(12)
+                $0.trailing.equalToSuperview().inset(22)
             }
             self.view.layoutIfNeeded()
         })
@@ -154,7 +154,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             } else {
                 self.rootView.targetButton.snp.remakeConstraints {
                     $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-12)
-                    $0.trailing.equalToSuperview().inset(12)
+                    $0.trailing.equalToSuperview().inset(22)
                 }
             }
             self.view.layoutIfNeeded()
