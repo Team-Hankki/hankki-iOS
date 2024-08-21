@@ -21,43 +21,6 @@ final class HankkiListViewModel {
 }
 
 extension HankkiListViewModel {
-    func updateMeHankkiList() {
-        let prevHankkiList: [HankkiListTableViewCell.Model] = hankkiList
-        
-        NetworkService.shared.userService.getMeHankkiList(.getMeHankkiHeartList) { result in
-            result.handleNetworkResult { response in
-                let currentHankkiList: [HankkiListTableViewCell.Model] = response.data.stores.map {
-                    return HankkiListTableViewCell.Model(id: $0.id,
-                                                         name: $0.name,
-                                                         imageURL: $0.imageUrl ?? "",
-                                                         category: $0.category,
-                                                         lowestPrice: $0.lowestPrice,
-                                                         heartCount: $0.heartCount)
-                }
-                
-                // 현재 목록의 id 리스트를 Set으로 변환
-                let currentIds = Set(currentHankkiList.map { $0.id })
-                let heartCountDict = Dictionary(uniqueKeysWithValues: currentHankkiList.map { ($0.id, $0.heartCount) })
-                
-                let updatedHankkiList = self.firstHankkiList.map {
-                    var store = $0
-                    if !currentIds.contains(store.id) {
-                        // 하트를 지웠을 경우
-                        if !store.isDeleted {
-                            store.isDeleted = true
-                            store.heartCount -= 1
-                        }
-                    } else {
-                        // 다시 하트를 눌렀을 경우
-                        store.isDeleted = false
-                        store.heartCount = heartCountDict[store.id] ?? store.heartCount
-                    }
-                    return store
-                }
-                self.hankkiList = updatedHankkiList
-            }
-        }
-    }
     
     func getZipDetail(zipId: Int) {
         NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
@@ -112,5 +75,55 @@ extension HankkiListViewModel {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
             result.handleNetworkResult()
         }
+    }
+    
+    // Liked List 에서 Detail로 갔을 때
+    // Detail에서 Liked를 취소 하고, dismiss 한 경우
+    // Liked List에 식당은 존재하되, 식당의 하트가 취소되어야함
+    func updateMeHankkiList() {
+        
+        // 제일 최신 Liked List를 받아옴
+        NetworkService.shared.userService.getMeHankkiList(.getMeHankkiHeartList) { result in
+            result.handleNetworkResult { response in
+                let currentHankkiList: [HankkiListTableViewCell.Model] = response.data.stores.map {
+                    return HankkiListTableViewCell.Model(id: $0.id,
+                                                         name: $0.name,
+                                                         imageURL: $0.imageUrl ?? "",
+                                                         category: $0.category,
+                                                         lowestPrice: $0.lowestPrice,
+                                                         heartCount: $0.heartCount)
+                }
+                
+                self.compaerLikedHnakkiList(currentHankkiList)
+            }
+        }
+    }
+}
+
+private extension HankkiListViewModel {
+    func compaerLikedHnakkiList(_ currentHankkiList: [HankkiListTableViewCell.Model]) {
+        // 현재 Liked List에 존재하는 식당의 id와 heartCount를 dictionary 형태로 저장함
+        let heartCountDict = Dictionary(uniqueKeysWithValues: currentHankkiList.map { ($0.id, $0.heartCount) })
+        
+        let updatedHankkiList = self.firstHankkiList.map {
+            var store = $0
+            if heartCountDict.keys.contains(store.id) {
+                // 사용자가 Liked 를 유지한 경우
+                store.isDeleted = false
+                store.heartCount = heartCountDict[store.id] ?? store.heartCount
+                
+            } else {
+                // 사용자가 Liked 를 취소한 경우
+                if !store.isDeleted {
+                    // Liked 취소 처리가 되지 않았을 경우
+                    // -> Liked 취소 처리를 하고, 초기 heartCount 값에서 1을 감소한다.
+                    store.isDeleted = true
+                    store.heartCount -= 1
+                }
+            }
+            return store
+        }
+
+        self.hankkiList = updatedHankkiList
     }
 }
