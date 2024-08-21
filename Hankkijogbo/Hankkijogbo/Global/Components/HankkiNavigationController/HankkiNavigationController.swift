@@ -86,6 +86,13 @@ extension HankkiNavigationController {
         titleButtonAction = forType.titleButtonAction
         
         setupBackgroundColor(forType.backgroundColor)
+        
+//        if forType.isGradient {
+//            print("navigation true")
+//            safeAreaView.layer.shadowOpacity = 0.12
+//        } else {
+//            safeAreaView.layer.shadowOpacity = 0
+//        }
     }
     
     /// NavigationBar의 배경색을 바꿈
@@ -99,14 +106,8 @@ extension HankkiNavigationController {
 
 private extension HankkiNavigationController {
     
-    func setupStyle() {    
-        // TODO: - 서현) 이 그라디언트가 Home 에만 들어가는 듯...
-//        safeAreaView.do {
-//            $0.layer.shadowColor = UIColor.black.cgColor
-//            $0.layer.shadowOpacity = 0.12
-//            $0.layer.shadowOffset = CGSize(width: 0, height: 4)
-//            $0.layer.shadowRadius = 32
-//        }
+    func setupStyle() {
+        
         
         titleStackView.do {
             $0.axis = .horizontal

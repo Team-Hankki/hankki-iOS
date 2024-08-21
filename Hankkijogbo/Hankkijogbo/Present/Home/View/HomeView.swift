@@ -28,10 +28,13 @@ final class HomeView: BaseView {
     
     let targetButton: UIButton = UIButton()
     
+    private let gradient: UIView = UIView()
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
         addSubviews(mapView,
+                    gradient,
                     buttonStackView,
                     targetButton,
                     bottomSheetView)
@@ -56,12 +59,18 @@ final class HomeView: BaseView {
                 targetButton.isHidden = true
             } else {
                 $0.bottom.equalTo(bottomSheetView.snp.top).offset(-12)
-                $0.trailing.equalToSuperview().inset(12)
+                $0.trailing.equalToSuperview().inset(22)
             }
         }
         
         bottomSheetView.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(UIScreen.getDeviceHeight() * 0.4)
+        }
+        
+        gradient.snp.makeConstraints {
+            $0.bottom.equalTo(self.snp.top)
+            $0.height.equalTo(50)
+            $0.horizontalEdges.equalToSuperview()
         }
     }
     
@@ -88,6 +97,11 @@ final class HomeView: BaseView {
         
         targetButton.do {
             $0.setImage(.btnTarget, for: .normal)
+            
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOpacity = 0.1
+            $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+            $0.layer.shadowRadius = 4
         }
         
         bottomSheetView.do {
@@ -95,6 +109,14 @@ final class HomeView: BaseView {
         }
         
         mapView.logoAlign = .rightTop
+        
+        gradient.do {
+            $0.backgroundColor = .white
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOpacity = 0.12
+            $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+            $0.layer.shadowRadius = 32
+        }
     }
 }
 
