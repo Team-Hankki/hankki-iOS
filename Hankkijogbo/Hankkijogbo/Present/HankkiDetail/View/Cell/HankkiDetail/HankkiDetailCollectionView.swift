@@ -12,7 +12,7 @@ final class HankkiDetailCollectionView: BaseView {
     // MARK: - UI Components
     
     private let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    lazy var collectionView: UICollectionView = UICollectionView(frame: .init(x: 0, y: 0, width: 339, height: 349), collectionViewLayout: flowLayout)
+    lazy var collectionView: UICollectionView = UICollectionView(frame: .init(x: 0, y: 0, width: UIScreen.getDeviceWidth() - 22 * 2, height: 349), collectionViewLayout: flowLayout)
     
     // MARK: - Life Cycle
 
@@ -43,7 +43,7 @@ extension HankkiDetailCollectionView {
     func updateLayout(menuSize: Int) {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(339)
+            $0.width.equalTo(UIScreen.getDeviceWidth() - 22 * 2)
             $0.height.equalTo(240 + (menuSize * 36))
         }
         layoutIfNeeded()

@@ -30,7 +30,7 @@ final class HankkiReportOptionCollectionView: BaseView {
     
     override func setupStyle() {
         flowLayout.do {
-            $0.itemSize = .init(width: 331, height: 52)
+            $0.itemSize = .init(width: UIScreen.getDeviceWidth() - 22 * 2, height: 52)
             $0.scrollDirection = .vertical
             $0.minimumLineSpacing = 8
             $0.headerReferenceSize = .init(width: 252, height: 27)

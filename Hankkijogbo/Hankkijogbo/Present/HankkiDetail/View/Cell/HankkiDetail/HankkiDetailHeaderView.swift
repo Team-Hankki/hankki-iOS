@@ -15,7 +15,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
     
     private let headerStackView: UIStackView = UIStackView()
     private let headerLabel: UILabel = UILabel()
-    private let categoryLabel: HankkiPaddingLabel = HankkiPaddingLabel(padding: .init(top: 10, left: 12, bottom: 10, right: 12))
+    private let categoryLabel: HankkiPaddingLabel = HankkiPaddingLabel(padding: UIEdgeInsets(top: 5, left: 12, bottom: 5, right: 12))
     
     // MARK: - Setup UI
     
@@ -36,7 +36,6 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
         categoryLabel.snp.makeConstraints {
             $0.centerY.equalTo(headerLabel)
             $0.leading.equalTo(headerLabel.snp.trailing).offset(8)
-            $0.height.equalTo(28)
         }
     }
     
@@ -44,8 +43,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
         headerStackView.do {
             $0.axis = .horizontal
             $0.spacing = 8
-            $0.alignment = .top
-            $0.distribution = .equalSpacing
+            $0.alignment = .center
         }
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(

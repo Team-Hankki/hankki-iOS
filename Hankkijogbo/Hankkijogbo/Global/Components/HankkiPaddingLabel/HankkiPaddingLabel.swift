@@ -9,11 +9,15 @@ import UIKit
 
 /// - 패딩을 적용할 수 있도록 커스텀한 Label
 final class HankkiPaddingLabel: UILabel {
-    var padding: UIEdgeInsets = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
+    let padding: UIEdgeInsets
 
-    convenience init(padding: UIEdgeInsets) {
-        self.init()
+    init(padding: UIEdgeInsets) {
         self.padding = padding
+        super.init(frame: .zero)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func drawText(in rect: CGRect) {
