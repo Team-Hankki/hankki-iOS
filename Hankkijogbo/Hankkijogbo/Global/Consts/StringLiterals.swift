@@ -110,7 +110,7 @@ enum StringLiterals {
         static let changeImage = "바꾸기"
         static let menuName = "메뉴 이름"
         static let price = "가격"
-        static let priceError = "8000원 이하만 가능해요"
+        static let priceError = "8천원 이하만 가능해요"
         static let addMenu = "메뉴 추가하기"
         static let goToReportedHankki = "제보한 식당 보러가기"
         static let hankkiReportComplete = "번째 식당을 등록했어요"
