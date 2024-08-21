@@ -141,7 +141,7 @@ final class AlertViewController: BaseViewController {
         if image == nil {
             // 이미지가 없는 모달창일 경우
             labelStackView.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(24)
+                $0.top.equalToSuperview().offset(20)
                 $0.leading.equalToSuperview().inset(20)
             }
             
