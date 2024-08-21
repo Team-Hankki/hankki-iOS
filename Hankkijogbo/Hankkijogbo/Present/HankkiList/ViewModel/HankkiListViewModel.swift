@@ -94,14 +94,14 @@ extension HankkiListViewModel {
                                                          heartCount: $0.heartCount)
                 }
                 
-                self.compaerLikedHnakkiList(currentHankkiList)
+                self.compareLikedHnakkiList(currentHankkiList)
             }
         }
     }
 }
 
 private extension HankkiListViewModel {
-    func compaerLikedHnakkiList(_ currentHankkiList: [HankkiListTableViewCell.Model]) {
+    func compareLikedHnakkiList(_ currentHankkiList: [HankkiListTableViewCell.Model]) {
         // 현재 Liked List에 존재하는 식당의 id와 heartCount를 dictionary 형태로 저장함
         let heartCountDict = Dictionary(uniqueKeysWithValues: currentHankkiList.map { ($0.id, $0.heartCount) })
         
