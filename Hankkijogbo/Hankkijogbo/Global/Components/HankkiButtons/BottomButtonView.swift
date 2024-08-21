@@ -39,7 +39,7 @@ final class BottomButtonView: BaseView {
         self.primaryButtonHandler = primaryButtonHandler
         self.lineButtonHandler = lineButtonHandler
         super.init(frame: frame)
-    
+        
         setupButtonAction()
     }
     
@@ -91,7 +91,7 @@ final class BottomButtonView: BaseView {
             $0.leading.trailing.top.equalToSuperview()
             $0.height.equalTo(154)
         }
-
+        
         if !primaryButtonText.isEmpty {
             primaryButton.snp.makeConstraints {
                 $0.top.bottom.equalToSuperview().inset(50)
@@ -119,7 +119,7 @@ private extension BottomButtonView {
                 UIColor.white.withAlphaComponent(0).cgColor,
                 UIColor.white.cgColor,
                 UIColor.white.cgColor
-              ]
+            ]
             $0.locations = [0.0, 0.3, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
@@ -145,21 +145,42 @@ private extension BottomButtonView {
         primaryButton.addTarget(self, action: #selector(primaryButtonDidTap), for: .touchUpInside)
         lineButton.addTarget(self, action: #selector(lineButtonDidTap), for: .touchUpInside)
     }
-   
+    
 }
 
 extension BottomButtonView {
-    func setupEnabledDoneButton() {
+    // TODO: - 서현) button text 관련해서 고민해봅시다...
+    func setupEnabledDoneButton(primaryButtonText: String = "") {
         primaryButton.do {
             $0.backgroundColor = .red500
             $0.isEnabled = true
         }
+        
+        if !primaryButtonText.isEmpty {
+            if let attributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: primaryButtonText,
+                color: .hankkiWhite
+            ) {
+                primaryButton.setAttributedTitle(attributedTitle, for: .normal)
+            }
+        }
     }
     
-    func setupDisabledDoneButton() {
+    func setupDisabledDoneButton(primaryButtonText: String = "") {
         primaryButton.do {
             $0.backgroundColor = .red400
             $0.isEnabled = false
+        }
+        
+        if !primaryButtonText.isEmpty {
+            if let attributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.subtitle3,
+                withText: primaryButtonText,
+                color: .hankkiWhite
+            ) {
+                primaryButton.setAttributedTitle(attributedTitle, for: .normal)
+            }
         }
     }
 }
