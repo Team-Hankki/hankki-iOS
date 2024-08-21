@@ -86,13 +86,6 @@ extension HankkiNavigationController {
         titleButtonAction = forType.titleButtonAction
         
         setupBackgroundColor(forType.backgroundColor)
-        
-//        if forType.isGradient {
-//            print("navigation true")
-//            safeAreaView.layer.shadowOpacity = 0.12
-//        } else {
-//            safeAreaView.layer.shadowOpacity = 0
-//        }
     }
     
     /// NavigationBar의 배경색을 바꿈

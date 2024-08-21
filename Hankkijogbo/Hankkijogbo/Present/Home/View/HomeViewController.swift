@@ -119,8 +119,7 @@ extension HomeViewController {
                                                               mainTitlePosition: "left",
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
-                                                              titleButtonAction: presentUniversity,
-                                                              isGradient: true)
+                                                              titleButtonAction: presentUniversity)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
             navigationController.isNavigationBarHidden = false
