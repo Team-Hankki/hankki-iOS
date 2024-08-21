@@ -152,14 +152,15 @@ private extension UnivSelectViewController {
     }
     
     func setupGradient() {
-       let gradient = CAGradientLayer()
+        let gradient = CAGradientLayer()
         gradient.do {
             $0.colors = [
-                UIColor.white.cgColor,
-                UIColor.white.withAlphaComponent(0.3).cgColor,
-                UIColor.white.withAlphaComponent(0).cgColor,
-              ]
-            $0.locations = [0.0, 0.7, 1.0]
+                UIColor.white.cgColor, // #FFF
+                UIColor.white.withAlphaComponent(0.30).cgColor, // rgba(255, 255, 255, 0.30)
+                UIColor.white.withAlphaComponent(0.00).cgColor  // rgba(255, 255, 255, 0.00)
+            ]
+            
+            $0.locations = [0.3286, 0.5686, 0.8]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)
             $0.endPoint = CGPoint(x: 0.5, y: 1.0)
             $0.frame = topGradientView.bounds
@@ -199,7 +200,7 @@ private extension UnivSelectViewController {
     func setupRegister() {
         univCollectionView.register(UnivCollectionViewCell.self, forCellWithReuseIdentifier: UnivCollectionViewCell.className)
     }
-
+    
     func setupDelegate() {
         univCollectionView.dataSource = self
         univCollectionView.delegate = self
