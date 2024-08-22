@@ -146,7 +146,7 @@ extension UIViewController {
     func presentMyZipListBottomSheet(id: Int) {
         let viewController = MyZipListBottomSheetViewController(storeId: id)
         viewController.modalTransitionStyle = .crossDissolve
-        viewController.modalPresentationStyle = .overFullScreen
+        viewController.modalPresentationStyle = .overFullScreen        
         self.present(viewController, animated: false, completion: nil)
     }
     

@@ -86,6 +86,14 @@ final class MoyaPlugin: PluginType {
         UIApplication.showAlert(titleText: StringLiterals.Alert.NetworkError.title,
                                 subText: StringLiterals.Alert.NetworkError.sub,
                                 primaryButtonText: StringLiterals.Alert.NetworkError.primaryButton,
-                                primaryButtonHandler: { exit(0) })
+                                primaryButtonHandler: presentSetting)
+    }
+}
+
+private extension MoyaPlugin {
+    func presentSetting() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }
