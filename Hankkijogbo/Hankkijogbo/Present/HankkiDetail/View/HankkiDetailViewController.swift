@@ -279,8 +279,8 @@ extension HankkiDetailViewController {
     
     @objc func editMenuButtonDidTap() {
         self.showAlert(
-            titleText: StringLiterals.Alert.waitPlease,
-            subText: StringLiterals.Alert.prepareForEditMenu,
+            titleText: StringLiterals.Alert.DevelopEdit.title,
+            subText: StringLiterals.Alert.DevelopEdit.sub,
             primaryButtonText: StringLiterals.Alert.check,
             primaryButtonHandler: dismissWithFadeOut
         )

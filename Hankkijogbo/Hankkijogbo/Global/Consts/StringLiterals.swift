@@ -35,7 +35,6 @@ enum StringLiterals {
         static let alreadyReportHankki = "등록된 식당이 있어요\n식당으로 이동할까요?"
         static let alreadyReportHankkiByOther = "다른 학교에 제보된 식당이에요\n우리 학교에도 추가할까요?"
         static let waitPlease = "조금만 기다려주세요!"
-        static let prepareForEditMenu = "메뉴를 편집할 수 있도록 준비하고 있어요 :)"
         static let thanksForReport = "님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!"
         static let reallyReport = "정말 제보하시겠어요?"
         static let disappearInfoByReport = "제보시 식당 정보가 앱에서 사라져요"
@@ -62,8 +61,14 @@ enum StringLiterals {
         }
         
         enum DevelopShare {
-            static let title = "조금만 기다려주세요"
-            static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요"
+            static let title = StringLiterals.Alert.waitPlease
+            static let sub = "친구에게 내 족보를 공유할 수 있도록 준비 중이에요 :)"
+            static let primaryButton = StringLiterals.Alert.check
+        }
+        
+        enum DevelopEdit {
+            static let title = StringLiterals.Alert.waitPlease
+            static let sub = "메뉴를 편집할 수 있도록 준비 중이에요 :)"
             static let primaryButton = StringLiterals.Alert.check
         }
         
