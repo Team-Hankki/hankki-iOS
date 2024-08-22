@@ -69,7 +69,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalTo(menuLabel.snp.bottom).offset(3)
             $0.leading.equalToSuperview()
             $0.width.equalTo(UIScreen.convertByWidthRatio(178))
-            $0.height.equalTo(UIScreen.convertByHeightRatio(48))
+            $0.height.equalTo(48)
         }
         priceTextField.snp.makeConstraints {
             $0.top.equalTo(menuTextField)
