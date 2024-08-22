@@ -8,7 +8,7 @@
 | [👑 @mcrkgus](https://github.com/mcrkgus) | [@EunsuSeo01](https://github.com/EunsuSeo01) | [@shimseohyun](https://github.com/shimseohyun) |
 |:---:|:---:|:---:|
 |<img width="250" alt="mcrkgus" src="https://github.com/user-attachments/assets/acfb09f7-5600-4861-b5c4-bb2c337e8d17">|<img width="250" alt="EunsuSeo01" src="https://github.com/user-attachments/assets/0cb6f598-2627-4173-8206-3aef7726b129">|<img width="250" alt="shimseohyun" src="https://github.com/user-attachments/assets/53244098-45eb-48a6-a734-26a5854ab5d0">|
-|`홈화면`<br/> `지도`<br/> `전체 식당 족보 리스트`<br/>| `식당 제보 화면`<br/> `식당 검색 화면`<br/> `식당 제보 완료 화면`<br/> `식당 상세 화면`<br/> `나의 식당 족보 바텀 시트`<br/>|`온보딩` `로그인`<br/> `대학 선택`<br/> `마이페이지`<br/> `나의 족보 만들기`<br/> `족보 내 식당 리스트 확인`<br/>|
+|`홈화면`<br/> `지도`<br/> `전체 식당 족보 리스트`<br/>| `식당 제보 화면`<br/> `식당 검색 화면`<br/> `식당 제보 완료 화면`<br/> `식당 상세 화면`<br/> `나의 식당 족보 바텀 시트`<br/>|`온보딩` `로그인`<br/> `대학 선택`<br/> `마이페이지`<br/> `제보한 식당 리스트`<br/> `좋아요한 식당 리스트`<br/> `나의 족보 만들기`<br/> `족보 내 식당 리스트 확인`<br/>|
 
 
 ## 🛠 Development Environment

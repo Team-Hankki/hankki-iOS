@@ -11,20 +11,13 @@ final class HankkiInfoCardView: BaseView {
     
     // MARK: - Properties
         
-    var hankkiNameString: String = "" {
-        didSet {
-            self.hankkiNameLabel.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body1,
-                withText: hankkiNameString,
-                color: .gray850
-            )
-        }
-    }
+    var nameMaxLength: Int = 11
+    var hankkiNameString: String = ""
     var addToMyZipListString: String = StringLiterals.MyZip.addToMyZip {
         didSet {
             // TODO: - 버튼은 텍스트 하나 바꾸려면 이렇게 다 다시해야 됨..ㅎ 우리 대안책을 나중에 찾아보아요...
             self.addToMyZipListButton.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body3,
+                for: PretendardStyle.body2,
                 withText: addToMyZipListString,
                 color: .red500
             ), for: .normal)
@@ -71,7 +64,7 @@ final class HankkiInfoCardView: BaseView {
         }
         addToMyZipListButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(11)
         }
     }
     
@@ -90,13 +83,13 @@ final class HankkiInfoCardView: BaseView {
         hankkiNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
-                withText: hankkiNameString,
+                withText: (hankkiNameString.count > nameMaxLength) ? hankkiNameString.getTruncatedTailString(limit: nameMaxLength) : hankkiNameString,
                 color: .gray850
             )
         }
         addToMyZipListButton.do {
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body3,
+                for: PretendardStyle.body2,
                 withText: addToMyZipListString,
                 color: .red500
             ), for: .normal)

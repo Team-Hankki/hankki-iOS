@@ -20,7 +20,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     
     var selectedHankkiNameString: String? {
         didSet {
-            delegate?.changeBottomButtonView(model != nil)
+            delegate?.changeBottomButtonView(selectedHankkiNameString != nil)
         }
     }
     
@@ -28,25 +28,19 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         didSet {
             if isSelected {
                 if selectedHankkiNameString != nil {
-                    hankkiNameLabel.textColor = .gray850
-                    checkButton.setImage(nil, for: .normal)
-                    self.backgroundColor = .hankkiWhite
+                    setupDeselectedStyle()
                     self.selectedHankkiNameString = nil
                 } else {
-                    hankkiNameLabel.textColor = .red500
-                    checkButton.setImage(.btnCheckFilled, for: .normal)
-                    self.backgroundColor = .red100
+                    setupSelectedStyle()
                     self.selectedHankkiNameString = hankkiNameLabel.text
                 }
             } else {
-                hankkiNameLabel.textColor = .gray850
-                checkButton.setImage(nil, for: .normal)
-                self.backgroundColor = .hankkiWhite
+                setupDeselectedStyle()
                 self.selectedHankkiNameString = nil
             }
         }
     }
-
+    
     // MARK: - UI Properties
     
     let hankkiNameLabel: UILabel = UILabel()
@@ -93,7 +87,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         hankkiNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.subtitle,
+                for: SuiteStyle.subtitle2,
                 color: .gray850
             )
             $0.lineBreakMode = .byTruncatingTail
@@ -111,6 +105,28 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .gray100
         }
     }
+}
+
+private extension SearchCollectionViewCell{
+    
+    // MARK: - Private Func
+    
+    func setupSelectedStyle() {
+        hankkiNameLabel.textColor = .red500
+        checkButton.setImage(.btnCheckFilled, for: .normal)
+        self.backgroundColor = .red100
+    }
+    
+    func setupDeselectedStyle() {
+        hankkiNameLabel.textColor = .gray850
+        checkButton.setImage(nil, for: .normal)
+        self.backgroundColor = .hankkiWhite
+    }
+}
+
+extension SearchCollectionViewCell {
+    
+    // MARK: - Public Func
     
     func bindLocationData(model: GetSearchedLocation) {
         self.model = model

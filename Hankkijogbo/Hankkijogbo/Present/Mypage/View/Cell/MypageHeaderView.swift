@@ -61,9 +61,7 @@ final class MypageHeaderView: BaseCollectionViewCell {
 }
 
 extension MypageHeaderView {
-    func dataBind(_ model: Model?) {
-        if let nameString = model?.name {
-            profileNameLabel.text = nameString + StringLiterals.Mypage.Header.greeting
-        } else { profileNameLabel.text = StringLiterals.Mypage.Header.greeting }
+    func dataBind(_ model: Model) {
+        profileNameLabel.text = model.name + StringLiterals.Mypage.Header.greeting
     }
 }

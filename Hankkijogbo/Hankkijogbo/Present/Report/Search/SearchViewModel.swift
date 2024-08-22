@@ -13,6 +13,7 @@ import Moya
 
 final class SearchViewModel {
     
+    var isFinalSelected: Bool = false
     var storeId: Int?
     private var universityId: Int?
     
@@ -21,18 +22,13 @@ final class SearchViewModel {
     var completeLocationSelection: (() -> Void)?
     var moveToDetail: (() -> Void)?
     
-    var selectedLocationData: GetSearchedLocation? {
-        didSet {
-            selectLocation?()
-        }
-    }
+    var selectedLocationData: GetSearchedLocation?
     var searchedLocationResponseData: GetSearchedLocationResponseData? {
         didSet {
             updateLocations?()
         }
     }
     var updateLocations: (() -> Void)?
-    var selectLocation: (() -> Void)?
     var emptyResult: (() -> Void)?
 }
 
@@ -54,6 +50,7 @@ extension SearchViewModel {
             result.handleNetworkResult { [weak self] response in
                 let data = response.data
                 if data.id == nil {
+                    self?.isFinalSelected = true
                     self?.completeLocationSelection?()
                 } else {
                     self?.storeId = data.id

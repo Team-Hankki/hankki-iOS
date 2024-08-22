@@ -18,7 +18,7 @@ extension HankkiListTableViewCell {
         let imageURL: String
         let category: String
         let lowestPrice: Int
-        let heartCount: Int
+        var heartCount: Int
         var isDeleted: Bool = false
     }
 }
@@ -94,7 +94,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle, color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle2, color: .gray900)
             $0.lineBreakMode = .byTruncatingTail
         }
         
@@ -214,7 +214,7 @@ private extension HankkiListTableViewCell {
         stackView.addArrangedSubviews(subInfoSeparatorView, subInfoImageView)
         
         subInfoSeparatorView.snp.makeConstraints {
-            $0.width.equalTo(10)
+            $0.width.equalTo(7)
             $0.height.equalTo(18)
         }
         

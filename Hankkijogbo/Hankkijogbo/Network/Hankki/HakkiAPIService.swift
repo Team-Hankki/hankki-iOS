@@ -21,6 +21,7 @@ protocol HankkiAPIServiceProtocol {
     func postHankki(multipartData: [MultipartFormData], completion: @escaping(NetworkResult<PostHankkiResponseDTO>) -> Void)
     func postHankkiFromOther(request: PostHankkiFromOtherRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func deleteHankkiHeart(id: Int, completion: @escaping(NetworkResult<HeartResponseDTO>) -> Void)
+    func deleteHankki(id: Int, completion: @escaping(NetworkResult<Void>) -> Void)
 }
 
 extension HankkiAPIServiceProtocol {
@@ -236,6 +237,22 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    /// 식당 삭제하기
+    func deleteHankki(id: Int, completion: @escaping (NetworkResult<Void>) -> Void) {
+        provider.request(.deleteHankki(id: id)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<Void> = self.fetchNetworkResult(statusCode: response.statusCode)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<Void> = self.fetchNetworkResult(statusCode: response.statusCode)
                     completion(networkResult)
                 }
             }

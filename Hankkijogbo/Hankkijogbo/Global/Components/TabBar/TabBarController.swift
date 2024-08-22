@@ -32,15 +32,23 @@ final class TabBarController: UITabBarController {
 
 private extension TabBarController {
     func setupStyle() {
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = .gray600
         tabBar.tintColor = .black
         
-        let customBorder = CALayer()
-        customBorder.frame = CGRect(x: 0, y: 0, width: tabBar.frame.width, height: 1)
-        customBorder.backgroundColor = UIColor.gray100.cgColor
-        tabBar.layer.addSublayer(customBorder)
+        tabBar.do {
+            $0.layer.shadowColor = UIColor.black.cgColor
+            $0.layer.shadowOpacity = 0.05
+            $0.layer.shadowOffset = CGSize(width: 0, height: 1)
+            $0.layer.shadowRadius = 24
+            
+            let customBorder = CALayer()
+            customBorder.frame = CGRect(x: 0, y: 0, width: tabBar.frame.width, height: 1)
+            customBorder.backgroundColor = UIColor.gray100.cgColor
+            
+            $0.layer.addSublayer(customBorder)
+        }
     }
     
     func setupDelegate() {

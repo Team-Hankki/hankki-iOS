@@ -76,7 +76,8 @@ extension HankkiNavigationController {
         backButton.isHidden = !forType.hasBackButton
         rightButton.isHidden = !forType.hasRightButton
     
-        setupMainTitle(stringOrImage: forType.mainTitle)
+        mainTitleLabel.attributedText = UILabel.setupAttributedText(for: forType.mainTitleFont, color: .gray900)
+        setupMainTitle(stringOrImage: forType.mainTitle, position: forType.mainTitlePosition)
         setupRightButton(stringOrImage: forType.rightButton)
         
         rightButtonAction = forType.rightButtonAction
@@ -98,11 +99,12 @@ extension HankkiNavigationController {
 
 private extension HankkiNavigationController {
     
-    func setupStyle() {        
+    func setupStyle() {
+        
+        
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
-            $0.spacing = 4
         }
         
         mainTitleLabel.do {
@@ -128,6 +130,7 @@ private extension HankkiNavigationController {
     }
     
     func setupLayout() {
+        
         customNavigationBar.snp.makeConstraints {
             $0.height.equalTo(navigationHeight)
             $0.bottom.equalTo(view.snp.topMargin)
@@ -175,7 +178,7 @@ private extension HankkiNavigationController {
         navigationBar.isHidden = true
     }
     
-    func setupMainTitle(stringOrImage: StringOrImageType) {
+    func setupMainTitle(stringOrImage: StringOrImageType, position: String) {
         switch stringOrImage {
         case .string(let string):
             mainImageView.isHidden = true
@@ -190,6 +193,15 @@ private extension HankkiNavigationController {
             mainImageView.isHidden = false
             mainTitleLabel.text = string
             mainImageView.image = image
+        }
+        titleStackView.snp.removeConstraints()
+        titleStackView.snp.makeConstraints {
+            if position == "left" {
+                $0.leading.equalToSuperview().inset(22)
+                $0.centerY.equalToSuperview()
+            } else if position == "center" {
+                $0.center.equalToSuperview()
+            }
         }
     }
     

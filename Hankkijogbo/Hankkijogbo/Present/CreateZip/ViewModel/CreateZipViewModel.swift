@@ -23,8 +23,9 @@ extension CreateZipViewModel {
         NetworkService.shared.zipService.postZip(requestBody: data) { result in
             switch result {
             case .conflict:
-                // TODO: - 서현) 기디쌤들한테 알럿 내용 받아오기
-                UIApplication.showAlert(titleText: "이미 존재하는 족보의 이름입니다.", primaryButtonText: "확인")
+                UIApplication.showAlert(titleText: StringLiterals.Alert.CreateZipConflict.title,
+                                        subText: StringLiterals.Alert.CreateZipConflict.sub,
+                                        primaryButtonText: StringLiterals.Alert.CreateZipConflict.primaryButton)
             default:
                 result.handleNetworkResult { _ in
                     DispatchQueue.main.async {

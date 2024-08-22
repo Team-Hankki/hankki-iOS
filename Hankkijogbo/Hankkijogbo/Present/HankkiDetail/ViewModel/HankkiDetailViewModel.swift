@@ -31,18 +31,21 @@ final class HankkiDetailViewModel {
     /// 식당 좋아요 추가
     func postHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in
-                completion()
-            }
+            result.handleNetworkResult { _ in completion() }
         }
     }
     
     /// 식당 좋아요 삭제
     func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in
-                completion()
-            }
+            result.handleNetworkResult { _ in completion() }
+        }
+    }
+    
+    /// 식당 삭제
+    func deleteHankkiAPI(id: Int, completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankki(id: id) { result in
+            result.handleNetworkResult(onSuccessVoid: completion)
         }
     }
 }

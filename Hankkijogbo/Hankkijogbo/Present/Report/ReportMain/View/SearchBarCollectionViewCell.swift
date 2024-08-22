@@ -12,12 +12,14 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
     
     private var hankkiNameMaxLength: Int = 12
-    var hankkiNameString: String = "" {
+    var hankkiNameString: String? {
         didSet {
-            if hankkiNameString != "" {
-                print(hankkiNameString)
-                self.setupStyleForSet()
-                reportedNumberLabel.textColor = .gray600
+            if let hankkiNameString = hankkiNameString {
+                if hankkiNameString != "" {
+                    self.setupStyleForSet()
+                } else {
+                    self.setupStyleForNotSet()
+                }
             } else {
                 self.setupStyleForNotSet()
             }
@@ -32,6 +34,12 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     private let separatorView: UIView = UIView()
     
     // MARK: - Setup UI
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        setupStyleForNotSet()
+    }
     
     override func setupHierarchy() {
         contentView.addSubviews(
@@ -109,7 +117,7 @@ private extension SearchBarCollectionViewCell {
             $0.layer.cornerRadius = 10
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle3,
-                withText: hankkiNameString,
+                withText: hankkiNameString ?? StringLiterals.Report.searchFirstPlaceHolder,
                 color: .red500
             ), for: .normal)
             $0.setImage(.icDown, for: .normal)
@@ -122,6 +130,7 @@ private extension SearchBarCollectionViewCell {
     }
     
     func setupSearchBarButtonTitle() {
+        guard let hankkiNameString = hankkiNameString else { return }
         let title = hankkiNameString.count > hankkiNameMaxLength
         ? hankkiNameString.getTruncatedTailString(limit: hankkiNameMaxLength)
         : hankkiNameString

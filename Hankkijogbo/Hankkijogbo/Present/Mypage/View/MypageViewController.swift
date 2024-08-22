@@ -22,7 +22,7 @@ final class MypageViewController: BaseViewController {
     ]
     
     private let optionList: [MypageOptionCollectionViewCell.Model] = [
-        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.FAQ),
+        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Terms),
         MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.OneonOne),
         MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Logout)
     ]
@@ -41,10 +41,6 @@ final class MypageViewController: BaseViewController {
         
         setupRegister()
         setupDelegate()
-        
-        bindViewModel()
-        
-        viewModel.getMe()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,15 +68,6 @@ extension MypageViewController {
 }
 
 private extension MypageViewController {
-    private func bindViewModel() {
-        viewModel.reloadCollectionView = { [weak self] in
-            DispatchQueue.main.async {
-                guard let headerView = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? MypageHeaderView else { return }
-                headerView.dataBind(self?.viewModel.userInfo ?? nil)
-            }
-        }
-    }
-    
     func setupRegister() {
         collectionView.register(MypageZipCollectionViewCell.self, forCellWithReuseIdentifier: MypageZipCollectionViewCell.className)
         collectionView.register(MypageHankkiCollectionViewCell.self, forCellWithReuseIdentifier: MypageHankkiCollectionViewCell.className)
@@ -115,7 +102,7 @@ private extension MypageViewController {
         self.showAlert(
             titleText: StringLiterals.Alert.Withdraw.title,
             secondaryButtonText: StringLiterals.Alert.Withdraw.secondaryButton,
-            primaryButtonText: StringLiterals.Alert.back,
+            primaryButtonText: StringLiterals.Alert.Withdraw.primaryButton,
             secondaryButtonHandler: handdleWithdraw
         )
     }
@@ -136,11 +123,17 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: MypageHeaderView.className,
-                for: indexPath
-            )
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                 ofKind: kind,
+                 withReuseIdentifier: MypageHeaderView.className,
+                 for: indexPath
+             ) as? MypageHeaderView else {
+                 return UICollectionReusableView()
+             }
+            
+            let nickname = UserDefaults.standard.getNickname()
+            headerView.dataBind(MypageHeaderView.Model(name: nickname))
+            
             return headerView
             
         case UICollectionView.elementKindSectionFooter:

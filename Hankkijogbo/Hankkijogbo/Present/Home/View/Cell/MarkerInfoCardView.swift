@@ -62,7 +62,7 @@ final class MarkerInfoCardView: BaseView {
         
         thumbnailImageView.do {
             $0.makeRoundBorder(cornerRadius: 8, borderWidth: 0, borderColor: .clear)
-            $0.backgroundColor = .gray
+            $0.contentMode = .scaleAspectFill
         }
 
         menutagLabel.do {
@@ -72,7 +72,7 @@ final class MarkerInfoCardView: BaseView {
         
         hankkiTitle.do {
             $0.textColor = .gray900
-            $0.font = .setupSuiteStyle(of: .subtitle)
+            $0.font = .setupSuiteStyle(of: .subtitle2)
         }
         
         [priceLabel, likeLabel].forEach {
@@ -125,7 +125,7 @@ final class MarkerInfoCardView: BaseView {
 
         addButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview().inset(22)
         }
     }
 }
@@ -150,7 +150,7 @@ private extension MarkerInfoCardView {
 extension MarkerInfoCardView {
     func bindData(model: GetHankkiThumbnailResponseData) {
         hankkiId = model.id
-        thumbnailImageView.setKFImage(url: model.imageUrl)
+        thumbnailImageView.setKFImage(url: model.imageUrl, placeholder: .imgDetailDefault)
         menutagLabel.text = model.category
         hankkiTitle.text = model.name
         priceLabel.text = String(model.lowestPrice)

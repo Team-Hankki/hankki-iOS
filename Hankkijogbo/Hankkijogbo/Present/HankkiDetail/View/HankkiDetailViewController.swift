@@ -141,7 +141,6 @@ private extension HankkiDetailViewController {
     func bindViewModel() {
         viewModel.setHankkiDetailData = { [weak self] in
             if let data = self?.viewModel.hankkiDetailData {
-                // TODO: - 디폴트 사진일 경우를 구별
                 if let first = data.imageUrls.first {
                     self?.setupImageStyle(imageUrl: first)
                 } else {
@@ -213,7 +212,7 @@ private extension HankkiDetailViewController {
             $0.backgroundColor = .gray300
         }
         thumbnailImageView.do {
-            $0.backgroundColor = .gray300
+            $0.image = .imgDetailDefault
         }
         topBlackGradientImageView.do {
             $0.image = nil
@@ -229,6 +228,38 @@ private extension HankkiDetailViewController {
         topBlackGradientImageView.do {
             $0.image = .imgBlackGradient
         }
+    }
+    
+    /// 정말 제보하시겠어요? Alert 띄우기
+    func showCheckAlertForReport() {
+        self.showAlert(
+            titleText: StringLiterals.Alert.reallyReport,
+            subText: StringLiterals.Alert.disappearInfoByReport,
+            secondaryButtonText: StringLiterals.Alert.back,
+            primaryButtonText: StringLiterals.Common.report,
+            primaryButtonHandler: deleteHankkiByReport
+        )
+    }
+    
+    /// 제보를 통한 식당 삭제
+    func deleteHankkiByReport() {
+        viewModel.deleteHankkiAPI(id: hankkiId) { [self] in
+            showThanksAlert()
+        }
+    }
+    
+    /// 제보 감사 Alert 띄우기
+    func showThanksAlert() {
+        let nickname: String = UserDefaults.standard.getNickname()
+
+        self.showAlert(
+            image: .imgModalReport,
+            titleText: nickname + StringLiterals.Alert.thanksForReport,
+            primaryButtonText: StringLiterals.Alert.back,
+            primaryButtonHandler: dismissAlertAndPop,
+            hightlightedText: nickname,
+            hightlightedColor: .red500
+        )
     }
     
     /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
@@ -260,12 +291,7 @@ extension HankkiDetailViewController {
     }
     
     @objc func hankkiReportButtonDidTap() {
-        self.showAlert(
-            image: .imgModalReport,
-            titleText: StringLiterals.Alert.thanksForReport,
-            primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: dismissAlertAndPop
-        )
+        showCheckAlertForReport()
     }
     
     @objc func setupBlackToast(_ notification: Notification) {

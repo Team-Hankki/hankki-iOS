@@ -17,7 +17,7 @@ enum SupplementaryItemType {
 class CompositionalLayoutFactory {
     
     /// Item 생성 시 사용합니다.
-    static func createItem(
+    func createItem(
         widthDimension: NSCollectionLayoutDimension,
         heightDimension: NSCollectionLayoutDimension,
         contentInsets: NSDirectionalEdgeInsets = .zero
@@ -29,7 +29,7 @@ class CompositionalLayoutFactory {
     }
     
     /// Group 생성 시 사용합니다.
-    static func createGroup(
+    func createGroup(
         item: [NSCollectionLayoutItem],
         widthDimension: NSCollectionLayoutDimension,
         heightDimension: NSCollectionLayoutDimension,
@@ -43,7 +43,7 @@ class CompositionalLayoutFactory {
     
     /// Header 또는 Footer 생성 시 사용합니다.
     /// - type에 .header 또는 .footer를 작성
-    static func createBoundarySupplementaryItem(
+    func createBoundarySupplementaryItem(
         type: SupplementaryItemType,
         widthDimension: NSCollectionLayoutDimension,
         heightDimension: NSCollectionLayoutDimension,
@@ -60,7 +60,7 @@ class CompositionalLayoutFactory {
     }
     
     /// Section 생성 시 사용합니다.
-    static func createLayoutSection(
+    func createLayoutSection(
         group: NSCollectionLayoutGroup,
         orthogonalScrollingBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior = .none,
         sectionContentInsets: NSDirectionalEdgeInsets = .zero,

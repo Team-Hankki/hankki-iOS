@@ -32,7 +32,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
             $0.top.leading.equalToSuperview()
         }
         selectedImageView.snp.makeConstraints {
-            $0.top.equalTo(recommendGuideLabel.snp.bottom).offset(32)
+            $0.top.equalTo(recommendGuideLabel.snp.bottom).offset(24)
             $0.leading.equalToSuperview()
             $0.size.equalTo(84)
         }

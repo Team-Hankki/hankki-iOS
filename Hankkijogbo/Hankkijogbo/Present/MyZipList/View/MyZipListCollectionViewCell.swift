@@ -50,7 +50,7 @@ final class MyZipListCollectionViewCell: BaseCollectionViewCell {
             $0.top.equalTo(firstHashtagLabel)
         }
         addZipButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(37)
+            $0.trailing.equalToSuperview().inset(22)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(24)
         }

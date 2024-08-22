@@ -36,7 +36,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
             $0.top.leading.equalToSuperview()
         }
         selectImageButton.snp.makeConstraints {
-            $0.top.equalTo(recommendGuideLabel.snp.bottom).offset(32)
+            $0.top.equalTo(recommendGuideLabel.snp.bottom).offset(24)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(58)
         }
