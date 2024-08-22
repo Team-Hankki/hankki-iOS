@@ -93,6 +93,7 @@ final class HomeView: BaseView {
         buttonStackView.do {
             $0.axis = .horizontal
             $0.spacing = 8
+            $0.isUserInteractionEnabled = true
         }
         
         targetButton.do {
