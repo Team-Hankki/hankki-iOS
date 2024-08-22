@@ -242,7 +242,7 @@ extension HomeViewController {
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     self.markerInfoCardView?.snp.updateConstraints {
-                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
+                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(12)
                     }
                     self.view.layoutIfNeeded()
                     self.markerInfoCardView!.addButton.addTarget(self, action: #selector(self.presentMyZipBottomSheet), for: .touchUpInside)
