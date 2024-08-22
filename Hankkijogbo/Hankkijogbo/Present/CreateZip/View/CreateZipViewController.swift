@@ -57,15 +57,15 @@ final class CreateZipViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         setupNavigationBar()
+        super.viewWillAppear(animated)
+        setupNavigationBar()
     }
     
     // MARK: - Set UI
     
     override func setupStyle() {
         viewTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1, 
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1,
                                                             withText: StringLiterals.CreateZip.viewTitle,
                                                             color: .gray900)
         }
@@ -75,7 +75,7 @@ final class CreateZipViewController: BaseViewController {
                                                             withText: StringLiterals.CreateZip.TitleInput.label,
                                                             color: .gray900)
         }
-    
+        
         titleInputTextField.do {
             $0.tag = 0
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
@@ -113,17 +113,21 @@ final class CreateZipViewController: BaseViewController {
             $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TagInput.placeholder,
                                       forColor: .gray400)
         }
+        
+        submitButton.do {
+            $0.setupDisabledButton()
+        }
     }
     
     override func setupHierarchy() {
         view.addSubviews(
             viewTitle,
-            titleInputTitle, 
-            titleInputTextField, 
+            titleInputTitle,
+            titleInputTextField,
             tagInputTitle,
             tagInputTextField,
             submitButton
-          )
+        )
         titleCountView.addSubview(titleCountLabel)
     }
     
@@ -194,7 +198,7 @@ private extension CreateZipViewController {
         titleInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         tagInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
-
+    
     @objc func textFieldDidChange() {
         isFormValid()
     }
@@ -207,19 +211,27 @@ private extension CreateZipViewController {
     func submitButtonDidTap() {
         let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
         let data = PostZipRequestDTO(title: titleInputTextField.text ?? " ", details: arr)
-
-        viewModel.postZip(data) {
-            DispatchQueue.main.async {
-                // 족보 만들기를 완료해서, 서버에서 생성이되면 이전 페이지로 이동한다
-                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                   let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-                    rootViewController.popViewController(animated: true)
-                    if let id = self.storeId {
-                        rootViewController.presentMyZipListBottomSheet(id: id)
-                    }
+        
+        viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+    }
+    
+    func resetTitleTextField() {
+        self.titleInputTextField.text = ""
+        submitButton.setupDisabledButton()
+    }
+    
+    func dismissSelf() {
+        DispatchQueue.main.async {
+            // 족보 만들기를 완료해서, 서버에서 생성이되면 이전 페이지로 이동한다
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                rootViewController.popViewController(animated: true)
+                if let id = self.storeId {
+                    rootViewController.presentMyZipListBottomSheet(id: id)
                 }
             }
         }
+        
     }
     
     func isFormValid() {
@@ -262,7 +274,7 @@ extension CreateZipViewController: UITextFieldDelegate {
             titleInputTextField.text = String(currentText.prefix(titleMaxCount))
             return
         }
-    
+        
         if currentText.count <= 1 {
             textField.text = ""
             return
@@ -335,7 +347,7 @@ extension CreateZipViewController: UITextFieldDelegate {
                 return false
             }
         }
-
+        
         // 텍스트 필드의 상태 : #
         // 현재 입력 : 백스페이스 (지우기)
         // 첫번째 태그를 작성하지 않고, 백페이스를 입력해 작성되어있던 #도 지우려는 경우
@@ -357,7 +369,7 @@ extension CreateZipViewController: UITextFieldDelegate {
             // -> 스페이스가 입력되지 않게 막아야한다.
             if currentText.contains(" ") {
                 return false
-            } 
+            }
             // 텍스트 필드의 상태 : #태그1
             // 첫번째 태그를 입력을 마무리하고, 두번째 태그를 작성하려고하는 경우
             // -> 첫번째 태그를 완성하고, 두번째 태그 작성을 위해 #을 자동으로 입력한다.
@@ -382,7 +394,7 @@ extension CreateZipViewController: UITextFieldDelegate {
             textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
         }
     }
-
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if textField.tag == 1 { moveCursorToEnd(textField) }
     }

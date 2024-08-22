@@ -19,13 +19,18 @@ extension CreateZipViewModel {
         }
     }
 
-    func postZip(_ data: PostZipRequestDTO, completion: @escaping (() -> Void)) {
+    func postZip(_ data: PostZipRequestDTO,
+                 onConflict: @escaping(() -> Void),
+                 completion: @escaping (() -> Void)) {
         NetworkService.shared.zipService.postZip(requestBody: data) { result in
             switch result {
             case .conflict:
                 UIApplication.showAlert(titleText: StringLiterals.Alert.CreateZipConflict.title,
                                         subText: StringLiterals.Alert.CreateZipConflict.sub,
-                                        primaryButtonText: StringLiterals.Alert.CreateZipConflict.primaryButton)
+                                        primaryButtonText: StringLiterals.Alert.CreateZipConflict.primaryButton,
+                                        primaryButtonHandler: onConflict
+                )
+                             
             default:
                 result.handleNetworkResult { _ in
                     completion()

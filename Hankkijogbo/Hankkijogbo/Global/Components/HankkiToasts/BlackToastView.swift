@@ -48,7 +48,6 @@ final class BlackToastView: BaseView {
         } else {
             addSubviews(messageLabel, actionButton, tapDetectView)
         }
-        print("✔️\(String(describing: self.superview)) \(message)")
     }
     
     override func setupLayout() {
