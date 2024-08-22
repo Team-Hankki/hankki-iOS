@@ -12,8 +12,8 @@ protocol HankkiAPIServiceProtocol {
     func getCategoryFilter(completion: @escaping(NetworkResult<GetCategoryFilterResponseDTO>) -> Void)
     func getPriceCategoryFilter(completion: @escaping(NetworkResult<GetPriceFilterResponseDTO>) -> Void)
     func getSortOptionFilter(completion: @escaping(NetworkResult<GetSortOptionFilterResponseDTO>) -> Void)
-    func getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiListResponseDTO>) -> Void)
-    func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiPinResponseDTO>) -> Void)
+    func getHankkiList(universityId: Int?, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiListResponseDTO>) -> Void)
+    func getHankkiPin(universityId: Int?, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping(NetworkResult<GetHankkiPinResponseDTO>) -> Void)
     func getHankkiThumbnail(id: Int, completion: @escaping(NetworkResult<GetHankkiThumbnailResponseDTO>) -> Void)
     func getHankkiDetail(id: Int, completion: @escaping(NetworkResult<GetHankkiDetailResponseDTO>) -> Void)
     func postHankkiValidate(req: PostHankkiValidateRequestDTO, completion: @escaping(NetworkResult<PostHankkiValidateResponseDTO>) -> Void)
@@ -126,7 +126,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
   
     /// 메인 페이지 식당 리스트 조회
-    func getHankkiList(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<GetHankkiListResponseDTO>) -> Void) {
+    func getHankkiList(universityId: Int?, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<GetHankkiListResponseDTO>) -> Void) {
         provider.request(.getHankkiList(universityid: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
             switch result {
             case .success(let response):
@@ -143,7 +143,7 @@ final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     }
     
     /// 메인 페이지 식당 핀 조회
-    func getHankkiPin(universityId: Int, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<GetHankkiPinResponseDTO>) -> Void) {
+    func getHankkiPin(universityId: Int?, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (NetworkResult<GetHankkiPinResponseDTO>) -> Void) {
         provider.request(.getHankkiPin(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption)) { result in
             switch result {
             case .success(let response):

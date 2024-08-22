@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetHankkiPinRequestDTO {
-    let universityId: Int
+    let universityId: Int?
     let storeCategory: String
     let priceCategory: String
     let sortOption: String

@@ -12,6 +12,7 @@ final class TotalListBottomSheetView: BaseView {
     // MARK: - Properties
     
     var isExpanded: Bool = false
+    var isBottomSheetUp: Bool = false
     var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
     
@@ -115,7 +116,7 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         totalListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(10)
+            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(15)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -158,6 +159,8 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
+        }, completion: { _ in
+            self.isBottomSheetUp = true
         })
     }
     
@@ -167,6 +170,11 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .identity
+        }, completion: { [weak self] _ in
+            self?.isBottomSheetUp = false
+            if let collectionView = self?.totalListCollectionView {
+                collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            }
         })
     }
     
@@ -176,6 +184,8 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.4))
+        }, completion: { _ in
+            self.isBottomSheetUp = false
         })
     }
     
