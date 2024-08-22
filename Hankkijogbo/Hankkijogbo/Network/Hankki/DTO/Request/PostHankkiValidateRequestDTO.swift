@@ -13,4 +13,5 @@ struct PostHankkiValidateRequestDTO: Codable {
     let universityId: Int
     let latitude: Double
     let longitude: Double
+    let storeName: String
 }
