@@ -64,11 +64,27 @@ extension UIApplication {
         }
     }
     
+    /// 하단에 뜨는 검정 토스트뷰를 띄우는 함수
     static func showBlackToast(message: String, action: (() -> Void)? = nil) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let delegate = windowScene.delegate as? SceneDelegate,
-           let rootViewController = delegate.window?.rootViewController {
-            rootViewController.showBlackToast(message: message, action: action)
+        
+        let toastView = BlackToastView(message: message, action: action)
+        
+        // 토스트 메시지를 최상위 윈도우에 추가
+        if let topWindow = shared.connectedScenes
+            .filter({ $0.activationState == .foregroundActive })
+            .compactMap({ $0 as? UIWindowScene })
+            .first?.windows
+            .filter({ $0.isKeyWindow }).first {
+            
+            topWindow.addSubview(toastView)
+            toastView.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                if UIScreen.hasNotch {
+                    $0.bottom.equalTo(topWindow.safeAreaLayoutGuide).offset(-16)
+                } else {
+                    $0.bottom.equalToSuperview().inset(16)
+                }
+            }
         }
     }
     

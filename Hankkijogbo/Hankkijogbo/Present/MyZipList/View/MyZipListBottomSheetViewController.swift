@@ -186,7 +186,10 @@ private extension MyZipListBottomSheetViewController {
         
         viewModel.showAddToZipCompleteToast = { [self] in
             guard let data = viewModel.myZipListFavoriteData else { return }
-            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil, userInfo: ["zipId": data[clickedZipIndexPath?.item ?? 0].id]))
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.setupToast), 
+                                                         object: nil,
+                                                         userInfo: ["zipId": data[clickedZipIndexPath?.item ?? 0].id]))
+            
             NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
         }
     }
@@ -298,7 +301,7 @@ private extension MyZipListBottomSheetViewController {
         dismissMyZipBottomSheet()
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let createZipViewController = CreateZipViewController()
+            let createZipViewController = CreateZipViewController(isBottomSheetOpen: true, storeId: storeId)
             rootViewController.pushViewController(createZipViewController, animated: true)
         }
     }
@@ -313,13 +316,20 @@ private extension MyZipListBottomSheetViewController {
         clickedZipIndexPath = self.myZipCollectionView.indexPathForItem(at: buttonPosition)
 
         guard let data = viewModel.myZipListFavoriteData else { return }
-        viewModel.postHankkiToZipAPI(
-            request: PostHankkiToZipRequestDTO(
-                favoriteId: data[clickedZipIndexPath?.item ?? 0].id,
-                storeId: storeId
-            )
-        )
-        self.dismissMyZipBottomSheet()
+        let zipId: Int = data[clickedZipIndexPath?.item ?? 0].id
+        
+        viewModel.postHankkiToZipAPI(request: PostHankkiToZipRequestDTO(favoriteId: zipId, storeId: storeId)) {
+            // 족보에 식당 추가를 성공햇을 경우
+            // black toast message 를 띄웁니다
+            UIApplication.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) {
+                let zipListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                    rootViewController.pushViewController(zipListViewController, animated: true)
+                }
+            }
+            self.dismissMyZipBottomSheet()
+        }
     }
 }
 
