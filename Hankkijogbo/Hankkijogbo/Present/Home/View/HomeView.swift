@@ -60,6 +60,7 @@ final class HomeView: BaseView {
             } else {
                 $0.bottom.equalTo(bottomSheetView.snp.top).offset(-12)
                 $0.trailing.equalToSuperview().inset(22)
+                targetButton.isHidden = false
             }
         }
         
