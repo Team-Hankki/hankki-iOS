@@ -36,9 +36,9 @@ extension HomeViewController: CLLocationManagerDelegate {
         
         // 위치 서비스 사용 가능 여부 확인
         if CLLocationManager.locationServicesEnabled() {
-            locationManager?.requestWhenInUseAuthorization()   // 앱 사용 중 위치 접근 권한 요청
+            locationManager?.requestWhenInUseAuthorization()
         } else {
-            print("Location Services Disabled.")
+            print("❌🌍❌ 위치 서비스가 비활성화 되었습니다. ❌🌍❌")
         }
     }
     
@@ -46,14 +46,12 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            print("Location authorization not determined")
+            print("❌🌍❌ 위치 접근 권한이 허용 되지 않았습니다. ❌🌍❌")
         case .restricted, .denied:
-            print("Location authorization restricted or denied")
-            // 위치 접근 권한이 거부된 경우 알림 표시 등 처리
+            print("❌🌍❌ 위치 접근 권한이 제한되거나 거부되었습니다. ❌🌍❌")
             showLocationAccessDeniedAlert()
         case .authorizedWhenInUse, .authorizedAlways:
-            print("Location authorized")
-            // 위치 접근 권한이 허용된 경우 위치 업데이트 시작
+            print("⭕️🌍⭕️ 위치 접근 권한이 허용되었습니다. ⭕️🌍⭕️")
             locationManager?.startUpdatingLocation()
         @unknown default:
             break
@@ -62,7 +60,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 성공
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("🌍 위치가 업데이트되었습니다.🌍")
+        print("🌍 위치가 업데이트되었습니다. 🌍")
         if let location = locations.last {
             print("🌍 현재 위치: 위도 \(location.coordinate.latitude), 경도 \(location.coordinate.longitude) 🌍")
             moveCameraToCurrentLocation(location: location)
@@ -74,7 +72,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 실패
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get location: \(error.localizedDescription)")
+        print("🌍 위치 업데이트 실패: \(error.localizedDescription) 🌍")
     }
     
     // 위치 접근 거부 경고 알림 표시
@@ -117,7 +115,7 @@ extension HomeViewController: CLLocationManagerDelegate {
 
         DispatchQueue.main.async {
             self.rootView.mapView.moveCamera(cameraUpdate)
-            print("🌍🌍Camera moved to current location: \(position.lat), \(position.lng)🌍🌍")
+            print("🌍 현재 위치로 카메라가 이동 : \(position.lat), \(position.lng) 🌍")
         }
     }
     
