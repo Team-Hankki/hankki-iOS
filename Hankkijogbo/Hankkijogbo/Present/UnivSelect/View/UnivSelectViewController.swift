@@ -155,9 +155,9 @@ private extension UnivSelectViewController {
         let gradient = CAGradientLayer()
         gradient.do {
             $0.colors = [
-                UIColor.white.cgColor, // #FFF
-                UIColor.white.withAlphaComponent(0.30).cgColor, // rgba(255, 255, 255, 0.30)
-                UIColor.white.withAlphaComponent(0.00).cgColor  // rgba(255, 255, 255, 0.00)
+                UIColor.white.cgColor,
+                UIColor.white.withAlphaComponent(0.30).cgColor,
+                UIColor.white.withAlphaComponent(0.00).cgColor 
             ]
             
             $0.locations = [0.3286, 0.5686, 0.8]
