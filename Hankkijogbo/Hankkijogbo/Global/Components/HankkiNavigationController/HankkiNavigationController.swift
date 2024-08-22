@@ -99,11 +99,12 @@ extension HankkiNavigationController {
 
 private extension HankkiNavigationController {
     
-    func setupStyle() {        
+    func setupStyle() {
+        
+        
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
-            $0.spacing = 4
         }
         
         mainTitleLabel.do {
@@ -129,6 +130,7 @@ private extension HankkiNavigationController {
     }
     
     func setupLayout() {
+        
         customNavigationBar.snp.makeConstraints {
             $0.height.equalTo(navigationHeight)
             $0.bottom.equalTo(view.snp.topMargin)

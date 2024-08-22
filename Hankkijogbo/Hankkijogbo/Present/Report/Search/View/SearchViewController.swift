@@ -148,7 +148,7 @@ final class SearchViewController: BaseViewController {
         searchTextField.do {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 10
-            $0.layer.borderWidth = 1
+            $0.layer.borderWidth = 1.5
             $0.layer.borderColor = UIColor.gray900.cgColor
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
@@ -289,6 +289,7 @@ private extension SearchViewController {
     @objc func searchTextDeleteButtonDidTap() {
         searchTextField.text = nil
         viewModel.removeAllLocations()
+        changeSideButtonVisibility(isVisible: false)
     }
     
     @objc func bottomButtonPrimaryHandler() {
@@ -306,25 +307,14 @@ extension SearchViewController: UITextFieldDelegate {
     /// - 1. border를 활성화해준다.
     /// - 2. 텍스트가 채워져 있으면 바로 사이드 버튼들의 visibility를 변경한다.
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if !(textField.text ?? "").isEmpty {
-            changeSideButtonVisibility(isVisible: true)
-        }
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.gray900.cgColor
         return true
     }
-    
-    /// 텍스트 필드 내용 수정 중일 때 호출되는 함수
-    /// - 사이드 버튼들의 visibility를 변경한다.
-    final func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        changeSideButtonVisibility(isVisible: true)
-        return true
-    }
-    
+
     /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
     /// - border를 제거해준다.
     final func textFieldDidEndEditing(_ textField: UITextField) {
-        changeSideButtonVisibility(isVisible: false)
         textField.layer.borderWidth = 0
         textField.layer.borderColor = nil
     }
@@ -333,6 +323,9 @@ extension SearchViewController: UITextFieldDelegate {
     /// - currentSearchedText 값 업데이트
     /// - debouncer 실행해서 API 호출
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        let currentText: String = textField.text ?? ""
+        changeSideButtonVisibility(isVisible: !currentText.isEmpty)
+        
         guard let query = self.searchTextField.text else { return }
         // TODO: - query.isEmpty일 때 보내면(-> 검색창 싹다 지웠을 때 발생함) 초기화를 위해 빈 locations 달라고 요청해야할 것 같다
         if !query.isEmpty {
@@ -416,9 +409,9 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: ChangeBottomButtonDelegate {
     func changeBottomButtonView(_ isDone: Bool) {
         if isDone {
-            self.bottomButtonView.setupEnabledDoneButton()
+            self.bottomButtonView.setupEnabledDoneButton(primaryButtonText: "이 식당 제보하기")
         } else {
-            self.bottomButtonView.setupDisabledDoneButton()
+            self.bottomButtonView.setupDisabledDoneButton(primaryButtonText: "식당을 선택해주세요")
         }
     }
 }

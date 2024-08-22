@@ -84,6 +84,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         self.do {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray200)
+            $0.backgroundColor = .hankkiWhite
         }
         reportOptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(

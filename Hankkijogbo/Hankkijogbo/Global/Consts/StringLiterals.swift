@@ -133,7 +133,7 @@ enum StringLiterals {
     }
     
     enum MyZip {
-        static let myHankkiZip = "나의 식당 족보"
+        static let myHankkiZip = "나의 족보"
         static let addNewZip = "새로운 족보 추가하기"
         static let zipList = "족보 목록"
         static let addToMyZip = "나의 족보에 추가"

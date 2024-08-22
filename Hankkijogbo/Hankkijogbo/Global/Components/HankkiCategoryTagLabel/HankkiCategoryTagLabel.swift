@@ -35,7 +35,7 @@ class HankkiCategoryTagLabel: UILabel {
     // 글자 수에 따라 tag 사이즈 조정 
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
-        let width = max(size.width + 20, minimumWidth)
+        let width = size.width + 16
         let height = defaultHeight
         return CGSize(width: width, height: height)
     }
