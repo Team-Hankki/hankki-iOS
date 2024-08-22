@@ -163,8 +163,13 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
-        }, completion: { _ in
-            self.isBottomSheetUp = true
+        }, completion: { [weak self] _ in
+            self?.isBottomSheetUp = true
+            if let collectionView = self?.totalListCollectionView {
+                collectionView.contentInset = .zero
+                collectionView.scrollIndicatorInsets = .zero
+                
+            }
         })
     }
     
@@ -178,6 +183,9 @@ extension TotalListBottomSheetView {
             self?.isBottomSheetUp = false
             if let collectionView = self?.totalListCollectionView {
                 collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                let bottomInset = self?.defaultHeight ?? 0 - collectionView.frame.height
+                collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: max(0, bottomInset), right: 0)
+                collectionView.scrollIndicatorInsets = collectionView.contentInset
             }
         })
     }
