@@ -174,7 +174,7 @@ private extension ZipListViewController {
     }
     
     func navigateToCreateZipViewController() {
-        let createZipViewController = CreateZipViewController()
+        let createZipViewController = CreateZipViewController(isBottomSheetOpen: false)
         navigationController?.pushViewController(createZipViewController, animated: true)
     }
 }

@@ -19,7 +19,7 @@ extension CreateZipViewModel {
         }
     }
 
-    func postZip(_ data: PostZipRequestDTO) {
+    func postZip(_ data: PostZipRequestDTO, completion: @escaping (() -> Void)) {
         NetworkService.shared.zipService.postZip(requestBody: data) { result in
             switch result {
             case .conflict:
@@ -28,11 +28,7 @@ extension CreateZipViewModel {
                                         primaryButtonText: StringLiterals.Alert.CreateZipConflict.primaryButton)
             default:
                 result.handleNetworkResult { _ in
-                    DispatchQueue.main.async {
-                        // 족보 만들기를 완료해서, 서버에서 생성이되면 이전 페이지로 이동한다
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController { rootViewController.popViewController(animated: true) }
-                    }
+                    completion()
                 }
             }
         }

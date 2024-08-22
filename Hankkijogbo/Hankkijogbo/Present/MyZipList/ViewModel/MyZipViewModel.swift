@@ -31,10 +31,11 @@ final class MyZipViewModel {
     }
     
     /// 족보에 식당 추가
-    func postHankkiToZipAPI(request: PostHankkiToZipRequestDTO) {
+    func postHankkiToZipAPI(request: PostHankkiToZipRequestDTO, completion: @escaping (() -> Void)) {
         NetworkService.shared.zipService.postHankkiToZip(requestBody: request) { result in
             result.handleNetworkResult { [weak self] _ in
-                self?.showAddToZipCompleteToast?()
+//                self?.showAddToZipCompleteToast?()
+                completion()
             }
         }
     }

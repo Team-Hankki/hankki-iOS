@@ -11,6 +11,9 @@ final class CreateZipViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let isBottomSheetOpen: Bool
+    private let storeId: Int?
+    
     private let viewModel: CreateZipViewModel = CreateZipViewModel()
     
     private let tagMaxCount: Int = 9
@@ -34,6 +37,16 @@ final class CreateZipViewController: BaseViewController {
                                                buttonHandler: submitButtonDidTap)
     
     // MARK: - Life Cycle
+    
+    init(isBottomSheetOpen: Bool, storeId: Int? = nil) {
+        self.isBottomSheetOpen = isBottomSheetOpen
+        self.storeId = storeId
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -195,7 +208,18 @@ private extension CreateZipViewController {
         let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
         let data = PostZipRequestDTO(title: titleInputTextField.text ?? " ", details: arr)
 
-        viewModel.postZip(data)
+        viewModel.postZip(data) {
+            DispatchQueue.main.async {
+                // 족보 만들기를 완료해서, 서버에서 생성이되면 이전 페이지로 이동한다
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                    rootViewController.popViewController(animated: true)
+                    if let id = self.storeId {
+                        rootViewController.presentMyZipListBottomSheet(id: id)
+                    }
+                }
+            }
+        }
     }
     
     func isFormValid() {
