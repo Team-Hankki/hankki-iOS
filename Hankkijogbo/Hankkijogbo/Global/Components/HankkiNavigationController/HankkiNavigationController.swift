@@ -153,7 +153,7 @@ private extension HankkiNavigationController {
         }
         
         backButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
         }
     }

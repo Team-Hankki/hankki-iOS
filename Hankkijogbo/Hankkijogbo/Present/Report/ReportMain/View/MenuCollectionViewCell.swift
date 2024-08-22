@@ -68,13 +68,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         menuTextField.snp.makeConstraints {
             $0.top.equalTo(menuLabel.snp.bottom).offset(3)
             $0.leading.equalToSuperview()
-            $0.width.equalTo(178)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(178))
             $0.height.equalTo(48)
         }
         priceTextField.snp.makeConstraints {
             $0.top.equalTo(menuTextField)
             $0.leading.equalTo(menuTextField.snp.trailing).offset(8)
-            $0.width.equalTo(118)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(118))
             $0.height.equalTo(menuTextField)
         }
         priceLabel.snp.makeConstraints {
@@ -87,7 +87,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         deleteMenuButton.snp.makeConstraints {
             $0.centerY.equalTo(priceTextField)
-            $0.leading.equalTo(priceTextField.snp.trailing).offset(3)          
+            $0.trailing.equalToSuperview()
             $0.size.equalTo(32)
         }
         errorLabel.snp.makeConstraints {
@@ -106,9 +106,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         menuTextField.do {
             $0.backgroundColor = .white
-            $0.layer.borderColor = UIColor.gray300.cgColor
-            $0.layer.borderWidth = 1
-            $0.layer.cornerRadius = 10
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
                 color: .gray800
@@ -129,9 +127,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceTextField.do {
             $0.backgroundColor = .white
-            $0.layer.borderColor = UIColor.gray300.cgColor
-            $0.layer.borderWidth = 1
-            $0.layer.cornerRadius = 10
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
                 color: .gray800
@@ -194,7 +190,7 @@ private extension MenuCollectionViewCell {
         priceLabel.textColor = .gray500
         priceTextField.text = ""
         priceTextField.textColor = .gray800
-        priceTextField.layer.borderColor = UIColor.gray300.cgColor
+        priceTextField.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
         
         errorLabel.isHidden = true
     }
@@ -219,7 +215,7 @@ private extension MenuCollectionViewCell {
             setupPriceErrorStyle()
         } else {
             setupPriceNonErrorStyle()
-            priceTextField.layer.borderColor = UIColor.gray800.cgColor
+            priceTextField.makeRoundBorder(cornerRadius: 10, borderWidth: 1.5, borderColor: .gray600)
         }
     }
     
@@ -256,7 +252,7 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == menuTextField {
             menuLabel.textColor = .gray800
-            textField.layer.borderColor = UIColor.gray800.cgColor
+            textField.makeRoundBorder(cornerRadius: 10, borderWidth: 1.5, borderColor: .gray600)
         } else {
             priceLabel.textColor = .gray800
             priceTextFieldDidEditingChange()
@@ -292,7 +288,7 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
                 textField.layer.borderColor = UIColor.gray300.cgColor
             }
         }
-        
+        textField.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
         delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }
     

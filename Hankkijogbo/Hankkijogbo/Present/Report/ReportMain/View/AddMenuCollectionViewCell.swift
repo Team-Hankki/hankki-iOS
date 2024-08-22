@@ -28,7 +28,7 @@ final class AddMenuCollectionViewCell: BaseCollectionViewCell {
     
     override func setupStyle() {
         addMenuButton.do {
-            $0.setImage(.btnAddFilled, for: .normal)
+            $0.setImage(.btnAddDetailBig, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: StringLiterals.Report.addMenu,

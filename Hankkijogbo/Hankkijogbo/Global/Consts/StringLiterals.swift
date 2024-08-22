@@ -84,7 +84,6 @@ enum StringLiterals {
         static let addToMyZipBlack = "나의 족보에 추가되었습니다."
         static let see = "보기"
         static let addToMyZipWhite = "나의 족보에 추가했어요"
-        static let move = "이동"
         
         static let serverError = "오류가 발생했어요. 다시 시도해주세요."
         static let accessError = "로그인 유효기간이 만료되었어요. 재로그인 해주세요."
@@ -120,7 +119,7 @@ enum StringLiterals {
         static let changeImage = "바꾸기"
         static let menuName = "메뉴 이름"
         static let price = "가격"
-        static let priceError = "8000원 이하만 가능해요"
+        static let priceError = "8천원 이하만 가능해요"
         static let addMenu = "메뉴 추가하기"
         static let goToReportedHankki = "제보한 식당 보러가기"
         static let hankkiReportComplete = "번째 식당을 등록했어요"

@@ -13,7 +13,18 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
     
     private let recommendGuideLabel: UILabel = UILabel()
     let selectImageButton: UIButton = UIButton()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
+        setupCustomLayer()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
@@ -41,7 +52,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
         }
         selectImageButton.do {
             $0.backgroundColor = .gray100
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray200)
+            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             $0.setImage(.icAddPhoto, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
                 for: PretendardStyle.body4,
@@ -52,5 +63,31 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
             $0.configuration?.titleAlignment = .center
             $0.configuration?.imagePadding = 6
         }
+    }
+}
+
+private extension SelectImageCollectionViewCell {
+    func setupCustomLayer() {
+        selectImageButton.layoutIfNeeded()
+     
+        let customLayer = CAShapeLayer()
+        let frameSize = selectImageButton.bounds.size
+        let shapeRect = CGRect(x: 0,
+                               y: 0,
+                               width: frameSize.width,
+                               height: frameSize.height)
+        
+        customLayer.bounds = shapeRect
+        customLayer.position = CGPoint(x: frameSize.width / 2,
+                                       y: frameSize.height / 2)
+        customLayer.fillColor = UIColor.clear.cgColor
+        customLayer.strokeColor = UIColor.gray200.cgColor
+        customLayer.lineWidth = 2
+        customLayer.lineJoin = CAShapeLayerLineJoin.round
+        customLayer.lineDashPattern = [4, 4]
+        customLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 10).cgPath
+        
+        selectImageButton.layer.sublayers?.removeAll { $0 is CAShapeLayer }
+        selectImageButton.layer.addSublayer(customLayer)
     }
 }

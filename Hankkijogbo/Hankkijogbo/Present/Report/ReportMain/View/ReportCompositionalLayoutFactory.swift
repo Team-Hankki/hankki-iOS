@@ -94,7 +94,7 @@ extension ReportCompositionalLayoutFactory {
         let footer = createBoundarySupplementaryItem(type: .footer, widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(80), alignment: .bottom)
         let item = createItem(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
         let group = createGroup(item: [item], widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(32))
-        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 24, leading: 22, bottom: 52, trailing: 22), boundarySupplementaryItems: [footer])
+        let section = createLayoutSection(group: group, sectionContentInsets: .init(top: 24, leading: 14, bottom: 52, trailing: 22), boundarySupplementaryItems: [footer])
         return section
     }
 }

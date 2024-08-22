@@ -70,7 +70,7 @@ final class HankkiInfoCardView: BaseView {
     
     override func setupStyle() {
         self.do {
-            $0.backgroundColor = .white
+            $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = 14
         }
         reportedGuideLabel.do {

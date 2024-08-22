@@ -120,7 +120,7 @@ private extension SearchBarCollectionViewCell {
                 withText: hankkiNameString ?? StringLiterals.Report.searchFirstPlaceHolder,
                 color: .red500
             ), for: .normal)
-            $0.setImage(.icArrowClose, for: .normal)
+            $0.setImage(.icDown, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft
             $0.configuration = .plain()
             $0.configuration?.contentInsets = .init(top: 0, leading: 14, bottom: 0, trailing: 14)
