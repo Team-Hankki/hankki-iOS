@@ -76,7 +76,7 @@ final class OnboardingViewController: BaseViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(37)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(22)
             $0.centerX.equalToSuperview()
         }
         
@@ -138,7 +138,7 @@ private extension OnboardingViewController {
                 $0.loopMode = .playOnce
             }
             nextButton.do {
-                $0.setupBackgroundColor(.gray900)
+                $0.setupBackgroundColor(.gray800)
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
             animationView.snp.remakeConstraints {
