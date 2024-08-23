@@ -34,25 +34,24 @@ extension HomeViewController: CLLocationManagerDelegate {
             locationManager?.distanceFilter = kCLDistanceFilterNone
         }
         
-        // 위치 서비스 사용 가능 여부 확인
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager?.requestWhenInUseAuthorization()
-        } else {
-            print("❌🌍❌ 위치 서비스가 비활성화 되었습니다. ❌🌍❌")
-        }
+        self.locationManager?.requestWhenInUseAuthorization()
     }
     
     // CLLocationManagerDelegate 메소드
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let status = CLLocationManager.authorizationStatus()
         switch status {
-        case .notDetermined:
-            print("❌🌍❌ 위치 접근 권한이 허용 되지 않았습니다. ❌🌍❌")
-        case .restricted, .denied:
-            print("❌🌍❌ 위치 접근 권한이 제한되거나 거부되었습니다. ❌🌍❌")
-            showLocationAccessDeniedAlert()
         case .authorizedWhenInUse, .authorizedAlways:
+            if let manager = locationManager {
+                manager.startUpdatingLocation()
+            }
             print("⭕️🌍⭕️ 위치 접근 권한이 허용되었습니다. ⭕️🌍⭕️")
-            locationManager?.startUpdatingLocation()
+        case .restricted, .denied:
+            showLocationAccessDeniedAlert()
+            print("❌🌍❌ 위치 접근 권한이 제한되거나 거부되었습니다. ❌🌍❌")
+        case .notDetermined:
+            requestLocationAuthorization()
+            print("❌🌍❌ 위치 접근 권한이 결정되지 않았습니다. ❌🌍❌")
         @unknown default:
             break
         }
@@ -95,7 +94,6 @@ extension HomeViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse, .authorizedAlways:
             // 위치 접근 권한이 허용된 경우 현재 위치로 이동
             if let manager = locationManager {
-                print("0824 현재 위치 \(locationManager)")
                 manager.startUpdatingLocation()
             }
         case .restricted, .denied:
