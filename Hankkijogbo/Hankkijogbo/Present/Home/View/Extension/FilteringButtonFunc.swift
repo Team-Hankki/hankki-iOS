@@ -238,11 +238,23 @@ extension HomeViewController {
     }
     
     @objc func priceButtonDidTap() {
-        toggleDropDown(isPriceModel: true, buttonType: .price)
+        if isDropDownVisible && currentDropDownButtonType == .price {
+            hideDropDown(buttonType: .price) {
+                self.resetButtonToDefaultState(self.rootView.priceButton, defaultTitle: StringLiterals.Home.priceFilteringButton)
+            }
+        } else {
+            toggleDropDown(isPriceModel: true, buttonType: .price)
+        }
     }
     
     @objc func sortButtonDidTap() {
-        toggleDropDown(isPriceModel: false, buttonType: .sort)
+        if isDropDownVisible && currentDropDownButtonType == .sort {
+            hideDropDown(buttonType: .sort) {
+                self.resetButtonToDefaultState(self.rootView.sortButton, defaultTitle: StringLiterals.Home.sortFilteringButton)
+            }
+        } else {
+            toggleDropDown(isPriceModel: false, buttonType: .sort)
+        }
     }
     
     @objc func typeButtonDidTap() {

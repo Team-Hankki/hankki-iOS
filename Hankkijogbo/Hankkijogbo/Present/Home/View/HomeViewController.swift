@@ -110,8 +110,7 @@ extension HomeViewController {
     }
     
     private func setupNavigationBar(mainTitle: String? = nil) {
-        // Univ StringLiterals 추가 이후에 반영 예정
-        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? "한끼대학교"
+        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? "전체"
         print("Setting up navigation bar with title: \(title)")
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,

@@ -36,9 +36,9 @@ extension HomeViewController: CLLocationManagerDelegate {
         
         // 위치 서비스 사용 가능 여부 확인
         if CLLocationManager.locationServicesEnabled() {
-            locationManager?.requestWhenInUseAuthorization()   // 앱 사용 중 위치 접근 권한 요청
+            locationManager?.requestWhenInUseAuthorization()
         } else {
-            print("Location Services Disabled.")
+            print("❌🌍❌ 위치 서비스가 비활성화 되었습니다. ❌🌍❌")
         }
     }
     
@@ -46,14 +46,12 @@ extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            print("Location authorization not determined")
+            print("❌🌍❌ 위치 접근 권한이 허용 되지 않았습니다. ❌🌍❌")
         case .restricted, .denied:
-            print("Location authorization restricted or denied")
-            // 위치 접근 권한이 거부된 경우 알림 표시 등 처리
+            print("❌🌍❌ 위치 접근 권한이 제한되거나 거부되었습니다. ❌🌍❌")
             showLocationAccessDeniedAlert()
         case .authorizedWhenInUse, .authorizedAlways:
-            print("Location authorized")
-            // 위치 접근 권한이 허용된 경우 위치 업데이트 시작
+            print("⭕️🌍⭕️ 위치 접근 권한이 허용되었습니다. ⭕️🌍⭕️")
             locationManager?.startUpdatingLocation()
         @unknown default:
             break
@@ -62,7 +60,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 성공
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("🌍 위치가 업데이트되었습니다.🌍")
+        print("🌍 위치가 업데이트되었습니다. 🌍")
         if let location = locations.last {
             print("🌍 현재 위치: 위도 \(location.coordinate.latitude), 경도 \(location.coordinate.longitude) 🌍")
             moveCameraToCurrentLocation(location: location)
@@ -74,7 +72,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 위치 업데이트 실패
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Failed to get location: \(error.localizedDescription)")
+        print("🌍 위치 업데이트 실패: \(error.localizedDescription) 🌍")
     }
     
     // 위치 접근 거부 경고 알림 표시
@@ -96,7 +94,6 @@ extension HomeViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
             // 위치 접근 권한이 허용된 경우 현재 위치로 이동
-            print("🌍🌍🌍위치 접근이 허용🌍🌍🌍")
             if let manager = locationManager {
                 manager.startUpdatingLocation()
             }
@@ -112,23 +109,19 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func moveCameraToCurrentLocation(location: CLLocation) {
-        print("🌍🌍🌍🌍🌍🌍🌍")
         guard isViewLoaded else { return }
         let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position)
 
         DispatchQueue.main.async {
             self.rootView.mapView.moveCamera(cameraUpdate)
-            print("🌍🌍Camera moved to current location: \(position.lat), \(position.lng)🌍🌍")
+            print("🌍 현재 위치로 카메라가 이동 : \(position.lat), \(position.lng) 🌍")
         }
     }
     
     // 카메라를 선택한 대학교 위치로 이동
     func moveCameraToUniversityLocation() {
-        guard let university = UserDefaults.standard.getUniversity() else {
-            print("University not found in UserDefaults")
-            return
-        }
+        guard let university = UserDefaults.standard.getUniversity() else { return }
         let position = NMGLatLng(lat: university.latitude, lng: university.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position)
         rootView.mapView.moveCamera(cameraUpdate)
@@ -137,6 +130,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     /// TargetButton Layout
     // MarkerCardInfoView가 노출될 때의 TargetButton Layout
     func showTargetButtonAtCardView() {
+        self.rootView.targetButton.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
             self.rootView.targetButton.snp.remakeConstraints {
                 $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-12)
@@ -148,6 +142,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // BottomSheet가 노출될 때의 TargetButton Layout
     func showTargetButtonAtBottomSheet() {
+        self.rootView.targetButton.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
             if self.rootView.bottomSheetView.isExpanded {
                 self.rootView.targetButton.isHidden = true
@@ -240,7 +235,7 @@ extension HomeViewController {
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     self.markerInfoCardView?.snp.updateConstraints {
-                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(22)
+                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).inset(12)
                     }
                     self.view.layoutIfNeeded()
                     self.markerInfoCardView!.addButton.addTarget(self, action: #selector(self.presentMyZipBottomSheet), for: .touchUpInside)

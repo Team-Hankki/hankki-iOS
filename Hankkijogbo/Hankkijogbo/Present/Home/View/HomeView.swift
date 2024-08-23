@@ -60,6 +60,7 @@ final class HomeView: BaseView {
             } else {
                 $0.bottom.equalTo(bottomSheetView.snp.top).offset(-12)
                 $0.trailing.equalToSuperview().inset(22)
+                targetButton.isHidden = false
             }
         }
         
@@ -93,6 +94,7 @@ final class HomeView: BaseView {
         buttonStackView.do {
             $0.axis = .horizontal
             $0.spacing = 8
+            $0.isUserInteractionEnabled = true
         }
         
         targetButton.do {

@@ -163,8 +163,13 @@ extension TotalListBottomSheetView {
                        options: .curveEaseOut,
                        animations: {
             self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
-        }, completion: { _ in
-            self.isBottomSheetUp = true
+        }, completion: { [weak self] _ in
+            self?.isBottomSheetUp = true
+            if let collectionView = self?.totalListCollectionView {
+                collectionView.contentInset = .zero
+                collectionView.scrollIndicatorInsets = .zero
+                
+            }
         })
     }
     
@@ -178,6 +183,9 @@ extension TotalListBottomSheetView {
             self?.isBottomSheetUp = false
             if let collectionView = self?.totalListCollectionView {
                 collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                let bottomInset = self?.defaultHeight ?? 0 - collectionView.frame.height
+                collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: max(0, bottomInset), right: 0)
+                collectionView.scrollIndicatorInsets = collectionView.contentInset
             }
         })
     }
@@ -255,14 +263,6 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalListCollectionViewCell.className, for: indexPath) as? TotalListCollectionViewCell else {
             return UICollectionViewCell()
         }
-        //        let store = data[indexPath.row]
-        //        if let imageUrl = store.imageUrl, imageUrl != "img_detail_default" {
-        //                   // URL에서 이미지를 로드
-        //            cell.thumbnailImageView.sd_setImage(with: URL(string: imageUrl))
-        //               } else {
-        //                   // 기본 이미지 설정
-        //                   cell.thumbnailImageView?.image = UIImage(named: "img_detail_default")
-        //               }
         cell.bindData(model: data[indexPath.row])
         cell.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
         cell.addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
