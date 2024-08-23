@@ -30,7 +30,7 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
         }
         
         typeLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(8)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(6)
             $0.centerX.equalToSuperview()
         }
     }
