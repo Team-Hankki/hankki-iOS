@@ -110,7 +110,7 @@ extension HomeViewController {
     }
     
     private func setupNavigationBar(mainTitle: String? = nil) {
-        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? "전체"
+        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.allUniversity
         print("Setting up navigation bar with title: \(title)")
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
@@ -271,10 +271,9 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         manager.startUpdatingLocation()
         
         shouldUpdateNavigationBar = false
-        setupNavigationBar(mainTitle: "전체")
+        setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
         fetchAllRestaurantsAndPins()
     }
-    
     
     func fetchAllRestaurantsAndPins() {
         viewModel.getHankkiListAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
