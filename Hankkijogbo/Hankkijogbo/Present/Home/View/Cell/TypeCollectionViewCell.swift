@@ -24,13 +24,13 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
     
     override func setupLayout() {
         thumbnailImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(21)
+            $0.top.equalToSuperview().inset(15)
             $0.centerX.equalToSuperview()
-            $0.width.height.equalTo(38)
+            $0.width.height.equalTo(48)
         }
         
         typeLabel.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(12)
+            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(8)
             $0.centerX.equalToSuperview()
         }
     }
