@@ -181,6 +181,7 @@ private extension UnivSelectViewController {
         
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
+            viewModel.postMeUniversity(isNull: true)
             delegate?.didRequestLocationFocus()
             navigationController?.popViewController(animated: true)
         case .restricted, .denied:

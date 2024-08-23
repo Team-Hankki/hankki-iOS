@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetMeUniversityResponseData: Codable {
-    let id: Int
+    let id: Int?
     let name: String
     let longitude: Double
     let latitude: Double
