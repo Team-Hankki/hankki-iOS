@@ -164,7 +164,6 @@ extension HomeViewController {
 
 private extension HomeViewController {
     func loadInitialData() {
-        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
             let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
             self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
@@ -173,8 +172,6 @@ private extension HomeViewController {
     }
     
     func updateUniversityData(universityId: Int?) {
-        guard let universityId = UserDefaults.standard.getUniversity()?.id else { return }
-        
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
             let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
             self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
