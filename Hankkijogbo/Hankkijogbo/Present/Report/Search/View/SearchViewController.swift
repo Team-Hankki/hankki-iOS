@@ -293,9 +293,9 @@ private extension SearchViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
-        guard let university = UserDefaults.standard.getUniversity() else { return }
+        guard let university = UserDefaults.standard.getUniversity(), let id = university.id else { return }
         guard let hankkiLocation = viewModel.selectedLocationData else { return }
-        let request = PostHankkiValidateRequestDTO(universityId: university.id, 
+        let request = PostHankkiValidateRequestDTO(universityId: id,
                                                    latitude: hankkiLocation.latitude,
                                                    longitude: hankkiLocation.longitude,
                                                    storeName: hankkiLocation.name)
