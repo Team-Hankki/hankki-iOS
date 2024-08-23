@@ -71,7 +71,7 @@ final class OnboardingViewController: BaseViewController {
         }
         
         skipButton.snp.makeConstraints {
-            $0.right.equalToSuperview().inset(14)
+            $0.trailing.equalToSuperview().inset(14)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(5)
         }
         
@@ -157,7 +157,7 @@ private extension OnboardingViewController {
         }
         
         let skipAttributedTitle = UILabel.setupAttributedText(
-            for: PretendardStyle.subtitle3,
+            for: PretendardStyle.body4,
             withText: "건너뛰기",
             color: currentData.skipButtonColor
         )
