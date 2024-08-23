@@ -24,7 +24,7 @@ final class EmptyView: BaseView {
     // MARK: - UI Components
     
     private let imageView: UIImageView = UIImageView()
-    private let textLabel: UILabel = UILabel()
+    let textLabel: UILabel = UILabel()
     private lazy var button: UIButton = MoreButton(buttonText: self.buttonText, buttonAction: self.buttonAction)
         
     // MARK: - Life Cycle
