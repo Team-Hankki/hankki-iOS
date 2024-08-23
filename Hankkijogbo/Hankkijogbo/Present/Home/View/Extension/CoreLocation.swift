@@ -95,6 +95,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         case .authorizedWhenInUse, .authorizedAlways:
             // 위치 접근 권한이 허용된 경우 현재 위치로 이동
             if let manager = locationManager {
+                print("0824 현재 위치 \(locationManager)")
                 manager.startUpdatingLocation()
             }
         case .restricted, .denied:
@@ -165,13 +166,21 @@ extension HomeViewController {
     func setupPosition() {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
         guard let university = UserDefaults.standard.getUniversity() else { return }
+        var initialPosition: NMGLatLng?
         
-        let initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+        if university.latitude == 0.0 &&  university.longitude == 0.0 {
+            startLocationUpdates()
+        } else {
+            initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+        }
+        
         viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
             
             markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
-            self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            if let initialPosition = initialPosition {
+                self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+            }
             
             self?.clearMarkers()
             
