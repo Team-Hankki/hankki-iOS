@@ -49,7 +49,7 @@ final class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.removeAllLocations()
-
+        
         setupRegister()
         setupDelegate()
         setupAddTarget()
@@ -213,7 +213,7 @@ extension SearchViewController {
 }
 
 private extension SearchViewController {
-        
+    
     func setupRegister() {
         searchCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.className)
         searchCollectionView.register(
@@ -265,8 +265,23 @@ private extension SearchViewController {
         if let currentSearchedText = searchTextField.text {
             if !currentSearchedText.isEmpty {
                 emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
-                emptyView.text = "'\(currentSearchedText)'" + StringLiterals.Report.emptySearchResult
-                emptyView.setupTextLabelColor(start: 0, end: currentSearchedText.count + 2, color: .gray800)
+                let firstLine = "'\(currentSearchedText)'에 대한"
+                let secondLine = "\n검색 결과가 없어요"
+                let fullText = firstLine + secondLine
+                
+                if let attributedText = UILabel.setupAttributedText(
+                    for: PretendardStyle.body2,
+                    withText: fullText,
+                    color: .gray500
+                ) {
+                    emptyView.textLabel.attributedText = attributedText
+                    
+                    emptyView.textLabel.setupTextColorRange(
+                        start: 0,
+                        end: currentSearchedText.count + 2,
+                        color: .gray800
+                    )
+                }
             } else {
                 emptyView.isHidden = true
             }
@@ -314,7 +329,7 @@ extension SearchViewController: UITextFieldDelegate {
         textField.layer.borderColor = UIColor.gray900.cgColor
         return true
     }
-
+    
     /// 텍스트 필드 내용 수정이 끝났을 때 호출되는 함수
     /// - border를 제거해준다.
     final func textFieldDidEndEditing(_ textField: UITextField) {

@@ -190,7 +190,7 @@ extension HomeViewController {
         self.isTypeCollectionViewVisible = false
     }
     
-    private func resetDropDownButtonIfNotChanged(buttonType: ButtonType) {
+    func resetDropDownButtonIfNotChanged(buttonType: ButtonType) {
         let button: UIButton
         let defaultTitle: String
         
@@ -208,7 +208,7 @@ extension HomeViewController {
         }
     }
     
-    private func resetTypeButtonIfNotChanged() {
+    func resetTypeButtonIfNotChanged() {
         let button = rootView.typeButton
         let defaultTitle = StringLiterals.Home.storeCategoryFilteringButton
         
@@ -219,8 +219,6 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
-    // objc 함수
-    
     @objc func revertButtonAction(_ sender: UIButton) {
         let filter: String
         if sender == rootView.priceButton {
@@ -276,5 +274,16 @@ extension HomeViewController {
         resetButtonToDefaultState(rootView.priceButton, defaultTitle: StringLiterals.Home.priceFilteringButton)
         resetButtonToDefaultState(rootView.sortButton, defaultTitle: StringLiterals.Home.sortFilteringButton)
         resetButtonToDefaultState(rootView.typeButton, defaultTitle: StringLiterals.Home.storeCategoryFilteringButton)
+    }
+    
+    func resetAllFilters() {
+        resetDropDownButtonIfNotChanged(buttonType: .price)
+        resetDropDownButtonIfNotChanged(buttonType: .sort)
+        resetTypeButtonIfNotChanged()
+        revertButton(for: rootView.priceButton, filter: StringLiterals.Home.priceFilteringButton)
+        revertButton(for: rootView.sortButton, filter: StringLiterals.Home.sortFilteringButton)
+        revertButton(for: rootView.typeButton, filter: StringLiterals.Home.storeCategoryFilteringButton)
+
+        viewModel.updateHankkiList()
     }
 }

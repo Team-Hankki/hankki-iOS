@@ -148,7 +148,7 @@ private extension HankkiNavigationController {
         }
         
         rightButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(31)
             $0.centerY.equalToSuperview()
         }
         

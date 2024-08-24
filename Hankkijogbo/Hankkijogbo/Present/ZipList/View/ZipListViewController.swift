@@ -200,10 +200,14 @@ extension ZipListViewController: UICollectionViewDataSource {
                 id: -1,
                 title: StringLiterals.ZipList.createZip,
                 imageUrl: "",
-                type: isEditMode ? ZipListCollectionViewCell.CellType.disable : ZipListCollectionViewCell.CellType.create )
+                type: isEditMode ? ZipListCollectionViewCell.CellType.disable : ZipListCollectionViewCell.CellType.create)
             )
+            cell.setSelected(false)
         } else {
             cell.dataBind(viewModel.zipList[indexPath.item - 1])
+            
+            let isSelected = collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false
+            cell.setSelected(isSelected)
         }
         
         return cell
