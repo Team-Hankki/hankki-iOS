@@ -427,9 +427,9 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: ChangeBottomButtonDelegate {
     func changeBottomButtonView(_ isDone: Bool) {
         if isDone {
-            self.bottomButtonView.setupEnabledDoneButton(primaryButtonText: "이 식당 제보하기")
+            self.bottomButtonView.setupEnabledDoneButton(primaryButtonText: StringLiterals.Report.reportThisHankki)
         } else {
-            self.bottomButtonView.setupDisabledDoneButton(primaryButtonText: "식당을 선택해주세요")
+            self.bottomButtonView.setupDisabledDoneButton(primaryButtonText: StringLiterals.Report.reportHankki)
         }
     }
 }
