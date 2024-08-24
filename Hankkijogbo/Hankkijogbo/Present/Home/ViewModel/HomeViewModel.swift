@@ -62,7 +62,7 @@ extension HomeViewModel {
         let priceCategory = priceCategory ?? ""
         let sortOption = sortOption ?? ""
         
-        guard let id = UserDefaults.standard.getUniversity()?.id else { return }
+        let id = UserDefaults.standard.getUniversity()?.id
         
         self.getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
