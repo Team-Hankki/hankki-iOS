@@ -187,7 +187,6 @@ extension HomeViewController {
     func hideTypeCollectionView() {
         typeCollectionView.isHidden = true
         resetTypeButtonIfNotChanged()
-        self.isTypeCollectionViewVisible = false
     }
     
     func resetDropDownButtonIfNotChanged(buttonType: ButtonType) {
