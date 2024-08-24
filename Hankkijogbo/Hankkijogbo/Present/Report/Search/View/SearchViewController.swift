@@ -121,8 +121,7 @@ final class SearchViewController: BaseViewController {
         emptyView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(128)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(112)
-            $0.height.equalTo(166)
+            $0.horizontalEdges.equalToSuperview().inset(22)
         }
     }
     
@@ -265,23 +264,9 @@ private extension SearchViewController {
         if let currentSearchedText = searchTextField.text {
             if !currentSearchedText.isEmpty {
                 emptyView.isHidden = viewModel.searchedLocationResponseData?.locations.count != 0
-                let firstLine = "'\(currentSearchedText)'에 대한"
-                let secondLine = "\n검색 결과가 없어요"
-                let fullText = firstLine + secondLine
                 
-                if let attributedText = UILabel.setupAttributedText(
-                    for: PretendardStyle.body2,
-                    withText: fullText,
-                    color: .gray500
-                ) {
-                    emptyView.textLabel.attributedText = attributedText
-                    
-                    emptyView.textLabel.setupTextColorRange(
-                        start: 0,
-                        end: currentSearchedText.count + 2,
-                        color: .gray800
-                    )
-                }
+                emptyView.text = "'\(currentSearchedText)'" + StringLiterals.Report.emptySearchResult
+                emptyView.setupTextLabelColor(start: 0, end: currentSearchedText.count + 2, color: .gray800)
             } else {
                 emptyView.isHidden = true
             }
@@ -427,9 +412,9 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: ChangeBottomButtonDelegate {
     func changeBottomButtonView(_ isDone: Bool) {
         if isDone {
-            self.bottomButtonView.setupEnabledDoneButton(primaryButtonText: "이 식당 제보하기")
+            self.bottomButtonView.setupEnabledDoneButton(primaryButtonText: StringLiterals.Report.reportThisHankki)
         } else {
-            self.bottomButtonView.setupDisabledDoneButton(primaryButtonText: "식당을 선택해주세요")
+            self.bottomButtonView.setupDisabledDoneButton(primaryButtonText: StringLiterals.Report.reportHankki)
         }
     }
 }
