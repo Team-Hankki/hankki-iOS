@@ -115,8 +115,12 @@ extension TabBarController: UITabBarControllerDelegate {
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
         
         if index == TabBarItem.allCases.firstIndex(of: .report) {
-            let reportViewController = ReportViewController()
-            navigationController?.pushViewController(reportViewController, animated: true)
+            if UserDefaults.standard.getUniversity()?.id == nil {
+                self.showAlert(titleText: StringLiterals.Alert.selectUniversityFirst, primaryButtonText: StringLiterals.Alert.check)
+            } else {
+                let reportViewController = ReportViewController()
+                navigationController?.pushViewController(reportViewController, animated: true)
+            }
             return false
         }
         

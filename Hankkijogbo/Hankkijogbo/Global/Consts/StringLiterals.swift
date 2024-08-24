@@ -21,6 +21,7 @@ enum StringLiterals {
     }
     
     enum Home {
+        static let allUniversity = "전체"
         static let storeCategoryFilteringButton = "종류"
         static let priceFilteringButton = "가격대"
         static let sortFilteringButton = "정렬"
@@ -38,6 +39,7 @@ enum StringLiterals {
         static let thanksForReport = "님,\n변동사항을 알려주셔서 감사합니다 :)\n오늘도 저렴하고 든든한 식사하세요!"
         static let reallyReport = "정말 제보하시겠어요?"
         static let disappearInfoByReport = "제보시 식당 정보가 앱에서 사라져요"
+        static let selectUniversityFirst = "대학교를 먼저 선택해주세요"
         static let check = "확인"
         static let back = "돌아가기"
         static let stay = "유지하기"
