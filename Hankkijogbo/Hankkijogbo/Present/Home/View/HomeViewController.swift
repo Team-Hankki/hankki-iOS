@@ -23,7 +23,7 @@ final class HomeViewController: BaseViewController {
     var markers: [NMFMarker] = []
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
-    private var universityId: Int? = UserDefaults.standard.getUniversity()?.id
+    private var universityId: Int?
     
     var shouldUpdateNavigationBar: Bool = true
     
@@ -60,7 +60,7 @@ final class HomeViewController: BaseViewController {
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
-        updateUniversityData(universityId: universityId)
+        updateUniversityData()
     }
     
     // MARK: - Set UI
@@ -164,6 +164,7 @@ extension HomeViewController {
 
 private extension HomeViewController {
     func loadInitialData() {
+        universityId = UserDefaults.standard.getUniversity()?.id
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
             let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
             self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
@@ -171,7 +172,9 @@ private extension HomeViewController {
         viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
     }
     
-    func updateUniversityData(universityId: Int?) {
+    func updateUniversityData() {
+        let universityId = UserDefaults.standard.getUniversity()?.id
+        
         viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
             let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
             self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
