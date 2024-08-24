@@ -71,12 +71,12 @@ final class OnboardingViewController: BaseViewController {
         }
         
         skipButton.snp.makeConstraints {
-            $0.right.equalToSuperview().inset(14)
+            $0.trailing.equalToSuperview().inset(14)
             $0.top.equalTo(view.safeAreaLayoutGuide).inset(5)
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(37)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(22)
             $0.centerX.equalToSuperview()
         }
         
@@ -138,7 +138,7 @@ private extension OnboardingViewController {
                 $0.loopMode = .playOnce
             }
             nextButton.do {
-                $0.setupBackgroundColor(.gray900)
+                $0.setupBackgroundColor(.gray800)
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
             animationView.snp.remakeConstraints {
@@ -157,7 +157,7 @@ private extension OnboardingViewController {
         }
         
         let skipAttributedTitle = UILabel.setupAttributedText(
-            for: PretendardStyle.subtitle3,
+            for: PretendardStyle.body4,
             withText: "건너뛰기",
             color: currentData.skipButtonColor
         )

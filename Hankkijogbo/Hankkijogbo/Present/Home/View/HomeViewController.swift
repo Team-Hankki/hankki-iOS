@@ -137,6 +137,7 @@ extension HomeViewController {
     func presentUniversity() {
         let univSelectViewController = UnivSelectViewController()
         univSelectViewController.delegate = self
+        resetAllFilters()
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
     
