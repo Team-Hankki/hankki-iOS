@@ -425,14 +425,14 @@ extension HankkiDetailViewController: UpdateReportButtonStyleDelegate {
         guard let footer = reportOptionCollectionView.collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HankkiReportOptionFooterView.className, for: IndexPath(item: 3, section: 0)) as? HankkiReportOptionFooterView else { return }
         
         if isEnabled {
-            footer.hankkiReportButton.setupEnabledButton()
+            footer.hankkiReportButton.setupIsValid(true)
             footer.hankkiReportButton.addTarget(
                 self,
                 action: #selector(hankkiReportButtonDidTap),
                 for: .touchUpInside
             )
         } else {
-            footer.hankkiReportButton.setupDisabledButton()
+            footer.hankkiReportButton.setupIsValid(false)
         }
     }
 }

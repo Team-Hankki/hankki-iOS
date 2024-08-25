@@ -33,12 +33,26 @@ final class MainButton: UIButton {
     
     typealias ButtonAction = () -> Void
     
-    let style: Style
-    let titleText: String
+    private let style: Style
+    private let titleText: String
     
-    // disable이 가능한 버튼인지 결정합니다.
-    // disable이 가능하면, 초기 설졍을 diable로 진행합니다.
-    let isDisable: Bool
+    private var isValid: Bool {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.updateStyle()
+            }
+        }
+    }
+    
+    private var isSubmitted: Bool = false {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                print("제출중...")
+            }
+        }
+    }
     
     var buttonHandler: ButtonAction?
     
@@ -48,22 +62,22 @@ final class MainButton: UIButton {
         type: MainButtonType = .primary,
         frame: CGRect = .zero,
         titleText: String,
-        isDisable: Bool = false,
+        isValid: Bool = true,
         buttonHandler: ButtonAction? = nil
     ) {
         self.style = type.style
         self.titleText = titleText
         
-        self.isDisable = isDisable
-        
         self.buttonHandler = buttonHandler
+        self.isValid = isValid
         
         super.init(frame: frame)
+    
         
         setupStyle()
         setupButtonAction()
     }
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -82,22 +96,44 @@ extension MainButton {
 }
 
 extension MainButton {
-    func setupEnabledButton() {
-        self.do {
-            $0.backgroundColor = style.ableBackgroundColor
-            $0.isEnabled = true
-        }
+    func setupIsValid(_ isValid: Bool) {
+        self.isValid = isValid
     }
     
-    func setupDisabledButton() {
-        self.do {
-            $0.backgroundColor = style.disableBackgroundColor
-            $0.isEnabled = false
-        }
+    func setupIsSubmitted(_ isSubmitted: Bool) {
+        self.isSubmitted = isSubmitted
     }
+    //
+    //    func setupEnabledButton() {
+    //        self.do {
+    //            $0.backgroundColor = style.ableBackgroundColor
+    //            $0.isEnabled = true
+    //        }
+    //    }
+    //
+    //    func setupDisabledButton() {
+    //        self.do {
+    //            $0.backgroundColor = style.disableBackgroundColor
+    //            $0.isEnabled = false
+    //        }
+    //    }
 }
 
 private extension MainButton {
+    func updateStyle() {
+        self.do {
+            if isValid {
+                // 버튼이 유효한 경우 = enable
+                $0.backgroundColor = style.ableBackgroundColor
+                $0.isEnabled = true
+            } else {
+                // 버튼이 유효하지 않은 경우 = disable
+                $0.backgroundColor = style.disableBackgroundColor
+                $0.isEnabled = false
+            }
+        }
+    }
+    
     func setupStyle() {
         self.do {
             if let attributedTitle = UILabel.setupAttributedText(
@@ -107,16 +143,9 @@ private extension MainButton {
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
-            
-            if isDisable {
-                $0.backgroundColor = style.disableBackgroundColor
-                $0.isEnabled = false
-            } else {
-                $0.backgroundColor = style.ableBackgroundColor
-                $0.isEnabled = true
-            }
-            
             $0.makeRoundBorder(cornerRadius: 16, borderWidth: 0, borderColor: .clear)
         }
+        
+        updateStyle()
     }
 }
