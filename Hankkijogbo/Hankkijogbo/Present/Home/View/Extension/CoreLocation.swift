@@ -109,7 +109,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func moveCameraToCurrentLocation(location: CLLocation) {
         guard isViewLoaded else { return }
-        let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+        let position = NMGLatLng(lat: location.coordinate.latitude - 0.0006, lng: location.coordinate.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 16.0)
 
         DispatchQueue.main.async {
@@ -121,7 +121,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     // 카메라를 선택한 대학교 위치로 이동
     func moveCameraToUniversityLocation() {
         guard let university = UserDefaults.standard.getUniversity() else { return }
-        let position = NMGLatLng(lat: university.latitude, lng: university.longitude)
+        let position = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 16.0)
         rootView.mapView.moveCamera(cameraUpdate)
     }
@@ -169,7 +169,7 @@ extension HomeViewController {
         if university.latitude == 0.0 &&  university.longitude == 0.0 {
             startLocationUpdates()
         } else {
-            initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+            initialPosition = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
         }
         
         viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
