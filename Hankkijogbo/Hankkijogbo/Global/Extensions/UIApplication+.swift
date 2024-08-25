@@ -48,7 +48,7 @@ extension UIApplication {
         hightlightedColor: UIColor? = nil
     ) {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let delegate = windowScene.delegate as? SceneDelegate,
+           let delegate = windowScene.delegate as? SceneDelegate,
            let rootViewController = delegate.window?.rootViewController {
             rootViewController.showAlert(
                 image: image,
@@ -85,24 +85,6 @@ extension UIApplication {
                     $0.bottom.equalToSuperview().inset(16)
                 }
             }
-        }
-    }
-    
-    static func showLoadingView(for type: LoadingViewType) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let delegate = windowScene.delegate as? SceneDelegate,
-                          let rootViewController = delegate.window?.rootViewController as? UINavigationController,
-                          let currentViewController = rootViewController.topViewController as? BaseViewController {
-                           currentViewController.showLoadingView()
-        }
-    }
-    
-    static func dismissLoadingView() {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let delegate = windowScene.delegate as? SceneDelegate,
-                          let rootViewController = delegate.window?.rootViewController as? UINavigationController,
-                          let currentViewController = rootViewController.topViewController as? BaseViewController {
-                           currentViewController.dismissLoadingView()
         }
     }
 }

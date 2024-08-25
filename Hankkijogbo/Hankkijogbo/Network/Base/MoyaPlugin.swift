@@ -12,6 +12,16 @@ import Moya
 
 final class MoyaPlugin: PluginType {
     
+    //MARK: - Properties
+    
+    weak var delegate: BaseViewControllerDelegate?
+    
+    // MARK: - Life Cycle
+    
+    static let shared = MoyaPlugin()
+    
+    private init() {}
+    
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
@@ -20,22 +30,8 @@ final class MoyaPlugin: PluginType {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             return
         }
-        print("🛜 \(request)")
         
-        let loadingViewType: LoadingViewType
-        if let targetWithLoading = target as? BaseTargetType {
-            loadingViewType = targetWithLoading.loadingViewType
-        } else {
-            loadingViewType = .none
-        }
-        
-        print("🥕 \(target) \(loadingViewType) 로딩뷰 시작")
-        
-        if loadingViewType == .fullView {
-            DispatchQueue.main.async {
-                UIApplication.showLoadingView(for: loadingViewType)
-            }
-        }
+        setLoading(true, target: target)
         
         let url = httpRequest.description
         let method = httpRequest.httpMethod ?? "unknown method"
@@ -57,20 +53,8 @@ final class MoyaPlugin: PluginType {
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         
-        let loadingViewType: LoadingViewType
-        if let targetWithLoading = target as? BaseTargetType {
-            loadingViewType = targetWithLoading.loadingViewType
-        } else {
-            loadingViewType = .none
-        }
+        setLoading(false, target: target)
         
-        print("🥕 \(target) \(loadingViewType) 로딩뷰 끝")
-        
-        if loadingViewType == .fullView {
-            DispatchQueue.main.async {
-                UIApplication.dismissLoadingView()
-            }
-        }
         switch result {
         case let .success(response):
             self.onSucceed(response)
@@ -119,5 +103,15 @@ private extension MoyaPlugin {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    func setLoading(_ isLoading: Bool, target: TargetType) {
+        let loadingViewType: LoadingViewType
+        if let targetWithLoading = target as? BaseTargetType {
+            loadingViewType = targetWithLoading.loadingViewType
+        } else {
+            loadingViewType = .none
+        }
+        delegate?.setLoading(isLoading, type: loadingViewType)
     }
 }

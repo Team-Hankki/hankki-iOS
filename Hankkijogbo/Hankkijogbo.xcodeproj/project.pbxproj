@@ -83,6 +83,7 @@
 		865826062C4170BE00265401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865826052C4170BE00265401 /* LoginViewController.swift */; };
 		865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D012C44E9E0009D9BEA /* MoreButton.swift */; };
 		865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */; };
+		865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D59C52C7B72C9004CC517 /* FullLoadingView.swift */; };
 		86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */; };
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
@@ -286,6 +287,7 @@
 		865C3D052C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
 		865C3D062C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.release.xcconfig"; sourceTree = "<group>"; };
 		865C3D092C45B4D3009D9BEA /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		865D59C52C7B72C9004CC517 /* FullLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLoadingView.swift; sourceTree = "<group>"; };
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				A240EA472C45273D000FF458 /* HankkiPaddingLabel */,
 				A29A441C2C6ADC11002B8D36 /* HankkiLineView */,
 				86E78D1C2C46B67400BE0DC3 /* EmptyView */,
+				865D59C42C7B71FE004CC517 /* LoadingView */,
 				A240EA0A2C3EFD54000FF458 /* HankkiCompositionalLayout */,
 				A240EA092C3EF712000FF458 /* HankkiReusableView */,
 				832546EA2C3F28D100B8C3DC /* HankkiDropDown */,
@@ -872,6 +875,14 @@
 				865826052C4170BE00265401 /* LoginViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		865D59C42C7B71FE004CC517 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				865D59C52C7B72C9004CC517 /* FullLoadingView.swift */,
+			);
+			path = LoadingView;
 			sourceTree = "<group>";
 		};
 		86685C4D2C3BC63500C080C4 /* UnivSelect */ = {
@@ -1776,6 +1787,7 @@
 				86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */,
 				837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */,
+				865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
 				A23D11972C47FFB90023480C /* SearchViewModel.swift in Sources */,

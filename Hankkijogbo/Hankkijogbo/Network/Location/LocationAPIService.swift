@@ -16,7 +16,7 @@ protocol LocationAPIServiceProtocol {
 
 final class LocationAPIService: BaseAPIService, LocationAPIServiceProtocol {
     
-    private let provider = MoyaProvider<LocationTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<LocationTargetType>(plugins: [MoyaPlugin.shared])
     
     func getSearchedLocation(query: String, completion: @escaping (NetworkResult<GetSearchedLocationResponseDTO>) -> Void) {
         provider.request(.getSearchedLocation(query: query)) { result in
