@@ -69,5 +69,14 @@ extension UserTargetType: BaseTargetType {
              return .post
         }
     }
-
+    
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .getMeHankkiHeartList: return .fullView
+        case .getMeHankkiReportList: return .fullView
+        case .getMeZipList: return .fullView
+        case .postMeUniversity: return .submit
+        default: return .none
+        }
+    }
 }

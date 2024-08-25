@@ -88,7 +88,7 @@ extension UIApplication {
         }
     }
     
-    static func showLoadingView() {
+    static func showLoadingView(for type: LoadingViewType) {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let delegate = windowScene.delegate as? SceneDelegate,
                           let rootViewController = delegate.window?.rootViewController as? UINavigationController,

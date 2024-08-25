@@ -39,7 +39,9 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .hankkiWhite
+//        view.backgroundColor = .hankkiWhite
+//        view.layer.borderColor = UIColor.red500.cgColor
+//        view.layer.borderWidth = 2
 
         setupHierarchy()
         setupLayout()

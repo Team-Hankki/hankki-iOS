@@ -82,4 +82,17 @@ extension ZipTargetType: BaseTargetType {
             return .delete
         }
     }
+    
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .getZipList: return .fullView
+        case .getMyZipList: return .fullView
+        case .getZipDetail: return .fullView
+        case .postZip: return .submit
+        case .postZipBatchDelete: return .submit
+        case .deleteZipToHankki: return .submit
+        default:
+            return .none
+        }
+    }
 }

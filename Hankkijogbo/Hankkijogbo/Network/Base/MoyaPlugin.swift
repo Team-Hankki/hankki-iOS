@@ -15,13 +15,26 @@ final class MoyaPlugin: PluginType {
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
-
+        
         guard let httpRequest = request.request else {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             return
         }
-        DispatchQueue.main.async {
-            UIApplication.showLoadingView()
+        print("🛜 \(request)")
+        
+        let loadingViewType: LoadingViewType
+        if let targetWithLoading = target as? BaseTargetType {
+            loadingViewType = targetWithLoading.loadingViewType
+        } else {
+            loadingViewType = .none
+        }
+        
+        print("🥕 \(target) \(loadingViewType) 로딩뷰 시작")
+        
+        if loadingViewType == .fullView {
+            DispatchQueue.main.async {
+                UIApplication.showLoadingView(for: loadingViewType)
+            }
         }
         
         let url = httpRequest.description
@@ -39,14 +52,25 @@ final class MoyaPlugin: PluginType {
         log.append("=======================================================\n")
         print(log)
     }
-
+    
     // MARK: - Response 받을 시 호출
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        DispatchQueue.main.async {
-            UIApplication.dismissLoadingView()
+        
+        let loadingViewType: LoadingViewType
+        if let targetWithLoading = target as? BaseTargetType {
+            loadingViewType = targetWithLoading.loadingViewType
+        } else {
+            loadingViewType = .none
         }
         
+        print("🥕 \(target) \(loadingViewType) 로딩뷰 끝")
+        
+        if loadingViewType == .fullView {
+            DispatchQueue.main.async {
+                UIApplication.dismissLoadingView()
+            }
+        }
         switch result {
         case let .success(response):
             self.onSucceed(response)
@@ -54,7 +78,7 @@ final class MoyaPlugin: PluginType {
             self.onFail(error)
         }
     }
-
+    
     func onSucceed(_ response: Response) {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
@@ -62,14 +86,14 @@ final class MoyaPlugin: PluginType {
         
         var log = "🍚 [RESULT] =============================================\n"
         log.append("3️⃣ [\(statusCode)] \(url)\n")
-   
+        
         if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
             log.append("\n4️⃣ \(reString)\n")
         }
         log.append("=======================================================\n")
         print(log)
     }
-
+    
     func onFail(_ error: MoyaError) {
         if let response = error.response {
             onSucceed(response)

@@ -134,4 +134,19 @@ extension HankkiTargetType: BaseTargetType {
             return .delete
         }
     }
+    
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .getHankkiList: return .fullView
+        case .getHankkiDetail: return .fullView
+        case .getHankkiPin: return .fullView
+            
+        case .postHankkiValidate: return .submit
+        case .postHankki: return .submit
+        case .postHankkiFromOther: return .submit
+        case .deleteHankki: return .submit
+            
+        default: return .none
+        }
+    }
 }
