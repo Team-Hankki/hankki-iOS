@@ -137,15 +137,8 @@ extension HankkiTargetType: BaseTargetType {
     
     var loadingViewType: LoadingViewType {
         switch self {
-        case .getHankkiList: return .fullView
-        case .getHankkiDetail: return .fullView
-        case .getHankkiPin: return .fullView
-            
-        case .postHankkiValidate: return .submit
-        case .postHankki: return .submit
-        case .postHankkiFromOther: return .submit
-        case .deleteHankki: return .submit
-            
+        case .getHankkiList, .getHankkiDetail, .getHankkiPin: return .fullView  
+        case .postHankkiValidate, .postHankki, .postHankkiFromOther, .deleteHankki: return .submit
         default: return .none
         }
     }
