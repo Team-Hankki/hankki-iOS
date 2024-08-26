@@ -161,9 +161,8 @@ extension HomeViewController {
         rootView.mapView.touchDelegate = self
     }
     
-    func setupPosition() {
+    func setupPosition(with university: UniversityModel) {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
-        guard let university = UserDefaults.standard.getUniversity() else { return }
         var initialPosition: NMGLatLng?
         
         if university.latitude == 0.0 &&  university.longitude == 0.0 {
@@ -171,9 +170,7 @@ extension HomeViewController {
         } else {
             initialPosition = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
         }
-        
         viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
-            
             markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
             if let initialPosition = initialPosition {

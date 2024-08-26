@@ -47,11 +47,12 @@ final class HomeViewController: BaseViewController {
         
         setupHankkiListResult()
         loadInitialData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupPosition()
         
         if shouldUpdateNavigationBar {
             setupNavigationBar()
@@ -82,11 +83,15 @@ final class HomeViewController: BaseViewController {
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
+                self.rootView.bottomSheetView.setNeedsLayout()
+                self.rootView.bottomSheetView.layoutIfNeeded()
             }
         }
         
         viewModel.hankkiPinsDidChange = { [weak self] pins in
-            self?.setupPosition(with: pins)
+            DispatchQueue.main.async {
+                self?.setupPosition(with: pins)
+            }
         }
         
         viewModel.showAlert = { [weak self] message in
@@ -161,6 +166,13 @@ extension HomeViewController {
             }
         }
     }
+    
+    @objc func locationStateUpdate(_ notification: Notification) {
+        if let university = notification.userInfo?["university"] as? UniversityModel {
+            setupPosition(with: university)
+        }
+    }
+    
 }
 
 private extension HomeViewController {
