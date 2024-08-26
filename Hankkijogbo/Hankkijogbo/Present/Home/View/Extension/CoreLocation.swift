@@ -110,7 +110,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     func moveCameraToCurrentLocation(location: CLLocation) {
         guard isViewLoaded else { return }
         let position = NMGLatLng(lat: location.coordinate.latitude - 0.0006, lng: location.coordinate.longitude)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 16.0)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
 
         DispatchQueue.main.async {
             self.rootView.mapView.moveCamera(cameraUpdate)
@@ -122,7 +122,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     func moveCameraToUniversityLocation() {
         guard let university = UserDefaults.standard.getUniversity() else { return }
         let position = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 16.0)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
         rootView.mapView.moveCamera(cameraUpdate)
     }
     
@@ -174,7 +174,7 @@ extension HomeViewController {
             markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
             if let initialPosition = initialPosition {
-                self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition, zoomTo: 16.0))
+                self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition, zoomTo: 14.0))
             }
             
             self?.clearMarkers()
