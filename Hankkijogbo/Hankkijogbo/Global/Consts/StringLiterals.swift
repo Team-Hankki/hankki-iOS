@@ -154,6 +154,7 @@ enum StringLiterals {
     enum NotificationName {
         static let updateAddToMyZipList = "UpdateAddToMyZipList"
         static let setupToast = "SetupToast"
+        static let locationDidUpdate = "locationDidUpdate"
     }
     
     enum Mypage {
