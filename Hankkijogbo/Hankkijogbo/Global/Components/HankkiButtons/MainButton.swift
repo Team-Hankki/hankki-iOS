@@ -73,7 +73,6 @@ final class MainButton: UIButton {
         
         super.init(frame: frame)
     
-        
         setupStyle()
         setupButtonAction()
     }
@@ -103,20 +102,6 @@ extension MainButton {
     func setupIsSubmitted(_ isSubmitted: Bool) {
         self.isSubmitted = isSubmitted
     }
-    //
-    //    func setupEnabledButton() {
-    //        self.do {
-    //            $0.backgroundColor = style.ableBackgroundColor
-    //            $0.isEnabled = true
-    //        }
-    //    }
-    //
-    //    func setupDisabledButton() {
-    //        self.do {
-    //            $0.backgroundColor = style.disableBackgroundColor
-    //            $0.isEnabled = false
-    //        }
-    //    }
 }
 
 private extension MainButton {
