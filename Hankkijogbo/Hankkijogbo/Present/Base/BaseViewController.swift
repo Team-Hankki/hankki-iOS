@@ -67,6 +67,7 @@ class BaseViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NetworkService.shared.setupDelegate(self)
     }
     
@@ -91,6 +92,8 @@ extension BaseViewController: BaseViewControllerDelegate {
 private extension BaseViewController {
     // Loading View의 초기 설정을 합니다.
     func setupLoadingView() {
+        NetworkService.shared.setupDelegate(self)
+        
         view.addSubviews(loadingView)
         loadingView.snp.makeConstraints {
             $0.edges.equalToSuperview()

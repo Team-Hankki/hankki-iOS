@@ -12,7 +12,7 @@ import Moya
 
 final class MoyaPlugin: PluginType {
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     weak var delegate: BaseViewControllerDelegate?
     
@@ -53,7 +53,6 @@ final class MoyaPlugin: PluginType {
     // MARK: - Response 받을 시 호출
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        
         setupLoading(false, target: target)
         
         switch result {
