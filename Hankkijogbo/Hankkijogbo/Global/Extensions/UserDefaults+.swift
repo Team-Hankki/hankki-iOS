@@ -8,6 +8,17 @@
 import Foundation
 
 extension UserDefaults {
+    func saveUserId(_ userId: String) {
+        UserDefaults.standard.set(userId, forKey: UserDefaultsKey.userId.rawValue)
+    }
+    
+    func removeUserId() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsKey.userId.rawValue)
+    }
+    
+    func getUserId() -> String {
+        return UserDefaults.standard.string(forKey: UserDefaultsKey.userId.rawValue) ?? ""
+    }
     
     /// refresh, access token 관련 함수
     func saveTokens(accessToken: String, refreshToken: String) {
@@ -62,6 +73,7 @@ extension UserDefaults {
     }
     
     func removeUserInformation() {
+        removeUserId()
         removeTokens()
         removeUniversity()
         removeNickname()
@@ -71,6 +83,7 @@ extension UserDefaults {
 enum UserDefaultsKey: String {
     case accessToken
     case refreshToken
+    case userId
     case university
     case nickname
 }

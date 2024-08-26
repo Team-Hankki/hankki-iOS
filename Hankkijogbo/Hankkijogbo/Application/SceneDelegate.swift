@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -15,9 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        //
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-      
+        
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
@@ -31,8 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        checkAppleAccountStatus()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
@@ -50,5 +51,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+}
 
+private extension SceneDelegate {
+    func checkAppleAccountStatus() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let userId: String = UserDefaults.standard.getUserId()
+        
+        appleIDProvider.getCredentialState(forUserID: userId) { (credentialState, error) in
+            switch credentialState {
+            case .authorized:
+                return
+                
+            default:
+                print("사용자가 애플 계정에 로그인하지 않은 상태이거나 인증이 취소되었습니다.")
+                UIApplication.resetApp()
+                return
+                
+            }
+        }
+    }
 }
