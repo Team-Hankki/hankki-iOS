@@ -25,13 +25,14 @@ final class MoyaPlugin: PluginType {
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
+        setupLoading(true, target: target)
         
         guard let httpRequest = request.request else {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
+            setupLoading(false, target: target)
             return
+            
         }
-        
-        setLoading(true, target: target)
         
         let url = httpRequest.description
         let method = httpRequest.httpMethod ?? "unknown method"
@@ -53,7 +54,7 @@ final class MoyaPlugin: PluginType {
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         
-        setLoading(false, target: target)
+        setupLoading(false, target: target)
         
         switch result {
         case let .success(response):
@@ -105,13 +106,13 @@ private extension MoyaPlugin {
         }
     }
     
-    func setLoading(_ isLoading: Bool, target: TargetType) {
+    func setupLoading(_ isLoading: Bool, target: TargetType) {
         let loadingViewType: LoadingViewType
         if let targetWithLoading = target as? BaseTargetType {
             loadingViewType = targetWithLoading.loadingViewType
         } else {
             loadingViewType = .none
         }
-        delegate?.setLoading(isLoading, type: loadingViewType)
+        delegate?.setupLoading(isLoading, type: loadingViewType)
     }
 }

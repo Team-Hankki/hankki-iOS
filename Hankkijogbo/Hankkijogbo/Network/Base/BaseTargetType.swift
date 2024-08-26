@@ -105,9 +105,3 @@ extension BaseTargetType {
         }
     }
 }
-
-enum LoadingViewType {
-    case fullView
-    case submit
-    case none
-}

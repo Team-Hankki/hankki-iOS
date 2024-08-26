@@ -12,7 +12,7 @@ import SnapKit
 import Then
 
 protocol BaseViewControllerDelegate: AnyObject {
-    func setLoading(_ isLoading: Bool, type: LoadingViewType)
+    func setupLoading(_ isLoading: Bool, type: LoadingViewType)
 }
 
 /// 모든 UIViewController는 BaseViewController를 상속 받는다.
@@ -56,8 +56,6 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        NetworkService.shared.setDelegate(self)
-        
         setupHierarchy()
         setupLayout()
         setupStyle()
@@ -66,6 +64,10 @@ class BaseViewController: UIViewController {
         
         setUpKeyboard()
         hideKeyboard()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NetworkService.shared.setupDelegate(self)
     }
     
     // MARK: - Set UI
@@ -78,7 +80,7 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController: BaseViewControllerDelegate {
-    func setLoading(_ isLoading: Bool, type: LoadingViewType) {
+    func setupLoading(_ isLoading: Bool, type: LoadingViewType) {
         self.loadingViewType = type
         self.isLoading = isLoading
     }
@@ -97,17 +99,14 @@ private extension BaseViewController {
     
     // Loading State에 맞게 Loading View를 update합니다.
     func updateLoadingView(for type: LoadingViewType) {
-        
-        switch type {
-            
-        case .fullView:
+        switch type {    
+        case .fullView, .submit:
             if isLoading {
-                loadingView.showLoadingView()
+                loadingView.showLoadingView(type)
             } else {
-                loadingView.dismissLoadingView()
+                loadingView.dismissLoadingView(type)
             }
-        case .submit:
-            print("submit loading")
+        
         case .none:
             print("empty loading")
         }

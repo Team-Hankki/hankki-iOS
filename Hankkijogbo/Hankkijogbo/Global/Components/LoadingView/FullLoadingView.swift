@@ -40,17 +40,18 @@ final class FullLoadingView: BaseView {
 }
 
 extension FullLoadingView {
-    func showLoadingView() {
+    func showLoadingView(_ type: LoadingViewType) {
         self.do {
             $0.isHidden = false
         }
         
         spinner.do {
+            $0.isHidden = type == .submit
             $0.play()
         }
     }
     
-    func dismissLoadingView() {
+    func dismissLoadingView(_ type: LoadingViewType) {
         self.do {
             $0.isHidden = true
         }

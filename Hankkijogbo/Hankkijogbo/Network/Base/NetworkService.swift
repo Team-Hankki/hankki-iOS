@@ -23,7 +23,7 @@ final class NetworkService {
 }
 
 extension NetworkService {
-    func setDelegate(_ delegate: BaseViewControllerDelegate) {
+    func setupDelegate(_ delegate: BaseViewControllerDelegate) {
         MoyaPlugin.shared.delegate = delegate
     }
 }
