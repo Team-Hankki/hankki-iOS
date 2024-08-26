@@ -12,16 +12,26 @@ import Moya
 
 final class MoyaPlugin: PluginType {
     
+    // MARK: - Properties
+    
+    weak var delegate: BaseViewControllerDelegate?
+    
+    // MARK: - Life Cycle
+    
+    static let shared = MoyaPlugin()
+    
+    private init() {}
+    
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
-
+        setupLoading(true, target: target)
+        
         guard let httpRequest = request.request else {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
+            setupLoading(false, target: target)
             return
-        }
-        DispatchQueue.main.async {
-            UIApplication.showLoadingView()
+            
         }
         
         let url = httpRequest.description
@@ -39,13 +49,11 @@ final class MoyaPlugin: PluginType {
         log.append("=======================================================\n")
         print(log)
     }
-
+    
     // MARK: - Response 받을 시 호출
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        DispatchQueue.main.async {
-            UIApplication.dismissLoadingView()
-        }
+        setupLoading(false, target: target)
         
         switch result {
         case let .success(response):
@@ -54,7 +62,7 @@ final class MoyaPlugin: PluginType {
             self.onFail(error)
         }
     }
-
+    
     func onSucceed(_ response: Response) {
         let request = response.request
         let url = request?.url?.absoluteString ?? "nil"
@@ -62,14 +70,14 @@ final class MoyaPlugin: PluginType {
         
         var log = "🍚 [RESULT] =============================================\n"
         log.append("3️⃣ [\(statusCode)] \(url)\n")
-   
+        
         if let reString = String(bytes: response.data, encoding: String.Encoding.utf8) {
             log.append("\n4️⃣ \(reString)\n")
         }
         log.append("=======================================================\n")
         print(log)
     }
-
+    
     func onFail(_ error: MoyaError) {
         if let response = error.response {
             onSucceed(response)
@@ -95,5 +103,15 @@ private extension MoyaPlugin {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    func setupLoading(_ isLoading: Bool, target: TargetType) {
+        let loadingViewType: LoadingViewType
+        if let targetWithLoading = target as? BaseTargetType {
+            loadingViewType = targetWithLoading.loadingViewType
+        } else {
+            loadingViewType = .none
+        }
+        delegate?.setupLoading(isLoading, type: loadingViewType)
     }
 }

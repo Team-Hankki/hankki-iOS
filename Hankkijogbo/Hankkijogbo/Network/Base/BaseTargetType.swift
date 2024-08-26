@@ -46,6 +46,7 @@ protocol BaseTargetType: TargetType {
     var pathParameter: String? { get }
     var queryParameter: [String: Any]? { get }
     var requestBodyParameter: Codable? { get }
+    var loadingViewType: LoadingViewType { get }
 }
 
 extension BaseTargetType {

@@ -15,7 +15,7 @@ protocol UniversityAPIServiceProtocol {
 }
 
 final class UniversityAPIService: BaseAPIService, UniversityAPIServiceProtocol {
-    private let provider = MoyaProvider<UniversityTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<UniversityTargetType>(plugins: [MoyaPlugin.shared])
     
     func getUniversityList(completion: @escaping (NetworkResult<GetUniversityListResponseDTO>) -> Void) {
         provider.request(.getUniversityList) { result in

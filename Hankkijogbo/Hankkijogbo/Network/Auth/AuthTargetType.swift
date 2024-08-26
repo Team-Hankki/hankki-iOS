@@ -70,4 +70,11 @@ extension AuthTargetType: BaseTargetType {
         case .patchLogout: return .patch
         }
     }
+    
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .deleteWithdraw, .patchLogout: return .fullView
+        default: return .none
+        }
+    }
 }

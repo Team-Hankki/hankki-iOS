@@ -39,7 +39,7 @@ extension HankkiAPIServiceProtocol {
 
 final class HankkiAPIService: BaseAPIService, HankkiAPIServiceProtocol {
     
-    private let provider = MoyaProvider<HankkiTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<HankkiTargetType>(plugins: [MoyaPlugin.shared])
     
     func postHankki(multipartData: [MultipartFormData], completion: @escaping (NetworkResult<PostHankkiResponseDTO>) -> Void) {
         provider.request(.postHankki(multipartData: multipartData)) { result in

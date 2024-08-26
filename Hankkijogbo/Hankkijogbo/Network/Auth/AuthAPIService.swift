@@ -21,7 +21,7 @@ protocol AuthAPIServiceProtocol {
 
 final class AuthAPIService: BaseAPIService, AuthAPIServiceProtocol {
     
-    private let provider = MoyaProvider<AuthTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<AuthTargetType>(plugins: [MoyaPlugin.shared])
     
     func postLogin(accessToken: String, requestBody: PostLoginRequestDTO, completion: @escaping (NetworkResult<PostLoginResponseDTO>) -> Void) {
         provider.request(.postLogin(accessToken: accessToken, requestBody: requestBody)) { result in
