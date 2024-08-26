@@ -59,13 +59,13 @@ private extension SceneDelegate {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let userId: String = UserDefaults.standard.getUserId()
         
-        appleIDProvider.getCredentialState(forUserID: userId) { (credentialState, error) in
+        appleIDProvider.getCredentialState(forUserID: userId) { (credentialState, _) in
             switch credentialState {
             case .authorized:
                 return
                 
             default:
-                print("사용자가 애플 계정에 로그인하지 않은 상태이거나 인증이 취소되었습니다.")
+                print("🛠️ RESTART APPLICATION 🛠️ - NO ACCESS")
                 UIApplication.resetApp()
                 return
                 
