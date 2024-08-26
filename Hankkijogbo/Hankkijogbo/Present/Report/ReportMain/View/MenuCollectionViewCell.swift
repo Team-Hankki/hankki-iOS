@@ -288,7 +288,6 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
                 textField.layer.borderColor = UIColor.gray300.cgColor
             }
         }
-        textField.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
         delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }
     
