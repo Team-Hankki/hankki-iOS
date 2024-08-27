@@ -80,9 +80,7 @@ private extension NetworkResult {
                 // access token을 재발급 받는 중 error가 났을 경우
                 // refresh token이 정상적이지 않을 경우
                 // 로그인을 다시 진행해 refresh token을 재발급 받는다.
-                print("🛠️ RESET APPLICATION 🛠️\n\n")
                 UIApplication.resetApp()
-                UIApplication.showBlackToast(message: StringLiterals.Toast.accessError)
             }
         }
     }
