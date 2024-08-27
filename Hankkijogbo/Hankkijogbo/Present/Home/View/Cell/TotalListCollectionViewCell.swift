@@ -133,7 +133,7 @@ extension TotalListCollectionViewCell {
         thumbnailImageView.setKFImage(url: model.imageUrl, placeholder: .imgDetailDefault)
         menutagLabel.text = model.category
         hankkiTitle.text = model.name
-        priceLabel.text = String(model.lowestPrice) + StringLiterals.Common.won
+        priceLabel.formattingPrice(price: model.lowestPrice)
         likeLabel.text = String(model.heartCount)
     }
 }
