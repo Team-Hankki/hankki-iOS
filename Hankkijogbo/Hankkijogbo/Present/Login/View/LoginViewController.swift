@@ -133,6 +133,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(name: fullNameString)
             
+            let userId = appleIDCredential.user
+            UserDefaults.standard.saveUserId(userId)
+            
             viewModel.postLogin(accessToken: identityTokenString, postLoginRequest: postLoginRequest)
             
         default:

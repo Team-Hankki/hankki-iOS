@@ -21,3 +21,9 @@ final class NetworkService {
     let zipService: ZipAPIServiceProtocol = ZipAPIService()
     let reportService: ReportAPIServiceProtocol = ReportAPIService()
 }
+
+extension NetworkService {
+    func setupDelegate(_ delegate: BaseViewControllerDelegate) {
+        MoyaPlugin.shared.delegate = delegate
+    }
+}

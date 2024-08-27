@@ -14,6 +14,12 @@ enum LocationTargetType {
 }
 
 extension LocationTargetType: BaseTargetType {
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .getSearchedLocation: return .fullView
+        }
+    }
+    
     var headerType: HeaderType { return .accessTokenHeader }
     var utilPath: UtilPath { return .location }
     

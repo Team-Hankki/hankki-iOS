@@ -52,6 +52,7 @@ extension UnivSelectViewModel {
             result.handleNetworkResult { _ in
                 // local에 대학 정보 저장
                 UserDefaults.standard.saveUniversity(currentUniversity)
+                NotificationCenter.default.post(name: NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil, userInfo: ["university": currentUniversity])
                 
                 // 홈 뷰로 돌아가기
                 DispatchQueue.main.async {

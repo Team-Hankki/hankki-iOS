@@ -42,4 +42,10 @@ extension ReportTargetType: BaseTargetType {
         case .getReportedNumber: .get
         }
     }
+    
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .getReportedNumber: return .none
+        }
+    }
 }

@@ -24,7 +24,7 @@ protocol UserAPIServiceProtocol {
 
 final class UserAPIService: BaseAPIService, UserAPIServiceProtocol {
     
-    private let provider = MoyaProvider<UserTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<UserTargetType>(plugins: [MoyaPlugin.shared])
     
     func getMe(completion: @escaping (NetworkResult<GetMeResponseDTO>) -> Void) {
         provider.request(.getMe) { result in

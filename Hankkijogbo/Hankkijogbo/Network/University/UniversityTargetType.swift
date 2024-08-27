@@ -50,5 +50,11 @@ extension UniversityTargetType: BaseTargetType {
         switch self {
         case .getUniversityList: return .get
         }
-    }    
+    }
+    
+    var loadingViewType: LoadingViewType {
+        switch self {
+        case .getUniversityList: return .fullView
+        }
+    }
 }

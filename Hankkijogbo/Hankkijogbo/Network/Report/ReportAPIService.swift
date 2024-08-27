@@ -16,7 +16,7 @@ protocol ReportAPIServiceProtocol {
 
 final class ReportAPIService: BaseAPIService, ReportAPIServiceProtocol {
     
-    private let provider = MoyaProvider<ReportTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<ReportTargetType>(plugins: [MoyaPlugin.shared])
     
     func getReportedNumber(completion: @escaping (NetworkResult<GetReportedNumberResponseDTO>) -> Void) {
         provider.request(.getReportedNumber) { result in

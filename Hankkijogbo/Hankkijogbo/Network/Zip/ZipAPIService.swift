@@ -23,7 +23,7 @@ protocol ZipAPIServiceProtocol {
 
 final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
     
-    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin()])
+    private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin.shared])
     
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<Void>) -> Void) {
         provider.request(.deleteZipToHankki(requestBody: requestBody)) { result in

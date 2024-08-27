@@ -33,8 +33,7 @@ final class CreateZipViewController: BaseViewController {
     private let tagInputTitle = UILabel()
     private let tagInputTextField = TagTextField()
     
-    private lazy var submitButton = MainButton(titleText: StringLiterals.CreateZip.submitButton,
-                                               buttonHandler: submitButtonDidTap)
+    private lazy var submitButton = MainButton(titleText: StringLiterals.CreateZip.submitButton, isValid: false, buttonHandler: submitButtonDidTap)
     
     // MARK: - Life Cycle
     
@@ -112,10 +111,6 @@ final class CreateZipViewController: BaseViewController {
             
             $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TagInput.placeholder,
                                       forColor: .gray400)
-        }
-        
-        submitButton.do {
-            $0.setupDisabledButton()
         }
     }
     
@@ -217,7 +212,7 @@ private extension CreateZipViewController {
     
     func resetTitleTextField() {
         self.titleInputTextField.text = ""
-        submitButton.setupDisabledButton()
+        submitButton.setupIsValid(false)
     }
     
     func dismissSelf() {
@@ -235,9 +230,9 @@ private extension CreateZipViewController {
     
     func isFormValid() {
         if !(titleInputTextField.text ?? "").isEmpty && (tagInputTextField.text ?? "").count > 1 {
-            submitButton.setupEnabledButton()
+            submitButton.setupIsValid(true)
         } else {
-            submitButton.setupDisabledButton()
+            submitButton.setupIsValid(false)
         }
     }
 }
@@ -247,7 +242,7 @@ private extension CreateZipViewController {
 extension CreateZipViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.gray600.cgColor
-        textField.layer.borderWidth = 1.5
+        textField.layer.borderWidth = 2
         
         switch textField.tag {
         case 0:
