@@ -60,7 +60,6 @@ final class HomeViewController: BaseViewController {
         
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
         updateUniversityData()
     }
     
@@ -68,7 +67,6 @@ final class HomeViewController: BaseViewController {
         super.viewDidDisappear(animated)
         
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
     }
     
     // MARK: - Set UI

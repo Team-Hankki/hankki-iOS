@@ -57,13 +57,10 @@ final class HankkiDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
-        NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
         
         navigationController?.isNavigationBarHidden = false
     }
