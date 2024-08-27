@@ -278,6 +278,7 @@ extension HankkiDetailViewController {
     }
     
     @objc func editMenuButtonDidTap() {
+        SetAmplitude.shared.buttonClicked("Menu-Edit")
         self.showAlert(
             titleText: StringLiterals.Alert.DevelopEdit.title,
             subText: StringLiterals.Alert.DevelopEdit.sub,

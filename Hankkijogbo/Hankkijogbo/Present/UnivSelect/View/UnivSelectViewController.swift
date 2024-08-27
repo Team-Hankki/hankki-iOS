@@ -231,6 +231,7 @@ extension UnivSelectViewController: UICollectionViewDataSource {
 extension UnivSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.currentUnivIndex = indexPath.item
+        SetAmplitude.shared.buttonClicked("University", additionalProperties: ["university_name" : viewModel.universityList[viewModel.currentUnivIndex].name])
         if viewModel.currentUnivIndex != -1 {
             bottomButtonView.setupEnabledDoneButton()
         }

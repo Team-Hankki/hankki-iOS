@@ -88,6 +88,8 @@
 		86685C522C3BC67D00C080C4 /* UnivSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */; };
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
+		8668D2482C7DAEEC001CBCA0 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 8668D2472C7DAEEC001CBCA0 /* Amplitude */; };
+		8668D24A2C7DE0CA001CBCA0 /* SetAmplitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D2492C7DE0CA001CBCA0 /* SetAmplitude.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
@@ -293,6 +295,7 @@
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
+		8668D2492C7DE0CA001CBCA0 /* SetAmplitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmplitude.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
@@ -423,6 +426,7 @@
 				83DBEDC12C2569A80042BA48 /* SnapKit in Frameworks */,
 				83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */,
 				839FC7232C47A3DB00B7FEDD /* Kingfisher in Frameworks */,
+				8668D2482C7DAEEC001CBCA0 /* Amplitude in Frameworks */,
 				8670A7862C49C3290098DCF1 /* Lottie in Frameworks */,
 				9E38C1F6B1DB0B110CF9BCB7 /* Pods_Hankkijogbo.framework in Frameworks */,
 			);
@@ -1217,6 +1221,7 @@
 		A2079B952C67344100817651 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8668D2492C7DE0CA001CBCA0 /* SetAmplitude.swift */,
 				A23D11992C4811790023480C /* HankkiDebouncer.swift */,
 				A2079B932C656F7D00817651 /* ImageCompressor.swift */,
 			);
@@ -1528,6 +1533,7 @@
 				83DBEDC32C256A3B0042BA48 /* Moya */,
 				839FC7222C47A3DB00B7FEDD /* Kingfisher */,
 				8670A7852C49C3290098DCF1 /* Lottie */,
+				8668D2472C7DAEEC001CBCA0 /* Amplitude */,
 			);
 			productName = Hankkijogbo;
 			productReference = 83DBED722C255A180042BA48 /* Hankkijogbo.app */;
@@ -1563,6 +1569,7 @@
 				83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */,
 				839FC7212C47A3DB00B7FEDD /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				8670A7842C49C3290098DCF1 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				8668D2462C7DAEEC001CBCA0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
 			);
 			productRefGroup = 83DBED732C255A180042BA48 /* Products */;
 			projectDirPath = "";
@@ -1714,6 +1721,7 @@
 				A2EC33B32C47169000809840 /* LocationAPIService.swift in Sources */,
 				839138D92C48F7FE00611D5C /* GetHankkiPinResponseDTO.swift in Sources */,
 				86880C242C47C77900CAEF58 /* LoginViewModel.swift in Sources */,
+				8668D24A2C7DE0CA001CBCA0 /* SetAmplitude.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,
@@ -2109,6 +2117,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		8668D2462C7DAEEC001CBCA0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amplitude/Amplitude-iOS";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8670A7842C49C3290098DCF1 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -2139,6 +2155,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		8668D2472C7DAEEC001CBCA0 /* Amplitude */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8668D2462C7DAEEC001CBCA0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */;
+			productName = Amplitude;
 		};
 		8670A7852C49C3290098DCF1 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

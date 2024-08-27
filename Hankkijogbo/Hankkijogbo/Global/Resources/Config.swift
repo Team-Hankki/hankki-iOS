@@ -14,6 +14,7 @@ enum Config {
         enum Plist {
             static let baseURL = "BASE_URL"
             static let NMFClientId = "NMFClientId"
+            static let Amplitude = "Amplitude"
         }
     }
     
@@ -36,6 +37,13 @@ extension Config {
     static let NMFClientId: String = {
         guard let key = Config.infoDictionary[Keys.Plist.NMFClientId] as? String else {
             fatalError("ClientID is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let Amplitude: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.Amplitude] as? String else {
+            fatalError("Amplitude is not set in plist for this configuration.")
         }
         return key
     }()

@@ -33,6 +33,7 @@ extension MypageViewController {
     func setupAction(_ section: SectionType, itemIndex: Int) {
         switch section {
         case .zip:
+            SetAmplitude.shared.buttonClicked("My-Jokbo")
             navigateToZipListViewController()
             
         case .hankki:
