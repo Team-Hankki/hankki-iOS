@@ -94,6 +94,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
         radioButton.do {
             $0.setImage(.btnRadioNormal, for: .normal)
+            $0.isUserInteractionEnabled = false
         }
     }
     
