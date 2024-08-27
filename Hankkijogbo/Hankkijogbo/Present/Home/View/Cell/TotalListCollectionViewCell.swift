@@ -69,6 +69,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         hankkiTitle.do {
             $0.textColor = .gray900
             $0.font = .setupSuiteStyle(of: .subtitle2)
+            $0.lineBreakMode = .byTruncatingTail
+            $0.numberOfLines = 1
         }
         
         [priceLabel, likeLabel].forEach {
@@ -112,6 +114,10 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalToSuperview().inset(22)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(72)
+        }
+        
+        hankkiTitle.snp.makeConstraints {
+            $0.width.equalTo(200)
         }
         
         hankkiInfoStackView.snp.makeConstraints {
