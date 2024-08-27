@@ -309,7 +309,7 @@ extension SearchViewController: UITextFieldDelegate {
     /// - 2. 텍스트가 채워져 있으면 바로 사이드 버튼들의 visibility를 변경한다.
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.gray400.cgColor
+        textField.layer.borderColor = UIColor.gray500.cgColor
         return true
     }
     

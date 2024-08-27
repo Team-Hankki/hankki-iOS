@@ -254,11 +254,11 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
         if textField == menuTextField {
             menuLabel.textColor = .gray800
             textField.layer.borderWidth = 2
-            textField.layer.borderColor = UIColor.gray400.cgColor
+            textField.layer.borderColor = UIColor.gray500.cgColor
         } else {
             priceTextFieldDidEditingChange()
             priceTextField.layer.borderWidth = 2
-            priceTextField.layer.borderColor = UIColor.gray400.cgColor
+            priceTextField.layer.borderColor = UIColor.gray500.cgColor
         }
         return true
     }
