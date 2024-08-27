@@ -82,6 +82,11 @@ final class ReportCompleteViewController: BaseViewController {
         setupNotification()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
+    }
+    
     // MARK: - Setup UI
     
     override func setupHierarchy() {

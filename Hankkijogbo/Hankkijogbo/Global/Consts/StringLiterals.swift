@@ -68,7 +68,7 @@ enum StringLiterals {
         
         enum DevelopShare {
             static let title = StringLiterals.Alert.waitPlease
-            static let sub = "친구에게 내 족보를 공유할 수 있도록 준비 중이에요 :)"
+            static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요 :)"
             static let primaryButton = StringLiterals.Alert.check
         }
         

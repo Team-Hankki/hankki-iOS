@@ -64,6 +64,13 @@ final class HomeViewController: BaseViewController {
         updateUniversityData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
+    }
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
