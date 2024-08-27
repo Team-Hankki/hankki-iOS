@@ -111,6 +111,7 @@ extension MyZipListCollectionViewCell {
         addZipButton.isUserInteractionEnabled = !isChecked
         addZipButton.setImage(isChecked ? .btnAddLinedDisabled : .btnAddLined, for: .normal)
         thumbnailImageView.image = getImageForType(zipData.imageType)
+        thumbnailImageView.alpha = isChecked ? 0.3 : 1.0
         setupLabelStyleOfData(zipData: zipData)
     }
 }
