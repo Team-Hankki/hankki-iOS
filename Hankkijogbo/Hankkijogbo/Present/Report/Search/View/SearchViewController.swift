@@ -147,15 +147,12 @@ final class SearchViewController: BaseViewController {
         searchTextField.do {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 10
-            $0.layer.borderWidth = 1.5
-            $0.layer.borderColor = UIColor.gray900.cgColor
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: StringLiterals.Report.searchSecondPlaceHolder,
                 color: .gray400
             )
             $0.addPadding(left: 40, right: 45)
-            $0.changeBorderVisibility(isVisible: false, color: UIColor.gray900.cgColor)
             $0.autocorrectionType = .no
             $0.spellCheckingType = .no
             $0.autocapitalizationType = .none
@@ -177,6 +174,7 @@ extension SearchViewController {
         viewModel.updateLocations = {
             self.updateEmptyView()
             self.searchCollectionView.reloadData()
+            self.bottomButtonView.setupDisabledDoneButton(primaryButtonText: StringLiterals.Report.reportHankki)
         }
         
         /// 버튼으로 최종 식당 선택 시 실행
@@ -330,7 +328,6 @@ extension SearchViewController: UITextFieldDelegate {
         changeSideButtonVisibility(isVisible: !currentText.isEmpty)
         
         guard let query = self.searchTextField.text else { return }
-        // TODO: - query.isEmpty일 때 보내면(-> 검색창 싹다 지웠을 때 발생함) 초기화를 위해 빈 locations 달라고 요청해야할 것 같다
         if !query.isEmpty {
             debouncer.run {
                 self.viewModel.getSearchedLocationAPI(query: query)
