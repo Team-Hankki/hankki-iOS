@@ -27,7 +27,7 @@ final class MoyaPlugin: PluginType {
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
-        addRquest(target)
+        addRequest(target)
         setupLoading(true, target: target)
         
         guard let httpRequest = request.request else {
@@ -124,7 +124,7 @@ private extension MoyaPlugin {
 }
 
 private extension MoyaPlugin {
-    func addRquest(_ target: TargetType) {
+    func addRequest(_ target: TargetType) {
         let key = String(describing: target)
         requestList[key] = delegate
     }
