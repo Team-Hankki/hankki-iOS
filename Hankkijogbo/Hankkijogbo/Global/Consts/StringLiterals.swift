@@ -33,6 +33,10 @@ enum StringLiterals {
     enum Alert {
         static let unknownError = "알 수 없는 오류가 발생했어요"
         static let tryAgain = "네트워크 연결 상태를 확인하고\n다시 시도해주세요"
+        static let bigImageError = "이미지 파일이 너무 커요"
+        static let smallImagePlease = "더 작은 이미지로 선택해주세요"
+        static let loadImageError = "이미지를 불러올 수 없어요"
+        static let checkImagePlease = "갤러리에서 이미지를 다시 선택해주세요"
         static let alreadyReportHankki = "등록된 식당이 있어요\n식당으로 이동할까요?"
         static let alreadyReportHankkiByOther = "다른 학교에 제보된 식당이에요\n우리 학교에도 추가할까요?"
         static let waitPlease = "조금만 기다려주세요!"
