@@ -202,18 +202,8 @@ private extension MenuCollectionViewCell {
     func setupPriceErrorStyle() {
         priceLabel.textColor = .red500
         priceTextField.textColor = .red500
-        priceTextField.layer.borderWidth = 2
         priceTextField.layer.borderColor = UIColor.red500.cgColor
         errorLabel.isHidden = false
-    }
-    
-    func setupPriceNonErrorStyle() {
-        priceLabel.textColor = .gray800
-        priceTextField.textColor = .gray800
-        
-        priceTextField.layer.borderWidth = 2
-        priceTextField.layer.borderColor = UIColor.gray400.cgColor
-        errorLabel.isHidden = true
     }
     
     // MARK: - @objc Func
@@ -222,7 +212,9 @@ private extension MenuCollectionViewCell {
         if Int(priceTextField.text ?? "") ?? 0 > 8000 {
             setupPriceErrorStyle()
         } else {
-            setupPriceNonErrorStyle()
+            priceLabel.textColor = .gray800
+            priceTextField.textColor = .gray800
+            errorLabel.isHidden = true
         }
     }
     
@@ -244,7 +236,9 @@ extension MenuCollectionViewCell {
             if menu.price > 8000 {
                 setupPriceErrorStyle()
             } else {
-                setupPriceNonErrorStyle()
+                priceLabel.textColor = .gray500
+                priceTextField.textColor = .gray800
+                errorLabel.isHidden = true
             }
         } else {
             priceTextField.text = ""
@@ -260,10 +254,11 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
         if textField == menuTextField {
             menuLabel.textColor = .gray800
             textField.layer.borderWidth = 2
-            textField.layer.borderColor = UIColor.gray400.cgColor
+            textField.layer.borderColor = UIColor.gray500.cgColor
         } else {
-            priceLabel.textColor = .gray800
             priceTextFieldDidEditingChange()
+            priceTextField.layer.borderWidth = 2
+            priceTextField.layer.borderColor = UIColor.gray500.cgColor
         }
         return true
     }
