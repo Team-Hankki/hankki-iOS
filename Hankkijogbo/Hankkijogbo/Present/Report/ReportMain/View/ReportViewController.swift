@@ -338,20 +338,20 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension ReportViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        // 로딩을 시작합니다.
-        self.setupLoading(true, type: .fullView)
-        
         picker.dismiss(animated: true)
+        
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            self.setupLoading(true, type: .fullView)
+
             itemProvider.loadObject(ofClass: UIImage.self) { (image, _) in
-                // 로딩을 끝냅니다.
-                self.setupLoading(false, type: .fullView)
                 
                 if let image = image as? UIImage {
                     self.image = image
                     ImageCompressor.compress(image: image) { data in
                         if let compressedData = data {
+                            self.setupLoading(false, type: .fullView)
+
                             self.reportViewModel.selectedImageData = compressedData
                             DispatchQueue.main.async {
                                 self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
