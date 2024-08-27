@@ -243,7 +243,7 @@ private extension CreateZipViewController {
 extension CreateZipViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.layer.borderColor = UIColor.gray600.cgColor
-        textField.layer.borderWidth = 1.5
+        textField.layer.borderWidth = 2
         
         switch textField.tag {
         case 0:
