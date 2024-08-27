@@ -106,7 +106,9 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         menuTextField.do {
             $0.backgroundColor = .white
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
+            $0.layer.borderColor = UIColor.gray300.cgColor
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 8
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
                 color: .gray800
@@ -127,7 +129,9 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceTextField.do {
             $0.backgroundColor = .white
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
+            $0.layer.borderColor = UIColor.gray300.cgColor
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 8
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body1,
                 color: .gray800
@@ -190,21 +194,25 @@ private extension MenuCollectionViewCell {
         priceLabel.textColor = .gray500
         priceTextField.text = ""
         priceTextField.textColor = .gray800
-        priceTextField.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
-        
+        priceTextField.layer.borderWidth = 1
+        priceTextField.layer.borderColor = UIColor.gray300.cgColor
         errorLabel.isHidden = true
     }
     
     func setupPriceErrorStyle() {
         priceLabel.textColor = .red500
         priceTextField.textColor = .red500
-        errorLabel.isHidden = false
+        priceTextField.layer.borderWidth = 2
         priceTextField.layer.borderColor = UIColor.red500.cgColor
+        errorLabel.isHidden = false
     }
     
     func setupPriceNonErrorStyle() {
         priceLabel.textColor = .gray800
         priceTextField.textColor = .gray800
+        
+        priceTextField.layer.borderWidth = 2
+        priceTextField.layer.borderColor = UIColor.gray400.cgColor
         errorLabel.isHidden = true
     }
     
@@ -215,7 +223,6 @@ private extension MenuCollectionViewCell {
             setupPriceErrorStyle()
         } else {
             setupPriceNonErrorStyle()
-            priceTextField.makeRoundBorder(cornerRadius: 10, borderWidth: 1.5, borderColor: .gray600)
         }
     }
     
@@ -252,7 +259,8 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == menuTextField {
             menuLabel.textColor = .gray800
-            textField.makeRoundBorder(cornerRadius: 10, borderWidth: 1.5, borderColor: .gray600)
+            textField.layer.borderWidth = 2
+            textField.layer.borderColor = UIColor.gray400.cgColor
         } else {
             priceLabel.textColor = .gray800
             priceTextFieldDidEditingChange()
@@ -281,10 +289,12 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     final func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == menuTextField {
             menuLabel.textColor = .gray500
+            textField.layer.borderWidth = 1
             textField.layer.borderColor = UIColor.gray300.cgColor
         } else {
             if Int(priceTextField.text ?? "") ?? 0 <= 8000 {
                 priceLabel.textColor = .gray500
+                textField.layer.borderWidth = 1
                 textField.layer.borderColor = UIColor.gray300.cgColor
             }
         }

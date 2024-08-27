@@ -146,7 +146,7 @@ final class SearchViewController: BaseViewController {
         
         searchTextField.do {
             $0.backgroundColor = .gray100
-            $0.layer.cornerRadius = 10
+            $0.layer.cornerRadius = 8
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
                 withText: StringLiterals.Report.searchSecondPlaceHolder,
@@ -308,8 +308,8 @@ extension SearchViewController: UITextFieldDelegate {
     /// - 1. border를 활성화해준다.
     /// - 2. 텍스트가 채워져 있으면 바로 사이드 버튼들의 visibility를 변경한다.
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray900.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.borderColor = UIColor.gray400.cgColor
         return true
     }
     

@@ -107,7 +107,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     }
 }
 
-private extension SearchCollectionViewCell{
+private extension SearchCollectionViewCell {
     
     // MARK: - Private Func
     

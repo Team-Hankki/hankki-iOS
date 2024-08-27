@@ -231,7 +231,6 @@ private extension CreateZipViewController {
                 }
             }
         }
-        
     }
     
     func isFormValid() {
