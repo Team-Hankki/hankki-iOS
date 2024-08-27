@@ -45,22 +45,21 @@ final class  HankkiListViewController: BaseViewController {
         setupDelegate()
         
         bindViewModel()
-        
-        if type == .myZip {
-            viewModel.getZipDetail(zipId: zipId ?? 0)
-        } else {
-            viewModel.getMeHankkiList(type.userTargetType)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
-        
-        // detail같은, 이전 뷰에서 좋아요가 취소되는 경우를 고려합니다.
-        if type == .liked && !viewModel.hankkiList.isEmpty {
-            viewModel.updateMeHankkiList()
+        if type == .myZip {
+            viewModel.getZipDetail(zipId: zipId ?? 0)
+        } else {
+            // detail같은, 이전 뷰에서 좋아요가 취소되는 경우를 고려합니다.
+            if type == .liked && !viewModel.hankkiList.isEmpty {
+                viewModel.updateMeHankkiList()
+                return
+            }
+            viewModel.getMeHankkiList(type.userTargetType)
         }
     }
     

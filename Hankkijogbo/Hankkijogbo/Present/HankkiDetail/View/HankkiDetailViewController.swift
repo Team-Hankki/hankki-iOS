@@ -50,7 +50,9 @@ final class HankkiDetailViewController: BaseViewController {
         setupGesture()
         bindViewModel()
         
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
+        viewModel.getHankkiDetailAPI(hankkiId: hankkiId) {
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
