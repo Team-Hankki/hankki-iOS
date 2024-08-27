@@ -45,6 +45,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             if let manager = locationManager {
                 manager.startUpdatingLocation()
             }
+            rootView.mapView.positionMode = .direction
             print("⭕️🌍⭕️ 위치 접근 권한이 허용되었습니다. ⭕️🌍⭕️")
         case .restricted, .denied:
             showLocationAccessDeniedAlert()
@@ -159,6 +160,8 @@ extension HomeViewController: CLLocationManagerDelegate {
 extension HomeViewController {
     func setupMap() {
         rootView.mapView.touchDelegate = self
+        rootView.mapView.positionMode = .direction
+        
     }
     
     func setupPosition(with university: UniversityModel) {

@@ -39,6 +39,7 @@ final class HomeViewController: BaseViewController {
         super.viewDidLoad()
         
         setupMap()
+        requestLocationAuthorization()
         
         setupDelegate()
         setupRegister()
