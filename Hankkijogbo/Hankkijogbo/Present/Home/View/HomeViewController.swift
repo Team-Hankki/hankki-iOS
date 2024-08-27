@@ -55,9 +55,7 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if shouldUpdateNavigationBar {
-            setupNavigationBar()
-        }
+        setupNavigationBar()
         
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
@@ -282,7 +280,6 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
     }
     
     func didSelectUniversity(name: String) {
-        shouldUpdateNavigationBar = true
         setupNavigationBar(mainTitle: name)
     }
     
@@ -290,7 +287,6 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         guard let manager = locationManager else { return }
         manager.startUpdatingLocation()
         
-        shouldUpdateNavigationBar = false
         setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
         fetchAllHankkiInfo()
     }
