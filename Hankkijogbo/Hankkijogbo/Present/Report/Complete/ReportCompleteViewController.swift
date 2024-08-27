@@ -37,7 +37,11 @@ final class ReportCompleteViewController: BaseViewController {
     private let hankkiOrangeGradientImageView: UIImageView = UIImageView()
     private lazy var hankkiInfoCardView: HankkiInfoCardView = HankkiInfoCardView(hankkiNameString: selectedHankkiName)
     
-    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(primaryButtonText: StringLiterals.Report.goToReportedHankki, primaryButtonHandler: bottomButtonPrimaryHandler)
+    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
+        primaryButtonText: StringLiterals.Report.goToReportedHankki,
+        primaryButtonHandler: bottomButtonPrimaryHandler,
+        gradientColor: .gray100
+    )
     private let goToHomeButton: UIButton = UIButton()
     private let bottomGradientView: UIView = UIView()
     
@@ -202,9 +206,9 @@ private extension ReportCompleteViewController {
         
         gradient.do {
             $0.colors = [
-                UIColor.hankkiWhite.withAlphaComponent(0).cgColor,
-                UIColor.hankkiWhite.cgColor,
-                UIColor.hankkiWhite.cgColor
+                UIColor.gray100.withAlphaComponent(0).cgColor,
+                UIColor.gray100.cgColor,
+                UIColor.gray100.cgColor
             ]
             $0.locations = [0.0, 0.24, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)

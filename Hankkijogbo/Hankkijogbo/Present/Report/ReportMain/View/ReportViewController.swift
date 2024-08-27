@@ -351,19 +351,17 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                                 self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
                             }
                         } else {
-                            // TODO: - 압축 실패 alert 문구
                             DispatchQueue.main.async {
-                                self.showAlert(titleText: StringLiterals.Alert.unknownError,
-                                               subText: StringLiterals.Alert.tryAgain,
+                                self.showAlert(titleText: StringLiterals.Alert.bigImageError,
+                                               subText: StringLiterals.Alert.smallImagePlease,
                                                primaryButtonText: StringLiterals.Alert.check)
                             }
                         }
                     }
                 } else {
-                    // TODO: - 이미지 불러오기 실패 alert 문구
                     DispatchQueue.main.async {
-                        self.showAlert(titleText: StringLiterals.Alert.unknownError,
-                                       subText: StringLiterals.Alert.tryAgain,
+                        self.showAlert(titleText: StringLiterals.Alert.loadImageError,
+                                       subText: StringLiterals.Alert.checkImagePlease,
                                        primaryButtonText: StringLiterals.Alert.check)
                     }
                 }

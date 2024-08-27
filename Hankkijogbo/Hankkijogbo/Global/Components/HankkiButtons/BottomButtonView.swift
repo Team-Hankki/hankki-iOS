@@ -18,6 +18,7 @@ final class BottomButtonView: BaseView {
     
     var primaryButtonHandler: ButtonAction?
     var lineButtonHandler: ButtonAction?
+    var gradientColor: UIColor
     
     // MARK: - UI Properties
     
@@ -32,12 +33,14 @@ final class BottomButtonView: BaseView {
          primaryButtonText: String,
          lineButtonText: String = "",
          primaryButtonHandler: ButtonAction? = nil,
-         lineButtonHandler: ButtonAction? = nil
+         lineButtonHandler: ButtonAction? = nil,
+         gradientColor: UIColor = .hankkiWhite
     ) {
         self.primaryButtonText = primaryButtonText
         self.lineButtonText = lineButtonText
         self.primaryButtonHandler = primaryButtonHandler
         self.lineButtonHandler = lineButtonHandler
+        self.gradientColor = gradientColor
         super.init(frame: frame)
         
         setupButtonAction()
@@ -116,9 +119,9 @@ private extension BottomButtonView {
         
         gradient.do {
             $0.colors = [
-                UIColor.white.withAlphaComponent(0).cgColor,
-                UIColor.white.cgColor,
-                UIColor.white.cgColor
+                gradientColor.withAlphaComponent(0).cgColor,
+                gradientColor.cgColor,
+                gradientColor.cgColor
             ]
             $0.locations = [0.0, 0.3, 1.0]
             $0.startPoint = CGPoint(x: 0.5, y: 0.0)

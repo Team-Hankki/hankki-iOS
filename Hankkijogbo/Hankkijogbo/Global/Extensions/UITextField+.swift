@@ -26,13 +26,6 @@ extension UITextField {
         self.attributedPlaceholder = NSAttributedString(string: forPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: forColor])
     }
     
-    /// 텍스트필드의 border의 가시성을 변경하는 함수
-    /// - isVisible이 true면 border가 보이고 false면 보이지 않는다
-    func changeBorderVisibility(isVisible: Bool, color: CGColor) {
-        self.layer.borderWidth = isVisible ? 1 : 0
-        self.layer.borderColor = color
-    }
-    
     /// TextField에 이모지를 받지 않는 함수 -> 이모지 클릭해도 작성 안 됨
     /// shouldChangeCharactersIn 함수 내에서 쓰면 됨
     /// - shouldChangeCharactersIn range: NSRange
