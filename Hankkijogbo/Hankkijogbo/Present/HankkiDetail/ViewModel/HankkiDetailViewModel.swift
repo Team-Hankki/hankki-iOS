@@ -38,7 +38,10 @@ final class HankkiDetailViewModel {
     /// 식당 좋아요 삭제
     func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in completion() }
+            result.handleNetworkResult { _ in
+                SetAmplitude.shared.buttonClicked("Liked")
+                completion()
+            }
         }
     }
     

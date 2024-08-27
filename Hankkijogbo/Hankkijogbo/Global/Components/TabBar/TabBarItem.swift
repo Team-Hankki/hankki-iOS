@@ -52,4 +52,12 @@ enum TabBarItem: CaseIterable {
         case .mypage: return MypageViewController()
         }
     }
+    
+    var amplitudeButtonName: String{
+        switch self {
+        case .home: return "Tabbar-Home"
+        case .report: return "Tabbar-Report"
+        case .mypage: return "Tabbar-Mypage"
+        }
+    }
 }

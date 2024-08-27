@@ -112,7 +112,11 @@ final class CustomTabBar: UITabBar {
 
 extension TabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
+        
+        let tabBarItem = TabBarItem.allCases[index]
+        SetAmplitude.shared.buttonClicked(tabBarItem.amplitudeButtonName)
         
         if index == TabBarItem.allCases.firstIndex(of: .report) {
             if UserDefaults.standard.getUniversity()?.id == nil {
