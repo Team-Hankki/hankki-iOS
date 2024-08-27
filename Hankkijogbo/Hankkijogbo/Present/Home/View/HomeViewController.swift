@@ -21,7 +21,6 @@ final class HomeViewController: BaseViewController {
     
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
-    var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     private var universityId: Int?
     
@@ -38,6 +37,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupMap()
         
         setupDelegate()
@@ -47,18 +47,19 @@ final class HomeViewController: BaseViewController {
         
         setupHankkiListResult()
         loadInitialData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupPosition()
         
         if shouldUpdateNavigationBar {
             setupNavigationBar()
         }
         
         requestLocationAuthorization()
-        NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(setupBlackToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
         updateUniversityData()
     }
@@ -82,11 +83,15 @@ final class HomeViewController: BaseViewController {
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
+                self.rootView.bottomSheetView.setNeedsLayout()
+                self.rootView.bottomSheetView.layoutIfNeeded()
             }
         }
         
         viewModel.hankkiPinsDidChange = { [weak self] pins in
-            self?.setupPosition(with: pins)
+            DispatchQueue.main.async {
+                self?.setupPosition(with: pins)
+            }
         }
         
         viewModel.showAlert = { [weak self] message in
@@ -111,7 +116,6 @@ extension HomeViewController {
     
     private func setupNavigationBar(mainTitle: String? = nil) {
         let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.allUniversity
-        print("Setting up navigation bar with title: \(title)")
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
@@ -141,15 +145,15 @@ extension HomeViewController {
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
     
+    @objc func presentMyZipBottomSheet() {
+        guard let thumbnailData = viewModel.hankkiThumbnail else { return }
+        self.presentMyZipListBottomSheet(id: thumbnailData.id)
+    }
+    
     @objc func getNotificationForMyZipList(_ notification: Notification) {
         if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
             self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
         }
-    }
-    
-    @objc func presentMyZipBottomSheet() {
-        guard let thumbnailData = viewModel.hankkiThumbnail else { return }
-        self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
     
     @objc func setupBlackToast(_ notification: Notification) {
@@ -159,6 +163,12 @@ extension HomeViewController {
                 let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
+        }
+    }
+    
+    @objc func locationStateUpdate(_ notification: Notification) {
+        if let university = notification.userInfo?["university"] as? UniversityModel {
+            setupPosition(with: university)
         }
     }
 }
@@ -203,9 +213,7 @@ private extension HomeViewController {
     }
 }
 
-extension HomeViewController: NMFMapViewCameraDelegate {}
-
-extension HomeViewController: NMFMapViewTouchDelegate {
+extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
         self.hideMarkerInfoCard()
@@ -250,11 +258,11 @@ extension HomeViewController: DropDownViewDelegate {
                 } else {
                     changeButtonTitle(for: rootView.priceButton, newTitle: StringLiterals.Home.more6000)
                 }
-                viewModel.priceCategory = item // 필터링 값 업데이트
+                viewModel.priceCategory = item
             case .sort:
                 if let sortOption = viewModel.sortOptions.first(where: { $0.tag == item }) {
                     changeButtonTitle(for: rootView.sortButton, newTitle: sortOption.name)
-                    viewModel.sortOption = item // 필터링 값 업데이트
+                    viewModel.sortOption = item
                 }
             }
             hideDropDown()
@@ -267,22 +275,22 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         startLocationUpdates()
     }
     
+    func didSelectUniversity(name: String) {
+        shouldUpdateNavigationBar = true
+        setupNavigationBar(mainTitle: name)
+    }
+    
     func startLocationUpdates() {
         guard let manager = locationManager else { return }
         manager.startUpdatingLocation()
         
         shouldUpdateNavigationBar = false
         setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
-        fetchAllRestaurantsAndPins()
+        fetchAllHankkiInfo()
     }
     
-    func fetchAllRestaurantsAndPins() {
+    func fetchAllHankkiInfo() {
         viewModel.getHankkiListAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
         viewModel.getHankkiPinAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
-    }
-    
-    func didSelectUniversity(name: String) {
-        shouldUpdateNavigationBar = true
-        setupNavigationBar(mainTitle: name)
     }
 }

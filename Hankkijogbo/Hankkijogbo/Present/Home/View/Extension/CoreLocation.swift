@@ -109,8 +109,8 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func moveCameraToCurrentLocation(location: CLLocation) {
         guard isViewLoaded else { return }
-        let position = NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+        let position = NMGLatLng(lat: location.coordinate.latitude - 0.0006, lng: location.coordinate.longitude)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
 
         DispatchQueue.main.async {
             self.rootView.mapView.moveCamera(cameraUpdate)
@@ -121,8 +121,8 @@ extension HomeViewController: CLLocationManagerDelegate {
     // 카메라를 선택한 대학교 위치로 이동
     func moveCameraToUniversityLocation() {
         guard let university = UserDefaults.standard.getUniversity() else { return }
-        let position = NMGLatLng(lat: university.latitude, lng: university.longitude)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+        let position = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
         rootView.mapView.moveCamera(cameraUpdate)
     }
     
@@ -161,23 +161,20 @@ extension HomeViewController {
         rootView.mapView.touchDelegate = self
     }
     
-    func setupPosition() {
+    func setupPosition(with university: UniversityModel) {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
-        guard let university = UserDefaults.standard.getUniversity() else { return }
         var initialPosition: NMGLatLng?
         
         if university.latitude == 0.0 &&  university.longitude == 0.0 {
             startLocationUpdates()
         } else {
-            initialPosition = NMGLatLng(lat: university.latitude, lng: university.longitude)
+            initialPosition = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
         }
-        
         viewModel.getHankkiPinAPI(universityId: university.id, storeCategory: "", priceCategory: "", sortOption: "", completion: { [weak self] pins in
-            
             markers = self?.viewModel.hankkiPins ?? []
             self?.rootView.mapView.positionMode = .direction
             if let initialPosition = initialPosition {
-                self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition))
+                self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition, zoomTo: 14.0))
             }
             
             self?.clearMarkers()
