@@ -40,14 +40,12 @@ final class HomeViewController: BaseViewController {
         
         setupMap()
         requestLocationAuthorization()
-        
         setupDelegate()
         setupRegister()
         setupaddTarget()
         bindViewModel()
-        
         setupHankkiListResult()
-        loadInitialData()
+        setupLocation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
     }
@@ -56,7 +54,6 @@ final class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
-        
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
         updateUniversityData()
@@ -213,6 +210,16 @@ private extension HomeViewController {
     func setupHankkiListResult() {
         viewModel.onHankkiListFetchCompletion = { [weak self] success, isEmpty in
             self?.handleHankkiListResult(success: success, isEmpty: isEmpty)
+        }
+    }
+    
+    func setupLocation() {
+        if let savedUniversity = UserDefaults.standard.getUniversity(), savedUniversity.id != nil {
+            moveCameraToUniversityLocation(savedUniversity)
+        } else {
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways {
+                requestLocationAuthorization()
+            }
         }
     }
 }
