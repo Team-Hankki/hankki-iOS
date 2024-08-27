@@ -350,8 +350,6 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                     self.image = image
                     ImageCompressor.compress(image: image) { data in
                         if let compressedData = data {
-                            self.setupLoading(false, type: .fullView)
-
                             self.reportViewModel.selectedImageData = compressedData
                             DispatchQueue.main.async {
                                 self.collectionView.reloadSections(IndexSet(integer: ReportSectionType.image.rawValue))
@@ -371,6 +369,8 @@ extension ReportViewController: PHPickerViewControllerDelegate {
                                        primaryButtonText: StringLiterals.Alert.check)
                     }
                 }
+                
+                self.setupLoading(false, type: .fullView)
             }
         }
     }
