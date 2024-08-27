@@ -184,7 +184,7 @@ private extension MyZipListBottomSheetViewController {
                             primaryButtonText: StringLiterals.Alert.check)
         }
         
-        viewModel.showAddToZipCompleteToast = { [self] in
+        viewModel.showAddToZipCompleteToast = {
             NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
         }
     }
