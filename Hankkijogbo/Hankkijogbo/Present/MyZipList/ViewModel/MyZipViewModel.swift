@@ -34,7 +34,7 @@ final class MyZipViewModel {
     func postHankkiToZipAPI(request: PostHankkiToZipRequestDTO, completion: @escaping (() -> Void)) {
         NetworkService.shared.zipService.postHankkiToZip(requestBody: request) { result in
             result.handleNetworkResult { [weak self] _ in
-//                self?.showAddToZipCompleteToast?()
+                self?.showAddToZipCompleteToast?()
                 SetAmplitude.shared.buttonClicked("Jokbo-Add")
                 completion()
             }

@@ -96,6 +96,7 @@ private extension SearchBarCollectionViewCell {
     // MARK: - Private Func
     
     func setupStyleForNotSet() {
+        reportedNumberLabel.textColor = .red500
         searchBarButton.do {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 10
@@ -112,6 +113,7 @@ private extension SearchBarCollectionViewCell {
     }
     
     func setupStyleForSet() {
+        reportedNumberLabel.textColor = .gray600
         searchBarButton.do {
             $0.backgroundColor = .red100
             $0.layer.cornerRadius = 10
