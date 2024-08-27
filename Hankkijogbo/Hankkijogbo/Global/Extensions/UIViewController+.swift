@@ -147,7 +147,7 @@ extension UIViewController {
         let viewController = MyZipListBottomSheetViewController(storeId: id)
         viewController.modalTransitionStyle = .crossDissolve
         viewController.modalPresentationStyle = .overFullScreen        
-        self.present(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: false, completion: nil)
     }
     
     /// - ViewController를 dismiss 할 때 fade out 효과를 주는 함수
