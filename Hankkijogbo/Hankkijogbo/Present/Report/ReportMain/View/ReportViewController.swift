@@ -70,7 +70,7 @@ final class ReportViewController: BaseViewController {
     
     override func setupLayout() {
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(18)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
