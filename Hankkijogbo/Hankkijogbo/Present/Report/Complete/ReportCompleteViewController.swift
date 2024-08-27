@@ -82,6 +82,10 @@ final class ReportCompleteViewController: BaseViewController {
         setupNotification()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
+    }
+    
     // MARK: - Setup UI
     
     override func setupHierarchy() {
@@ -198,7 +202,6 @@ private extension ReportCompleteViewController {
     
     func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAddToMyZipListString), name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(setupWhiteToast), name: NSNotification.Name(StringLiterals.NotificationName.setupToast), object: nil)
     }
     
     func setupBottomGradientView() {

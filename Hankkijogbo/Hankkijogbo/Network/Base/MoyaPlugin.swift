@@ -16,6 +16,8 @@ final class MoyaPlugin: PluginType {
     
     weak var delegate: BaseViewControllerDelegate?
     
+    private var requestList: [String: BaseViewControllerDelegate] = [:]
+    
     // MARK: - Life Cycle
     
     static let shared = MoyaPlugin()
@@ -25,6 +27,7 @@ final class MoyaPlugin: PluginType {
     // MARK: - Request 보낼 시 호출
     
     func willSend(_ request: RequestType, target: TargetType) {
+        addRequest(target)
         setupLoading(true, target: target)
         
         guard let httpRequest = request.request else {
@@ -53,7 +56,11 @@ final class MoyaPlugin: PluginType {
     // MARK: - Response 받을 시 호출
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
+        
+        let key = String(describing: target)
+        delegate = requestList[key]
         setupLoading(false, target: target)
+        removeRequest(target)
         
         switch result {
         case let .success(response):
@@ -113,5 +120,17 @@ private extension MoyaPlugin {
             loadingViewType = .none
         }
         delegate?.setupLoading(isLoading, type: loadingViewType)
+    }
+}
+
+private extension MoyaPlugin {
+    func addRequest(_ target: TargetType) {
+        let key = String(describing: target)
+        requestList[key] = delegate
+    }
+    
+    func removeRequest(_ target: TargetType) {
+        let key = String(describing: target)
+        requestList.removeValue(forKey: key)
     }
 }

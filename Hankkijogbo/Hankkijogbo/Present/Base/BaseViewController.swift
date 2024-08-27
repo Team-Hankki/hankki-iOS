@@ -102,7 +102,7 @@ private extension BaseViewController {
     
     // Loading State에 맞게 Loading View를 update합니다.
     func updateLoadingView(for type: LoadingViewType) {
-        switch type {    
+        switch type {
         case .fullView, .submit:
             if isLoading {
                 loadingView.showLoadingView(type)
