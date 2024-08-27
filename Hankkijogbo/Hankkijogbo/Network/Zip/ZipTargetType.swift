@@ -85,14 +85,9 @@ extension ZipTargetType: BaseTargetType {
     
     var loadingViewType: LoadingViewType {
         switch self {
-        case .getZipList: return .fullView
-        case .getMyZipList: return .fullView
-        case .getZipDetail: return .fullView
-        case .postZip: return .submit
-        case .postZipBatchDelete: return .submit
-        case .deleteZipToHankki: return .submit
-        default:
-            return .none
+        case .getZipList, .getMyZipList, .getZipDetail: return .fullView
+        case .postZip, .postZipBatchDelete, .deleteZipToHankki: return .submit
+        default: return .none
         }
     }
 }
