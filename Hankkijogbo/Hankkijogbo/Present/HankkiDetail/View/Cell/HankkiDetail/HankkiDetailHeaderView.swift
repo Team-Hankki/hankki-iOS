@@ -59,7 +59,7 @@ final class HankkiDetailHeaderView: BaseCollectionReusableView {
                 color: .red500
             )
             $0.backgroundColor = .red100
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 0, borderColor: .clear)
+            $0.makeRoundBorder(cornerRadius: categoryLabel.intrinsicContentSize.width / 2.0, borderWidth: 0, borderColor: .clear)
         }
     }
 }

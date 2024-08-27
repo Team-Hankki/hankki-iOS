@@ -44,19 +44,19 @@ final class HankkiDetailFooterView: BaseCollectionReusableView {
     override func setupLayout() {
         footerButtonStackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10)
-            $0.leading.equalToSuperview().inset(32)
+            $0.leading.trailing.equalToSuperview().inset(32)
             $0.height.equalTo(42)
         }
         likedButton.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
-            $0.width.lessThanOrEqualTo(105)
-            $0.height.equalTo(42)
+            $0.width.equalToSuperview().multipliedBy(0.38)
+            $0.height.equalToSuperview()
         }
         addMyZipButton.snp.makeConstraints {
             $0.centerY.equalTo(likedButton)
             $0.leading.equalTo(likedButton.snp.trailing).offset(12)
-            $0.width.lessThanOrEqualTo(150)
-            $0.height.equalTo(42)
+            $0.width.equalToSuperview().multipliedBy(0.57)
+            $0.height.equalToSuperview()
         }
     }
     

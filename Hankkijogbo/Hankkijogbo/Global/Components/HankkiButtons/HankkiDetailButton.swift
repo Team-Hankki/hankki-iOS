@@ -65,8 +65,8 @@ final class HankkiDetailButton: BaseView {
     
     override func setupLayout() {
         hankkiDetailButton.snp.makeConstraints {
-            $0.width.greaterThanOrEqualTo(105)
-            $0.height.equalTo(42)
+            $0.width.equalToSuperview()
+            $0.height.equalToSuperview()
         }
     }
 }
