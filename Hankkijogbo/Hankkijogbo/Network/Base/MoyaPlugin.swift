@@ -28,7 +28,6 @@ final class MoyaPlugin: PluginType {
     
     func willSend(_ request: RequestType, target: TargetType) {
         addRquest(target)
-        print("🥕🥕 추가\n\(requestList)")
         setupLoading(true, target: target)
         
         guard let httpRequest = request.request else {
@@ -62,7 +61,6 @@ final class MoyaPlugin: PluginType {
         delegate = requestList[key]
         setupLoading(false, target: target)
         removeRequest(target)
-        print("🥕🥕 결과\n\(target)\n\(requestList)")
         
         switch result {
         case let .success(response):
