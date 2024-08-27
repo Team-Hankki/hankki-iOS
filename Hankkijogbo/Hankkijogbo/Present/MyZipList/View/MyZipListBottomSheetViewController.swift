@@ -185,8 +185,6 @@ private extension MyZipListBottomSheetViewController {
         }
         
         viewModel.showAddToZipCompleteToast = { [self] in
-            guard let data = viewModel.myZipListFavoriteData else { return }
-            
             NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.updateAddToMyZipList)))
         }
     }
