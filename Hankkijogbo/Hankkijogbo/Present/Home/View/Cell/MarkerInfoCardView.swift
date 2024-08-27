@@ -113,7 +113,7 @@ final class MarkerInfoCardView: BaseView {
     
     override func setupLayout() {
         thumbnailImageView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(22)
             $0.size.equalTo(72)
         }
