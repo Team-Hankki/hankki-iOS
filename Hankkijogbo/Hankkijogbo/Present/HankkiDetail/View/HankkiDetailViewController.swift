@@ -50,7 +50,9 @@ final class HankkiDetailViewController: BaseViewController {
         setupGesture()
         bindViewModel()
         
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
+        viewModel.getHankkiDetailAPI(hankkiId: hankkiId) {
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -263,7 +265,6 @@ private extension HankkiDetailViewController {
     
     /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
     func dismissAlertAndPop() {
-        dismissWithFadeOut()
         backButtonDidTap()
     }
 }
@@ -281,8 +282,7 @@ extension HankkiDetailViewController {
         self.showAlert(
             titleText: StringLiterals.Alert.DevelopEdit.title,
             subText: StringLiterals.Alert.DevelopEdit.sub,
-            primaryButtonText: StringLiterals.Alert.check,
-            primaryButtonHandler: dismissWithFadeOut
+            primaryButtonText: StringLiterals.Alert.check
         )
     }
     

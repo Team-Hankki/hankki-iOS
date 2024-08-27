@@ -8,6 +8,7 @@
 import Foundation
 
 import Moya
+import UIKit
 
 final class HankkiDetailViewModel {
     var showAlert: ((String) -> Void)?
@@ -20,11 +21,19 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int) {
+    func getHankkiDetailAPI(hankkiId: Int, dismiss: @escaping () -> Void) {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
-            result.handleNetworkResult { response in
-                self?.hankkiDetailData = response.data
+            
+            switch result {
+            case .notFound:
+                UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
+                dismiss()
+            default:
+                result.handleNetworkResult { response in
+                    self?.hankkiDetailData = response.data
+                }
             }
+
         }
     }
     

@@ -95,9 +95,9 @@ enum StringLiterals {
         static let addToMyZipBlack = "나의 족보에 추가되었습니다."
         static let see = "보기"
         static let addToMyZipWhite = "나의 족보에 추가했어요"
-        
-        static let serverError = "오류가 발생했어요. 다시 시도해주세요."
-        static let accessError = "로그인 유효기간이 만료되었어요. 재로그인 해주세요."
+        static let deleteAlready = "이미 삭제된 식당입니다"
+        static let serverError = "오류가 발생했어요 다시 시도해주세요"
+        static let accessError = "로그인 유효기간이 만료되었어요 재로그인 해주세요"
     }
     
     enum Toolbar {
