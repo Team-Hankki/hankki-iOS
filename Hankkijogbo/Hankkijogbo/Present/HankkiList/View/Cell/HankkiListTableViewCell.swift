@@ -101,6 +101,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         categoryChipView.do {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             $0.backgroundColor = .red100
+            $0.setContentCompressionResistancePriority(.required, for: .horizontal)
         }
         
         categoryLabel.do {
