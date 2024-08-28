@@ -135,7 +135,6 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         self.contentView.addSubviews(cellStackView, line)
         cellStackView.addArrangedSubviews(thumbnailView, infoStackView, heartButton)
         infoStackView.addArrangedSubviews(titleStaciView, subInfoStackView)
-        titleStaciView.addArrangedSubviews(titleLabel, categoryChipView)
         subInfoStackView.addArrangedSubviews(createSubInfoView(0), createSubInfoView(1))
         categoryChipView.addSubview(categoryLabel)
     }
@@ -174,10 +173,13 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 extension HankkiListTableViewCell {
     func dataBind(_ data: Model, isFinal: Bool, isLikeButtonDisable: Bool) {
         self.data = data
-
-        titleLabel.text = data.name
-        thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgDetailDefault)
+        
+        // 이래야 categoryLabel 크기가 유지됩니다.
         categoryLabel.text = data.category
+        titleLabel.text = data.name
+        titleStaciView.addArrangedSubviews(titleLabel, categoryChipView)
+        
+        thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgDetailDefault)
         heartButton.isHidden = isLikeButtonDisable
         priceLabel.formattingPrice(price: data.lowestPrice)
         heartCountLabel.text = "\(data.heartCount)"
