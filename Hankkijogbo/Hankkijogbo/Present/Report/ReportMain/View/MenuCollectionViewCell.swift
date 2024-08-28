@@ -214,6 +214,7 @@ private extension MenuCollectionViewCell {
         } else {
             priceLabel.textColor = .gray800
             priceTextField.textColor = .gray800
+            priceTextField.layer.borderColor = UIColor.gray500.cgColor
             errorLabel.isHidden = true
         }
     }

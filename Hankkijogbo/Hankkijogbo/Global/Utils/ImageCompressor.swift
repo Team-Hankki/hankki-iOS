@@ -15,10 +15,6 @@ struct ImageCompressor {
         completion: @escaping (Data?) -> Void
     ) {
         DispatchQueue.global(qos: .userInitiated).async {
-            if image.jpegData(compressionQuality: 0.0)?.count ?? 0 > literalFor1MB {
-                return completion(nil)
-            }
-            
             var compression: CGFloat = 1.0
             var data: Data? = image.jpegData(compressionQuality: compression)
             guard let initialImageSize = data?.count else { return completion(nil) }
@@ -27,6 +23,10 @@ struct ImageCompressor {
             while data != nil && imageSize > maxByte && compression > 0.0 {
                 let percentageToDecrease = getPercentageToDecreaseTo(imageSize: imageSize)
                 compression -= percentageToDecrease
+                if compression < 0.0 {
+                    completion(nil)
+                    return
+                }
                 data = image.jpegData(compressionQuality: compression)
                 imageSize = data?.count ?? 0
             }

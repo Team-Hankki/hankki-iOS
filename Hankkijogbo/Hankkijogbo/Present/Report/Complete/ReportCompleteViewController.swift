@@ -11,6 +11,7 @@ final class ReportCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     
+    var isFirst: Bool = true
     let hankkiId: Int
     let reportedNumber: Int
     var nickname: String {
@@ -72,7 +73,10 @@ final class ReportCompleteViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setupBottomGradientView()
+        if isFirst {
+            setupBottomGradientView()
+            isFirst = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,7 +115,7 @@ final class ReportCompleteViewController: BaseViewController {
             $0.leading.equalTo(reportedNumberLabel)
         }
         hankkiImageView.snp.makeConstraints {
-            $0.top.equalTo(randomThanksLabel.snp.bottom).offset(UIScreen.convertByHeightRatio(103))
+            $0.top.equalTo(reportedNumberLabel.snp.bottom).offset(UIScreen.convertByHeightRatio(131))
             $0.centerX.equalToSuperview()
             $0.width.equalTo(UIScreen.convertByWidthRatio(312))
             $0.height.equalTo(UIScreen.convertByHeightRatio(372))
@@ -123,7 +127,7 @@ final class ReportCompleteViewController: BaseViewController {
         }
         bottomGradientView.snp.makeConstraints {
             $0.horizontalEdges.bottom.equalToSuperview()
-            $0.height.equalTo(UIScreen.convertByHeightRatio(374))
+            $0.height.equalTo(UIScreen.convertByHeightRatio(385))
         }
         hankkiInfoCardView.snp.makeConstraints {
             $0.bottom.equalTo(bottomButtonView.snp.top).offset(-50)
