@@ -40,14 +40,12 @@ final class HomeViewController: BaseViewController {
         
         setupMap()
         requestLocationAuthorization()
-        
         setupDelegate()
         setupRegister()
         setupaddTarget()
         bindViewModel()
-        
         setupHankkiListResult()
-        loadInitialData()
+        setupLocation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
     }
@@ -55,10 +53,7 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if shouldUpdateNavigationBar {
-            setupNavigationBar()
-        }
-        
+        setupNavigationBar()
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
         updateUniversityData()
@@ -217,6 +212,16 @@ private extension HomeViewController {
             self?.handleHankkiListResult(success: success, isEmpty: isEmpty)
         }
     }
+    
+    func setupLocation() {
+        if let savedUniversity = UserDefaults.standard.getUniversity(), savedUniversity.id != nil {
+            moveCameraToUniversityLocation(savedUniversity)
+        } else {
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse || CLLocationManager.authorizationStatus() == .authorizedAlways {
+                requestLocationAuthorization()
+            }
+        }
+    }
 }
 
 extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
@@ -282,7 +287,6 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
     }
     
     func didSelectUniversity(name: String) {
-        shouldUpdateNavigationBar = true
         setupNavigationBar(mainTitle: name)
     }
     
@@ -290,7 +294,6 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         guard let manager = locationManager else { return }
         manager.startUpdatingLocation()
         
-        shouldUpdateNavigationBar = false
         setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
         fetchAllHankkiInfo()
     }

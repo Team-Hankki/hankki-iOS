@@ -113,7 +113,7 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         bottomSheetHandlerView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(9)
+            $0.top.equalToSuperview().inset(14)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(44)
             $0.height.equalTo(4)

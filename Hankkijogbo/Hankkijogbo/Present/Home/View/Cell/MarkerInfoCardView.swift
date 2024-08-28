@@ -113,7 +113,7 @@ final class MarkerInfoCardView: BaseView {
     
     override func setupLayout() {
         thumbnailImageView.snp.makeConstraints {
-            $0.verticalEdges.equalToSuperview().inset(16)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(22)
             $0.size.equalTo(72)
         }
@@ -153,7 +153,7 @@ extension MarkerInfoCardView {
         thumbnailImageView.setKFImage(url: model.imageUrl, placeholder: .imgDetailDefault)
         menutagLabel.text = model.category
         hankkiTitle.text = model.name
-        priceLabel.text = String(model.lowestPrice)
+        priceLabel.formattingPrice(price: model.lowestPrice)
         likeLabel.text = String(model.heartCount)
     }
 }

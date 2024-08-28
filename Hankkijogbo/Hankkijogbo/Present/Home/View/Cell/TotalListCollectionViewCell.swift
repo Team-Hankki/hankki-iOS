@@ -30,7 +30,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         super.init(frame: frame)
         
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,10 +47,10 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
                                                 hankkiDetailStackView)
         
         hankkiDetailStackView.addArrangedSubviews(priceImage,
-                                                priceLabel,
-                                                dotImage, 
-                                                likeImage,
-                                                likeLabel)
+                                                  priceLabel,
+                                                  dotImage, 
+                                                  likeImage,
+                                                  likeLabel)
     }
     
     override func setupStyle() {
@@ -69,6 +69,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         hankkiTitle.do {
             $0.textColor = .gray900
             $0.font = .setupSuiteStyle(of: .subtitle2)
+            $0.lineBreakMode = .byTruncatingTail
+            $0.numberOfLines = 1
         }
         
         [priceLabel, likeLabel].forEach {
@@ -89,7 +91,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         likeImage.do {
             $0.image = .icHeart
         }
-           
+        
         hankkiInfoStackView.do {
             $0.axis = .vertical
             $0.spacing = 3
@@ -114,6 +116,10 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.size.equalTo(72)
         }
         
+        hankkiTitle.snp.makeConstraints {
+            $0.width.equalTo(200)
+        }
+        
         hankkiInfoStackView.snp.makeConstraints {
             $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
             $0.centerY.equalTo(thumbnailImageView)
@@ -133,7 +139,7 @@ extension TotalListCollectionViewCell {
         thumbnailImageView.setKFImage(url: model.imageUrl, placeholder: .imgDetailDefault)
         menutagLabel.text = model.category
         hankkiTitle.text = model.name
-        priceLabel.text = String(model.lowestPrice) + StringLiterals.Common.won
+        priceLabel.formattingPrice(price: model.lowestPrice)
         likeLabel.text = String(model.heartCount)
     }
 }
