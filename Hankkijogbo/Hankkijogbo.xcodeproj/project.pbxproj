@@ -89,7 +89,8 @@
 		86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */; };
 		86685C582C3BD89500C080C4 /* UnivCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */; };
 		8668D2482C7DAEEC001CBCA0 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 8668D2472C7DAEEC001CBCA0 /* Amplitude */; };
-		8668D24A2C7DE0CA001CBCA0 /* SetAmplitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D2492C7DE0CA001CBCA0 /* SetAmplitude.swift */; };
+		8668D24A2C7DE0CA001CBCA0 /* SetupAmplitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D2492C7DE0CA001CBCA0 /* SetupAmplitude.swift */; };
+		8668D24C2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
@@ -295,7 +296,8 @@
 		86685C512C3BC67D00C080C4 /* UnivSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewModel.swift; sourceTree = "<group>"; };
 		86685C532C3BC68900C080C4 /* UnivSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivSelectViewController.swift; sourceTree = "<group>"; };
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
-		8668D2492C7DE0CA001CBCA0 /* SetAmplitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAmplitude.swift; sourceTree = "<group>"; };
+		8668D2492C7DE0CA001CBCA0 /* SetupAmplitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAmplitude.swift; sourceTree = "<group>"; };
+		8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 			isa = PBXGroup;
 			children = (
 				83DBEDB32C2566300042BA48 /* StringLiterals.swift */,
+				8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */,
 			);
 			path = Consts;
 			sourceTree = "<group>";
@@ -1221,7 +1224,7 @@
 		A2079B952C67344100817651 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				8668D2492C7DE0CA001CBCA0 /* SetAmplitude.swift */,
+				8668D2492C7DE0CA001CBCA0 /* SetupAmplitude.swift */,
 				A23D11992C4811790023480C /* HankkiDebouncer.swift */,
 				A2079B932C656F7D00817651 /* ImageCompressor.swift */,
 			);
@@ -1687,6 +1690,7 @@
 				86880BF62C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift in Sources */,
 				86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */,
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
+				8668D24C2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift in Sources */,
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
 				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
@@ -1721,7 +1725,7 @@
 				A2EC33B32C47169000809840 /* LocationAPIService.swift in Sources */,
 				839138D92C48F7FE00611D5C /* GetHankkiPinResponseDTO.swift in Sources */,
 				86880C242C47C77900CAEF58 /* LoginViewModel.swift in Sources */,
-				8668D24A2C7DE0CA001CBCA0 /* SetAmplitude.swift in Sources */,
+				8668D24A2C7DE0CA001CBCA0 /* SetupAmplitude.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,

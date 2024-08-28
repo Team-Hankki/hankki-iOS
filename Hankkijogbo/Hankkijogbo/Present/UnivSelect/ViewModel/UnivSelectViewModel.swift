@@ -50,6 +50,8 @@ extension UnivSelectViewModel {
         
         NetworkService.shared.userService.postMeUniversity(requestBody: request) { result in
             result.handleNetworkResult { _ in
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.UnivSelect.tabSubmit, 
+                                               eventProperties: ["university_name": currentUniversity.name])
                 // local에 대학 정보 저장
                 UserDefaults.standard.saveUniversity(currentUniversity)
                 NotificationCenter.default.post(name: NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil, userInfo: ["university": currentUniversity])

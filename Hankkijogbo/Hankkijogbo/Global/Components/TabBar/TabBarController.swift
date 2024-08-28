@@ -116,7 +116,7 @@ extension TabBarController: UITabBarControllerDelegate {
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
         
         let tabBarItem = TabBarItem.allCases[index]
-        SetAmplitude.shared.buttonClicked(tabBarItem.amplitudeButtonName)
+        SetupAmplitude.shared.logEvent(tabBarItem.amplitudeButtonName)
         
         if index == TabBarItem.allCases.firstIndex(of: .report) {
             if UserDefaults.standard.getUniversity()?.id == nil {
