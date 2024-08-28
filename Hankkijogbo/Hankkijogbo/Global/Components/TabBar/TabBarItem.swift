@@ -55,9 +55,9 @@ enum TabBarItem: CaseIterable {
     
     var amplitudeButtonName: String{
         switch self {
-        case .home: return "Tabbar-Home"
-        case .report: return "Tabbar-Report"
-        case .mypage: return "Tabbar-Mypage"
+        case .home: return AmplitudeLiterals.Tabbar.tabHome
+        case .report: return AmplitudeLiterals.Tabbar.tabReport
+        case .mypage: return AmplitudeLiterals.Tabbar.tabMypage
         }
     }
 }

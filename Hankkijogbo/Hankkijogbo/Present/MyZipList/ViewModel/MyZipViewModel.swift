@@ -35,7 +35,7 @@ final class MyZipViewModel {
         NetworkService.shared.zipService.postHankkiToZip(requestBody: request) { result in
             result.handleNetworkResult { [weak self] _ in
 //                self?.showAddToZipCompleteToast?()
-                SetAmplitude.shared.buttonClicked("Jokbo-Add")
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.MyZipListBottomSheet.tabAdd)
                 completion()
             }
         }

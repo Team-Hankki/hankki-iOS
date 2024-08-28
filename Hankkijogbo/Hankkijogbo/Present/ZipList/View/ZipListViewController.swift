@@ -225,7 +225,7 @@ extension ZipListViewController: UICollectionViewDelegate {
                 }
             } else {
                 if indexPath.item == 0 {
-                    SetAmplitude.shared.buttonClicked("New-Jokbo")
+                    SetupAmplitude.shared.logEvent(AmplitudeLiterals.ZipList.tabCreateZip)
                     navigateToCreateZipViewController()
                 } else {
                     // 첫 족보 추가하기 셀은 리스트에 포함하지 않으므로 1을 뺀다

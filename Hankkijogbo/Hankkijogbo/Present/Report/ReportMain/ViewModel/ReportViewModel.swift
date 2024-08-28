@@ -110,7 +110,7 @@ extension ReportViewModel {
         NetworkService.shared.hankkiService.postHankki(multipartData: multipartData) { result in
             result.handleNetworkResult { [weak self] response in
                 guard let self = self, let nickname = nickname else { return }
-                SetAmplitude.shared.buttonClicked("Report-Submit")
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabSubmit)
                 let data = response.data
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                    let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {

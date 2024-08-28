@@ -40,17 +40,17 @@ final class HankkiDetailViewModel {
     /// 식당 좋아요 추가
     func postHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in completion() }
+            result.handleNetworkResult { _ in
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabHeart)
+                completion()
+            }
         }
     }
     
     /// 식당 좋아요 삭제
     func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in
-                SetAmplitude.shared.buttonClicked("Liked")
-                completion()
-            }
+            result.handleNetworkResult { _ in completion() }
         }
     }
     
