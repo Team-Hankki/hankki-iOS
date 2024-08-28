@@ -123,8 +123,8 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     // 카메라를 선택한 대학교 위치로 이동
     func moveCameraToUniversityLocation(_ university: UniversityModel) {
-        let position = NMGLatLng(lat: university.latitude, lng: university.longitude)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: position)
+        let position = NMGLatLng(lat: university.latitude - 0.0006, lng: university.longitude)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
         rootView.mapView.moveCamera(cameraUpdate)
     }
     
