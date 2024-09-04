@@ -20,7 +20,8 @@ final class SplashViewController: BaseViewController {
         super.viewDidAppear(animated)
 
         if isLogin() {
-            getUniversity()
+//            getUniversity()
+            presentHomeView()
         } else {
             presentLoginView()
         }
@@ -73,7 +74,7 @@ private extension SplashViewController {
     }
     
     func presentHomeView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             let navigationController = HankkiNavigationController(rootViewController: TabBarController())
             self.view.window?.rootViewController = navigationController
             navigationController.popToRootViewController(animated: false)
@@ -81,7 +82,7 @@ private extension SplashViewController {
     }
     
     func presentLoginView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.view.window?.rootViewController = LoginViewController()
         }
     }
