@@ -20,7 +20,6 @@ final class SplashViewController: BaseViewController {
         super.viewDidAppear(animated)
 
         if isLogin() {
-//            getUniversity()
             presentHomeView()
         } else {
             presentLoginView()
@@ -84,24 +83,6 @@ private extension SplashViewController {
     func presentLoginView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.view.window?.rootViewController = LoginViewController()
-        }
-    }
-}
-
-private extension SplashViewController {
-    func getUniversity() {
-        UserDefaults.standard.removeUniversity()
-        
-        NetworkService.shared.userService.getMeUniversity { result in
-            result.handleNetworkResult { response in
-                
-                let university: UniversityModel = UniversityModel(id: response.data.id,
-                                                                  name: response.data.name,
-                                                                  longitude: response.data.longitude,
-                                                                  latitude: response.data.latitude)
-                UserDefaults.standard.saveUniversity(university)
-                self.presentHomeView()
-            }
         }
     }
 }
