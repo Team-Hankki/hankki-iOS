@@ -11,28 +11,6 @@ import UIKit
 final class LoginViewModel { }
 
 extension LoginViewModel {
-//    func getUniversity() {
-//        UserDefaults.standard.removeUniversity()
-//        
-//        NetworkService.shared.userService.getMeUniversity { result in
-//            switch result {
-//            case .notFound:
-//                let university: UniversityModel = UniversityModel(id: nil,
-//                                                                  name: "전체",
-//                                                                  longitude: 0.0,
-//                                                                  latitude: 0.0)
-//                UserDefaults.standard.saveUniversity(university)
-//            default:
-//                result.handleNetworkResult { response in
-//                    let university: UniversityModel = UniversityModel(id: response.data.id,
-//                                                                      name: response.data.name,
-//                                                                      longitude: response.data.longitude,
-//                                                                      latitude: response.data.latitude)
-//                    UserDefaults.standard.saveUniversity(university)
-//                }
-//            }
-//        }
-//    }
     
     func postLogin (accessToken: String, postLoginRequest: PostLoginRequestDTO) {
         NetworkService.shared.authService.postLogin(accessToken: accessToken, requestBody: postLoginRequest) { result in
@@ -98,6 +76,7 @@ private extension LoginViewModel {
             switch result {
             // 어떠한 이슈로 서버 내에 유저의 대학 정보가 저장되지 않은 경우 '전체'로 기본 값을 설정한다.
             case .notFound:
+                print("🏫 UNIVERSITY NOTFOUND 🏫 - SET DEFAULT")
                 self.saveUniversity()
                 completion()
             default:

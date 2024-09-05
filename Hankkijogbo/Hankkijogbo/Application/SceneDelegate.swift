@@ -45,7 +45,7 @@ private extension SceneDelegate {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let userId: String = UserDefaults.standard.getUserId()
 
-        if !userId.isEmpty { } else { return }
+        if userId.isEmpty { return }
 
         appleIDProvider.getCredentialState(forUserID: userId) { (credentialState, _) in
             DispatchQueue.main.async {
