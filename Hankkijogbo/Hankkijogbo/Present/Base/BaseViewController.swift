@@ -111,7 +111,7 @@ private extension BaseViewController {
             }
         
         case .none:
-            print("empty loading")
+            return
         }
     }
 }

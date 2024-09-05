@@ -123,7 +123,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
             let fullName = appleIDCredential.fullName
-            let fullNameString = "\((fullName?.familyName ?? "") + (fullName?.givenName ?? ""))"
+            appleIDCredential.email
+            
+            var fullNameString = "\((fullName?.familyName ?? "") + (fullName?.givenName ?? ""))"
                          
             var identityTokenString: String = ""
             
@@ -134,6 +136,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let postLoginRequest: PostLoginRequestDTO = PostLoginRequestDTO(name: fullNameString)
             
             let userId = appleIDCredential.user
+            
+            print("시리얼 아이디 : \(appleIDCredential.user)")
+            
             UserDefaults.standard.saveUserId(userId)
             
             viewModel.postLogin(accessToken: identityTokenString, postLoginRequest: postLoginRequest)

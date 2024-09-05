@@ -197,18 +197,4 @@ extension HomeViewModel {
             }
         }
     }
-    
-    func getMeUniversity() {
-        NetworkService.shared.userService.getMeUniversity { result in
-            switch result {
-            case .success(let response):
-                print("SUCCESS")
-            case .unAuthorized, .networkFail:
-                self.showAlert?("Failed")
-                print("FAILED")
-            default:
-                return
-            }
-        }
-    }
 }
