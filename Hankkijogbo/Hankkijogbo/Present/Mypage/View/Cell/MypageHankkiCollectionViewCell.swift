@@ -31,7 +31,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body5, color: .gray900)
         }
     }
     

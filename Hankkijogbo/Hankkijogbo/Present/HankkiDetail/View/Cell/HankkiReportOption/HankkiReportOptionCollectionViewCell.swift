@@ -88,7 +88,7 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
         reportOptionLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 color: .gray400
             )
         }

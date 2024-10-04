@@ -46,7 +46,7 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
         }
         
         typeLabel.do {
-            $0.font = .setupPretendardStyle(of: .body4)
+            $0.font = .setupPretendardStyle(of: .body5)
             $0.textColor = .gray400
         }
     }

@@ -81,7 +81,7 @@ final class UnivSelectViewController: BaseViewController {
         headerContentLabel.do {
             $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: "아직 등록되지 않은 대학(지역)이 있어요.\n조금만 기다려주세요 :)",
                 color: .gray400
             )
