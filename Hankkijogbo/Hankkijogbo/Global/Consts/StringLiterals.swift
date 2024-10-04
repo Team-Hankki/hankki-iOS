@@ -117,6 +117,12 @@ enum StringLiterals {
         static let optionImproperReport = "부적절한 제보예요"
     }
     
+    enum EditHankki {
+        static let howToEdit = "어떻게 편집할까요?"
+        static let addNewMenu = "새로운 메뉴\n추가하기"
+        static let modifyMenu = "원래 메뉴\n수정/삭제하기"
+    }
+    
     enum Report {
         static let numberOfReport = "번째 제보예요"
         static let reportThisLocation = "을 제보할래요"
