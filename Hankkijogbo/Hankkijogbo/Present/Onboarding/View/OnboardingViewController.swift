@@ -157,7 +157,7 @@ private extension OnboardingViewController {
         }
         
         let skipAttributedTitle = UILabel.setupAttributedText(
-            for: PretendardStyle.body4,
+            for: PretendardStyle.body5,
             withText: "건너뛰기",
             color: currentData.skipButtonColor
         )

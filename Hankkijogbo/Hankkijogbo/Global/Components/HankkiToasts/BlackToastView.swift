@@ -86,12 +86,12 @@ final class BlackToastView: BaseView {
         messageLabel.do {
             $0.text = message
             $0.textColor = .white
-            $0.font = .setupPretendardStyle(of: .body4)
+            $0.font = .setupPretendardStyle(of: .body5)
         }
         actionButton.do {
             $0.setTitle(StringLiterals.Toast.see, for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = .setupPretendardStyle(of: .body5)
+            $0.titleLabel?.font = .setupPretendardStyle(of: .body6)
             $0.setUnderline()
         }
     }

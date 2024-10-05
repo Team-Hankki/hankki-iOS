@@ -30,7 +30,7 @@ final class AddMenuCollectionViewCell: BaseCollectionViewCell {
         addMenuButton.do {
             $0.setImage(.btnAddDetailBig, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body4,
                 withText: StringLiterals.Report.addMenu,
                 color: .gray400
             ), for: .normal)

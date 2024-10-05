@@ -90,7 +90,7 @@ final class CreateZipViewController: BaseViewController {
         
         titleCountLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 withText: "(0/\(titleMaxCount))",
                 color: .gray300)
         }

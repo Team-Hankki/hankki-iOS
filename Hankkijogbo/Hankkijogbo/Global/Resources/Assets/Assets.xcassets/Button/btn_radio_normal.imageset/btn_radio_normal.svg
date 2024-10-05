@@ -1,4 +1,5 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="12" r="9.5" stroke="#E5E5E5"/>
-<circle cx="12" cy="12" r="5" fill="#FF4C24"/>
+<g id="btn_radio">
+<circle id="Ellipse 575" cx="12" cy="12" r="9.5" stroke="#E5E5E5"/>
+</g>
 </svg>

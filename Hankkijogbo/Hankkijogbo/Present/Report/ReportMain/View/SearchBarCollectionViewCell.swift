@@ -74,7 +74,7 @@ final class SearchBarCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         reportedNumberLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 color: .red500
             )
         }
@@ -102,7 +102,7 @@ private extension SearchBarCollectionViewCell {
             $0.layer.cornerRadius = 10
             $0.setImage(.icSearch, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body4,
                 withText: StringLiterals.Report.searchFirstPlaceHolder,
                 color: .gray400
             ), for: .normal)

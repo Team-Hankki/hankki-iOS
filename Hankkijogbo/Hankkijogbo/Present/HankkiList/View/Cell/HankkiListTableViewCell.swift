@@ -125,8 +125,8 @@ final class HankkiListTableViewCell: BaseTableViewCell {
         }
         
         heartButton.do {
-            $0.setImage(.btnLikeSelected52, for: .selected)
-            $0.setImage(.btnLikeNormal52, for: .normal)
+            $0.setImage(.btnLikeSelectedList, for: .selected)
+            $0.setImage(.btnLikeNormalList, for: .normal)
             $0.isSelected = true
         }
     }

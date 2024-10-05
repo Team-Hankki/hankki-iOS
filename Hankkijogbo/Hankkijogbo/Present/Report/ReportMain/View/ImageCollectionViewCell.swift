@@ -52,7 +52,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         recommendGuideLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.Report.addMenuSubtitle,
                 color: .gray400
             )
@@ -65,7 +65,7 @@ final class ImageCollectionViewCell: BaseCollectionViewCell {
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 8
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 withText: StringLiterals.Report.changeImage,
                 color: .gray700
             ), for: .normal)

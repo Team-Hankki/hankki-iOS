@@ -45,7 +45,7 @@ final class HankkiDetailButton: BaseView {
     override func setupStyle() {
         hankkiDetailButton.do {
             if let attributedTitle = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: text,
                 color: .gray500
             ) {
