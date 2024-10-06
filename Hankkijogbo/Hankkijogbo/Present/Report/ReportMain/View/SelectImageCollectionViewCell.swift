@@ -45,7 +45,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         recommendGuideLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.Report.addMenuSubtitle,
                 color: .gray400
             )
@@ -55,7 +55,7 @@ final class SelectImageCollectionViewCell: BaseCollectionViewCell {
             $0.makeRoundBorder(cornerRadius: 10, borderWidth: 0, borderColor: .clear)
             $0.setImage(.icAddPhoto, for: .normal)
             $0.setAttributedTitle(UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 withText: StringLiterals.Report.addImage,
                 color: .gray500
             ), for: .normal)
