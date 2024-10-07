@@ -20,7 +20,7 @@ extension HomeViewController {
             $0.setImage(.icClose.withTintColor(.red500), for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
-            $0.contentEdgeInsets = .init(top: 0, left: 10, bottom: 0, right: 3)
+            $0.contentEdgeInsets = .init(top: 0, left: 10, bottom: 0, right: 5)
             
             if let leftImageView = button.viewWithTag(100) as? UIImageView {
                 leftImageView.isHidden = true
@@ -37,7 +37,7 @@ extension HomeViewController {
         button.do {
             $0.applyDefaultStyle(title: filter)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
-            $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 3)
+            $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
             
             if let leftImageView = button.viewWithTag(100) as? UIImageView {
                 leftImageView.isHidden = false
