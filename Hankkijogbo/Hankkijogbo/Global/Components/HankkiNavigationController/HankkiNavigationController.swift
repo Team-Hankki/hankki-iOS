@@ -105,7 +105,7 @@ private extension HankkiNavigationController {
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
-            $0.spacing = 1.5
+            $0.spacing = 2
         }
         
         mainTitleLabel.do {
