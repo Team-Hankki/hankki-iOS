@@ -167,6 +167,7 @@
 		A240EA592C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */; };
 		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
 		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
+		A24A78722CB3F45E0049B031 /* AddNewMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */; };
 		A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */; };
 		A29ADF9E2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */; };
 		A29ADFA02C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */; };
@@ -374,6 +375,7 @@
 		A240EA582C458F01000FF458 /* HankkiEditMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiEditMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
 		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMenuViewController.swift; sourceTree = "<group>"; };
 		A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLineView.swift; sourceTree = "<group>"; };
 		A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiValidateResponseDTO.swift; sourceTree = "<group>"; };
 		A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiFromOtherRequestDTO.swift; sourceTree = "<group>"; };
@@ -1258,6 +1260,7 @@
 			isa = PBXGroup;
 			children = (
 				A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */,
+				A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */,
 			);
 			path = EditHankki;
 			sourceTree = "<group>";
@@ -1750,6 +1753,7 @@
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
+				A24A78722CB3F45E0049B031 /* AddNewMenuViewController.swift in Sources */,
 				8670A7972C49EFC80098DCF1 /* OnboardingModel.swift in Sources */,
 				A240EA522C45519B000FF458 /* HankkiReportOptionHeaderView.swift in Sources */,
 				8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */,

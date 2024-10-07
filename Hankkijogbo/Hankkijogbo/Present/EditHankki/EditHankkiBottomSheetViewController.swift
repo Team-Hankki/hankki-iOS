@@ -13,7 +13,6 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
     
     var storeId: Int
     
-    private var viewModel: MyZipViewModel = MyZipViewModel()
     private var defaultHeight: CGFloat = 295
     
     // MARK: - UI Components
@@ -126,11 +125,13 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         }
         
         addNewMenuImageView.do {
+            $0.isUserInteractionEnabled = true
             $0.image = .imgAdd
             $0.makeRoundBorder(cornerRadius: 20, borderWidth: 1, borderColor: .gray200)
         }
         
         addNewMenuStackView.do {
+            $0.isUserInteractionEnabled = true
             $0.axis = .vertical
             $0.alignment = .leading
             $0.spacing = 8
@@ -149,11 +150,13 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         }
         
         modifyMenuImageView.do {
+            $0.isUserInteractionEnabled = true
             $0.image = .imgEdit
             $0.makeRoundBorder(cornerRadius: 20, borderWidth: 1, borderColor: .gray200)
         }
         
         modifyMenuStackView.do {
+            $0.isUserInteractionEnabled = true
             $0.axis = .vertical
             $0.alignment = .leading
             $0.spacing = 8
@@ -179,12 +182,29 @@ private extension EditHankkiBottomSheetViewController {
     
     func setupAddTarget() {
         dimmedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap)))
+        addNewMenuImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addNewMenuDidTap)))
+        addNewMenuLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addNewMenuDidTap)))
+        addNewMenuButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addNewMenuDidTap)))
+        modifyMenuImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(modifyMenuDidTap)))
+        modifyMenuLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(modifyMenuDidTap)))
+        modifyMenuButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(modifyMenuDidTap)))
     }
     
     // MARK: - @objc
     
     @objc func dimmedViewDidTap() {
         dismissMyZipBottomSheet()
+    }
+    
+    @objc func addNewMenuDidTap() {
+        let addNewMenuViewController = AddNewMenuViewController()
+        self.navigationController?.pushViewController(addNewMenuViewController, animated: true)
+    }
+    
+    @objc func modifyMenuDidTap() {
+        print("메뉴 편집")
+//        let modifyMenuViewController = ModifyMenuViewController()
+//        self.navigationController?.pushViewController(modifyMenuViewController, animated: true)
     }
 }
 
