@@ -25,6 +25,7 @@ final class TotalListBottomSheetView: BaseView {
     
     private let bottomSheetHandlerView: UIView = UIView()
     private let bottomGradientView: UIView = UIView()
+    private let totalListCountLabel: UILabel = UILabel()
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let containerView: UIView = UIView()
@@ -55,6 +56,7 @@ final class TotalListBottomSheetView: BaseView {
         self.addSubviews(containerView)
         containerView.addSubviews(
             bottomSheetHandlerView,
+            totalListCountLabel,
             totalListCollectionView,
             emptyView,
             emptyLabel
@@ -62,7 +64,6 @@ final class TotalListBottomSheetView: BaseView {
     }
     
     override func setupStyle() {
-
         containerView.do {
             $0.backgroundColor = .white
             
@@ -78,6 +79,10 @@ final class TotalListBottomSheetView: BaseView {
         bottomSheetHandlerView.do {
             $0.backgroundColor = .gray200
             $0.layer.cornerRadius = 2
+        }
+        
+        totalListCountLabel.do {
+            $0.font = .setupPretendardStyle(of: .body5)
         }
         
         flowLayout.do {
@@ -119,8 +124,13 @@ final class TotalListBottomSheetView: BaseView {
             $0.height.equalTo(4)
         }
         
+        totalListCountLabel.snp.makeConstraints {
+            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+        }
+        
         totalListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(15)
+            $0.top.equalTo(totalListCountLabel.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -209,7 +219,6 @@ extension TotalListBottomSheetView {
     }
     
     func setupBottomGradientView() {
-        
         bottomGradientView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         
         let gradient = CAGradientLayer()
@@ -227,6 +236,11 @@ extension TotalListBottomSheetView {
         }
         
         bottomGradientView.layer.addSublayer(gradient)
+    }
+    
+    func updateTotalListCount(count: Int) {
+        totalListCountLabel.text = "\(count)개의 족보"
+        totalListCountLabel.asFontColor(targetString: "의 족보", font: .setupPretendardStyle(of: .body6), color: .gray600)
     }
 }
 
@@ -249,7 +263,7 @@ extension TotalListBottomSheetView {
         // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
         let buttonPosition = sender.convert(CGPoint.zero, to: self.totalListCollectionView)
         let itemIndexPath = self.totalListCollectionView.indexPathForItem(at: buttonPosition)
-
+        
         NotificationCenter.default.post(Notification(name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil, userInfo: ["itemIndexPath": itemIndexPath ?? IndexPath()]))
     }
 }
