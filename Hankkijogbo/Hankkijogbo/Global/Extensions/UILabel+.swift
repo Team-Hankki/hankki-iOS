@@ -41,7 +41,7 @@ extension UILabel {
     }
     
     /// font, color 둘 다 변경
-    func asFontColor(targetString: String, font: UIFont, color: UIColor) {
+    func asFontColor(targetString: String, font: UIFont?, color: UIColor) {
         let originText = text ?? ""
         let attributedString = NSMutableAttributedString(string: originText)
         let range = (originText as NSString).range(of: targetString)

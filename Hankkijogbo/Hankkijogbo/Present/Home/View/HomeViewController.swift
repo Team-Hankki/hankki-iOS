@@ -83,6 +83,7 @@ final class HomeViewController: BaseViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
+                self.rootView.bottomSheetView.updateTotalListCount(count: data.count)
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
                 self.rootView.bottomSheetView.setNeedsLayout()
                 self.rootView.bottomSheetView.layoutIfNeeded()
