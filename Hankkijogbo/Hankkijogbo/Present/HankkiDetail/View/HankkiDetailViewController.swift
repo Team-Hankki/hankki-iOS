@@ -279,11 +279,11 @@ extension HankkiDetailViewController {
     
     @objc func editMenuButtonDidTap() {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
-        self.showAlert(
-            titleText: StringLiterals.Alert.DevelopEdit.title,
-            subText: StringLiterals.Alert.DevelopEdit.sub,
-            primaryButtonText: StringLiterals.Alert.check
-        )
+        
+        let viewController = EditHankkiBottomSheetViewController(storeId: 1)
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: true, completion: nil)
     }
     
     @objc func addMyZipButtonDidTap() {
