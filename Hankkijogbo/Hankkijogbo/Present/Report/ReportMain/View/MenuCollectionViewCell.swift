@@ -122,7 +122,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body7,
+                for: PretendardStyle.body8,
                 withText: StringLiterals.Report.price,
                 color: .gray500
             )
