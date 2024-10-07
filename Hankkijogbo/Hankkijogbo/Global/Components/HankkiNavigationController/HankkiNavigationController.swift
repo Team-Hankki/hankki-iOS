@@ -52,7 +52,8 @@ final class HankkiNavigationController: UINavigationController {
     private let customNavigationBar: UIView = UINavigationBar()
     
     let titleStackView: UIStackView = UIStackView()
-    private let mainImageView: UIImageView = UIImageView()
+    private let mainImageViewLeft: UIImageView = UIImageView()
+    private let mainImageViewRight: UIImageView = UIImageView()
     let mainTitleLabel: UILabel = UILabel()
     private let backButton: UIButton = UIButton()
     private var rightButton: UIButton = UIButton()
@@ -104,6 +105,7 @@ private extension HankkiNavigationController {
         titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
+            $0.spacing = 2
         }
         
         mainTitleLabel.do {
@@ -125,7 +127,7 @@ private extension HankkiNavigationController {
     func setupHierarchy() {
         view.addSubviews(safeAreaView, customNavigationBar)
         customNavigationBar.addSubviews(backButton, titleStackView, rightButton)
-        titleStackView.addArrangedSubviews(mainTitleLabel, mainImageView)
+        titleStackView.addArrangedSubviews(mainImageViewLeft, mainTitleLabel, mainImageViewRight)
     }
     
     func setupLayout() {
@@ -180,18 +182,29 @@ private extension HankkiNavigationController {
     func setupMainTitle(stringOrImage: StringOrImageType, position: String) {
         switch stringOrImage {
         case .string(let string):
-            mainImageView.isHidden = true
+            mainImageViewRight.isHidden = true
+            mainImageViewLeft.isHidden = true
             mainTitleLabel.isHidden = false
             mainTitleLabel.text = string
         case .image(let image):
             mainTitleLabel.isHidden = true
-            mainImageView.isHidden = false
-            mainImageView.image = image
+            mainImageViewRight.isHidden = false
+            mainImageViewLeft.isHidden = true
+            mainImageViewRight.image = image
         case .stringAndImage(let string, let image):
             mainTitleLabel.isHidden = false
-            mainImageView.isHidden = false
+            mainImageViewRight.isHidden = false
+            mainImageViewLeft.isHidden = true
             mainTitleLabel.text = string
-            mainImageView.image = image
+            mainImageViewRight.image = image
+        case .stringAndImageDouble(let string, let leftImage, let rightImage):
+            mainTitleLabel.isHidden = false
+            mainImageViewRight.isHidden = false
+            mainImageViewLeft.isHidden = false
+            mainTitleLabel.text = string
+            mainImageViewRight.image = rightImage
+            mainImageViewLeft.image = leftImage
+            
         }
         titleStackView.snp.removeConstraints()
         titleStackView.snp.makeConstraints {
@@ -214,6 +227,9 @@ private extension HankkiNavigationController {
             rightButton.setImage(image, for: .normal)
         case .stringAndImage(let string, let image):
             rightButton.setImage(image, for: .normal)
+            rightButton.setTitle(string, for: .normal)
+        case .stringAndImageDouble(let string, let leftImage, let rightImage):
+            rightButton.setImage(rightImage, for: .normal)
             rightButton.setTitle(string, for: .normal)
         }
     }

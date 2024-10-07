@@ -14,12 +14,19 @@ extension HomeViewController {
     func changeButtonTitle(for button: UIButton, newTitle: String) {
         button.do {
             $0.setTitle(newTitle, for: .normal)
-            $0.backgroundColor = .yellow300
-            $0.layer.borderColor = UIColor.yellow500.cgColor
-            $0.setTitleColor(.gray700, for: .normal)
-            $0.setImage(.icClose.withTintColor(.gray700), for: .normal)
+            $0.backgroundColor = .red100
+            $0.layer.borderColor = UIColor.red500.cgColor
+            $0.setTitleColor(.red500, for: .normal)
+            $0.setImage(.icClose.withTintColor(.red500), for: .normal)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
             $0.addTarget(self, action: #selector(revertButtonAction(_:)), for: .touchUpInside)
+            $0.contentEdgeInsets = .init(top: 0, left: 10, bottom: 0, right: 5)
+            
+            if let leftImageView = button.viewWithTag(100) as? UIImageView {
+                leftImageView.isHidden = true
+                leftImageView.layoutIfNeeded()
+            }
+            
             $0.sizeToFit()
             $0.tag = 1
         }
@@ -30,6 +37,13 @@ extension HomeViewController {
         button.do {
             $0.applyDefaultStyle(title: filter)
             $0.removeTarget(self, action: nil, for: .touchUpInside)
+            $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
+            
+            if let leftImageView = button.viewWithTag(100) as? UIImageView {
+                leftImageView.isHidden = false
+                leftImageView.layoutIfNeeded()
+            }
+            
             $0.sizeToFit()
             $0.tag = 0
         }
@@ -102,12 +116,12 @@ extension HomeViewController {
             $0.top.equalTo(isPriceModel ? rootView.priceButton.snp.bottom : rootView.sortButton.snp.bottom).offset(10)
             switch buttonType {
             case .price:
-                rootView.priceButton.setTitleColor(.gray700, for: .normal)
-                rootView.priceButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
+                rootView.priceButton.setTitleColor(.gray800, for: .normal)
+                rootView.priceButton.setImage(.icArrowOpen, for: .normal)
                 $0.centerX.equalTo(rootView.priceButton)
             case .sort:
-                rootView.sortButton.setTitleColor(.gray700, for: .normal)
-                rootView.sortButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
+                rootView.sortButton.setTitleColor(.gray800, for: .normal)
+                rootView.sortButton.setImage(.icArrowOpen, for: .normal)
                 $0.centerX.equalTo(rootView.sortButton)
             }
             $0.width.equalTo(112)
@@ -179,8 +193,8 @@ extension HomeViewController {
             $0.leading.equalTo(rootView).inset(8)
             $0.trailing.centerX.equalToSuperview()
         }
-        rootView.typeButton.setTitleColor(.gray700, for: .normal)
-        rootView.typeButton.setImage(.icArrowOpen.withTintColor(.gray700), for: .normal)
+        rootView.typeButton.setTitleColor(.gray800, for: .normal)
+        rootView.typeButton.setImage(.icArrowOpen, for: .normal)
     }
     
     /// TypeCollectionView를 숨김
@@ -282,7 +296,7 @@ extension HomeViewController {
         revertButton(for: rootView.priceButton, filter: StringLiterals.Home.priceFilteringButton)
         revertButton(for: rootView.sortButton, filter: StringLiterals.Home.sortFilteringButton)
         revertButton(for: rootView.typeButton, filter: StringLiterals.Home.storeCategoryFilteringButton)
-
+        
         viewModel.updateHankkiList()
     }
 }

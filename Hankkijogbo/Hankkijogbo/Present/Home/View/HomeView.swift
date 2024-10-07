@@ -15,6 +15,10 @@ final class HomeView: BaseView {
                               StringLiterals.Home.priceFilteringButton,
                               StringLiterals.Home.sortFilteringButton]
     
+    let leftImages: [UIImage] = [.imgFilteringEmpty,
+                                 .imgFilteringCoin,
+                                 .imgFilteringAlign]
+    
     // MARK: - UI Components
     
     var mapView = NMFMapView()
@@ -78,16 +82,26 @@ final class HomeView: BaseView {
     override func setupStyle() {
         let buttons = [typeButton, priceButton, sortButton]
         for (index, button) in buttons.enumerated() {
+            let leftImageView = UIImageView(image: leftImages[index])
+            leftImageView.tag = 100
             button.do {
                 $0.backgroundColor = .hankkiWhite
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
                 $0.setTitle(buttonType[index], for: .normal)
-                $0.setTitleColor(.gray500, for: .normal)
-                $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+                $0.setTitleColor(.gray800, for: .normal)
+                $0.setImage(.icArrowClose, for: .normal)
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
-                $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 3)
+                $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
+            }
+            
+            button.addSubview(leftImageView)
+            
+            leftImageView.snp.makeConstraints {
+                $0.leading.equalTo(button.snp.trailing).inset(24)
+                $0.centerY.equalTo(button.snp.centerY)
+                $0.width.height.equalTo(16)
             }
         }
         
