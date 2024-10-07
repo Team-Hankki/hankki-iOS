@@ -16,8 +16,8 @@ final class HomeView: BaseView {
                               StringLiterals.Home.sortFilteringButton]
     
     let leftImages: [UIImage] = [.imgFilteringEmpty,
-                                         .imgFilteringCoin,
-                                         .imgFilteringAlign]
+                                 .imgFilteringCoin,
+                                 .imgFilteringAlign]
     
     // MARK: - UI Components
     
@@ -93,16 +93,16 @@ final class HomeView: BaseView {
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
-                $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 3)
+                $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
             }
             
             button.addSubview(leftImageView)
- 
-               leftImageView.snp.makeConstraints {
-                   $0.leading.equalTo(button.snp.trailing).inset(24)
-                   $0.centerY.equalTo(button.snp.centerY)
-                   $0.width.height.equalTo(16)
-               }
+            
+            leftImageView.snp.makeConstraints {
+                $0.leading.equalTo(button.snp.trailing).inset(24)
+                $0.centerY.equalTo(button.snp.centerY)
+                $0.width.height.equalTo(16)
+            }
         }
         
         buttonStackView.do {

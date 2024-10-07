@@ -23,10 +23,8 @@ extension HomeViewController {
             $0.contentEdgeInsets = .init(top: 0, left: 10, bottom: 0, right: 3)
             
             if let leftImageView = button.viewWithTag(100) as? UIImageView {
-                print("IMAGE가 있다요👾")
-                print(leftImageView.image, "👾")
                 leftImageView.isHidden = true
-                leftImageView.layoutIfNeeded() 
+                leftImageView.layoutIfNeeded()
             }
             
             $0.sizeToFit()
