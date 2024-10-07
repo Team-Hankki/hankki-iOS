@@ -17,7 +17,7 @@ enum TabBarItem: CaseIterable {
         case .home:
             return .icHomeNormal
         case .report:
-            return .icReport
+            return .icReportNormal
         case .mypage:
             return .icMypageNormal
         }
@@ -29,7 +29,7 @@ enum TabBarItem: CaseIterable {
         case .home:
             return .icHomeSelected
         case .report:
-            return .icReport
+            return .icReportSelected
         case .mypage:
             return .icMypageSelected
         }
@@ -38,9 +38,9 @@ enum TabBarItem: CaseIterable {
     // 탭 별 제목
     var itemTitle: String? {
         switch self {
-        case .home: return ""
-        case .report: return ""
-        case .mypage: return ""
+        case .home: return "가게"
+        case .report: return "제보하기"
+        case .mypage: return "마이"
         }
     }
     

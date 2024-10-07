@@ -81,14 +81,14 @@ private extension TabBarController {
         
         // title이 선택되지 않았을 때 폰트, 색상 설정
         let normalAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.setupSuiteStyle(of: .body1) as Any,
-            .foregroundColor: UIColor.gray
+            .font: UIFont.setupSuiteStyle(of: .caption) as Any,
+            .foregroundColor: UIColor.gray400
         ]
         
         // title이 선택되었을 때 폰트, 색상 설정
         let selectedAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.setupSuiteStyle(of: .body1) as Any,
-            .foregroundColor: UIColor.black
+            .font: UIFont.setupSuiteStyle(of: .caption) as Any,
+            .foregroundColor: UIColor.red500
         ]
         
         tabbarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
