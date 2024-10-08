@@ -24,8 +24,8 @@ final class MypageViewController: BaseViewController {
     ]
     
     private let optionList: [MypageOptionCollectionViewCell.Model] = [
-        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Terms),
         MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.OneonOne),
+        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Terms),
         MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Logout)
     ]
     

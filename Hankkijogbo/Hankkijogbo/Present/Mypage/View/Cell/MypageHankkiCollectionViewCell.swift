@@ -41,7 +41,7 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
         }
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.snp.centerY).inset(2)
+            $0.top.equalTo(imageView.snp.bottom).offset(2)
         }
     }
 }
