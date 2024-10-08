@@ -150,7 +150,7 @@ private extension MypageViewController {
             
         let separator = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: separatorSize,
-            elementKind: "separatorElementKind",
+            elementKind: MypageSeparatorView.className,
             alignment: .bottomTrailing
         )
             

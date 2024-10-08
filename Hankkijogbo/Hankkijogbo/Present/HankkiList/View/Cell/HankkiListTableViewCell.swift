@@ -116,13 +116,14 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     }
     
     override func setupHierarchy() {
-        self.contentView.addSubviews(thumbnailView,
+        contentView.addSubviews(thumbnailView,
                                      infoView,
                                      heartButton)
         
         infoView.addSubviews(titleStackView,
                              menuListLabel,
-                             priceTitleLabel, priceLabel)
+                             priceTitleLabel, 
+                             priceLabel)
         
         titleStackView.addArrangedSubviews(titleLabel, heartSatckView)
         heartSatckView.addArrangedSubviews(heartImageView, heartCountLabel)

@@ -12,13 +12,8 @@ import Then
 import SnapKit
 
 final class MypageSeparatorView: BaseCollectionViewCell {
-    
-    // MARK: - Properties
     private let separator: UIView = UIView()
     
-    
-    // MARK: - UI Properties
-
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

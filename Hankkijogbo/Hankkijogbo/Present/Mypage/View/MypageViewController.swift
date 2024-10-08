@@ -79,7 +79,7 @@ private extension MypageViewController {
                                 forCellWithReuseIdentifier: MypageHankkiCollectionViewCell.className)
         
         collectionView.register(MypageSeparatorView.self,
-                                forSupplementaryViewOfKind: "separatorElementKind",
+                                forSupplementaryViewOfKind: MypageSeparatorView.className,
                                 withReuseIdentifier: MypageSeparatorView.className)
         
         collectionView.register(MypageOptionCollectionViewCell.self, 
@@ -149,7 +149,7 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             return headerView
             
-        case "separatorElementKind":
+        case MypageSeparatorView.className:
             let separatorView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: MypageSeparatorView.className,
