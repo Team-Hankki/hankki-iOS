@@ -11,9 +11,9 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var storeId: Int
-    
+    private var storeId: Int
     private var defaultHeight: CGFloat = 295
+    private var isHaveToDismiss: Bool = false
     
     // MARK: - UI Components
     
@@ -46,6 +46,20 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         super.viewDidLoad()
         
         setupAddTarget()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isHaveToDismiss {
+            self.dismiss(animated: false)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        isHaveToDismiss = true
     }
     
     // MARK: - Set UI
