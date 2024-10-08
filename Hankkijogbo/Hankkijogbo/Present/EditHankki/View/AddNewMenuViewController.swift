@@ -42,7 +42,6 @@ final class AddNewMenuViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .hankkiWhite
         
         setupRegister()
         setupDelegate()
@@ -126,7 +125,8 @@ extension AddNewMenuViewController {
     
     @objc func bottomButtonPrimaryHandler() {
         viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) {
-            print("메뉴 추가 완료")
+            let addNewMenuCompleteViewController = AddNewMenuCompleteViewController(storeId: self.storeId, totalMenuCount: self.viewModel.validMenus.count)
+            self.navigationController?.pushViewController(addNewMenuCompleteViewController, animated: true)
         }
     }
     
