@@ -44,7 +44,6 @@
 		83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DA28972C3852C5004819FA /* HankkiNavigationController.swift */; };
 		83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED752C255A180042BA48 /* AppDelegate.swift */; };
 		83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED772C255A180042BA48 /* SceneDelegate.swift */; };
-		83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED792C255A180042BA48 /* ViewController.swift */; };
 		83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83DBED7E2C255A1A0042BA48 /* Assets.xcassets */; };
 		83DBED822C255A1A0042BA48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DBED802C255A1A0042BA48 /* LaunchScreen.storyboard */; };
 		83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBED912C2564990042BA48 /* HomeViewModel.swift */; };
@@ -168,6 +167,10 @@
 		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
 		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
 		A24A78722CB3F45E0049B031 /* AddNewMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */; };
+		A24A78772CB44BCB0049B031 /* AddNewMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78762CB44BCB0049B031 /* AddNewMenuViewModel.swift */; };
+		A24A787C2CB44E450049B031 /* MenuTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787B2CB44E450049B031 /* MenuTargetType.swift */; };
+		A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787D2CB44E500049B031 /* MenuAPIService.swift */; };
+		A24A78802CB463490049B031 /* PostMenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */; };
 		A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */; };
 		A29ADF9E2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */; };
 		A29ADFA02C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */; };
@@ -252,7 +255,6 @@
 		83DBED722C255A180042BA48 /* Hankkijogbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hankkijogbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DBED752C255A180042BA48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83DBED772C255A180042BA48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		83DBED792C255A180042BA48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		83DBED7E2C255A1A0042BA48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83DBED812C255A1A0042BA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83DBED832C255A1A0042BA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Hankkijogbo/Global/Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -376,6 +378,10 @@
 		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
 		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMenuViewController.swift; sourceTree = "<group>"; };
+		A24A78762CB44BCB0049B031 /* AddNewMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMenuViewModel.swift; sourceTree = "<group>"; };
+		A24A787B2CB44E450049B031 /* MenuTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTargetType.swift; sourceTree = "<group>"; };
+		A24A787D2CB44E500049B031 /* MenuAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAPIService.swift; sourceTree = "<group>"; };
+		A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMenuResponseDTO.swift; sourceTree = "<group>"; };
 		A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLineView.swift; sourceTree = "<group>"; };
 		A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiValidateResponseDTO.swift; sourceTree = "<group>"; };
 		A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiFromOtherRequestDTO.swift; sourceTree = "<group>"; };
@@ -620,7 +626,6 @@
 		83DBED8A2C25645B0042BA48 /* Present */ = {
 			isa = PBXGroup;
 			children = (
-				83DBED792C255A180042BA48 /* ViewController.swift */,
 				A22D20C92C3165B6001AFAC6 /* Base */,
 				865826032C4170A400265401 /* Login */,
 				86880C1A2C47A0CC00CAEF58 /* Splash */,
@@ -649,6 +654,7 @@
 				86880BD82C46CC6700CAEF58 /* Zip */,
 				8302854E2C455FB00004D9F7 /* Hankki */,
 				A2EC33A92C4711A000809840 /* Report */,
+				A24A78792CB44E110049B031 /* Menu */,
 				A2EC33AA2C4711A600809840 /* Location */,
 			);
 			path = Network;
@@ -1259,8 +1265,9 @@
 		A236B5FD2CAC154A00935819 /* EditHankki */ = {
 			isa = PBXGroup;
 			children = (
-				A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */,
-				A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */,
+				A24A78752CB449AB0049B031 /* Model */,
+				A24A78742CB449A20049B031 /* ViewModel */,
+				A24A78732CB4499C0049B031 /* View */,
 			);
 			path = EditHankki;
 			sourceTree = "<group>";
@@ -1373,6 +1380,48 @@
 				A240EA532C4551A3000FF458 /* HankkiReportOptionFooterView.swift */,
 			);
 			path = HankkiReportOption;
+			sourceTree = "<group>";
+		};
+		A24A78732CB4499C0049B031 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */,
+				A24A78712CB3F45D0049B031 /* AddNewMenuViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A24A78742CB449A20049B031 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A24A78762CB44BCB0049B031 /* AddNewMenuViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A24A78752CB449AB0049B031 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A24A78792CB44E110049B031 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A24A787A2CB44E360049B031 /* DTO */,
+				A24A787B2CB44E450049B031 /* MenuTargetType.swift */,
+				A24A787D2CB44E500049B031 /* MenuAPIService.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		A24A787A2CB44E360049B031 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		A29A441C2C6ADC11002B8D36 /* HankkiLineView */ = {
@@ -1718,12 +1767,12 @@
 				86880BD72C46C55C00CAEF58 /* UserAPIService.swift in Sources */,
 				830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */,
 				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
-				83DBED7A2C255A180042BA48 /* ViewController.swift in Sources */,
 				A2C9FC952C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift in Sources */,
 				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
 				A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */,
 				A2C9FCB32C49AFF800868DF7 /* PostHankkiRequestDTO.swift in Sources */,
+				A24A78802CB463490049B031 /* PostMenuResponseDTO.swift in Sources */,
 				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
 				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
 				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
@@ -1752,6 +1801,7 @@
 				A240EA262C4176FF000FF458 /* String+.swift in Sources */,
 				A2DEBF562C3D230F00DE14A9 /* BaseCollectionReusableView.swift in Sources */,
 				83DBED762C255A180042BA48 /* AppDelegate.swift in Sources */,
+				A24A787C2CB44E450049B031 /* MenuTargetType.swift in Sources */,
 				864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */,
 				A24A78722CB3F45E0049B031 /* AddNewMenuViewController.swift in Sources */,
 				8670A7972C49EFC80098DCF1 /* OnboardingModel.swift in Sources */,
@@ -1836,6 +1886,7 @@
 				86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
+				A24A78772CB44BCB0049B031 /* AddNewMenuViewModel.swift in Sources */,
 				A2C9FCB02C49985800868DF7 /* GetMyZipListResponseDTO.swift in Sources */,
 				86880BDC2C46CCA100CAEF58 /* ZipAPIService.swift in Sources */,
 				839FC71C2C46E2AA00B7FEDD /* GetPriceFilterResponseDTO.swift in Sources */,
@@ -1847,6 +1898,7 @@
 				839138DB2C48F82900611D5C /* GetHankkiPinRequestDTO.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
 				A2DEBF642C3D67DE00DE14A9 /* MenuCollectionViewCell.swift in Sources */,
+				A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */,
 				86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */,
 				8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,

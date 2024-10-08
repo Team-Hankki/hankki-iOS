@@ -197,7 +197,7 @@ private extension EditHankkiBottomSheetViewController {
     }
     
     @objc func addNewMenuDidTap() {
-        let addNewMenuViewController = AddNewMenuViewController()
+        let addNewMenuViewController = AddNewMenuViewController(storeId: storeId)
         self.navigationController?.pushViewController(addNewMenuViewController, animated: true)
     }
     
