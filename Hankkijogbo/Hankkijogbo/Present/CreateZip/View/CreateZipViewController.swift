@@ -17,21 +17,25 @@ final class CreateZipViewController: BaseViewController {
     private let viewModel: CreateZipViewModel = CreateZipViewModel()
     
     private let tagMaxCount: Int = 9
-    private let titleMaxCount: Int = 16
+    private let titleMaxCount: Int = 18
     
     private var firstTagCount: Int = 0
     
     // MARK: - UI Properties
     
-    private let viewTitle = UILabel()
+    private let viewTitleLabel = UILabel()
+    private let descriptionLabel = UILabel()
     
     private let titleInputTitle = UILabel()
     private let titleInputTextField = UITextField()
+    private let titleInputLineView = UIView()
+    
     private let titleCountView = UIView()
     private let titleCountLabel = UILabel()
     
     private let tagInputTitle = UILabel()
     private let tagInputTextField = TagTextField()
+    private let tagInputLineView = UIView()
     
     private lazy var submitButton = MainButton(titleText: StringLiterals.CreateZip.submitButton, isValid: false, buttonHandler: submitButtonDidTap)
     
@@ -63,110 +67,144 @@ final class CreateZipViewController: BaseViewController {
     // MARK: - Set UI
     
     override func setupStyle() {
-        viewTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1,
+        viewTitleLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.h1,
                                                             withText: StringLiterals.CreateZip.viewTitle,
                                                             color: .gray900)
         }
         
+        descriptionLabel.do {
+            $0.numberOfLines = 2
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body6,
+                                                            withText: StringLiterals.CreateZip.viewDescription,
+                                                            color: .gray400)
+        }
+        
         titleInputTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.subtitle2,
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body6,
                                                             withText: StringLiterals.CreateZip.TitleInput.label,
-                                                            color: .gray900)
+                                                            color: .gray500)
         }
         
         titleInputTextField.do {
             $0.tag = 0
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
-            $0.addPadding(left: 12, right: 14)
-            $0.font = UIFont.setupPretendardStyle(of: .body1)
+            $0.addPadding(left: 8, right: 14)
+            $0.font = UIFont.setupPretendardStyle(of: .subtitle2)
             $0.textColor = .gray800
             
-            $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TitleInput.placeholder, forColor: .gray400)
+            $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TitleInput.placeholder,
+                                      forColor: .gray300)
             
             $0.rightViewMode = .always
             $0.rightView = titleCountView
         }
         
+        titleInputLineView.do {
+            $0.backgroundColor = .gray200
+        }
+            
         titleCountLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
-                withText: "(0/\(titleMaxCount))",
-                color: .gray300)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body8,
+                                                            withText: "(0/\(titleMaxCount))",
+                                                            color: .gray300)
         }
         
         tagInputTitle.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.subtitle2,
-                withText: StringLiterals.CreateZip.TagInput.label,
-                color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body6,
+                                                            withText: StringLiterals.CreateZip.TagInput.label,
+                                                            color: .gray500)
         }
         
         tagInputTextField.do {
             $0.tag = 1
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray300)
-            $0.addPadding(left: 12)
-            $0.font = UIFont.setupPretendardStyle(of: .body1)
+            $0.addPadding(left: 8)
+            $0.font = UIFont.setupPretendardStyle(of: .subtitle2)
             $0.textColor = .gray800
             
             $0.changePlaceholderColor(forPlaceHolder: StringLiterals.CreateZip.TagInput.placeholder,
-                                      forColor: .gray400)
+                                      forColor: .gray300)
         }
+        
+        tagInputLineView.do {
+            $0.backgroundColor = .gray200
+        }
+
     }
     
     override func setupHierarchy() {
         view.addSubviews(
-            viewTitle,
+            viewTitleLabel,
+            descriptionLabel,
             titleInputTitle,
             titleInputTextField,
+            titleInputLineView,
             tagInputTitle,
             tagInputTextField,
+            tagInputLineView,
             submitButton
         )
         titleCountView.addSubview(titleCountLabel)
     }
     
     override func setupLayout() {
-        viewTitle.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(30)
+        viewTitleLabel.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(22)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(34)
+        }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(viewTitleLabel.snp.bottom).offset(10)
+            $0.horizontalEdges.equalToSuperview().offset(22)
         }
         
         titleInputTitle.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(22)
-            $0.top.equalTo(viewTitle.snp.bottom).offset(58)
+            $0.leading.equalToSuperview().inset(30)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(36)
         }
         
         titleInputTextField.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(22)
-            $0.top.equalTo(titleInputTitle.snp.bottom).offset(10)
-            $0.height.equalTo(50)
+            $0.top.equalTo(titleInputTitle.snp.bottom)
+            $0.height.equalTo(40)
+        }
+        
+        titleInputLineView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(22)
+            $0.height.equalTo(1)
+            $0.top.equalTo(titleInputTextField.snp.bottom)
         }
         
         tagInputTitle.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(22)
-            $0.top.equalTo(titleInputTextField.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().inset(30)
+            $0.top.equalTo(titleInputLineView.snp.bottom).offset(20)
         }
         
         tagInputTextField.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(22)
-            $0.top.equalTo(tagInputTitle.snp.bottom).offset(10)
-            $0.height.equalTo(50)
+            $0.top.equalTo(tagInputTitle.snp.bottom)
+            $0.height.equalTo(40)
+        }
+        
+        tagInputLineView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(22)
+            $0.height.equalTo(1)
+            $0.top.equalTo(tagInputTextField.snp.bottom)
         }
         
         titleCountView.snp.makeConstraints {
             $0.width.equalTo(40)
             $0.height.equalTo(50)
         }
+        
         titleCountLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(14)
             $0.centerY.equalToSuperview()
         }
         submitButton.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(22)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(tagInputTextField.snp.bottom).offset(37)
             $0.height.equalTo(54)
-            $0.width.equalTo(149)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
     }
 }
@@ -241,8 +279,11 @@ private extension CreateZipViewController {
 
 extension CreateZipViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.gray500.cgColor
-        textField.layer.borderWidth = 2
+        if textField.tag == 0 {
+            titleInputLineView.backgroundColor = .gray500
+        } else if textField.tag == 1 {
+            tagInputLineView.backgroundColor = .gray500
+        }
         
         switch textField.tag {
         case 0:
@@ -258,13 +299,16 @@ extension CreateZipViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.gray300.cgColor
-        textField.layer.borderWidth = 1
+        if textField.tag == 0 {
+            titleInputLineView.backgroundColor = .gray200
+        } else if textField.tag == 1 {
+            tagInputLineView.backgroundColor = .gray200
+        }
         
         let currentText = textField.text ?? ""
         
         if textField.tag == 0 {
-            titleCountLabel.textColor = .gray400
+            titleCountLabel.textColor = .gray300
             titleInputTextField.text = String(currentText.prefix(titleMaxCount))
             return
         }

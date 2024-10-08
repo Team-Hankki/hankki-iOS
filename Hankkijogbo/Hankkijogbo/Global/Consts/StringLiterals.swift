@@ -199,17 +199,18 @@ enum StringLiterals {
     }
     
     enum CreateZip {
-        static let viewTitle = "새로운 식당 족보"
+        static let viewTitle = "새로운 식당 족보 만들기"
+        static let viewDescription = "족보의 제목을 짓고, 해시태그를 남겨\n새로운 족보를 만들 수 있어요"
         static let submitButton = "족보 만들기"
         
         enum TitleInput {
-            static let label = "족보의 제목을 지어주세요"
-            static let placeholder = "한끼대학교 든든한 식당 모음"
+            static let label = "족보 제목"
+            static let placeholder = "한식 맛집 모음"
         }
         
         enum TagInput {
-            static let label = "족보를 떠올리면?"
-            static let placeholder = "#든든한 #한끼해장"
+            static let label = "족보 해시태그"
+            static let placeholder = "#든든한 #가성비"
         }
     }
     
