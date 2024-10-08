@@ -18,7 +18,6 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
 
     private let iconImageView: UIImageView = UIImageView()
     private let titleLabel: UILabel = UILabel()
-    private let lineView: UIView = UIView()
     
     override func setupStyle() {
         iconImageView.do {
@@ -27,36 +26,26 @@ final class MypageOptionCollectionViewCell: BaseCollectionViewCell {
         
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
-                color: .gray900
+                for: PretendardStyle.body6,
+                color: .gray600
             )
-        }
-        
-        lineView.do {
-            $0.backgroundColor = .gray200
         }
     }
     
     override func setupHierarchy() {
-        self.addSubviews(titleLabel, iconImageView, lineView)
+        self.addSubviews(titleLabel, iconImageView)
     }
     
     override func setupLayout() {
         iconImageView.snp.makeConstraints {
             $0.size.equalTo(24)
             $0.trailing.equalToSuperview()
-            $0.top.equalToSuperview().inset(18)
+            $0.centerY.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
-            $0.top.equalToSuperview().inset(18)
-        }
-        
-        lineView.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.width.equalToSuperview()
-            $0.height.equalTo(1)
+            $0.centerY.equalToSuperview()
         }
     }
 }

@@ -55,7 +55,7 @@ final class MypageHeaderView: BaseCollectionViewCell {
         }
         
         profileNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(23.5)
+            $0.top.equalToSuperview()
             $0.leading.equalTo(profileImageView.snp.trailing).offset(14)
         }
         

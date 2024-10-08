@@ -100,7 +100,7 @@ private extension MypageViewController {
     
     func setupOptionSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(180))
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
@@ -108,6 +108,7 @@ private extension MypageViewController {
             layoutSize: groupSize,
             subitems: [item]
         )
+        
         let section = NSCollectionLayoutSection(group: group)
         
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22)
