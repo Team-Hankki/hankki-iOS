@@ -17,9 +17,9 @@ final class MypageHeaderView: BaseCollectionViewCell {
     
     // MARK: - UI Properties
     
-    private let profileView: UIView = UIView()
     private let profileImageView: UIImageView = UIImageView()
     private let profileNameLabel: UILabel = UILabel()
+    private let profileGreetingLabel: UILabel = UILabel()
     
     override func setupStyle() {
         profileImageView.do {
@@ -28,40 +28,47 @@ final class MypageHeaderView: BaseCollectionViewCell {
         
         profileNameLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.h2,
+                for: SuiteStyle.h3,
                 color: .gray900
             )
-            $0.numberOfLines = 2
-            $0.textAlignment = .center
         }
+        
+        profileGreetingLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: SuiteStyle.body4,
+                withText: StringLiterals.Mypage.Header.greeting,
+                color: .gray500
+            )
+        }
+        
     }
     
     override func setupHierarchy() {
-        self.addSubview(profileView)
-        profileView.addSubviews(profileImageView, profileNameLabel)
+        self.addSubviews(profileImageView, profileNameLabel, profileGreetingLabel)
+        
     }
     
     override func setupLayout() {
-        profileView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-        }
-
         profileImageView.snp.makeConstraints {
-            $0.size.equalTo(98)
-            $0.top.equalToSuperview().inset(10)
-            $0.centerX.equalToSuperview()
+            $0.size.equalTo(62)
+//            $0.leading.equalToSuperview().inset(22)
+            $0.top.equalToSuperview().inset(16)
         }
-
+        
         profileNameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview().inset(19)
-            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(23.5)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(14)
+        }
+        
+        profileGreetingLabel.snp.makeConstraints {
+            $0.top.equalTo(profileNameLabel.snp.bottom)
+            $0.leading.equalTo(profileNameLabel)
         }
     }
 }
 
 extension MypageHeaderView {
     func dataBind(_ model: Model) {
-        profileNameLabel.text = model.name + StringLiterals.Mypage.Header.greeting
+        profileNameLabel.text = model.name + StringLiterals.Mypage.Header.nicknameFinal
     }
 }

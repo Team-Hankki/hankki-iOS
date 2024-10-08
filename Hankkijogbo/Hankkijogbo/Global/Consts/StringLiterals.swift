@@ -184,7 +184,8 @@ enum StringLiterals {
         }
         
         enum Header {
-            static let greeting = "님\n한끼 잘 챙겨드세요"
+            static let nicknameFinal = "님"
+            static let greeting = "한끼 잘 챙겨드세요 :)"
         }
     }
     

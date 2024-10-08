@@ -101,11 +101,11 @@ private extension MypageViewController {
     
     func setupZipSection() -> NSCollectionLayoutSection {
         let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
-            itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(72))
+            itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(62)),
+            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(62))
         )
         
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(196))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(110))
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -114,7 +114,7 @@ private extension MypageViewController {
         )
         
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 22, bottom: 0, trailing: 22)
         
         return section
     }
