@@ -173,8 +173,9 @@ enum StringLiterals {
         static let myZipList = "나의 족보"
         
         enum HankkiList {
-            static let reported = "내가 제보한 식당"
-            static let liked = "좋아요 누른 식당"
+            static let myZip = "나의 족보"
+            static let reported = "제보한 식당"
+            static let liked = "좋아요한 식당"
         }
         
         enum Option {

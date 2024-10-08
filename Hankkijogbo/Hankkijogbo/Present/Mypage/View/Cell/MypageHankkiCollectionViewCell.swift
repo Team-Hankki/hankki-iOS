@@ -25,13 +25,8 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Set UI
     override func setupStyle() {
-        self.do {
-            $0.backgroundColor = .gray50
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 1, borderColor: .gray200)
-        }
-        
         titleLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body5, color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: SuiteStyle.body3, color: .gray600)
         }
     }
     
@@ -41,13 +36,12 @@ final class MypageHankkiCollectionViewCell: BaseCollectionViewCell {
     
     override func setupLayout() {
         imageView.snp.makeConstraints {
-            $0.size.equalTo(31)
-            $0.bottom.equalTo(self.snp.centerY)
+            $0.size.equalTo(32)
             $0.centerX.equalToSuperview()
         }
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(self.snp.centerY).offset(9)
+            $0.top.equalTo(self.snp.centerY).inset(2)
         }
     }
 }

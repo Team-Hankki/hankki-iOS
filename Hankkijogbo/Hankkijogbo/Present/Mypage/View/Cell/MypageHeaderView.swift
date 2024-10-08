@@ -51,8 +51,7 @@ final class MypageHeaderView: BaseCollectionViewCell {
     override func setupLayout() {
         profileImageView.snp.makeConstraints {
             $0.size.equalTo(62)
-//            $0.leading.equalToSuperview().inset(22)
-            $0.top.equalToSuperview().inset(16)
+            $0.leading.equalTo(22)
         }
         
         profileNameLabel.snp.makeConstraints {

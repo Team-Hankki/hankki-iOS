@@ -16,14 +16,12 @@ private extension MypageViewController {
 
 extension MypageViewController {
     enum SectionType: Int, CaseIterable {
-        case zip, hankki, option
+        case hankki, option
         
         var numberOfItemsInSection: Int {
             switch self {
-            case .zip:
-                1
             case .hankki:
-                2
+                3
             case .option:
                 3
             }
@@ -32,12 +30,10 @@ extension MypageViewController {
     
     func setupAction(_ section: SectionType, itemIndex: Int) {
         switch section {
-        case .zip:
-            SetupAmplitude.shared.logEvent(AmplitudeLiterals.Mypage.tabMyzip)
-            navigateToZipListViewController()
-            
         case .hankki:
             switch itemIndex {
+            case 1:
+                navigateToZipListViewController()
             case 0:
                 navigateToHankkiListViewController(.reported)
             default:
@@ -69,8 +65,6 @@ extension MypageViewController {
     
     func setupSection(_ section: SectionType) -> NSCollectionLayoutSection {
         switch section {
-        case .zip:
-        return setupZipSection()
         case .hankki:
             return setupHankkiSection()
         case .option:
@@ -82,13 +76,33 @@ extension MypageViewController {
 // MARK: - setup CollectionView Section
 
 private extension MypageViewController {
-    
-    func setupNSCollectionLayoutSection(itemSize: NSCollectionLayoutSize, groupSize: NSCollectionLayoutSize) -> NSCollectionLayoutSection {
-        let itemSize = itemSize
-        
+
+    func setupHankkiSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(55))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = groupSize
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(32 + 55 + 18))
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: groupSize,
+            subitem: item,
+            count: 3
+        )
+
+        group.interItemSpacing = .fixed(20)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 30, bottom: 18, trailing: 30)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        setupHeader(section)
+        setupSeparator(section)
+        return section
+    }
+    
+    func setupOptionSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: groupSize,
@@ -96,60 +110,29 @@ private extension MypageViewController {
         )
         let section = NSCollectionLayoutSection(group: group)
         
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22)
+        
+        setupFooter(section)
+
         return section
     }
-    
-    func setupZipSection() -> NSCollectionLayoutSection {
-        let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
-            itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(62)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(62))
-        )
-        
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(110))
+}
+
+private extension MypageViewController {
+    // 헤더 설정
+    func setupHeader(_ section: NSCollectionLayoutSection) {
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(62))
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        
         section.boundarySupplementaryItems = [header]
-        section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 22, bottom: 0, trailing: 22)
-        
-        return section
     }
     
-    func setupHankkiSection() -> NSCollectionLayoutSection {
-        let itemWidth: CGFloat = ((UIScreen.getDeviceWidth() - 22*2) / 2) - 20
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1.0))
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(94))
-        
-        let group = NSCollectionLayoutGroup.horizontal(
-            layoutSize: groupSize,
-            subitem: item,
-            count: 2
-        )
-        
-        group.interItemSpacing = .fixed(20)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 19, leading: 22, bottom: 10, trailing: 22)
-        
-        return section
-    }
-    
-    func setupOptionSection() -> NSCollectionLayoutSection {
-        let section: NSCollectionLayoutSection = setupNSCollectionLayoutSection(
-            itemSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60)),
-            groupSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60))
-        )
-
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 22, bottom: 0, trailing: 22)
-
+    // 푸터 설정 (탈퇴하기)
+    func setupFooter(_ section: NSCollectionLayoutSection) {
         let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(48))
         
         let footer = NSCollectionLayoutBoundarySupplementaryItem(
@@ -159,7 +142,17 @@ private extension MypageViewController {
         )
         
         section.boundarySupplementaryItems = [footer]
-
-        return section
+    }
+    
+    func setupSeparator(_ section: NSCollectionLayoutSection) {
+        let separatorSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(10))
+            
+        let separator = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: separatorSize,
+            elementKind: "separatorElementKind",
+            alignment: .bottomTrailing
+        )
+            
+        section.boundarySupplementaryItems.append(separator)
     }
 }
