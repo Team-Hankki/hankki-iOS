@@ -120,6 +120,12 @@ enum StringLiterals {
     enum EditHankki {
         static let howToEdit = "어떻게 편집할까요?"
         static let addNewMenu = "새로운 메뉴\n추가하기"
+        static let addNewMenuTitle = "새로운 메뉴를\n추가할게요"
+        static let addNewMenuPlease = "메뉴를 추가해주세요"
+        static let addMenuComplete = "개 추가하기"
+        static let addMenuCompleteByYouFirst = "님이 말씀해주신\n메뉴 "
+        static let addMenuCompleteByYouSecond = "개를 새로 추가했어요!"
+        static let complete = "완료"
         static let modifyMenu = "원래 메뉴\n수정/삭제하기"
     }
     

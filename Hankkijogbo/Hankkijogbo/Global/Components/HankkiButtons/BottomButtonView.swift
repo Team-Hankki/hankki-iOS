@@ -13,7 +13,11 @@ final class BottomButtonView: BaseView {
     
     typealias ButtonAction = () -> Void
     
-    let primaryButtonText: String
+    var primaryButtonText: String {
+        didSet {
+            setupStyle()
+        }
+    }
     let lineButtonText: String
     
     var primaryButtonHandler: ButtonAction?

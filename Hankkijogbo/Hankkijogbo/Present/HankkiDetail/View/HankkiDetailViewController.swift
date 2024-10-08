@@ -280,10 +280,10 @@ extension HankkiDetailViewController {
     @objc func editMenuButtonDidTap() {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
         
-        let viewController = EditHankkiBottomSheetViewController(storeId: 1)
-        viewController.modalTransitionStyle = .crossDissolve
-        viewController.modalPresentationStyle = .overFullScreen
-        self.present(viewController, animated: true, completion: nil)
+        let editHankkiBottomSheet = HankkiNavigationController(rootViewController: EditHankkiBottomSheetViewController(storeId: self.hankkiId))
+        editHankkiBottomSheet.modalTransitionStyle = .crossDissolve
+        editHankkiBottomSheet.modalPresentationStyle = .overFullScreen
+        self.present(editHankkiBottomSheet, animated: true, completion: nil)
     }
     
     @objc func addMyZipButtonDidTap() {
