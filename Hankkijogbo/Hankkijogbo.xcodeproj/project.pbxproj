@@ -77,7 +77,6 @@
 		864FA9082C3D20560051EA36 /* MypageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9072C3D20560051EA36 /* MypageHeaderView.swift */; };
 		864FA90A2C3D20910051EA36 /* MypageOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */; };
 		864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */; };
-		864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */; };
 		864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */; };
 		864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA91B2C3D63400051EA36 /* BottomButtonView.swift */; };
 		865826062C4170BE00265401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865826052C4170BE00265401 /* LoginViewController.swift */; };
@@ -136,6 +135,7 @@
 		86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761222C3EC87A00413059 /* ZipListCollectionViewCellModel.swift */; };
 		86B761302C3EEDEE00413059 /* HankkiListViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */; };
 		86E78D1D2C46B67400BE0DC3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E78D1B2C46B67400BE0DC3 /* EmptyView.swift */; };
+		86FAFBAD2CB4DECE00910A7D /* MypageSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */; };
 		9E38C1F6B1DB0B110CF9BCB7 /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC84CE15CCD6BBF6F508B9D /* Pods_Hankkijogbo.framework */; };
 		A2079B942C656F7D00817651 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079B932C656F7D00817651 /* ImageCompressor.swift */; };
 		A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */; };
@@ -282,7 +282,6 @@
 		864FA9072C3D20560051EA36 /* MypageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageHeaderView.swift; sourceTree = "<group>"; };
 		864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageQuitFooterView.swift; sourceTree = "<group>"; };
-		864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageZipCollectionViewCell.swift; sourceTree = "<group>"; };
 		864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCollectionViewCellEnum.swift; sourceTree = "<group>"; };
 		864FA91B2C3D63400051EA36 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
 		865826052C4170BE00265401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -344,6 +343,7 @@
 		86B761222C3EC87A00413059 /* ZipListCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewControllerType.swift; sourceTree = "<group>"; };
 		86E78D1B2C46B67400BE0DC3 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSeparatorView.swift; sourceTree = "<group>"; };
 		A2079B932C656F7D00817651 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiCategoryModel.swift; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -864,8 +864,8 @@
 			isa = PBXGroup;
 			children = (
 				864FA9072C3D20560051EA36 /* MypageHeaderView.swift */,
-				864FA90D2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift */,
 				864FA9052C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift */,
+				86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */,
 				864FA9092C3D20910051EA36 /* MypageOptionCollectionViewCell.swift */,
 				864FA90B2C3D20BE0051EA36 /* MypageQuitFooterView.swift */,
 			);
@@ -1847,12 +1847,12 @@
 				8302855D2C4567A30004D9F7 /* BaseTargetType.swift in Sources */,
 				86685C542C3BC68900C080C4 /* UnivSelectViewController.swift in Sources */,
 				86880BE52C46D3EE00CAEF58 /* AuthRequestDTO.swift in Sources */,
+				86FAFBAD2CB4DECE00910A7D /* MypageSeparatorView.swift in Sources */,
 				86880C0B2C47084B00CAEF58 /* PostHankkiToZipRequestDTO.swift in Sources */,
 				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
 				86880C1C2C47A0DC00CAEF58 /* SplashViewController.swift in Sources */,
-				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */,

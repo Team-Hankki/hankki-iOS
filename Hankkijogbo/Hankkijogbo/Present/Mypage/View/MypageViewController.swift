@@ -15,15 +15,17 @@ final class MypageViewController: BaseViewController {
     let viewModel: MypageViewModel = MypageViewModel()
     
     private let hankkiList: [MypageHankkiCollectionViewCell.Model] = [
+        MypageHankkiCollectionViewCell.Model(title: StringLiterals.Mypage.HankkiList.myZip,
+                                             image: .icMypageMyzip),
         MypageHankkiCollectionViewCell.Model(title: StringLiterals.Mypage.HankkiList.reported,
-                                             image: .icFood31),
-        MypageHankkiCollectionViewCell.Model(title: StringLiterals.Mypage.HankkiList.liked, 
-                                             image: .icLike)
+                                             image: .icMypageReported),
+        MypageHankkiCollectionViewCell.Model(title: StringLiterals.Mypage.HankkiList.liked,
+                                             image: .icMypageLiked)
     ]
     
     private let optionList: [MypageOptionCollectionViewCell.Model] = [
-        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Terms),
         MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.OneonOne),
+        MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Terms),
         MypageOptionCollectionViewCell.Model(title: StringLiterals.Mypage.Option.Logout)
     ]
     
@@ -69,12 +71,23 @@ extension MypageViewController {
 
 private extension MypageViewController {
     func setupRegister() {
-        collectionView.register(MypageZipCollectionViewCell.self, forCellWithReuseIdentifier: MypageZipCollectionViewCell.className)
-        collectionView.register(MypageHankkiCollectionViewCell.self, forCellWithReuseIdentifier: MypageHankkiCollectionViewCell.className)
-        collectionView.register(MypageOptionCollectionViewCell.self, forCellWithReuseIdentifier: MypageOptionCollectionViewCell.className)
+        collectionView.register(MypageHeaderView.self, 
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: MypageHeaderView.className)
         
-        collectionView.register(MypageHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MypageHeaderView.className)
-        collectionView.register(MypageQuitFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: MypageQuitFooterView.className)
+        collectionView.register(MypageHankkiCollectionViewCell.self,
+                                forCellWithReuseIdentifier: MypageHankkiCollectionViewCell.className)
+        
+        collectionView.register(MypageSeparatorView.self,
+                                forSupplementaryViewOfKind: MypageSeparatorView.className,
+                                withReuseIdentifier: MypageSeparatorView.className)
+        
+        collectionView.register(MypageOptionCollectionViewCell.self, 
+                                forCellWithReuseIdentifier: MypageOptionCollectionViewCell.className)
+    
+        collectionView.register(MypageQuitFooterView.self, 
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: MypageQuitFooterView.className)
     }
     
     func setupDelegate() {
@@ -136,6 +149,15 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             return headerView
             
+        case MypageSeparatorView.className:
+            let separatorView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MypageSeparatorView.className,
+                for: indexPath
+            )as! MypageSeparatorView
+            
+            return separatorView
+            
         case UICollectionView.elementKindSectionFooter:
             let footerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
@@ -156,12 +178,6 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch SectionType(rawValue: indexPath.section) {
-        case .zip:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MypageZipCollectionViewCell.className, for: indexPath) as? MypageZipCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            return cell
-            
         case .hankki:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MypageHankkiCollectionViewCell.className, for: indexPath) as? MypageHankkiCollectionViewCell else {
                 return UICollectionViewCell()
@@ -177,7 +193,7 @@ extension MypageViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.dataBind(optionList[indexPath.item])
             return cell
             
-        case .none:
+        default:
             return UICollectionViewCell()
         }
     }

@@ -173,8 +173,9 @@ enum StringLiterals {
         static let myZipList = "나의 족보"
         
         enum HankkiList {
-            static let reported = "내가 제보한 식당"
-            static let liked = "좋아요 누른 식당"
+            static let myZip = "나의 족보"
+            static let reported = "제보한 식당"
+            static let liked = "좋아요한 식당"
         }
         
         enum Option {
@@ -184,7 +185,8 @@ enum StringLiterals {
         }
         
         enum Header {
-            static let greeting = "님\n한끼 잘 챙겨드세요"
+            static let nicknameFinal = "님"
+            static let greeting = "한끼 잘 챙겨드세요 :)"
         }
     }
     
@@ -217,6 +219,7 @@ enum StringLiterals {
         }
         
         static let moreButton = "식당 구경하러 가기"
+        static let average = "평균"
         
         enum EmptyView {
             static let myZip = "나의 족보에\n식당을 추가해보세요"
