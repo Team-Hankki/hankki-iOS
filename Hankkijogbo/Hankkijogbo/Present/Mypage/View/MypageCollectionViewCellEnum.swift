@@ -32,9 +32,9 @@ extension MypageViewController {
         switch section {
         case .hankki:
             switch itemIndex {
-            case 1:
-                navigateToZipListViewController()
             case 0:
+                navigateToZipListViewController()
+            case 1:
                 navigateToHankkiListViewController(.reported)
             default:
                 navigateToHankkiListViewController(.liked)
