@@ -21,8 +21,11 @@ final class EditMenuViewController: BaseViewController {
     private lazy var menuFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var menuCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: menuFlowLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.Common.complete,
-        primaryButtonHandler: bottomButtonPrimaryHandler
+        primaryButtonText: "",
+        leftButtonText: StringLiterals.ModifyMenu.deleteMenuButton,
+        rightButtonText: StringLiterals.ModifyMenu.modifyMenuButton,
+        leftButtonHandler: deleteButtonHandler,
+        rightButtonHandler: modifyButtonHandler
     )
     
     // MARK: - Life Cycle
@@ -110,8 +113,12 @@ private extension EditMenuViewController {
     
     // MARK: - @objc Func
     
-    @objc func bottomButtonPrimaryHandler() {
-        print("클릭핑")
+    @objc func deleteButtonHandler() {
+        print("삭제")
+    }
+    
+    @objc func modifyButtonHandler() {
+        print("수정")
     }
 }
 
@@ -130,4 +137,24 @@ extension EditMenuViewController: UICollectionViewDataSource, UICollectionViewDe
         guard let cell = collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell else { return }
         cell.radioButton.isSelected = !cell.radioButton.isSelected
     }
+    
+    /// didSelectItemAt 전에 호출되는 메서드
+//    /// - 클릭된 카테고리를 한번 더 클릭 시 클릭을 해제시켜주기 위해 필요함
+//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
+//            if reportViewModel.categories[indexPath.row].isChecked {
+//                reportViewModel.categories[indexPath.row].isChecked = false
+//                return false
+//            }
+//        }
+//        return true
+//    }
+//    
+//    /// 다른 카테고리가 이미 선택되어 있다면 이를 해제하고 이번에 클릭된 카테고리를 활성화 시킨다
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
+//            reportViewModel.disableCheckedCategories()
+//            reportViewModel.categories[indexPath.row].isChecked = true
+//        }
+//    }
 }
