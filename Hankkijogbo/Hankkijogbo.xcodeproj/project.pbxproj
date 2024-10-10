@@ -171,7 +171,7 @@
 		A24A787C2CB44E450049B031 /* MenuTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787B2CB44E450049B031 /* MenuTargetType.swift */; };
 		A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787D2CB44E500049B031 /* MenuAPIService.swift */; };
 		A24A78802CB463490049B031 /* PostMenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */; };
-		A24A78822CB559870049B031 /* AddNewMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78812CB559870049B031 /* AddNewMenuCompleteViewController.swift */; };
+		A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */; };
 		A27AD9322CB7EB2800515D3B /* EditMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */; };
 		A27AD9342CB7EEB900515D3B /* ModifyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */; };
 		A27AD9362CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */; };
@@ -386,7 +386,7 @@
 		A24A787B2CB44E450049B031 /* MenuTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTargetType.swift; sourceTree = "<group>"; };
 		A24A787D2CB44E500049B031 /* MenuAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAPIService.swift; sourceTree = "<group>"; };
 		A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMenuResponseDTO.swift; sourceTree = "<group>"; };
-		A24A78812CB559870049B031 /* AddNewMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMenuCompleteViewController.swift; sourceTree = "<group>"; };
+		A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuCompleteViewController.swift; sourceTree = "<group>"; };
 		A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewController.swift; sourceTree = "<group>"; };
 		A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewController.swift; sourceTree = "<group>"; };
 		A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuCompleteViewController.swift; sourceTree = "<group>"; };
@@ -1437,7 +1437,7 @@
 			isa = PBXGroup;
 			children = (
 				A24A78712CB3F45D0049B031 /* AddMenuViewController.swift */,
-				A24A78812CB559870049B031 /* AddNewMenuCompleteViewController.swift */,
+				A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */,
 			);
 			path = AddMenu;
 			sourceTree = "<group>";
@@ -1905,7 +1905,7 @@
 				86880C1E2C47A12100CAEF58 /* UserDefaults+.swift in Sources */,
 				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
-				A24A78822CB559870049B031 /* AddNewMenuCompleteViewController.swift in Sources */,
+				A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				86880BFF2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift in Sources */,
 				86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */,
