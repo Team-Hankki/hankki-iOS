@@ -19,7 +19,7 @@ final class SplashViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if isLogin() {
+        if UserDefaults.standard.isLogin {
             presentHomeView()
         } else {
             presentLoginView()
@@ -68,10 +68,6 @@ final class SplashViewController: BaseViewController {
 }
 
 private extension SplashViewController {
-    func isLogin() -> Bool {
-        return !UserDefaults.standard.getAccesshToken().isEmpty
-    }
-    
     func presentHomeView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             let navigationController = HankkiNavigationController(rootViewController: TabBarController())
