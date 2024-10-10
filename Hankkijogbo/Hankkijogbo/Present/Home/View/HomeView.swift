@@ -123,7 +123,6 @@ final class HomeView: BaseView {
 }
 
 extension HomeView {
-    
     func setupAddTarget() {
         let buttons = [typeButton, priceButton, sortButton]
         for button in buttons {
