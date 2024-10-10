@@ -223,4 +223,8 @@ enum StringLiterals {
         static let OneonOne = "https://tally.so/r/mO0oJY"
         static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
     }
+    
+    enum Onboarding {
+        static let guest = "둘러보기"
+    }
 }
