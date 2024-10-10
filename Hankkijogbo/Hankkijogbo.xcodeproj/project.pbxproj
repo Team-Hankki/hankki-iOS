@@ -167,7 +167,7 @@
 		A240EA5B2C459DEA000FF458 /* CATransition+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA5A2C459DEA000FF458 /* CATransition+.swift */; };
 		A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2471B8C2C46AB770080FA30 /* UIApplication+.swift */; };
 		A24A78722CB3F45E0049B031 /* AddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78712CB3F45D0049B031 /* AddMenuViewController.swift */; };
-		A24A78772CB44BCB0049B031 /* AddNewMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78762CB44BCB0049B031 /* AddNewMenuViewModel.swift */; };
+		A24A78772CB44BCB0049B031 /* AddMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78762CB44BCB0049B031 /* AddMenuViewModel.swift */; };
 		A24A787C2CB44E450049B031 /* MenuTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787B2CB44E450049B031 /* MenuTargetType.swift */; };
 		A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787D2CB44E500049B031 /* MenuAPIService.swift */; };
 		A24A78802CB463490049B031 /* PostMenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */; };
@@ -382,7 +382,7 @@
 		A240EA5A2C459DEA000FF458 /* CATransition+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CATransition+.swift"; sourceTree = "<group>"; };
 		A2471B8C2C46AB770080FA30 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		A24A78712CB3F45D0049B031 /* AddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuViewController.swift; sourceTree = "<group>"; };
-		A24A78762CB44BCB0049B031 /* AddNewMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMenuViewModel.swift; sourceTree = "<group>"; };
+		A24A78762CB44BCB0049B031 /* AddMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuViewModel.swift; sourceTree = "<group>"; };
 		A24A787B2CB44E450049B031 /* MenuTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTargetType.swift; sourceTree = "<group>"; };
 		A24A787D2CB44E500049B031 /* MenuAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAPIService.swift; sourceTree = "<group>"; };
 		A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMenuResponseDTO.swift; sourceTree = "<group>"; };
@@ -1403,7 +1403,7 @@
 		A24A78742CB449A20049B031 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A24A78762CB44BCB0049B031 /* AddNewMenuViewModel.swift */,
+				A24A78762CB44BCB0049B031 /* AddMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1917,7 +1917,7 @@
 				86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
-				A24A78772CB44BCB0049B031 /* AddNewMenuViewModel.swift in Sources */,
+				A24A78772CB44BCB0049B031 /* AddMenuViewModel.swift in Sources */,
 				A2C9FCB02C49985800868DF7 /* GetMyZipListResponseDTO.swift in Sources */,
 				86880BDC2C46CCA100CAEF58 /* ZipAPIService.swift in Sources */,
 				839FC71C2C46E2AA00B7FEDD /* GetPriceFilterResponseDTO.swift in Sources */,
