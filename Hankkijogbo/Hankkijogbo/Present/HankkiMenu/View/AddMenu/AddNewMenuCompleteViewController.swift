@@ -1,5 +1,5 @@
 //
-//  AddNewMenuCompleteViewController.swift
+//  AddMenuCompleteViewController.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 10/8/24.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-final class AddNewMenuCompleteViewController: BaseViewController {
+final class AddMenuCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     

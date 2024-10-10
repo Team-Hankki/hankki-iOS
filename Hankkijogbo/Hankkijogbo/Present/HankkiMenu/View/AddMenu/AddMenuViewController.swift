@@ -1,5 +1,5 @@
 //
-//  AddNewMenuViewController.swift
+//  AddMenuViewController.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 10/7/24.
@@ -7,17 +7,17 @@
 
 import UIKit
 
-enum AddNewMenuSectionType: Int {
+enum AddMenuSectionType: Int {
     case menu
     case addMenu
 }
 
-final class AddNewMenuViewController: BaseViewController {
+final class AddMenuViewController: BaseViewController {
     
     // MARK: - Properties
     
     let storeId: Int
-    var viewModel: AddNewMenuViewModel = AddNewMenuViewModel()
+    var viewModel: AddMenuViewModel = AddMenuViewModel()
     
     // MARK: - UI Components
     
@@ -97,7 +97,7 @@ final class AddNewMenuViewController: BaseViewController {
     }
 }
 
-extension AddNewMenuViewController {
+extension AddMenuViewController {
     func setupRegister() {
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         menuCollectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
@@ -125,15 +125,15 @@ extension AddNewMenuViewController {
     
     @objc func bottomButtonPrimaryHandler() {
         viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) {
-            let addNewMenuCompleteViewController = AddNewMenuCompleteViewController(storeId: self.storeId, totalMenuCount: self.viewModel.validMenus.count)
-            self.navigationController?.pushViewController(addNewMenuCompleteViewController, animated: true)
+            let addMenuCompleteViewController = AddMenuCompleteViewController(storeId: self.storeId, totalMenuCount: self.viewModel.validMenus.count)
+            self.navigationController?.pushViewController(addMenuCompleteViewController, animated: true)
         }
     }
     
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
         viewModel.menus.append(MenuData())
-        menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddNewMenuSectionType.menu.rawValue)])
+        menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
         bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.EditHankki.addMenuComplete
     }
     
@@ -146,20 +146,20 @@ extension AddNewMenuViewController {
             
             guard let item = itemIndexPath?.item else { return }
             viewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
-            menuCollectionView.deleteItems(at: [IndexPath(item: item, section: AddNewMenuSectionType.menu.rawValue)]) // item 삭제
-            menuCollectionView.reloadSections(IndexSet(integer: AddNewMenuSectionType.menu.rawValue))
+            menuCollectionView.deleteItems(at: [IndexPath(item: item, section: AddMenuSectionType.menu.rawValue)]) // item 삭제
+            menuCollectionView.reloadSections(IndexSet(integer: AddMenuSectionType.menu.rawValue))
             bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.EditHankki.addMenuComplete
         }
     }
 }
 
-extension AddNewMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionType = AddNewMenuSectionType(rawValue: section)
+        let sectionType = AddMenuSectionType(rawValue: section)
         switch sectionType {
         case .menu:
             return viewModel.menus.count
@@ -185,7 +185,7 @@ extension AddNewMenuViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let sectionType = AddNewMenuSectionType(rawValue: indexPath.section)
+        let sectionType = AddMenuSectionType(rawValue: indexPath.section)
         switch sectionType {
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
@@ -205,7 +205,7 @@ extension AddNewMenuViewController: UICollectionViewDataSource, UICollectionView
 
 // MARK: - PassSelectedHankkiData Delegate
 
-extension AddNewMenuViewController: PassItemDataDelegate {
+extension AddMenuViewController: PassItemDataDelegate {
     func updateViewModelLocationData(data: GetSearchedLocation?) {
         print("네엡")
     }

@@ -1,5 +1,5 @@
 //
-//  AddNewMenuViewModel.swift
+//  AddMenuViewModel.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 10/8/24.
@@ -7,7 +7,7 @@
 
 import Moya
 
-final class AddNewMenuViewModel {
+final class AddMenuViewModel {
     var updateButton: ((Bool) -> Void)?
     
     var menus: [MenuData] = [MenuData()] {
@@ -23,7 +23,7 @@ final class AddNewMenuViewModel {
     }
 }
 
-private extension AddNewMenuViewModel {
+private extension AddMenuViewModel {
     
     func checkStatus() {
         if !menus.isEmpty {
@@ -36,7 +36,7 @@ private extension AddNewMenuViewModel {
     }
 }
 
-extension AddNewMenuViewModel {
+extension AddMenuViewModel {
     
     /// 메뉴 추가
     func postMenuAPI(storeId: Int, requestBody: [MenuData], completion: @escaping () -> Void) {
