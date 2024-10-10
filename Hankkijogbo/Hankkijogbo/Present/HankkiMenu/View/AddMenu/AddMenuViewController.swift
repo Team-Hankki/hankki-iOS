@@ -25,7 +25,7 @@ final class AddMenuViewController: BaseViewController {
     private lazy var menuFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var menuCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: menuFlowLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.EditHankki.addNewMenuPlease,
+        primaryButtonText: StringLiterals.AddMenu.addNewMenuPlease,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -78,7 +78,7 @@ final class AddMenuViewController: BaseViewController {
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: StringLiterals.EditHankki.addNewMenuTitle,
+                withText: StringLiterals.AddMenu.addNewMenuTitle,
                 color: .gray850
             )
             $0.numberOfLines = 2
@@ -134,7 +134,7 @@ extension AddMenuViewController {
     @objc func addMenuButtonDidTap() {
         viewModel.menus.append(MenuData())
         menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
-        bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.EditHankki.addMenuComplete
+        bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
     }
     
     /// 메뉴 셀 삭제
@@ -148,7 +148,7 @@ extension AddMenuViewController {
             viewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
             menuCollectionView.deleteItems(at: [IndexPath(item: item, section: AddMenuSectionType.menu.rawValue)]) // item 삭제
             menuCollectionView.reloadSections(IndexSet(integer: AddMenuSectionType.menu.rawValue))
-            bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.EditHankki.addMenuComplete
+            bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
         }
     }
 }

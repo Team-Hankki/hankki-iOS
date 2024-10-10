@@ -217,8 +217,8 @@ private extension EditHankkiBottomSheetViewController {
     
     @objc func modifyMenuDidTap() {
         print("메뉴 편집")
-//        let modifyMenuViewController = ModifyMenuViewController()
-//        self.navigationController?.pushViewController(modifyMenuViewController, animated: true)
+        let editMenuViewController = EditMenuViewController()
+        self.navigationController?.pushViewController(editMenuViewController, animated: true)
     }
 }
 

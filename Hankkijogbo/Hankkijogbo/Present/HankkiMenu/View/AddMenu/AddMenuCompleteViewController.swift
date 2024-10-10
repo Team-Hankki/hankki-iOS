@@ -21,7 +21,7 @@ final class AddMenuCompleteViewController: BaseViewController {
     let titleLabel: UILabel = UILabel()
     let completeImageView: UIImageView = UIImageView()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.EditHankki.complete,
+        primaryButtonText: StringLiterals.Common.complete,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -71,7 +71,7 @@ final class AddMenuCompleteViewController: BaseViewController {
             $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: UserDefaults.standard.getNickname() + StringLiterals.EditHankki.addMenuCompleteByYouFirst + String(totalMenuCount) + StringLiterals.EditHankki.addMenuCompleteByYouSecond,
+                withText: UserDefaults.standard.getNickname() + StringLiterals.AddMenu.addMenuCompleteByYouFirst + String(totalMenuCount) + StringLiterals.AddMenu.addMenuCompleteByYouSecond,
                 color: .gray850
             )
         }
