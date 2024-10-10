@@ -18,6 +18,7 @@ enum StringLiterals {
         
         static let won = "원"
         static let report = "제보하기"
+        static let complete = "완료"
     }
     
     enum Home {
@@ -120,13 +121,24 @@ enum StringLiterals {
     enum EditHankki {
         static let howToEdit = "어떻게 편집할까요?"
         static let addNewMenu = "새로운 메뉴\n추가하기"
+        static let modifyMenu = "원래 메뉴\n수정/삭제하기"
+    }
+    
+    enum AddMenu {
         static let addNewMenuTitle = "새로운 메뉴를\n추가할게요"
         static let addNewMenuPlease = "메뉴를 추가해주세요"
         static let addMenuComplete = "개 추가하기"
         static let addMenuCompleteByYouFirst = "님이 말씀해주신\n메뉴 "
         static let addMenuCompleteByYouSecond = "개를 새로 추가했어요!"
-        static let complete = "완료"
-        static let modifyMenu = "원래 메뉴\n수정/삭제하기"
+    }
+    
+    enum ModifyMenu {
+        static let editMenuTitle = "어떤 메뉴를 편집할까요?"
+        static let deleteMenuButton = "삭제하기"
+        static let modifyMenuButton = "수정하기"
+        static let modifyMenuTitle = " 메뉴를\n수정할게요"
+        static let modifyCarefullyPlease = "모두에게 보여지는 정보이니 신중하게 수정부탁드려요"
+        static let modifyMenuCompleteButton = "수정 완료"
     }
     
     enum Report {
