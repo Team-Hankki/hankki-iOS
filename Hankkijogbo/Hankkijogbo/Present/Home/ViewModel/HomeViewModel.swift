@@ -82,20 +82,12 @@ extension HomeViewModel {
         }
     }
     
-    // 종류 카테고리를 가져오는 메서드
+//     종류 카테고리를 가져오는 메서드
     func getCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getCategoryFilter { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.categoryFilters = response?.data.categories ?? []
+            result.handleNetworkResult { [weak self] response in
+                self?.categoryFilters = response.data.categories
                 completion(true)
-                print("SUCCESS")
-            case .unAuthorized, .networkFail:
-                self?.showAlert?("Failed")
-                completion(false)
-                print("FAILED")
-            default:
-                return
             }
         }
     }
@@ -103,17 +95,9 @@ extension HomeViewModel {
     // 가격 카테고리를 가져오는 메서드
     func getPriceCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getPriceCategoryFilter { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.priceFilters = response?.data.priceCategories ?? []
+            result.handleNetworkResult { [weak self] response in
+                self?.priceFilters = response.data.priceCategories
                 completion(true)
-                print("SUCCESS")
-            case .unAuthorized, .networkFail:
-                self?.showAlert?("Failed to fetch category filters.")
-                completion(false)
-                print("FAILED")
-            default:
-                return
             }
         }
     }
@@ -121,22 +105,14 @@ extension HomeViewModel {
     // 정렬 옵션을 가져오는 메서드
     func getSortOptionFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getSortOptionFilter { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.sortOptions = response?.data.options ?? []
+            result.handleNetworkResult { [weak self] response in
+                self?.sortOptions = response.data.options
                 completion(true)
-                print("SUCCESS")
-            case .unAuthorized, .networkFail:
-                self?.showAlert?("Failed")
-                completion(false)
-                print("FAILED")
-            default:
-                return
             }
         }
     }
     
-  //   식당 리스트를 가져오는 메서드
+    //   식당 리스트를 가져오는 메서드
     func getHankkiListAPI(universityId: Int? = nil, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
             switch result {
@@ -160,7 +136,7 @@ extension HomeViewModel {
             }
         }
     }
-
+    
     // 식당 핀을 가져오는 메서드
     func getHankkiPinAPI(universityId: Int? = nil, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiPin(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
