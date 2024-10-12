@@ -53,6 +53,7 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        viewModel.delegate = self
         setupNavigationBar()
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
@@ -108,6 +109,7 @@ extension HomeViewController {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
+        viewModel.delegate = self
     }
     
     private func setupRegister() {
@@ -312,5 +314,11 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
     func fetchAllHankkiInfo() {
         viewModel.getHankkiListAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
         viewModel.getHankkiPinAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
+    }
+}
+
+extension HomeViewController: NetworkResultDelegate {
+    func moveToLoginScreen() {
+        UIApplication.browseApp()
     }
 }

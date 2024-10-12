@@ -12,6 +12,8 @@ import UIKit
 
 final class HomeViewModel {
     
+    weak var delegate: NetworkResultDelegate?
+    
     private let hankkiAPIService: HankkiAPIServiceProtocol
     var showAlert: ((String) -> Void)?
     
@@ -85,7 +87,7 @@ extension HomeViewModel {
     //     종류 카테고리를 가져오는 메서드
     func getCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getCategoryFilter { [weak self] result in
-            result.handleNetworkResult { [weak self] response in
+            result.handleNetworkResult(delegate: self?.delegate) { [weak self] response in
                 self?.categoryFilters = response.data.categories
                 completion(true)
             }
@@ -95,7 +97,7 @@ extension HomeViewModel {
     // 가격 카테고리를 가져오는 메서드
     func getPriceCategoryFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getPriceCategoryFilter { [weak self] result in
-            result.handleNetworkResult { [weak self] response in
+            result.handleNetworkResult(delegate: self?.delegate) { [weak self] response in
                 self?.priceFilters = response.data.priceCategories
                 completion(true)
             }
@@ -105,7 +107,7 @@ extension HomeViewModel {
     // 정렬 옵션을 가져오는 메서드
     func getSortOptionFilterAPI(completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getSortOptionFilter { [weak self] result in
-            result.handleNetworkResult { [weak self] response in
+            result.handleNetworkResult(delegate: self?.delegate) { [weak self] response in
                 self?.sortOptions = response.data.options
                 completion(true)
             }
@@ -115,7 +117,7 @@ extension HomeViewModel {
     //   식당 리스트를 가져오는 메서드
     func getHankkiListAPI(universityId: Int? = nil, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiList(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
-            result.handleNetworkResult { [weak self] response in
+            result.handleNetworkResult(delegate: self?.delegate) { [weak self] response in
                 self?.hankkiLists = response.data.stores.map { store in
                     var modifiedStore = store
                     modifiedStore.imageUrl = store.imageUrl ?? "img_detail_default"
@@ -131,7 +133,7 @@ extension HomeViewModel {
     // 식당 핀을 가져오는 메서드
     func getHankkiPinAPI(universityId: Int? = nil, storeCategory: String, priceCategory: String, sortOption: String, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiPin(universityId: universityId, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { [weak self] result in
-            result.handleNetworkResult { [weak self] response in
+            result.handleNetworkResult(delegate: self?.delegate) { [weak self] response in
                 self?.hankkiPins = response.data.pins
                 self?.hankkiPinsDidChange?(self?.hankkiPins ?? [])
                 completion(true)
@@ -142,7 +144,7 @@ extension HomeViewModel {
     // 식당 썸네일을 가져오는 메서드
     func getThumbnailAPI(id: Int, completion: @escaping (Bool) -> Void) {
         NetworkService.shared.hankkiService.getHankkiThumbnail(id: id) { result in
-            result.handleNetworkResult { [weak self] response in
+            result.handleNetworkResult(delegate: self.delegate) { [weak self] response in
                 self?.hankkiThumbnail = response.data
                 completion(true)
             }
