@@ -76,6 +76,7 @@ private extension ZipListViewController {
     func setupDelegate() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        viewModel.delegate = self
     }
     
     func setupNavigationBar() {
@@ -242,4 +243,10 @@ extension ZipListViewController: UICollectionViewDelegate {
                 cell.setSelected(false)
             }
         }
+}
+
+extension ZipListViewController: NetworkResultDelegate {
+    func moveToLoginScreen() {
+        UIApplication.browseApp()
+    }
 }
