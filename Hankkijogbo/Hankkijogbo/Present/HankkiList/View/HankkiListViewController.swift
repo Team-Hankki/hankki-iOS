@@ -16,7 +16,7 @@ final class  HankkiListViewController: BaseViewController {
     let zipId: Int?
     
     let viewModel: HankkiListViewModel = HankkiListViewModel()
-
+    
     // MARK: - UI Properties
     
     private let hankkiTableView = UITableView(frame: .zero, style: .grouped)
@@ -119,6 +119,7 @@ private extension HankkiListViewController {
     func setupDelegate() {
         hankkiTableView.delegate = self
         hankkiTableView.dataSource = self
+        viewModel.delegate = self
     }
     
     func setupNavigationBar() {
@@ -136,7 +137,7 @@ private extension HankkiListViewController {
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
         }
-     }
+    }
 }
 
 extension HankkiListViewController: UITableViewDataSource {
@@ -146,7 +147,7 @@ extension HankkiListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HankkiListTableViewCell.className,
-        for: indexPath
+                                                       for: indexPath
         ) as? HankkiListTableViewCell else { return UITableViewCell() }
         
         cell.dataBind(viewModel.hankkiList[indexPath.item],
@@ -306,5 +307,11 @@ extension HankkiListViewController {
         }
         
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension HankkiListViewController: NetworkResultDelegate {
+    func moveToLoginScreen() {
+        UIApplication.browseApp()
     }
 }

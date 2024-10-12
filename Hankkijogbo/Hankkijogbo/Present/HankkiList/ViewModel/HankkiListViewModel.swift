@@ -10,6 +10,8 @@ import UIKit
 
 final class HankkiListViewModel {
     
+    weak var delegate: NetworkResultDelegate?
+    
     var reloadCollectionView: (() -> Void)?
     var firstHankkiList: [HankkiListTableViewCell.Model] = []
     var hankkiList: [HankkiListTableViewCell.Model] = [] {
@@ -25,7 +27,7 @@ extension HankkiListViewModel {
     func getZipDetail(zipId: Int) {
         NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
             
-            result.handleNetworkResult { response in
+            result.handleNetworkResult(delegate: self.delegate) { response in
                 self.zipInfo = ZipHeaderTableView.Model(name: UserDefaults.standard.getNickname(),
                                                         title: response.data.title,
                                                         details: response.data.details)
@@ -44,7 +46,7 @@ extension HankkiListViewModel {
     
     func getMeHankkiList(_ type: UserTargetType) {
         NetworkService.shared.userService.getMeHankkiList(type) { result in
-            result.handleNetworkResult { response in
+            result.handleNetworkResult(delegate: self.delegate) { response in
                 self.hankkiList = response.data.stores.map {
                     return HankkiListTableViewCell.Model(id: $0.id,
                                                          name: $0.name,
