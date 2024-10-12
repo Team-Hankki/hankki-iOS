@@ -206,6 +206,7 @@ private extension UnivSelectViewController {
     func setupDelegate() {
         univCollectionView.dataSource = self
         univCollectionView.delegate = self
+        viewModel.delegate = self
     }
 }
 
@@ -240,5 +241,11 @@ extension UnivSelectViewController: UICollectionViewDelegate {
 extension UnivSelectViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return true
+    }
+}
+
+extension UnivSelectViewController: NetworkResultDelegate {
+    func moveToLoginScreen() {
+        UIApplication.browseApp()
     }
 }

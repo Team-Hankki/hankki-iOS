@@ -10,6 +10,8 @@ import UIKit
 
 class UnivSelectViewModel {
     
+    weak var delegate: NetworkResultDelegate?
+    
     var currentUnivIndex: Int = -1
     
     var universityList: [UniversityModel] = [] {
@@ -25,7 +27,7 @@ class UnivSelectViewModel {
 extension UnivSelectViewModel {
     func getUniversityList() {
         NetworkService.shared.universityService.getUniversityList { [weak self] result in
-            result.handleNetworkResult { response in
+            result.handleNetworkResult(delegate: self?.delegate) { response in
                 self?.universityList = response.data.universities.map {
                     UniversityModel(id: $0.id,
                                     name: $0.name,
@@ -49,8 +51,8 @@ extension UnivSelectViewModel {
                                                                              latitude: currentUniversity.latitude)
         
         NetworkService.shared.userService.postMeUniversity(requestBody: request) { result in
-            result.handleNetworkResult { _ in
-                SetupAmplitude.shared.logEvent(AmplitudeLiterals.UnivSelect.tabSubmit, 
+            result.handleNetworkResult(delegate: self.delegate) { _ in
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.UnivSelect.tabSubmit,
                                                eventProperties: ["university_name": currentUniversity.name])
                 // local에 대학 정보 저장
                 UserDefaults.standard.saveUniversity(currentUniversity)
