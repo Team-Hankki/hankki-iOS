@@ -196,6 +196,7 @@ private extension HankkiDetailViewController {
         infoCollectionView.collectionView.dataSource = self
         reportOptionCollectionView.collectionView.delegate = self
         reportOptionCollectionView.collectionView.dataSource = self
+        viewModel.delegate = self
     }
     
     func setupAddTarget() {
@@ -434,5 +435,11 @@ extension HankkiDetailViewController: UpdateReportButtonStyleDelegate {
         } else {
             footer.hankkiReportButton.setupIsValid(false)
         }
+    }
+}
+
+extension HankkiDetailViewController: NetworkResultDelegate {
+    func moveToLoginScreen() {
+        UIApplication.browseApp()
     }
 }

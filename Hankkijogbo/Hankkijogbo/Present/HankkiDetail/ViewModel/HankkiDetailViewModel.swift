@@ -11,6 +11,9 @@ import Moya
 import UIKit
 
 final class HankkiDetailViewModel {
+    
+    weak var delegate: NetworkResultDelegate?
+    
     var showAlert: ((String) -> Void)?
     
     var hankkiDetailData: GetHankkiDetailResponseData? {
@@ -29,7 +32,7 @@ final class HankkiDetailViewModel {
                 UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
                 dismiss()
             default:
-                result.handleNetworkResult { response in
+                result.handleNetworkResult(delegate: self?.delegate) { response in
                     self?.hankkiDetailData = response.data
                 }
             }
