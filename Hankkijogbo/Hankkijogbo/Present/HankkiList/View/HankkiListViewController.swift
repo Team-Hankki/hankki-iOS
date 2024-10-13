@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class  HankkiListViewController: BaseViewController {
+final class  HankkiListViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -307,11 +307,5 @@ extension HankkiListViewController {
         }
         
         navigationController?.popToRootViewController(animated: true)
-    }
-}
-
-extension HankkiListViewController: NetworkResultDelegate {
-    func moveToLoginScreen() {
-        UIApplication.browseApp()
     }
 }

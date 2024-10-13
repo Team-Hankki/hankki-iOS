@@ -9,7 +9,7 @@ import UIKit
 
 import NMapsMap
 
-final class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -314,11 +314,5 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
     func fetchAllHankkiInfo() {
         viewModel.getHankkiListAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
         viewModel.getHankkiPinAPI(storeCategory: "", priceCategory: "", sortOption: "") { _ in }
-    }
-}
-
-extension HomeViewController: NetworkResultDelegate {
-    func moveToLoginScreen() {
-        UIApplication.browseApp()
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ZipListViewController: BaseViewController {
+final class ZipListViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -243,10 +243,4 @@ extension ZipListViewController: UICollectionViewDelegate {
                 cell.setSelected(false)
             }
         }
-}
-
-extension ZipListViewController: NetworkResultDelegate {
-    func moveToLoginScreen() {
-        UIApplication.browseApp()
-    }
 }

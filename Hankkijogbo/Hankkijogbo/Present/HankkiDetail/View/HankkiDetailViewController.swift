@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HankkiDetailViewController: BaseViewController {
+final class HankkiDetailViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -435,11 +435,5 @@ extension HankkiDetailViewController: UpdateReportButtonStyleDelegate {
         } else {
             footer.hankkiReportButton.setupIsValid(false)
         }
-    }
-}
-
-extension HankkiDetailViewController: NetworkResultDelegate {
-    func moveToLoginScreen() {
-        UIApplication.browseApp()
     }
 }

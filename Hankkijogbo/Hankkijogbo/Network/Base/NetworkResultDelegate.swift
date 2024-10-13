@@ -6,7 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NetworkResultDelegate: AnyObject {
     func moveToLoginScreen()
+}
+
+extension NetworkResultDelegate {
+    func moveToLoginScreen() {
+        UIApplication.browseApp()
+    }
 }

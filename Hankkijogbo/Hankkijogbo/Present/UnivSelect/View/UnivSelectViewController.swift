@@ -13,7 +13,7 @@ protocol UnivSelectViewControllerDelegate: AnyObject {
     func didSelectUniversity(name: String)
 }
 
-final class UnivSelectViewController: BaseViewController {
+final class UnivSelectViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -241,11 +241,5 @@ extension UnivSelectViewController: UICollectionViewDelegate {
 extension UnivSelectViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return true
-    }
-}
-
-extension UnivSelectViewController: NetworkResultDelegate {
-    func moveToLoginScreen() {
-        UIApplication.browseApp()
     }
 }
