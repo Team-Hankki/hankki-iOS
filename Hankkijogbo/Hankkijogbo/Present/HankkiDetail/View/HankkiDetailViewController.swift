@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HankkiDetailViewController: BaseViewController {
+final class HankkiDetailViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -196,6 +196,7 @@ private extension HankkiDetailViewController {
         infoCollectionView.collectionView.dataSource = self
         reportOptionCollectionView.collectionView.delegate = self
         reportOptionCollectionView.collectionView.dataSource = self
+        viewModel.delegate = self
     }
     
     func setupAddTarget() {

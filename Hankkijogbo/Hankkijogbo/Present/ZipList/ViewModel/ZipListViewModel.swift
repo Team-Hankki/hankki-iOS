@@ -9,6 +9,8 @@ import Foundation
 
 final class ZipListViewModel {
     
+    weak var delegate: NetworkResultDelegate?
+    
     var reloadCollectionView: (() -> Void)?
     
     var zipList: [ZipListCollectionViewCell.Model] = [] {
@@ -21,7 +23,7 @@ final class ZipListViewModel {
 extension ZipListViewModel {
     func getZipList() {
         NetworkService.shared.userService.getMeZipList { result in
-            result.handleNetworkResult { response in
+            result.handleNetworkResult(delegate: self.delegate) { response in
                 self.zipList = response.data.favorites.map {
                     return ZipListCollectionViewCell.Model(id: $0.id, title: $0.title, imageUrl: $0.imageType)
                 }

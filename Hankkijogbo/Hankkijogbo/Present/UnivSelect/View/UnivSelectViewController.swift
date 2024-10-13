@@ -13,7 +13,7 @@ protocol UnivSelectViewControllerDelegate: AnyObject {
     func didSelectUniversity(name: String)
 }
 
-final class UnivSelectViewController: BaseViewController {
+final class UnivSelectViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -206,6 +206,7 @@ private extension UnivSelectViewController {
     func setupDelegate() {
         univCollectionView.dataSource = self
         univCollectionView.delegate = self
+        viewModel.delegate = self
     }
 }
 

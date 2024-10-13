@@ -35,6 +35,21 @@ extension UIApplication {
         }
     }
     
+    static func browseApp() {
+        // 어플리케이션에서 user information 삭제
+        UserDefaults.standard.removeUserInformation()
+        
+        // Login 화면으로 이동
+        DispatchQueue.main.async {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first {
+                    let loginViewController = LoginViewController()
+                    window.rootViewController = loginViewController
+                }
+            }
+        }
+    }
+    
     // view controller 외의 곳에서 alert을 호출하려는 경우
     static func showAlert(
         image: UIImage? = nil,

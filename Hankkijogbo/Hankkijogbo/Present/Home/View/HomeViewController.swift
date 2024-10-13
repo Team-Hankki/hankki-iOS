@@ -9,7 +9,7 @@ import UIKit
 
 import NMapsMap
 
-final class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -53,6 +53,7 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        viewModel.delegate = self
         setupNavigationBar()
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
@@ -108,6 +109,7 @@ extension HomeViewController {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
+        viewModel.delegate = self
     }
     
     private func setupRegister() {
