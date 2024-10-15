@@ -4,6 +4,8 @@
 <dict>
 	<key>Amplitude</key>
 	<string>$(Amplitude)</string>
+    <key>UIUserInterfaceStyle</key>
+    <string>Light</string>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
