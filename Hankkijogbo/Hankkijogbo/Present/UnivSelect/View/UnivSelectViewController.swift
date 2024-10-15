@@ -185,7 +185,7 @@ private extension UnivSelectViewController {
             delegate?.didRequestLocationFocus()
         case .restricted, .denied:
             // 위치 정보 접근이 거부된 경우, 서울시립대학교로 포커싱
-            viewModel.currentUnivIndex = 25
+            viewModel.currentUnivIndex = 20
             viewModel.postMeUniversity()
         case .notDetermined:
             // 위치 정보 접근 권한이 아직 결정되지 않은 경우 동의 요청
