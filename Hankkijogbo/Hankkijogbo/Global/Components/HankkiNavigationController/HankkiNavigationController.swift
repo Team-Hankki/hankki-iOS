@@ -209,7 +209,7 @@ private extension HankkiNavigationController {
         titleStackView.snp.removeConstraints()
         titleStackView.snp.makeConstraints {
             if position == "left" {
-                $0.leading.equalToSuperview().inset(22)
+                $0.leading.equalToSuperview().inset(16)
                 $0.centerY.equalToSuperview()
             } else if position == "center" {
                 $0.center.equalToSuperview()
