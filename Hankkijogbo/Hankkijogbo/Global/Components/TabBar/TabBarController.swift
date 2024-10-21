@@ -91,7 +91,7 @@ private extension TabBarController {
             .foregroundColor: UIColor.red500
         ]
         
-        tabbarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
+        tabbarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -10)
         tabbarItem.setTitleTextAttributes(normalAttributes, for: .normal)
         tabbarItem.setTitleTextAttributes(selectedAttributes, for: .selected)
         
