@@ -53,7 +53,8 @@ final class HomeView: BaseView {
         }
         
         buttonStackView.snp.makeConstraints {
-            $0.top.leading.equalTo(mapView).inset(12)
+            $0.top.equalTo(mapView).inset(10)
+            $0.leading.equalTo(mapView).inset(14)
         }
         
         [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
