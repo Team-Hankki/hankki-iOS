@@ -95,6 +95,11 @@ final class HomeView: BaseView {
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
                 $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
+                $0.layer.shadowOffset = CGSize(width: 0, height: 1)
+                $0.layer.shadowColor = UIColor.black.cgColor
+                $0.layer.shadowRadius = 6
+                $0.layer.shadowOpacity = 0.1
+                $0.layer.masksToBounds = false
             }
             
             button.addSubview(leftImageView)
