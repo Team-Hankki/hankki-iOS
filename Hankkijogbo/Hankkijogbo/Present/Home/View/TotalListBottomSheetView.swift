@@ -192,7 +192,7 @@ extension TotalListBottomSheetView {
         }, completion: { [weak self] _ in
             self?.isBottomSheetUp = false
             if let collectionView = self?.totalListCollectionView {
-                collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
                 let bottomInset = self?.defaultHeight ?? 0 - collectionView.frame.height
                 collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: max(0, bottomInset), right: 0)
                 collectionView.scrollIndicatorInsets = collectionView.contentInset
