@@ -149,7 +149,7 @@ final class CreateZipViewController: BaseViewController {
     override func setupLayout() {
         viewTitleLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(22)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(34)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(19)
         }
         
         descriptionLabel.snp.makeConstraints {
