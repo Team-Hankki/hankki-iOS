@@ -87,8 +87,14 @@ final class EditMenuCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension EditMenuCollectionViewCell {
-    func bindData(_ menuData: MenuData) {
+    func bindData(_ menuData: SelectableMenuData) {
         nameLabel.text = menuData.name
         priceLabel.formattingPrice(price: menuData.price)
+        
+        if menuData.isSelected {
+            updateSelectedStyle()
+        } else {
+            updateDefaultStyle()
+        }
     }
 }

@@ -14,6 +14,7 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
     private var storeId: Int
     private var defaultHeight: CGFloat = 295
     private var isHaveToDismiss: Bool = false
+    private var selectableMenus: [SelectableMenuData]
     
     // MARK: - UI Components
     
@@ -31,8 +32,10 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
     
     // MARK: - Init
     
-    init(storeId: Int) {
+    init(storeId: Int, selectableMenus: [SelectableMenuData]) {
         self.storeId = storeId
+        self.selectableMenus = selectableMenus
+        
         super.init()
     }
     
@@ -216,8 +219,7 @@ private extension EditHankkiBottomSheetViewController {
     }
     
     @objc func modifyMenuDidTap() {
-        print("메뉴 편집")
-        let editMenuViewController = EditMenuViewController()
+        let editMenuViewController = EditMenuViewController(viewModel: EditMenuViewModel(menus: selectableMenus))
         self.navigationController?.pushViewController(editMenuViewController, animated: true)
     }
 }

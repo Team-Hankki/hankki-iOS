@@ -13,7 +13,7 @@ final class EditMenuViewController: BaseViewController {
     
     // MARK: - Properties
     
-    //    let viewModel: EditMenuViewModel = EditMenuViewModel()
+    var viewModel: EditMenuViewModel
     
     // MARK: - UI Components
     
@@ -30,14 +30,15 @@ final class EditMenuViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    //    init(viewModel: EditMenuViewModel) {
-    //        self.viewModel = viewModel
-    //        super.init()
-    //    }
-    //
-    //    required init?(coder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
+    init(viewModel: EditMenuViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,47 +115,43 @@ private extension EditMenuViewController {
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
-        print("삭제")
+//        viewModel.deleteMenuAPI(storeId: storeId, id: <#T##Int#>) {
+//            <#code#>
+//        }
     }
     
     @objc func modifyButtonHandler() {
-        print("수정")
+//        viewModel.modifyMenuAPI(storeId: storeId, id: <#T##Int#>, requestBody: <#T##[MenuData]#>) {
+//            <#code#>
+//        }
+        print("1030 \(viewModel.menus.filter { $0.isSelected })")
     }
 }
 
 extension EditMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return viewModel.menus.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditMenuCollectionViewCell.className, for: indexPath) as? EditMenuCollectionViewCell else { return UICollectionViewCell() }
-        cell.bindData(MenuData(name: "테스트핑", price: 7999))
+        cell.bindData(viewModel.menus[indexPath.row])
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell else { return }
-        cell.radioButton.isSelected = !cell.radioButton.isSelected
-    }
-    
-    /// didSelectItemAt 전에 호출되는 메서드
-//    /// - 클릭된 카테고리를 한번 더 클릭 시 클릭을 해제시켜주기 위해 필요함
 //    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//        if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
-//            if reportViewModel.categories[indexPath.row].isChecked {
-//                reportViewModel.categories[indexPath.row].isChecked = false
+//        if collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell != nil {
+//            if viewModel.menus[indexPath.row].isSelected {
+//                viewModel.menus[indexPath.row].isSelected = false
 //                return false
 //            }
 //        }
 //        return true
 //    }
-//    
-//    /// 다른 카테고리가 이미 선택되어 있다면 이를 해제하고 이번에 클릭된 카테고리를 활성화 시킨다
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
-//            reportViewModel.disableCheckedCategories()
-//            reportViewModel.categories[indexPath.row].isChecked = true
-//        }
-//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let _ = collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell else { return }
+        viewModel.disableSelectedMenus()
+        viewModel.menus[indexPath.row].isSelected = true
+    }
 }
