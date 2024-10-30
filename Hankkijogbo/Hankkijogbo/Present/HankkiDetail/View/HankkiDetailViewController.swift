@@ -280,7 +280,17 @@ extension HankkiDetailViewController {
     @objc func editMenuButtonDidTap() {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
         
-        let editHankkiBottomSheet = HankkiNavigationController(rootViewController: EditHankkiBottomSheetViewController(storeId: self.hankkiId))
+        guard let menus = viewModel.hankkiDetailData?.menus else { return }
+        let selectableMenus: [SelectableMenuData] = menus.map { menu in
+            SelectableMenuData(isSelected: false, id: menu.id, name: menu.name, price: menu.price)
+        }
+        
+        let editHankkiBottomSheet = HankkiNavigationController(
+            rootViewController: EditHankkiBottomSheetViewController(
+                storeId: self.hankkiId,
+                selectableMenus: selectableMenus
+            )
+        )
         editHankkiBottomSheet.modalTransitionStyle = .crossDissolve
         editHankkiBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(editHankkiBottomSheet, animated: true, completion: nil)
