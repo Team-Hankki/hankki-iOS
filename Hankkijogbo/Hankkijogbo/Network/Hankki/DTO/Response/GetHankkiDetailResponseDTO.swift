@@ -22,3 +22,10 @@ struct MenuData: Codable {
     var name: String = ""
     var price: Int = 0
 }
+
+struct SelectableMenuData {
+    var isSelected: Bool = false
+    var id: Int = 0
+    var name: String = ""
+    var price: Int = 0
+}
