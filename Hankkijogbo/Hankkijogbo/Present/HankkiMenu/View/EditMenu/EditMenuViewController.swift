@@ -95,10 +95,6 @@ final class EditMenuViewController: BaseViewController {
         menuCollectionView.do {
             $0.showsVerticalScrollIndicator = false
         }
-        
-        bottomButtonView.do {
-            $0.setupEnabledDoneButton()
-        }
     }
 }
 
@@ -109,10 +105,12 @@ extension EditMenuViewController {
             self.menuCollectionView.reloadData()
         }
         
-        viewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
-                            secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
-                            primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton)
+        viewModel.updateButton = { isActive in
+            if isActive {
+                self.bottomButtonView.setupEnabledDoneButton()
+            } else {
+                self.bottomButtonView.setupDisabledDoneButton()
+            }
         }
     }
     
@@ -133,8 +131,15 @@ extension EditMenuViewController {
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
+        showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
+                  secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
+                  primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton,
+                  primaryButtonHandler: deleteMenu)
+    }
+    
+    @objc func deleteMenu() {
 //        viewModel.deleteMenuAPI(storeId: storeId, id: <#T##Int#>) {
-//            <#code#>
+//            print("todo: 삭제 완료 화면 띄울 예정")
 //        }
     }
     
@@ -142,6 +147,7 @@ extension EditMenuViewController {
 //        viewModel.modifyMenuAPI(storeId: storeId, id: <#T##Int#>, requestBody: <#T##[MenuData]#>) {
 //            <#code#>
 //        }
+        print("수정하기 예정")
     }
 }
 

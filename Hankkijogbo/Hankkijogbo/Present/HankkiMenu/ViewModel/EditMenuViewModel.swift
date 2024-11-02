@@ -11,11 +11,16 @@ final class EditMenuViewModel {
     
     var updateCollectionView: (() -> Void)?
     var updateButton: ((Bool) -> Void)?
-    var showAlert: ((String) -> Void)?
     
     var menus: [SelectableMenuData] = [] {
         didSet {
+            updateSelectedMenu()
             updateCollectionView?()
+        }
+    }
+    var selectedMenu: SelectableMenuData? {
+        didSet {
+            updateButton?(selectedMenu != nil)
         }
     }
     
@@ -25,6 +30,10 @@ final class EditMenuViewModel {
 }
 
 extension EditMenuViewModel {
+    
+    func updateSelectedMenu() {
+        selectedMenu = menus.filter { $0.isSelected }.first
+    }
     
     func disableSelectedMenus() {
         menus.enumerated().forEach { index, menu in
