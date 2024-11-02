@@ -66,7 +66,8 @@ final class EditMenuViewController: BaseViewController {
         
         menuCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(34)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(89)
         }
         
         bottomButtonView.snp.makeConstraints {
@@ -113,6 +114,11 @@ extension EditMenuViewController {
     
     func setupRegister() {
         menuCollectionView.register(EditMenuCollectionViewCell.self, forCellWithReuseIdentifier: EditMenuCollectionViewCell.className)
+        menuCollectionView.register(
+            BufferView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: BufferView.className
+        )
     }
 
     func setupDelegate() {
@@ -136,8 +142,25 @@ extension EditMenuViewController {
 }
 
 extension EditMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.menus.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: BufferView.className,
+                for: indexPath
+            ) as? BufferView else {
+                return UICollectionReusableView()
+            }
+            return footer
+        default:
+            return UICollectionReusableView()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -157,9 +180,16 @@ extension EditMenuViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell != nil {            
+        if collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell != nil {
             viewModel.disableSelectedMenus()
             viewModel.menus[indexPath.row].isSelected = true
         }
+    }
+}
+
+extension EditMenuViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return .init(width: UIScreen.getDeviceWidth(), height: 60)
     }
 }
