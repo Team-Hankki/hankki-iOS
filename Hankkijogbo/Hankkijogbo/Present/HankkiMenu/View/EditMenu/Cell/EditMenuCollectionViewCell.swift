@@ -61,13 +61,16 @@ final class EditMenuCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func updateSelectedStyle() {
-        backgroundColor = .red100
-        nameLabel.font = .setupPretendardStyle(of: .body2)
-        priceLabel.font = .setupPretendardStyle(of: .body2)
-        nameLabel.textColor = .red500
-        priceLabel.textColor = .red500
-        radioButton.setImage(.btnRadioSelected, for: .normal)
+    func updateStyle(isSelected: Bool) {
+        backgroundColor = isSelected ? .red100 : .hankkiWhite
+        radioButton.setImage(isSelected ? .btnRadioSelected : .btnRadioNormal, for: .normal)
+        
+        let font: UIFont? = .setupPretendardStyle(of: isSelected ? .body2 : .body3)
+        let textColor: UIColor = isSelected ? .red500 : .gray700
+        nameLabel.font = font
+        priceLabel.font = font
+        nameLabel.textColor = textColor
+        priceLabel.textColor = textColor
     }
     
     func updateDefaultStyle() {
@@ -85,11 +88,6 @@ extension EditMenuCollectionViewCell {
     func bindData(_ menuData: SelectableMenuData) {
         nameLabel.text = menuData.name
         priceLabel.formattingPrice(price: menuData.price)
-        
-        if menuData.isSelected {
-            updateSelectedStyle()
-        } else {
-            updateDefaultStyle()
-        }
+        updateStyle(isSelected: menuData.isSelected)
     }
 }

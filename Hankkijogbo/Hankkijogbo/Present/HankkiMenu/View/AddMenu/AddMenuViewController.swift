@@ -17,7 +17,7 @@ final class AddMenuViewController: BaseViewController {
     // MARK: - Properties
     
     let storeId: Int
-    var viewModel: AddMenuViewModel = AddMenuViewModel()
+    private var viewModel: AddMenuViewModel = AddMenuViewModel()
     
     // MARK: - UI Components
     
