@@ -92,6 +92,10 @@ final class EditMenuViewController: BaseViewController {
             $0.itemSize = CGSize(width: view.frame.width, height: 60)
         }
         
+        menuCollectionView.do {
+            $0.showsVerticalScrollIndicator = false
+        }
+        
         bottomButtonView.do {
             $0.setupEnabledDoneButton()
         }
