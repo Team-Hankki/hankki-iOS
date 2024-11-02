@@ -19,6 +19,7 @@ enum StringLiterals {
         static let won = "원"
         static let report = "제보하기"
         static let complete = "완료"
+        static let delete = "삭제하기"
     }
     
     enum Home {
@@ -64,7 +65,7 @@ enum StringLiterals {
         }
         enum DeleteZip {
             static let title = "족보를 삭제할까요?"
-            static let primaryButton = "삭제하기"
+            static let primaryButton = StringLiterals.Common.delete
         }
         
         enum DevelopShare {
@@ -77,6 +78,12 @@ enum StringLiterals {
             static let title = StringLiterals.Alert.waitPlease
             static let sub = "메뉴를 편집할 수 있도록 준비 중이에요 :)"
             static let primaryButton = StringLiterals.Alert.check
+        }
+        
+        enum DeleteMenu {
+            static let title = "삭제하면 되돌릴 수 없어요\n그래도 삭제하시겠어요?"
+            static let secondaryButton = "취소"
+            static let primaryButton = StringLiterals.Common.delete
         }
         
         enum NetworkError {
@@ -134,7 +141,7 @@ enum StringLiterals {
     
     enum ModifyMenu {
         static let editMenuTitle = "어떤 메뉴를 편집할까요?"
-        static let deleteMenuButton = "삭제하기"
+        static let deleteMenuButton = StringLiterals.Common.delete
         static let modifyMenuButton = "수정하기"
         static let modifyMenuTitle = " 메뉴를\n수정할게요"
         static let modifyCarefullyPlease = "모두에게 보여지는 정보이니 신중하게 수정부탁드려요"
