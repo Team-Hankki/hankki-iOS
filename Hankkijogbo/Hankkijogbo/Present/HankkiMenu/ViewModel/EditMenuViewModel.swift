@@ -12,6 +12,7 @@ final class EditMenuViewModel {
     var updateCollectionView: (() -> Void)?
     var updateButton: ((Bool) -> Void)?
     
+    var storeId: Int
     var menus: [SelectableMenuData] = [] {
         didSet {
             updateSelectedMenu()
@@ -24,7 +25,8 @@ final class EditMenuViewModel {
         }
     }
     
-    init(menus: [SelectableMenuData]) {
+    init(storeId: Int, menus: [SelectableMenuData]) {
+        self.storeId = storeId
         self.menus = menus
     }
 }
@@ -53,8 +55,9 @@ extension EditMenuViewModel {
     }
     
     /// 메뉴 삭제
-    func deleteMenuAPI(storeId: Int, id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.menuService.deleteMenu(storeId: storeId, id: id) { result in
+    func deleteMenuAPI(completion: @escaping () -> Void) {
+        guard let selectedMenu = selectedMenu else { return }
+        NetworkService.shared.menuService.deleteMenu(storeId: storeId, id: selectedMenu.id) { result in
             result.handleNetworkResult { _ in
                 completion()
             }

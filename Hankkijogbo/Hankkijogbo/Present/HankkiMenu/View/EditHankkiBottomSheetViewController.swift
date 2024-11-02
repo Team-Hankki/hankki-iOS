@@ -219,7 +219,7 @@ private extension EditHankkiBottomSheetViewController {
     }
     
     @objc func modifyMenuDidTap() {
-        let editMenuViewController = EditMenuViewController(viewModel: EditMenuViewModel(menus: selectableMenus))
+        let editMenuViewController = EditMenuViewController(viewModel: EditMenuViewModel(storeId: storeId, menus: selectableMenus))
         self.navigationController?.pushViewController(editMenuViewController, animated: true)
     }
 }

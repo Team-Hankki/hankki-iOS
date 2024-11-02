@@ -138,9 +138,9 @@ extension EditMenuViewController {
     }
     
     @objc func deleteMenu() {
-//        viewModel.deleteMenuAPI(storeId: storeId, id: <#T##Int#>) {
-//            print("todo: 삭제 완료 화면 띄울 예정")
-//        }
+        viewModel.deleteMenuAPI {
+            print("todo: 삭제 완료 화면 띄울 예정")
+        }
     }
     
     @objc func modifyButtonHandler() {
