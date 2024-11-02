@@ -88,7 +88,7 @@ final class EditMenuViewController: BaseViewController {
         menuFlowLayout.do {
             $0.scrollDirection = .vertical
             $0.minimumLineSpacing = 0
-            $0.itemSize = CGSize(width: view.frame.width, height: 64)
+            $0.itemSize = CGSize(width: view.frame.width, height: 60)
         }
         
         bottomButtonView.do {
