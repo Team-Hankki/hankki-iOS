@@ -43,9 +43,9 @@ final class EditMenuViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindViewModel()
         setupRegister()
         setupDelegate()
-        bindViewModel()
     }
     
     // MARK: - Set UI
@@ -97,7 +97,19 @@ final class EditMenuViewController: BaseViewController {
     }
 }
 
-private extension EditMenuViewController {
+extension EditMenuViewController {
+    
+    func bindViewModel() {
+        viewModel.updateCollectionView = {
+            self.menuCollectionView.reloadData()
+        }
+        
+        viewModel.showAlert = { [weak self] _ in
+            self?.showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
+                            secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
+                            primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton)
+        }
+    }
     
     func setupRegister() {
         menuCollectionView.register(EditMenuCollectionViewCell.self, forCellWithReuseIdentifier: EditMenuCollectionViewCell.className)
@@ -106,10 +118,6 @@ private extension EditMenuViewController {
     func setupDelegate() {
         menuCollectionView.dataSource = self
         menuCollectionView.delegate = self
-    }
-
-    func bindViewModel() {
-        
     }
     
     // MARK: - @objc Func
@@ -124,7 +132,6 @@ private extension EditMenuViewController {
 //        viewModel.modifyMenuAPI(storeId: storeId, id: <#T##Int#>, requestBody: <#T##[MenuData]#>) {
 //            <#code#>
 //        }
-        print("1030 \(viewModel.menus.filter { $0.isSelected })")
     }
 }
 
@@ -139,19 +146,20 @@ extension EditMenuViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//        if collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell != nil {
-//            if viewModel.menus[indexPath.row].isSelected {
-//                viewModel.menus[indexPath.row].isSelected = false
-//                return false
-//            }
-//        }
-//        return true
-//    }
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell != nil {
+            if viewModel.menus[indexPath.row].isSelected {
+                viewModel.menus[indexPath.row].isSelected = false
+                return false
+            }
+        }
+        return true
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let _ = collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell else { return }
-        viewModel.disableSelectedMenus()
-        viewModel.menus[indexPath.row].isSelected = true
+        if collectionView.cellForItem(at: indexPath) as? EditMenuCollectionViewCell != nil {            
+            viewModel.disableSelectedMenus()
+            viewModel.menus[indexPath.row].isSelected = true
+        }
     }
 }

@@ -9,12 +9,6 @@ import UIKit
 
 final class EditMenuCollectionViewCell: BaseCollectionViewCell {
     
-    override var isSelected: Bool {
-        didSet {
-            isSelected ? updateSelectedStyle() : updateDefaultStyle()
-        }
-    }
-    
     // MARK: - UI Components
     
     var radioButton: RadioButton = RadioButton()

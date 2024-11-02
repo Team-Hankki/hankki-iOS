@@ -8,9 +8,16 @@
 import Moya
 
 final class EditMenuViewModel {
-    var updateButton: ((Bool) -> Void)?
     
-    var menus: [SelectableMenuData]
+    var updateCollectionView: (() -> Void)?
+    var updateButton: ((Bool) -> Void)?
+    var showAlert: ((String) -> Void)?
+    
+    var menus: [SelectableMenuData] = [] {
+        didSet {
+            updateCollectionView?()
+        }
+    }
     
     init(menus: [SelectableMenuData]) {
         self.menus = menus
