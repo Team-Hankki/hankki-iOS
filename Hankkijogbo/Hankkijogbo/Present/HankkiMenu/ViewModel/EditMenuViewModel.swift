@@ -45,15 +45,6 @@ extension EditMenuViewModel {
         }
     }
     
-    /// 메뉴 수정
-    func modifyMenuAPI(storeId: Int, id: Int, requestBody: MenuData, completion: @escaping () -> Void) {
-        NetworkService.shared.menuService.patchMenu(storeId: storeId, id: id, requestBody: requestBody) { result in
-            result.handleNetworkResult { _ in
-                completion()
-            }
-        }
-    }
-    
     /// 메뉴 삭제
     func deleteMenuAPI(completion: @escaping () -> Void) {
         guard let selectedMenu = selectedMenu else { return }
