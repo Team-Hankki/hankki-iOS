@@ -20,6 +20,8 @@ enum StringLiterals {
         static let report = "제보하기"
         static let complete = "완료"
         static let delete = "삭제하기"
+        
+        static let price = "가격"
     }
     
     enum Home {
@@ -144,7 +146,14 @@ enum StringLiterals {
         static let deleteMenuButton = StringLiterals.Common.delete
         static let modifyMenuButton = "수정하기"
         static let modifyMenuTitle = " 메뉴를\n수정할게요"
+        static let name = "메뉴이름"
+        static let price = StringLiterals.Common.price
+        static let namePlaceholder = "새로운 메뉴 이름"
+        static let enterOriginalName = "기존 메뉴이름 입력"
+        static let enterOriginalPrice = "기존 메뉴가격 입력"
+        static let deleteOverPrice = "가격이 올랐군요\n8천원 이상은 메뉴 삭제를 추천해요"
         static let modifyCarefullyPlease = "모두에게 보여지는 정보이니 신중하게 수정부탁드려요"
+        static let applyButton = "적용"
         static let modifyMenuCompleteButton = "수정 완료"
     }
     
@@ -161,7 +170,7 @@ enum StringLiterals {
         static let addImage = "대표 음식 이미지 첨부하기 (선택)"
         static let changeImage = "바꾸기"
         static let menuName = "메뉴 이름"
-        static let price = "가격"
+        static let price = StringLiterals.Common.price
         static let priceError = "8천원 이하만 가능해요"
         static let addMenu = "메뉴 추가하기"
         static let goToReportedHankki = "제보한 식당 보러가기"
