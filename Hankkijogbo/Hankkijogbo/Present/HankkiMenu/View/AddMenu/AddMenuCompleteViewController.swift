@@ -1,5 +1,5 @@
 //
-//  AddNewMenuCompleteViewController.swift
+//  AddMenuCompleteViewController.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 10/8/24.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-final class AddNewMenuCompleteViewController: BaseViewController {
+final class AddMenuCompleteViewController: BaseViewController {
     
     // MARK: - Properties
     
@@ -21,7 +21,7 @@ final class AddNewMenuCompleteViewController: BaseViewController {
     let titleLabel: UILabel = UILabel()
     let completeImageView: UIImageView = UIImageView()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.EditHankki.complete,
+        primaryButtonText: StringLiterals.Common.complete,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -71,7 +71,7 @@ final class AddNewMenuCompleteViewController: BaseViewController {
             $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
-                withText: UserDefaults.standard.getNickname() + StringLiterals.EditHankki.addMenuCompleteByYouFirst + String(totalMenuCount) + StringLiterals.EditHankki.addMenuCompleteByYouSecond,
+                withText: UserDefaults.standard.getNickname() + StringLiterals.AddMenu.addMenuCompleteByYouFirst + String(totalMenuCount) + StringLiterals.AddMenu.addMenuCompleteByYouSecond,
                 color: .gray850
             )
         }

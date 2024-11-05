@@ -13,7 +13,7 @@ protocol MenuAPIServiceProtocol {
     typealias PostMenuResponseDTO = BaseDTO<PostMenuResponseData>
     
     func postMenu(storeId: Int, requestBody: [MenuData], completion: @escaping(NetworkResult<PostMenuResponseDTO>) -> Void)
-    func patchMenu(storeId: Int, id: Int, requestBody: [MenuData], completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
+    func patchMenu(storeId: Int, id: Int, requestBody: MenuData, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
     func deleteMenu(storeId: Int, id: Int, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
 }
 
@@ -40,7 +40,7 @@ final class MenuAPIService: BaseAPIService, MenuAPIServiceProtocol {
     func patchMenu(
         storeId: Int,
         id: Int,
-        requestBody: [MenuData],
+        requestBody: MenuData,
         completion: @escaping (NetworkResult<EmptyDTO>) -> Void
     ) {
         provider.request(.patchMenu(storeId: storeId, id: id, requestBody: requestBody)) { result in

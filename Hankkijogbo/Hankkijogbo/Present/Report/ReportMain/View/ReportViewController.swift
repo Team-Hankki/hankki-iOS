@@ -96,12 +96,6 @@ extension ReportViewController {
             self.collectionView.reloadData()
         }
         
-        reportViewModel.showAlert = { [weak self] _ in
-            self?.showAlert(titleText: StringLiterals.Alert.unknownError,
-                            subText: StringLiterals.Alert.tryAgain,
-                            primaryButtonText: StringLiterals.Alert.check)
-        }
-        
         reportViewModel.updateButton = { isActive in
             if isActive {
                 self.bottomButtonView.setupEnabledDoneButton()
