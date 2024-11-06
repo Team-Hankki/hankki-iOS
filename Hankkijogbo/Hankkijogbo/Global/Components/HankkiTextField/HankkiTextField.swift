@@ -16,6 +16,8 @@ final class HankkiTextField: UITextField {
     var defaultButtonImage: UIImage
     var editingButtonImage: UIImage
     
+    private var isModifying: Bool = false
+    
     // MARK: - UI Components
 
     private let titleLabel: UILabel = UILabel()
@@ -124,6 +126,7 @@ private extension HankkiTextField {
     // MARK: - @objc Func
     
     @objc func rightButtonDidTap() {
+        isModifying = true
         becomeFirstResponder()
     }
 }
@@ -133,6 +136,7 @@ private extension HankkiTextField {
 extension HankkiTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if !isModifying { return false }
         updateStyle(isEditing: true)
         
         return true
@@ -140,6 +144,7 @@ extension HankkiTextField: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateStyle(isEditing: false)
+        isModifying = false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
