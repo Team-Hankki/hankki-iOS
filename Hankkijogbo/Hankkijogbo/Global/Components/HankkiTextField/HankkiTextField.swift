@@ -14,8 +14,11 @@ final class HankkiTextField: UITextField {
     var titleText: String
     var placeholderText: String?
     var inputAccessoryText: String?
+    var subText: String
     var defaultButtonImage: UIImage
     var editingButtonImage: UIImage
+    var defaultButtonHandler: (() -> Void)?
+    var editingButtonHandler: (() -> Void)?
     
     private var isModifying: Bool = false
     
@@ -31,20 +34,27 @@ final class HankkiTextField: UITextField {
         titleText: String,
         placeholderText: String? = nil,
         inputAccessoryText: String? = nil,
+        subText: String = "",
         defaultButtonImage: UIImage,
-        editingButtonImage: UIImage
+        editingButtonImage: UIImage,
+        defaultButtonHandler: (() -> Void)? = nil,
+        editingButtonHandler: (() -> Void)? = nil
     ) {
         self.titleText = titleText
         self.placeholderText = placeholderText
         self.inputAccessoryText = inputAccessoryText
+        self.subText = subText
         self.defaultButtonImage = defaultButtonImage
         self.editingButtonImage = editingButtonImage
+        self.defaultButtonHandler = defaultButtonHandler
+        self.editingButtonHandler = editingButtonHandler
         super.init(frame: .zero)
         
         setupHierarchy()
         setupLayout()
         setupStyle()
         setupDelegate()
+        setupAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +94,7 @@ private extension HankkiTextField {
             $0.textColor = .gray850
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
-                withText: StringLiterals.ModifyMenu.namePlaceholder,
+                withText: placeholderText ?? "",
                 color: .gray400
             )
             $0.addPadding(left: 73, right: 44)
@@ -109,6 +119,11 @@ private extension HankkiTextField {
     func setupDelegate() {
         delegate = self
     }
+    
+    func setupAddTarget() {
+        addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        inputAccessoryButton.addTarget(self, action: #selector(applyButtonDidTap), for: .touchUpInside)
+    }
 }
 
 private extension HankkiTextField {
@@ -131,7 +146,6 @@ private extension HankkiTextField {
         guard let inputAccessoryText = inputAccessoryText else { return }
         
         inputAccessoryButton.do {
-            $0.isUserInteractionEnabled = false
             $0.frame = .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54)
             $0.backgroundColor = .red400
             $0.setAttributedTitle(
@@ -140,11 +154,9 @@ private extension HankkiTextField {
                     withText: inputAccessoryText,
                     color: .hankkiWhite
                 ), for: .normal)
-            $0.addTarget(self, action: #selector(applyButtonDidTap), for: .touchUpInside)
         }
         
         inputAccessoryView = inputAccessoryButton
-        inputAccessoryView?.isUserInteractionEnabled = false
     }
     
     func hideInputAccessoryView() {
@@ -155,13 +167,22 @@ private extension HankkiTextField {
     // MARK: - @objc Func
     
     @objc func rightButtonDidTap() {
+        defaultButtonHandler?()
         isModifying = true
         becomeFirstResponder()
     }
     
     @objc func applyButtonDidTap() {
-        hideInputAccessoryView()
-        resignFirstResponder()
+        guard let text = text else { return }
+        if !text.isEmpty {
+            hideInputAccessoryView()
+            resignFirstResponder()
+        }
+    }
+    
+    @objc func textFieldDidChange() {
+        guard let text = text else { return }
+        inputAccessoryButton.backgroundColor = !text.isEmpty ? .red500 : .red400
     }
 }
 
@@ -174,17 +195,20 @@ extension HankkiTextField: UITextFieldDelegate {
         
         updateStyle(isEditing: true)
         setupInputAccessoryView()
+        textFieldDidChange()
         
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateStyle(isEditing: false)
+        hideInputAccessoryView()
         isModifying = false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        applyButtonDidTap()
+        hideInputAccessoryView()
+        resignFirstResponder()
         return true
     }
 }
