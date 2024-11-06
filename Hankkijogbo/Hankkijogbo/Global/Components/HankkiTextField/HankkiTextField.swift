@@ -14,7 +14,6 @@ final class HankkiTextField: UITextField {
     var titleText: String
     var placeholderText: String?
     var inputAccessoryText: String?
-    var subText: String
     var defaultButtonImage: UIImage
     var editingButtonImage: UIImage
     var defaultButtonHandler: (() -> Void)?
@@ -34,7 +33,6 @@ final class HankkiTextField: UITextField {
         titleText: String,
         placeholderText: String? = nil,
         inputAccessoryText: String? = nil,
-        subText: String = "",
         defaultButtonImage: UIImage,
         editingButtonImage: UIImage,
         defaultButtonHandler: (() -> Void)? = nil,
@@ -43,7 +41,6 @@ final class HankkiTextField: UITextField {
         self.titleText = titleText
         self.placeholderText = placeholderText
         self.inputAccessoryText = inputAccessoryText
-        self.subText = subText
         self.defaultButtonImage = defaultButtonImage
         self.editingButtonImage = editingButtonImage
         self.defaultButtonHandler = defaultButtonHandler
@@ -97,7 +94,6 @@ private extension HankkiTextField {
                 withText: placeholderText ?? "",
                 color: .gray400
             )
-            $0.addPadding(left: 73, right: 44)
             $0.textAlignment = .right
             $0.autocorrectionType = .no
             $0.spellCheckingType = .no

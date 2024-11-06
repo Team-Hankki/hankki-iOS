@@ -17,7 +17,7 @@ final class EditMenuViewController: BaseViewController {
     
     // MARK: - UI Components
     
-    let titleLabel: UILabel = UILabel()
+    private let titleLabel: UILabel = UILabel()
     private lazy var menuFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var menuCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: menuFlowLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
@@ -144,10 +144,10 @@ extension EditMenuViewController {
     }
     
     @objc func modifyButtonHandler() {
-//        viewModel.modifyMenuAPI(storeId: storeId, id: <#T##Int#>, requestBody: <#T##[MenuData]#>) {
-//            <#code#>
-//        }
-        print("수정하기 예정")
+        guard let selectedMenu = viewModel.selectedMenu else { return }
+        let modifyMenuViewModel = ModifyMenuViewModel(storeId: viewModel.storeId, selectedMenu: selectedMenu)
+        let modifyMenuViewController = ModifyMenuViewController(viewModel: modifyMenuViewModel)
+        self.navigationController?.pushViewController(modifyMenuViewController, animated: true)
     }
 }
 
