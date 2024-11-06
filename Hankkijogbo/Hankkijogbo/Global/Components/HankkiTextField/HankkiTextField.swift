@@ -13,6 +13,7 @@ final class HankkiTextField: UITextField {
     
     var titleText: String
     var placeholderText: String?
+    var inputAccessoryText: String?
     var defaultButtonImage: UIImage
     var editingButtonImage: UIImage
     
@@ -22,17 +23,20 @@ final class HankkiTextField: UITextField {
 
     private let titleLabel: UILabel = UILabel()
     private let rightButton: UIButton = UIButton()
+    private let inputAccessoryButton: UIButton = UIButton()
     
     // MARK: - Init
     
     init(
         titleText: String,
         placeholderText: String? = nil,
+        inputAccessoryText: String? = nil,
         defaultButtonImage: UIImage,
         editingButtonImage: UIImage
     ) {
         self.titleText = titleText
         self.placeholderText = placeholderText
+        self.inputAccessoryText = inputAccessoryText
         self.defaultButtonImage = defaultButtonImage
         self.editingButtonImage = editingButtonImage
         super.init(frame: .zero)
@@ -123,11 +127,41 @@ private extension HankkiTextField {
         rightButton.setImage(buttonImage, for: .normal)
     }
     
+    func setupInputAccessoryView() {
+        guard let inputAccessoryText = inputAccessoryText else { return }
+        
+        inputAccessoryButton.do {
+            $0.isUserInteractionEnabled = false
+            $0.frame = .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54)
+            $0.backgroundColor = .red400
+            $0.setAttributedTitle(
+                UILabel.setupAttributedText(
+                    for: PretendardStyle.subtitle3,
+                    withText: inputAccessoryText,
+                    color: .hankkiWhite
+                ), for: .normal)
+            $0.addTarget(self, action: #selector(applyButtonDidTap), for: .touchUpInside)
+        }
+        
+        inputAccessoryView = inputAccessoryButton
+        inputAccessoryView?.isUserInteractionEnabled = false
+    }
+    
+    func hideInputAccessoryView() {
+        inputAccessoryButton.backgroundColor = .clear
+        inputAccessoryView = nil
+    }
+    
     // MARK: - @objc Func
     
     @objc func rightButtonDidTap() {
         isModifying = true
         becomeFirstResponder()
+    }
+    
+    @objc func applyButtonDidTap() {
+        hideInputAccessoryView()
+        resignFirstResponder()
     }
 }
 
@@ -137,7 +171,9 @@ extension HankkiTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if !isModifying { return false }
+        
         updateStyle(isEditing: true)
+        setupInputAccessoryView()
         
         return true
     }
@@ -148,6 +184,7 @@ extension HankkiTextField: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        applyButtonDidTap()
         return true
     }
 }
