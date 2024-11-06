@@ -21,6 +21,31 @@ extension UITextField {
         }
     }
     
+    /// 텍스트 필드 안쪽에 패딩 및 텍스트 표시
+    func addPaddingAndText(isLeft: Bool, padding: CGFloat, text: String, font: FontStyle, textColor: UIColor) {        
+        let label = UILabel()
+        label.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: font,
+                withText: text,
+                color: textColor
+            )
+            $0.textAlignment = .left
+            $0.baselineAdjustment = .alignCenters
+        }
+        label.snp.makeConstraints {
+            $0.width.equalTo(label.intrinsicContentSize.width + padding)
+        }
+        
+        if isLeft {
+            leftView = label
+            leftViewMode = .always
+        } else {
+            rightView = label
+            rightViewMode = .always
+        }
+    }
+    
     /// Placeholder의 색상을 바꿔주는 메서드
     func changePlaceholderColor(forPlaceHolder: String, forColor: UIColor) {
         self.attributedPlaceholder = NSAttributedString(string: forPlaceHolder, attributes: [NSAttributedString.Key.foregroundColor: forColor])
