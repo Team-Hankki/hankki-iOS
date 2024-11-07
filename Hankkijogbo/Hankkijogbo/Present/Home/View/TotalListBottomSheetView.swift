@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TotalListBottomSheetViewDelegate: AnyObject {
+    func didSelectHankkiCell(at index: Int, pinId: Int)
+}
+
 final class TotalListBottomSheetView: BaseView {
     
     // MARK: - Properties
@@ -20,7 +24,8 @@ final class TotalListBottomSheetView: BaseView {
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     weak var homeViewController: HomeViewController?
-    
+    weak var delegate: TotalListBottomSheetViewDelegate?
+
     // MARK: - UI Components
     
     private let bottomSheetHandlerView: UIView = UIView()
@@ -288,13 +293,9 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
 
 extension TotalListBottomSheetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
-            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
-        }
-        
+        let pinId = data[indexPath.item].id
+        delegate?.didSelectHankkiCell(at: indexPath.item, pinId: pinId)
+        viewLayoutIfNeededWithHiddenAnimation()
     }
 }
 

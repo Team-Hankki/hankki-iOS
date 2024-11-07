@@ -128,6 +128,7 @@ extension HomeViewController {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
+        rootView.bottomSheetView.delegate = self
     }
     
     private func setupRegister() {

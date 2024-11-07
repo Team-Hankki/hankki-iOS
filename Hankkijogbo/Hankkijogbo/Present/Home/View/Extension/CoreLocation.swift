@@ -269,3 +269,9 @@ extension HomeViewController {
         self.showTargetButtonAtBottomSheet()
     }
 }
+
+extension HomeViewController: TotalListBottomSheetViewDelegate {
+    func didSelectHankkiCell(at index: Int, pinId: Int) {
+        showMarkerInfoCard(at: index, pinId: pinId)
+    }
+}
