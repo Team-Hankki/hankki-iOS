@@ -20,8 +20,6 @@ final class HankkiTextField: UITextField {
     var inputAccessoryText: String?
     var defaultButtonImage: UIImage
     var editingButtonImage: UIImage
-    var defaultButtonHandler: (() -> Void)?
-    var editingButtonHandler: (() -> Void)?
     var hankkiTextFieldDelegate: HankkiTextFieldDelegate?
     
     private var isModifying: Bool = false
@@ -29,7 +27,8 @@ final class HankkiTextField: UITextField {
     // MARK: - UI Components
 
     private let titleLabel: UILabel = UILabel()
-    private let rightButton: UIButton = UIButton()
+    private let defaultButton: UIButton = UIButton()
+    private let editingButton: UIButton = UIButton()
     private let inputAccessoryButton: UIButton = UIButton()
     
     // MARK: - Init
@@ -40,8 +39,6 @@ final class HankkiTextField: UITextField {
         inputAccessoryText: String? = nil,
         defaultButtonImage: UIImage,
         editingButtonImage: UIImage,
-        defaultButtonHandler: (() -> Void)? = nil,
-        editingButtonHandler: (() -> Void)? = nil,
         hankkiTextFieldDelegate: HankkiTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
@@ -49,8 +46,6 @@ final class HankkiTextField: UITextField {
         self.inputAccessoryText = inputAccessoryText
         self.defaultButtonImage = defaultButtonImage
         self.editingButtonImage = editingButtonImage
-        self.defaultButtonHandler = defaultButtonHandler
-        self.editingButtonHandler = editingButtonHandler
         self.hankkiTextFieldDelegate = hankkiTextFieldDelegate
         super.init(frame: .zero)
         
@@ -73,7 +68,8 @@ private extension HankkiTextField {
     func setupHierarchy() {
         self.addSubviews(
             titleLabel,
-            rightButton
+            defaultButton,
+            editingButton
         )
     }
     
@@ -83,7 +79,13 @@ private extension HankkiTextField {
             $0.centerY.equalToSuperview()
         }
         
-        rightButton.snp.makeConstraints {
+        defaultButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(12)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(24)
+        }
+        
+        editingButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(24)
@@ -113,9 +115,13 @@ private extension HankkiTextField {
             $0.text = titleText
         }
         
-        rightButton.do {
+        defaultButton.do {
             $0.setImage(defaultButtonImage, for: .normal)
-            $0.addTarget(self, action: #selector(rightButtonDidTap), for: .touchUpInside)
+        }
+        
+        editingButton.do {
+            $0.setImage(editingButtonImage, for: .normal)
+            $0.isHidden = true
         }
     }
     
@@ -125,6 +131,8 @@ private extension HankkiTextField {
     
     func setupAddTarget() {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        defaultButton.addTarget(self, action: #selector(defaultButtonDidTap), for: .touchUpInside)
+        editingButton.addTarget(self, action: #selector(editingButtonDidTap), for: .touchUpInside)
         inputAccessoryButton.addTarget(self, action: #selector(applyButtonDidTap), for: .touchUpInside)
     }
 }
@@ -136,13 +144,15 @@ private extension HankkiTextField {
         let borderColor: CGColor? = isEditing ? UIColor.gray500.cgColor : nil
         let font: UIFont? = .setupPretendardStyle(of: isEditing ? .body4 : .body5)
         let textColor: UIColor = isEditing ? .gray850 : .gray500
-        let buttonImage: UIImage = isEditing ? editingButtonImage : defaultButtonImage
+        let hiddenButton: UIButton = isEditing ? defaultButton : editingButton
+        let shownButton: UIButton = isEditing ? editingButton : defaultButton
 
         layer.borderWidth = borderWidth
         layer.borderColor = borderColor
         titleLabel.font = font
         titleLabel.textColor = textColor
-        rightButton.setImage(buttonImage, for: .normal)
+        hiddenButton.isHidden = true
+        shownButton.isHidden = false
     }
     
     func setupInputAccessoryView() {
@@ -169,10 +179,14 @@ private extension HankkiTextField {
     
     // MARK: - @objc Func
     
-    @objc func rightButtonDidTap() {
-        defaultButtonHandler?()
+    @objc func defaultButtonDidTap() {
         isModifying = true
         becomeFirstResponder()
+    }
+    
+    @objc func editingButtonDidTap() {
+        text = ""
+        hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
     @objc func applyButtonDidTap() {
@@ -207,8 +221,7 @@ extension HankkiTextField: UITextFieldDelegate {
         updateStyle(isEditing: false)
         hideInputAccessoryView()
         isModifying = false
-        
-        hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: textField)
+        hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
