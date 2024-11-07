@@ -108,7 +108,8 @@ class DeleteMenuAccessoryView: BaseView {
         }
         
         deleteButton.snp.makeConstraints {
-            $0.leading.equalTo(bottomLabel.snp.trailing).offset(42)
+            $0.trailing.equalTo(xButton.snp.leading).offset(-14)
+            $0.leading.greaterThanOrEqualTo(10)
             $0.centerY.equalToSuperview()
             $0.width.equalTo(61)
             $0.height.equalTo(32)
