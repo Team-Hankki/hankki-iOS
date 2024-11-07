@@ -26,11 +26,9 @@ extension UIView {
     }
     
     /// 특정 코너만 둥글게
-    func makeRoundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
+    func makeRoundCorners(corners: CACornerMask, radius: CGFloat) {
+        layer.maskedCorners = corners
+        layer.cornerRadius = radius
     }
     
     /// 애니메이션과 함께 뷰를 제거한다.

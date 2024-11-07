@@ -1510,8 +1510,8 @@
 			isa = PBXGroup;
 			children = (
 				A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */,
-				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
 				A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */,
+				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
 			);
 			path = ModifyMenuTextField;
 			sourceTree = "<group>";

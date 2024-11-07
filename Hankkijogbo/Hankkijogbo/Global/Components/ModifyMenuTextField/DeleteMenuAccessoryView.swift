@@ -47,9 +47,9 @@ class DeleteMenuAccessoryView: BaseView {
     override func setupStyle() {
         self.do {
             $0.backgroundColor = .gray50
+            $0.makeRoundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 12)
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray200.cgColor
-            $0.makeRoundCorners(corners: [.topLeft, .topRight], radius: 12)
             $0.isHidden = true
         }
         
