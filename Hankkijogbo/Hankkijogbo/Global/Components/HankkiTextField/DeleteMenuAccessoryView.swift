@@ -30,7 +30,7 @@ class DeleteMenuAccessoryView: BaseView {
         self.deleteButtonAction = deleteButtonAction
         self.xButtonAction = xButtonAction
         
-        super.init(frame: .zero)
+        super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 73))
         
         setupStyle()
         setupHierarchy()

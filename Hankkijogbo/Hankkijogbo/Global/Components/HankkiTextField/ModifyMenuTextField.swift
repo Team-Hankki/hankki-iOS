@@ -21,14 +21,18 @@ final class ModifyMenuTextField: UITextField {
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
     private var isModifying: Bool = false
+    private var isWarn: Bool = false
     
     // MARK: - UI Components
-
+    
     private let titleLabel: UILabel = UILabel()
     private let defaultButton: UIButton = UIButton()
     private let editingButton: UIButton = UIButton()
-    private let inputApplyButton: UIButton = UIButton()
-    private let inputResetButton: UIButton = UIButton()
+    private lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
+    private lazy var deleteMenuAccessoryView: DeleteMenuAccessoryView = DeleteMenuAccessoryView(
+        deleteButtonAction: showDeleteAlert,
+        xButtonAction: hideDeleteMenuAccessoryView
+    )
     
     // MARK: - Init
     
@@ -126,75 +130,71 @@ private extension ModifyMenuTextField {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         defaultButton.addTarget(self, action: #selector(defaultButtonDidTap), for: .touchUpInside)
         editingButton.addTarget(self, action: #selector(editingButtonDidTap), for: .touchUpInside)
-        inputApplyButton.addTarget(self, action: #selector(inputApplyButtonDidTap), for: .touchUpInside)
-        inputResetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
+        enterMenuAccessoryView.applyButton.addTarget(self, action: #selector(inputApplyButtonDidTap), for: .touchUpInside)
+        enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
 }
 
 private extension ModifyMenuTextField {
     
     func updateStyle(isEditing: Bool) {
-        let borderWidth: CGFloat = isEditing ? 1 : 0
-        let borderColor: CGColor? = isEditing ? UIColor.gray500.cgColor : nil
-        let font: UIFont? = .setupPretendardStyle(of: isEditing ? .body4 : .body5)
-        let textColor: UIColor = isEditing ? .gray850 : .gray500
+        if isWarn {
+            updateWarnStyle()
+        } else {
+            let textColor: UIColor = isEditing ? .gray850 : .gray800
+            let borderWidth: CGFloat = isEditing ? 1 : 0
+            let borderColor: CGColor? = isEditing ? UIColor.gray500.cgColor : nil
+            let titleFont: UIFont? = .setupPretendardStyle(of: isEditing ? .body4 : .body5)
+            let titleTextColor: UIColor = isEditing ? .gray850 : .gray500
+            
+            self.textColor = textColor
+            layer.borderWidth = borderWidth
+            layer.borderColor = borderColor
+            titleLabel.font = titleFont
+            titleLabel.textColor = titleTextColor
+        }
+        
         let hiddenButton: UIButton = isEditing ? defaultButton : editingButton
         let shownButton: UIButton = isEditing ? editingButton : defaultButton
-
-        layer.borderWidth = borderWidth
-        layer.borderColor = borderColor
-        titleLabel.font = font
-        titleLabel.textColor = textColor
         hiddenButton.isHidden = true
         shownButton.isHidden = false
     }
     
+    func updateWarnStyle() {
+        if let text = text, text.isEmpty { isWarn = false }
+        layer.borderColor = isWarn ? UIColor.warnRed.cgColor : UIColor.gray500.cgColor
+        textColor = isWarn ? .warnRed : .gray850
+    }
+    
     func setupInputAccessoryView() {
         let accessoryView = UIView(frame: .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54 + 56))
-
-        inputApplyButton.do {
-            $0.backgroundColor = .red400
-            $0.setAttributedTitle(
-                UILabel.setupAttributedText(
-                    for: PretendardStyle.subtitle3,
-                    withText: StringLiterals.ModifyMenu.applyButton,
-                    color: .hankkiWhite
-                ), for: .normal)
-        }
+        accessoryView.addSubviews(enterMenuAccessoryView, deleteMenuAccessoryView)
         
-        inputResetButton.do {
-            $0.backgroundColor = .gray100
-            $0.layer.cornerRadius = 8
-            $0.setAttributedTitle(
-                UILabel.setupAttributedText(
-                    for: PretendardStyle.body7,
-                    withText: "기존 메뉴\(titleText.suffix(2)) 입력",
-                    color: .gray600
-                ),
-                for: .normal
-            )
-        }
-        
-        accessoryView.addSubviews(inputApplyButton, inputResetButton)
-        
-        inputApplyButton.snp.makeConstraints {
+        enterMenuAccessoryView.snp.makeConstraints {
             $0.horizontalEdges.bottom.equalToSuperview()
-            $0.height.equalTo(54)
+            $0.height.equalTo(54 + 56)
         }
         
-        inputResetButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(inputApplyButton.snp.top).offset(-20)
-            $0.width.equalTo(121)
-            $0.height.equalTo(36)
+        deleteMenuAccessoryView.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.height.equalTo(73)
         }
         
         inputAccessoryView = accessoryView
     }
     
-    func hideInputAccessoryView() {
+    func removeInputAccessoryView() {
         inputAccessoryView?.isHidden = true
         inputAccessoryView = nil
+    }
+    
+    func hideDeleteMenuAccessoryView() {
+        deleteMenuAccessoryView.isHidden = true
+        enterMenuAccessoryView.isHidden = false
+    }
+    
+    func showDeleteAlert() {
+        print("삭제츄")
     }
     
     // MARK: - @objc Func
@@ -206,13 +206,15 @@ private extension ModifyMenuTextField {
     
     @objc func editingButtonDidTap() {
         text = ""
+        textColor = .gray800
+        layer.borderWidth = 0
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
     @objc func inputApplyButtonDidTap() {
         guard let text = text else { return }
         if !text.isEmpty {
-            hideInputAccessoryView()
+            removeInputAccessoryView()
             resignFirstResponder()
         }
     }
@@ -223,8 +225,18 @@ private extension ModifyMenuTextField {
     
     @objc func textFieldDidChange() {
         guard let text = text else { return }
-        inputApplyButton.backgroundColor = !text.isEmpty ? .red500 : .red400
-        inputResetButton.isHidden = text.isEmpty
+        enterMenuAccessoryView.applyButton.backgroundColor = !text.isEmpty ? .red500 : .red400
+        enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
+        
+        if let price = Int(text) {
+            let isInvalidPrice = price > 8000
+            isWarn = isInvalidPrice
+            deleteMenuAccessoryView.isHidden = !isInvalidPrice
+            enterMenuAccessoryView.isHidden = isInvalidPrice
+            updateWarnStyle()
+        } else {
+            hideDeleteMenuAccessoryView()
+        }
     }
 }
 
@@ -244,13 +256,13 @@ extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateStyle(isEditing: false)
-        hideInputAccessoryView()
+        removeInputAccessoryView()
         isModifying = false
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        hideInputAccessoryView()
+        removeInputAccessoryView()
         resignFirstResponder()
         return true
     }
