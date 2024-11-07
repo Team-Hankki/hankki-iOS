@@ -184,6 +184,7 @@
 		A29ADF9E2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */; };
 		A29ADFA02C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */; };
 		A2AF6FB02CD99ABF00F5271D /* ModifyMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */; };
+		A2AF6FB22CDD427800F5271D /* DeleteMenuAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -405,6 +406,7 @@
 		A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiValidateResponseDTO.swift; sourceTree = "<group>"; };
 		A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiFromOtherRequestDTO.swift; sourceTree = "<group>"; };
 		A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuTextField.swift; sourceTree = "<group>"; };
+		A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMenuAccessoryView.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -1506,6 +1508,7 @@
 			isa = PBXGroup;
 			children = (
 				A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */,
+				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
 			);
 			path = HankkiTextField;
 			sourceTree = "<group>";
@@ -1966,6 +1969,7 @@
 				86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */,
 				865D59C82C7B9105004CC517 /* LoadingViewType.swift in Sources */,
 				86880C382C4920A700CAEF58 /* PostZipRequestDTO.swift in Sources */,
+				A2AF6FB22CDD427800F5271D /* DeleteMenuAccessoryView.swift in Sources */,
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
