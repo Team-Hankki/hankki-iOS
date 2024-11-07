@@ -18,12 +18,12 @@ final class ModifyMenuViewController: BaseViewController {
     // MARK: - UI Components
     
     private let titleLabel: UILabel = UILabel()
-    private lazy var nameTextField: HankkiTextField = HankkiTextField(
+    private lazy var nameTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.name,
         placeholderText: StringLiterals.ModifyMenu.namePlaceholder,
         hankkiTextFieldDelegate: self
     )
-    private lazy var priceTextField: HankkiTextField = HankkiTextField(
+    private lazy var priceTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.price,
         hankkiTextFieldDelegate: self
     )
@@ -150,7 +150,7 @@ private extension ModifyMenuViewController {
 
 // MARK: - HankkiTextFieldDelegate
 
-extension ModifyMenuViewController: HankkiTextFieldDelegate {
+extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
     func getOriginalText(textField: UITextField) -> String {
         switch textField {
         case nameTextField:

@@ -1,5 +1,5 @@
 //
-//  HankkiTextField.swift
+//  ModifyMenuTextField.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 11/5/24.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-protocol HankkiTextFieldDelegate: AnyObject {
+protocol ModifyMenuTextFieldDelegate: AnyObject {
     func handleTextFieldUpdate(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
 }
 
-final class HankkiTextField: UITextField {
+final class ModifyMenuTextField: UITextField {
     
     // MARK: - Properties
     
     var titleText: String
     var placeholderText: String?
-    var hankkiTextFieldDelegate: HankkiTextFieldDelegate?
+    var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
     private var isModifying: Bool = false
     
@@ -35,11 +35,11 @@ final class HankkiTextField: UITextField {
     init(
         titleText: String,
         placeholderText: String? = nil,
-        hankkiTextFieldDelegate: HankkiTextFieldDelegate? = nil
+        hankkiTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
         self.placeholderText = placeholderText
-        self.hankkiTextFieldDelegate = hankkiTextFieldDelegate
+        self.modifyMenuTextFieldDelegate = hankkiTextFieldDelegate
         super.init(frame: .zero)
         
         setupHierarchy()
@@ -54,7 +54,7 @@ final class HankkiTextField: UITextField {
     }
 }
 
-private extension HankkiTextField {
+private extension ModifyMenuTextField {
     
     // MARK: - Set UI
     
@@ -131,7 +131,7 @@ private extension HankkiTextField {
     }
 }
 
-private extension HankkiTextField {
+private extension ModifyMenuTextField {
     
     func updateStyle(isEditing: Bool) {
         let borderWidth: CGFloat = isEditing ? 1 : 0
@@ -206,7 +206,7 @@ private extension HankkiTextField {
     
     @objc func editingButtonDidTap() {
         text = ""
-        hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: self)
+        modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
     @objc func inputApplyButtonDidTap() {
@@ -218,7 +218,7 @@ private extension HankkiTextField {
     }
     
     @objc func inputResetButtonDidTap() {
-        self.text = hankkiTextFieldDelegate?.getOriginalText(textField: self)
+        self.text = modifyMenuTextFieldDelegate?.getOriginalText(textField: self)
     }
     
     @objc func textFieldDidChange() {
@@ -230,7 +230,7 @@ private extension HankkiTextField {
 
 // MARK: - UITextFieldDelegate
 
-extension HankkiTextField: UITextFieldDelegate {
+extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if !isModifying { return false }
@@ -246,7 +246,7 @@ extension HankkiTextField: UITextFieldDelegate {
         updateStyle(isEditing: false)
         hideInputAccessoryView()
         isModifying = false
-        hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: self)
+        modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
