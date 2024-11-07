@@ -27,6 +27,7 @@ final class ModifyMenuViewController: BaseViewController {
         titleText: StringLiterals.ModifyMenu.price,
         hankkiTextFieldDelegate: self
     )
+    private let over8000PriceLabel: UILabel = UILabel()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.ModifyMenu.modifyMenuCompleteButton,
         primaryButtonHandler: completeButtonDidTap
@@ -58,6 +59,7 @@ final class ModifyMenuViewController: BaseViewController {
             titleLabel,
             nameTextField,
             priceTextField,
+            over8000PriceLabel,
             bottomButtonView,
             carefulGuideLabel
         )
@@ -79,6 +81,11 @@ final class ModifyMenuViewController: BaseViewController {
             $0.top.equalTo(nameTextField.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(52)
+        }
+        
+        over8000PriceLabel.snp.makeConstraints {
+            $0.top.equalTo(priceTextField.snp.bottom).offset(6)
+            $0.trailing.equalTo(priceTextField)
         }
         
         bottomButtonView.snp.makeConstraints {
@@ -117,6 +124,15 @@ final class ModifyMenuViewController: BaseViewController {
                 textColor: .gray800
             )
             $0.keyboardType = .numberPad
+        }
+        
+        over8000PriceLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.caption1,
+                withText: StringLiterals.ModifyMenu.overPriceErrorText,
+                color: .warnRed
+            )
+            $0.isHidden = true
         }
         
         carefulGuideLabel.do {
@@ -171,5 +187,9 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
         default:
             break
         }
+    }
+    
+    func showErrorLabel(isWarn: Bool) {
+        over8000PriceLabel.isHidden = !isWarn
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 protocol ModifyMenuTextFieldDelegate: AnyObject {
     func handleTextFieldUpdate(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
+    func showErrorLabel(isWarn: Bool)
 }
 
 final class ModifyMenuTextField: UITextField {
@@ -21,7 +22,12 @@ final class ModifyMenuTextField: UITextField {
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
     private var isModifying: Bool = false
-    private var isWarn: Bool = false
+    private var isWarn: Bool = false {
+        didSet {
+            updateWarnStyle()
+            modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn)
+        }
+    }
     
     // MARK: - UI Components
     
@@ -164,6 +170,9 @@ private extension ModifyMenuTextField {
         if let text = text, text.isEmpty { isWarn = false }
         layer.borderColor = isWarn ? UIColor.warnRed.cgColor : UIColor.gray500.cgColor
         textColor = isWarn ? .warnRed : .gray850
+        
+        deleteMenuAccessoryView.isHidden = !isWarn
+        enterMenuAccessoryView.isHidden = isWarn
     }
     
     func setupInputAccessoryView() {
@@ -205,9 +214,9 @@ private extension ModifyMenuTextField {
     }
     
     @objc func editingButtonDidTap() {
+        isWarn = false
         text = ""
-        textColor = .gray800
-        layer.borderWidth = 0
+        updateStyle(isEditing: false)
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
@@ -229,13 +238,7 @@ private extension ModifyMenuTextField {
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         if let price = Int(text) {
-            let isInvalidPrice = price > 8000
-            isWarn = isInvalidPrice
-            deleteMenuAccessoryView.isHidden = !isInvalidPrice
-            enterMenuAccessoryView.isHidden = isInvalidPrice
-            updateWarnStyle()
-        } else {
-            hideDeleteMenuAccessoryView()
+            isWarn = price > 8000
         }
     }
 }
