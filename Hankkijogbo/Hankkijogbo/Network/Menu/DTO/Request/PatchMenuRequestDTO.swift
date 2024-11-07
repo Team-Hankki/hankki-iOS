@@ -10,6 +10,6 @@ import Foundation
 // MARK: - 메뉴 수정 API Req
 
 struct PatchMenuRequestDTO: Codable {
-    let name: String
-    let price: Int
+    var name: String?
+    var price: Int?
 }

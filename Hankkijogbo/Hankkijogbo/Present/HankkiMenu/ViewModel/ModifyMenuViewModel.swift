@@ -13,6 +13,11 @@ final class ModifyMenuViewModel {
     
     var storeId: Int
     var selectedMenu: SelectableMenuData
+    var modifiedMenuData: PatchMenuRequestDTO = PatchMenuRequestDTO() {
+        didSet {
+            updateButton?(isMenuDataValid())
+        }
+    }
     
     init(storeId: Int, selectedMenu: SelectableMenuData) {
         self.storeId = storeId
@@ -22,11 +27,17 @@ final class ModifyMenuViewModel {
 
 extension ModifyMenuViewModel {
     
+    func isMenuDataValid() -> Bool {
+        guard let name = modifiedMenuData.name, let price = modifiedMenuData.price else { return false }
+        return !(name.isEmpty) && (price <= 8000)
+    }
+    
     /// 메뉴 수정
     func modifyMenuAPI(completion: @escaping () -> Void) {
-        let requestBody: PatchMenuRequestDTO = PatchMenuRequestDTO(name: selectedMenu.name, price: selectedMenu.price)
-        NetworkService.shared.menuService.patchMenu(storeId: storeId, id: selectedMenu.id, requestBody: requestBody) { result in
-            result.handleNetworkResult { _ in completion() }
+        if isMenuDataValid() {
+            NetworkService.shared.menuService.patchMenu(storeId: storeId, id: selectedMenu.id, requestBody: modifiedMenuData) { result in
+                result.handleNetworkResult { _ in completion() }
+            }
         }
     }
 }

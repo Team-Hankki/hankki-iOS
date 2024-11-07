@@ -23,13 +23,15 @@ final class ModifyMenuViewController: BaseViewController {
         placeholderText: StringLiterals.ModifyMenu.namePlaceholder,
         inputAccessoryText: StringLiterals.ModifyMenu.applyButton,
         defaultButtonImage: .btnModifyMenu,
-        editingButtonImage: .btnDelete
+        editingButtonImage: .btnDelete,
+        hankkiTextFieldDelegate: self
     )
     private lazy var priceTextField: HankkiTextField = HankkiTextField(
         titleText: StringLiterals.ModifyMenu.price,
         inputAccessoryText: StringLiterals.ModifyMenu.applyButton,
         defaultButtonImage: .btnModifyMenu,
-        editingButtonImage: .btnDelete
+        editingButtonImage: .btnDelete,
+        hankkiTextFieldDelegate: self
     )
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.ModifyMenu.modifyMenuCompleteButton,
@@ -131,6 +133,8 @@ final class ModifyMenuViewController: BaseViewController {
     }
 }
 
+// MARK: - Private Func
+
 private extension ModifyMenuViewController {
     
     func bindViewModel() {
@@ -147,5 +151,21 @@ private extension ModifyMenuViewController {
     
     @objc func completeButtonDidTap() {
         print("수정 완료 클릭")
+    }
+}
+
+// MARK: - HankkiTextFieldDelegate
+
+extension ModifyMenuViewController: HankkiTextFieldDelegate {
+    
+    func handleTextFieldUpdate(textField: UITextField) {
+        switch textField {
+        case nameTextField:
+            viewModel.modifiedMenuData.name = textField.text
+        case priceTextField:
+            viewModel.modifiedMenuData.price = Int(textField.text ?? "")
+        default:
+            break
+        }
     }
 }

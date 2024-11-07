@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HankkiTextFieldDelegate: AnyObject {
+    func handleTextFieldUpdate(textField: UITextField)
+}
+
 final class HankkiTextField: UITextField {
     
     // MARK: - Properties
@@ -18,6 +22,7 @@ final class HankkiTextField: UITextField {
     var editingButtonImage: UIImage
     var defaultButtonHandler: (() -> Void)?
     var editingButtonHandler: (() -> Void)?
+    var hankkiTextFieldDelegate: HankkiTextFieldDelegate?
     
     private var isModifying: Bool = false
     
@@ -36,7 +41,8 @@ final class HankkiTextField: UITextField {
         defaultButtonImage: UIImage,
         editingButtonImage: UIImage,
         defaultButtonHandler: (() -> Void)? = nil,
-        editingButtonHandler: (() -> Void)? = nil
+        editingButtonHandler: (() -> Void)? = nil,
+        hankkiTextFieldDelegate: HankkiTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
         self.placeholderText = placeholderText
@@ -45,6 +51,7 @@ final class HankkiTextField: UITextField {
         self.editingButtonImage = editingButtonImage
         self.defaultButtonHandler = defaultButtonHandler
         self.editingButtonHandler = editingButtonHandler
+        self.hankkiTextFieldDelegate = hankkiTextFieldDelegate
         super.init(frame: .zero)
         
         setupHierarchy()
@@ -200,6 +207,8 @@ extension HankkiTextField: UITextFieldDelegate {
         updateStyle(isEditing: false)
         hideInputAccessoryView()
         isModifying = false
+        
+        hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: textField)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
