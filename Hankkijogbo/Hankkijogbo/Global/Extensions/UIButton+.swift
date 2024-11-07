@@ -76,8 +76,8 @@ extension UIButton {
             $0.setTitle(title, for: .normal)
             $0.backgroundColor = .hankkiWhite
             $0.layer.borderColor = UIColor.gray300.cgColor
-            $0.setTitleColor(.gray500, for: .normal)
-            $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+            $0.setTitleColor(.gray800, for: .normal)
+            $0.setImage(.icArrowClose.withTintColor(.gray400), for: .normal)
         }
     }
 }
