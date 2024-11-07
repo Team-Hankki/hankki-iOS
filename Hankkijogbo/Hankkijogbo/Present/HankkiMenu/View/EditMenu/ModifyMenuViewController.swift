@@ -21,16 +21,10 @@ final class ModifyMenuViewController: BaseViewController {
     private lazy var nameTextField: HankkiTextField = HankkiTextField(
         titleText: StringLiterals.ModifyMenu.name,
         placeholderText: StringLiterals.ModifyMenu.namePlaceholder,
-        inputAccessoryText: StringLiterals.ModifyMenu.applyButton,
-        defaultButtonImage: .btnModifyMenu,
-        editingButtonImage: .btnDelete,
         hankkiTextFieldDelegate: self
     )
     private lazy var priceTextField: HankkiTextField = HankkiTextField(
         titleText: StringLiterals.ModifyMenu.price,
-        inputAccessoryText: StringLiterals.ModifyMenu.applyButton,
-        defaultButtonImage: .btnModifyMenu,
-        editingButtonImage: .btnDelete,
         hankkiTextFieldDelegate: self
     )
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
@@ -157,6 +151,16 @@ private extension ModifyMenuViewController {
 // MARK: - HankkiTextFieldDelegate
 
 extension ModifyMenuViewController: HankkiTextFieldDelegate {
+    func getOriginalText(textField: UITextField) -> String {
+        switch textField {
+        case nameTextField:
+            return viewModel.selectedMenu.name
+        case priceTextField:
+            return String(describing: viewModel.selectedMenu.price)
+        default:
+            return ""
+        }
+    }
     
     func handleTextFieldUpdate(textField: UITextField) {
         switch textField {

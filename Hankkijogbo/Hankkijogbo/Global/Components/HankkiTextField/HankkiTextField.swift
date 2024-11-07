@@ -9,6 +9,7 @@ import UIKit
 
 protocol HankkiTextFieldDelegate: AnyObject {
     func handleTextFieldUpdate(textField: UITextField)
+    func getOriginalText(textField: UITextField) -> String
 }
 
 final class HankkiTextField: UITextField {
@@ -17,9 +18,6 @@ final class HankkiTextField: UITextField {
     
     var titleText: String
     var placeholderText: String?
-    var inputAccessoryText: String?
-    var defaultButtonImage: UIImage
-    var editingButtonImage: UIImage
     var hankkiTextFieldDelegate: HankkiTextFieldDelegate?
     
     private var isModifying: Bool = false
@@ -29,23 +27,18 @@ final class HankkiTextField: UITextField {
     private let titleLabel: UILabel = UILabel()
     private let defaultButton: UIButton = UIButton()
     private let editingButton: UIButton = UIButton()
-    private let inputAccessoryButton: UIButton = UIButton()
+    private let inputApplyButton: UIButton = UIButton()
+    private let inputResetButton: UIButton = UIButton()
     
     // MARK: - Init
     
     init(
         titleText: String,
         placeholderText: String? = nil,
-        inputAccessoryText: String? = nil,
-        defaultButtonImage: UIImage,
-        editingButtonImage: UIImage,
         hankkiTextFieldDelegate: HankkiTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
         self.placeholderText = placeholderText
-        self.inputAccessoryText = inputAccessoryText
-        self.defaultButtonImage = defaultButtonImage
-        self.editingButtonImage = editingButtonImage
         self.hankkiTextFieldDelegate = hankkiTextFieldDelegate
         super.init(frame: .zero)
         
@@ -116,11 +109,11 @@ private extension HankkiTextField {
         }
         
         defaultButton.do {
-            $0.setImage(defaultButtonImage, for: .normal)
+            $0.setImage(.btnModifyMenu, for: .normal)
         }
         
         editingButton.do {
-            $0.setImage(editingButtonImage, for: .normal)
+            $0.setImage(.btnDelete, for: .normal)
             $0.isHidden = true
         }
     }
@@ -133,7 +126,8 @@ private extension HankkiTextField {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         defaultButton.addTarget(self, action: #selector(defaultButtonDidTap), for: .touchUpInside)
         editingButton.addTarget(self, action: #selector(editingButtonDidTap), for: .touchUpInside)
-        inputAccessoryButton.addTarget(self, action: #selector(applyButtonDidTap), for: .touchUpInside)
+        inputApplyButton.addTarget(self, action: #selector(inputApplyButtonDidTap), for: .touchUpInside)
+        inputResetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
 }
 
@@ -156,24 +150,50 @@ private extension HankkiTextField {
     }
     
     func setupInputAccessoryView() {
-        guard let inputAccessoryText = inputAccessoryText else { return }
-        
-        inputAccessoryButton.do {
-            $0.frame = .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54)
+        let accessoryView = UIView(frame: .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54 + 56))
+
+        inputApplyButton.do {
             $0.backgroundColor = .red400
             $0.setAttributedTitle(
                 UILabel.setupAttributedText(
                     for: PretendardStyle.subtitle3,
-                    withText: inputAccessoryText,
+                    withText: StringLiterals.ModifyMenu.applyButton,
                     color: .hankkiWhite
                 ), for: .normal)
         }
         
-        inputAccessoryView = inputAccessoryButton
+        inputResetButton.do {
+            $0.backgroundColor = .gray100
+            $0.layer.cornerRadius = 8
+            $0.setAttributedTitle(
+                UILabel.setupAttributedText(
+                    for: PretendardStyle.body7,
+                    withText: "기존 메뉴\(titleText.suffix(2)) 입력",
+                    color: .gray600
+                ),
+                for: .normal
+            )
+        }
+        
+        accessoryView.addSubviews(inputApplyButton, inputResetButton)
+        
+        inputApplyButton.snp.makeConstraints {
+            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.height.equalTo(54)
+        }
+        
+        inputResetButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(inputApplyButton.snp.top).offset(-20)
+            $0.width.equalTo(121)
+            $0.height.equalTo(36)
+        }
+        
+        inputAccessoryView = accessoryView
     }
     
     func hideInputAccessoryView() {
-        inputAccessoryButton.backgroundColor = .clear
+        inputAccessoryView?.isHidden = true
         inputAccessoryView = nil
     }
     
@@ -189,7 +209,7 @@ private extension HankkiTextField {
         hankkiTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
-    @objc func applyButtonDidTap() {
+    @objc func inputApplyButtonDidTap() {
         guard let text = text else { return }
         if !text.isEmpty {
             hideInputAccessoryView()
@@ -197,9 +217,14 @@ private extension HankkiTextField {
         }
     }
     
+    @objc func inputResetButtonDidTap() {
+        self.text = hankkiTextFieldDelegate?.getOriginalText(textField: self)
+    }
+    
     @objc func textFieldDidChange() {
         guard let text = text else { return }
-        inputAccessoryButton.backgroundColor = !text.isEmpty ? .red500 : .red400
+        inputApplyButton.backgroundColor = !text.isEmpty ? .red500 : .red400
+        inputResetButton.isHidden = text.isEmpty
     }
 }
 
