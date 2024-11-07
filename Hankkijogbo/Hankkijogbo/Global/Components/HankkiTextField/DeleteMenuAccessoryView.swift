@@ -50,6 +50,7 @@ class DeleteMenuAccessoryView: BaseView {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.gray200.cgColor
             $0.makeRoundCorners(corners: [.topLeft, .topRight], radius: 12)
+            $0.isHidden = true
         }
         
         topLabel.do {
