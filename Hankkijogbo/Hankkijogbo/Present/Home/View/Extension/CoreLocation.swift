@@ -114,7 +114,7 @@ extension HomeViewController: CLLocationManagerDelegate {
         guard isViewLoaded else { return }
         let position = NMGLatLng(lat: location.coordinate.latitude - 0.0006, lng: location.coordinate.longitude)
         let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
-
+        
         DispatchQueue.main.async {
             self.rootView.mapView.moveCamera(cameraUpdate)
             print("🌍 현재 위치로 카메라가 이동 : \(position.lat), \(position.lng) 🌍")
@@ -128,7 +128,6 @@ extension HomeViewController: CLLocationManagerDelegate {
         rootView.mapView.moveCamera(cameraUpdate)
     }
     
-    /// TargetButton Layout
     // MarkerCardInfoView가 노출될 때의 TargetButton Layout
     func showTargetButtonAtCardView() {
         self.rootView.targetButton.isHidden = false
@@ -162,9 +161,9 @@ extension HomeViewController {
     func setupMap() {
         rootView.mapView.touchDelegate = self
         rootView.mapView.positionMode = .direction
-        
     }
     
+    // 선택한 대학교의 식당 리스트, 지도핀 카메라 포커싱 및 보여주기
     func setupPosition(with university: UniversityModel) {
         var markers: [GetHankkiPinData] = viewModel.hankkiPins
         var initialPosition: NMGLatLng?
@@ -198,6 +197,13 @@ extension HomeViewController {
         })
     }
     
+    // latitude,longitude로 카메라 포커싱
+    func moveCameraToLocation(latitude: Double, longitude: Double) {
+        let position = NMGLatLng(lat: latitude, lng: longitude)
+        let cameraUpdate = NMFCameraUpdate(scrollTo: position, zoomTo: 14.0)
+        rootView.mapView.moveCamera(cameraUpdate)
+    }
+    
     func setupPosition(with pins: [GetHankkiPinData]) {
         clearMarkers()
         
@@ -215,11 +221,13 @@ extension HomeViewController {
         }
     }
     
+    // 지도 핀 삭제
     private func clearMarkers() {
         markers.forEach { $0.mapView = nil }
         markers.removeAll()
     }
     
+    // 식당 상세 카드뷰 노출
     private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
@@ -253,6 +261,7 @@ extension HomeViewController {
         }
     }
     
+    // 식당 상세 카드뷰 숨기기
     func hideMarkerInfoCard() {
         guard markerInfoCardView != nil else { return }
         
@@ -268,10 +277,24 @@ extension HomeViewController {
         })
         self.showTargetButtonAtBottomSheet()
     }
+    
+    // 식당 id로 latitude, longitude 찾는 메소드
+    func findLocationById(_ id: Int) -> (latitude: Double, longitude: Double)? {
+        if let pinData = hankkiPins.first(where: { $0.id == id }) {
+            return (latitude: pinData.latitude, longitude: pinData.longitude)
+        }
+        return nil
+    }
 }
 
 extension HomeViewController: TotalListBottomSheetViewDelegate {
     func didSelectHankkiCell(at index: Int, pinId: Int) {
         showMarkerInfoCard(at: index, pinId: pinId)
+        
+        if let location = findLocationById(pinId) {
+            moveCameraToLocation(latitude: location.latitude, longitude: location.longitude)
+        } else {
+            print("해당 식당 ID의 위치 정보를 찾을 수 없습니다.")
+        }
     }
 }

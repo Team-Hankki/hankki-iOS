@@ -21,6 +21,7 @@ final class HomeViewController: BaseViewController {
     
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
+    var hankkiPins: [GetHankkiPinData] = []
     
     private var universityId: Int?
     
@@ -110,6 +111,7 @@ final class HomeViewController: BaseViewController {
         }
         
         viewModel.hankkiPinsDidChange = { [weak self] pins in
+            self?.hankkiPins = pins
             DispatchQueue.main.async {
                 self?.setupPosition(with: pins)
             }
