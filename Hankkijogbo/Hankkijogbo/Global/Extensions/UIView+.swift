@@ -25,6 +25,14 @@ extension UIView {
         layer.borderColor = borderColor.cgColor
     }
     
+    /// 특정 코너만 둥글게
+    func makeRoundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
+    
     /// 애니메이션과 함께 뷰를 제거한다.
     func removeViewWithAnimation(duration: Double = 1.5, delay: Double = 1) {
         UIView.animate(withDuration: duration,
