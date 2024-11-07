@@ -63,8 +63,8 @@ final class HomeView: BaseView {
             if bottomSheetView.isExpanded {
                 targetButton.isHidden = true
             } else {
-                $0.bottom.equalTo(bottomSheetView.snp.top).offset(-12)
-                $0.trailing.equalToSuperview().inset(22)
+                $0.bottom.equalTo(bottomSheetView.snp.top).offset(-10)
+                $0.trailing.equalToSuperview().inset(12)
                 targetButton.isHidden = false
             }
         }
