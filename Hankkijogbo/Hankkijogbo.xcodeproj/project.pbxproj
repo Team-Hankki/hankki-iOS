@@ -138,6 +138,8 @@
 		9E38C1F6B1DB0B110CF9BCB7 /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC84CE15CCD6BBF6F508B9D /* Pods_Hankkijogbo.framework */; };
 		A2079B942C656F7D00817651 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079B932C656F7D00817651 /* ImageCompressor.swift */; };
 		A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */; };
+		A21DAE9B2CD9085B004D896C /* ModifyMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */; };
+		A21DAE9E2CD90B06004D896C /* PatchMenuRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DAE9D2CD90B06004D896C /* PatchMenuRequestDTO.swift */; };
 		A22D20C72C3162C9001AFAC6 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */; };
 		A236B5FF2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */; };
 		A23D11972C47FFB90023480C /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D11962C47FFB90023480C /* SearchViewModel.swift */; };
@@ -171,16 +173,19 @@
 		A24A787C2CB44E450049B031 /* MenuTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787B2CB44E450049B031 /* MenuTargetType.swift */; };
 		A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787D2CB44E500049B031 /* MenuAPIService.swift */; };
 		A24A78802CB463490049B031 /* PostMenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */; };
-		A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */; };
 		A27AD9322CB7EB2800515D3B /* EditMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */; };
 		A27AD9342CB7EEB900515D3B /* ModifyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */; };
-		A27AD9362CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */; };
+		A27AD9362CB7EECB00515D3B /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */; };
 		A27AD9392CB8057700515D3B /* EditMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9382CB8057700515D3B /* EditMenuCollectionViewCell.swift */; };
 		A27AD93B2CB806E700515D3B /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD93A2CB806E700515D3B /* RadioButton.swift */; };
 		A28F60482CB877B6000FDCD2 /* EditMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F60472CB877B6000FDCD2 /* EditMenuViewModel.swift */; };
 		A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */; };
 		A29ADF9E2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */; };
 		A29ADFA02C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */; };
+		A2AF6FB02CD99ABF00F5271D /* ModifyMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */; };
+		A2AF6FB22CDD427800F5271D /* DeleteMenuAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */; };
+		A2AF6FB42CDD69F900F5271D /* EnterMenuAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */; };
+		A2AF6FB62CDD85D000F5271D /* MenuCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -356,6 +361,8 @@
 		86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSeparatorView.swift; sourceTree = "<group>"; };
 		A2079B932C656F7D00817651 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiCategoryModel.swift; sourceTree = "<group>"; };
+		A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewModel.swift; sourceTree = "<group>"; };
+		A21DAE9D2CD90B06004D896C /* PatchMenuRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchMenuRequestDTO.swift; sourceTree = "<group>"; };
 		A22D20C62C3162C9001AFAC6 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHankkiBottomSheetViewController.swift; sourceTree = "<group>"; };
 		A23D11962C47FFB90023480C /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -389,16 +396,19 @@
 		A24A787B2CB44E450049B031 /* MenuTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTargetType.swift; sourceTree = "<group>"; };
 		A24A787D2CB44E500049B031 /* MenuAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAPIService.swift; sourceTree = "<group>"; };
 		A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMenuResponseDTO.swift; sourceTree = "<group>"; };
-		A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuCompleteViewController.swift; sourceTree = "<group>"; };
 		A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewController.swift; sourceTree = "<group>"; };
 		A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewController.swift; sourceTree = "<group>"; };
-		A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuCompleteViewController.swift; sourceTree = "<group>"; };
+		A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		A27AD9382CB8057700515D3B /* EditMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A27AD93A2CB806E700515D3B /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		A28F60472CB877B6000FDCD2 /* EditMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewModel.swift; sourceTree = "<group>"; };
 		A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLineView.swift; sourceTree = "<group>"; };
 		A29ADF9D2C6B87DC00821A17 /* PostHankkiValidateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiValidateResponseDTO.swift; sourceTree = "<group>"; };
 		A29ADF9F2C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiFromOtherRequestDTO.swift; sourceTree = "<group>"; };
+		A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuTextField.swift; sourceTree = "<group>"; };
+		A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMenuAccessoryView.swift; sourceTree = "<group>"; };
+		A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterMenuAccessoryView.swift; sourceTree = "<group>"; };
+		A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCompleteView.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -772,6 +782,7 @@
 		83DBEDA92C2565920042BA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A2AF6FAE2CD99AB300F5271D /* ModifyMenuTextField */,
 				8322D03B2C5FB36B00F6D725 /* HankkiCategoryTagLabel */,
 				A240EA472C45273D000FF458 /* HankkiPaddingLabel */,
 				A29A441C2C6ADC11002B8D36 /* HankkiLineView */,
@@ -1265,6 +1276,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A21DAE9C2CD90AF9004D896C /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				A21DAE9D2CD90B06004D896C /* PatchMenuRequestDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		A21DAEA02CD91F20004D896C /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		A22D20C92C3165B6001AFAC6 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -1401,8 +1428,9 @@
 			isa = PBXGroup;
 			children = (
 				A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */,
-				A27AD92D2CB7EAB800515D3B /* AddMenu */,
-				A27AD92E2CB7EAC200515D3B /* EditMenu */,
+				A27AD92D2CB7EAB800515D3B /* Add */,
+				A27AD92E2CB7EAC200515D3B /* Edit */,
+				A2AF6FB72CDDC07700F5271D /* Complete */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1412,6 +1440,7 @@
 			children = (
 				A24A78762CB44BCB0049B031 /* AddMenuViewModel.swift */,
 				A28F60472CB877B6000FDCD2 /* EditMenuViewModel.swift */,
+				A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1436,29 +1465,28 @@
 		A24A787A2CB44E360049B031 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */,
+				A21DAE9C2CD90AF9004D896C /* Request */,
+				A21DAEA02CD91F20004D896C /* Response */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		A27AD92D2CB7EAB800515D3B /* AddMenu */ = {
+		A27AD92D2CB7EAB800515D3B /* Add */ = {
 			isa = PBXGroup;
 			children = (
 				A24A78712CB3F45D0049B031 /* AddMenuViewController.swift */,
-				A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */,
 			);
-			path = AddMenu;
+			path = Add;
 			sourceTree = "<group>";
 		};
-		A27AD92E2CB7EAC200515D3B /* EditMenu */ = {
+		A27AD92E2CB7EAC200515D3B /* Edit */ = {
 			isa = PBXGroup;
 			children = (
 				A27AD9372CB8055C00515D3B /* Cell */,
 				A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */,
 				A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */,
-				A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */,
 			);
-			path = EditMenu;
+			path = Edit;
 			sourceTree = "<group>";
 		};
 		A27AD9372CB8055C00515D3B /* Cell */ = {
@@ -1475,6 +1503,25 @@
 				A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */,
 			);
 			path = HankkiLineView;
+			sourceTree = "<group>";
+		};
+		A2AF6FAE2CD99AB300F5271D /* ModifyMenuTextField */ = {
+			isa = PBXGroup;
+			children = (
+				A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */,
+				A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */,
+				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
+			);
+			path = ModifyMenuTextField;
+			sourceTree = "<group>";
+		};
+		A2AF6FB72CDDC07700F5271D /* Complete */ = {
+			isa = PBXGroup;
+			children = (
+				A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */,
+				A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */,
+			);
+			path = Complete;
 			sourceTree = "<group>";
 		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
@@ -1786,12 +1833,14 @@
 				A29ADFA02C6B995B00821A17 /* PostHankkiFromOtherRequestDTO.swift in Sources */,
 				A240EA492C45274B000FF458 /* HankkiPaddingLabel.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
+				A2AF6FB42CDD69F900F5271D /* EnterMenuAccessoryView.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				830285472C455BB10004D9F7 /* NetworkService.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2EC33AF2C47166F00809840 /* LocationTargetType.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */,
+				A21DAE9B2CD9085B004D896C /* ModifyMenuViewModel.swift in Sources */,
 				830285452C45596D0004D9F7 /* NetworkResult.swift in Sources */,
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
@@ -1858,6 +1907,7 @@
 				86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */,
 				A240EA502C454B90000FF458 /* HankkiReportOptionCollectionViewCell.swift in Sources */,
 				A2C9FCB52C49B15700868DF7 /* PostHankkiResponseDTO.swift in Sources */,
+				A21DAE9E2CD90B06004D896C /* PatchMenuRequestDTO.swift in Sources */,
 				A2C9FCA52C49721200868DF7 /* HankkiDetailViewModel.swift in Sources */,
 				83DBEDCC2C256B080042BA48 /* UILabel+.swift in Sources */,
 				A240EA462C451061000FF458 /* HankkiDetailCollectionViewCell.swift in Sources */,
@@ -1908,6 +1958,7 @@
 				A236B5FF2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,
 				A2DEBF762C3DBEEB00DE14A9 /* ReportHeaderView.swift in Sources */,
+				A2AF6FB02CD99ABF00F5271D /* ModifyMenuTextField.swift in Sources */,
 				830285532C4560680004D9F7 /* GetCategoryFilterResponseDTO.swift in Sources */,
 				8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */,
 				83A23A422C4010AA00A71ECE /* ButtonType.swift in Sources */,
@@ -1924,12 +1975,12 @@
 				86880C1E2C47A12100CAEF58 /* UserDefaults+.swift in Sources */,
 				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
-				A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				86880BFF2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift in Sources */,
 				86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */,
 				865D59C82C7B9105004CC517 /* LoadingViewType.swift in Sources */,
 				86880C382C4920A700CAEF58 /* PostZipRequestDTO.swift in Sources */,
+				A2AF6FB22CDD427800F5271D /* DeleteMenuAccessoryView.swift in Sources */,
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
@@ -1965,9 +2016,10 @@
 				A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				A2C9FCA12C49711700868DF7 /* GetMyZipListResponseDTO.swift in Sources */,
-				A27AD9362CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift in Sources */,
+				A27AD9362CB7EECB00515D3B /* CompleteViewController.swift in Sources */,
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */,
+				A2AF6FB62CDD85D000F5271D /* MenuCompleteView.swift in Sources */,
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */,
 				86880C362C49148900CAEF58 /* CreateZipViewModel.swift in Sources */,

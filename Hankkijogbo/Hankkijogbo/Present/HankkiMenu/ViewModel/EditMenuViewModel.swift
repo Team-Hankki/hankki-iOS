@@ -45,20 +45,26 @@ extension EditMenuViewModel {
         }
     }
     
-    /// 메뉴 수정
-    func modifyMenuAPI(storeId: Int, id: Int, requestBody: MenuData, completion: @escaping () -> Void) {
-        NetworkService.shared.menuService.patchMenu(storeId: storeId, id: id, requestBody: requestBody) { result in
-            result.handleNetworkResult { _ in
-                completion()
-            }
-        }
-    }
-    
     /// 메뉴 삭제
     func deleteMenuAPI(completion: @escaping () -> Void) {
         guard let selectedMenu = selectedMenu else { return }
         NetworkService.shared.menuService.deleteMenu(storeId: storeId, id: selectedMenu.id) { result in
-            result.handleNetworkResult { _ in
+            result.handleNetworkResult(onSuccessVoid: completion)
+        }
+    }
+    
+    /// 식당 상세 쪽에서 메뉴 가져오기 -> 일단 임시로 사용 중...
+    func getUpdatedMenusAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.getHankkiDetail(id: storeId) { [weak self] result in
+            result.handleNetworkResult { response in
+                self?.menus = response.data.menus.map {
+                    SelectableMenuData(
+                        isSelected: false,
+                        id: $0.id,
+                        name: $0.name,
+                        price: $0.price
+                    )
+                }
                 completion()
             }
         }

@@ -17,7 +17,7 @@ final class EditMenuViewController: BaseViewController {
     
     // MARK: - UI Components
     
-    let titleLabel: UILabel = UILabel()
+    private let titleLabel: UILabel = UILabel()
     private lazy var menuFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var menuCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: menuFlowLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
@@ -46,6 +46,14 @@ final class EditMenuViewController: BaseViewController {
         bindViewModel()
         setupRegister()
         setupDelegate()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.getUpdatedMenusAPI {
+            self.menuCollectionView.reloadData()
+        }
     }
     
     // MARK: - Set UI
@@ -98,7 +106,7 @@ final class EditMenuViewController: BaseViewController {
     }
 }
 
-extension EditMenuViewController {
+private extension EditMenuViewController {
     
     func bindViewModel() {
         viewModel.updateCollectionView = {
@@ -128,6 +136,22 @@ extension EditMenuViewController {
         menuCollectionView.delegate = self
     }
     
+    func popToEditMenu() {
+        if let editMenuViewController = navigationController?.viewControllers.first(where: {
+            $0 is EditMenuViewController
+        }) {
+            navigationController?.popToViewController(editMenuViewController, animated: true)
+        }
+    }
+    
+    func popToRoot() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func postNotification() {
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
+    }
+    
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
@@ -138,16 +162,27 @@ extension EditMenuViewController {
     }
     
     @objc func deleteMenu() {
-        viewModel.deleteMenuAPI {
-            print("todo: 삭제 완료 화면 띄울 예정")
+        viewModel.deleteMenuAPI { [self] in
+            let completeView: MenuCompleteView = MenuCompleteView(
+                firstSentence: StringLiterals.ModifyMenu.completeByYou,
+                secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
+                completeImage: .imgDeleteComplete,
+                modifyOtherMenuButtonAction: { self.popToEditMenu() },
+                completeButtonAction: {
+                    self.postNotification()
+                    self.popToRoot()
+                }
+            )
+            let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
+            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
     }
     
     @objc func modifyButtonHandler() {
-//        viewModel.modifyMenuAPI(storeId: storeId, id: <#T##Int#>, requestBody: <#T##[MenuData]#>) {
-//            <#code#>
-//        }
-        print("수정하기 예정")
+        guard let selectedMenu = viewModel.selectedMenu else { return }
+        let modifyMenuViewModel = ModifyMenuViewModel(storeId: viewModel.storeId, selectedMenu: selectedMenu)
+        let modifyMenuViewController = ModifyMenuViewController(viewModel: modifyMenuViewModel)
+        self.navigationController?.pushViewController(modifyMenuViewController, animated: true)
     }
 }
 
