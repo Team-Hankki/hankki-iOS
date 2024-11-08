@@ -51,6 +51,12 @@ final class MypageViewController: BaseViewController {
          setupNavigationBar()
      }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.isNavigationBarHidden = false
+    }
+    
     override func setupHierarchy() {
         view.addSubview(collectionView)
     }
@@ -100,15 +106,7 @@ private extension MypageViewController {
     }
     
     func setupNavigationBar() {
-         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
-                                                               hasRightButton: false,
-                                                               mainTitle: .string(StringLiterals.Mypage.navigation),
-                                                               rightButton: .string(""),
-                                                               rightButtonAction: {})
-                                                                 
-        if let navigationController = navigationController as? HankkiNavigationController {
-              navigationController.setupNavigationBar(forType: type)
-        }
+        navigationController?.isNavigationBarHidden = true
      }
     
     func showQuitAlert() {
