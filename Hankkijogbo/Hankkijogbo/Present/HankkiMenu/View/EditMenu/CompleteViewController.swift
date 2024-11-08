@@ -56,24 +56,3 @@ final class CompleteViewController: BaseViewController {
         }
     }
 }
-
-// MARK: - Private Func
-
-private extension CompleteViewController {
-    
-    func bindViewModel() {
-//        viewModel.updateButton = { isActive in
-//            if isActive {
-//                self.bottomButtonView.setupEnabledDoneButton()
-//            } else {
-//                self.bottomButtonView.setupDisabledDoneButton()
-//            }
-//        }
-    }
-    
-    // MARK: - @objc Func
-    
-    @objc func completeButtonDidTap() {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-}

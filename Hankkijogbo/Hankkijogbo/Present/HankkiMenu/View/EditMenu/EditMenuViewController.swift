@@ -48,6 +48,14 @@ final class EditMenuViewController: BaseViewController {
         setupDelegate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.getUpdatedMenusAPI {
+            self.menuCollectionView.reloadData()
+        }
+    }
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
@@ -98,7 +106,7 @@ final class EditMenuViewController: BaseViewController {
     }
 }
 
-extension EditMenuViewController {
+private extension EditMenuViewController {
     
     func bindViewModel() {
         viewModel.updateCollectionView = {
@@ -128,6 +136,18 @@ extension EditMenuViewController {
         menuCollectionView.delegate = self
     }
     
+    func popToEditMenu() {
+        if let editMenuViewController = navigationController?.viewControllers.first(where: {
+            $0 is EditMenuViewController
+        }) {
+            navigationController?.popToViewController(editMenuViewController, animated: true)
+        }
+    }
+    
+    func popToRoot() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
@@ -142,7 +162,9 @@ extension EditMenuViewController {
             let completeView: MenuCompleteView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
-                completeImage: .imgDeleteComplete
+                completeImage: .imgDeleteComplete,
+                modifyOtherMenuButtonAction: { self.popToEditMenu() },
+                completeButtonAction: { self.popToRoot() }
             )
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
