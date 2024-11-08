@@ -26,7 +26,7 @@ enum StringLiterals {
     
     enum Home {
         static let allUniversity = "전체"
-        static let storeCategoryFilteringButton = "종류"
+        static let storeCategoryFilteringButton = "뭐 먹지"
         static let priceFilteringButton = "가격대"
         static let sortFilteringButton = "정렬"
         static let less6000 = "6000원 이하"

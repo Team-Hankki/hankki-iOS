@@ -26,6 +26,9 @@ final class HomeViewController: BaseViewController {
     
     var shouldUpdateNavigationBar: Bool = true
     
+    var lastScrollPosition: CGPoint = .zero
+    var isRestoringScrollPosition = false
+    
     // MARK: - UI Components
     
     var typeCollectionView = TypeCollectionView()
@@ -57,6 +60,22 @@ final class HomeViewController: BaseViewController {
         requestLocationAuthorization()
         NotificationCenter.default.addObserver(self, selector: #selector(getNotificationForMyZipList), name: NSNotification.Name(StringLiterals.NotificationName.presentMyZipBottomSheetNotificationName), object: nil)
         updateUniversityData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if !isRestoringScrollPosition {
+            rootView.bottomSheetView.totalListCollectionView.setContentOffset(lastScrollPosition, animated: false)
+            isRestoringScrollPosition = false
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        lastScrollPosition = rootView.bottomSheetView.totalListCollectionView.contentOffset
+        isRestoringScrollPosition = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
