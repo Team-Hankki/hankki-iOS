@@ -170,6 +170,18 @@ private extension ModifyMenuViewController {
         }
     }
     
+    func popToEditMenu() {
+        if let editMenuViewController = navigationController?.viewControllers.first(where: {
+            $0 is EditMenuViewController
+        }) {
+            navigationController?.popToViewController(editMenuViewController, animated: true)
+        }
+    }
+    
+    func popToRoot() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     // MARK: - @objc Func
     
     @objc func completeButtonDidTap() {
@@ -178,7 +190,8 @@ private extension ModifyMenuViewController {
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.modifyMenuComplete,
                 completeImage: .imgModifyComplete,
-                modifyOtherMenuButtonAction: {self.navigationController?.popToRootViewController(animated: true)}
+                modifyOtherMenuButtonAction: { self.popToEditMenu() },
+                completeButtonAction: { self.popToRoot() }
             )
             let modifyMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)
