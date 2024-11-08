@@ -19,6 +19,7 @@ final class ModifyMenuTextField: UITextField {
     // MARK: - Properties
     
     var titleText: String
+    var originalText: String = ""
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
@@ -45,6 +46,7 @@ final class ModifyMenuTextField: UITextField {
     
     init(
         titleText: String,
+        originalText: String,
         placeholderText: String? = nil,
         hankkiTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
     ) {
@@ -52,7 +54,8 @@ final class ModifyMenuTextField: UITextField {
         self.placeholderText = placeholderText
         self.modifyMenuTextFieldDelegate = hankkiTextFieldDelegate
         super.init(frame: .zero)
-        
+        self.text = originalText
+
         setupHierarchy()
         setupLayout()
         setupStyle()
