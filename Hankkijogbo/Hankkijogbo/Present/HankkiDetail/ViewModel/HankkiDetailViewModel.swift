@@ -12,6 +12,7 @@ import UIKit
 
 final class HankkiDetailViewModel {
     var showAlert: ((String) -> Void)?
+    var dismiss: (() -> Void)?
     
     var hankkiDetailData: GetHankkiDetailResponseData? {
         didSet {
@@ -21,16 +22,17 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int, dismiss: @escaping () -> Void) {
+    func getHankkiDetailAPI(hankkiId: Int, completion: @escaping () -> Void) {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
-            
+            guard let self = self else { return }
             switch result {
             case .notFound:
                 UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
-                dismiss()
+                self.dismiss?()
             default:
                 result.handleNetworkResult { response in
-                    self?.hankkiDetailData = response.data
+                    self.hankkiDetailData = response.data
+                    completion()
                 }
             }
 

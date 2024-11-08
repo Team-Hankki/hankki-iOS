@@ -48,11 +48,9 @@ final class HankkiDetailViewController: BaseViewController {
         setupDelegate()
         setupAddTarget()
         setupGesture()
+        setupNotification()
         bindViewModel()
-        
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId) {
-            self.navigationController?.popViewController(animated: false)
-        }
+        getHankkiDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +155,10 @@ private extension HankkiDetailViewController {
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
         }
+        
+        viewModel.dismiss = {
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
     func setupRegister() {
@@ -206,6 +208,21 @@ private extension HankkiDetailViewController {
         let rightSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(backButtonDidTap))
         rightSwipeGesture.direction = .right
         self.view.addGestureRecognizer(rightSwipeGesture)
+    }
+    
+    func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadHankkiDetailNotification),
+            name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail),
+            object: nil
+        )
+    }
+    
+    func getHankkiDetail() {
+        viewModel.getHankkiDetailAPI(hankkiId: hankkiId) {
+            self.infoCollectionView.collectionView.reloadData()
+        }
     }
     
     func setupNoImageStyle() {
@@ -312,6 +329,10 @@ extension HankkiDetailViewController {
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }
+    }
+    
+    @objc func reloadHankkiDetailNotification() {
+        getHankkiDetail()
     }
 }
 

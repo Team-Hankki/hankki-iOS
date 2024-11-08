@@ -170,6 +170,10 @@ private extension ModifyMenuViewController {
         }
     }
     
+    func postNotification() {
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
+    }
+    
     func popToEditMenu() {
         if let editMenuViewController = navigationController?.viewControllers.first(where: {
             $0 is EditMenuViewController
@@ -191,7 +195,10 @@ private extension ModifyMenuViewController {
                 secondSentence: StringLiterals.ModifyMenu.modifyMenuComplete,
                 completeImage: .imgModifyComplete,
                 modifyOtherMenuButtonAction: { self.popToEditMenu() },
-                completeButtonAction: { self.popToRoot() }
+                completeButtonAction: {
+                    self.postNotification()
+                    self.popToRoot()
+                }
             )
             let modifyMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)

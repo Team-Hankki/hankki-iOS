@@ -205,6 +205,7 @@ enum StringLiterals {
         static let updateAddToMyZipList = "UpdateAddToMyZipList"
         static let locationDidUpdate = "locationDidUpdate"
         static let presentMyZipBottomSheetNotificationName = "presentMyZipBottomSheetNotificationName"
+        static let reloadHankkiDetail = "reloadHankkiDetail"
     }
     
     enum Mypage {
