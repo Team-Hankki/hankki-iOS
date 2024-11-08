@@ -49,9 +49,7 @@ extension EditMenuViewModel {
     func deleteMenuAPI(completion: @escaping () -> Void) {
         guard let selectedMenu = selectedMenu else { return }
         NetworkService.shared.menuService.deleteMenu(storeId: storeId, id: selectedMenu.id) { result in
-            result.handleNetworkResult { _ in
-                completion()
-            }
+            result.handleNetworkResult(onSuccessVoid: completion)
         }
     }
 }

@@ -40,4 +40,11 @@ extension ModifyMenuViewModel {
             }
         }
     }
+    
+    /// 메뉴 삭제
+    func deleteMenuAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.menuService.deleteMenu(storeId: storeId, id: selectedMenu.id) { result in
+            result.handleNetworkResult(onSuccessVoid: completion)
+        }
+    }
 }

@@ -11,6 +11,7 @@ protocol ModifyMenuTextFieldDelegate: AnyObject {
     func handleTextFieldUpdate(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
     func showErrorLabel(isWarn: Bool)
+    func showDeleteAlert()
 }
 
 final class ModifyMenuTextField: UITextField {
@@ -203,7 +204,7 @@ private extension ModifyMenuTextField {
     }
     
     func showDeleteAlert() {
-        print("삭제츄")
+        modifyMenuTextFieldDelegate?.showDeleteAlert()
     }
     
     // MARK: - @objc Func

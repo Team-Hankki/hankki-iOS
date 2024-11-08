@@ -25,6 +25,7 @@ final class ModifyMenuViewController: BaseViewController {
     )
     private lazy var priceTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.price,
+        
         hankkiTextFieldDelegate: self
     )
     private let over8000PriceLabel: UILabel = UILabel()
@@ -157,6 +158,18 @@ private extension ModifyMenuViewController {
         }
     }
     
+    func deleteMenu() {
+        viewModel.deleteMenuAPI { [self] in
+            let completeView: MenuCompleteView = MenuCompleteView(
+                firstSentence: StringLiterals.ModifyMenu.completeByYou,
+                secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
+                completeImage: .imgDeleteComplete
+            )
+            let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
+            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
+        }
+    }
+    
     // MARK: - @objc Func
     
     @objc func completeButtonDidTap() {
@@ -200,5 +213,12 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
     
     func showErrorLabel(isWarn: Bool) {
         over8000PriceLabel.isHidden = !isWarn
+    }
+    
+    func showDeleteAlert() {
+        showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
+                  secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
+                  primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton,
+                  primaryButtonHandler: deleteMenu)
     }
 }
