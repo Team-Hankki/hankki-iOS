@@ -161,7 +161,13 @@ private extension ModifyMenuViewController {
     
     @objc func completeButtonDidTap() {
         viewModel.modifyMenuAPI { [self] in
-            let modifyMenuCompleteViewController = ModifyMenuCompleteViewController(viewModel: viewModel)
+            let completeView: MenuCompleteView = MenuCompleteView(
+                firstSentence: StringLiterals.ModifyMenu.completeByYou,
+                secondSentence: StringLiterals.ModifyMenu.modifyMenuComplete,
+                completeImage: .imgModifyComplete,
+                modifyOtherMenuButtonAction: {self.navigationController?.popToRootViewController(animated: true)}
+            )
+            let modifyMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)
         }
     }

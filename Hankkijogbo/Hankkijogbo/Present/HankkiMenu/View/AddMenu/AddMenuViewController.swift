@@ -124,9 +124,14 @@ extension AddMenuViewController {
     }
     
     @objc func bottomButtonPrimaryHandler() {
-        viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) {
-            let addMenuCompleteViewController = AddMenuCompleteViewController(storeId: self.storeId, totalMenuCount: self.viewModel.validMenus.count)
-            self.navigationController?.pushViewController(addMenuCompleteViewController, animated: true)
+        viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) { [self] in
+            let completeView: MenuCompleteView = MenuCompleteView(
+                firstSentence: StringLiterals.AddMenu.addMenuCompleteByYouFirst,
+                secondSentence: "\(self.viewModel.validMenus.count)" + StringLiterals.AddMenu.addMenuCompleteByYouSecond,
+                completeImage: .imgDeleteComplete
+            )
+            let addMenuCompleteViewController = CompleteViewController(completeView: completeView)
+            navigationController?.pushViewController(addMenuCompleteViewController, animated: true)
         }
     }
     

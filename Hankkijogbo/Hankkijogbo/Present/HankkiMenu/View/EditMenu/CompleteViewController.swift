@@ -1,5 +1,5 @@
 //
-//  ModifyMenuCompleteViewController.swift
+//  CompleteViewController.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 10/10/24.
@@ -7,28 +7,18 @@
 
 import UIKit
 
-// MARK: - 메뉴 수정 완료 화면
+// MARK: - 완료 화면
 
-final class ModifyMenuCompleteViewController: BaseViewController {
-    
-    // MARK: - Properties
-    
-    var viewModel: ModifyMenuViewModel
+final class CompleteViewController: BaseViewController {
     
     // MARK: - UI Components
     
-    private lazy var completeView: MenuCompleteView = MenuCompleteView(
-        firstSentence: StringLiterals.ModifyMenu.completeByYou,
-        secondSentence: StringLiterals.ModifyMenu.modifyMenuComplete,
-        completeImage: .imgModifyComplete,
-        modifyOtherMenuButtonAction: completeButtonDidTap,
-        completeButtonAction: completeButtonDidTap
-    )
+    private var completeView: MenuCompleteView
     
     // MARK: - Life Cycle
     
-    init(viewModel: ModifyMenuViewModel) {
-        self.viewModel = viewModel
+    init(completeView: MenuCompleteView) {
+        self.completeView = completeView
         super.init()
     }
 
@@ -61,7 +51,7 @@ final class ModifyMenuCompleteViewController: BaseViewController {
 
 // MARK: - Private Func
 
-private extension ModifyMenuCompleteViewController {
+private extension CompleteViewController {
     
     func bindViewModel() {
 //        viewModel.updateButton = { isActive in

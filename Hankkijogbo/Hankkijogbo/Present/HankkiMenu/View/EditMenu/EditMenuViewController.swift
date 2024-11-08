@@ -138,8 +138,14 @@ extension EditMenuViewController {
     }
     
     @objc func deleteMenu() {
-        viewModel.deleteMenuAPI {
-            print("todo: 삭제 완료 화면 띄울 예정")
+        viewModel.deleteMenuAPI { [self] in
+            let completeView: MenuCompleteView = MenuCompleteView(
+                firstSentence: StringLiterals.ModifyMenu.completeByYou,
+                secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
+                completeImage: .imgDeleteComplete
+            )
+            let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
+            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
     }
     

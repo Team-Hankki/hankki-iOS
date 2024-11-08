@@ -176,7 +176,7 @@
 		A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */; };
 		A27AD9322CB7EB2800515D3B /* EditMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */; };
 		A27AD9342CB7EEB900515D3B /* ModifyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */; };
-		A27AD9362CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */; };
+		A27AD9362CB7EECB00515D3B /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */; };
 		A27AD9392CB8057700515D3B /* EditMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9382CB8057700515D3B /* EditMenuCollectionViewCell.swift */; };
 		A27AD93B2CB806E700515D3B /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD93A2CB806E700515D3B /* RadioButton.swift */; };
 		A28F60482CB877B6000FDCD2 /* EditMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F60472CB877B6000FDCD2 /* EditMenuViewModel.swift */; };
@@ -400,7 +400,7 @@
 		A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuCompleteViewController.swift; sourceTree = "<group>"; };
 		A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewController.swift; sourceTree = "<group>"; };
 		A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewController.swift; sourceTree = "<group>"; };
-		A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuCompleteViewController.swift; sourceTree = "<group>"; };
+		A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		A27AD9382CB8057700515D3B /* EditMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		A27AD93A2CB806E700515D3B /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		A28F60472CB877B6000FDCD2 /* EditMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewModel.swift; sourceTree = "<group>"; };
@@ -1488,7 +1488,7 @@
 				A27AD9372CB8055C00515D3B /* Cell */,
 				A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */,
 				A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */,
-				A27AD9352CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift */,
+				A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */,
 			);
 			path = EditMenu;
 			sourceTree = "<group>";
@@ -2012,7 +2012,7 @@
 				A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */,
 				A2F27C042C353AEF001E6514 /* BaseView.swift in Sources */,
 				A2C9FCA12C49711700868DF7 /* GetMyZipListResponseDTO.swift in Sources */,
-				A27AD9362CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift in Sources */,
+				A27AD9362CB7EECB00515D3B /* CompleteViewController.swift in Sources */,
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */,
 				A2AF6FB62CDD85D000F5271D /* MenuCompleteView.swift in Sources */,
