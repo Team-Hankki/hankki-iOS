@@ -49,7 +49,7 @@ class EnterMenuAccessoryView: BaseView {
             $0.setAttributedTitle(
                 UILabel.setupAttributedText(
                     for: PretendardStyle.body7,
-                    withText: "기존 메뉴\(titleText.suffix(2)) 입력",
+                    withText: "기존 \(titleText) 입력",
                     color: .gray600
                 ),
                 for: .normal

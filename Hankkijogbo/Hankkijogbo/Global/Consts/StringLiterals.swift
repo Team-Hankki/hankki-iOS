@@ -147,7 +147,7 @@ enum StringLiterals {
         static let modifyMenuButton = "수정하기"
         static let modifyMenuTitle = " 메뉴를\n수정할게요"
         static let name = "메뉴이름"
-        static let price = StringLiterals.Common.price
+        static let price = "메뉴가격"
         static let namePlaceholder = "새로운 메뉴 이름"
         static let enterOriginalName = "기존 메뉴이름 입력"
         static let enterOriginalPrice = "기존 메뉴가격 입력"
