@@ -23,6 +23,8 @@ final class HankkiEditMenuCollectionViewCell: BaseCollectionViewCell {
         editMenuButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(11)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(120)
+            $0.height.equalTo(30)
         }
     }
     
@@ -33,6 +35,7 @@ final class HankkiEditMenuCollectionViewCell: BaseCollectionViewCell {
             $0.titleLabel?.font = .setupPretendardStyle(of: .body7)
             $0.setTitleColor(.gray400, for: .normal)
             $0.setUnderline()
+            $0.contentEdgeInsets = .init(top: 10, left: 10, bottom: 30, right: 10)
         }
     }
 }
