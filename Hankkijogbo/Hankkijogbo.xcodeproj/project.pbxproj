@@ -173,7 +173,6 @@
 		A24A787C2CB44E450049B031 /* MenuTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787B2CB44E450049B031 /* MenuTargetType.swift */; };
 		A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787D2CB44E500049B031 /* MenuAPIService.swift */; };
 		A24A78802CB463490049B031 /* PostMenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */; };
-		A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */; };
 		A27AD9322CB7EB2800515D3B /* EditMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */; };
 		A27AD9342CB7EEB900515D3B /* ModifyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */; };
 		A27AD9362CB7EECB00515D3B /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */; };
@@ -397,7 +396,6 @@
 		A24A787B2CB44E450049B031 /* MenuTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTargetType.swift; sourceTree = "<group>"; };
 		A24A787D2CB44E500049B031 /* MenuAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAPIService.swift; sourceTree = "<group>"; };
 		A24A787F2CB463490049B031 /* PostMenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMenuResponseDTO.swift; sourceTree = "<group>"; };
-		A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuCompleteViewController.swift; sourceTree = "<group>"; };
 		A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMenuViewController.swift; sourceTree = "<group>"; };
 		A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewController.swift; sourceTree = "<group>"; };
 		A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
@@ -1430,9 +1428,9 @@
 			isa = PBXGroup;
 			children = (
 				A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */,
-				A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */,
-				A27AD92D2CB7EAB800515D3B /* AddMenu */,
-				A27AD92E2CB7EAC200515D3B /* EditMenu */,
+				A27AD92D2CB7EAB800515D3B /* Add */,
+				A27AD92E2CB7EAC200515D3B /* Edit */,
+				A2AF6FB72CDDC07700F5271D /* Complete */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1473,24 +1471,22 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		A27AD92D2CB7EAB800515D3B /* AddMenu */ = {
+		A27AD92D2CB7EAB800515D3B /* Add */ = {
 			isa = PBXGroup;
 			children = (
 				A24A78712CB3F45D0049B031 /* AddMenuViewController.swift */,
-				A24A78812CB559870049B031 /* AddMenuCompleteViewController.swift */,
 			);
-			path = AddMenu;
+			path = Add;
 			sourceTree = "<group>";
 		};
-		A27AD92E2CB7EAC200515D3B /* EditMenu */ = {
+		A27AD92E2CB7EAC200515D3B /* Edit */ = {
 			isa = PBXGroup;
 			children = (
 				A27AD9372CB8055C00515D3B /* Cell */,
 				A27AD9312CB7EB2800515D3B /* EditMenuViewController.swift */,
 				A27AD9332CB7EEB900515D3B /* ModifyMenuViewController.swift */,
-				A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */,
 			);
-			path = EditMenu;
+			path = Edit;
 			sourceTree = "<group>";
 		};
 		A27AD9372CB8055C00515D3B /* Cell */ = {
@@ -1517,6 +1513,15 @@
 				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
 			);
 			path = ModifyMenuTextField;
+			sourceTree = "<group>";
+		};
+		A2AF6FB72CDDC07700F5271D /* Complete */ = {
+			isa = PBXGroup;
+			children = (
+				A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */,
+				A27AD9352CB7EECB00515D3B /* CompleteViewController.swift */,
+			);
+			path = Complete;
 			sourceTree = "<group>";
 		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
@@ -1970,7 +1975,6 @@
 				86880C1E2C47A12100CAEF58 /* UserDefaults+.swift in Sources */,
 				8302F8EB2C3EBF77004ADAA4 /* TypeCollectionView.swift in Sources */,
 				A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */,
-				A24A78822CB559870049B031 /* AddMenuCompleteViewController.swift in Sources */,
 				83DA28982C3852C5004819FA /* HankkiNavigationController.swift in Sources */,
 				86880BFF2C46ECD300CAEF58 /* PostMeUniversityRequestDTO.swift in Sources */,
 				86880BDA2C46CC8500CAEF58 /* ZipTargetType.swift in Sources */,
