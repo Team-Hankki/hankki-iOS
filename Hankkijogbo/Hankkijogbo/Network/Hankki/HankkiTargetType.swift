@@ -59,10 +59,6 @@ extension HankkiTargetType: BaseTargetType {
     
     var queryParameter: [String: Any]? {
         switch self {
-            //        case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption):
-            //            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
-            //        case .getHankkiList(let universityId, let storeCategory, let priceCategory, let sortOption):
-            //            return ["universityId": universityId, "storeCategory": storeCategory, "priceCategory": priceCategory, "sortOption": sortOption]
         case .getHankkiPin(let universityId, let storeCategory, let priceCategory, let sortOption),
                 .getHankkiList(let universityId, let storeCategory, let priceCategory, let sortOption):
             

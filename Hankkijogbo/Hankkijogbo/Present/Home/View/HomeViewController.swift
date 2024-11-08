@@ -21,6 +21,7 @@ final class HomeViewController: BaseViewController {
     
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
+    var hankkiPins: [GetHankkiPinData] = []
     
     private var universityId: Int?
     
@@ -110,12 +111,13 @@ final class HomeViewController: BaseViewController {
         }
         
         viewModel.hankkiPinsDidChange = { [weak self] pins in
+            self?.hankkiPins = pins
             DispatchQueue.main.async {
                 self?.setupPosition(with: pins)
             }
         }
         
-        viewModel.showAlert = { [weak self] message in
+        viewModel.showAlert = { [weak self] _ in
             self?.showAlert(titleText: StringLiterals.Alert.unknownError,
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
@@ -128,6 +130,7 @@ extension HomeViewController {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
+        rootView.bottomSheetView.delegate = self
     }
     
     private func setupRegister() {
@@ -256,7 +259,7 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         typeCollectionView.isHidden = true
         viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
-        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name ?? "")
+        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
     }
 }
 
@@ -281,7 +284,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // DropDownViewDelegate
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
-        viewModel.getSortOptionFilterAPI { [self] isSuccess in
+        viewModel.getSortOptionFilterAPI { [self] _ in
             switch buttonType {
             case .price:
                 if item == "K6" {
