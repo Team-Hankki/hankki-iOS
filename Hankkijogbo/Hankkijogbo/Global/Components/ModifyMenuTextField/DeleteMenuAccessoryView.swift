@@ -32,9 +32,6 @@ class DeleteMenuAccessoryView: BaseView {
         
         super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 73))
         
-        setupStyle()
-        setupHierarchy()
-        setupLayout()
         setupAddTarget()
     }
    
