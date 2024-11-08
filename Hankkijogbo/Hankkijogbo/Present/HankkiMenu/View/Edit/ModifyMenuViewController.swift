@@ -25,7 +25,6 @@ final class ModifyMenuViewController: BaseViewController {
     )
     private lazy var priceTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.price,
-        
         hankkiTextFieldDelegate: self
     )
     private let over8000PriceLabel: UILabel = UILabel()
@@ -164,7 +163,12 @@ private extension ModifyMenuViewController {
             let completeView: MenuCompleteView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
-                completeImage: .imgDeleteComplete
+                completeImage: .imgDeleteComplete,
+                modifyOtherMenuButtonAction: { self.popToEditMenu() },
+                completeButtonAction: {
+                    self.postNotification()
+                    self.popToRoot()
+                }
             )
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
