@@ -160,7 +160,10 @@ private extension ModifyMenuViewController {
     // MARK: - @objc Func
     
     @objc func completeButtonDidTap() {
-        print("수정 완료 클릭")
+        viewModel.modifyMenuAPI { [self] in
+            let modifyMenuCompleteViewController = ModifyMenuCompleteViewController(viewModel: viewModel)
+            navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)
+        }
     }
 }
 
