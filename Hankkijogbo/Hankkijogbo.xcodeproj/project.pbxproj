@@ -186,6 +186,7 @@
 		A2AF6FB02CD99ABF00F5271D /* ModifyMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */; };
 		A2AF6FB22CDD427800F5271D /* DeleteMenuAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */; };
 		A2AF6FB42CDD69F900F5271D /* EnterMenuAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */; };
+		A2AF6FB62CDD85D000F5271D /* MenuCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -409,6 +410,7 @@
 		A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuTextField.swift; sourceTree = "<group>"; };
 		A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMenuAccessoryView.swift; sourceTree = "<group>"; };
 		A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterMenuAccessoryView.swift; sourceTree = "<group>"; };
+		A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCompleteView.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -1428,6 +1430,7 @@
 			isa = PBXGroup;
 			children = (
 				A236B5FE2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift */,
+				A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */,
 				A27AD92D2CB7EAB800515D3B /* AddMenu */,
 				A27AD92E2CB7EAC200515D3B /* EditMenu */,
 			);
@@ -2012,6 +2015,7 @@
 				A27AD9362CB7EECB00515D3B /* ModifyMenuCompleteViewController.swift in Sources */,
 				8302853D2C4178D80004D9F7 /* CoreLocation.swift in Sources */,
 				86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */,
+				A2AF6FB62CDD85D000F5271D /* MenuCompleteView.swift in Sources */,
 				A240EA222C403E91000FF458 /* ImageCollectionViewCell.swift in Sources */,
 				83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */,
 				86880C362C49148900CAEF58 /* CreateZipViewModel.swift in Sources */,

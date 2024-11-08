@@ -23,12 +23,7 @@ class EnterMenuAccessoryView: BaseView {
     
     init(titleText: String) {
         self.titleText = titleText
-        
         super.init(frame: .zero)
-        
-        setupStyle()
-        setupHierarchy()
-        setupLayout()
     }
    
     required init?(coder: NSCoder) {
