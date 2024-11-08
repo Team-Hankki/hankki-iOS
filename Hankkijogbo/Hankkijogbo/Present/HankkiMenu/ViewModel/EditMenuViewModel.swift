@@ -52,4 +52,21 @@ extension EditMenuViewModel {
             result.handleNetworkResult(onSuccessVoid: completion)
         }
     }
+    
+    /// 식당 상세 쪽에서 메뉴 가져오기 -> 일단 임시로 사용 중...
+    func getUpdatedMenusAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.getHankkiDetail(id: storeId) { [weak self] result in
+            result.handleNetworkResult { response in
+                self?.menus = response.data.menus.map {
+                    SelectableMenuData(
+                        isSelected: false,
+                        id: $0.id,
+                        name: $0.name,
+                        price: $0.price
+                    )
+                }
+                completion()
+            }
+        }
+    }
 }
