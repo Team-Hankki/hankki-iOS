@@ -109,6 +109,7 @@ final class ModifyMenuViewController: BaseViewController {
                 withText: viewModel.selectedMenu.name + StringLiterals.ModifyMenu.modifyMenuTitle,
                 color: .gray900
             )
+            $0.setupTextColorRange(start: 0, end: viewModel.selectedMenu.name.count, color: .red500)
         }
         
         nameTextField.do {
