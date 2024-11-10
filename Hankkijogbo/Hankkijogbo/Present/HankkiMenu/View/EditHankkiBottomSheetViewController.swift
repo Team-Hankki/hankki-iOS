@@ -129,7 +129,7 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         containerView.do {
             $0.isUserInteractionEnabled = true
             $0.backgroundColor = .white
-            $0.layer.cornerRadius = 32
+            $0.layer.cornerRadius = 24
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
