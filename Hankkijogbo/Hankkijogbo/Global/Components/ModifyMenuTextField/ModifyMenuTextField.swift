@@ -103,7 +103,7 @@ private extension ModifyMenuTextField {
         self.do {
             $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = 10
-            $0.font = .setupPretendardStyle(of: .body2)
+            $0.font = .setupPretendardStyle(of: .body3)
             $0.textColor = .gray850
             $0.attributedPlaceholder = UILabel.setupAttributedText(
                 for: PretendardStyle.body2,
@@ -117,7 +117,7 @@ private extension ModifyMenuTextField {
         }
         
         titleLabel.do {
-            $0.font = .setupPretendardStyle(of: .body5)
+            $0.font = .setupPretendardStyle(of: .body6)
             $0.textColor = .gray500
             $0.text = titleText
         }
