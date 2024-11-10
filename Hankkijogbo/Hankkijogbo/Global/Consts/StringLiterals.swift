@@ -155,7 +155,6 @@ enum StringLiterals {
         static let recommendDeleteMenu = "8천원을 넘는 메뉴는 삭제를 추천해요"
         static let overPriceErrorText = "8000원 이하만 제보 가능해요"
         static let modifyCarefullyPlease = "모두에게 보여지는 정보이니 신중하게 수정부탁드려요"
-        static let applyButton = "적용"
         static let modifyMenuCompleteButton = "수정 완료"
         static let modifyOtherMenuButton = "다른 메뉴도 수정하기"
         static let completeByYou = "님이 말씀해주신대로\n"

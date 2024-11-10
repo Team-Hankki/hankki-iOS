@@ -140,7 +140,7 @@ private extension ModifyMenuTextField {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         defaultButton.addTarget(self, action: #selector(defaultButtonDidTap), for: .touchUpInside)
         editingButton.addTarget(self, action: #selector(editingButtonDidTap), for: .touchUpInside)
-        enterMenuAccessoryView.applyButton.addTarget(self, action: #selector(inputApplyButtonDidTap), for: .touchUpInside)
+        enterMenuAccessoryView.modifyCompleteButton.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
 }
@@ -224,7 +224,7 @@ private extension ModifyMenuTextField {
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
-    @objc func inputApplyButtonDidTap() {
+    @objc func modifyCompleteButtonDidTap() {
         guard let text = text else { return }
         if !text.isEmpty {
             removeInputAccessoryView()
@@ -238,7 +238,7 @@ private extension ModifyMenuTextField {
     
     @objc func textFieldDidChange() {
         guard let text = text else { return }
-        enterMenuAccessoryView.applyButton.backgroundColor = !text.isEmpty ? .red500 : .red400
+        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = !text.isEmpty ? .red500 : .red400
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         if let price = Int(text) {
