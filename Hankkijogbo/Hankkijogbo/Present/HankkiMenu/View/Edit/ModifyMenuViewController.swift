@@ -123,7 +123,7 @@ final class ModifyMenuViewController: BaseViewController {
                 isLeft: false,
                 padding: 44,
                 text: StringLiterals.Common.won,
-                font: PretendardStyle.body2,
+                font: PretendardStyle.body3,
                 textColor: .gray800
             )
             $0.keyboardType = .numberPad

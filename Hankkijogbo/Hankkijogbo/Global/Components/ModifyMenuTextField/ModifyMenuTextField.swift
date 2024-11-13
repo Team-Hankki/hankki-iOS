@@ -104,9 +104,9 @@ private extension ModifyMenuTextField {
             $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = 10
             $0.font = .setupPretendardStyle(of: .body3)
-            $0.textColor = .gray850
+            $0.textColor = .gray800
             $0.attributedPlaceholder = UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body3,
                 withText: placeholderText ?? "",
                 color: .gray400
             )
