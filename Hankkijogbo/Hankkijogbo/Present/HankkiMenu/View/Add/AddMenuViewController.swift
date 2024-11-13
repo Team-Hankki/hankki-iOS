@@ -25,7 +25,7 @@ final class AddMenuViewController: BaseViewController {
     private lazy var menuFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var menuCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: menuFlowLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.AddMenu.addNewMenuPlease,
+        primaryButtonText: String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
@@ -97,7 +97,10 @@ final class AddMenuViewController: BaseViewController {
     }
 }
 
-extension AddMenuViewController {
+// MARK: - Private Func
+
+private extension AddMenuViewController {
+    
     func setupRegister() {
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         menuCollectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
@@ -158,6 +161,8 @@ extension AddMenuViewController {
         }
     }
 }
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
