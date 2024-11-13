@@ -87,9 +87,6 @@ final class ReportViewController: BaseViewController {
             $0.showsVerticalScrollIndicator = false
         }
     }
-}
-
-extension ReportViewController {
     
     func bindViewModel() {
         reportViewModel.updateCollectionView = {
@@ -164,6 +161,22 @@ private extension ReportViewController {
         guard let locationData = reportViewModel.selectedLocationData else { return }
         reportViewModel.postHankkiAPI(locationData: locationData)
     }
+    
+    func addMenuData() {
+        if reportViewModel.menus.count == 1 {
+            updateFirstXButtonIsHidden()
+        }
+        
+        reportViewModel.menus.append(MenuData())
+        collectionView.insertItems(at: [IndexPath(item: reportViewModel.menus.count - 1, section: ReportSectionType.menu.rawValue)])
+    }
+    
+    func updateFirstXButtonIsHidden() {
+        guard let cell = collectionView.cellForItem(
+            at: IndexPath(item: reportViewModel.menus.count - 1, section: ReportSectionType.menu.rawValue)
+        ) as? MenuCollectionViewCell else { return }
+        cell.deleteMenuButton.isHidden = false
+    }
 }
 
 // MARK: - @objc Func
@@ -197,8 +210,7 @@ private extension ReportViewController {
     
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
-        reportViewModel.menus.append(MenuData())
-        collectionView.insertItems(at: [IndexPath(item: reportViewModel.menus.count - 1, section: ReportSectionType.menu.rawValue)])
+        addMenuData()
         scrollToFooterView()
     }
     
@@ -295,7 +307,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.bindData(menu: reportViewModel.menus[indexPath.row])
+            cell.bindData(menu: reportViewModel.menus[indexPath.row], isOnlyOne: reportViewModel.menus.count == 1)
             cell.deleteMenuButton.addTarget(self, action: #selector(deleteMenuButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:

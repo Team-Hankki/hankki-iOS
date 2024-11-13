@@ -126,6 +126,28 @@ private extension AddMenuViewController {
         menuCollectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .top, animated: true)
     }
     
+    func addMenuData() {
+        if viewModel.menus.count == 1 {
+            updateFirstXButtonIsHidden()
+        }
+        
+        viewModel.menus.append(MenuData())
+        menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
+    }
+    
+    func updateBottomButtonText() {
+        bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+    }
+    
+    func updateFirstXButtonIsHidden() {
+        guard let cell = menuCollectionView.cellForItem(
+            at: IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)
+        ) as? MenuCollectionViewCell else { return }
+        cell.deleteMenuButton.isHidden = false
+    }
+    
+    // MARK: - @objc Func
+    
     @objc func bottomButtonPrimaryHandler() {
         viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) { [self] in
             let completeView: MenuCompleteView = MenuCompleteView(
@@ -140,9 +162,8 @@ private extension AddMenuViewController {
     
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
-        viewModel.menus.append(MenuData())
-        menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
-        bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+        addMenuData()
+        updateBottomButtonText()
         scrollToFooterView()
     }
     
@@ -185,7 +206,7 @@ extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDel
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.bindData(menu: viewModel.menus[indexPath.row])
+            cell.bindData(menu: viewModel.menus[indexPath.row], isOnlyOne: viewModel.menus.count == 1)
             cell.deleteMenuButton.addTarget(self, action: #selector(deleteMenuButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:

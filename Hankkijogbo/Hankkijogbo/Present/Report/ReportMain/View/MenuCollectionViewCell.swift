@@ -154,6 +154,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         deleteMenuButton.do {
             $0.setImage(.btnDeleteSmall, for: .normal)
+            $0.isHidden = true
         }
         errorLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
@@ -180,7 +181,7 @@ private extension MenuCollectionViewCell {
     }
     
     func setupToolbar() {
-        doneToolbar.items=[
+        doneToolbar.items = [
             UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
             UIBarButtonItem(title: StringLiterals.Toolbar.done, style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
         ]
@@ -197,6 +198,7 @@ private extension MenuCollectionViewCell {
         priceTextField.layer.borderWidth = 1
         priceTextField.layer.borderColor = UIColor.gray300.cgColor
         errorLabel.isHidden = true
+        deleteMenuButton.isHidden = false
     }
     
     func setupPriceErrorStyle() {
@@ -229,7 +231,7 @@ extension MenuCollectionViewCell {
     
     // MARK: - Public Func
     
-    func bindData(menu: MenuData) {
+    func bindData(menu: MenuData, isOnlyOne: Bool) {
         menuTextField.text = menu.name
         if menu.price != 0 {
             priceTextField.text = "\(menu.price)"
@@ -244,6 +246,8 @@ extension MenuCollectionViewCell {
         } else {
             priceTextField.text = ""
         }
+        
+        deleteMenuButton.isHidden = isOnlyOne
     }
 }
 
