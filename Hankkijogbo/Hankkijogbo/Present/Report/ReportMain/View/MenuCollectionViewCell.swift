@@ -201,9 +201,38 @@ private extension MenuCollectionViewCell {
         deleteMenuButton.isHidden = false
     }
     
+    func setupMenuNormalStyle() {
+        menuLabel.textColor = .gray500
+        menuTextField.layer.borderWidth = 1
+        menuTextField.layer.borderColor = UIColor.gray300.cgColor
+    }
+    
+    func setupPriceNormalStyle() {
+        priceLabel.textColor = .gray500
+        priceTextField.textColor = .gray800
+        priceTextField.layer.borderWidth = 1
+        priceTextField.layer.borderColor = UIColor.gray300.cgColor
+        errorLabel.isHidden = true
+    }
+    
+    func setupMenuFocusedStyle() {
+        menuLabel.textColor = .gray800
+        menuTextField.layer.borderWidth = 2
+        menuTextField.layer.borderColor = UIColor.gray600.cgColor
+    }
+    
+    func setupPriceFocusedStyle() {
+        priceLabel.textColor = .gray800
+        priceTextField.textColor = .gray800
+        priceTextField.layer.borderWidth = 2
+        priceTextField.layer.borderColor = UIColor.gray600.cgColor
+        errorLabel.isHidden = true
+    }
+    
     func setupPriceErrorStyle() {
         priceLabel.textColor = .red500
         priceTextField.textColor = .red500
+        priceTextField.layer.borderWidth = 2
         priceTextField.layer.borderColor = UIColor.red500.cgColor
         errorLabel.isHidden = false
     }
@@ -214,10 +243,7 @@ private extension MenuCollectionViewCell {
         if Int(priceTextField.text ?? "") ?? 0 > 8000 {
             setupPriceErrorStyle()
         } else {
-            priceLabel.textColor = .gray800
-            priceTextField.textColor = .gray800
-            priceTextField.layer.borderColor = UIColor.gray500.cgColor
-            errorLabel.isHidden = true
+            setupPriceFocusedStyle()
         }
     }
     
@@ -239,9 +265,7 @@ extension MenuCollectionViewCell {
             if menu.price > 8000 {
                 setupPriceErrorStyle()
             } else {
-                priceLabel.textColor = .gray500
-                priceTextField.textColor = .gray800
-                errorLabel.isHidden = true
+                setupPriceNormalStyle()
             }
         } else {
             priceTextField.text = ""
@@ -257,13 +281,9 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == menuTextField {
-            menuLabel.textColor = .gray800
-            textField.layer.borderWidth = 2
-            textField.layer.borderColor = UIColor.gray600.cgColor
+            setupMenuFocusedStyle()
         } else {
             priceTextFieldDidEditingChange()
-            priceTextField.layer.borderWidth = 2
-            priceTextField.layer.borderColor = UIColor.gray600.cgColor
         }
         return true
     }
@@ -288,14 +308,10 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     /// - 뷰 모델의 메뉴 데이터도 여기서 적힌 값으로 업데이트
     final func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == menuTextField {
-            menuLabel.textColor = .gray500
-            textField.layer.borderWidth = 1
-            textField.layer.borderColor = UIColor.gray300.cgColor
+            setupMenuNormalStyle()
         } else {
             if Int(priceTextField.text ?? "") ?? 0 <= 8000 {
-                priceLabel.textColor = .gray500
-                textField.layer.borderWidth = 1
-                textField.layer.borderColor = UIColor.gray300.cgColor
+                setupPriceNormalStyle()
             }
         }
         delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
