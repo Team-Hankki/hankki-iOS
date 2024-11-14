@@ -154,6 +154,22 @@ private extension AddMenuViewController {
         cell.deleteMenuButton.isHidden = false
     }
     
+    func postNotification() {
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
+    }
+    
+    func popToAddMenu() {
+        if let addViewController = navigationController?.viewControllers.first(where: {
+            $0 is AddMenuViewController
+        }) {
+            navigationController?.popToViewController(addViewController, animated: true)
+        }
+    }
+    
+    func popToRoot() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     // MARK: - @objc Func
     
     @objc func bottomButtonPrimaryHandler() {
@@ -161,7 +177,13 @@ private extension AddMenuViewController {
             let completeView: MenuCompleteView = MenuCompleteView(
                 firstSentence: StringLiterals.AddMenu.addMenuCompleteByYouFirst,
                 secondSentence: "\(self.viewModel.validMenus.count)" + StringLiterals.AddMenu.addMenuCompleteByYouSecond,
-                completeImage: .imgDeleteComplete
+                completeImage: .imgAddComplete,
+                doThisAgainButtonText: StringLiterals.ModifyMenu.addOtherMenuButton,
+                doThisAgainButtonAction: { self.popToAddMenu() },
+                completeButtonAction: {
+                    self.postNotification()
+                    self.popToRoot()
+                }
             )
             let addMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(addMenuCompleteViewController, animated: true)

@@ -16,14 +16,15 @@ final class MenuCompleteView: BaseView {
     private let firstSentence: String
     private let secondSentence: String
     private let completeImage: UIImage
-    private let modifyOtherMenuButtonAction: ButtonAction?
+    private let doThisAgainButtonText: String
+    private let doThisAgainButtonAction: ButtonAction?
     private let completeButtonAction: ButtonAction?
     
     // MARK: - UI Components
     
     private let titleLabel: UILabel = UILabel()
     private let completeImageView: UIImageView = UIImageView()
-    private let modifyOtherMenuButton: UIButton = UIButton()
+    private let doThisAgainButton: UIButton = UIButton()
     private lazy var completeButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.Common.complete,
         primaryButtonHandler: completeButtonAction,
@@ -36,13 +37,15 @@ final class MenuCompleteView: BaseView {
         firstSentence: String,
         secondSentence: String,
         completeImage: UIImage,
-        modifyOtherMenuButtonAction: ButtonAction? = nil,
+        doThisAgainButtonText: String,
+        doThisAgainButtonAction: ButtonAction? = nil,
         completeButtonAction: ButtonAction? = nil
     ) {
         self.firstSentence = firstSentence
         self.secondSentence = secondSentence
         self.completeImage = completeImage
-        self.modifyOtherMenuButtonAction = modifyOtherMenuButtonAction
+        self.doThisAgainButtonText = doThisAgainButtonText
+        self.doThisAgainButtonAction = doThisAgainButtonAction
         self.completeButtonAction = completeButtonAction
         super.init(frame: .zero)
     }
@@ -58,7 +61,7 @@ final class MenuCompleteView: BaseView {
             titleLabel,
             completeImageView,
             completeButtonView,
-            modifyOtherMenuButton
+            doThisAgainButton
         )
     }
     
@@ -80,8 +83,8 @@ final class MenuCompleteView: BaseView {
             $0.height.equalTo(154)
         }
         
-        if modifyOtherMenuButtonAction != nil {
-            modifyOtherMenuButton.snp.makeConstraints {
+        if doThisAgainButtonAction != nil {
+            doThisAgainButton.snp.makeConstraints {
                 $0.leading.trailing.equalToSuperview().inset(22)
                 $0.bottom.equalTo(completeButtonView.snp.top).offset(42)
                 $0.height.equalTo(54)
@@ -103,16 +106,16 @@ final class MenuCompleteView: BaseView {
             $0.image = completeImage
         }
         
-        if modifyOtherMenuButtonAction != nil {
-            modifyOtherMenuButton.do {
+        if doThisAgainButtonAction != nil {
+            doThisAgainButton.do {
                 $0.setAttributedTitle(UILabel.setupAttributedText(
                     for: PretendardStyle.subtitle3,
-                    withText: StringLiterals.ModifyMenu.modifyOtherMenuButton,
+                    withText: doThisAgainButtonText,
                     color: .red500
                 ), for: .normal)
                 $0.backgroundColor = .hankkiWhite
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .red500)
-                $0.addTarget(self, action: #selector(modifyOtherMenuButtonDidTap), for: .touchUpInside)
+                $0.addTarget(self, action: #selector(doThisAgainButtonDidTap), for: .touchUpInside)
             }
         }
         
@@ -121,7 +124,7 @@ final class MenuCompleteView: BaseView {
         }
     }
     
-    @objc private func modifyOtherMenuButtonDidTap() {
-        modifyOtherMenuButtonAction?()
+    @objc private func doThisAgainButtonDidTap() {
+        doThisAgainButtonAction?()
     }
 }

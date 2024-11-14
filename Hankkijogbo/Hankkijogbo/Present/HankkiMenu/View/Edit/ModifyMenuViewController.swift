@@ -166,7 +166,8 @@ private extension ModifyMenuViewController {
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
                 completeImage: .imgDeleteComplete,
-                modifyOtherMenuButtonAction: { self.popToEditMenu() },
+                doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: { self.popToEditMenu() },
                 completeButtonAction: {
                     self.postNotification()
                     self.popToRoot()
@@ -201,7 +202,8 @@ private extension ModifyMenuViewController {
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.modifyMenuComplete,
                 completeImage: .imgModifyComplete,
-                modifyOtherMenuButtonAction: { self.popToEditMenu() },
+                doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: { self.popToEditMenu() },
                 completeButtonAction: {
                     self.postNotification()
                     self.popToRoot()
