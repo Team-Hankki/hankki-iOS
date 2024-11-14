@@ -198,26 +198,12 @@ extension HomeViewController {
 }
 
 private extension HomeViewController {
-    func loadInitialData() {
-        universityId = UserDefaults.standard.getUniversity()?.id
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
-            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
-            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
-        }
-        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-    }
-    
     func updateUniversityData() {
         let universityId = UserDefaults.standard.getUniversity()?.id
         
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
-            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
-            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
-        }
-        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        rootView.bottomSheetView.totalListCollectionView.reloadData()
+        viewModel.updateHankkiList()
         
-        // 대학 선택 후 홈화면 재진입 시 해당 대학교에 맞게 reset
+        rootView.bottomSheetView.totalListCollectionView.reloadData()
         hideMarkerInfoCard()
         rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
     }
