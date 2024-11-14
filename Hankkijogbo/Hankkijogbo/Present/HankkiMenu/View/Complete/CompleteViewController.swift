@@ -30,7 +30,7 @@ final class CompleteViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         if let navigationController = navigationController as? HankkiNavigationController {
-            navigationController.hideNavigationBar()
+            navigationController.isNavigationBarHidden = true
         }
     }
     
@@ -38,7 +38,7 @@ final class CompleteViewController: BaseViewController {
         super.viewWillDisappear(animated)
         
         if let navigationController = navigationController as? HankkiNavigationController {
-            navigationController.showNavigationBar()
+            navigationController.isNavigationBarHidden = false
         }
     }
     
