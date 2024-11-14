@@ -48,6 +48,13 @@ final class AddMenuViewController: BaseViewController {
         bindViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.menus = [MenuData()]
+        menuCollectionView.reloadData()
+    }
+    
     // MARK: - Set UI
     
     override func setupHierarchy() {
