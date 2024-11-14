@@ -23,6 +23,16 @@ struct MenuData: Codable {
     var price: Int = 0
 }
 
+
+extension MenuData {
+    func toMenuRequestDTO() -> MenuRequestDTO {
+        return MenuRequestDTO(
+            name: self.name,
+            price: self.price
+        )
+    }
+}
+
 struct SelectableMenuData {
     var isSelected: Bool = false
     var id: Int = 0

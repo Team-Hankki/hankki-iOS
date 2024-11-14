@@ -157,7 +157,7 @@ private extension AddMenuViewController {
     // MARK: - @objc Func
     
     @objc func bottomButtonPrimaryHandler() {
-        viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) { [self] in
+        viewModel.postMenuAPI(storeId: storeId) { [self] in
             let completeView: MenuCompleteView = MenuCompleteView(
                 firstSentence: StringLiterals.AddMenu.addMenuCompleteByYouFirst,
                 secondSentence: "\(self.viewModel.validMenus.count)" + StringLiterals.AddMenu.addMenuCompleteByYouSecond,

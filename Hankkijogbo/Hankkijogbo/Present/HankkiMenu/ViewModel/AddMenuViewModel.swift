@@ -40,10 +40,11 @@ private extension AddMenuViewModel {
 extension AddMenuViewModel {
     
     /// 메뉴 추가
-    func postMenuAPI(storeId: Int, requestBody: [MenuData], completion: @escaping () -> Void) {
+    func postMenuAPI(storeId: Int, completion: @escaping () -> Void) {
         validMenus = menus.filter { $0.name != "" && $0.price > 0 && $0.price <= 8000 }
         
-        NetworkService.shared.menuService.postMenu(storeId: storeId, requestBody: validMenus) { result in
+        let requestBody: [MenuRequestDTO] = validMenus.map { $0.toMenuRequestDTO() }
+        NetworkService.shared.menuService.postMenu(storeId: storeId, requestBody: requestBody) { result in
             result.handleNetworkResult { _ in
                 completion()
             }

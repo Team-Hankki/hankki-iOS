@@ -13,7 +13,7 @@ final class ModifyMenuViewModel {
     
     var storeId: Int
     var selectedMenu: SelectableMenuData
-    var modifiedMenuData: PatchMenuRequestDTO = PatchMenuRequestDTO() {
+    var modifiedMenuData: MenuRequestDTO = MenuRequestDTO() {
         didSet {
             updateButton?(isMenuDataValid())
         }

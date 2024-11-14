@@ -10,8 +10,8 @@ import Foundation
 import Moya
 
 enum MenuTargetType {
-    case postMenu(storeId: Int, requestBody: MenuData)
-    case patchMenu(storeId: Int, id: Int, requestBody: PatchMenuRequestDTO)
+    case postMenu(storeId: Int, requestBody: [MenuRequestDTO])
+    case patchMenu(storeId: Int, id: Int, requestBody: MenuRequestDTO)
     case deleteMenu(storeId: Int, id: Int)
 }
 

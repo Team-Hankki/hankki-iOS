@@ -10,7 +10,5 @@ import Foundation
 // MARK: - 메뉴 추가 API Res
 
 struct PostMenuResponseData: Codable {
-    let id: Int
-    let name: String
-    let price: Int
+    let menuList: [MenuData]
 }
