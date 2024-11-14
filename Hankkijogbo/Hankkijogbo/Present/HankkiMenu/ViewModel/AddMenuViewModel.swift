@@ -8,6 +8,7 @@
 import Moya
 
 final class AddMenuViewModel {
+    
     var updateButton: ((Bool) -> Void)?
     
     var menus: [MenuData] = [MenuData()] {

@@ -112,12 +112,8 @@ private extension AddMenuViewController {
     }
     
     func bindViewModel() {
-        viewModel.updateButton = { isActive in
-            if isActive {
-                self.bottomButtonView.setupEnabledDoneButton()
-            } else {
-                self.bottomButtonView.setupDisabledDoneButton()
-            }
+        viewModel.updateButton = { [weak self] isActive in
+            self?.updateBottomButtonStyle(isActive: isActive)
         }
     }
     
@@ -135,8 +131,20 @@ private extension AddMenuViewController {
         menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
     }
     
-    func updateBottomButtonText() {
+    func removeMenuData(menuIndex: Int) {
+        viewModel.menus.remove(at: menuIndex) // 해당 위치의 데이터 삭제
+        menuCollectionView.deleteItems(at: [IndexPath(item: menuIndex, section: AddMenuSectionType.menu.rawValue)]) // item 삭제
+        menuCollectionView.reloadSections(IndexSet(integer: AddMenuSectionType.menu.rawValue))
+    }
+    
+    func updateBottomButtonStyle(isActive: Bool) {
         bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+        
+        if isActive {
+            self.bottomButtonView.setupEnabledDoneButton()
+        } else {
+            self.bottomButtonView.setupDisabledDoneButton()
+        }
     }
     
     func updateFirstXButtonIsHidden() {
@@ -163,7 +171,6 @@ private extension AddMenuViewController {
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
         addMenuData()
-        updateBottomButtonText()
         scrollToFooterView()
     }
     
@@ -173,12 +180,8 @@ private extension AddMenuViewController {
             // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
             let buttonPosition = sender.convert(CGPoint.zero, to: self.menuCollectionView)
             let itemIndexPath = self.menuCollectionView.indexPathForItem(at: buttonPosition)
-            
             guard let item = itemIndexPath?.item else { return }
-            viewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
-            menuCollectionView.deleteItems(at: [IndexPath(item: item, section: AddMenuSectionType.menu.rawValue)]) // item 삭제
-            menuCollectionView.reloadSections(IndexSet(integer: AddMenuSectionType.menu.rawValue))
-            bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+            removeMenuData(menuIndex: item)
         }
     }
 }
