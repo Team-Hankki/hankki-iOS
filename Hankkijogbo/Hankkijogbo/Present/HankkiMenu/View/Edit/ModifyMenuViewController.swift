@@ -168,18 +168,11 @@ private extension ModifyMenuViewController {
                 completeImage: .imgDeleteComplete,
                 doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
                 doThisAgainButtonAction: { self.popToEditMenu() },
-                completeButtonAction: {
-                    self.postNotification()
-                    self.popToRoot()
-                }
+                completeButtonAction: { self.popToRoot() }
             )
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
-    }
-    
-    func postNotification() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
     }
     
     func popToEditMenu() {
@@ -204,10 +197,7 @@ private extension ModifyMenuViewController {
                 completeImage: .imgModifyComplete,
                 doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
                 doThisAgainButtonAction: { self.popToEditMenu() },
-                completeButtonAction: {
-                    self.postNotification()
-                    self.popToRoot()
-                }
+                completeButtonAction: { self.popToRoot() }
             )
             let modifyMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)

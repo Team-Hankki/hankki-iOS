@@ -20,6 +20,11 @@ final class MenuCompleteView: BaseView {
     private let doThisAgainButtonAction: ButtonAction?
     private let completeButtonAction: ButtonAction?
     
+    private lazy var completeWithNotificationAction: ButtonAction = { [self] in
+        completeButtonAction?()
+        postNotification()
+    }
+    
     // MARK: - UI Components
     
     private let titleLabel: UILabel = UILabel()
@@ -27,10 +32,10 @@ final class MenuCompleteView: BaseView {
     private let doThisAgainButton: UIButton = UIButton()
     private lazy var completeButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.Common.complete,
-        primaryButtonHandler: completeButtonAction,
+        primaryButtonHandler: completeWithNotificationAction,
         gradientColor: .clear
     )
-        
+    
     // MARK: - Life Cycle
     
     init(
@@ -49,7 +54,7 @@ final class MenuCompleteView: BaseView {
         self.completeButtonAction = completeButtonAction
         super.init(frame: .zero)
     }
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -123,8 +128,18 @@ final class MenuCompleteView: BaseView {
             $0.setupEnabledDoneButton()
         }
     }
+}
+
+// MARK: - Private Func
+
+private extension MenuCompleteView {
     
-    @objc private func doThisAgainButtonDidTap() {
+    func postNotification() {
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
+    }
+    
+    @objc func doThisAgainButtonDidTap() {
+        postNotification()
         doThisAgainButtonAction?()
     }
 }

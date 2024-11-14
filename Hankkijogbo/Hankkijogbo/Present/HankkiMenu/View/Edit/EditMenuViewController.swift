@@ -148,10 +148,6 @@ private extension EditMenuViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func postNotification() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
-    }
-    
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
@@ -169,10 +165,7 @@ private extension EditMenuViewController {
                 completeImage: .imgDeleteComplete,
                 doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
                 doThisAgainButtonAction: { self.popToEditMenu() },
-                completeButtonAction: {
-                    self.postNotification()
-                    self.popToRoot()
-                }
+                completeButtonAction: { self.popToRoot() }
             )
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
