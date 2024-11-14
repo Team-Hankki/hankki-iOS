@@ -51,7 +51,7 @@ final class EditMenuViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.getUpdatedMenusAPI {
+        viewModel.getMenuAPI {
             self.menuCollectionView.reloadData()
         }
     }
