@@ -36,7 +36,7 @@ extension MenuTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .postMenu(let storeId, _):
-            return utilPath.rawValue + "/\(storeId)/menus"
+            return utilPath.rawValue + "/\(storeId)/menus/bulk"
         case .patchMenu(let storeId, let id, _), .deleteMenu(let storeId, let id):
             return utilPath.rawValue + "/\(storeId)/menus/\(id)"
         }
