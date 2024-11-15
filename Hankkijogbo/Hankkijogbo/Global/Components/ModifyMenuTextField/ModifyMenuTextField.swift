@@ -24,10 +24,16 @@ final class ModifyMenuTextField: UITextField {
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
+    private var isModifying: Bool = false {
+        didSet {
+            updateStyle()
+            modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn && isModifying)
+        }
+    }
     private var isWarn: Bool = false {
         didSet {
-            updateWarnStyle()
-            modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn)
+            updateStyle()
+            modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn && isModifying)
         }
     }
     
@@ -147,15 +153,15 @@ private extension ModifyMenuTextField {
 
 private extension ModifyMenuTextField {
     
-    func updateStyle(isEditing: Bool) {
+    func updateStyle() {
         if isWarn && titleText == StringLiterals.ModifyMenu.price {
             updateWarnStyle()
         } else {
-            let textColor: UIColor = isEditing ? .gray850 : .gray800
-            let borderWidth: CGFloat = isEditing ? 1 : 0
-            let borderColor: CGColor? = isEditing ? UIColor.gray500.cgColor : nil
-            let titleFont: UIFont? = .setupPretendardStyle(of: isEditing ? .body4 : .body5)
-            let titleTextColor: UIColor = isEditing ? .gray850 : .gray500
+            let textColor: UIColor = isModifying ? .gray850 : .gray800
+            let borderWidth: CGFloat = isModifying ? 1 : 0
+            let borderColor: CGColor? = isModifying ? UIColor.gray500.cgColor : nil
+            let titleFont: UIFont? = .setupPretendardStyle(of: isModifying ? .body5 : .body6)
+            let titleTextColor: UIColor = isModifying ? .gray850 : .gray500
             
             self.textColor = textColor
             layer.borderWidth = borderWidth
@@ -164,15 +170,17 @@ private extension ModifyMenuTextField {
             titleLabel.textColor = titleTextColor
         }
         
-        let hiddenButton: UIButton = isEditing ? modifyButton : xButton
-        let shownButton: UIButton = isEditing ? xButton : modifyButton
+        let hiddenButton: UIButton = isModifying ? modifyButton : xButton
+        let shownButton: UIButton = isModifying ? xButton : modifyButton
         hiddenButton.isHidden = true
         shownButton.isHidden = false
     }
     
     func updateWarnStyle() {
         if let text = text, text.isEmpty { isWarn = false }
-        layer.borderColor = isWarn ? UIColor.warnRed.cgColor : UIColor.gray500.cgColor
+        titleLabel.textColor = isWarn && !isModifying ? .warnRed : .gray850
+        layer.borderWidth = isWarn && isModifying ? 1 : 0
+        layer.borderColor = isWarn && isModifying ? UIColor.warnRed.cgColor : nil
         textColor = isWarn ? .warnRed : .gray850
         
         deleteMenuAccessoryView.isHidden = !isWarn
@@ -218,8 +226,8 @@ private extension ModifyMenuTextField {
     
     @objc func xButtonDidTap() {
         isWarn = false
+        isModifying = false
         text = ""
-        updateStyle(isEditing: false)
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
@@ -250,14 +258,14 @@ private extension ModifyMenuTextField {
 extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        updateStyle(isEditing: true)
+        isModifying = true
         setupInputAccessoryView()
         textFieldDidChange()
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        updateStyle(isEditing: false)
+        isModifying = false
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
 }
