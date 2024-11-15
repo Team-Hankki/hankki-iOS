@@ -33,6 +33,7 @@ final class ModifyMenuTextField: UITextField {
     private var isWarn: Bool = false {
         didSet {
             updateStyle()
+            toggleAccessoryViewVisibility(isDeleteHidden: !isWarn)
             modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn && isModifying)
         }
     }
@@ -45,7 +46,7 @@ final class ModifyMenuTextField: UITextField {
     private lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
     private lazy var deleteMenuAccessoryView: DeleteMenuAccessoryView = DeleteMenuAccessoryView(
         deleteButtonAction: showDeleteAlert,
-        xButtonAction: hideAccessoryView
+        xButtonAction: hideDeleteMenuAccessoryView
     )
     
     // MARK: - Init
@@ -182,9 +183,6 @@ private extension ModifyMenuTextField {
         layer.borderWidth = isWarn && isModifying ? 1 : 0
         layer.borderColor = isWarn && isModifying ? UIColor.warnRed.cgColor : nil
         textColor = isWarn ? .warnRed : .gray850
-        
-        deleteMenuAccessoryView.isHidden = !isWarn
-        enterMenuAccessoryView.isHidden = isWarn
     }
     
     func setupInputAccessoryView() {
@@ -204,9 +202,13 @@ private extension ModifyMenuTextField {
         inputAccessoryView = accessoryView
     }
     
-    func hideAccessoryView() {
-        deleteMenuAccessoryView.isHidden = true
-        enterMenuAccessoryView.isHidden = false
+    func toggleAccessoryViewVisibility(isDeleteHidden: Bool) {
+        deleteMenuAccessoryView.isHidden = isDeleteHidden
+        enterMenuAccessoryView.isHidden = !isDeleteHidden
+    }
+    
+    func hideDeleteMenuAccessoryView() {
+        toggleAccessoryViewVisibility(isDeleteHidden: true)
     }
     
     func showDeleteAlert() {
