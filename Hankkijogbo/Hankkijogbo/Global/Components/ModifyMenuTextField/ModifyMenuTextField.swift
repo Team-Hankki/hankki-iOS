@@ -38,6 +38,8 @@ final class ModifyMenuTextField: UITextField {
         }
     }
     
+    private lazy var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(modifyButtonDidTap))
+
     // MARK: - UI Components
     
     private let titleLabel: UILabel = UILabel()
@@ -68,6 +70,7 @@ final class ModifyMenuTextField: UITextField {
         setupStyle()
         setupDelegate()
         setupAddTarget()
+        setupGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -149,6 +152,10 @@ private extension ModifyMenuTextField {
         xButton.addTarget(self, action: #selector(xButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.modifyCompleteButton.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
+    }
+    
+    func setupGesture() {
+        addGestureRecognizer(tapGesture)
     }
 }
 
