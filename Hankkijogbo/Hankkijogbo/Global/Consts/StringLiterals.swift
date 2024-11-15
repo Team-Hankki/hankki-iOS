@@ -91,9 +91,9 @@ enum StringLiterals {
         }
         
         enum DeleteLastMenu {
-            static let title = "메뉴를 모두 삭제하면 식당이 삭제돼요.\n그래도 삭제하시겠어요?"
-            static let secondaryButton = cancel
-            static let primaryButton = Common.delete
+            static let title = "메뉴가 1개 있어요\n메뉴를 삭제하면 식당이 삭제돼요"
+            static let secondaryButton = back
+            static let primaryButton = "식당 삭제"
         }
         
         enum ModifyCompleteMenu {
@@ -116,7 +116,7 @@ enum StringLiterals {
     }
     
     enum Toast {
-        static let addToMyZipBlack = "나의 족보에 추가되었습니다."
+        static let addToMyZipBlack = "나의 족보에 추가되었습니다"
         static let see = "보기"
         static let addToMyZipWhite = "나의 족보에 추가했어요"
         static let deleteAlready = "이미 삭제된 식당입니다"
