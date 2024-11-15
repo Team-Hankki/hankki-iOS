@@ -32,7 +32,7 @@ final class ModifyMenuViewController: BaseViewController {
     private let over8000PriceLabel: UILabel = UILabel()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.ModifyMenu.modifyMenuCompleteButton,
-        primaryButtonHandler: completeButtonDidTap
+        primaryButtonHandler: showModifyCompleteAlert
     )
     private let carefulGuideLabel: UILabel = UILabel()
     
