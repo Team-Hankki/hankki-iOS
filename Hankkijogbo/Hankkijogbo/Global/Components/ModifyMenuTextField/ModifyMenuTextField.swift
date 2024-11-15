@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ModifyMenuTextFieldDelegate: AnyObject {
-    func handleTextFieldUpdate(textField: UITextField)
+    func updateModifiedMenuData(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
     func isMenuDataValid() -> Bool
     func showErrorLabel(isWarn: Bool)
@@ -210,6 +210,11 @@ private extension ModifyMenuTextField {
         inputAccessoryView = accessoryView
     }
     
+    func changeModifyCompleteButtonStyle() {
+        guard let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
+        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = modifyMenuTextFieldDelegate.isMenuDataValid() ? .red500 : .red400
+    }
+    
     func toggleAccessoryViewVisibility(isDeleteHidden: Bool) {
         deleteMenuAccessoryView.isHidden = isDeleteHidden
         enterMenuAccessoryView.isHidden = !isDeleteHidden
@@ -224,7 +229,7 @@ private extension ModifyMenuTextField {
     }
         
     func modifyComplete() {
-        modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
+        modifyMenuTextFieldDelegate?.updateModifiedMenuData(textField: self)
         modifyMenuTextFieldDelegate?.showModifyCompleteAlert()
     }
     
@@ -238,7 +243,7 @@ private extension ModifyMenuTextField {
         isWarn = false
         isModifying = false
         text = ""
-        modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
+        modifyMenuTextFieldDelegate?.updateModifiedMenuData(textField: self)
     }
     
     @objc func modifyCompleteButtonDidTap() {
@@ -250,12 +255,14 @@ private extension ModifyMenuTextField {
     
     @objc func inputResetButtonDidTap() {
         self.text = modifyMenuTextFieldDelegate?.getOriginalText(textField: self)
+        modifyMenuTextFieldDelegate?.updateModifiedMenuData(textField: self)
+        changeModifyCompleteButtonStyle()
     }
     
     @objc func textFieldDidChange() {
         guard let text = text, let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
-        modifyMenuTextFieldDelegate.handleTextFieldUpdate(textField: self)
-        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = modifyMenuTextFieldDelegate.isMenuDataValid() ? .red500 : .red400
+        modifyMenuTextFieldDelegate.updateModifiedMenuData(textField: self)
+        changeModifyCompleteButtonStyle()
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         if titleText == StringLiterals.ModifyMenu.price, let price = Int(text) {

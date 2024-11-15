@@ -154,6 +154,7 @@ private extension ModifyMenuViewController {
         viewModel.updateButton = { isActive in
             if isActive {
                 self.bottomButtonView.setupEnabledDoneButton()
+                self.bottomButtonView.setupEnabledDoneButton()
             } else {
                 self.bottomButtonView.setupDisabledDoneButton()
             }
@@ -223,7 +224,7 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
         }
     }
     
-    func handleTextFieldUpdate(textField: UITextField) {
+    func updateModifiedMenuData(textField: UITextField) {
         guard let text = textField.text else { return }
         switch textField {
         case nameTextField:
