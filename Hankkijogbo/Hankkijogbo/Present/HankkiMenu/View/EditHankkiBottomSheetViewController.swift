@@ -99,7 +99,7 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().inset(24)
             $0.width.equalTo((UIScreen.getDeviceWidth() - 58) / 2)
-            $0.height.equalTo(154)
+            $0.height.equalTo(((UIScreen.getDeviceWidth() - 58) / 2) - 5)
         }
         
         addNewMenuStackView.snp.makeConstraints {
@@ -129,7 +129,7 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         containerView.do {
             $0.isUserInteractionEnabled = true
             $0.backgroundColor = .white
-            $0.layer.cornerRadius = 32
+            $0.layer.cornerRadius = 24
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
@@ -159,7 +159,7 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         }
         addNewMenuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.subtitle2,
+                for: SuiteStyle.subtitle3,
                 withText: StringLiterals.EditHankki.addNewMenu,
                 color: .gray800
             )
@@ -184,7 +184,7 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         }
         modifyMenuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: SuiteStyle.subtitle2,
+                for: SuiteStyle.subtitle3,
                 withText: StringLiterals.EditHankki.modifyMenu,
                 color: .gray800
             )

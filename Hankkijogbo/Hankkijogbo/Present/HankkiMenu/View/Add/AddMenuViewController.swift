@@ -64,7 +64,7 @@ final class AddMenuViewController: BaseViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview().inset(14)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(bottomButtonView.snp.top).offset(35)
         }
         
         bottomButtonView.snp.makeConstraints {
@@ -101,11 +101,6 @@ extension AddMenuViewController {
     func setupRegister() {
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         menuCollectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
-        menuCollectionView.register(
-            BufferView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-            withReuseIdentifier: BufferView.className
-        )
     }
     
     func setupDelegate() {
@@ -121,6 +116,11 @@ extension AddMenuViewController {
                 self.bottomButtonView.setupDisabledDoneButton()
             }
         }
+    }
+    
+    func scrollToFooterView() {
+        let footerIndexPath = IndexPath(item: 0, section: AddMenuSectionType.addMenu.rawValue)
+        menuCollectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .top, animated: true)
     }
     
     @objc func bottomButtonPrimaryHandler() {
@@ -140,6 +140,7 @@ extension AddMenuViewController {
         viewModel.menus.append(MenuData())
         menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
         bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+        scrollToFooterView()
     }
     
     /// 메뉴 셀 삭제
@@ -170,22 +171,6 @@ extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDel
             return viewModel.menus.count
         default:
             return 1
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionFooter:
-            guard let footer = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: BufferView.className,
-                for: indexPath
-            ) as? BufferView else {
-                return UICollectionReusableView()
-            }
-            return footer
-        default:
-            return UICollectionReusableView()
         }
     }
     

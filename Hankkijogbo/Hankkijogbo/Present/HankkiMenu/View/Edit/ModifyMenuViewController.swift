@@ -20,11 +20,13 @@ final class ModifyMenuViewController: BaseViewController {
     private let titleLabel: UILabel = UILabel()
     private lazy var nameTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.name,
+        originalText: viewModel.selectedMenu.name,
         placeholderText: StringLiterals.ModifyMenu.namePlaceholder,
         hankkiTextFieldDelegate: self
     )
     private lazy var priceTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.price,
+        originalText: String(viewModel.selectedMenu.price),
         hankkiTextFieldDelegate: self
     )
     private let over8000PriceLabel: UILabel = UILabel()
@@ -121,7 +123,7 @@ final class ModifyMenuViewController: BaseViewController {
                 isLeft: false,
                 padding: 44,
                 text: StringLiterals.Common.won,
-                font: PretendardStyle.body2,
+                font: PretendardStyle.body3,
                 textColor: .gray800
             )
             $0.keyboardType = .numberPad

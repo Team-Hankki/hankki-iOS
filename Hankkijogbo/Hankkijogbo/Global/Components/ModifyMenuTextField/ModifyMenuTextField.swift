@@ -19,6 +19,7 @@ final class ModifyMenuTextField: UITextField {
     // MARK: - Properties
     
     var titleText: String
+    var originalText: String = ""
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
@@ -45,6 +46,7 @@ final class ModifyMenuTextField: UITextField {
     
     init(
         titleText: String,
+        originalText: String,
         placeholderText: String? = nil,
         hankkiTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
     ) {
@@ -52,7 +54,8 @@ final class ModifyMenuTextField: UITextField {
         self.placeholderText = placeholderText
         self.modifyMenuTextFieldDelegate = hankkiTextFieldDelegate
         super.init(frame: .zero)
-        
+        self.text = originalText
+
         setupHierarchy()
         setupLayout()
         setupStyle()
@@ -100,10 +103,10 @@ private extension ModifyMenuTextField {
         self.do {
             $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = 10
-            $0.font = .setupPretendardStyle(of: .body2)
-            $0.textColor = .gray850
+            $0.font = .setupPretendardStyle(of: .body3)
+            $0.textColor = .gray800
             $0.attributedPlaceholder = UILabel.setupAttributedText(
-                for: PretendardStyle.body2,
+                for: PretendardStyle.body3,
                 withText: placeholderText ?? "",
                 color: .gray400
             )
@@ -114,7 +117,7 @@ private extension ModifyMenuTextField {
         }
         
         titleLabel.do {
-            $0.font = .setupPretendardStyle(of: .body5)
+            $0.font = .setupPretendardStyle(of: .body6)
             $0.textColor = .gray500
             $0.text = titleText
         }
@@ -137,7 +140,7 @@ private extension ModifyMenuTextField {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         defaultButton.addTarget(self, action: #selector(defaultButtonDidTap), for: .touchUpInside)
         editingButton.addTarget(self, action: #selector(editingButtonDidTap), for: .touchUpInside)
-        enterMenuAccessoryView.applyButton.addTarget(self, action: #selector(inputApplyButtonDidTap), for: .touchUpInside)
+        enterMenuAccessoryView.modifyCompleteButton.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
 }
@@ -221,7 +224,7 @@ private extension ModifyMenuTextField {
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
     
-    @objc func inputApplyButtonDidTap() {
+    @objc func modifyCompleteButtonDidTap() {
         guard let text = text else { return }
         if !text.isEmpty {
             removeInputAccessoryView()
@@ -235,7 +238,7 @@ private extension ModifyMenuTextField {
     
     @objc func textFieldDidChange() {
         guard let text = text else { return }
-        enterMenuAccessoryView.applyButton.backgroundColor = !text.isEmpty ? .red500 : .red400
+        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = !text.isEmpty ? .red500 : .red400
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         if let price = Int(text) {

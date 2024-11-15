@@ -60,7 +60,7 @@ class DeleteMenuAccessoryView: BaseView {
         
         bottomLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: StringLiterals.ModifyMenu.recommendDeleteMenu,
                 color: .gray850
             )
