@@ -235,6 +235,10 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
         }
     }
     
+    func isMenuDataValid() -> Bool {
+        return viewModel.isMenuDataValid()
+    }
+    
     func showErrorLabel(isWarn: Bool) {
         over8000PriceLabel.isHidden = !isWarn
     }

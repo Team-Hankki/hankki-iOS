@@ -10,6 +10,7 @@ import UIKit
 protocol ModifyMenuTextFieldDelegate: AnyObject {
     func handleTextFieldUpdate(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
+    func isMenuDataValid() -> Bool
     func showErrorLabel(isWarn: Bool)
     func showDeleteAlert()
     func showModifyCompleteAlert()
@@ -252,8 +253,9 @@ private extension ModifyMenuTextField {
     }
     
     @objc func textFieldDidChange() {
-        guard let text = text else { return }
-        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = !text.isEmpty ? .red500 : .red400
+        guard let text = text, let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
+        modifyMenuTextFieldDelegate.handleTextFieldUpdate(textField: self)
+        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = modifyMenuTextFieldDelegate.isMenuDataValid() ? .red500 : .red400
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         if titleText == StringLiterals.ModifyMenu.price, let price = Int(text) {
@@ -275,6 +277,5 @@ extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         isModifying = false
-        modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
 }
