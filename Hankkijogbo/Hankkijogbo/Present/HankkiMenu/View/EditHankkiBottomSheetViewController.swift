@@ -57,12 +57,14 @@ final class EditHankkiBottomSheetViewController: BaseViewController {
         if isHaveToDismiss {
             self.dismiss(animated: false)
         }
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         isHaveToDismiss = true
+        navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Set UI
