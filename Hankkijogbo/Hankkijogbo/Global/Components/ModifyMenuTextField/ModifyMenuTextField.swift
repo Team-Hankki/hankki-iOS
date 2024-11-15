@@ -35,8 +35,8 @@ final class ModifyMenuTextField: UITextField {
     // MARK: - UI Components
     
     private let titleLabel: UILabel = UILabel()
-    private let defaultButton: UIButton = UIButton()
-    private let editingButton: UIButton = UIButton()
+    private let modifyButton: UIButton = UIButton()
+    private let xButton: UIButton = UIButton()
     private lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
     private lazy var deleteMenuAccessoryView: DeleteMenuAccessoryView = DeleteMenuAccessoryView(
         deleteButtonAction: showDeleteAlert,
@@ -76,8 +76,8 @@ private extension ModifyMenuTextField {
     func setupHierarchy() {
         self.addSubviews(
             titleLabel,
-            defaultButton,
-            editingButton
+            modifyButton,
+            xButton
         )
     }
     
@@ -87,13 +87,13 @@ private extension ModifyMenuTextField {
             $0.centerY.equalToSuperview()
         }
         
-        defaultButton.snp.makeConstraints {
+        modifyButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(24)
         }
         
-        editingButton.snp.makeConstraints {
+        xButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(12)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(24)
@@ -123,11 +123,11 @@ private extension ModifyMenuTextField {
             $0.text = titleText
         }
         
-        defaultButton.do {
+        modifyButton.do {
             $0.setImage(.btnModifyMenu, for: .normal)
         }
         
-        editingButton.do {
+        xButton.do {
             $0.setImage(.btnDelete, for: .normal)
             $0.isHidden = true
         }
@@ -139,8 +139,8 @@ private extension ModifyMenuTextField {
     
     func setupAddTarget() {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        defaultButton.addTarget(self, action: #selector(defaultButtonDidTap), for: .touchUpInside)
-        editingButton.addTarget(self, action: #selector(editingButtonDidTap), for: .touchUpInside)
+        modifyButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
+        xButton.addTarget(self, action: #selector(xButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.modifyCompleteButton.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
@@ -165,8 +165,8 @@ private extension ModifyMenuTextField {
             titleLabel.textColor = titleTextColor
         }
         
-        let hiddenButton: UIButton = isEditing ? defaultButton : editingButton
-        let shownButton: UIButton = isEditing ? editingButton : defaultButton
+        let hiddenButton: UIButton = isEditing ? modifyButton : xButton
+        let shownButton: UIButton = isEditing ? xButton : modifyButton
         hiddenButton.isHidden = true
         shownButton.isHidden = false
     }
@@ -213,12 +213,12 @@ private extension ModifyMenuTextField {
     
     // MARK: - @objc Func
     
-    @objc func defaultButtonDidTap() {
+    @objc func modifyButtonDidTap() {
         isModifying = true
         becomeFirstResponder()
     }
     
-    @objc func editingButtonDidTap() {
+    @objc func xButtonDidTap() {
         isWarn = false
         text = ""
         updateStyle(isEditing: false)
