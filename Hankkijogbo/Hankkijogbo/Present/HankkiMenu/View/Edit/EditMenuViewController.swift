@@ -171,13 +171,14 @@ private extension EditMenuViewController {
         viewModel.deleteMenuAPI { [weak self] in
             guard let self = self else { return }
             
-            let isMenuEmpty = self.viewModel.menus.isEmpty
+            let isLastMenu = self.viewModel.isLastMenu
+            print("1115 \(isLastMenu)")
             let completeView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
                 completeImage: .imgDeleteComplete,
-                doThisAgainButtonText: isMenuEmpty ? StringLiterals.ModifyMenu.editOtherMenuButton : nil,
-                doThisAgainButtonAction: isMenuEmpty ? { self.popToEditMenu() } : nil,
+                doThisAgainButtonText: isLastMenu ? nil : StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: isLastMenu ? nil : { self.popToEditMenu() },
                 completeButtonAction: { self.popToRoot() }
             )
             
@@ -188,7 +189,11 @@ private extension EditMenuViewController {
 
     @objc func modifyButtonHandler() {
         guard let selectedMenu = viewModel.selectedMenu else { return }
-        let modifyMenuViewModel = ModifyMenuViewModel(storeId: viewModel.storeId, selectedMenu: selectedMenu)
+        let modifyMenuViewModel = ModifyMenuViewModel(
+            storeId: viewModel.storeId,
+            isLastMenu: viewModel.isLastMenu,
+            selectedMenu: selectedMenu
+        )
         let modifyMenuViewController = ModifyMenuViewController(viewModel: modifyMenuViewModel)
         self.navigationController?.pushViewController(modifyMenuViewController, animated: true)
     }

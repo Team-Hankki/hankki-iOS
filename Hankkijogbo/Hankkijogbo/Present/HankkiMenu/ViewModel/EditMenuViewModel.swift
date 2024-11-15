@@ -13,9 +13,11 @@ final class EditMenuViewModel {
     var updateButton: ((Bool) -> Void)?
     
     var storeId: Int
+    lazy var isLastMenu: Bool = menus.count == 1
     var menus: [SelectableMenuData] = [] {
         didSet {
             updateSelectedMenu()
+            updateIsLastMenu()
             updateCollectionView?()
         }
     }
@@ -35,6 +37,10 @@ extension EditMenuViewModel {
     
     func updateSelectedMenu() {
         selectedMenu = menus.filter { $0.isSelected }.first
+    }
+    
+    func updateIsLastMenu() {
+        isLastMenu = menus.count == 1
     }
     
     func disableSelectedMenus() {

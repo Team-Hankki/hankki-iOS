@@ -161,17 +161,21 @@ private extension ModifyMenuViewController {
     }
     
     func deleteMenu() {
-        viewModel.deleteMenuAPI { [self] in
-            let completeView: MenuCompleteView = MenuCompleteView(
+        viewModel.deleteMenuAPI { [weak self] in
+            guard let self = self else { return }
+            
+            let isLastMenu = self.viewModel.isLastMenu
+            let completeView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
                 completeImage: .imgDeleteComplete,
-                doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
-                doThisAgainButtonAction: { self.popToEditMenu() },
+                doThisAgainButtonText: isLastMenu ? nil : StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: isLastMenu ? nil : { self.popToEditMenu() },
                 completeButtonAction: { self.popToRoot() }
             )
+            
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
-            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
+            self.navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
     }
     
@@ -235,9 +239,19 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
     }
     
     func showDeleteAlert() {
-        showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
-                  secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
-                  primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton,
+        let titleText = viewModel.isLastMenu
+        ? StringLiterals.Alert.DeleteLastMenu.title
+        : StringLiterals.Alert.DeleteMenu.title
+        let secondaryButtonText = viewModel.isLastMenu
+        ? StringLiterals.Alert.DeleteLastMenu.secondaryButton
+        : StringLiterals.Alert.DeleteMenu.secondaryButton
+        let primaryButtonText = viewModel.isLastMenu
+        ? StringLiterals.Alert.DeleteLastMenu.primaryButton
+        : StringLiterals.Alert.DeleteMenu.primaryButton
+        
+        showAlert(titleText: titleText,
+                  secondaryButtonText: secondaryButtonText,
+                  primaryButtonText: primaryButtonText,
                   primaryButtonHandler: deleteMenu)
     }
 }

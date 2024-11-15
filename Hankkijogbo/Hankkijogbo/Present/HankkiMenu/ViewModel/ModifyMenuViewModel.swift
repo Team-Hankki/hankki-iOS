@@ -12,6 +12,7 @@ final class ModifyMenuViewModel {
     var updateButton: ((Bool) -> Void)?
     
     var storeId: Int
+    var isLastMenu: Bool
     var selectedMenu: SelectableMenuData
     var modifiedMenuData: MenuRequestDTO = MenuRequestDTO() {
         didSet {
@@ -19,8 +20,9 @@ final class ModifyMenuViewModel {
         }
     }
     
-    init(storeId: Int, selectedMenu: SelectableMenuData) {
+    init(storeId: Int, isLastMenu: Bool, selectedMenu: SelectableMenuData) {
         self.storeId = storeId
+        self.isLastMenu = isLastMenu
         self.selectedMenu = selectedMenu
     }
 }
