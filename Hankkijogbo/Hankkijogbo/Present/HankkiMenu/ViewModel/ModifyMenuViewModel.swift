@@ -14,7 +14,7 @@ final class ModifyMenuViewModel {
     var storeId: Int
     var isLastMenu: Bool
     var selectedMenu: SelectableMenuData
-    var modifiedMenuData: MenuRequestDTO = MenuRequestDTO() {
+    lazy var modifiedMenuData: MenuRequestDTO = MenuRequestDTO(name: selectedMenu.name, price: selectedMenu.price) {
         didSet {
             updateButton?(isMenuDataValid())
         }
@@ -30,8 +30,7 @@ final class ModifyMenuViewModel {
 extension ModifyMenuViewModel {
     
     func isMenuDataValid() -> Bool {
-        guard let name = modifiedMenuData.name, let price = modifiedMenuData.price else { return false }
-        return !(name.isEmpty) && (price <= 8000)
+        return !(modifiedMenuData.name.isEmpty) && (modifiedMenuData.price <= 8000)
     }
     
     /// 메뉴 수정
