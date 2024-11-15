@@ -212,7 +212,9 @@ private extension ModifyMenuTextField {
     
     func changeModifyCompleteButtonStyle() {
         guard let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
-        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = modifyMenuTextFieldDelegate.isMenuDataValid() ? .red500 : .red400
+        let isValidData = modifyMenuTextFieldDelegate.isMenuDataValid()
+        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = isValidData ? .red500 : .red400
+        enterMenuAccessoryView.modifyCompleteButton.isEnabled = isValidData ? true : false
     }
     
     func toggleAccessoryViewVisibility(isDeleteHidden: Bool) {
