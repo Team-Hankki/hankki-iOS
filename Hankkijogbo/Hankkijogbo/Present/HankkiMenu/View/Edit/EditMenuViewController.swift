@@ -151,27 +151,41 @@ private extension EditMenuViewController {
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
-        showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
-                  secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
-                  primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton,
+        let titleText = viewModel.menus.count == 1
+        ? StringLiterals.Alert.DeleteLastMenu.title
+        : StringLiterals.Alert.DeleteMenu.title
+        let secondaryButtonText = viewModel.menus.count == 1
+        ? StringLiterals.Alert.DeleteLastMenu.secondaryButton
+        : StringLiterals.Alert.DeleteMenu.secondaryButton
+        let primaryButtonText = viewModel.menus.count == 1
+        ? StringLiterals.Alert.DeleteLastMenu.primaryButton
+        : StringLiterals.Alert.DeleteMenu.primaryButton
+        
+        showAlert(titleText: titleText,
+                  secondaryButtonText: secondaryButtonText,
+                  primaryButtonText: primaryButtonText,
                   primaryButtonHandler: deleteMenu)
     }
     
     @objc func deleteMenu() {
-        viewModel.deleteMenuAPI { [self] in
-            let completeView: MenuCompleteView = MenuCompleteView(
+        viewModel.deleteMenuAPI { [weak self] in
+            guard let self = self else { return }
+            
+            let isMenuEmpty = self.viewModel.menus.isEmpty
+            let completeView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
                 completeImage: .imgDeleteComplete,
-                doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
-                doThisAgainButtonAction: { self.popToEditMenu() },
+                doThisAgainButtonText: isMenuEmpty ? StringLiterals.ModifyMenu.editOtherMenuButton : nil,
+                doThisAgainButtonAction: isMenuEmpty ? { self.popToEditMenu() } : nil,
                 completeButtonAction: { self.popToRoot() }
             )
+            
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
-            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
+            self.navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
     }
-    
+
     @objc func modifyButtonHandler() {
         guard let selectedMenu = viewModel.selectedMenu else { return }
         let modifyMenuViewModel = ModifyMenuViewModel(storeId: viewModel.storeId, selectedMenu: selectedMenu)

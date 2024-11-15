@@ -88,6 +88,12 @@ enum StringLiterals {
             static let primaryButton = StringLiterals.Common.delete
         }
         
+        enum DeleteLastMenu {
+            static let title = "메뉴를 모두 삭제하면 식당이 삭제돼요.\n그래도 삭제하시겠어요?"
+            static let secondaryButton = "취소"
+            static let primaryButton = StringLiterals.Common.delete
+        }
+        
         enum NetworkError {
             static let title = "네트워크 오류가 발생했어요"
             static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"

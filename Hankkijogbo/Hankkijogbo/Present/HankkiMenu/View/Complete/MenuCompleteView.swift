@@ -16,7 +16,7 @@ final class MenuCompleteView: BaseView {
     private let firstSentence: String
     private let secondSentence: String
     private let completeImage: UIImage
-    private let doThisAgainButtonText: String
+    private let doThisAgainButtonText: String?
     private let doThisAgainButtonAction: ButtonAction?
     private let completeButtonAction: ButtonAction?
     
@@ -42,7 +42,7 @@ final class MenuCompleteView: BaseView {
         firstSentence: String,
         secondSentence: String,
         completeImage: UIImage,
-        doThisAgainButtonText: String,
+        doThisAgainButtonText: String? = nil,
         doThisAgainButtonAction: ButtonAction? = nil,
         completeButtonAction: ButtonAction? = nil
     ) {
@@ -115,7 +115,7 @@ final class MenuCompleteView: BaseView {
             doThisAgainButton.do {
                 $0.setAttributedTitle(UILabel.setupAttributedText(
                     for: PretendardStyle.subtitle3,
-                    withText: doThisAgainButtonText,
+                    withText: doThisAgainButtonText ?? "",
                     color: .red500
                 ), for: .normal)
                 $0.backgroundColor = .hankkiWhite
