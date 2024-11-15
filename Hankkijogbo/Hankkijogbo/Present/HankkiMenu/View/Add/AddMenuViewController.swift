@@ -51,8 +51,8 @@ final class AddMenuViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.menus = [MenuData()]
-        menuCollectionView.reloadData()
+        initializaMenuData()
+        setupNavigationBar()
     }
     
     // MARK: - Set UI
@@ -108,6 +108,11 @@ final class AddMenuViewController: BaseViewController {
 
 private extension AddMenuViewController {
     
+    func initializaMenuData() {
+        viewModel.menus = [MenuData()]
+        menuCollectionView.reloadData()
+    }
+    
     func setupRegister() {
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         menuCollectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
@@ -121,6 +126,16 @@ private extension AddMenuViewController {
     func bindViewModel() {
         viewModel.updateButton = { [weak self] isActive in
             self?.updateBottomButtonStyle(isActive: isActive)
+        }
+    }
+    
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                              hasRightButton: false,
+                                                              mainTitle: .string(""),
+                                                              rightButton: .string(""))
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
         }
     }
     
