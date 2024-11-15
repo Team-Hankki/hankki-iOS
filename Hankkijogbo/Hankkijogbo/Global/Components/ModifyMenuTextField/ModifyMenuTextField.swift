@@ -12,6 +12,7 @@ protocol ModifyMenuTextFieldDelegate: AnyObject {
     func getOriginalText(textField: UITextField) -> String
     func showErrorLabel(isWarn: Bool)
     func showDeleteAlert()
+    func showModifyCompleteAlert()
 }
 
 final class ModifyMenuTextField: UITextField {
@@ -39,7 +40,7 @@ final class ModifyMenuTextField: UITextField {
     private lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
     private lazy var deleteMenuAccessoryView: DeleteMenuAccessoryView = DeleteMenuAccessoryView(
         deleteButtonAction: showDeleteAlert,
-        xButtonAction: hideDeleteMenuAccessoryView
+        xButtonAction: hideAccessoryView
     )
     
     // MARK: - Init
@@ -196,18 +197,18 @@ private extension ModifyMenuTextField {
         inputAccessoryView = accessoryView
     }
     
-    func removeInputAccessoryView() {
-        inputAccessoryView?.isHidden = true
-        inputAccessoryView = nil
-    }
-    
-    func hideDeleteMenuAccessoryView() {
+    func hideAccessoryView() {
         deleteMenuAccessoryView.isHidden = true
         enterMenuAccessoryView.isHidden = false
     }
     
     func showDeleteAlert() {
         modifyMenuTextFieldDelegate?.showDeleteAlert()
+    }
+        
+    func modifyComplete() {
+        modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
+        modifyMenuTextFieldDelegate?.showModifyCompleteAlert()
     }
     
     // MARK: - @objc Func
@@ -227,8 +228,7 @@ private extension ModifyMenuTextField {
     @objc func modifyCompleteButtonDidTap() {
         guard let text = text else { return }
         if !text.isEmpty {
-            removeInputAccessoryView()
-            resignFirstResponder()
+            modifyComplete()
         }
     }
     
@@ -263,14 +263,7 @@ extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateStyle(isEditing: false)
-        removeInputAccessoryView()
         isModifying = false
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        removeInputAccessoryView()
-        resignFirstResponder()
-        return true
     }
 }

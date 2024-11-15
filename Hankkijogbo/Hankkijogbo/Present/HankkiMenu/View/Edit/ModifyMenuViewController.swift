@@ -224,11 +224,12 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
     }
     
     func handleTextFieldUpdate(textField: UITextField) {
+        guard let text = textField.text else { return }
         switch textField {
         case nameTextField:
-            viewModel.modifiedMenuData.name = textField.text
+            viewModel.modifiedMenuData.name = text
         case priceTextField:
-            viewModel.modifiedMenuData.price = Int(textField.text ?? "")
+            viewModel.modifiedMenuData.price = Int(text) ?? 0
         default:
             break
         }
@@ -249,9 +250,20 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
         ? StringLiterals.Alert.DeleteLastMenu.primaryButton
         : StringLiterals.Alert.DeleteMenu.primaryButton
         
-        showAlert(titleText: titleText,
-                  secondaryButtonText: secondaryButtonText,
-                  primaryButtonText: primaryButtonText,
-                  primaryButtonHandler: deleteMenu)
+        showAlert(
+            titleText: titleText,
+            secondaryButtonText: secondaryButtonText,
+            primaryButtonText: primaryButtonText,
+            primaryButtonHandler: deleteMenu
+        )
+    }
+    
+    func showModifyCompleteAlert() {
+        showAlert(
+            titleText: StringLiterals.Alert.ModifyCompleteMenu.title,
+            secondaryButtonText: StringLiterals.Alert.ModifyCompleteMenu.secondaryButton,
+            primaryButtonText: StringLiterals.Alert.ModifyCompleteMenu.primaryButton,
+            primaryButtonHandler: completeButtonDidTap
+        )
     }
 }

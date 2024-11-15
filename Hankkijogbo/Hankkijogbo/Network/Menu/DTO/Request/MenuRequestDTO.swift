@@ -10,6 +10,6 @@ import Foundation
 // MARK: - 메뉴 쪽 API Request Body
 
 struct MenuRequestDTO: Codable {
-    var name: String?
-    var price: Int?
+    var name: String
+    var price: Int
 }
