@@ -24,7 +24,6 @@ final class ModifyMenuTextField: UITextField {
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
-    private var isModifying: Bool = false
     private var isWarn: Bool = false {
         didSet {
             updateWarnStyle()
@@ -214,7 +213,6 @@ private extension ModifyMenuTextField {
     // MARK: - @objc Func
     
     @objc func modifyButtonDidTap() {
-        isModifying = true
         becomeFirstResponder()
     }
     
@@ -252,18 +250,14 @@ private extension ModifyMenuTextField {
 extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if !isModifying { return false }
-        
         updateStyle(isEditing: true)
         setupInputAccessoryView()
         textFieldDidChange()
-        
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateStyle(isEditing: false)
-        isModifying = false
         modifyMenuTextFieldDelegate?.handleTextFieldUpdate(textField: self)
     }
 }
