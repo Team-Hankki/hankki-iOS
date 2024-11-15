@@ -143,10 +143,6 @@ final class ModifyMenuViewController: BaseViewController {
             $0.font = .setupSuiteStyle(of: .body3)
             $0.textColor = .gray400
         }
-        
-        bottomButtonView.do {
-            $0.setupEnabledDoneButton()
-        }
     }
 }
 

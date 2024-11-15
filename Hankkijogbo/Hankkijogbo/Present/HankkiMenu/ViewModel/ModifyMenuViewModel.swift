@@ -30,7 +30,7 @@ final class ModifyMenuViewModel {
 extension ModifyMenuViewModel {
     
     func isMenuDataValid() -> Bool {
-        return !(modifiedMenuData.name.isEmpty) && (modifiedMenuData.price > 0) && (modifiedMenuData.price <= 8000)
+        return !(modifiedMenuData.name.isEmpty) && (modifiedMenuData.price > 0) && (modifiedMenuData.price <= 8000) && ((modifiedMenuData.name != selectedMenu.name) || (modifiedMenuData.price != selectedMenu.price))
     }
     
     /// 메뉴 수정
