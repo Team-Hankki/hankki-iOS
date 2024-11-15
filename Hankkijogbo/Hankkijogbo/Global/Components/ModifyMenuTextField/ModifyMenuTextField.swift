@@ -149,7 +149,7 @@ private extension ModifyMenuTextField {
 private extension ModifyMenuTextField {
     
     func updateStyle(isEditing: Bool) {
-        if isWarn {
+        if isWarn && titleText == StringLiterals.ModifyMenu.price {
             updateWarnStyle()
         } else {
             let textColor: UIColor = isEditing ? .gray850 : .gray800
@@ -241,7 +241,7 @@ private extension ModifyMenuTextField {
         enterMenuAccessoryView.modifyCompleteButton.backgroundColor = !text.isEmpty ? .red500 : .red400
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
-        if let price = Int(text) {
+        if titleText == StringLiterals.ModifyMenu.price, let price = Int(text) {
             isWarn = price > 8000
         }
     }
