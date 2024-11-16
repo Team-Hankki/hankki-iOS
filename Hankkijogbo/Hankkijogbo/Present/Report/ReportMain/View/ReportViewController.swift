@@ -8,11 +8,6 @@
 import UIKit
 import PhotosUI
 
-protocol PassItemDataDelegate: AnyObject {
-    func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String)
-    func updateViewModelLocationData(data: GetSearchedLocation?)
-}
-
 final class ReportViewController: BaseViewController {
     
     // MARK: - Properties
@@ -382,14 +377,19 @@ extension ReportViewController: PHPickerViewControllerDelegate {
     }
 }
 
-// MARK: - PassSelectedHankkiData Delegate
+// MARK: - UpdateViewModelMenuDataDelegate
 
-extension ReportViewController: PassItemDataDelegate {
+extension ReportViewController: UpdateViewModelMenuDataDelegate {
     
-    func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String) {
+    func updateViewModelMenuData(cell: MenuCollectionViewCell, name: String, price: String) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         reportViewModel.menus[indexPath.row] = MenuData(name: name, price: Int(price) ?? 0)
     }
+}
+
+// MARK: - UpdateViewModelLocationDataDelegate
+
+extension ReportViewController: UpdateViewModelLocationDataDelegate {
     
     func updateViewModelLocationData(data: GetSearchedLocation?) {
         reportViewModel.selectedLocationData = data

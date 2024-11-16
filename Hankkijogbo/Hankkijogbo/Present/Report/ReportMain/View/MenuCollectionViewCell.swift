@@ -7,13 +7,21 @@
 
 import UIKit
 
+protocol UpdateViewModelLocationDataDelegate: AnyObject {
+    func updateViewModelLocationData(data: GetSearchedLocation?)
+}
+
+protocol UpdateViewModelMenuDataDelegate: AnyObject {
+    func updateViewModelMenuData(cell: MenuCollectionViewCell, name: String, price: String)
+}
+
 final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
     private let menuNameMaxLength: Int = 30
     private let priceMaxLength: Int = 5
-    weak var delegate: PassItemDataDelegate?
+    weak var delegate: UpdateViewModelMenuDataDelegate?
         
     // MARK: - UI Components
     
@@ -278,6 +286,7 @@ extension MenuCollectionViewCell {
 // MARK: - UITextField Delegate
 
 extension MenuCollectionViewCell: UITextFieldDelegate {
+    
     /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == menuTextField {
@@ -314,7 +323,8 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
                 setupPriceNormalStyle()
             }
         }
-        delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
+        
+        delegate?.updateViewModelMenuData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }
     
     /// 키보드의 return 키 클릭 시 호출되는 함수

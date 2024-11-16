@@ -225,6 +225,7 @@ private extension AddMenuViewController {
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         2
     }
@@ -260,12 +261,9 @@ extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDel
 
 // MARK: - PassSelectedHankkiData Delegate
 
-extension AddMenuViewController: PassItemDataDelegate {
-    func updateViewModelLocationData(data: GetSearchedLocation?) {
-        print("네엡")
-    }
+extension AddMenuViewController: UpdateViewModelMenuDataDelegate {
     
-    func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String) {
+    func updateViewModelMenuData(cell: MenuCollectionViewCell, name: String, price: String) {
         guard let indexPath = menuCollectionView.indexPath(for: cell) else { return }
         viewModel.menus[indexPath.row] = MenuData(name: name, price: Int(price) ?? 0)
     }
