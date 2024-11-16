@@ -1299,7 +1299,6 @@
 		A236B5FD2CAC154A00935819 /* HankkiMenu */ = {
 			isa = PBXGroup;
 			children = (
-				A24A78752CB449AB0049B031 /* Model */,
 				A24A78742CB449A20049B031 /* ViewModel */,
 				A24A78732CB4499C0049B031 /* View */,
 			);
@@ -1435,13 +1434,6 @@
 				A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		A24A78752CB449AB0049B031 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		A24A78792CB44E110049B031 /* Menu */ = {
@@ -2175,7 +2167,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2024100301;
-				DEVELOPMENT_TEAM = KT2Q6HC762;
+				DEVELOPMENT_TEAM = LM9BKUSL5K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
@@ -2213,7 +2205,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2024100301;
-				DEVELOPMENT_TEAM = KT2Q6HC762;
+				DEVELOPMENT_TEAM = LM9BKUSL5K;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
