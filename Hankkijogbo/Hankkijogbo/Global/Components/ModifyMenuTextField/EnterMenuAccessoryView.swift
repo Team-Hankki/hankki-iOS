@@ -8,7 +8,7 @@
 import UIKit
 
 /// - 메뉴 정보 입력 시 뜨는 악세사리 뷰
-class EnterMenuAccessoryView: BaseView {
+final class EnterMenuAccessoryView: BaseView {
     
     // MARK: - Properties
     
