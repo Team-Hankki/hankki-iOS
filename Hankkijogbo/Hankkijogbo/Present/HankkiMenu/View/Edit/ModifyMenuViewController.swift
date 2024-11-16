@@ -22,12 +22,12 @@ final class ModifyMenuViewController: BaseViewController {
         titleText: StringLiterals.ModifyMenu.name,
         originalText: viewModel.selectedMenu.name,
         placeholderText: StringLiterals.ModifyMenu.namePlaceholder,
-        hankkiTextFieldDelegate: self
+        modifyMenuTextFieldDelegate: self
     )
     private lazy var priceTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.price,
         originalText: String(viewModel.selectedMenu.price),
-        hankkiTextFieldDelegate: self
+        modifyMenuTextFieldDelegate: self
     )
     private let over8000PriceLabel: UILabel = UILabel()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(

@@ -58,11 +58,11 @@ final class ModifyMenuTextField: UITextField {
         titleText: String,
         originalText: String,
         placeholderText: String? = nil,
-        hankkiTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
+        modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
         self.placeholderText = placeholderText
-        self.modifyMenuTextFieldDelegate = hankkiTextFieldDelegate
+        self.modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate
         super.init(frame: .zero)
         self.text = originalText
 
@@ -210,7 +210,7 @@ private extension ModifyMenuTextField {
         inputAccessoryView = accessoryView
     }
     
-    func changeModifyCompleteButtonStyle() {
+    func updateModifyCompleteButtonStyle() {
         guard let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
         let isValidData = modifyMenuTextFieldDelegate.isMenuDataValid()
         enterMenuAccessoryView.modifyCompleteButton.backgroundColor = isValidData ? .red500 : .red400
@@ -258,13 +258,13 @@ private extension ModifyMenuTextField {
     @objc func inputResetButtonDidTap() {
         self.text = modifyMenuTextFieldDelegate?.getOriginalText(textField: self)
         modifyMenuTextFieldDelegate?.updateModifiedMenuData(textField: self)
-        changeModifyCompleteButtonStyle()
+        updateModifyCompleteButtonStyle()
     }
     
     @objc func textFieldDidChange() {
         guard let text = text, let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
         modifyMenuTextFieldDelegate.updateModifiedMenuData(textField: self)
-        changeModifyCompleteButtonStyle()
+        updateModifyCompleteButtonStyle()
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         if titleText == StringLiterals.ModifyMenu.price, let price = Int(text) {
