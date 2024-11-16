@@ -11,6 +11,7 @@ final class AddMenuViewModel {
     
     var updateButton: ((Bool) -> Void)?
     
+    var storeId: Int
     var menus: [MenuData] = [MenuData()] {
         didSet {
             checkStatus()
@@ -21,6 +22,10 @@ final class AddMenuViewModel {
         didSet {
             updateButton?(isValid ?? false)
         }
+    }
+    
+    init(storeId: Int) {
+        self.storeId = storeId
     }
 }
 
@@ -40,7 +45,7 @@ private extension AddMenuViewModel {
 extension AddMenuViewModel {
     
     /// 메뉴 추가
-    func postMenuAPI(storeId: Int, completion: @escaping () -> Void) {
+    func postMenuAPI(completion: @escaping () -> Void) {
         validMenus = menus.filter { $0.name != "" && $0.price > 0 && $0.price <= 8000 }
         
         let requestBody: [MenuRequestDTO] = validMenus.map { $0.toMenuRequestDTO() }

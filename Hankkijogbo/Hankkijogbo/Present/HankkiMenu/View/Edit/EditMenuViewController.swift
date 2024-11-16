@@ -172,7 +172,6 @@ private extension EditMenuViewController {
             guard let self = self else { return }
             
             let isLastMenu = self.viewModel.isLastMenu
-            print("1115 \(isLastMenu)")
             let completeView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,

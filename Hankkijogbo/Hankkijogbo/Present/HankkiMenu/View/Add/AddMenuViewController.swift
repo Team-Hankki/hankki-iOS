@@ -16,8 +16,7 @@ final class AddMenuViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let storeId: Int
-    private var viewModel: AddMenuViewModel = AddMenuViewModel()
+    private var viewModel: AddMenuViewModel
     
     // MARK: - UI Components
     
@@ -31,8 +30,8 @@ final class AddMenuViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(storeId: Int) {
-        self.storeId = storeId
+    init(viewModel: AddMenuViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
     
@@ -191,7 +190,7 @@ private extension AddMenuViewController {
     // MARK: - @objc Func
     
     @objc func bottomButtonPrimaryHandler() {
-        viewModel.postMenuAPI(storeId: storeId) { [self] in
+        viewModel.postMenuAPI { [self] in
             let completeView: MenuCompleteView = MenuCompleteView(
                 firstSentence: StringLiterals.AddMenu.addMenuCompleteByYouFirst,
                 secondSentence: "\(self.viewModel.validMenus.count)" + StringLiterals.AddMenu.addMenuCompleteByYouSecond,
