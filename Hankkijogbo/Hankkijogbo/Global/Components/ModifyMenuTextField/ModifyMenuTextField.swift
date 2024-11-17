@@ -11,7 +11,7 @@ protocol ModifyMenuTextFieldDelegate: AnyObject {
     func updateModifiedMenuData(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
     func isMenuDataValid() -> Bool
-    func showErrorLabel(isWarn: Bool)
+    func updateErrorLabelVisibility(isHidden: Bool)
     func showDeleteAlert()
     func showModifyCompleteAlert()
 }
@@ -26,19 +26,6 @@ final class ModifyMenuTextField: UITextField {
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
     private let menuNameMaxLength: Int = 30
-    private var isModifying: Bool = false {
-        didSet {
-            updateStyle()
-            modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn && isModifying)
-        }
-    }
-    private var isWarn: Bool = false {
-        didSet {
-            updateStyle()
-            toggleAccessoryViewVisibility(isDeleteHidden: !isWarn)
-            modifyMenuTextFieldDelegate?.showErrorLabel(isWarn: isWarn && isModifying)
-        }
-    }
     
     private lazy var tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(modifyButtonDidTap))
 
@@ -163,37 +150,6 @@ private extension ModifyMenuTextField {
 
 private extension ModifyMenuTextField {
     
-    func updateStyle() {
-        if isWarn && titleText == StringLiterals.ModifyMenu.price {
-            updateWarnStyle()
-        } else {
-            let textColor: UIColor = isModifying ? .gray850 : .gray800
-            let borderWidth: CGFloat = isModifying ? 1 : 0
-            let borderColor: CGColor? = isModifying ? UIColor.gray500.cgColor : nil
-            let titleFont: UIFont? = .setupPretendardStyle(of: isModifying ? .body5 : .body6)
-            let titleTextColor: UIColor = isModifying ? .gray850 : .gray500
-            
-            self.textColor = textColor
-            layer.borderWidth = borderWidth
-            layer.borderColor = borderColor
-            titleLabel.font = titleFont
-            titleLabel.textColor = titleTextColor
-        }
-        
-        let hiddenButton: UIButton = isModifying ? modifyButton : xButton
-        let shownButton: UIButton = isModifying ? xButton : modifyButton
-        hiddenButton.isHidden = true
-        shownButton.isHidden = false
-    }
-    
-    func updateWarnStyle() {
-        if let text = text, text.isEmpty { isWarn = false }
-        titleLabel.textColor = isWarn && !isModifying ? .warnRed : .gray850
-        layer.borderWidth = isWarn && isModifying ? 1 : 0
-        layer.borderColor = isWarn && isModifying ? UIColor.warnRed.cgColor : nil
-        textColor = isWarn ? .warnRed : .gray850
-    }
-    
     func setupInputAccessoryView() {
         let accessoryView = UIView(frame: .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54 + 56))
         accessoryView.addSubviews(enterMenuAccessoryView, deleteMenuAccessoryView)
@@ -209,6 +165,55 @@ private extension ModifyMenuTextField {
         }
         
         inputAccessoryView = accessoryView
+    }
+    
+    func updateButtonBy(isFocus: Bool) {
+        modifyButton.isHidden = isFocus
+        xButton.isHidden = !isFocus
+    }
+    
+    func updateStyleBy(isFocus: Bool) {
+        textColor = isFocus ? .gray850 : .gray800
+        layer.borderWidth = isFocus ? 1 : 0
+        layer.borderColor = isFocus ? UIColor.gray500.cgColor : nil
+        titleLabel.font = .setupPretendardStyle(of: isFocus ? .body5 : .body6)
+        titleLabel.textColor = isFocus ? .gray850 : .gray500
+        
+        updateButtonBy(isFocus: isFocus)
+        modifyMenuTextFieldDelegate?.updateErrorLabelVisibility(isHidden: true)
+    }
+    
+    func updateErrorStyleBy(isFocus: Bool) {
+        textColor = .warnRed
+        if isFocus {
+            layer.borderColor = UIColor.warnRed.cgColor
+        } else {
+            titleLabel.textColor = .warnRed
+        }
+        
+        modifyMenuTextFieldDelegate?.updateErrorLabelVisibility(isHidden: !isFocus)
+    }
+    
+    func updateStyle(type: ModifyMenuTextFieldType) {
+        switch type {
+        case .focused:
+            updateStyleBy(isFocus: true)
+            toggleAccessoryViewVisibility(isDeleteHidden: true)
+        case .unfocused:
+            updateStyleBy(isFocus: false)
+        case .focusedWithError:
+            updateStyleBy(isFocus: true)
+            updateErrorStyleBy(isFocus: true)
+            toggleAccessoryViewVisibility(isDeleteHidden: false)
+        case .unfocusedWithError:
+            updateStyleBy(isFocus: false)
+            updateErrorStyleBy(isFocus: false)
+        }
+    }
+    
+    func isErrorValue() -> Bool {
+        guard let price = Int(text ?? "") else { return false }
+        return titleText == StringLiterals.ModifyMenu.price && price > 8000
     }
     
     func updateModifyCompleteButtonStyle() {
@@ -243,9 +248,8 @@ private extension ModifyMenuTextField {
     }
     
     @objc func xButtonDidTap() {
-        isWarn = false
-        isModifying = false
         text = ""
+        updateStyle(type: .unfocused)
         modifyMenuTextFieldDelegate?.updateModifiedMenuData(textField: self)
     }
     
@@ -258,8 +262,7 @@ private extension ModifyMenuTextField {
     
     @objc func inputResetButtonDidTap() {
         self.text = modifyMenuTextFieldDelegate?.getOriginalText(textField: self)
-        modifyMenuTextFieldDelegate?.updateModifiedMenuData(textField: self)
-        updateModifyCompleteButtonStyle()
+        textFieldDidChange()
     }
     
     @objc func textFieldDidChange() {
@@ -268,9 +271,7 @@ private extension ModifyMenuTextField {
         updateModifyCompleteButtonStyle()
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
-        if titleText == StringLiterals.ModifyMenu.price, let price = Int(text) {
-            isWarn = price > 8000
-        }
+        updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
     }
 }
 
@@ -279,9 +280,9 @@ private extension ModifyMenuTextField {
 extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        isModifying = true
+        updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
         setupInputAccessoryView()
-        textFieldDidChange()
+        
         return true
     }
     
@@ -293,14 +294,17 @@ extension ModifyMenuTextField: UITextFieldDelegate {
             return (newString.count <= menuNameMaxLength) && (textField.disableEmojiText(range: range, string: string))
         }
         
-        return false
+        return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        isModifying = false
+        updateStyle(type: isErrorValue() ? .unfocusedWithError : .unfocused)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        updateStyle(type: .unfocused)
         resignFirstResponder()
+        
+        return true
     }
 }

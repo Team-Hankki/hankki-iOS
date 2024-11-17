@@ -186,6 +186,7 @@
 		A2AF6FB62CDD85D000F5271D /* MenuCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */; };
 		A2AF6FD62CE5BADC00F5271D /* MenuRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FD52CE5BADC00F5271D /* MenuRequestDTO.swift */; };
 		A2AF6FDB2CE61AA000F5271D /* MenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FDA2CE61AA000F5271D /* MenuResponseDTO.swift */; };
+		A2AF6FDD2CEA287E00F5271D /* ModifyMenuTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FDC2CEA287E00F5271D /* ModifyMenuTextFieldType.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -409,6 +410,7 @@
 		A2AF6FB52CDD85D000F5271D /* MenuCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCompleteView.swift; sourceTree = "<group>"; };
 		A2AF6FD52CE5BADC00F5271D /* MenuRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRequestDTO.swift; sourceTree = "<group>"; };
 		A2AF6FDA2CE61AA000F5271D /* MenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuResponseDTO.swift; sourceTree = "<group>"; };
+		A2AF6FDC2CEA287E00F5271D /* ModifyMenuTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuTextFieldType.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -1495,6 +1497,7 @@
 				A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */,
 				A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */,
 				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
+				A2AF6FDC2CEA287E00F5271D /* ModifyMenuTextFieldType.swift */,
 			);
 			path = ModifyMenuTextField;
 			sourceTree = "<group>";
@@ -2000,6 +2003,7 @@
 				86FAFBAD2CB4DECE00910A7D /* MypageSeparatorView.swift in Sources */,
 				86880C0B2C47084B00CAEF58 /* PostHankkiToZipRequestDTO.swift in Sources */,
 				A240EA1D2C3F35CB000FF458 /* SearchViewController.swift in Sources */,
+				A2AF6FDD2CEA287E00F5271D /* ModifyMenuTextFieldType.swift in Sources */,
 				83DBEDB02C2566120042BA48 /* UIStackView+.swift in Sources */,
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
 				86880C1C2C47A0DC00CAEF58 /* SplashViewController.swift in Sources */,
