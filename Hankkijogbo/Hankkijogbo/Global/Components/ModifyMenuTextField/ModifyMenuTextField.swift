@@ -25,6 +25,7 @@ final class ModifyMenuTextField: UITextField {
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
+    private let menuNameMaxLength: Int = 30
     private var isModifying: Bool = false {
         didSet {
             updateStyle()
@@ -282,6 +283,17 @@ extension ModifyMenuTextField: UITextFieldDelegate {
         setupInputAccessoryView()
         textFieldDidChange()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentString = (textField.text ?? "") as NSString
+        let newString = currentString.replacingCharacters(in: range, with: string)
+        
+        if titleText == StringLiterals.ModifyMenu.name {
+            return (newString.count <= menuNameMaxLength) && (textField.disableEmojiText(range: range, string: string))
+        }
+        
+        return false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
