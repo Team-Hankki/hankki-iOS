@@ -287,4 +287,8 @@ extension ModifyMenuTextField: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         isModifying = false
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        resignFirstResponder()
+    }
 }
