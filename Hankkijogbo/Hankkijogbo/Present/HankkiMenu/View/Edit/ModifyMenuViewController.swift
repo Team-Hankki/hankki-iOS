@@ -70,7 +70,7 @@ final class ModifyMenuViewController: BaseViewController {
     override func setupLayout() {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(18)
-            $0.leading.equalToSuperview().inset(22)
+            $0.leading.trailing.equalToSuperview().inset(22)
         }
         
         nameTextField.snp.makeConstraints {
@@ -104,7 +104,7 @@ final class ModifyMenuViewController: BaseViewController {
     
     override func setupStyle() {
         titleLabel.do {
-            $0.numberOfLines = 2
+            $0.numberOfLines = 0
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
                 withText: viewModel.selectedMenu.name + StringLiterals.ModifyMenu.modifyMenuTitle,
