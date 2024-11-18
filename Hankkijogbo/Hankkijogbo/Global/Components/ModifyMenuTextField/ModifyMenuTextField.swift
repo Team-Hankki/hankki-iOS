@@ -139,7 +139,7 @@ private extension ModifyMenuTextField {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         modifyButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
         xButton.addTarget(self, action: #selector(xButtonDidTap), for: .touchUpInside)
-        enterMenuAccessoryView.modifyCompleteButton.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
+        enterMenuAccessoryView.hankkiAccessoryView.button.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
     
@@ -219,8 +219,7 @@ private extension ModifyMenuTextField {
     func updateModifyCompleteButtonStyle() {
         guard let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
         let isValidData = modifyMenuTextFieldDelegate.isMenuDataValid()
-        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = isValidData ? .red500 : .red400
-        enterMenuAccessoryView.modifyCompleteButton.isEnabled = isValidData ? true : false
+        enterMenuAccessoryView.hankkiAccessoryView.updateStyle(isValid: isValidData)
     }
     
     func toggleAccessoryViewVisibility(isDeleteHidden: Bool) {
