@@ -38,7 +38,8 @@ final class CreateZipViewController: BaseViewController {
     private let tagInputLineView = UIView()
     
     private lazy var submitButton = MainButton(titleText: StringLiterals.CreateZip.submitButton, isValid: false, buttonHandler: submitButtonDidTap)
-    
+    private let hankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.CreateZip.submitButton)
+
     // MARK: - Life Cycle
     
     init(isBottomSheetOpen: Bool, storeId: Int? = nil) {
@@ -221,6 +222,17 @@ private extension CreateZipViewController {
         }
     }
     
+    func setupInputAccessoryView() {
+        let accessoryView = UIView(frame: .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54))
+        accessoryView.addSubview(hankkiAccessoryView)
+        hankkiAccessoryView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        titleInputTextField.inputAccessoryView = accessoryView
+        tagInputTextField.inputAccessoryView = accessoryView
+    }
+    
     func setupDelegate() {
         titleInputTextField.delegate = self
         tagInputTextField.delegate = self
@@ -230,6 +242,7 @@ private extension CreateZipViewController {
         titleInputTextField.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
         titleInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         tagInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        hankkiAccessoryView.button.addTarget(self, action: #selector(submitButtonDidTap), for: .touchUpInside)
     }
     
     @objc func textFieldDidChange() {
@@ -241,7 +254,7 @@ private extension CreateZipViewController {
         if currentText.count <= titleMaxCount { titleCountLabel.text = "(\(currentText.count)/\(titleMaxCount))" }
     }
     
-    func submitButtonDidTap() {
+    @objc func submitButtonDidTap() {
         let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
         let data = PostZipRequestDTO(title: titleInputTextField.text ?? " ", details: arr)
         
@@ -251,6 +264,7 @@ private extension CreateZipViewController {
     func resetTitleTextField() {
         self.titleInputTextField.text = ""
         submitButton.setupIsValid(false)
+        hankkiAccessoryView.updateStyle(isValid: false)
     }
     
     func dismissSelf() {
@@ -267,28 +281,25 @@ private extension CreateZipViewController {
     }
     
     func isFormValid() {
-        if !(titleInputTextField.text ?? "").isEmpty && (tagInputTextField.text ?? "").count > 1 {
-            submitButton.setupIsValid(true)
-        } else {
-            submitButton.setupIsValid(false)
-        }
+        let isValid = !(titleInputTextField.text ?? "").isEmpty && (tagInputTextField.text ?? "").count > 1
+        submitButton.setupIsValid(isValid)
+        hankkiAccessoryView.updateStyle(isValid: isValid)
     }
 }
 
 // MARK: - delegate
 
 extension CreateZipViewController: UITextFieldDelegate {
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.tag == 0 {
-            titleInputLineView.backgroundColor = .gray500
-        } else if textField.tag == 1 {
-            tagInputLineView.backgroundColor = .gray500
-        }
+        setupInputAccessoryView()
         
         switch textField.tag {
         case 0:
+            titleInputLineView.backgroundColor = .gray500
             titleCountLabel.textColor = .gray500
         case 1:
+            tagInputLineView.backgroundColor = .gray500
             let currentText = textField.text ?? ""
             if currentText.isEmpty {
                 textField.text = "#"
