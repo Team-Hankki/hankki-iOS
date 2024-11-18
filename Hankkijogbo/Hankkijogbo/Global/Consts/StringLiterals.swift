@@ -20,6 +20,7 @@ enum StringLiterals {
         static let report = "제보하기"
         static let complete = "완료"
         static let delete = "삭제하기"
+        static let modifyComplete = "수정 완료"
         
         static let price = "가격"
     }
@@ -52,57 +53,70 @@ enum StringLiterals {
         static let back = "돌아가기"
         static let stay = "유지하기"
         static let no = "아니요"
+        static let cancel = "취소"
         static let move = "이동하기"
         static let add = "추가하기"
         
         enum Logout {
             static let title = "정말 로그아웃 하실 건가요?"
-            static let secondaryButton = StringLiterals.Common.logout
-            static let primaryButton = StringLiterals.Alert.stay
+            static let secondaryButton = Common.logout
+            static let primaryButton = stay
         }
         enum Withdraw {
             static let title = "소중한 족보가 사라져요"
-            static let secondaryButton = StringLiterals.Common.withdraw
-            static let primaryButton = StringLiterals.Alert.stay
+            static let secondaryButton = Common.withdraw
+            static let primaryButton = stay
         }
         enum DeleteZip {
             static let title = "족보를 삭제할까요?"
-            static let primaryButton = StringLiterals.Common.delete
+            static let primaryButton = Common.delete
         }
         
         enum DevelopShare {
-            static let title = StringLiterals.Alert.waitPlease
+            static let title = Alert.waitPlease
             static let sub = "친구에게 내 족보를 공유할 수 있도록\n준비 중이에요 :)"
-            static let primaryButton = StringLiterals.Alert.check
+            static let primaryButton = check
         }
         
         enum DevelopEdit {
-            static let title = StringLiterals.Alert.waitPlease
+            static let title = Alert.waitPlease
             static let sub = "메뉴를 편집할 수 있도록 준비 중이에요 :)"
-            static let primaryButton = StringLiterals.Alert.check
+            static let primaryButton = check
         }
         
         enum DeleteMenu {
             static let title = "삭제하면 되돌릴 수 없어요\n그래도 삭제하시겠어요?"
-            static let secondaryButton = "취소"
-            static let primaryButton = StringLiterals.Common.delete
+            static let secondaryButton = cancel
+            static let primaryButton = Common.delete
+        }
+        
+        enum DeleteLastMenu {
+            static let title = "메뉴가 1개 있어요\n메뉴를 삭제하면 식당이 삭제돼요"
+            static let secondaryButton = back
+            static let primaryButton = "식당 삭제"
+        }
+        
+        enum ModifyCompleteMenu {
+            static let title = "메뉴를 모두 수정하셨나요?"
+            static let secondaryButton = back
+            static let primaryButton = Common.modifyComplete
         }
         
         enum NetworkError {
             static let title = "네트워크 오류가 발생했어요"
             static let sub = "네트워크 연결 상태를 확인하고 다시 시도해주세요"
-            static let primaryButton = StringLiterals.Alert.check
+            static let primaryButton = check
         }
         
         enum CreateZipConflict {
             static let title = "동일이름 족보 생성 불가"
             static let sub = "같은 이름의 족보는 생성할 수 없어요"
-            static let primaryButton = StringLiterals.Alert.check
+            static let primaryButton = check
         }
     }
     
     enum Toast {
-        static let addToMyZipBlack = "나의 족보에 추가되었습니다."
+        static let addToMyZipBlack = "나의 족보에 추가되었습니다"
         static let see = "보기"
         static let addToMyZipWhite = "나의 족보에 추가했어요"
         static let deleteAlready = "이미 삭제된 식당입니다"
@@ -143,7 +157,7 @@ enum StringLiterals {
     
     enum ModifyMenu {
         static let editMenuTitle = "어떤 메뉴를 편집할까요?"
-        static let deleteMenuButton = StringLiterals.Common.delete
+        static let deleteMenuButton = Common.delete
         static let modifyMenuButton = "수정하기"
         static let modifyMenuTitle = " 메뉴를\n수정할게요"
         static let name = "메뉴 이름"
@@ -155,8 +169,9 @@ enum StringLiterals {
         static let recommendDeleteMenu = "8천원을 넘는 메뉴는 삭제를 추천해요"
         static let overPriceErrorText = "8000원 이하만 제보 가능해요"
         static let modifyCarefullyPlease = "모두에게 보여지는 정보이니 신중하게 수정부탁드려요"
-        static let modifyMenuCompleteButton = "수정 완료"
-        static let modifyOtherMenuButton = "다른 메뉴도 수정하기"
+        static let modifyMenuCompleteButton = Common.modifyComplete
+        static let editOtherMenuButton = "다른 메뉴도 편집하기"
+        static let addOtherMenuButton = "다른 메뉴도 추가하기"
         static let completeByYou = "님이 말씀해주신대로\n"
         static let modifyMenuComplete = "메뉴 정보를 수정했어요!"
         static let deleteMenuComplete = "메뉴를 삭제했어요!"
@@ -175,7 +190,7 @@ enum StringLiterals {
         static let addImage = "대표 음식 이미지 첨부하기 (선택)"
         static let changeImage = "바꾸기"
         static let menuName = "메뉴 이름"
-        static let price = StringLiterals.Common.price
+        static let price = Common.price
         static let priceError = "8천원 이하만 가능해요"
         static let addMenu = "메뉴 추가하기"
         static let goToReportedHankki = "제보한 식당 보러가기"
@@ -221,7 +236,7 @@ enum StringLiterals {
         enum Option {
             static let Terms = "약관 및 정책"
             static let OneonOne = "1:1 문의"
-            static let Logout = StringLiterals.Common.logout
+            static let Logout = Common.logout
         }
         
         enum Header {
@@ -256,7 +271,7 @@ enum StringLiterals {
     
     enum HankkiList {
         enum Header {
-            static let shareButton = StringLiterals.Common.share
+            static let shareButton = Common.share
         }
         
         static let moreButton = "식당 구경하러 가기"

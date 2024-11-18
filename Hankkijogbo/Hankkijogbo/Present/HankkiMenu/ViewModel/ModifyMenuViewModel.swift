@@ -12,15 +12,17 @@ final class ModifyMenuViewModel {
     var updateButton: ((Bool) -> Void)?
     
     var storeId: Int
+    var isLastMenu: Bool
     var selectedMenu: SelectableMenuData
-    var modifiedMenuData: PatchMenuRequestDTO = PatchMenuRequestDTO() {
+    lazy var modifiedMenuData: MenuRequestDTO = MenuRequestDTO(name: selectedMenu.name, price: selectedMenu.price) {
         didSet {
             updateButton?(isMenuDataValid())
         }
     }
     
-    init(storeId: Int, selectedMenu: SelectableMenuData) {
+    init(storeId: Int, isLastMenu: Bool, selectedMenu: SelectableMenuData) {
         self.storeId = storeId
+        self.isLastMenu = isLastMenu
         self.selectedMenu = selectedMenu
     }
 }
@@ -28,8 +30,7 @@ final class ModifyMenuViewModel {
 extension ModifyMenuViewModel {
     
     func isMenuDataValid() -> Bool {
-        guard let name = modifiedMenuData.name, let price = modifiedMenuData.price else { return false }
-        return !(name.isEmpty) && (price <= 8000)
+        return !(modifiedMenuData.name.isEmpty) && (modifiedMenuData.price > 0) && (modifiedMenuData.price <= 8000) && ((modifiedMenuData.name != selectedMenu.name) || (modifiedMenuData.price != selectedMenu.price))
     }
     
     /// 메뉴 수정

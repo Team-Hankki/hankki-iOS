@@ -39,6 +39,7 @@ final class EditMenuCollectionViewCell: BaseCollectionViewCell {
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(radioButton.snp.trailing).offset(13)
             $0.centerY.equalTo(radioButton)
+            $0.width.lessThanOrEqualTo(UIScreen.getDeviceWidth() - 60 - 13 - 55 - 24)
         }
         priceLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(24)
@@ -52,6 +53,8 @@ final class EditMenuCollectionViewCell: BaseCollectionViewCell {
                 for: PretendardStyle.body3,
                 color: .gray700
             )
+            $0.numberOfLines = 1
+            $0.lineBreakMode = .byTruncatingTail
         }
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(

@@ -8,7 +8,7 @@
 import UIKit
 
 /// - 메뉴 삭제를 추천하는 인풋 악세사리 뷰
-class DeleteMenuAccessoryView: BaseView {
+final class DeleteMenuAccessoryView: BaseView {
     
     // MARK: - Properties
     

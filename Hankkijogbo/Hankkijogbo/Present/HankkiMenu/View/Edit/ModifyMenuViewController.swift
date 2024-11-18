@@ -22,17 +22,17 @@ final class ModifyMenuViewController: BaseViewController {
         titleText: StringLiterals.ModifyMenu.name,
         originalText: viewModel.selectedMenu.name,
         placeholderText: StringLiterals.ModifyMenu.namePlaceholder,
-        hankkiTextFieldDelegate: self
+        modifyMenuTextFieldDelegate: self
     )
     private lazy var priceTextField: ModifyMenuTextField = ModifyMenuTextField(
         titleText: StringLiterals.ModifyMenu.price,
         originalText: String(viewModel.selectedMenu.price),
-        hankkiTextFieldDelegate: self
+        modifyMenuTextFieldDelegate: self
     )
     private let over8000PriceLabel: UILabel = UILabel()
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.ModifyMenu.modifyMenuCompleteButton,
-        primaryButtonHandler: completeButtonDidTap
+        primaryButtonHandler: showModifyCompleteAlert
     )
     private let carefulGuideLabel: UILabel = UILabel()
     
@@ -70,7 +70,7 @@ final class ModifyMenuViewController: BaseViewController {
     override func setupLayout() {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(18)
-            $0.leading.equalToSuperview().inset(22)
+            $0.leading.trailing.equalToSuperview().inset(22)
         }
         
         nameTextField.snp.makeConstraints {
@@ -104,7 +104,7 @@ final class ModifyMenuViewController: BaseViewController {
     
     override func setupStyle() {
         titleLabel.do {
-            $0.numberOfLines = 2
+            $0.numberOfLines = 0
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h2,
                 withText: viewModel.selectedMenu.name + StringLiterals.ModifyMenu.modifyMenuTitle,
@@ -154,6 +154,7 @@ private extension ModifyMenuViewController {
         viewModel.updateButton = { isActive in
             if isActive {
                 self.bottomButtonView.setupEnabledDoneButton()
+                self.bottomButtonView.setupEnabledDoneButton()
             } else {
                 self.bottomButtonView.setupDisabledDoneButton()
             }
@@ -161,24 +162,22 @@ private extension ModifyMenuViewController {
     }
     
     func deleteMenu() {
-        viewModel.deleteMenuAPI { [self] in
-            let completeView: MenuCompleteView = MenuCompleteView(
+        viewModel.deleteMenuAPI { [weak self] in
+            guard let self = self else { return }
+            
+            let isLastMenu = self.viewModel.isLastMenu
+            let completeView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
                 completeImage: .imgDeleteComplete,
-                modifyOtherMenuButtonAction: { self.popToEditMenu() },
-                completeButtonAction: {
-                    self.postNotification()
-                    self.popToRoot()
-                }
+                doThisAgainButtonText: isLastMenu ? nil : StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: isLastMenu ? nil : { self.popToEditMenu() },
+                completeButtonAction: { self.popToRoot() }
             )
+            
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
-            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
+            self.navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
-    }
-    
-    func postNotification() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
     }
     
     func popToEditMenu() {
@@ -201,11 +200,9 @@ private extension ModifyMenuViewController {
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.modifyMenuComplete,
                 completeImage: .imgModifyComplete,
-                modifyOtherMenuButtonAction: { self.popToEditMenu() },
-                completeButtonAction: {
-                    self.postNotification()
-                    self.popToRoot()
-                }
+                doThisAgainButtonText: StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: { self.popToEditMenu() },
+                completeButtonAction: { self.popToRoot() }
             )
             let modifyMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)
@@ -227,25 +224,51 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
         }
     }
     
-    func handleTextFieldUpdate(textField: UITextField) {
+    func updateModifiedMenuData(textField: UITextField) {
+        guard let text = textField.text else { return }
         switch textField {
         case nameTextField:
-            viewModel.modifiedMenuData.name = textField.text
+            viewModel.modifiedMenuData.name = text
         case priceTextField:
-            viewModel.modifiedMenuData.price = Int(textField.text ?? "")
+            viewModel.modifiedMenuData.price = Int(text) ?? 0
         default:
             break
         }
     }
     
-    func showErrorLabel(isWarn: Bool) {
-        over8000PriceLabel.isHidden = !isWarn
+    func isMenuDataValid() -> Bool {
+        return viewModel.isMenuDataValid()
+    }
+    
+    func updateErrorLabelVisibility(isHidden: Bool) {
+        over8000PriceLabel.isHidden = isHidden
     }
     
     func showDeleteAlert() {
-        showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
-                  secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
-                  primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton,
-                  primaryButtonHandler: deleteMenu)
+        let titleText = viewModel.isLastMenu
+        ? StringLiterals.Alert.DeleteLastMenu.title
+        : StringLiterals.Alert.DeleteMenu.title
+        let secondaryButtonText = viewModel.isLastMenu
+        ? StringLiterals.Alert.DeleteLastMenu.secondaryButton
+        : StringLiterals.Alert.DeleteMenu.secondaryButton
+        let primaryButtonText = viewModel.isLastMenu
+        ? StringLiterals.Alert.DeleteLastMenu.primaryButton
+        : StringLiterals.Alert.DeleteMenu.primaryButton
+        
+        showAlert(
+            titleText: titleText,
+            secondaryButtonText: secondaryButtonText,
+            primaryButtonText: primaryButtonText,
+            primaryButtonHandler: deleteMenu
+        )
+    }
+    
+    func showModifyCompleteAlert() {
+        showAlert(
+            titleText: StringLiterals.Alert.ModifyCompleteMenu.title,
+            secondaryButtonText: StringLiterals.Alert.ModifyCompleteMenu.secondaryButton,
+            primaryButtonText: StringLiterals.Alert.ModifyCompleteMenu.primaryButton,
+            primaryButtonHandler: completeButtonDidTap
+        )
     }
 }

@@ -10,8 +10,9 @@ import Foundation
 import Moya
 
 enum MenuTargetType {
-    case postMenu(storeId: Int, requestBody: MenuData)
-    case patchMenu(storeId: Int, id: Int, requestBody: PatchMenuRequestDTO)
+    case getMenu(storeId: Int)
+    case postMenu(storeId: Int, requestBody: [MenuRequestDTO])
+    case patchMenu(storeId: Int, id: Int, requestBody: MenuRequestDTO)
     case deleteMenu(storeId: Int, id: Int)
 }
 
@@ -35,8 +36,10 @@ extension MenuTargetType: BaseTargetType {
     
     var path: String {
         switch self {
-        case .postMenu(let storeId, _):
+        case .getMenu(let storeId):
             return utilPath.rawValue + "/\(storeId)/menus"
+        case .postMenu(let storeId, _):
+            return utilPath.rawValue + "/\(storeId)/menus/bulk"
         case .patchMenu(let storeId, let id, _), .deleteMenu(let storeId, let id):
             return utilPath.rawValue + "/\(storeId)/menus/\(id)"
         }
@@ -44,6 +47,7 @@ extension MenuTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
+        case .getMenu: .get
         case .postMenu: .post
         case .patchMenu: .patch
         case .deleteMenu: .delete

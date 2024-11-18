@@ -16,8 +16,7 @@ final class AddMenuViewController: BaseViewController {
     
     // MARK: - Properties
     
-    let storeId: Int
-    private var viewModel: AddMenuViewModel = AddMenuViewModel()
+    private var viewModel: AddMenuViewModel
     
     // MARK: - UI Components
     
@@ -25,14 +24,14 @@ final class AddMenuViewController: BaseViewController {
     private lazy var menuFlowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private lazy var menuCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: menuFlowLayout)
     private lazy var bottomButtonView: BottomButtonView = BottomButtonView(
-        primaryButtonText: StringLiterals.AddMenu.addNewMenuPlease,
+        primaryButtonText: String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete,
         primaryButtonHandler: bottomButtonPrimaryHandler
     )
     
     // MARK: - Life Cycle
     
-    init(storeId: Int) {
-        self.storeId = storeId
+    init(viewModel: AddMenuViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
     
@@ -46,6 +45,13 @@ final class AddMenuViewController: BaseViewController {
         setupRegister()
         setupDelegate()
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        initializaMenuData()
+        setupNavigationBar()
     }
     
     // MARK: - Set UI
@@ -97,7 +103,15 @@ final class AddMenuViewController: BaseViewController {
     }
 }
 
-extension AddMenuViewController {
+// MARK: - Private Func
+
+private extension AddMenuViewController {
+    
+    func initializaMenuData() {
+        viewModel.menus = [MenuData()]
+        menuCollectionView.reloadData()
+    }
+    
     func setupRegister() {
         menuCollectionView.register(MenuCollectionViewCell.self, forCellWithReuseIdentifier: MenuCollectionViewCell.className)
         menuCollectionView.register(AddMenuCollectionViewCell.self, forCellWithReuseIdentifier: AddMenuCollectionViewCell.className)
@@ -109,12 +123,18 @@ extension AddMenuViewController {
     }
     
     func bindViewModel() {
-        viewModel.updateButton = { isActive in
-            if isActive {
-                self.bottomButtonView.setupEnabledDoneButton()
-            } else {
-                self.bottomButtonView.setupDisabledDoneButton()
-            }
+        viewModel.updateButton = { [weak self] isActive in
+            self?.updateBottomButtonStyle(isActive: isActive)
+        }
+    }
+    
+    func setupNavigationBar() {
+        let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                              hasRightButton: false,
+                                                              mainTitle: .string(""),
+                                                              rightButton: .string(""))
+        if let navigationController = navigationController as? HankkiNavigationController {
+            navigationController.setupNavigationBar(forType: type)
         }
     }
     
@@ -123,12 +143,61 @@ extension AddMenuViewController {
         menuCollectionView.scrollToSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, indexPath: footerIndexPath, scrollPosition: .top, animated: true)
     }
     
+    func addMenuData() {
+        if viewModel.menus.count == 1 {
+            updateFirstXButtonIsHidden()
+        }
+        
+        viewModel.menus.append(MenuData())
+        menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
+    }
+    
+    func removeMenuData(menuIndex: Int) {
+        viewModel.menus.remove(at: menuIndex) // 해당 위치의 데이터 삭제
+        menuCollectionView.deleteItems(at: [IndexPath(item: menuIndex, section: AddMenuSectionType.menu.rawValue)]) // item 삭제
+        menuCollectionView.reloadSections(IndexSet(integer: AddMenuSectionType.menu.rawValue))
+    }
+    
+    func updateBottomButtonStyle(isActive: Bool) {
+        bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+        
+        if isActive {
+            self.bottomButtonView.setupEnabledDoneButton()
+        } else {
+            self.bottomButtonView.setupDisabledDoneButton()
+        }
+    }
+    
+    func updateFirstXButtonIsHidden() {
+        guard let cell = menuCollectionView.cellForItem(
+            at: IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)
+        ) as? MenuCollectionViewCell else { return }
+        cell.deleteMenuButton.isHidden = false
+    }
+    
+    func popToAddMenu() {
+        if let addViewController = navigationController?.viewControllers.first(where: {
+            $0 is AddMenuViewController
+        }) {
+            navigationController?.popToViewController(addViewController, animated: true)
+        }
+    }
+    
+    func popToRoot() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    // MARK: - @objc Func
+    
     @objc func bottomButtonPrimaryHandler() {
-        viewModel.postMenuAPI(storeId: storeId, requestBody: viewModel.validMenus) { [self] in
+        viewModel.postMenuAPI { [self] in
             let completeView: MenuCompleteView = MenuCompleteView(
                 firstSentence: StringLiterals.AddMenu.addMenuCompleteByYouFirst,
                 secondSentence: "\(self.viewModel.validMenus.count)" + StringLiterals.AddMenu.addMenuCompleteByYouSecond,
-                completeImage: .imgDeleteComplete
+                completeImage: .imgAddComplete,
+                doThisAgainButtonText: StringLiterals.ModifyMenu.addOtherMenuButton,
+                doThisAgainButtonAction: { self.popToAddMenu() },
+                completeButtonAction: { self.popToRoot() }
             )
             let addMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(addMenuCompleteViewController, animated: true)
@@ -137,9 +206,7 @@ extension AddMenuViewController {
     
     /// 메뉴 셀 추가
     @objc func addMenuButtonDidTap() {
-        viewModel.menus.append(MenuData())
-        menuCollectionView.insertItems(at: [IndexPath(item: viewModel.menus.count - 1, section: AddMenuSectionType.menu.rawValue)])
-        bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+        addMenuData()
         scrollToFooterView()
     }
     
@@ -149,17 +216,16 @@ extension AddMenuViewController {
             // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
             let buttonPosition = sender.convert(CGPoint.zero, to: self.menuCollectionView)
             let itemIndexPath = self.menuCollectionView.indexPathForItem(at: buttonPosition)
-            
             guard let item = itemIndexPath?.item else { return }
-            viewModel.menus.remove(at: item) // 해당 위치의 데이터 삭제
-            menuCollectionView.deleteItems(at: [IndexPath(item: item, section: AddMenuSectionType.menu.rawValue)]) // item 삭제
-            menuCollectionView.reloadSections(IndexSet(integer: AddMenuSectionType.menu.rawValue))
-            bottomButtonView.primaryButtonText = String(viewModel.menus.count) + StringLiterals.AddMenu.addMenuComplete
+            removeMenuData(menuIndex: item)
         }
     }
 }
 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
 extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         2
     }
@@ -180,7 +246,7 @@ extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDel
         case .menu:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCollectionViewCell.className, for: indexPath) as? MenuCollectionViewCell else { return UICollectionViewCell() }
             cell.delegate = self
-            cell.bindData(menu: viewModel.menus[indexPath.row])
+            cell.bindData(menu: viewModel.menus[indexPath.row], isOnlyOne: viewModel.menus.count == 1)
             cell.deleteMenuButton.addTarget(self, action: #selector(deleteMenuButtonDidTap(_:)), for: .touchUpInside)
             return cell
         case .addMenu:
@@ -195,12 +261,9 @@ extension AddMenuViewController: UICollectionViewDataSource, UICollectionViewDel
 
 // MARK: - PassSelectedHankkiData Delegate
 
-extension AddMenuViewController: PassItemDataDelegate {
-    func updateViewModelLocationData(data: GetSearchedLocation?) {
-        print("네엡")
-    }
+extension AddMenuViewController: UpdateViewModelMenuDataDelegate {
     
-    func updateViewModelMenusData(cell: MenuCollectionViewCell, name: String, price: String) {
+    func updateViewModelMenuData(cell: MenuCollectionViewCell, name: String, price: String) {
         guard let indexPath = menuCollectionView.indexPath(for: cell) else { return }
         viewModel.menus[indexPath.row] = MenuData(name: name, price: Int(price) ?? 0)
     }

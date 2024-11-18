@@ -220,9 +220,7 @@ private extension HankkiDetailViewController {
     }
     
     func getHankkiDetail() {
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId) {
-            self.infoCollectionView.collectionView.reloadData()
-        }
+        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
     }
     
     func setupNoImageStyle() {

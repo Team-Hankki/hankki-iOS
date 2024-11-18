@@ -51,7 +51,7 @@ final class EditMenuViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.getUpdatedMenusAPI {
+        viewModel.getMenuAPI {
             self.menuCollectionView.reloadData()
         }
     }
@@ -148,39 +148,51 @@ private extension EditMenuViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    func postNotification() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail)))
-    }
-    
     // MARK: - @objc Func
     
     @objc func deleteButtonHandler() {
-        showAlert(titleText: StringLiterals.Alert.DeleteMenu.title,
-                  secondaryButtonText: StringLiterals.Alert.DeleteMenu.secondaryButton,
-                  primaryButtonText: StringLiterals.Alert.DeleteMenu.primaryButton,
+        let titleText = viewModel.menus.count == 1
+        ? StringLiterals.Alert.DeleteLastMenu.title
+        : StringLiterals.Alert.DeleteMenu.title
+        let secondaryButtonText = viewModel.menus.count == 1
+        ? StringLiterals.Alert.DeleteLastMenu.secondaryButton
+        : StringLiterals.Alert.DeleteMenu.secondaryButton
+        let primaryButtonText = viewModel.menus.count == 1
+        ? StringLiterals.Alert.DeleteLastMenu.primaryButton
+        : StringLiterals.Alert.DeleteMenu.primaryButton
+        
+        showAlert(titleText: titleText,
+                  secondaryButtonText: secondaryButtonText,
+                  primaryButtonText: primaryButtonText,
                   primaryButtonHandler: deleteMenu)
     }
     
     @objc func deleteMenu() {
-        viewModel.deleteMenuAPI { [self] in
-            let completeView: MenuCompleteView = MenuCompleteView(
+        viewModel.deleteMenuAPI { [weak self] in
+            guard let self = self else { return }
+            
+            let isLastMenu = self.viewModel.isLastMenu
+            let completeView = MenuCompleteView(
                 firstSentence: StringLiterals.ModifyMenu.completeByYou,
                 secondSentence: StringLiterals.ModifyMenu.deleteMenuComplete,
                 completeImage: .imgDeleteComplete,
-                modifyOtherMenuButtonAction: { self.popToEditMenu() },
-                completeButtonAction: {
-                    self.postNotification()
-                    self.popToRoot()
-                }
+                doThisAgainButtonText: isLastMenu ? nil : StringLiterals.ModifyMenu.editOtherMenuButton,
+                doThisAgainButtonAction: isLastMenu ? nil : { self.popToEditMenu() },
+                completeButtonAction: { self.popToRoot() }
             )
+            
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
-            navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
+            self.navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
     }
-    
+
     @objc func modifyButtonHandler() {
         guard let selectedMenu = viewModel.selectedMenu else { return }
-        let modifyMenuViewModel = ModifyMenuViewModel(storeId: viewModel.storeId, selectedMenu: selectedMenu)
+        let modifyMenuViewModel = ModifyMenuViewModel(
+            storeId: viewModel.storeId,
+            isLastMenu: viewModel.isLastMenu,
+            selectedMenu: selectedMenu
+        )
         let modifyMenuViewController = ModifyMenuViewController(viewModel: modifyMenuViewModel)
         self.navigationController?.pushViewController(modifyMenuViewController, animated: true)
     }

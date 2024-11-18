@@ -11,6 +11,8 @@ import Moya
 import UIKit
 
 final class HankkiDetailViewModel {
+    
+    var setHankkiDetailData: (() -> Void)?
     var showAlert: ((String) -> Void)?
     var dismiss: (() -> Void)?
     
@@ -19,10 +21,9 @@ final class HankkiDetailViewModel {
             setHankkiDetailData?()
         }
     }
-    var setHankkiDetailData: (() -> Void)?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int, completion: @escaping () -> Void) {
+    func getHankkiDetailAPI(hankkiId: Int) {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -32,7 +33,6 @@ final class HankkiDetailViewModel {
             default:
                 result.handleNetworkResult { response in
                     self.hankkiDetailData = response.data
-                    completion()
                 }
             }
 
