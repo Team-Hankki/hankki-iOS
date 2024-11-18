@@ -9,7 +9,6 @@ import UIKit
 
 protocol ModifyMenuTextFieldDelegate: AnyObject {
     func updateModifiedMenuData(textField: UITextField)
-    func getOriginalText(textField: UITextField) -> String
     func updateErrorLabelVisibility(isHidden: Bool)
     func showDeleteAlert()
     func showModifyCompleteAlert()
@@ -20,7 +19,7 @@ final class ModifyMenuTextField: UITextField {
     // MARK: - Properties
     
     var titleText: String
-    var originalText: String = ""
+    var originalText: String?
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
@@ -44,11 +43,12 @@ final class ModifyMenuTextField: UITextField {
     
     init(
         titleText: String,
-        originalText: String,
+        originalText: String? = nil,
         placeholderText: String? = nil,
         modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
+        self.originalText = originalText
         self.placeholderText = placeholderText
         self.modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate
         super.init(frame: .zero)
@@ -254,14 +254,14 @@ private extension ModifyMenuTextField {
     }
     
     @objc func inputResetButtonDidTap() {
-        self.text = modifyMenuTextFieldDelegate?.getOriginalText(textField: self)
+        self.text = originalText
         textFieldDidChange()
     }
     
     @objc func textFieldDidChange() {
         guard let text = text, let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
         modifyMenuTextFieldDelegate.updateModifiedMenuData(textField: self)
-        enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
+        enterMenuAccessoryView.resetButton.isHidden = (text == originalText)
         
         updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
     }
@@ -272,8 +272,8 @@ private extension ModifyMenuTextField {
 extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
         setupInputAccessoryView()
+        textFieldDidChange()
         
         return true
     }

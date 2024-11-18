@@ -34,6 +34,7 @@ final class EnterMenuAccessoryView: BaseView {
     
     override func setupStyle() {
         resetButton.do {
+            $0.isHidden = true
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 8
             $0.setAttributedTitle(

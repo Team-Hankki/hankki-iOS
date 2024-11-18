@@ -215,17 +215,6 @@ private extension ModifyMenuViewController {
 
 extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
     
-    func getOriginalText(textField: UITextField) -> String {
-        switch textField {
-        case nameTextField:
-            return viewModel.selectedMenu.name
-        case priceTextField:
-            return String(describing: viewModel.selectedMenu.price)
-        default:
-            return ""
-        }
-    }
-    
     func updateModifiedMenuData(textField: UITextField) {
         guard let text = textField.text else { return }
         switch textField {
