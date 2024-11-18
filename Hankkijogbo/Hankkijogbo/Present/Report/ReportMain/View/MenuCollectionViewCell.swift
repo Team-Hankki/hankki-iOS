@@ -217,7 +217,7 @@ private extension MenuCollectionViewCell {
     
     func setupPriceStyleBy(isFocus: Bool) {
         priceLabel.textColor = isFocus ? .gray800 : .gray500
-        priceTextField.textColor = isFocus ? .gray800 : .gray800
+        priceTextField.textColor = .gray800
         priceTextField.layer.borderWidth = isFocus ? 2 : 1
         priceTextField.layer.borderColor = isFocus ? UIColor.gray600.cgColor: UIColor.gray300.cgColor
         errorLabel.isHidden = true
