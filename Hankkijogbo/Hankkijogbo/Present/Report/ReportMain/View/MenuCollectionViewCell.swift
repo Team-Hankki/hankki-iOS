@@ -169,7 +169,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
                 withText: StringLiterals.Report.priceError,
-                color: .red500
+                color: .warnRed
             )
             $0.isHidden = true
         }
@@ -224,10 +224,10 @@ private extension MenuCollectionViewCell {
     }
     
     func setupPriceErrorStyle() {
-        priceLabel.textColor = .red500
-        priceTextField.textColor = .red500
+        priceLabel.textColor = .warnRed
+        priceTextField.textColor = .warnRed
         priceTextField.layer.borderWidth = 2
-        priceTextField.layer.borderColor = UIColor.red500.cgColor
+        priceTextField.layer.borderColor = UIColor.warnRed.cgColor
         errorLabel.isHidden = false
     }
     
