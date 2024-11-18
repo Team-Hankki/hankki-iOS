@@ -10,7 +10,6 @@ import UIKit
 protocol ModifyMenuTextFieldDelegate: AnyObject {
     func updateModifiedMenuData(textField: UITextField)
     func getOriginalText(textField: UITextField) -> String
-    func isMenuDataValid() -> Bool
     func updateErrorLabelVisibility(isHidden: Bool)
     func showDeleteAlert()
     func showModifyCompleteAlert()
@@ -34,7 +33,8 @@ final class ModifyMenuTextField: UITextField {
     private let titleLabel: UILabel = UILabel()
     private let modifyButton: UIButton = UIButton()
     private let xButton: UIButton = UIButton()
-    private lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
+    
+    lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
     private lazy var deleteMenuAccessoryView: DeleteMenuAccessoryView = DeleteMenuAccessoryView(
         deleteButtonAction: showDeleteAlert,
         xButtonAction: hideDeleteMenuAccessoryView
@@ -216,12 +216,6 @@ private extension ModifyMenuTextField {
         return titleText == StringLiterals.ModifyMenu.price && price > 8000
     }
     
-    func updateModifyCompleteButtonStyle() {
-        guard let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
-        let isValidData = modifyMenuTextFieldDelegate.isMenuDataValid()
-        enterMenuAccessoryView.hankkiAccessoryView.updateStyle(isValid: isValidData)
-    }
-    
     func toggleAccessoryViewVisibility(isDeleteHidden: Bool) {
         deleteMenuAccessoryView.isHidden = isDeleteHidden
         enterMenuAccessoryView.isHidden = !isDeleteHidden
@@ -267,7 +261,6 @@ private extension ModifyMenuTextField {
     @objc func textFieldDidChange() {
         guard let text = text, let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
         modifyMenuTextFieldDelegate.updateModifiedMenuData(textField: self)
-        updateModifyCompleteButtonStyle()
         enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
         
         updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
