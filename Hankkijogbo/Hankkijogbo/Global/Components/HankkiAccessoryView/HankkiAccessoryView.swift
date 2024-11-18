@@ -33,6 +33,7 @@ final class HankkiAccessoryView: BaseView {
     
     override func setupStyle() {
         button.do {
+            $0.isEnabled = false
             $0.backgroundColor = .red400
             $0.setAttributedTitle(
                 UILabel.setupAttributedText(
@@ -63,6 +64,6 @@ extension HankkiAccessoryView {
     
     func updateStyle(isValid: Bool) {
         button.backgroundColor = isValid ? .red500 : .red400
-        button.isUserInteractionEnabled = isValid
+        button.isEnabled = isValid
     }
 }
