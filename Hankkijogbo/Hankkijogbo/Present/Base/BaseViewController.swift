@@ -60,15 +60,13 @@ class BaseViewController: UIViewController {
         setupLayout()
         setupStyle()
         
-        setupLoadingView()
-        
         setUpKeyboard()
         hideKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NetworkService.shared.setupDelegate(self)
+        setupLoadingView()
     }
     
     // MARK: - Set UI

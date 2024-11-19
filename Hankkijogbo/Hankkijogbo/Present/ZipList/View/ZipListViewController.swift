@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ZipListViewController: BaseViewController {
+final class ZipListViewController: BaseViewController, NetworkResultDelegate {
     
     // MARK: - Properties
     
@@ -76,6 +76,7 @@ private extension ZipListViewController {
     func setupDelegate() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        viewModel.delegate = self
     }
     
     func setupNavigationBar() {

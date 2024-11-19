@@ -9,10 +9,11 @@ final class LoginViewController: BaseViewController {
     
     // MARK: - UI Components
     
-    let logoImageView: UIImageView = UIImageView()
-    let viewTitle: UILabel = UILabel()
-    let imageView: UIImageView  = UIImageView()
-    let loginButton: UIButton = UIButton()
+    private let guestButton: UIButton = UIButton()
+    private let logoImageView: UIImageView = UIImageView()
+    private let viewTitle: UILabel = UILabel()
+    private let imageView: UIImageView  = UIImageView()
+    private let loginButton: UIButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -25,10 +26,22 @@ final class LoginViewController: BaseViewController {
     // MARK: - Set UI
     
     override func setupStyle() {
-        
         view.do {
             $0.contentMode = .scaleAspectFill
             $0.backgroundColor = .red500
+        }
+        
+        guestButton.do {
+            $0.setupPadding(top: 8, leading: 8, bottom: 8, trailing: 8)
+            $0.setupBackgroundColor(.clear)
+            
+            let guestAttributedTitle = UILabel.setupAttributedText(
+                for: PretendardStyle.body5,
+                withText: StringLiterals.Onboarding.guest,
+                color: .hankkiWhite
+            )
+            
+            $0.setAttributedTitle(guestAttributedTitle, for: .normal)
         }
         
         logoImageView.do {
@@ -63,10 +76,15 @@ final class LoginViewController: BaseViewController {
     }
     
     override func setupHierarchy() {
-        view.addSubviews(imageView, logoImageView, viewTitle, loginButton)
+        view.addSubviews(guestButton, imageView, logoImageView, viewTitle, loginButton)
     }
     
     override func setupLayout() {
+        guestButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(5)
+            $0.trailing.equalToSuperview().inset(14)
+        }
+        
         logoImageView.snp.makeConstraints {
             $0.width.equalTo(180)
             $0.height.equalTo(41)
@@ -95,9 +113,19 @@ final class LoginViewController: BaseViewController {
 
 private extension LoginViewController {
     func setupAction() {
+        guestButton.addTarget(self, action: #selector(guestButtonDidTap), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(loginButtonDidTap), for: .touchUpInside)
     }
 
+    @objc func guestButtonDidTap() {
+        // 홈화면으로 이동
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+            self.view.window?.rootViewController = navigationController
+            navigationController.popToRootViewController(animated: false)
+        }
+    }
+        
     @objc func loginButtonDidTap() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()

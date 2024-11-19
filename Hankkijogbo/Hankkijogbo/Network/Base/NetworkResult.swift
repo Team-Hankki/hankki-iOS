@@ -27,7 +27,7 @@ enum NetworkResult<T> {
     var stateDescription: String {
         switch self {
         case .success: return "🍚🔥 SUCCESS 🔥🍚"
-
+            
         case .networkFail: return "🍚🔥 NETWORK FAIL 🔥🍚"
         case .decodeError: return "🍚🔥 DECODED_ERROR 🔥🍚"
             
@@ -43,7 +43,7 @@ enum NetworkResult<T> {
 }
 
 extension NetworkResult {
-    func handleNetworkResult(onSuccess: ((T) -> Void)? = nil, onSuccessVoid: (() -> Void)? = nil) {
+    func handleNetworkResult(delegate: NetworkResultDelegate? = nil, onSuccess: ((T) -> Void)? = nil, onSuccessVoid: (() -> Void)? = nil) {
         switch self {
         case .success(let response):
             if let res = response {
@@ -56,8 +56,24 @@ extension NetworkResult {
             
         case .unAuthorized:
             // 401 error
-            // access token이 올바르지 않거나, 만료된 경우
-            self.postReissue()
+            if UserDefaults.standard.isLogin {
+                // 로그인을 한 유저인 경우
+                // access token을 재발급 받는다.
+                self.postReissue()
+            } else {
+                // 로그인을 하지 않은 유저인 경우
+                // 로그인이 필요하다는 알럿창을 띄운다 (임시)
+                print("👽 USER IS NOT LOGGED IN👽")
+                UIApplication.showAlert(titleText: "로그인이 필요한 기능이에요. ",
+                                        secondaryButtonText: "닫기",
+                                        primaryButtonText: "로그인하기",
+                                        primaryButtonHandler: {
+                    if let delegate = delegate {
+                        delegate.moveToLoginScreen()
+                    } else {
+                        print("👽Delegate nil👽")
+                    }})
+            }
             
         default:
             UIApplication.showBlackToast(message: StringLiterals.Toast.serverError)

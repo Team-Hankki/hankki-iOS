@@ -21,6 +21,7 @@ final class HankkiDetailViewModel {
             setHankkiDetailData?()
         }
     }
+    weak var delegate: NetworkResultDelegate?
     
     /// 식당 세부 조회
     func getHankkiDetailAPI(hankkiId: Int) {
@@ -31,7 +32,7 @@ final class HankkiDetailViewModel {
                 UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
                 self.dismiss?()
             default:
-                result.handleNetworkResult { response in
+                result.handleNetworkResult(delegate: self.delegate) { response in
                     self.hankkiDetailData = response.data
                 }
             }

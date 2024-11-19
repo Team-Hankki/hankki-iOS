@@ -59,29 +59,34 @@ extension BaseTargetType {
     
     var headers: [String: String]? {
         var header: [String: String] = [:]
+        
         switch headerType {
         case .loginHeader(let accessToken):
             header["Content-Type"] = "application/json"
             header["Authorization"] = "\(accessToken)"
-            
-        case .withdrawHeader(let authorizationCode):
-            header["Content-Type"] = "application/json"
-            let accessToken = UserDefaults.standard.getAccesshToken()
-            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
-            header["X-Apple-Code"] = "\(authorizationCode)"
+            return header
             
         case .refreshTokenHeader:
             header["Content-Type"] = "application/json"
             let refreshToken = UserDefaults.standard.getRefreshToken()
             header["Authorization"] = URLConstant.bearer + "\(refreshToken)"
+            return header
             
+        // 이후부터는 access token이 헤더에 필요합니다.
+        case .withdrawHeader(let authorizationCode):
+            header["Content-Type"] = "application/json"
+            header["X-Apple-Code"] = "\(authorizationCode)"
+               
         case .formdataHeader:
             header["Content-Type"] = "multipart/form-data"
-            let accessToken = UserDefaults.standard.getAccesshToken()
-            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
             
         default:
             header["Content-Type"] = "application/json"
+        }
+        
+        if UserDefaults.standard.isLogin {
+            // 유저가 로그인 한 회원일 경우
+            // Access Token을 header-Authorization 에 삽입해 전송한다.
             let accessToken = UserDefaults.standard.getAccesshToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         }
@@ -105,3 +110,4 @@ extension BaseTargetType {
         }
     }
 }
+

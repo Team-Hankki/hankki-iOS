@@ -34,9 +34,7 @@ final class MoyaPlugin: PluginType {
             print("--> ❌🍚❌유효하지 않은 요청❌🍚❌")
             setupLoading(false, target: target)
             return
-            
         }
-        
         let url = httpRequest.description
         let method = httpRequest.httpMethod ?? "unknown method"
         var log = "🍚 [\(method)] =================================================\n"
@@ -56,12 +54,15 @@ final class MoyaPlugin: PluginType {
     // MARK: - Response 받을 시 호출
     
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        
         let key = String(describing: target)
-        delegate = requestList[key]
+        
+        if requestList[key] != nil {
+            delegate = requestList[key]
+        }
+        
         setupLoading(false, target: target)
         removeRequest(target)
-        
+
         switch result {
         case let .success(response):
             self.onSucceed(response)
