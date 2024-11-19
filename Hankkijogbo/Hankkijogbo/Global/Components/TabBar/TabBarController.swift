@@ -31,6 +31,7 @@ final class TabBarController: UITabBarController {
 // MARK: - Private Extensions
 
 private extension TabBarController {
+    
     func setupStyle() {
         view.backgroundColor = .white
         tabBar.backgroundColor = .white
@@ -101,7 +102,7 @@ private extension TabBarController {
     }
 }
 
-// Custom Tab Bar
+/// Custom Tab Bar
 final class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
@@ -110,7 +111,10 @@ final class CustomTabBar: UITabBar {
     }
 }
 
+// MARK: - UITabBarControllerDelegate
+
 extension TabBarController: UITabBarControllerDelegate {
+    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
 
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
@@ -118,24 +122,25 @@ extension TabBarController: UITabBarControllerDelegate {
         let tabBarItem = TabBarItem.allCases[index]
         SetupAmplitude.shared.logEvent(tabBarItem.amplitudeButtonName)
         
-        if index == TabBarItem.allCases.firstIndex(of: .report) {
+        switch tabBarItem {
+        case .report:
             if UserDefaults.standard.getUniversity()?.id == nil {
                 self.showAlert(titleText: StringLiterals.Alert.selectUniversityFirst, primaryButtonText: StringLiterals.Alert.check)
             } else {
-                let reportViewController = ReportViewController()
-                navigationController?.pushViewController(reportViewController, animated: true)
+                navigationController?.pushViewController(TabBarItem.report.targetViewController, animated: true)
             }
             return false
-        }
-        
-        if !UserDefaults.standard.isLogin {
-            self.showAlert(titleText: StringLiterals.Alert.Browse.title,
-                           secondaryButtonText: StringLiterals.Alert.Browse.secondaryButton,
-                           primaryButtonText: StringLiterals.Alert.Browse.primaryButton,
-                           primaryButtonHandler: { UIApplication.browseApp() })
-        } else {
+        case .mypage:
+            if !UserDefaults.standard.isLogin {
+                self.showAlert(titleText: StringLiterals.Alert.Browse.title,
+                               secondaryButtonText: StringLiterals.Alert.Browse.secondaryButton,
+                               primaryButtonText: StringLiterals.Alert.Browse.primaryButton,
+                               primaryButtonHandler: { UIApplication.browseApp() })
+                return false
+            }
+            return true
+        default:
             return true
         }
-        return false
     }
 }
