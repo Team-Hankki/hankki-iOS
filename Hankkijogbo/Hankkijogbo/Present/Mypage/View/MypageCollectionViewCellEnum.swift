@@ -122,7 +122,7 @@ private extension MypageViewController {
 private extension MypageViewController {
     // 헤더 설정
     func setupHeader(_ section: NSCollectionLayoutSection) {
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(62))
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(16 + 62))
         
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
