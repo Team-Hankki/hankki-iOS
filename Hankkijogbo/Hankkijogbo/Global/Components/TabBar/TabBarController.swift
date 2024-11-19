@@ -129,10 +129,10 @@ extension TabBarController: UITabBarControllerDelegate {
         }
         
         if !UserDefaults.standard.isLogin {
-            self.showAlert(titleText: "로그인이 필요한 기능이에요.",
-                           secondaryButtonText: "닫기",
-                           primaryButtonText: "로그인하기",
-                           primaryButtonHandler: {UIApplication.browseApp()})
+            self.showAlert(titleText: StringLiterals.Alert.Browse.title,
+                           secondaryButtonText: StringLiterals.Alert.Browse.secondaryButton,
+                           primaryButtonText: StringLiterals.Alert.Browse.primaryButton,
+                           primaryButtonHandler: { UIApplication.browseApp() })
         } else {
             return true
         }
