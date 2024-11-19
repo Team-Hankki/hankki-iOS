@@ -15,6 +15,10 @@ final class HomeView: BaseView {
                               StringLiterals.Home.priceFilteringButton,
                               StringLiterals.Home.sortFilteringButton]
     
+    let leftImages: [UIImage] = [.imgFilteringEmpty,
+                                 .imgFilteringCoin,
+                                 .imgFilteringAlign]
+    
     // MARK: - UI Components
     
     var mapView = NMFMapView()
@@ -49,7 +53,8 @@ final class HomeView: BaseView {
         }
         
         buttonStackView.snp.makeConstraints {
-            $0.top.leading.equalTo(mapView).inset(12)
+            $0.top.equalTo(mapView).inset(10)
+            $0.leading.equalTo(mapView).inset(14)
         }
         
         [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
@@ -58,8 +63,8 @@ final class HomeView: BaseView {
             if bottomSheetView.isExpanded {
                 targetButton.isHidden = true
             } else {
-                $0.bottom.equalTo(bottomSheetView.snp.top).offset(-12)
-                $0.trailing.equalToSuperview().inset(22)
+                $0.bottom.equalTo(bottomSheetView.snp.top).offset(-10)
+                $0.trailing.equalToSuperview().inset(12)
                 targetButton.isHidden = false
             }
         }
@@ -78,16 +83,31 @@ final class HomeView: BaseView {
     override func setupStyle() {
         let buttons = [typeButton, priceButton, sortButton]
         for (index, button) in buttons.enumerated() {
+            let leftImageView = UIImageView(image: leftImages[index])
+            leftImageView.tag = 100
             button.do {
                 $0.backgroundColor = .hankkiWhite
                 $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
                 $0.setTitle(buttonType[index], for: .normal)
-                $0.setTitleColor(.gray500, for: .normal)
-                $0.setImage(.icArrowClose.withTintColor(.gray500), for: .normal)
+                $0.setTitleColor(.gray800, for: .normal)
+                $0.setImage(.icArrowClose, for: .normal)
                 $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
                 $0.contentHorizontalAlignment = .left
                 $0.semanticContentAttribute = .forceRightToLeft
-                $0.contentEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 3)
+                $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
+                $0.layer.shadowOffset = CGSize(width: 0, height: 1)
+                $0.layer.shadowColor = UIColor.black.cgColor
+                $0.layer.shadowRadius = 6
+                $0.layer.shadowOpacity = 0.1
+                $0.layer.masksToBounds = false
+            }
+            
+            button.addSubview(leftImageView)
+            
+            leftImageView.snp.makeConstraints {
+                $0.leading.equalTo(button.snp.trailing).inset(24)
+                $0.centerY.equalTo(button.snp.centerY)
+                $0.width.height.equalTo(16)
             }
         }
         

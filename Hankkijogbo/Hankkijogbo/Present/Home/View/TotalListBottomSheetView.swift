@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TotalListBottomSheetViewDelegate: AnyObject {
+    func didSelectHankkiCell(at index: Int, pinId: Int)
+}
+
 final class TotalListBottomSheetView: BaseView {
     
     // MARK: - Properties
@@ -20,11 +24,13 @@ final class TotalListBottomSheetView: BaseView {
     var presentMyZipBottomSheetNotificationName: String = "presentMyZipBottomSheetNotificationName"
     
     weak var homeViewController: HomeViewController?
-    
+    weak var delegate: TotalListBottomSheetViewDelegate?
+
     // MARK: - UI Components
     
     private let bottomSheetHandlerView: UIView = UIView()
     private let bottomGradientView: UIView = UIView()
+    private let totalListCountLabel: UILabel = UILabel()
     private let flowLayout = UICollectionViewFlowLayout()
     lazy var totalListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     private let containerView: UIView = UIView()
@@ -55,6 +61,7 @@ final class TotalListBottomSheetView: BaseView {
         self.addSubviews(containerView)
         containerView.addSubviews(
             bottomSheetHandlerView,
+            totalListCountLabel,
             totalListCollectionView,
             emptyView,
             emptyLabel
@@ -62,7 +69,6 @@ final class TotalListBottomSheetView: BaseView {
     }
     
     override func setupStyle() {
-
         containerView.do {
             $0.backgroundColor = .white
             
@@ -80,6 +86,10 @@ final class TotalListBottomSheetView: BaseView {
             $0.layer.cornerRadius = 2
         }
         
+        totalListCountLabel.do {
+            $0.font = .setupPretendardStyle(of: .body5)
+        }
+        
         flowLayout.do {
             $0.estimatedItemSize = .init(width: UIScreen.getDeviceWidth(), height: 56)
             $0.minimumLineSpacing = 0
@@ -95,7 +105,7 @@ final class TotalListBottomSheetView: BaseView {
         
         emptyLabel.do {
             $0.text = StringLiterals.Home.emptyNotice
-            $0.font = .setupPretendardStyle(of: .body2)
+            $0.font = .setupPretendardStyle(of: .body4)
             $0.textColor = .gray400
             $0.textAlignment = .center
             $0.isHidden = true
@@ -119,8 +129,13 @@ final class TotalListBottomSheetView: BaseView {
             $0.height.equalTo(4)
         }
         
+        totalListCountLabel.snp.makeConstraints {
+            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(16)
+            $0.centerX.equalToSuperview()
+        }
+        
         totalListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(bottomSheetHandlerView.snp.bottom).offset(15)
+            $0.top.equalTo(totalListCountLabel.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -182,7 +197,7 @@ extension TotalListBottomSheetView {
         }, completion: { [weak self] _ in
             self?.isBottomSheetUp = false
             if let collectionView = self?.totalListCollectionView {
-                collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
                 let bottomInset = self?.defaultHeight ?? 0 - collectionView.frame.height
                 collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: max(0, bottomInset), right: 0)
                 collectionView.scrollIndicatorInsets = collectionView.contentInset
@@ -209,7 +224,6 @@ extension TotalListBottomSheetView {
     }
     
     func setupBottomGradientView() {
-        
         bottomGradientView.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         
         let gradient = CAGradientLayer()
@@ -227,6 +241,11 @@ extension TotalListBottomSheetView {
         }
         
         bottomGradientView.layer.addSublayer(gradient)
+    }
+    
+    func updateTotalListCount(count: Int) {
+        totalListCountLabel.text = "\(count)개의 족보"
+        totalListCountLabel.asFontColor(targetString: "의 족보", font: .setupPretendardStyle(of: .body6), color: .gray600)
     }
 }
 
@@ -249,7 +268,7 @@ extension TotalListBottomSheetView {
         // 클릭된 버튼이 속해있는 셀의 IndexPath 구하기
         let buttonPosition = sender.convert(CGPoint.zero, to: self.totalListCollectionView)
         let itemIndexPath = self.totalListCollectionView.indexPathForItem(at: buttonPosition)
-
+        
         NotificationCenter.default.post(Notification(name: NSNotification.Name(presentMyZipBottomSheetNotificationName), object: nil, userInfo: ["itemIndexPath": itemIndexPath ?? IndexPath()]))
     }
 }
@@ -274,13 +293,9 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
 
 extension TotalListBottomSheetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
-            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
-        }
-        
+        let pinId = data[indexPath.item].id
+        delegate?.didSelectHankkiCell(at: indexPath.item, pinId: pinId)
+        viewLayoutIfNeededWithHiddenAnimation()
     }
 }
 

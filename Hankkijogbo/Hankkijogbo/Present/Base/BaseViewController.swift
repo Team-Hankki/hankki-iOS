@@ -85,7 +85,6 @@ extension BaseViewController: BaseViewControllerDelegate {
     }
 }
 
-
 // Loading View
 private extension BaseViewController {
     // Loading View의 초기 설정을 합니다.

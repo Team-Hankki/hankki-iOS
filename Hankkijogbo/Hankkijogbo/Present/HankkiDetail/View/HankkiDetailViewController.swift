@@ -48,11 +48,9 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         setupDelegate()
         setupAddTarget()
         setupGesture()
+        setupNotification()
         bindViewModel()
-        
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId) {
-            self.navigationController?.popViewController(animated: false)
-        }
+        getHankkiDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +155,10 @@ private extension HankkiDetailViewController {
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
         }
+        
+        viewModel.dismiss = {
+            self.navigationController?.popViewController(animated: false)
+        }
     }
     
     func setupRegister() {
@@ -207,6 +209,19 @@ private extension HankkiDetailViewController {
         let rightSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(backButtonDidTap))
         rightSwipeGesture.direction = .right
         self.view.addGestureRecognizer(rightSwipeGesture)
+    }
+    
+    func setupNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadHankkiDetailNotification),
+            name: NSNotification.Name(StringLiterals.NotificationName.reloadHankkiDetail),
+            object: nil
+        )
+    }
+    
+    func getHankkiDetail() {
+        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
     }
     
     func setupNoImageStyle() {
@@ -280,11 +295,21 @@ extension HankkiDetailViewController {
     
     @objc func editMenuButtonDidTap() {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
-        self.showAlert(
-            titleText: StringLiterals.Alert.DevelopEdit.title,
-            subText: StringLiterals.Alert.DevelopEdit.sub,
-            primaryButtonText: StringLiterals.Alert.check
+        
+        guard let menus = viewModel.hankkiDetailData?.menus else { return }
+        let selectableMenus: [SelectableMenuData] = menus.map { menu in
+            SelectableMenuData(isSelected: false, id: menu.id, name: menu.name, price: menu.price)
+        }
+        
+        let editHankkiBottomSheet = HankkiNavigationController(
+            rootViewController: EditHankkiBottomSheetViewController(
+                storeId: self.hankkiId,
+                selectableMenus: selectableMenus
+            )
         )
+        editHankkiBottomSheet.modalTransitionStyle = .crossDissolve
+        editHankkiBottomSheet.modalPresentationStyle = .overFullScreen
+        self.present(editHankkiBottomSheet, animated: true, completion: nil)
     }
     
     @objc func addMyZipButtonDidTap() {
@@ -303,6 +328,10 @@ extension HankkiDetailViewController {
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }
+    }
+    
+    @objc func reloadHankkiDetailNotification() {
+        getHankkiDetail()
     }
 }
 

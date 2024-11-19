@@ -21,10 +21,14 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
     
     var selectedMarkerIndex: Int?
     var markers: [NMFMarker] = []
+    var hankkiPins: [GetHankkiPinData] = []
     
     private var universityId: Int?
     
     var shouldUpdateNavigationBar: Bool = true
+    
+    var lastScrollPosition: CGPoint = .zero
+    var isRestoringScrollPosition = false
     
     // MARK: - UI Components
     
@@ -60,6 +64,22 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
         updateUniversityData()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if !isRestoringScrollPosition {
+            rootView.bottomSheetView.totalListCollectionView.setContentOffset(lastScrollPosition, animated: false)
+            isRestoringScrollPosition = false
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        lastScrollPosition = rootView.bottomSheetView.totalListCollectionView.contentOffset
+        isRestoringScrollPosition = false
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -84,6 +104,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
+                self.rootView.bottomSheetView.updateTotalListCount(count: data.count)
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
                 self.rootView.bottomSheetView.setNeedsLayout()
                 self.rootView.bottomSheetView.layoutIfNeeded()
@@ -91,12 +112,13 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
         }
         
         viewModel.hankkiPinsDidChange = { [weak self] pins in
+            self?.hankkiPins = pins
             DispatchQueue.main.async {
                 self?.setupPosition(with: pins)
             }
         }
         
-        viewModel.showAlert = { [weak self] message in
+        viewModel.showAlert = { [weak self] _ in
             self?.showAlert(titleText: StringLiterals.Alert.unknownError,
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
@@ -109,6 +131,7 @@ extension HomeViewController {
         typeCollectionView.collectionView.delegate = self
         typeCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
+        rootView.bottomSheetView.delegate = self
         viewModel.delegate = self
     }
     
@@ -122,8 +145,8 @@ extension HomeViewController {
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImage(title, .btnDropdown),
-                                                              mainTitleFont: SuiteStyle.subtitle1,
+                                                              mainTitle: .stringAndImageDouble(title, .icSchool, .icArrowUnder),
+                                                              mainTitleFont: PretendardStyle.body5,
                                                               mainTitlePosition: "left",
                                                               rightButton: .string(""),
                                                               rightButtonAction: {},
@@ -188,26 +211,12 @@ extension HomeViewController {
 }
 
 private extension HomeViewController {
-    func loadInitialData() {
-        universityId = UserDefaults.standard.getUniversity()?.id
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
-            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
-            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
-        }
-        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-    }
-    
     func updateUniversityData() {
         let universityId = UserDefaults.standard.getUniversity()?.id
         
-        viewModel.getHankkiListAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "") { [weak self] success in
-            let isEmpty = self?.viewModel.hankkiLists.isEmpty ?? true
-            self?.viewModel.onHankkiListFetchCompletion?(success, isEmpty)
-        }
-        viewModel.getHankkiPinAPI(universityId: universityId, storeCategory: "", priceCategory: "", sortOption: "", completion: { _ in })
-        rootView.bottomSheetView.totalListCollectionView.reloadData()
+        viewModel.updateHankkiList()
         
-        // 대학 선택 후 홈화면 재진입 시 해당 대학교에 맞게 reset
+        rootView.bottomSheetView.totalListCollectionView.reloadData()
         hideMarkerInfoCard()
         rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
     }
@@ -249,7 +258,7 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         typeCollectionView.isHidden = true
         viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
-        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name ?? "")
+        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
     }
 }
 
@@ -274,7 +283,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 // DropDownViewDelegate
 extension HomeViewController: DropDownViewDelegate {
     func dropDownView(_ controller: DropDownView, didSelectItem item: String, buttonType: ButtonType) {
-        viewModel.getSortOptionFilterAPI { [self] isSuccess in
+        viewModel.getSortOptionFilterAPI { [self] _ in
             switch buttonType {
             case .price:
                 if item == "K6" {

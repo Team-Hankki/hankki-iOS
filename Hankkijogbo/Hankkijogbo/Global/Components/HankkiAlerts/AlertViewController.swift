@@ -84,7 +84,7 @@ final class AlertViewController: BaseViewController {
         
         subLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
+                for: PretendardStyle.body6,
                 withText: subText,
                 color: .gray500
             )

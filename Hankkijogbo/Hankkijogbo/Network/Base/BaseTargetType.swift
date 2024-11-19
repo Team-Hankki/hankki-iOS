@@ -31,7 +31,7 @@ enum HeaderType {
 enum UtilPath: String {
     case auth = "/v1/auth"
     case user = "/v1/users"
-    case menu = "/v1/menus"
+    case menu = "/v1"
     case hankki = "/v1/stores"
     case zip = "/v1/favorites"
     case report = "/v1/reports"

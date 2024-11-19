@@ -1,5 +1,5 @@
 {
-  "originHash" : "0284a8d021ff41b90032efd78e1afd9eec33d918374b3801ad2ce53873ec07ef",
+  "originHash" : "83f265caa107bd411a5b1166549c8ea62979fd689642172db418fac79f0298a8",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/amplitude/Amplitude-iOS",
       "state" : {
         "branch" : "main",
-        "revision" : "681c49824a2b011256f3e66ab910f2e514629bd3"
+        "revision" : "4471ff73fffdff9a9b256422a0a0b9233582f33d"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "b06a8c8596e4c3e8e7788e08e720e3248563ce6a",
-        "version" : "6.7.1"
+        "revision" : "c7c7d2cf50a3211fe2843f76869c698e4e417930",
+        "version" : "6.8.0"
       }
     },
     {

@@ -57,7 +57,7 @@ final class EmptyView: BaseView {
         }
         
         textLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body2, withText: text, color: .gray500)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.body4, withText: text, color: .gray500)
             $0.numberOfLines = 0
             $0.textAlignment = .center
         }

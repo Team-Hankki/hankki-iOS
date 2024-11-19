@@ -7,13 +7,22 @@
 
 import UIKit
 
+protocol UpdateViewModelLocationDataDelegate: AnyObject {
+    func updateViewModelLocationData(data: GetSearchedLocation?)
+}
+
+protocol UpdateViewModelMenuDataDelegate: AnyObject {
+    func updateViewModelMenuData(cell: MenuCollectionViewCell, name: String, price: String)
+}
+
 final class MenuCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
     
     private let menuNameMaxLength: Int = 30
     private let priceMaxLength: Int = 5
-    weak var delegate: PassItemDataDelegate?
+    private let priceMaxValue: Int = 8000
+    weak var delegate: UpdateViewModelMenuDataDelegate?
         
     // MARK: - UI Components
     
@@ -99,7 +108,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
     override func setupStyle() {
         menuLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body6,
+                for: PretendardStyle.body8,
                 withText: StringLiterals.Report.menuName,
                 color: .gray500
             )
@@ -122,7 +131,7 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body6,
+                for: PretendardStyle.body8,
                 withText: StringLiterals.Report.price,
                 color: .gray500
             )
@@ -154,12 +163,13 @@ final class MenuCollectionViewCell: BaseCollectionViewCell {
         }
         deleteMenuButton.do {
             $0.setImage(.btnDeleteSmall, for: .normal)
+            $0.isHidden = true
         }
         errorLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption1,
                 withText: StringLiterals.Report.priceError,
-                color: .red500
+                color: .warnRed
             )
             $0.isHidden = true
         }
@@ -180,7 +190,7 @@ private extension MenuCollectionViewCell {
     }
     
     func setupToolbar() {
-        doneToolbar.items=[
+        doneToolbar.items = [
             UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: self, action: nil),
             UIBarButtonItem(title: StringLiterals.Toolbar.done, style: UIBarButtonItem.Style.plain, target: self, action: #selector(doneButtonDidTap))
         ]
@@ -190,32 +200,44 @@ private extension MenuCollectionViewCell {
     func setupInitialStyle() {
         menuLabel.textColor = .gray500
         menuTextField.text = ""
-        
         priceLabel.textColor = .gray500
         priceTextField.text = ""
         priceTextField.textColor = .gray800
         priceTextField.layer.borderWidth = 1
         priceTextField.layer.borderColor = UIColor.gray300.cgColor
         errorLabel.isHidden = true
+        deleteMenuButton.isHidden = false
+    }
+    
+    func setupMenuStyleBy(isFocus: Bool) {
+        menuLabel.textColor = isFocus ? .gray800 : .gray500
+        menuTextField.layer.borderWidth = isFocus ? 2 : 1
+        menuTextField.layer.borderColor = isFocus ? UIColor.gray600.cgColor : UIColor.gray300.cgColor
+    }
+    
+    func setupPriceStyleBy(isFocus: Bool) {
+        priceLabel.textColor = isFocus ? .gray800 : .gray500
+        priceTextField.textColor = .gray800
+        priceTextField.layer.borderWidth = isFocus ? 2 : 1
+        priceTextField.layer.borderColor = isFocus ? UIColor.gray600.cgColor: UIColor.gray300.cgColor
+        errorLabel.isHidden = true
     }
     
     func setupPriceErrorStyle() {
-        priceLabel.textColor = .red500
-        priceTextField.textColor = .red500
-        priceTextField.layer.borderColor = UIColor.red500.cgColor
+        priceLabel.textColor = .warnRed
+        priceTextField.textColor = .warnRed
+        priceTextField.layer.borderWidth = 2
+        priceTextField.layer.borderColor = UIColor.warnRed.cgColor
         errorLabel.isHidden = false
     }
     
     // MARK: - @objc Func
     
     @objc func priceTextFieldDidEditingChange() {
-        if Int(priceTextField.text ?? "") ?? 0 > 8000 {
+        if Int(priceTextField.text ?? "") ?? 0 > priceMaxValue {
             setupPriceErrorStyle()
         } else {
-            priceLabel.textColor = .gray800
-            priceTextField.textColor = .gray800
-            priceTextField.layer.borderColor = UIColor.gray500.cgColor
-            errorLabel.isHidden = true
+            setupPriceStyleBy(isFocus: true)
         }
     }
     
@@ -229,37 +251,34 @@ extension MenuCollectionViewCell {
     
     // MARK: - Public Func
     
-    func bindData(menu: MenuData) {
+    func bindData(menu: MenuData, isOnlyOne: Bool) {
         menuTextField.text = menu.name
         if menu.price != 0 {
             priceTextField.text = "\(menu.price)"
             
-            if menu.price > 8000 {
+            if menu.price > priceMaxValue {
                 setupPriceErrorStyle()
             } else {
-                priceLabel.textColor = .gray500
-                priceTextField.textColor = .gray800
-                errorLabel.isHidden = true
+                setupPriceStyleBy(isFocus: false)
             }
         } else {
             priceTextField.text = ""
         }
+        
+        deleteMenuButton.isHidden = isOnlyOne
     }
 }
 
 // MARK: - UITextField Delegate
 
 extension MenuCollectionViewCell: UITextFieldDelegate {
+    
     /// 텍스트 필드 내용 수정을 시작할 때 호출되는 함수
     final func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == menuTextField {
-            menuLabel.textColor = .gray800
-            textField.layer.borderWidth = 2
-            textField.layer.borderColor = UIColor.gray500.cgColor
+            setupMenuStyleBy(isFocus: true)
         } else {
             priceTextFieldDidEditingChange()
-            priceTextField.layer.borderWidth = 2
-            priceTextField.layer.borderColor = UIColor.gray500.cgColor
         }
         return true
     }
@@ -284,17 +303,14 @@ extension MenuCollectionViewCell: UITextFieldDelegate {
     /// - 뷰 모델의 메뉴 데이터도 여기서 적힌 값으로 업데이트
     final func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == menuTextField {
-            menuLabel.textColor = .gray500
-            textField.layer.borderWidth = 1
-            textField.layer.borderColor = UIColor.gray300.cgColor
+            setupMenuStyleBy(isFocus: false)
         } else {
-            if Int(priceTextField.text ?? "") ?? 0 <= 8000 {
-                priceLabel.textColor = .gray500
-                textField.layer.borderWidth = 1
-                textField.layer.borderColor = UIColor.gray300.cgColor
+            if Int(priceTextField.text ?? "") ?? 0 <= priceMaxValue {
+                setupPriceStyleBy(isFocus: false)
             }
         }
-        delegate?.updateViewModelMenusData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
+        
+        delegate?.updateViewModelMenuData(cell: self, name: menuTextField.text ?? "", price: (priceTextField.text ?? ""))
     }
     
     /// 키보드의 return 키 클릭 시 호출되는 함수

@@ -27,4 +27,5 @@ enum StringOrImageType {
     case string(String)
     case image(UIImage)
     case stringAndImage(String, UIImage)
+    case stringAndImageDouble(String, UIImage, UIImage)
 }

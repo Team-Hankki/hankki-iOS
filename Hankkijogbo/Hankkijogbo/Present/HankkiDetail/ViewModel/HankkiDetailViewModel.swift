@@ -12,28 +12,28 @@ import UIKit
 
 final class HankkiDetailViewModel {
     
-    weak var delegate: NetworkResultDelegate?
-    
+    var setHankkiDetailData: (() -> Void)?
     var showAlert: ((String) -> Void)?
+    var dismiss: (() -> Void)?
     
     var hankkiDetailData: GetHankkiDetailResponseData? {
         didSet {
             setHankkiDetailData?()
         }
     }
-    var setHankkiDetailData: (() -> Void)?
+    weak var delegate: NetworkResultDelegate?
     
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int, dismiss: @escaping () -> Void) {
+    func getHankkiDetailAPI(hankkiId: Int) {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
-            
+            guard let self = self else { return }
             switch result {
             case .notFound:
                 UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
-                dismiss()
+                self.dismiss?()
             default:
-                result.handleNetworkResult(delegate: self?.delegate) { response in
-                    self?.hankkiDetailData = response.data
+                result.handleNetworkResult(delegate: self.delegate) { response in
+                    self.hankkiDetailData = response.data
                 }
             }
 

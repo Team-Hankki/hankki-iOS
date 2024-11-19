@@ -11,7 +11,7 @@ import Moya
 import UIKit // todo: 제거
 
 final class ReportViewModel {
-    var showAlert: ((String) -> Void)?
+    
     var updateCollectionView: (() -> Void)?
     var updateButton: ((Bool) -> Void)?
     

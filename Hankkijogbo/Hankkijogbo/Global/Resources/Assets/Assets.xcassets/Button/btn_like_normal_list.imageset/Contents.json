@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "btn_heart_normal.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -32,6 +32,7 @@ final class HankkiDetailCollectionView: BaseView {
         collectionView.do {
             $0.backgroundColor = .hankkiWhite
             $0.layer.cornerRadius = 20
+            $0.isScrollEnabled = false
         }
     }
 }
@@ -41,6 +42,7 @@ extension HankkiDetailCollectionView {
     /// 메뉴 데이터 불러온 이후에 컬뷰 레이아웃 업데이트 -> 메뉴 개수에 따라 높이 동적으로
     /// 그림자도 업데이트된 크기에 맞게 그려야 해서 layoutIfNeeded 이후에 addShadow
     func updateLayout(menuSize: Int) {
+        collectionView.snp.removeConstraints()
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(UIScreen.getDeviceWidth() - 22 * 2)
