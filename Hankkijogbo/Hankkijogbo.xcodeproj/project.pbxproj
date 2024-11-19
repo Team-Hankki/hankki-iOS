@@ -2023,7 +2023,6 @@
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
 				86880C1C2C47A0DC00CAEF58 /* SplashViewController.swift in Sources */,
 				8336B5222CBACDC90034474E /* NetworkResultDelegate.swift in Sources */,
-				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */,
@@ -2193,6 +2192,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "한끼족보";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치를 기반으로 식당 정보를 제공하기 위해 사용자의 위치에 접근합니다. ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -2231,6 +2231,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hankkijogbo/Global/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "한끼족보";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치를 기반으로 식당 정보를 제공하기 위해 사용자의 위치에 접근합니다. ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
