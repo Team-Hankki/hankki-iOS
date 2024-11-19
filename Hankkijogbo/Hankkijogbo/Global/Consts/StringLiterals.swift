@@ -163,8 +163,6 @@ enum StringLiterals {
         static let name = "메뉴 이름"
         static let price = "메뉴 가격"
         static let namePlaceholder = "새로운 메뉴 이름"
-        static let enterOriginalName = "기존 메뉴 이름 입력"
-        static let enterOriginalPrice = "기존 메뉴 가격 입력"
         static let overPrice = "가격이 올랐군요"
         static let recommendDeleteMenu = "8천원을 넘는 메뉴는 삭제를 추천해요"
         static let overPriceErrorText = "8000원 이하만 제보 가능해요"

@@ -154,10 +154,11 @@ private extension ModifyMenuViewController {
         viewModel.updateButton = { isActive in
             if isActive {
                 self.bottomButtonView.setupEnabledDoneButton()
-                self.bottomButtonView.setupEnabledDoneButton()
             } else {
                 self.bottomButtonView.setupDisabledDoneButton()
             }
+            self.nameTextField.enterMenuAccessoryView.hankkiAccessoryView.updateStyle(isValid: isActive)
+            self.priceTextField.enterMenuAccessoryView.hankkiAccessoryView.updateStyle(isValid: isActive)
         }
     }
     
@@ -213,16 +214,6 @@ private extension ModifyMenuViewController {
 // MARK: - HankkiTextFieldDelegate
 
 extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
-    func getOriginalText(textField: UITextField) -> String {
-        switch textField {
-        case nameTextField:
-            return viewModel.selectedMenu.name
-        case priceTextField:
-            return String(describing: viewModel.selectedMenu.price)
-        default:
-            return ""
-        }
-    }
     
     func updateModifiedMenuData(textField: UITextField) {
         guard let text = textField.text else { return }
@@ -234,10 +225,6 @@ extension ModifyMenuViewController: ModifyMenuTextFieldDelegate {
         default:
             break
         }
-    }
-    
-    func isMenuDataValid() -> Bool {
-        return viewModel.isMenuDataValid()
     }
     
     func updateErrorLabelVisibility(isHidden: Bool) {

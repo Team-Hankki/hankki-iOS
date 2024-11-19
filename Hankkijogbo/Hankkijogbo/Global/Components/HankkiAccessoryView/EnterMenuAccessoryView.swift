@@ -16,7 +16,7 @@ final class EnterMenuAccessoryView: BaseView {
     
     // MARK: - UI Components
     
-    let modifyCompleteButton: UIButton = UIButton()
+    let hankkiAccessoryView: HankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.ModifyMenu.modifyMenuCompleteButton)
     let resetButton: UIButton = UIButton()
         
     // MARK: - Init
@@ -33,17 +33,8 @@ final class EnterMenuAccessoryView: BaseView {
     // MARK: - Set UI
     
     override func setupStyle() {
-        modifyCompleteButton.do {
-            $0.backgroundColor = .red400
-            $0.setAttributedTitle(
-                UILabel.setupAttributedText(
-                    for: PretendardStyle.subtitle3,
-                    withText: StringLiterals.ModifyMenu.modifyMenuCompleteButton,
-                    color: .hankkiWhite
-                ), for: .normal)
-        }
-        
         resetButton.do {
+            $0.isHidden = true
             $0.backgroundColor = .gray100
             $0.layer.cornerRadius = 8
             $0.setAttributedTitle(
@@ -58,18 +49,17 @@ final class EnterMenuAccessoryView: BaseView {
     }
     
     override func setupHierarchy() {
-        addSubviews(modifyCompleteButton, resetButton)
+        addSubviews(hankkiAccessoryView, resetButton)
     }
 
     override func setupLayout() {
-        modifyCompleteButton.snp.makeConstraints {
+        hankkiAccessoryView.snp.makeConstraints {
             $0.horizontalEdges.bottom.equalToSuperview()
-            $0.height.equalTo(54)
         }
         
         resetButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(modifyCompleteButton.snp.top).offset(-20)
+            $0.bottom.equalTo(hankkiAccessoryView.snp.top).offset(-20)
             $0.width.equalTo(121)
             $0.height.equalTo(36)
         }

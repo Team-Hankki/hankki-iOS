@@ -187,6 +187,7 @@
 		A2AF6FD62CE5BADC00F5271D /* MenuRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FD52CE5BADC00F5271D /* MenuRequestDTO.swift */; };
 		A2AF6FDB2CE61AA000F5271D /* MenuResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FDA2CE61AA000F5271D /* MenuResponseDTO.swift */; };
 		A2AF6FDD2CEA287E00F5271D /* ModifyMenuTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FDC2CEA287E00F5271D /* ModifyMenuTextFieldType.swift */; };
+		A2AF6FF32CEB5EF800F5271D /* HankkiAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AF6FF22CEB5EF800F5271D /* HankkiAccessoryView.swift */; };
 		A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B542422C32AF7500A6B225 /* UIFont+.swift */; };
 		A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B599172C39B5C8004B7E4E /* BlackToastView.swift */; };
 		A2B599202C3B5470004B7E4E /* WhiteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B5991F2C3B5470004B7E4E /* WhiteToastView.swift */; };
@@ -411,6 +412,7 @@
 		A2AF6FD52CE5BADC00F5271D /* MenuRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRequestDTO.swift; sourceTree = "<group>"; };
 		A2AF6FDA2CE61AA000F5271D /* MenuResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuResponseDTO.swift; sourceTree = "<group>"; };
 		A2AF6FDC2CEA287E00F5271D /* ModifyMenuTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuTextFieldType.swift; sourceTree = "<group>"; };
+		A2AF6FF22CEB5EF800F5271D /* HankkiAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiAccessoryView.swift; sourceTree = "<group>"; };
 		A2B5423B2C32A29300A6B225 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		A2B5423C2C32A29300A6B225 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		A2B5423D2C32A29300A6B225 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -785,6 +787,7 @@
 			isa = PBXGroup;
 			children = (
 				A2AF6FAE2CD99AB300F5271D /* ModifyMenuTextField */,
+				A2AF6FF12CEB5EB900F5271D /* HankkiAccessoryView */,
 				8322D03B2C5FB36B00F6D725 /* HankkiCategoryTagLabel */,
 				A240EA472C45273D000FF458 /* HankkiPaddingLabel */,
 				A29A441C2C6ADC11002B8D36 /* HankkiLineView */,
@@ -1495,8 +1498,6 @@
 			isa = PBXGroup;
 			children = (
 				A2AF6FAF2CD99ABF00F5271D /* ModifyMenuTextField.swift */,
-				A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */,
-				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
 				A2AF6FDC2CEA287E00F5271D /* ModifyMenuTextFieldType.swift */,
 			);
 			path = ModifyMenuTextField;
@@ -1517,6 +1518,16 @@
 				A2AF6FDA2CE61AA000F5271D /* MenuResponseDTO.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		A2AF6FF12CEB5EB900F5271D /* HankkiAccessoryView */ = {
+			isa = PBXGroup;
+			children = (
+				A2AF6FF22CEB5EF800F5271D /* HankkiAccessoryView.swift */,
+				A2AF6FB32CDD69F900F5271D /* EnterMenuAccessoryView.swift */,
+				A2AF6FB12CDD427800F5271D /* DeleteMenuAccessoryView.swift */,
+			);
+			path = HankkiAccessoryView;
 			sourceTree = "<group>";
 		};
 		A2B542252C32A26600A6B225 /* SUITE */ = {
@@ -1851,6 +1862,7 @@
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
 				A2B599182C39B5C8004B7E4E /* BlackToastView.swift in Sources */,
+				A2AF6FF32CEB5EF800F5271D /* HankkiAccessoryView.swift in Sources */,
 				8302F8E12C3DB43D004ADAA4 /* TotalListBottomSheetView.swift in Sources */,
 				A28F60482CB877B6000FDCD2 /* EditMenuViewModel.swift in Sources */,
 				8302F8DD2C3D6C0B004ADAA4 /* (null) in Sources */,

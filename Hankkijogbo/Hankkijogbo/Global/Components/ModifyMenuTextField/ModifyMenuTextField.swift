@@ -9,8 +9,6 @@ import UIKit
 
 protocol ModifyMenuTextFieldDelegate: AnyObject {
     func updateModifiedMenuData(textField: UITextField)
-    func getOriginalText(textField: UITextField) -> String
-    func isMenuDataValid() -> Bool
     func updateErrorLabelVisibility(isHidden: Bool)
     func showDeleteAlert()
     func showModifyCompleteAlert()
@@ -21,7 +19,7 @@ final class ModifyMenuTextField: UITextField {
     // MARK: - Properties
     
     var titleText: String
-    var originalText: String = ""
+    var originalText: String?
     var placeholderText: String?
     var modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate?
     
@@ -34,7 +32,8 @@ final class ModifyMenuTextField: UITextField {
     private let titleLabel: UILabel = UILabel()
     private let modifyButton: UIButton = UIButton()
     private let xButton: UIButton = UIButton()
-    private lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
+    
+    lazy var enterMenuAccessoryView: EnterMenuAccessoryView = EnterMenuAccessoryView(titleText: titleText)
     private lazy var deleteMenuAccessoryView: DeleteMenuAccessoryView = DeleteMenuAccessoryView(
         deleteButtonAction: showDeleteAlert,
         xButtonAction: hideDeleteMenuAccessoryView
@@ -44,11 +43,12 @@ final class ModifyMenuTextField: UITextField {
     
     init(
         titleText: String,
-        originalText: String,
+        originalText: String? = nil,
         placeholderText: String? = nil,
         modifyMenuTextFieldDelegate: ModifyMenuTextFieldDelegate? = nil
     ) {
         self.titleText = titleText
+        self.originalText = originalText
         self.placeholderText = placeholderText
         self.modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate
         super.init(frame: .zero)
@@ -139,7 +139,7 @@ private extension ModifyMenuTextField {
         addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         modifyButton.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
         xButton.addTarget(self, action: #selector(xButtonDidTap), for: .touchUpInside)
-        enterMenuAccessoryView.modifyCompleteButton.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
+        enterMenuAccessoryView.hankkiAccessoryView.button.addTarget(self, action: #selector(modifyCompleteButtonDidTap), for: .touchUpInside)
         enterMenuAccessoryView.resetButton.addTarget(self, action: #selector(inputResetButtonDidTap), for: .touchUpInside)
     }
     
@@ -216,13 +216,6 @@ private extension ModifyMenuTextField {
         return titleText == StringLiterals.ModifyMenu.price && price > 8000
     }
     
-    func updateModifyCompleteButtonStyle() {
-        guard let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
-        let isValidData = modifyMenuTextFieldDelegate.isMenuDataValid()
-        enterMenuAccessoryView.modifyCompleteButton.backgroundColor = isValidData ? .red500 : .red400
-        enterMenuAccessoryView.modifyCompleteButton.isEnabled = isValidData ? true : false
-    }
-    
     func toggleAccessoryViewVisibility(isDeleteHidden: Bool) {
         deleteMenuAccessoryView.isHidden = isDeleteHidden
         enterMenuAccessoryView.isHidden = !isDeleteHidden
@@ -261,15 +254,14 @@ private extension ModifyMenuTextField {
     }
     
     @objc func inputResetButtonDidTap() {
-        self.text = modifyMenuTextFieldDelegate?.getOriginalText(textField: self)
+        self.text = originalText
         textFieldDidChange()
     }
     
     @objc func textFieldDidChange() {
         guard let text = text, let modifyMenuTextFieldDelegate = modifyMenuTextFieldDelegate else { return }
         modifyMenuTextFieldDelegate.updateModifiedMenuData(textField: self)
-        updateModifyCompleteButtonStyle()
-        enterMenuAccessoryView.resetButton.isHidden = text.isEmpty
+        enterMenuAccessoryView.resetButton.isHidden = (text == originalText)
         
         updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
     }
@@ -280,8 +272,8 @@ private extension ModifyMenuTextField {
 extension ModifyMenuTextField: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        updateStyle(type: isErrorValue() ? .focusedWithError : .focused)
         setupInputAccessoryView()
+        textFieldDidChange()
         
         return true
     }
