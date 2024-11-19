@@ -198,7 +198,7 @@ private extension HankkiDetailViewController {
         infoCollectionView.collectionView.dataSource = self
         reportOptionCollectionView.collectionView.delegate = self
         reportOptionCollectionView.collectionView.dataSource = self
-//        viewModel.delegate = self
+        viewModel.delegate = self
     }
     
     func setupAddTarget() {
