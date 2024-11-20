@@ -25,7 +25,7 @@ final class TotalListBottomSheetView: BaseView {
     
     weak var homeViewController: HomeViewController?
     weak var delegate: TotalListBottomSheetViewDelegate?
-
+    
     // MARK: - UI Components
     
     private let bottomSheetHandlerView: UIView = UIView()
@@ -179,12 +179,12 @@ extension TotalListBottomSheetView {
                        animations: {
             self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
         }, completion: { [weak self] _ in
-            self?.isBottomSheetUp = true
-            if let collectionView = self?.totalListCollectionView {
-                collectionView.contentInset = .zero
-                collectionView.scrollIndicatorInsets = .zero
-                
-            }
+            guard let self = self else { return }
+            self.isBottomSheetUp = true
+            if let homeVC = self.homeViewController {
+                homeVC.lastScrollPosition = self.totalListCollectionView.contentOffset
+                self.totalListCollectionView.setContentOffset(homeVC.lastScrollPosition, animated: false)
+            } else { }
         })
     }
     
