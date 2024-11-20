@@ -62,6 +62,9 @@ final class EditMenuCollectionViewCell: BaseCollectionViewCell {
                 color: .gray700
             )
         }
+        radioButton.do {
+            $0.isUserInteractionEnabled = false
+        }
     }
     
     func updateStyle(isSelected: Bool) {

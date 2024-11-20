@@ -171,17 +171,6 @@ extension HomeViewController {
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
     
-    func showLoginAlert() {
-        showAlert(titleText: "로그인이 필요한 기능이에요. ",
-                  secondaryButtonText: "닫기",
-                  primaryButtonText: "로그인하기",
-                  primaryButtonHandler: moveToLogin)
-    }
-    
-    func moveToLogin() {
-        // TODO: - Login 이동
-    }
-    
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)

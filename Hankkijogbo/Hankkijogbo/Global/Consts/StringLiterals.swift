@@ -57,6 +57,12 @@ enum StringLiterals {
         static let move = "이동하기"
         static let add = "추가하기"
         
+        enum Browse {
+            static let title = "로그인이 필요한 기능이에요."
+            static let secondaryButton = "닫기"
+            static let primaryButton = "로그인하기"
+        }
+        
         enum Logout {
             static let title = "정말 로그아웃 하실 건가요?"
             static let secondaryButton = Common.logout

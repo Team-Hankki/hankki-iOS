@@ -31,6 +31,7 @@ final class TabBarController: UITabBarController {
 // MARK: - Private Extensions
 
 private extension TabBarController {
+    
     func setupStyle() {
         view.backgroundColor = .white
         tabBar.backgroundColor = .white
@@ -99,9 +100,16 @@ private extension TabBarController {
         
         return currentViewController
     }
+    
+    func showRequireLoginAlert() {
+        self.showAlert(titleText: StringLiterals.Alert.Browse.title,
+                       secondaryButtonText: StringLiterals.Alert.Browse.secondaryButton,
+                       primaryButtonText: StringLiterals.Alert.Browse.primaryButton,
+                       primaryButtonHandler: { UIApplication.browseApp() })
+    }
 }
 
-// Custom Tab Bar
+/// Custom Tab Bar
 final class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         var size = super.sizeThatFits(size)
@@ -110,24 +118,39 @@ final class CustomTabBar: UITabBar {
     }
 }
 
-extension TabBarController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+// MARK: - UITabBarControllerDelegate
 
+extension TabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         guard let index = viewControllers?.firstIndex(of: viewController) else { return true }
         
         let tabBarItem = TabBarItem.allCases[index]
         SetupAmplitude.shared.logEvent(tabBarItem.amplitudeButtonName)
         
-        if index == TabBarItem.allCases.firstIndex(of: .report) {
-            if UserDefaults.standard.getUniversity()?.id == nil {
-                self.showAlert(titleText: StringLiterals.Alert.selectUniversityFirst, primaryButtonText: StringLiterals.Alert.check)
+        let isNotLogin: Bool = !UserDefaults.standard.isLogin
+        let isAllUniversity: Bool = (UserDefaults.standard.getUniversity()?.id == nil)
+        
+        switch tabBarItem {
+        case .report:
+            if isNotLogin {
+                showRequireLoginAlert()
             } else {
-                let reportViewController = ReportViewController()
-                navigationController?.pushViewController(reportViewController, animated: true)
+                if isAllUniversity {
+                    self.showAlert(titleText: StringLiterals.Alert.selectUniversityFirst, primaryButtonText: StringLiterals.Alert.check)
+                } else {
+                    navigationController?.pushViewController(TabBarItem.report.targetViewController, animated: true)
+                }
             }
             return false
+        case .mypage:
+            if isNotLogin {
+                showRequireLoginAlert()
+                return false
+            }
+            return true
+        default:
+            return true
         }
-        
-        return true
     }
 }

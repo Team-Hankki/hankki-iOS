@@ -64,9 +64,9 @@ extension NetworkResult {
                 // 로그인을 하지 않은 유저인 경우
                 // 로그인이 필요하다는 알럿창을 띄운다 (임시)
                 print("👽 USER IS NOT LOGGED IN👽")
-                UIApplication.showAlert(titleText: "로그인이 필요한 기능이에요. ",
-                                        secondaryButtonText: "닫기",
-                                        primaryButtonText: "로그인하기",
+                UIApplication.showAlert(titleText: StringLiterals.Alert.Browse.title,
+                                        secondaryButtonText: StringLiterals.Alert.Browse.secondaryButton,
+                                        primaryButtonText: StringLiterals.Alert.Browse.primaryButton,
                                         primaryButtonHandler: {
                     if let delegate = delegate {
                         delegate.moveToLoginScreen()
