@@ -221,6 +221,16 @@ extension HomeViewController {
         }
     }
     
+    // 선택된 식당 핀만 노출
+    private func setupSelectPosition(latitude: Double, longitude: Double) {
+        clearMarkers()
+        let marker = NMFMarker()
+        marker.iconImage = NMFOverlayImage(image: .icPin)
+        marker.position = NMGLatLng(lat: latitude, lng: longitude)
+        marker.mapView = rootView.mapView
+        markers.append(marker)
+    }
+    
     // 지도 핀 삭제
     private func clearMarkers() {
         markers.forEach { $0.mapView = nil }
@@ -231,6 +241,10 @@ extension HomeViewController {
     private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
+        
+        if let location = hankkiPins.first(where: { $0.id == pinId }) {
+            setupSelectPosition(latitude: location.latitude, longitude: location.longitude)
+        }
         
         if markerInfoCardView == nil {
             markerInfoCardView = MarkerInfoCardView()
@@ -274,6 +288,10 @@ extension HomeViewController {
             self.markerInfoCardView?.removeFromSuperview()
             self.markerInfoCardView = nil
             self.selectedMarkerIndex = nil
+            
+            // 전체 지도 핀 복원
+            self.clearMarkers()
+            self.setupPosition(with: self.hankkiPins)
         })
         self.showTargetButtonAtBottomSheet()
     }
