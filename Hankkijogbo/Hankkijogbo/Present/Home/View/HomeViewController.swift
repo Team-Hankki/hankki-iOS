@@ -206,7 +206,6 @@ private extension HomeViewController {
         viewModel.updateHankkiList()
         
         rootView.bottomSheetView.totalListCollectionView.reloadData()
-        hideMarkerInfoCard()
     }
     
     func handleHankkiListResult(success: Bool, isEmpty: Bool) {
