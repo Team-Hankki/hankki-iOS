@@ -144,7 +144,7 @@ extension HomeViewController: CLLocationManagerDelegate {
     func showTargetButtonAtBottomSheet() {
         self.rootView.targetButton.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-            if self.rootView.bottomSheetView.isExpanded {
+            if self.rootView.bottomSheetView.isExpanded && self.rootView.bottomSheetView.isBottomSheetUp {
                 self.rootView.targetButton.isHidden = true
             } else {
                 self.rootView.targetButton.snp.remakeConstraints {
