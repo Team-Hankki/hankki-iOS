@@ -133,8 +133,8 @@ extension HomeViewController: CLLocationManagerDelegate {
         self.rootView.targetButton.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
             self.rootView.targetButton.snp.remakeConstraints {
-                $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-12)
-                $0.trailing.equalToSuperview().inset(22)
+                $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-10)
+                $0.trailing.equalToSuperview().inset(12)
             }
             self.view.layoutIfNeeded()
         })
@@ -148,8 +148,8 @@ extension HomeViewController: CLLocationManagerDelegate {
                 self.rootView.targetButton.isHidden = true
             } else {
                 self.rootView.targetButton.snp.remakeConstraints {
-                    $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-12)
-                    $0.trailing.equalToSuperview().inset(22)
+                    $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-10)
+                    $0.trailing.equalToSuperview().inset(12)
                 }
             }
             self.view.layoutIfNeeded()
