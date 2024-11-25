@@ -43,11 +43,11 @@ extension MypageViewController {
         case .option:
             switch itemIndex {
             case 0:
-                if let url = URL(string: StringLiterals.ExternalLink.Terms) {
+                if let url = URL(string: StringLiterals.ExternalLink.OneonOne) {
                     UIApplication.shared.open(url, options: [:])
                 }
             case 1:
-                if let url = URL(string: StringLiterals.ExternalLink.OneonOne) {
+                if let url = URL(string: StringLiterals.ExternalLink.Terms) {
                     UIApplication.shared.open(url, options: [:])
                 }
             case 2:
