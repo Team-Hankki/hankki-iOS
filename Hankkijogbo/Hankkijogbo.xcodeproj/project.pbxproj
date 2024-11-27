@@ -2023,7 +2023,6 @@
 				A240EA242C412759000FF458 /* UICollectionView+.swift in Sources */,
 				86880C1C2C47A0DC00CAEF58 /* SplashViewController.swift in Sources */,
 				8336B5222CBACDC90034474E /* NetworkResultDelegate.swift in Sources */,
-				864FA90E2C3D20FF0051EA36 /* MypageZipCollectionViewCell.swift in Sources */,
 				8302855B2C4565A90004D9F7 /* GetHankkiListResponseDTO.swift in Sources */,
 				83DBED962C2564AC0042BA48 /* HomeViewController.swift in Sources */,
 				A2EC33B72C4716A000809840 /* ReportAPIService.swift in Sources */,
@@ -2187,7 +2186,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hankkijogbo/Hankkijogbo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2024112401;
 				DEVELOPMENT_TEAM = KT2Q6HC762;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2205,7 +2204,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = shop.hankki.dev.hankki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2226,7 +2225,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hankkijogbo/Hankkijogbo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2024112401;
 				DEVELOPMENT_TEAM = KT2Q6HC762;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2244,7 +2243,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = shop.hankki.dev.hankki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

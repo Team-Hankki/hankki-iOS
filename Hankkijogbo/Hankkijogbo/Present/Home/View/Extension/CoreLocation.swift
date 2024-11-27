@@ -133,8 +133,8 @@ extension HomeViewController: CLLocationManagerDelegate {
         self.rootView.targetButton.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
             self.rootView.targetButton.snp.remakeConstraints {
-                $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-12)
-                $0.trailing.equalToSuperview().inset(22)
+                $0.bottom.equalTo(self.markerInfoCardView!.snp.top).offset(-10)
+                $0.trailing.equalToSuperview().inset(12)
             }
             self.view.layoutIfNeeded()
         })
@@ -144,12 +144,12 @@ extension HomeViewController: CLLocationManagerDelegate {
     func showTargetButtonAtBottomSheet() {
         self.rootView.targetButton.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-            if self.rootView.bottomSheetView.isExpanded {
+            if self.rootView.bottomSheetView.isExpanded && self.rootView.bottomSheetView.isBottomSheetUp {
                 self.rootView.targetButton.isHidden = true
             } else {
                 self.rootView.targetButton.snp.remakeConstraints {
-                    $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-12)
-                    $0.trailing.equalToSuperview().inset(22)
+                    $0.bottom.equalTo(self.rootView.bottomSheetView.snp.top).offset(-10)
+                    $0.trailing.equalToSuperview().inset(12)
                 }
             }
             self.view.layoutIfNeeded()
@@ -180,20 +180,21 @@ extension HomeViewController {
                 self?.rootView.mapView.moveCamera(NMFCameraUpdate(scrollTo: initialPosition, zoomTo: 14.0))
             }
             
-            self?.clearMarkers()
-            
-            for (index, location) in markers.enumerated() {
-                let marker = NMFMarker()
-                marker.iconImage = NMFOverlayImage(image: .icPin)
-                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
-                marker.mapView = self?.rootView.mapView
-                marker.touchHandler = { [weak self] _ in
-                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
-                    self?.showMarkerInfoCard(at: index, pinId: location.id)
-                    return true
-                }
-                self?.markers.append(marker)
-            }
+            self?.setupPosition(with: markers)
+//            self?.clearMarkers()
+//
+//            for (index, location) in markers.enumerated() {
+//                let marker = NMFMarker()
+//                marker.iconImage = NMFOverlayImage(image: .icPin)
+//                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
+//                marker.mapView = self?.rootView.mapView
+//                marker.touchHandler = { [weak self] _ in
+//                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
+//                    self?.showMarkerInfoCard(at: index, pinId: location.id)
+//                    return true
+//                }
+//                self?.markers.append(marker)
+//            }
         })
     }
     
@@ -221,6 +222,16 @@ extension HomeViewController {
         }
     }
     
+    // 선택된 식당 핀만 노출
+    private func setupSelectPosition(latitude: Double, longitude: Double) {
+        clearMarkers()
+        let marker = NMFMarker()
+        marker.iconImage = NMFOverlayImage(image: .icPin)
+        marker.position = NMGLatLng(lat: latitude, lng: longitude)
+        marker.mapView = rootView.mapView
+        markers.append(marker)
+    }
+    
     // 지도 핀 삭제
     private func clearMarkers() {
         markers.forEach { $0.mapView = nil }
@@ -231,6 +242,10 @@ extension HomeViewController {
     private func showMarkerInfoCard(at index: Int, pinId: Int) {
         guard selectedMarkerIndex != index else { return }
         selectedMarkerIndex = index
+        
+        if let location = hankkiPins.first(where: { $0.id == pinId }) {
+            setupSelectPosition(latitude: location.latitude, longitude: location.longitude)
+        }
         
         if markerInfoCardView == nil {
             markerInfoCardView = MarkerInfoCardView()
@@ -274,6 +289,10 @@ extension HomeViewController {
             self.markerInfoCardView?.removeFromSuperview()
             self.markerInfoCardView = nil
             self.selectedMarkerIndex = nil
+            
+            // 전체 지도 핀 복원
+            self.clearMarkers()
+            self.setupPosition(with: self.hankkiPins)
         })
         self.showTargetButtonAtBottomSheet()
     }
