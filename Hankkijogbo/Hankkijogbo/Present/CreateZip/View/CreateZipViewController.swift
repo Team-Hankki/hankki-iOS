@@ -37,6 +37,11 @@ final class CreateZipViewController: BaseViewController {
     private let tagInputTextField = TagTextField()
     private let tagInputLineView = UIView()
     
+    private let testTextField = CreateZipTextField(titleText: "테스트",
+                                                   placeholderText: "테스트입니다...",
+                                                   maxLength: 5,
+                                                   regex:"^[ㄱ-힣a-zA-Z0-9{}\\[\\]/?.,;:|)*~`!^\\-_+<>@#\\$%&\\\\=\\('\"\"\\\\]*$")
+    
     private lazy var submitButton = MainButton(titleText: StringLiterals.CreateZip.submitButton, isValid: false, buttonHandler: submitButtonDidTap)
     private let hankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.CreateZip.submitButton)
 
@@ -142,7 +147,8 @@ final class CreateZipViewController: BaseViewController {
             tagInputTitle,
             tagInputTextField,
             tagInputLineView,
-            submitButton
+            submitButton,
+            testTextField
         )
         titleCountView.addSubview(titleCountLabel)
     }
@@ -206,6 +212,12 @@ final class CreateZipViewController: BaseViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(54)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        
+        testTextField.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(22)
+            $0.top.equalTo(tagInputTextField.snp.bottom)
+            
         }
     }
 }

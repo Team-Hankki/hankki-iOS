@@ -134,6 +134,7 @@
 		86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761202C3DF60800413059 /* ZipHeaderTableView.swift */; };
 		86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761222C3EC87A00413059 /* ZipListCollectionViewCellModel.swift */; };
 		86B761302C3EEDEE00413059 /* HankkiListViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */; };
+		86BD76092D0309CE0070EC5D /* CreateZipTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BD76082D0309CE0070EC5D /* CreateZipTextField.swift */; };
 		86E78D1D2C46B67400BE0DC3 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E78D1B2C46B67400BE0DC3 /* EmptyView.swift */; };
 		86FAFBAD2CB4DECE00910A7D /* MypageSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */; };
 		9E38C1F6B1DB0B110CF9BCB7 /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC84CE15CCD6BBF6F508B9D /* Pods_Hankkijogbo.framework */; };
@@ -361,6 +362,7 @@
 		86B761202C3DF60800413059 /* ZipHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipHeaderTableView.swift; sourceTree = "<group>"; };
 		86B761222C3EC87A00413059 /* ZipListCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewControllerType.swift; sourceTree = "<group>"; };
+		86BD76082D0309CE0070EC5D /* CreateZipTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipTextField.swift; sourceTree = "<group>"; };
 		86E78D1B2C46B67400BE0DC3 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSeparatorView.swift; sourceTree = "<group>"; };
 		A2079B932C656F7D00817651 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
@@ -789,6 +791,7 @@
 		83DBEDA92C2565920042BA48 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				86BD76052D0309A80070EC5D /* CreateZipTextField */,
 				A2AF6FAE2CD99AB300F5271D /* ModifyMenuTextField */,
 				A2AF6FF12CEB5EB900F5271D /* HankkiAccessoryView */,
 				8322D03B2C5FB36B00F6D725 /* HankkiCategoryTagLabel */,
@@ -1245,6 +1248,14 @@
 				86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		86BD76052D0309A80070EC5D /* CreateZipTextField */ = {
+			isa = PBXGroup;
+			children = (
+				86BD76082D0309CE0070EC5D /* CreateZipTextField.swift */,
+			);
+			path = CreateZipTextField;
 			sourceTree = "<group>";
 		};
 		86E78D1A2C46B42600BE0DC3 /* Recovered References */ = {
@@ -1995,6 +2006,7 @@
 				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
 				86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */,
 				A2FF94132C31660E001ADA03 /* BaseCollectionViewCell.swift in Sources */,
+				86BD76092D0309CE0070EC5D /* CreateZipTextField.swift in Sources */,
 				83DBED922C2564990042BA48 /* HomeViewModel.swift in Sources */,
 				A24A78772CB44BCB0049B031 /* AddMenuViewModel.swift in Sources */,
 				A2C9FCB02C49985800868DF7 /* GetMyZipListResponseDTO.swift in Sources */,
