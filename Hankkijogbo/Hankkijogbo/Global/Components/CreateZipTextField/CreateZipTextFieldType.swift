@@ -9,8 +9,44 @@ import UIKit
 
 extension CreateZipTextField {
     enum CreateZipTextFieldType {
-        case tag
         case title
+        case tag
+
+        var titleText: String {
+            switch self {
+            case .title:
+                StringLiterals.CreateZip.TitleInput.label
+            case . tag:
+                StringLiterals.CreateZip.TagInput.label
+            }
+        }
+        
+        var placeholderText: String {
+            switch self {
+            case .title:
+                StringLiterals.CreateZip.TitleInput.placeholder
+            case . tag:
+                StringLiterals.CreateZip.TagInput.placeholder
+            }
+        }
+        
+        var maxLength: Int {
+            switch self {
+            case .title:
+                CreateZipLiterals.titleMaxCount
+            case .tag:
+                CreateZipLiterals.tagMaxCount * 2 + 1
+            }
+        }
+        
+        var regex: String {
+            switch self {
+            case .title:
+                CreateZipLiterals.titleRegex
+            case .tag:
+                CreateZipLiterals.tagRegex
+            }
+        }
         
         func textFieldDidBeginEditing(for instance: CreateZipTextField) -> (UITextField) -> Void {
             switch self {
@@ -24,7 +60,7 @@ extension CreateZipTextField {
         func textFieldDidEndEditing(for instance: CreateZipTextField) -> (UITextField) -> Void {
             switch self {
             case .tag:
-                return { textField in instance.tagTextFieldDidBeginEditing(textField) }
+                return { textField in instance.tagTextFieldDidEndEditing(textField) }
             default:
                 return { _ in }
             }
@@ -50,18 +86,24 @@ private extension CreateZipTextField {
     }
     
     func tagTextFieldDidEndEditing(_ textField: UITextField) {
-        let tagMaxCount = 9
-        
         let currentText = textField.text ?? ""
         
+        // 현재 textField에 아무것도 입력하지 않고, 입력을 종료한 경우
+        // #
+        // textField를 초기화 한다.
         if currentText.count <= 1 {
             textField.text = ""
             return
         }
         
+        // 첫번째 태그를 tagMaxCount를 초과해서 입력하는 경우
         if !currentText.contains(" ") {
-            textField.text = String(currentText.prefix(tagMaxCount))
-        } else {
+            textField.text = String(currentText.prefix(CreateZipLiterals.tagMaxCount))
+            return
+        }
+        
+        // 현재 textField에 첫번째 태그가 입력되어있는 경우
+        if currentText.contains(" ") {
             if currentText.hasSuffix("#") {
                 let arr = (textField.text ?? "").split(separator: " ").map { String($0) }
                 textField.text = arr[0]
@@ -71,14 +113,13 @@ private extension CreateZipTextField {
             let arr = (textField.text ?? "").split(separator: " ").map { String($0) }
             let firstTagCount = arr[0].count
             
-            textField.text = String(currentText.prefix(firstTagCount + 1 + tagMaxCount))
+            textField.text = String(currentText.prefix(firstTagCount + 1 + CreateZipLiterals.tagMaxCount))
         }
     }
     
     func replaceTagTextField(_ textField: UITextField, string: String, currentText: String) -> Bool {
         let updatedText: String = currentText+string
-        
-        let tagMaxCount = 9
+    
         var firstTagCount = 0
         
         // 현재 입력된 TextField의 마지막글자를 반환합니다.
@@ -115,8 +156,8 @@ private extension CreateZipTextField {
         }
         
         // 첫번째 태그가 최대 글자수를 넘지 않게 막는다.
-        if !currentText.contains(" ") && updatedText.count > tagMaxCount + 1 {
-            textField.text = String(updatedText.prefix(tagMaxCount))
+        if !currentText.contains(" ") && updatedText.count > CreateZipLiterals.tagMaxCount + 1 {
+            textField.text = String(updatedText.prefix(CreateZipLiterals.tagMaxCount))
             return false
         }
         
@@ -145,8 +186,8 @@ private extension CreateZipTextField {
         }
         
         // 두번째 태그가 최대 글자수를 넘지 않게 막는다.
-        if updatedText.count > firstTagCount + 1 + tagMaxCount + 1 {
-            textField.text = String(updatedText.prefix(firstTagCount + 1 + tagMaxCount))
+        if updatedText.count > firstTagCount + 1 + CreateZipLiterals.tagMaxCount + 1 {
+            textField.text = String(updatedText.prefix(firstTagCount + 1 + CreateZipLiterals.tagMaxCount))
             return false
         }
         

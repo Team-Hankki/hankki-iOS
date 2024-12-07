@@ -7,6 +7,14 @@
 
 import UIKit
 
+struct CreateZipLiterals {
+    static let titleMaxCount: Int = 18
+    static let titleRegex: String = "^[ㄱ-힣a-zA-Z0-9{}\\[\\]/?.,;:|)*~`!^\\-_+<>@#\\$%&\\\\=\\('\"\"\\\\]*$"
+    
+    static let tagMaxCount: Int = 9
+    static let tagRegex: String = "^[ㄱ-힣a-zA-Z0-9]+$"
+}
+
 final class CreateZipViewController: BaseViewController {
     
     // MARK: - Properties
@@ -16,42 +24,29 @@ final class CreateZipViewController: BaseViewController {
     
     private let viewModel: CreateZipViewModel = CreateZipViewModel()
     
-    private let tagMaxCount: Int = 9
-    private let titleMaxCount: Int = 18
-    
     private var firstTagCount: Int = 0
+    
+    private var isValid: Bool = false
     
     // MARK: - UI Properties
     
-    private let viewTitleLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private let viewTitleLabel: UILabel = UILabel()
+    private let descriptionLabel: UILabel = UILabel()
     
-    private let titleCountView = UIView()
-    private let titleCountLabel = UILabel()
+    private lazy var titleTextField: CreateZipTextField = CreateZipTextField(.title) { [weak self] in
+        self?.isFormValid()
+    }
+    private lazy var tagTextField: CreateZipTextField = CreateZipTextField(.tag) { [weak self] in
+        self?.isFormValid()
+    }
     
-    private let titleTextField = CreateZipTextField(
-        type: .title,
-        titleText: StringLiterals.CreateZip.TitleInput.label,
-        placeholderText: StringLiterals.CreateZip.TitleInput.placeholder,
-        maxLength: 18,
-        regex: "^[ㄱ-힣a-zA-Z0-9{}\\[\\]/?.,;:|)*~`!^\\-_+<>@#\\$%&\\\\=\\('\"\"\\\\]*$"
-    )
-    
-    private let tagTextField = CreateZipTextField(
-        type: .tag,
-        titleText: StringLiterals.CreateZip.TagInput.label,
-        placeholderText: StringLiterals.CreateZip.TagInput.placeholder,
-        maxLength: 9 * 2 + 1,
-        regex: "^[ㄱ-힣a-zA-Z0-9]+$"
-    )
-    
-    private lazy var submitButton = MainButton(
+    private lazy var submitButton: MainButton = MainButton(
         titleText: StringLiterals.CreateZip.submitButton,
         isValid: false,
         buttonHandler: submitButtonDidTap
     )
     
-    private let hankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.CreateZip.submitButton)
+    private let hankkiAccessoryView: HankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.CreateZip.submitButton)
     
     // MARK: - Life Cycle
     
@@ -67,9 +62,10 @@ final class CreateZipViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupDelegate()
+    
         setupAddTarget()
+        setupTextFieldAccessoryView()
+        
         self.hideKeyboard()
     }
     
@@ -139,7 +135,9 @@ final class CreateZipViewController: BaseViewController {
     }
 }
 
+// MARK: - setup
 private extension CreateZipViewController {
+    
     func setupNavigationBar() {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: false,
@@ -151,49 +149,49 @@ private extension CreateZipViewController {
         }
     }
     
-    func setupInputAccessoryView() {
+    func setupTextFieldAccessoryView() {
         let accessoryView = UIView(frame: .init(x: 0, y: 0, width: UIScreen.getDeviceWidth(), height: 54))
         accessoryView.addSubview(hankkiAccessoryView)
         hankkiAccessoryView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        //        titleInputTextField.inputAccessoryView = accessoryView
-        //        tagInputTextField.inputAccessoryView = accessoryView
-    }
-    
-    func setupDelegate() {
-        //        titleInputTextField.delegate = self
-        //        tagInputTextField.delegate = self
+        titleTextField.setupAccessoryView(accessoryView)
+        tagTextField.setupAccessoryView(accessoryView)
     }
     
     func setupAddTarget() {
-        //        titleInputTextField.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
-        //        titleInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        //        tagInputTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        submitButton.addTarget(self, action: #selector(submitButtonDidTap), for: .touchUpInside)
         hankkiAccessoryView.button.addTarget(self, action: #selector(submitButtonDidTap), for: .touchUpInside)
     }
-    
-    @objc func textFieldDidChange() {
-        isFormValid()
-    }
-    
-    @objc func titleTextFieldDidChange(_ textField: UITextField) {
-        let currentText = textField.text ?? ""
-        if currentText.count <= titleMaxCount { titleCountLabel.text = "(\(currentText.count)/\(titleMaxCount))" }
-    }
+}
+
+private extension CreateZipViewController {
     
     @objc func submitButtonDidTap() {
-        //        let arr = (tagInputTextField.text ?? "").split(separator: " ").map { String($0) }
-        //        let data = PostZipRequestDTO(title: titleInputTextField.text ?? " ", details: arr)
+        let title = titleTextField.value
+        let tagList = tagTextField.value.split(separator: " ").map { String($0) }
         
-        //        viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+        let data = PostZipRequestDTO(title: title, details: tagList)
+        
+        viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+    }
+    
+    // textField 값의 유효성 검사
+    func isFormValid() {
+        let isValid = !(titleTextField.value).isEmpty
+                    && (tagTextField.value).count > 1
+        updateSubmitButton(isValid)
     }
     
     func resetTitleTextField() {
-        titleTextField.value = ""
-        submitButton.setupIsValid(false)
-        hankkiAccessoryView.updateStyle(isValid: false)
+        titleTextField.resetTextField()
+        updateSubmitButton(false)
+    }
+    
+    func updateSubmitButton(_ isValid: Bool) {
+        submitButton.setupIsValid(isValid)
+        hankkiAccessoryView.updateStyle(isValid: isValid)
     }
     
     func dismissSelf() {
@@ -207,12 +205,5 @@ private extension CreateZipViewController {
                 }
             }
         }
-    }
-    
-    func isFormValid() {
-        //        let isValid = !(titleInputTextField.text ?? "").isEmpty && (tagInputTextField.text ?? "").count > 1
-        let isValid = true
-        submitButton.setupIsValid(isValid)
-        hankkiAccessoryView.updateStyle(isValid: isValid)
     }
 }

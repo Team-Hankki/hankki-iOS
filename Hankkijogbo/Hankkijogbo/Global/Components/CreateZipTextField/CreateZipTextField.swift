@@ -7,33 +7,26 @@
 
 import UIKit
 
-final class CreateZipTextField: UIView {
+final class CreateZipTextField: BaseView {
     
     // MARK: - Properties
     
     private let type: CreateZipTextFieldType
-    private let titleText: String
-    private let placeholderText: String
-    private let maxLength: Int
-    private let regex: String
     
     var value: String {
         didSet {
-            countLabel.text = "(\(value.count)/\(maxLength))"
-            textField.text = value
+            countLabel.text = "(\(value.count)/\(type.maxLength))"
+            checkIsValid()
         }
     }
     
-    var textFieldDelegate: UITextFieldDelegate? {
-         didSet {
-             textField.delegate = textFieldDelegate
-         }
-     }
-        
+    typealias IsValid = (() -> Void)
+    private let checkIsValid: IsValid
+    
     // MARK: - UI Components
     
     private let titleLabel = UILabel()
-    let textField = UITextField()
+    private let textField = UITextField()
     private let textFieldLine = UIView()
     
     private let countView = UIView()
@@ -42,24 +35,16 @@ final class CreateZipTextField: UIView {
     // MARK: - Init
     
     init(
-        type: CreateZipTextFieldType,
-        titleText: String,
-        placeholderText: String,
-        maxLength: Int,
-        regex: String
+        _ type: CreateZipTextFieldType,
+        checkIsValid: @escaping IsValid
     ) {
         self.type = type
-        self.titleText = titleText
-        self.placeholderText = placeholderText
-        self.maxLength = maxLength
-        self.regex = regex
+        self.checkIsValid = checkIsValid
+        
         self.value = ""
         
         super.init(frame: .zero)
         
-        setupHierarchy()
-        setupLayout()
-        setupStyle()
         setupDelegate()
         setupAddTarget()
     }
@@ -78,20 +63,19 @@ final class CreateZipTextField: UIView {
         
         return super.canPerformAction(action, withSender: sender)
     }
-}
-
-private extension CreateZipTextField {
-    func setupHierarchy() {
+    
+    // MARK: - setup UI
+    
+    override func setupHierarchy() {
         self.addSubviews(
             titleLabel,
             textField,
             textFieldLine
         )
-        
         countView.addSubview(countLabel)
     }
     
-    func setupLayout() {
+    override func setupLayout() {
         titleLabel.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(8)
             $0.top.equalToSuperview()
@@ -120,11 +104,11 @@ private extension CreateZipTextField {
         }
     }
     
-    func setupStyle() {
+    override func setupStyle() {
         titleLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: titleText,
+                withText: type.titleText,
                 color: .gray500
             )
         }
@@ -137,7 +121,7 @@ private extension CreateZipTextField {
             $0.font = UIFont.setupPretendardStyle(of: .subtitle2)
             $0.textColor = .gray800
             $0.changePlaceholderColor(
-                forPlaceHolder: placeholderText,
+                forPlaceHolder: type.placeholderText,
                 forColor: .gray300
             )
         }
@@ -149,39 +133,58 @@ private extension CreateZipTextField {
         countLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body8,
-                withText: "(0/\(maxLength))",
+                withText: "(0/\(type.maxLength))",
                 color: .gray300)
         }
     }
+}
+
+private extension CreateZipTextField {
     
     func setupDelegate() {
         textField.delegate = self
     }
     
     func setupAddTarget() {
-//        textField.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(updateValue), for: .editingChanged)
     }
 }
 
+extension CreateZipTextField {
+    // textField를 초기화합니다.
+    func resetTextField() {
+        textField.text = ""
+        value = ""
+    }
+    
+    func setupAccessoryView(_ accessoryView: UIView) {
+        textField.inputAccessoryView = accessoryView
+    }
+}
 private extension CreateZipTextField {
+    // textField의 값이 바뀔때, value를 업데이트합니다
+    @objc func updateValue(_ textField: UITextField) {
+        value = textField.text ?? ""
+    }
+    
     // regex를 기반으로, 정규식에과 일치하는 입력일 경우 true를 반환합니다.
     func isValidString(_ string: String, regex: String) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         return predicate.evaluate(with: string)
     }
-    
-    @objc func titleTextFieldDidChange(_ textField: UITextField) {
-        value = textField.text ?? ""
-    }
 }
 
+// MARK: - Delegation
 extension CreateZipTextField: UITextFieldDelegate {
     
     // textField의 편집을 시작합니다
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldLine.backgroundColor = .gray500
         countLabel.textColor = .gray500
+        
         type.textFieldDidBeginEditing(for: self)(textField)
+        
+        value = textField.text ?? ""
     }
     
     // textField의 편집을 종료합니다
@@ -189,11 +192,12 @@ extension CreateZipTextField: UITextFieldDelegate {
         textFieldLine.backgroundColor = .gray200
         countLabel.textColor = .gray300
         
-        let currentText = textField.text ?? ""
-        textField.text = String(currentText.prefix(maxLength))
-        value = textField.text ?? ""
+        // 입력된 text가 maxLength 를 넘기면, text를 maxLength의 길이에 맞게 자릅니다.
+        textField.text = String(value.prefix(type.maxLength))
         
         type.textFieldDidEndEditing(for: self)(textField)
+        
+        value = textField.text ?? ""
     }
     
     // textField의 text의 내용 수정을 감지합니다.
@@ -202,13 +206,13 @@ extension CreateZipTextField: UITextFieldDelegate {
         let updatedText = currentText+string
         
         // 정규식에 맞는 텍스트만 입력되도록 합니다. (+ 스페이스 바, 백스페이스)
-        if !isValidString(string, regex: regex) && string != " " && !string.isEmpty {
+        if !isValidString(string, regex: type.regex) && string != " " && !string.isEmpty {
             return false
         }
         
         // TextField의 최대 글자수를 제한 합니다.
-        if updatedText.count > maxLength + 1 {
-            textField.text = String(updatedText.prefix(maxLength))
+        if updatedText.count > type.maxLength + 1 {
+            textField.text = String(updatedText.prefix(type.maxLength))
             return false
         }
         
