@@ -11,29 +11,49 @@ final class CreateZipTextField: UIView {
     
     // MARK: - Properties
     
+    private let type: CreateZipTextFieldType
     private let titleText: String
     private let placeholderText: String
     private let maxLength: Int
     private let regex: String
     
+    var value: String {
+        didSet {
+            countLabel.text = "(\(value.count)/\(maxLength))"
+            textField.text = value
+        }
+    }
+    
+    var textFieldDelegate: UITextFieldDelegate? {
+         didSet {
+             textField.delegate = textFieldDelegate
+         }
+     }
+        
     // MARK: - UI Components
     
     private let titleLabel = UILabel()
-    private let textField = UITextField()
+    let textField = UITextField()
     private let textFieldLine = UIView()
+    
+    private let countView = UIView()
+    private let countLabel = UILabel()
     
     // MARK: - Init
     
     init(
+        type: CreateZipTextFieldType,
         titleText: String,
         placeholderText: String,
         maxLength: Int,
         regex: String
     ) {
+        self.type = type
         self.titleText = titleText
         self.placeholderText = placeholderText
         self.maxLength = maxLength
         self.regex = regex
+        self.value = ""
         
         super.init(frame: .zero)
         
@@ -41,10 +61,22 @@ final class CreateZipTextField: UIView {
         setupLayout()
         setupStyle()
         setupDelegate()
+        setupAddTarget()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // 터치 이벤트를 무시하여 드래그를 방지합니다
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if type == .tag {
+            if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+                return false
+            }
+        }
+        
+        return super.canPerformAction(action, withSender: sender)
     }
 }
 
@@ -55,6 +87,8 @@ private extension CreateZipTextField {
             textField,
             textFieldLine
         )
+        
+        countView.addSubview(countLabel)
     }
     
     func setupLayout() {
@@ -75,6 +109,15 @@ private extension CreateZipTextField {
             $0.height.equalTo(1)
             $0.bottom.equalToSuperview()
         }
+        
+        countLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(8)
+            $0.centerY.equalToSuperview()
+        }
+        countView.snp.makeConstraints {
+            $0.height.equalTo(40)
+        }
     }
     
     func setupStyle() {
@@ -88,6 +131,8 @@ private extension CreateZipTextField {
         
         textField.do {
             $0.addPadding(left: 8)
+            $0.rightViewMode = type == .title ? .always : .never
+            $0.rightView = countView
             
             $0.font = UIFont.setupPretendardStyle(of: .subtitle2)
             $0.textColor = .gray800
@@ -100,18 +145,33 @@ private extension CreateZipTextField {
         textFieldLine.do {
             $0.backgroundColor = .gray200
         }
+        
+        countLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.body8,
+                withText: "(0/\(maxLength))",
+                color: .gray300)
+        }
     }
     
     func setupDelegate() {
         textField.delegate = self
     }
+    
+    func setupAddTarget() {
+//        textField.addTarget(self, action: #selector(titleTextFieldDidChange), for: .editingChanged)
+    }
 }
 
 private extension CreateZipTextField {
     // regex를 기반으로, 정규식에과 일치하는 입력일 경우 true를 반환합니다.
-    func isValidString(_ s: String, regex: String) -> Bool {
+    func isValidString(_ string: String, regex: String) -> Bool {
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
-        return predicate.evaluate(with: s)
+        return predicate.evaluate(with: string)
+    }
+    
+    @objc func titleTextFieldDidChange(_ textField: UITextField) {
+        value = textField.text ?? ""
     }
 }
 
@@ -120,14 +180,20 @@ extension CreateZipTextField: UITextFieldDelegate {
     // textField의 편집을 시작합니다
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldLine.backgroundColor = .gray500
+        countLabel.textColor = .gray500
+        type.textFieldDidBeginEditing(for: self)(textField)
     }
     
     // textField의 편집을 종료합니다
     func textFieldDidEndEditing(_ textField: UITextField) {
-        let currentText = textField.text ?? ""
-        
         textFieldLine.backgroundColor = .gray200
+        countLabel.textColor = .gray300
+        
+        let currentText = textField.text ?? ""
         textField.text = String(currentText.prefix(maxLength))
+        value = textField.text ?? ""
+        
+        type.textFieldDidEndEditing(for: self)(textField)
     }
     
     // textField의 text의 내용 수정을 감지합니다.
@@ -145,6 +211,18 @@ extension CreateZipTextField: UITextFieldDelegate {
             textField.text = String(updatedText.prefix(maxLength))
             return false
         }
-        return true
+        
+        return type.replaceTextField(for: self)(textField, string, currentText)
+    }
+    
+    // textField에서 선택된 범위가 변경될때 호출됩니다.
+    // textField를 드래그 해 선택 범위를 지정하고, 수정을 시작하면
+    // endOfDocument를 기준으로 커서를 끝으로 이동시킵니다
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if type == .tag {
+            if let endPosition = textField.position(from: textField.endOfDocument, offset: 0) {
+                textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
+            }
+        }
     }
 }
