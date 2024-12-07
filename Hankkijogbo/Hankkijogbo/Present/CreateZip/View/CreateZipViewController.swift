@@ -169,8 +169,8 @@ private extension CreateZipViewController {
 private extension CreateZipViewController {
     
     @objc func submitButtonDidTap() {
-        let title = titleTextField.value
-        let tagList = tagTextField.value.split(separator: " ").map { String($0) }
+        let title: String = titleTextField.value
+        let tagList: [String] = tagTextField.value.split(separator: " ").map { String($0) }
         
         let data = PostZipRequestDTO(title: title, details: tagList)
         

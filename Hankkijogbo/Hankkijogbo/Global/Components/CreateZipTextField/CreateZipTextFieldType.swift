@@ -103,24 +103,20 @@ private extension CreateZipTextField {
         }
         
         // 현재 textField에 첫번째 태그가 입력되어있는 경우
+        let firstTag = getFirstTag(textField.text ?? "")
+        
         if currentText.contains(" ") {
             if currentText.hasSuffix("#") {
-                let arr = (textField.text ?? "").split(separator: " ").map { String($0) }
-                textField.text = arr[0]
+                textField.text = firstTag
                 return
             }
             
-            let arr = (textField.text ?? "").split(separator: " ").map { String($0) }
-            let firstTagCount = arr[0].count
-            
-            textField.text = String(currentText.prefix(firstTagCount + 1 + CreateZipLiterals.tagMaxCount))
+            textField.text = String(currentText.prefix(firstTag.count + 1 + CreateZipLiterals.tagMaxCount))
         }
     }
     
     func replaceTagTextField(_ textField: UITextField, string: String, currentText: String) -> Bool {
-        let updatedText: String = currentText+string
-    
-        var firstTagCount = 0
+        let updatedText: String = currentText + string
         
         // 현재 입력된 TextField의 마지막글자를 반환합니다.
         var lastChar = ""
@@ -160,12 +156,7 @@ private extension CreateZipTextField {
             textField.text = String(updatedText.prefix(CreateZipLiterals.tagMaxCount))
             return false
         }
-        
-        if currentText.contains(" ") {
-            let arr = (textField.text ?? "").split(separator: " ").map { String($0) }
-            firstTagCount = arr[0].count
-        }
-        
+
         // 현재 입력 : 스페이스
         
         if string == " " {
@@ -179,18 +170,28 @@ private extension CreateZipTextField {
             // 첫번째 태그를 입력을 마무리하고, 두번째 태그를 작성하려고하는 경우
             // -> 첫번째 태그를 완성하고, 두번째 태그 작성을 위해 #을 자동으로 입력한다.
             else {
-                firstTagCount = currentText.count
                 textField.text = "\(currentText) #"
                 return false
             }
         }
         
+        let firstTag = getFirstTag(textField.text ?? "")
+        
         // 두번째 태그가 최대 글자수를 넘지 않게 막는다.
-        if updatedText.count > firstTagCount + 1 + CreateZipLiterals.tagMaxCount + 1 {
-            textField.text = String(updatedText.prefix(firstTagCount + 1 + CreateZipLiterals.tagMaxCount))
+        if updatedText.count > firstTag.count + 1 + CreateZipLiterals.tagMaxCount + 1 {
+            textField.text = String(updatedText.prefix(firstTag.count + 1 + CreateZipLiterals.tagMaxCount))
             return false
         }
         
         return true
+    }
+}
+
+private extension CreateZipTextField {
+    // 첫번째 입력된 태그를 반환합니다
+    // 띄어쓰기 기준
+    func getFirstTag(_ string: String) -> String {
+        let arr = string.split(separator: " ").map { String($0) }
+        return arr[0]
     }
 }
