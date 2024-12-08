@@ -65,6 +65,8 @@
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
 		83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39732C4644DD00DD7EC3 /* URLConstant.swift */; };
 		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
+		83EC67FA2D060F0F002B929E /* status=filtered.svg in Resources */ = {isa = PBXBuildFile; fileRef = 83EC67F92D060F0F002B929E /* status=filtered.svg */; };
+		83EC67FB2D060F0F002B929E /* status=Default.svg in Resources */ = {isa = PBXBuildFile; fileRef = 83EC67F82D060F0F002B929E /* status=Default.svg */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
 		8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */; };
 		8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */; };
@@ -289,6 +291,8 @@
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		83DD39732C4644DD00DD7EC3 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
+		83EC67F82D060F0F002B929E /* status=Default.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "status=Default.svg"; sourceTree = "<group>"; };
+		83EC67F92D060F0F002B929E /* status=filtered.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = "status=filtered.svg"; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
 		864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -822,6 +826,8 @@
 			children = (
 				8641516E2C6B470800E2FD44 /* Gifs */,
 				83DBED7E2C255A1A0042BA48 /* Assets.xcassets */,
+				83EC67F82D060F0F002B929E /* status=Default.svg */,
+				83EC67F92D060F0F002B929E /* status=filtered.svg */,
 				838D09D42C329A0A001400A4 /* Colors.xcassets */,
 			);
 			path = Assets;
@@ -1764,6 +1770,8 @@
 				A2F27C012C3500DB001E6514 /* SUITE-Regular.otf in Resources */,
 				A2F27BE62C34EED9001E6514 /* Pretendard-Regular.otf in Resources */,
 				83DBED7F2C255A1A0042BA48 /* Assets.xcassets in Resources */,
+				83EC67FA2D060F0F002B929E /* status=filtered.svg in Resources */,
+				83EC67FB2D060F0F002B929E /* status=Default.svg in Resources */,
 				8670A78C2C49C6BE0098DCF1 /* onboarding2.json in Resources */,
 				8670A7902C49C9410098DCF1 /* onboarding1.json in Resources */,
 				A2F240312C5C03B400C204BE /* Config.xcconfig in Resources */,
