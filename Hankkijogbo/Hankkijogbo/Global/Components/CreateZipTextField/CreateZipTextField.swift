@@ -161,6 +161,7 @@ extension CreateZipTextField {
         textField.inputAccessoryView = accessoryView
     }
 }
+
 private extension CreateZipTextField {
     // textField의 값이 바뀔때, value를 업데이트합니다
     @objc func updateValue(_ textField: UITextField) {

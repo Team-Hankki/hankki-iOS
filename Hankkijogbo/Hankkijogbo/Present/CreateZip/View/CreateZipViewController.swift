@@ -26,8 +26,6 @@ final class CreateZipViewController: BaseViewController {
     
     private var firstTagCount: Int = 0
     
-    private var isValid: Bool = false
-    
     // MARK: - UI Properties
     
     private let viewTitleLabel: UILabel = UILabel()
