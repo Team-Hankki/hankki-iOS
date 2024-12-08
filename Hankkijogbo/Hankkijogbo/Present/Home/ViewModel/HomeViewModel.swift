@@ -46,12 +46,20 @@ final class HomeViewModel {
     var storeCategory: String? {
         didSet { updateHankkiList() }
     }
+    
     var priceCategory: String? {
         didSet { updateHankkiList() }
     }
+    
     var sortOption: String? {
         didSet { updateHankkiList() }
     }
+    
+    var selectedStoreCategoryIndex: Int? {
+        didSet { selectedStoreCategoryChanged() }
+    }
+    
+    var didStoreCategoryIndexChange: ((Int?) -> Void)?
     
     init(hankkiAPIService: HankkiAPIServiceProtocol = HankkiAPIService()) {
         self.hankkiAPIService = hankkiAPIService
@@ -59,6 +67,10 @@ final class HomeViewModel {
 }
 
 extension HomeViewModel {
+    private func selectedStoreCategoryChanged() {
+        didStoreCategoryIndexChange?(selectedStoreCategoryIndex)
+    }
+    
     func updateHankkiList() {
         let storeCategory = storeCategory ?? ""
         let priceCategory = priceCategory ?? ""

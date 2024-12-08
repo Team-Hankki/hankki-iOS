@@ -123,20 +123,28 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
         }
+        
+        viewModel.getCategoryFilterAPI { [weak self] success in
+            if success {
+                DispatchQueue.main.async {
+                    self?.rootView.typeFiletringCollectionView.collectionView.reloadData()
+                }
+            }
+        }
     }
 }
 
 extension HomeViewController {
     private func setupDelegate() {
-        typeCollectionView.collectionView.delegate = self
-        typeCollectionView.collectionView.dataSource = self
+        rootView.typeFiletringCollectionView.collectionView.delegate = self
+        rootView.typeFiletringCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
         rootView.bottomSheetView.delegate = self
         viewModel.delegate = self
     }
     
     private func setupRegister() {
-        typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
+        rootView.typeFiletringCollectionView.collectionView.register(TypeCollectionViewCell.self,
                                                    forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
     
@@ -243,9 +251,10 @@ extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate 
 // CollectionViewDelegate, DataSource
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        typeCollectionView.isHidden = true
+        viewModel.selectedStoreCategoryIndex = indexPath.item
         viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
         changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
+        collectionView.reloadData()
     }
 }
 
@@ -257,13 +266,15 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
         cell.bindData(model: viewModel.categoryFilters[indexPath.item])
+        let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
+          cell.updateSelection(isSelected: isSelected)
         return cell
     }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 58, height: 60)
     }
 }
 

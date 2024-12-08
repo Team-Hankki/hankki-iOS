@@ -60,4 +60,8 @@ extension TypeCollectionViewCell {
         typeLabel.text = model.name
         thumbnailImageView.setKFImage(url: model.imageUrl)
     }
+    
+    func updateSelection(isSelected: Bool) {
+        selectedUnderLineView.isHidden = !isSelected
+    }
 }
