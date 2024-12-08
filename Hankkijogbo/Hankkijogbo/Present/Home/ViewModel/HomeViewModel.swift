@@ -55,7 +55,7 @@ final class HomeViewModel {
         didSet { updateHankkiList() }
     }
     
-    var selectedStoreCategoryIndex: Int? {
+    var selectedStoreCategoryIndex: Int? = 0{
         didSet { selectedStoreCategoryChanged() }
     }
     
