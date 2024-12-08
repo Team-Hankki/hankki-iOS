@@ -210,9 +210,7 @@ extension HomeViewController {
 private extension HomeViewController {
     func updateUniversityData() {
         let universityId = UserDefaults.standard.getUniversity()?.id
-        
         viewModel.updateHankkiList()
-        
         rootView.bottomSheetView.totalListCollectionView.reloadData()
     }
     
@@ -255,6 +253,7 @@ extension HomeViewController: UICollectionViewDelegate {
         viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
         changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
         collectionView.reloadData()
+        collectionView.scrollToCenter(at: indexPath)
     }
 }
 
