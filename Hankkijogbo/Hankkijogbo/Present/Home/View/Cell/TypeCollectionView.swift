@@ -24,7 +24,7 @@ final class TypeCollectionView: BaseView {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(900)
-            $0.height.equalTo(100)
+            $0.height.equalTo(60)
         }
     }
     
@@ -35,7 +35,7 @@ final class TypeCollectionView: BaseView {
         }
         
         collectionView.do {
-            $0.backgroundColor = .clear
+            $0.backgroundColor = .hankkiWhite
             $0.showsHorizontalScrollIndicator = false
         }
     }
