@@ -23,7 +23,7 @@ final class TypeCollectionView: BaseView {
     override func setupLayout() {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(900)
+            $0.width.equalTo(UIScreen.convertByWidthRatio(592))
             $0.height.equalTo(60)
         }
     }
