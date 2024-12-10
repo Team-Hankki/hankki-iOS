@@ -189,10 +189,8 @@ extension HankkiListTableViewCell {
     func dataBind(_ data: Model, isFinal: Bool, isLikeButtonDisable: Bool) {
         self.data = data
     
-//        categoryLabel.text = data.category
-        categoryLabel.text = "가나다라 마바사 아자차카 타파아 아야어여오요우이"
-//        titleLabel.text = data.name
-        titleLabel.text = "가나다라 마바사 아자차카 타파아 아야어여오요우이"
+        categoryLabel.text = data.category
+        titleLabel.text = data.name
         
         thumbnailView.setKFImage(url: data.imageURL, placeholder: .imgDetailDefault)
         heartButton.isHidden = isLikeButtonDisable
