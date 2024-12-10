@@ -145,7 +145,7 @@ extension HomeViewController {
     
     private func setupRegister() {
         rootView.typeFiletringCollectionView.collectionView.register(TypeCollectionViewCell.self,
-                                                   forCellWithReuseIdentifier: TypeCollectionViewCell.className)
+                                                                     forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
     
     private func setupNavigationBar(mainTitle: String? = nil) {
@@ -259,14 +259,15 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.categoryFilters.count
+        return viewModel.categoryFilters.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
-        cell.bindData(model: viewModel.categoryFilters[indexPath.item])
+        if indexPath.item < viewModel.categoryFilters.count { cell.bindData(model: viewModel.categoryFilters[indexPath.item]) }
+        else { cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""))}
         let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
-          cell.updateSelection(isSelected: isSelected)
+        cell.updateSelection(isSelected: isSelected)
         return cell
     }
 }
