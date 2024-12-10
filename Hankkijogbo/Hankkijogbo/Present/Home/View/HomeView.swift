@@ -22,6 +22,7 @@ final class HomeView: BaseView {
     // MARK: - UI Components
     
     var mapView = NMFMapView()
+    let typeFiletringCollectionView = TypeCollectionView()
     var bottomSheetView = TotalListBottomSheetView()
     
     let typeButton: UIButton = UIButton()
@@ -30,6 +31,7 @@ final class HomeView: BaseView {
     
     private let buttonStackView: UIStackView = UIStackView()
     
+    let filteringFloatingButton: UIButton = UIButton()
     let targetButton: UIButton = UIButton()
     
     private let gradient: UIView = UIView()
@@ -39,12 +41,10 @@ final class HomeView: BaseView {
     override func setupHierarchy() {
         addSubviews(mapView,
                     gradient,
-                    buttonStackView,
+                    typeFiletringCollectionView,
+                    filteringFloatingButton,
                     targetButton,
                     bottomSheetView)
-        buttonStackView.addArrangedSubviews(typeButton,
-                                            priceButton,
-                                            sortButton)
     }
     
     override func setupLayout() {
@@ -52,12 +52,15 @@ final class HomeView: BaseView {
             $0.edges.equalToSuperview()
         }
         
-        buttonStackView.snp.makeConstraints {
-            $0.top.equalTo(mapView).inset(10)
-            $0.leading.equalTo(mapView).inset(14)
+        typeFiletringCollectionView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
         }
         
-        [typeButton, priceButton, sortButton].forEach { $0.snp.makeConstraints { $0.height.equalTo(32)} }
+        filteringFloatingButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(10)
+            $0.trailing.equalToSuperview().inset(18)
+        }
         
         targetButton.snp.makeConstraints {
             if bottomSheetView.isExpanded && bottomSheetView.isBottomSheetUp {
@@ -81,45 +84,13 @@ final class HomeView: BaseView {
     }
     
     override func setupStyle() {
-        let buttons = [typeButton, priceButton, sortButton]
-        for (index, button) in buttons.enumerated() {
-            let leftImageView = UIImageView(image: leftImages[index])
-            leftImageView.tag = 100
-            button.do {
-                $0.backgroundColor = .hankkiWhite
-                $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
-                $0.setTitle(buttonType[index], for: .normal)
-                $0.setTitleColor(.gray800, for: .normal)
-                $0.setImage(.icArrowClose, for: .normal)
-                $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
-                $0.contentHorizontalAlignment = .left
-                $0.semanticContentAttribute = .forceRightToLeft
-                $0.contentEdgeInsets = .init(top: 0, left: 28, bottom: 0, right: 5)
-                $0.layer.shadowOffset = CGSize(width: 0, height: 1)
-                $0.layer.shadowColor = UIColor.black.cgColor
-                $0.layer.shadowRadius = 6
-                $0.layer.shadowOpacity = 0.1
-                $0.layer.masksToBounds = false
-            }
-            
-            button.addSubview(leftImageView)
-            
-            leftImageView.snp.makeConstraints {
-                $0.leading.equalTo(button.snp.trailing).inset(24)
-                $0.centerY.equalTo(button.snp.centerY)
-                $0.width.height.equalTo(16)
-            }
-        }
-        
-        buttonStackView.do {
-            $0.axis = .horizontal
-            $0.spacing = 8
-            $0.isUserInteractionEnabled = true
+        filteringFloatingButton.do {
+            $0.setImage(.icFilteringNormal, for: .normal)
+            $0.setImage(.icFilteringSelected, for: .selected)
         }
         
         targetButton.do {
             $0.setImage(.btnTarget, for: .normal)
-            
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOpacity = 0.1
             $0.layer.shadowOffset = CGSize(width: 0, height: 4)
