@@ -4,10 +4,19 @@
 <dict>
 	<key>Amplitude</key>
 	<string>$(Amplitude)</string>
-    <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>Hankkijogbo</string>
+			</array>
+		</dict>
+	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NMFClientId</key>
