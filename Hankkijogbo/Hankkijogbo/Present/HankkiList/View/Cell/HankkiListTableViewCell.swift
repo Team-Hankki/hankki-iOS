@@ -33,25 +33,25 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     
     // MARK: - UI Properties
     
-    private let cellStackView = UIStackView()
+    private let cellStackView: UIStackView = UIStackView()
     
-    private let thumbnailView = UIImageView()
-    private let infoStackView = UIStackView()
+    private let thumbnailView: UIImageView = UIImageView()
+    private let infoStackView: UIStackView = UIStackView()
     
-    private let categoryLabel = UILabel()
+    private let categoryLabel: UILabel = UILabel()
     
-    private let titleLabel = UILabel()
-    private let titleStaciView = UIStackView()
-
-    private let heartView = UIView()
-    private let heartIcon = UIImageView()
-    private let heartCountLabel  = UILabel()
+    private let titleLabel: UILabel = UILabel()
+    private let titleStackView: UIStackView = UIStackView()
     
-    private let priceView = UIView()
-    private let priceTitleLabel = UILabel()
-    private let priceLabel  = UILabel()
+    private let heartView: UIView = UIView()
+    private let heartIcon: UIImageView = UIImageView()
+    private let heartCountLabel: UILabel = UILabel()
     
-    private let heartButton = UIButton()
+    private let priceView: UIView = UIView()
+    private let priceTitleLabel: UILabel = UILabel()
+    private let priceLabel: UILabel = UILabel()
+    
+    private let heartButton: UIButton = UIButton()
     
     // MARK: - Life Cycle
     
@@ -66,7 +66,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     }
     
     // MARK: - setup UI
-
+    
     override func setupStyle() {
         
         thumbnailView.do {
@@ -87,7 +87,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
             $0.alignment = .leading
         }
         
-        titleStaciView.do {
+        titleStackView.do {
             $0.axis = .horizontal
             $0.alignment = .center
             $0.spacing = 6
@@ -129,15 +129,15 @@ final class HankkiListTableViewCell: BaseTableViewCell {
     override func setupHierarchy() {
         self.contentView.addSubviews(thumbnailView, cellStackView)
         cellStackView.addArrangedSubviews(infoStackView, heartButton)
-        infoStackView.addArrangedSubviews(categoryLabel, titleStaciView, priceView)
+        infoStackView.addArrangedSubviews(categoryLabel, titleStackView, priceView)
         
-        titleStaciView.addArrangedSubviews(titleLabel, heartView)
+        titleStackView.addArrangedSubviews(titleLabel, heartView)
         heartView.addSubviews(heartIcon, heartCountLabel)
         priceView.addSubviews(priceTitleLabel, priceLabel)
     }
     
     override func setupLayout() {
-  
+        
         thumbnailView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(15)
             $0.verticalEdges.equalToSuperview().inset(12)
@@ -188,7 +188,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 extension HankkiListTableViewCell {
     func dataBind(_ data: Model, isFinal: Bool, isLikeButtonDisable: Bool) {
         self.data = data
-    
+        
         categoryLabel.text = data.category
         titleLabel.text = data.name
         
