@@ -158,7 +158,7 @@ extension HankkiListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 104
+        return 102
     }
     
     /// 나의 족보 리스트 헤더 세팅

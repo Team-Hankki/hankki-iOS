@@ -279,7 +279,7 @@ enum StringLiterals {
         }
         
         static let moreButton = "식당 구경하러 가기"
-        static let average = "평균"
+        static let lowest = "최저"
         
         enum EmptyView {
             static let myZip = "나의 족보에\n식당을 추가해보세요"
