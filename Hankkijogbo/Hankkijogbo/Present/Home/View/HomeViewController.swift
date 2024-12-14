@@ -170,10 +170,18 @@ extension HomeViewController {
         resetAllFilters()
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
-    
+}
+
+private extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
+    }
+    
+    @objc func filteringBottomSheet() {
+        let filteringBottomSheet = FilteringBottomSheetViewController()
+        filteringBottomSheet.modalPresentationStyle = .overFullScreen
+        self.present(filteringBottomSheet, animated: true, completion: nil)
     }
     
     @objc func getNotificationForMyZipList(_ notification: Notification) {
