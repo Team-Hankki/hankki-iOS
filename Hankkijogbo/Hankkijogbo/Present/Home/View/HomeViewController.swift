@@ -172,7 +172,7 @@ extension HomeViewController {
     }
 }
 
-private extension HomeViewController {
+ extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)

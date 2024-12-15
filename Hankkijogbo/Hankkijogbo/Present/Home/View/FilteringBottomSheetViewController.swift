@@ -12,7 +12,11 @@ final class FilteringBottomSheetViewController: BaseViewController {
     // MARK: - Properties
     
     private var defaultHeight: CGFloat = 266
+    private let viewModel = HomeViewModel()
     
+    private let filteringTitleList = ["가격대", "정렬"]
+    private var priceData: [GetPriceFilterData] = []
+    private var sortData: [GetSortOptionFilterData] = []
     
     // MARK: - Components
     
@@ -30,8 +34,6 @@ final class FilteringBottomSheetViewController: BaseViewController {
     
     private let applyButton: UIButton = UIButton()
     
-    // MARK: - Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -46,6 +48,10 @@ final class FilteringBottomSheetViewController: BaseViewController {
     }
     
     override func setupLayout() {
+        self.view.snp.makeConstraints {
+            $0.height.equalTo(defaultHeight)
+        }
+        
         priceTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(28)
             $0.leading.equalToSuperview().inset(22)
@@ -71,13 +77,20 @@ final class FilteringBottomSheetViewController: BaseViewController {
             $0.height.equalTo(68)
             $0.width.equalTo(UIScreen.main.bounds.width)
         }
+        
+        [entireChipButton, less6000ChipButton, more6000ChipButton, latestChipButton, lowestChipButton, recommendChipButton].forEach {
+            $0.snp.makeConstraints {
+                $0.height.equalTo(30)
+            }
+        }
     }
     
     override func setupStyle() {
-        [priceTitleLabel, sortTitleLabel].forEach {
-            $0.do {
+        [priceTitleLabel, sortTitleLabel].enumerated().forEach { index, label in
+            label.do {
                 $0.font = .setupPretendardStyle(of: .body4)
                 $0.textColor = .gray850
+                $0.text = filteringTitleList[index]
             }
         }
         
@@ -110,6 +123,8 @@ private extension FilteringBottomSheetViewController {
             $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
             $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
             $0.titleLabel?.textColor = .gray600
+            $0.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+            $0.sizeToFit()
         }
     }
     
@@ -119,6 +134,8 @@ private extension FilteringBottomSheetViewController {
             $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
             $0.titleLabel?.textColor = .red500
             $0.backgroundColor = .red100
+            $0.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+            $0.sizeToFit()
         }
     }
 }
