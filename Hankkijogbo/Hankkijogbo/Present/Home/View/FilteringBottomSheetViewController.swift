@@ -37,6 +37,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        bindViewModels()
     }
     
     override func setupHierarchy() {
@@ -136,6 +137,52 @@ private extension FilteringBottomSheetViewController {
             $0.backgroundColor = .red100
             $0.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
             $0.sizeToFit()
+        }
+    }
+}
+
+private extension FilteringBottomSheetViewController {
+    func bindViewModels() {
+        viewModel.getPriceCategoryFilterAPI { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                DispatchQueue.main.async {
+                    self.priceData = self.viewModel.priceFilters
+                    print("PRICE 🚗", self.priceData)
+                    if let entire = self.priceData.first(where: { $0.tag == nil}) {
+                        self.entireChipButton.setTitle("전체", for: .normal)
+                    }
+                    
+                    if let less6000 = self.priceData.first(where: { $0.tag == "K6" }) {
+                        self.less6000ChipButton.setTitle(less6000.name, for: .normal)
+                    }
+                    
+                    if let more6000 = self.priceData.first(where: { $0.tag == "K8" }){
+                        self.more6000ChipButton.setTitle(more6000.name, for: .normal)
+                    }
+                }
+            }
+        }
+        
+        viewModel.getSortOptionFilterAPI { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                DispatchQueue.main.async {
+                    self.sortData = self.viewModel.sortOptions
+                    print("SORT 🚗", self.sortData)
+                    if let latest = self.sortData.first(where: { $0.tag == "LATEST" }) {
+                        self.latestChipButton.setTitle(latest.name, for: .normal)
+                    }
+                    
+                    if let recommend = self.sortData.first(where: { $0.tag == "RECOMMENDED" }) {
+                        self.recommendChipButton.setTitle(recommend.name, for: .normal)
+                    }
+                    
+                    if let lowestPrice = self.sortData.first(where: { $0.tag == "LOWESTPRICE" }) {
+                        self.lowestChipButton.setTitle(lowestPrice.name, for: .normal)
+                    }
+                }
+            }
         }
     }
 }
