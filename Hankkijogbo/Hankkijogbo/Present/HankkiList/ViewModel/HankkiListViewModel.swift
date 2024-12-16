@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
+import KakaoSDKCommon
+import KakaoSDKShare
+import KakaoSDKTemplate
+
 final class HankkiListViewModel {
-    
+
     weak var delegate: NetworkResultDelegate?
     
     var reloadCollectionView: (() -> Void)?
@@ -24,11 +28,12 @@ final class HankkiListViewModel {
 
 extension HankkiListViewModel {
     
-    func getZipDetail(zipId: Int) {
-        NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
+    func getZipDetail(zipID: Int) {
+        NetworkService.shared.zipService.getZipList(zipId: zipID) { result in
             
             result.handleNetworkResult(delegate: self.delegate) { response in
-                self.zipInfo = ZipHeaderTableView.Model(name: UserDefaults.standard.getNickname(),
+                self.zipInfo = ZipHeaderTableView.Model(id: zipID,
+                                                        name: UserDefaults.standard.getNickname(),
                                                         title: response.data.title,
                                                         details: response.data.details)
                 
@@ -97,6 +102,38 @@ extension HankkiListViewModel {
                 }
                 
                 self.compareLikedHnakkiList(currentHankkiList)
+            }
+        }
+    }
+    
+    func shareZip() {
+        let templeteID: Int64 = 115383
+        
+        
+        let templetArgs: [String:String] = ["IMAGE_URL": hankkiList[0].imageURL,
+                                            "ZIP_ID": String(zipInfo?.id ?? 0),
+                                            "NAME": hankkiList[0].name,
+                                            "SENDER": "서현"]
+        
+        // 카카오톡이 있는지 확인합니다.
+        if ShareApi.isKakaoTalkSharingAvailable() {
+            ShareApi.shared.shareCustom(templateId: templeteID, templateArgs: templetArgs) { sharingResult, error in
+                if let error = error {
+                    print("error : \(error)")
+                } else {
+                    print("sharing is success")
+                    guard let sharingResult else { return }
+                    UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                }
+            }
+        } else {
+            let url = "itms-apps://itunes.apple.com/app/362057947"
+            if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
             }
         }
     }

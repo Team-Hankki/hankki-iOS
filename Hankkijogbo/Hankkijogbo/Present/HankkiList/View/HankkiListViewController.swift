@@ -52,7 +52,7 @@ final class  HankkiListViewController: BaseViewController, NetworkResultDelegate
         
         setupNavigationBar()
         if type == .myZip {
-            viewModel.getZipDetail(zipId: zipId ?? 0)
+            viewModel.getZipDetail(zipID: zipId ?? 0)
         } else {
             // detail같은, 이전 뷰에서 좋아요가 취소되는 경우를 고려합니다.
             if type == .liked && !viewModel.hankkiList.isEmpty {
@@ -96,7 +96,7 @@ final class  HankkiListViewController: BaseViewController, NetworkResultDelegate
 }
 
 private extension HankkiListViewController {
-    private func bindViewModel() {
+    private func bindViewModel() {        
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
                 self?.emptyView.isHidden = (self?.viewModel.hankkiList.count != 0)
@@ -104,7 +104,7 @@ private extension HankkiListViewController {
             }
             if self?.type == .myZip && !(self?.isHeaderSetting ?? false) {
                 guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
-                headerView.dataBind(self?.viewModel.zipInfo ?? nil)
+                headerView.dataBind(self?.viewModel.zipInfo ?? nil, viewModel: self!.viewModel)
                 self?.isHeaderSetting = true
             }
         }

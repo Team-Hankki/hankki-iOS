@@ -9,6 +9,7 @@ import UIKit
 
 extension ZipHeaderTableView {
     struct Model {
+        let id: Int
         let name: String
         let title: String
         let details: [String]
@@ -19,6 +20,7 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
+    private var viewModel: HankkiListViewModel?
     var showAlert: ((String) -> Void)?
     
     // MARK: - UI Properties
@@ -161,9 +163,7 @@ private extension ZipHeaderTableView {
     }
     
     @objc func shareButtonDidTap() {
-        UIApplication.showAlert(titleText: StringLiterals.Alert.DevelopShare.title,
-                                subText: StringLiterals.Alert.DevelopShare.sub,
-                                primaryButtonText: StringLiterals.Alert.DevelopShare.primaryButton)
+        viewModel?.shareZip()
     }
     
     func setupTagStackView(_ tagList: [String]) {
@@ -203,7 +203,8 @@ private extension ZipHeaderTableView {
 }
 
 extension ZipHeaderTableView {
-    func dataBind(_ data: Model?) {
+    func dataBind(_ data: Model?, viewModel: HankkiListViewModel) {
+        self.viewModel = viewModel
         headerLabel.text = data?.title
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name

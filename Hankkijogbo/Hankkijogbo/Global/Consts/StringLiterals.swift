@@ -291,6 +291,7 @@ enum StringLiterals {
     enum ExternalLink {
         static let OneonOne = "https://tally.so/r/mO0oJY"
         static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let LinkTree = "https://link.inpock.co.kr/hankkilink?fbclid=PAZXh0bgNhZW0CMTEAAabp7jPfQGVtGfHXOSEA-urXPNPbog0a0Rco43_a-zsdcxQOvFqVXQoqsXQ_aem_gyGO3bZoFAlf0tMF7QTqKg"
     }
     
     enum Onboarding {
