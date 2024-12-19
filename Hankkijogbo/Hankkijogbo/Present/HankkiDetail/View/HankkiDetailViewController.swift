@@ -13,11 +13,6 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     
     let hankkiId: Int
     var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
-    var reportOptionArray: [String] = [
-        StringLiterals.HankkiDetail.optionDisappear,
-        StringLiterals.HankkiDetail.optionIncreasePrice,
-        StringLiterals.HankkiDetail.optionImproperReport
-    ]
     
     // MARK: - UI Components
     
@@ -26,6 +21,7 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     private let lightGrayBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
     private let thumbnailImageView: UIImageView = UIImageView()
+    private let differentInfoView: DifferentInfoView = DifferentInfoView()
     private let topBlackGradientImageView: UIImageView = UIImageView()
     
     // MARK: - Life Cycle
@@ -71,7 +67,8 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         contentView.addSubviews(
             lightGrayBackgroundView,
             thumbnailImageView,
-            backButton
+            backButton,
+            differentInfoView
         )
         thumbnailImageView.addSubview(topBlackGradientImageView)
     }
@@ -81,26 +78,36 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
             $0.top.equalTo(self.view).offset(-UIApplication.getStatusBarHeight())
             $0.horizontalEdges.bottom.equalToSuperview()
         }
+        
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(UIScreen.getDeviceWidth())
         }
+        
         thumbnailImageView.snp.makeConstraints {
             $0.top.width.equalToSuperview()
             $0.height.equalTo(235)
         }
+        
         topBlackGradientImageView.snp.makeConstraints {
             $0.top.equalTo(self.scrollView)
             $0.size.equalTo(thumbnailImageView)
         }
+        
         lightGrayBackgroundView.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
+        
         backButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(48.5)
             $0.leading.equalToSuperview().inset(7)
             $0.size.equalTo(40)
+        }
+        
+        differentInfoView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(15)
+            $0.bottom.equalTo(thumbnailImageView.snp.bottom).offset(-12)
         }
     }
     
@@ -108,12 +115,15 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         view.do {
             $0.backgroundColor = .gray50
         }
+        
         scrollView.do {
             $0.backgroundColor = .clear
         }
+        
         lightGrayBackgroundView.do {
             $0.backgroundColor = .gray50
         }
+        
         backButton.do {
             $0.setImage(.btnBackWhite, for: .normal)
         }
