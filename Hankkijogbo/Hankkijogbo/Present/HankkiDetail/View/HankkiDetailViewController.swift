@@ -87,7 +87,7 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         }
         thumbnailImageView.snp.makeConstraints {
             $0.top.width.equalToSuperview()
-            $0.height.equalTo(250)
+            $0.height.equalTo(235)
         }
         topBlackGradientImageView.snp.makeConstraints {
             $0.top.equalTo(self.scrollView)
@@ -98,9 +98,9 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(UIApplication.getStatusBarHeight() + 15)
-            $0.leading.equalToSuperview().inset(20)
-            $0.size.equalTo(20)
+            $0.top.equalToSuperview().inset(48.5)
+            $0.leading.equalToSuperview().inset(7)
+            $0.size.equalTo(40)
         }
     }
     
