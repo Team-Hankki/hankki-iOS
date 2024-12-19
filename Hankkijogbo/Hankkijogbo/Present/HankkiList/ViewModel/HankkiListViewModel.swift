@@ -109,9 +109,8 @@ extension HankkiListViewModel {
     func shareZip() {
         let templeteID: Int64 = 115383
         
-        
         let templetArgs: [String:String] = ["IMAGE_URL": hankkiList[0].imageURL,
-                                            "ZIP_ID": String(zipInfo?.id ?? 0),
+                                            "SHARED_ZIP_ID": String(zipInfo?.id ?? 0),
                                             "NAME": hankkiList[0].name,
                                             "SENDER": "서현"]
         

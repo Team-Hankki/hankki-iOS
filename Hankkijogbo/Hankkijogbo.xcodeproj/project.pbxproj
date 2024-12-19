@@ -84,6 +84,7 @@
 		8659381E2D10262800A07E7A /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 8659381D2D10262800A07E7A /* KakaoSDKCommon */; };
 		865938202D10262800A07E7A /* KakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8659381F2D10262800A07E7A /* KakaoSDKShare */; };
 		865938222D10262800A07E7A /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 865938212D10262800A07E7A /* KakaoSDKTemplate */; };
+		865938242D14939700A07E7A /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865938232D14939700A07E7A /* URL+.swift */; };
 		865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D012C44E9E0009D9BEA /* MoreButton.swift */; };
 		865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */; };
 		865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D59C52C7B72C9004CC517 /* FullLoadingView.swift */; };
@@ -311,6 +312,7 @@
 		864FA91B2C3D63400051EA36 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
 		865826052C4170BE00265401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		865826072C41762600265401 /* Hankkijogbo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hankkijogbo.entitlements; sourceTree = "<group>"; };
+		865938232D14939700A07E7A /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		865C3D012C44E9E0009D9BEA /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 		865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFooterTableView.swift; sourceTree = "<group>"; };
 		865C3D052C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 		83DBEDA72C2565840042BA48 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				865938232D14939700A07E7A /* URL+.swift */,
 				83DBEDC72C256AD00042BA48 /* NSObject+.swift */,
 				A240EA5A2C459DEA000FF458 /* CATransition+.swift */,
 				A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */,
@@ -1924,6 +1927,7 @@
 				8668D24A2C7DE0CA001CBCA0 /* SetupAmplitude.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
+				865938242D14939700A07E7A /* URL+.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,
 				A2EC33AD2C47166500809840 /* ReportTargetType.swift in Sources */,
 				A23D119A2C4811790023480C /* HankkiDebouncer.swift in Sources */,

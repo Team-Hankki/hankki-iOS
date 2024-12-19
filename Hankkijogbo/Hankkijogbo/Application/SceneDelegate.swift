@@ -16,8 +16,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = SplashViewController()
         window?.makeKeyAndVisible()
+        
+        // TODO: - 로그인 확인 여부 로직 필요
+        // 딥링크로 앱이 시작된 경우 처리합니다
+        if let urlContext = connectionOptions.urlContexts.first {
+            print("❤️ 딥링크로 앱이 시작된 경우 처리합니다")
+            handleDeeplink(urlContext.url)
+        } else {
+            window?.rootViewController = SplashViewController()
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -36,6 +44,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
     }
     
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // TODO: - 로그인 확인 여부 로직 필요
+        
+        // 앱이 실행중일 때, 딥링크로 접속했을 경우 처리를 진행합니다.
+        print("❤️ 앱이 시작중일때, 딥링크로 접속했을 경우 처리를 진행합니다.")
+        guard let urlContext = URLContexts.first else { return }
+        handleDeeplink(urlContext.url)
+    }
 }
 
 private extension SceneDelegate {
@@ -44,9 +60,9 @@ private extension SceneDelegate {
     func checkAppleAccountStatus() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let userId: String = UserDefaults.standard.getUserId()
-
+        
         if userId.isEmpty { return }
-
+        
         appleIDProvider.getCredentialState(forUserID: userId) { (credentialState, _) in
             DispatchQueue.main.async {
                 switch credentialState {
@@ -67,6 +83,41 @@ private extension SceneDelegate {
         
         if !accessToken.isEmpty {
             getMe()
+        }
+    }
+    
+    /// 딥링크의 URL을 처리합니다.
+    private func handleDeeplink(_ url: URL) {
+        guard url.scheme == "kakao\(Config.Kakao)" else { return }
+        
+        // 카카오 메세지 템플릿을 통해 접속한 경우
+        if url.host == "kakaolink" {
+            let queryParameters = url.getQueryParameters()
+            
+            if let zipID = queryParameters["sharedZipID"] {
+                navigateToSharedZipDetails(zipID: zipID)
+            } else {
+                print("❌ 카카오 메세지 템플릿을 통한 잘못된 딥링크 형식")
+            }
+        } else {
+            print("❌ 존제하지 않는 딥링크 형식")
+        }
+    }
+    
+    /// 공유받은 족보 상세 페이지로 이동
+    private func navigateToSharedZipDetails(zipID: String) {
+        
+        if let id = Int(zipID) {
+            let tabBarController = TabBarController()
+            tabBarController.selectedIndex = 2
+            let navigationController = HankkiNavigationController(rootViewController: tabBarController)
+            
+            window?.rootViewController = navigationController
+            navigationController.pushViewController(HankkiListViewController(.myZip, zipId: id), animated: false)
+            
+        } else {
+            print("❌ 공유받은 족보의 ID가 잘못된 형식입니다. - \(zipID)")
+            return
         }
     }
 }
