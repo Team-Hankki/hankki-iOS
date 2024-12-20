@@ -128,7 +128,7 @@ extension DropDownView: UITableViewDelegate, UITableViewDataSource {
         let item = data[indexPath.row]
         
         if let priceFilter = item as? GetPriceFilterData {
-            delegate?.dropDownView(self, didSelectItem: priceFilter.tag, buttonType: buttonType)
+            delegate?.dropDownView(self, didSelectItem: priceFilter.tag ?? "", buttonType: buttonType)
         } else if let sortOption = item as? GetSortOptionFilterData {
             delegate?.dropDownView(self, didSelectItem: sortOption.tag, buttonType: buttonType)
         }
