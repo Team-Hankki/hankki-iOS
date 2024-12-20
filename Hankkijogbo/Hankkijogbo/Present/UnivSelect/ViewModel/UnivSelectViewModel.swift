@@ -41,7 +41,7 @@ extension UnivSelectViewModel {
     func postMeUniversity(isNull: Bool = false) {
         var currentUniversity: UniversityModel
         if isNull {
-            currentUniversity = UniversityModel(id: nil, name: StringLiterals.Home.allUniversity, longitude: 0.0, latitude: 0.0)
+            currentUniversity = UniversityModel(id: nil, name: StringLiterals.Home.entire, longitude: 0.0, latitude: 0.0)
         } else {
             currentUniversity = universityList[currentUnivIndex]
         }

@@ -149,7 +149,7 @@ extension HomeViewController {
     }
     
     private func setupNavigationBar(mainTitle: String? = nil) {
-        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.allUniversity
+        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.entire
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
@@ -178,10 +178,18 @@ extension HomeViewController {
         resetAllFilters()
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
-    
+}
+
+ extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
+    }
+    
+    @objc func filteringBottomSheet() {
+        let filteringBottomSheet = FilteringBottomSheetViewController()
+        filteringBottomSheet.modalPresentationStyle = .overFullScreen
+        self.present(filteringBottomSheet, animated: true, completion: nil)
     }
     
     @objc func getNotificationForMyZipList(_ notification: Notification) {
@@ -314,7 +322,7 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         guard let manager = locationManager else { return }
         manager.startUpdatingLocation()
         
-        setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
+        setupNavigationBar(mainTitle: StringLiterals.Home.entire)
         fetchAllHankkiInfo()
     }
     
