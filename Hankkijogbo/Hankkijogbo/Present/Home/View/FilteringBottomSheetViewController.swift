@@ -152,11 +152,11 @@ private extension FilteringBottomSheetViewController {
                         self.entireChipButton.setTitle(StringLiterals.Home.entire, for: .normal)
                     }
                     
-                    if let less6000 = self.priceData.first(where: { $0.tag == "K6" }) {
+                    if let less6000 = self.priceData.first(where: { $0.tag == StringLiterals.FilteringTag.less6000 }) {
                         self.less6000ChipButton.setTitle(less6000.name, for: .normal)
                     }
                     
-                    if let more6000 = self.priceData.first(where: { $0.tag == "K8" }){
+                    if let more6000 = self.priceData.first(where: { $0.tag == StringLiterals.FilteringTag.more6000 }){
                         self.more6000ChipButton.setTitle(more6000.name, for: .normal)
                     }
                 }
@@ -168,15 +168,15 @@ private extension FilteringBottomSheetViewController {
             if success {
                 DispatchQueue.main.async {
                     self.sortData = self.viewModel.sortOptions
-                    if let latest = self.sortData.first(where: { $0.tag == "LATEST" }) {
+                    if let latest = self.sortData.first(where: { $0.tag == StringLiterals.FilteringTag.latest }) {
                         self.latestChipButton.setTitle(latest.name, for: .normal)
                     }
                     
-                    if let recommend = self.sortData.first(where: { $0.tag == "RECOMMENDED" }) {
+                    if let recommend = self.sortData.first(where: { $0.tag == StringLiterals.FilteringTag.recommended }) {
                         self.recommendChipButton.setTitle(recommend.name, for: .normal)
                     }
                     
-                    if let lowestPrice = self.sortData.first(where: { $0.tag == "LOWESTPRICE" }) {
+                    if let lowestPrice = self.sortData.first(where: { $0.tag == StringLiterals.FilteringTag.lowestPrice }) {
                         self.lowestChipButton.setTitle(lowestPrice.name, for: .normal)
                     }
                 }

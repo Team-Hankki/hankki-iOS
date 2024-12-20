@@ -297,4 +297,12 @@ enum StringLiterals {
     enum Onboarding {
         static let guest = "둘러보기"
     }
+    
+    enum FilteringTag {
+        static let less6000 = "K6"
+        static let more6000 = "K8"
+        static let latest = "LATEST"
+        static let recommended = "RECOMMENDED"
+        static let lowestPrice = "LOWESTPRICE"
+    }
 }
