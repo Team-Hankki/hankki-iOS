@@ -133,7 +133,7 @@ private extension FilteringBottomSheetViewController {
         button.do {
             $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .red500)
             $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
-            $0.titleLabel?.textColor = .red500
+            $0.setTitleColor(.red500, for: .selected)
             $0.backgroundColor = .red100
             $0.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
             $0.sizeToFit()
