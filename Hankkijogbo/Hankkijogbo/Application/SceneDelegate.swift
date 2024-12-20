@@ -95,7 +95,7 @@ private extension SceneDelegate {
             let queryParameters = url.getQueryParameters()
             
             if let zipID = queryParameters["sharedZipID"] {
-                navigateToSharedZipDetails(zipID: zipID)
+                presentSharedZipDetails(zipID: zipID)
             } else {
                 print("❌ 카카오 메세지 템플릿을 통한 잘못된 딥링크 형식")
             }
@@ -105,7 +105,7 @@ private extension SceneDelegate {
     }
     
     /// 공유받은 족보 상세 페이지로 이동
-    private func navigateToSharedZipDetails(zipID: String) {
+    private func presentSharedZipDetails(zipID: String) {
         
         if let id = Int(zipID) {
             let tabBarController = TabBarController()

@@ -22,6 +22,7 @@ final class CreateZipViewController: BaseViewController {
     private let type: CreateZipViewControllerType
     private let isBottomSheetOpen: Bool
     private let storeId: Int?
+    private let zipId: Int?
     
     private let viewModel: CreateZipViewModel = CreateZipViewModel()
     
@@ -49,9 +50,10 @@ final class CreateZipViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(isBottomSheetOpen: Bool, storeId: Int? = nil, type: CreateZipViewControllerType = .myZip) {
+    init(isBottomSheetOpen: Bool, storeId: Int? = nil, zipId: Int? = nil, type: CreateZipViewControllerType = .myZip) {
         self.isBottomSheetOpen = isBottomSheetOpen
         self.storeId = storeId
+        self.zipId = zipId
         self.type = type
         super.init()
     }
@@ -175,7 +177,16 @@ private extension CreateZipViewController {
         
         let data = PostZipRequestDTO(title: title, details: tagList)
         
-        viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+        switch type {
+        case .sharedZip:
+            // 공유된 족보를 내 족보에 추가
+            viewModel.postSharedZip(data, zipId: zipId!, onConflict: resetTitleTextField, completion: presentMyZipListViewController)
+            
+        case .myZip:
+            // 내 족보를 새로 만들기
+            viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+        }
+        
     }
     
     // textField 값의 유효성 검사
@@ -204,6 +215,19 @@ private extension CreateZipViewController {
                 if let id = self.storeId {
                     rootViewController.presentMyZipListBottomSheet(id: id)
                 }
+            }
+        }
+    }
+    
+    func presentMyZipListViewController() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                let tabBarController = TabBarController()
+                tabBarController.selectedIndex = 2
+                let navigationController = HankkiNavigationController(rootViewController: tabBarController)
+                
+                window.rootViewController = navigationController
+                navigationController.pushViewController(ZipListViewController(), animated: false)
             }
         }
     }

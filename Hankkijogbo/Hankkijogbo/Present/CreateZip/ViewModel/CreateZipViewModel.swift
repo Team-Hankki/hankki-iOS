@@ -18,7 +18,7 @@ extension CreateZipViewModel {
             result.handleNetworkResult()
         }
     }
-
+    
     func postZip(_ data: PostZipRequestDTO,
                  onConflict: @escaping(() -> Void),
                  completion: @escaping (() -> Void)) {
@@ -30,7 +30,27 @@ extension CreateZipViewModel {
                                         primaryButtonText: StringLiterals.Alert.CreateZipConflict.primaryButton,
                                         primaryButtonHandler: onConflict
                 )
-                             
+                
+            default:
+                result.handleNetworkResult { _ in
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func postSharedZip(_ data: PostZipRequestDTO, zipId: Int,
+                       onConflict: @escaping(() -> Void),
+                       completion: @escaping (() -> Void)) {
+        NetworkService.shared.zipService.postSharedZip(zipId: zipId, requestBody: data) { result in
+            switch result {
+            case .conflict:
+                UIApplication.showAlert(titleText: StringLiterals.Alert.CreateZipConflict.title,
+                                        subText: StringLiterals.Alert.CreateZipConflict.sub,
+                                        primaryButtonText: StringLiterals.Alert.CreateZipConflict.primaryButton,
+                                        primaryButtonHandler: onConflict
+                )
+                
             default:
                 result.handleNetworkResult { _ in
                     completion()

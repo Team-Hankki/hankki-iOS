@@ -129,7 +129,7 @@ private extension ZipDetailViewController {
     func presentAddZipViewController() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false, type: .sharedZip)
+            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false, zipId: zipID, type: .sharedZip)
             rootViewController.pushViewController(addZipViewController, animated: true)
         }
     }

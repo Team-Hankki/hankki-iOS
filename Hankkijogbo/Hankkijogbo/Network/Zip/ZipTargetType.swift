@@ -13,6 +13,7 @@ enum ZipTargetType {
     case getZipList(storedId: Int)
     case getZipDetail(zipId: Int)
     case postZip(requestBody: PostZipRequestDTO)
+    case postSharedZip(zipId: Int, requestBody: PostZipRequestDTO)
     case postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO)
     case postHankkiToZip(requestBody: PostHankkiToZipRequestDTO)
     case deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO)
@@ -46,6 +47,7 @@ extension ZipTargetType: BaseTargetType {
         case .getZipList(let storeId): return storeId
         case .getZipDetail: return .none
         case .postZip(let requestBody): return requestBody
+        case .postSharedZip(zipId: _, requestBody: let requestBody): return requestBody
         case .postZipBatchDelete(let requestBody): return requestBody
         case .postHankkiToZip: return .none
         case .deleteZipToHankki: return .none
@@ -61,6 +63,8 @@ extension ZipTargetType: BaseTargetType {
             return utilPath.rawValue + "/\(zipId)"
         case .postZip:
             return utilPath.rawValue
+        case .postSharedZip(zipId: let zipId, requestBody: _):
+            return utilPath.rawValue + "/\(zipId)/shared"
         case .postZipBatchDelete:
             return utilPath.rawValue + "/batch-delete"
         case .postHankkiToZip(let requestBody):
@@ -76,7 +80,7 @@ extension ZipTargetType: BaseTargetType {
         switch self {
         case .getZipList, .getZipDetail, .getMyZipList:
             return .get
-        case .postZip, .postZipBatchDelete, .postHankkiToZip:
+        case .postZip, .postSharedZip, .postZipBatchDelete, .postHankkiToZip:
             return .post
         case .deleteZipToHankki: 
             return .delete
@@ -86,7 +90,7 @@ extension ZipTargetType: BaseTargetType {
     var loadingViewType: LoadingViewType {
         switch self {
         case .getZipList, .getMyZipList, .getZipDetail: return .fullView
-        case .postZip, .postZipBatchDelete, .deleteZipToHankki: return .submit
+        case .postZip, .postSharedZip, .postZipBatchDelete, .deleteZipToHankki: return .submit
         default: return .none
         }
     }

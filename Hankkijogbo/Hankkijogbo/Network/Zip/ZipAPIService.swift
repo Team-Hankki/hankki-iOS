@@ -17,12 +17,13 @@ protocol ZipAPIServiceProtocol {
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<Void>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
+    func postSharedZip(zipId: Int, requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<Void>) -> Void)
     func postHankkiToZip(requestBody: PostHankkiToZipRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
 }
 
 final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
-    
+
     private let provider = MoyaProvider<ZipTargetType>(plugins: [MoyaPlugin.shared])
     
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<Void>) -> Void) {
@@ -88,6 +89,21 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
     
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
         provider.request(.postZip(requestBody: requestBody)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func postSharedZip(zipId: Int, requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void) {
+        provider.request(.postSharedZip(zipId: zipId, requestBody: requestBody)) { result in
             switch result {
             case .success(let response):
                 let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
