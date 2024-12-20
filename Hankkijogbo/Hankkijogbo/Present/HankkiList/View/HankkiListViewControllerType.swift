@@ -7,34 +7,13 @@
 
 import UIKit
 
-extension HankkiListViewController {
+extension BaseHankkiListViewController {
     enum HankkiListViewControllerType {
         case myZip
+        case sharedZip
         case reported
         case liked
-        
-        var navigationColor: UIColor {
-            switch self {
-            case .myZip:
-                .red500
-            case .reported, .liked:
-                .white
-            }
-        }
-        var headrViewHeight: CGFloat {
-            switch self {
-            case .myZip:
-                UIView.convertByAspectRatioHeight(
-                    UIScreen.getDeviceWidth() - 22 * 2,
-                    width: 329,
-                    height: 231
-                ) + 22
-                
-            case .reported, .liked:
-                0
-            }
-        }
-        
+ 
         var navigationTitle: String {
             switch self {
             case .myZip:
@@ -43,6 +22,8 @@ extension HankkiListViewController {
                 StringLiterals.Mypage.HankkiList.reported
             case .liked:
                 StringLiterals.Mypage.HankkiList.liked
+            case .sharedZip:
+                <#code#>
             }
         }
         

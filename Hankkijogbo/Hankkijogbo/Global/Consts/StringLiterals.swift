@@ -287,6 +287,7 @@ enum StringLiterals {
             static let liked = "아직 좋아요 누른 식당이 없어요"
         }
     }
+
     
     enum ExternalLink {
         static let OneonOne = "https://tally.so/r/mO0oJY"

@@ -113,7 +113,7 @@ private extension SceneDelegate {
             let navigationController = HankkiNavigationController(rootViewController: tabBarController)
             
             window?.rootViewController = navigationController
-            navigationController.pushViewController(HankkiListViewController(.myZip, zipId: id), animated: false)
+            navigationController.pushViewController(ZipDetailViewController(zipID: id), animated: false)
             
         } else {
             print("❌ 공유받은 족보의 ID가 잘못된 형식입니다. - \(zipID)")

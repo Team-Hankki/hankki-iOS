@@ -324,7 +324,7 @@ extension HankkiDetailViewController {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
-                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipID: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }
