@@ -293,8 +293,8 @@ enum StringLiterals {
         static let navigation = "공유받은 족보"
         static let addButton = "내 족보에 추가하기"
         
-        static let addTitle = "공유받은 족보의\n새로운 이름을 지어주세요"
-        static let addDescription = "공유받은 족보는 내 마음대로 편집할 수 있어요!"
+        static let viewTitle = "공유받은 족보의\n새로운 이름을 지어주세요"
+        static let viewDescription = "공유받은 족보는 내 마음대로 편집할 수 있어요!"
         static let submitButton = "추가하기"
     }
 

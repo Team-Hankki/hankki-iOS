@@ -59,7 +59,7 @@ final class ZipDetailViewController: BaseHankkiListViewController {
             
             if !(self?.isHeaderSetting ?? false) {
                 guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
-                headerView.dataBind(self?.viewModel.zipInfo ?? nil, viewModel: self!.viewModel)
+                headerView.dataBind(self?.viewModel.zipInfo ?? nil, viewModel: self!.viewModel, isShareButtonHidden: self?.type == .sharedZip)
                 self?.isHeaderSetting = true
             }
         }
@@ -129,7 +129,7 @@ private extension ZipDetailViewController {
     func presentAddZipViewController() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false)
+            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false, type: .sharedZip)
             rootViewController.pushViewController(addZipViewController, animated: true)
         }
     }

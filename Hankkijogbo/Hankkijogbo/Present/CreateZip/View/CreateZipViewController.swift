@@ -19,6 +19,7 @@ final class CreateZipViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let type: CreateZipViewControllerType
     private let isBottomSheetOpen: Bool
     private let storeId: Int?
     
@@ -39,18 +40,19 @@ final class CreateZipViewController: BaseViewController {
     }
     
     private lazy var submitButton: MainButton = MainButton(
-        titleText: StringLiterals.CreateZip.submitButton,
+        titleText: type.submitButtonText,
         isValid: false,
         buttonHandler: submitButtonDidTap
     )
     
-    private let hankkiAccessoryView: HankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.CreateZip.submitButton)
+    private lazy var hankkiAccessoryView: HankkiAccessoryView = HankkiAccessoryView(text: type.submitButtonText)
     
     // MARK: - Life Cycle
     
-    init(isBottomSheetOpen: Bool, storeId: Int? = nil) {
+    init(isBottomSheetOpen: Bool, storeId: Int? = nil, type: CreateZipViewControllerType = .myZip) {
         self.isBottomSheetOpen = isBottomSheetOpen
         self.storeId = storeId
+        self.type = type
         super.init()
     }
     
@@ -76,18 +78,19 @@ final class CreateZipViewController: BaseViewController {
     
     override func setupStyle() {
         viewTitleLabel.do {
+            $0.numberOfLines = 0
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h1,
-                withText: StringLiterals.CreateZip.viewTitle,
+                withText: type.viewTitle,
                 color: .gray900
             )
         }
         
         descriptionLabel.do {
-            $0.numberOfLines = 2
+            $0.numberOfLines = 0
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: StringLiterals.CreateZip.viewDescription,
+                withText: type.viewDescription,
                 color: .gray400
             )
         }

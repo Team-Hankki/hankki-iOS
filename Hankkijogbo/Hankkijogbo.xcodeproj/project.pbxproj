@@ -97,6 +97,7 @@
 		8668D24C2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */; };
 		866DFE0A2D1548BD006EE662 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE092D1548BD006EE662 /* HankkiListViewController.swift */; };
 		866DFE0C2D154ACF006EE662 /* ZipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */; };
+		866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
@@ -106,7 +107,6 @@
 		8670A7942C49CBB50098DCF1 /* onboarding4.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A7932C49CBB50098DCF1 /* onboarding4.json */; };
 		8670A7972C49EFC80098DCF1 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */; };
 		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
-		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
 		86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */; };
 		86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */; };
 		86880BD52C46C55200CAEF58 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD42C46C55200CAEF58 /* UserTargetType.swift */; };
@@ -329,6 +329,7 @@
 		8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
 		866DFE092D1548BD006EE662 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
 		866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDetailViewController.swift; sourceTree = "<group>"; };
+		866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewControllerType.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
@@ -337,7 +338,6 @@
 		8670A7932C49CBB50098DCF1 /* onboarding4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding4.json; sourceTree = "<group>"; };
 		8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
-		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIService.swift; sourceTree = "<group>"; };
 		86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTargetType.swift; sourceTree = "<group>"; };
 		86880BD42C46C55200CAEF58 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargetType.swift; sourceTree = "<group>"; };
@@ -1037,7 +1037,7 @@
 			isa = PBXGroup;
 			children = (
 				86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */,
-				86784E8E2C4021E200E94A5D /* TagTextField.swift */,
+				866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1911,7 +1911,6 @@
 				830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */,
 				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
 				A2C9FC952C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift in Sources */,
-				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
 				A27AD9392CB8057700515D3B /* EditMenuCollectionViewCell.swift in Sources */,
 				A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */,
@@ -2017,6 +2016,7 @@
 				86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */,
 				837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */,
+				866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */,
 				865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,

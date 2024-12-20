@@ -19,7 +19,7 @@ extension ZipHeaderTableView {
 final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
-    
+
     private var viewModel: HankkiListViewModel?
     var showAlert: ((String) -> Void)?
     
@@ -203,10 +203,11 @@ private extension ZipHeaderTableView {
 }
 
 extension ZipHeaderTableView {
-    func dataBind(_ data: Model?, viewModel: HankkiListViewModel) {
+    func dataBind(_ data: Model?, viewModel: HankkiListViewModel, isShareButtonHidden: Bool) {
         self.viewModel = viewModel
         headerLabel.text = data?.title
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name
+        shareButton.isHidden = isShareButtonHidden
     }
 }
