@@ -13,8 +13,6 @@ class BaseHankkiListViewController: BaseViewController, NetworkResultDelegate {
     
     let cellHeight: CGFloat = 102
     
-    let type: HankkiListViewControllerType
-    
     let viewModel: HankkiListViewModel = HankkiListViewModel()
     
     // MARK: - UI Properties
@@ -24,15 +22,6 @@ class BaseHankkiListViewController: BaseViewController, NetworkResultDelegate {
     let hankkiTableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: - Life Cycle
-    
-    init(_ type: HankkiListViewControllerType) {
-        self.type = type
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

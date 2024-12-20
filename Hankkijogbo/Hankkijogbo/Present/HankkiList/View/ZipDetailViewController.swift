@@ -1,5 +1,5 @@
 //
-//  ZipDetailControllerView.swift
+//  ZipDetailViewController.swift
 //  Hankkijogbo
 //
 //  Created by 심서현 on 12/20/24.
@@ -11,16 +11,25 @@ final class ZipDetailViewController: BaseHankkiListViewController {
     
     // MARK: - Properties
     
+    private let type: ZipDetailCollectionViewType
     private let zipID: Int
     private var isHeaderSetting: Bool = false
     private let headerViewHeight: CGFloat = UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2,
                                                                               width: 329,
                                                                               height: 231) + 22
+    private let footerViewHeight: CGFloat = 112
+    
+    // MARK: - UI Components
+    
+    private lazy var bottomButtonView: BottomButtonView = BottomButtonView(primaryButtonText: StringLiterals.SharedZip.addButton,
+                                                                           primaryButtonHandler: presentAddZipViewController,
+                                                                           isPrimaryButtonAble: true)
     
     // MARK: - Life Cycle
-    init (zipID: Int, type: HankkiListViewControllerType = .myZip) {
+    init (zipID: Int, type: ZipDetailCollectionViewType = .myZip) {
+        self.type = type
         self.zipID = zipID
-        super.init(type)
+        super.init()
         self.emptyView = EmptyView(
             text: StringLiterals.HankkiList.EmptyView.myZip,
             buttonText: StringLiterals.HankkiList.moreButton,
@@ -36,12 +45,11 @@ final class ZipDetailViewController: BaseHankkiListViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
         
-        if type == .myZip {
-            viewModel.getZipDetail(zipID: zipID)
-        }
+        viewModel.getZipDetail(zipID: zipID)
     }
     
     // MARK: - override
+    
     override func bindViewModel() {
         viewModel.reloadCollectionView = { [weak self] in
             DispatchQueue.main.async {
@@ -57,11 +65,27 @@ final class ZipDetailViewController: BaseHankkiListViewController {
         }
     }
     
+    override func setupHierarchy() {
+        super.setupHierarchy()
+        
+        if type.isAddZipButton {
+            view.addSubview(bottomButtonView)
+        }
+    }
+    
     override func setupLayout() {
         super.setupLayout()
         emptyView.snp.remakeConstraints {
             $0.centerY.equalTo(headerViewHeight + (UIScreen.getDeviceHeight() - headerViewHeight) / 2)
             $0.centerX.equalToSuperview()
+        }
+        
+        if type.isAddZipButton {
+            bottomButtonView.snp.makeConstraints {
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalToSuperview()
+                $0.height.equalTo(154)
+            }
         }
     }
 }
@@ -100,8 +124,18 @@ private extension ZipDetailViewController {
         hankkiTableView.deleteRows(at: [indexPath], with: .automatic)
         hankkiTableView.endUpdates()
     }
+    
+    // 공유 받은 족보 -> 족보 저장 뷰
+    func presentAddZipViewController() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false)
+            rootViewController.pushViewController(addZipViewController, animated: true)
+        }
+    }
 }
-// MARK: - Delegate UITableView
+// MARK: - Delegat
+
 extension ZipDetailViewController {
     
     /// 헤더 설정
@@ -118,6 +152,10 @@ extension ZipDetailViewController {
     
     /// 푸터 설정
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if type == .sharedZip {
+            return nil
+        }
+        
         if viewModel.hankkiList.isEmpty {
             return nil
         }
@@ -130,11 +168,15 @@ extension ZipDetailViewController {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if type == .sharedZip {
+            return 100
+        }
+        
         if viewModel.hankkiList.isEmpty {
             return 0
         }
         
-        return 112
+        return footerViewHeight
     }
     
     /// 스와이프 해서 셀 지우기 설정
@@ -156,10 +198,18 @@ extension ZipDetailViewController {
     
     /// 헤더의 스크롤 막기
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 && self.type == .myZip {
+        if scrollView.contentOffset.y < 0 {
             scrollView.bounces = false
         } else {
             scrollView.bounces = true
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if type == .myZip {
+            super.tableView(tableView, didSelectRowAt: indexPath)
+        } else {
+            return
         }
     }
 }

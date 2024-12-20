@@ -70,7 +70,7 @@ final class MypageViewController: BaseViewController {
 
 extension MypageViewController {
     func navigateToHankkiListViewController(_ type: HankkiListViewController.HankkiListViewControllerType) {
-        let hankkiListViewController = HankkiListViewController(type, zipId: nil)
+        let hankkiListViewController = HankkiListViewController(type)
         navigationController?.pushViewController(hankkiListViewController, animated: true)
     }
 }

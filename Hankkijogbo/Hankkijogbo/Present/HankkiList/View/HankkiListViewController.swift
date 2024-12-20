@@ -9,12 +9,18 @@ import UIKit
 
 final class HankkiListViewController: BaseHankkiListViewController {
     
+    // MARK: - Properties
+    
+    private let type: HankkiListViewControllerType
+    
     // MARK: - UI Components
     
     // MARK: - Life Cycle
     
-    override init(_ type: BaseHankkiListViewController.HankkiListViewControllerType, zipId: Int?) {
-        super.init(type, zipId: nil)
+    init(_ type: BaseHankkiListViewController.HankkiListViewControllerType) {
+        self.type = type
+        super.init()
+        
         self.emptyView = EmptyView(text: type.emptyViewLabel)
     }
     

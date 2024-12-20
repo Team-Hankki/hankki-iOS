@@ -128,6 +128,7 @@ enum StringLiterals {
         static let deleteAlready = "이미 삭제된 식당입니다"
         static let serverError = "오류가 발생했어요 다시 시도해주세요"
         static let accessError = "로그인 유효기간이 만료되었어요 재로그인 해주세요"
+        static let addSharedZip = "족보가 추가되었습니다"
     }
     
     enum Toolbar {
@@ -286,6 +287,15 @@ enum StringLiterals {
             static let reported = "아직 제보한 식당이 없어요"
             static let liked = "아직 좋아요 누른 식당이 없어요"
         }
+    }
+    
+    enum SharedZip {
+        static let navigation = "공유받은 족보"
+        static let addButton = "내 족보에 추가하기"
+        
+        static let addTitle = "공유받은 족보의\n새로운 이름을 지어주세요"
+        static let addDescription = "공유받은 족보는 내 마음대로 편집할 수 있어요!"
+        static let submitButton = "추가하기"
     }
 
     
