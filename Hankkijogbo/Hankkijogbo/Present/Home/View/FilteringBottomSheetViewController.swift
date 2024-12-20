@@ -14,7 +14,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
     private var defaultHeight: CGFloat = 266
     private let viewModel = HomeViewModel()
     
-    private let filteringTitleList = ["가격대", "정렬"]
+    private let filteringTitleList = [StringLiterals.Home.priceFilteringButton, StringLiterals.Home.sortFilteringButton]
     private var priceData: [GetPriceFilterData] = []
     private var sortData: [GetSortOptionFilterData] = []
     
@@ -108,7 +108,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
         }
         
         applyButton.do {
-            $0.setTitle("적용", for: .normal)
+            $0.setTitle(StringLiterals.Home.apply, for: .normal)
             $0.titleLabel?.font = .setupPretendardStyle(of: .body4)
             $0.setTitleColor(.gray800, for: .normal)
             $0.backgroundColor = .hankkiWhite
@@ -149,7 +149,7 @@ private extension FilteringBottomSheetViewController {
                 DispatchQueue.main.async {
                     self.priceData = self.viewModel.priceFilters
                     if let entire = self.priceData.first(where: { $0.tag == nil}) {
-                        self.entireChipButton.setTitle("전체", for: .normal)
+                        self.entireChipButton.setTitle(StringLiterals.Home.entire, for: .normal)
                     }
                     
                     if let less6000 = self.priceData.first(where: { $0.tag == "K6" }) {

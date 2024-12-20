@@ -141,7 +141,7 @@ extension HomeViewController {
     }
     
     private func setupNavigationBar(mainTitle: String? = nil) {
-        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.allUniversity
+        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.entire
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
@@ -311,7 +311,7 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         guard let manager = locationManager else { return }
         manager.startUpdatingLocation()
         
-        setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
+        setupNavigationBar(mainTitle: StringLiterals.Home.entire)
         fetchAllHankkiInfo()
     }
     
