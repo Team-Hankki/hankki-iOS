@@ -64,7 +64,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
         }
         
         sortTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(priceTitleLabel.snp.bottom).offset(24)
+            $0.top.equalTo(priceChipStackView.snp.bottom).offset(24)
             $0.leading.equalToSuperview().inset(22)
         }
         
@@ -123,7 +123,7 @@ private extension FilteringBottomSheetViewController {
         button.do {
             $0.makeRoundBorder(cornerRadius: 16, borderWidth: 1, borderColor: .gray300)
             $0.titleLabel?.font = .setupPretendardStyle(of: .caption1)
-            $0.titleLabel?.textColor = .gray600
+            $0.setTitleColor(.gray600, for: .normal)
             $0.contentEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
             $0.sizeToFit()
         }
@@ -148,7 +148,6 @@ private extension FilteringBottomSheetViewController {
             if success {
                 DispatchQueue.main.async {
                     self.priceData = self.viewModel.priceFilters
-                    print("PRICE 🚗", self.priceData)
                     if let entire = self.priceData.first(where: { $0.tag == nil}) {
                         self.entireChipButton.setTitle("전체", for: .normal)
                     }
@@ -169,7 +168,6 @@ private extension FilteringBottomSheetViewController {
             if success {
                 DispatchQueue.main.async {
                     self.sortData = self.viewModel.sortOptions
-                    print("SORT 🚗", self.sortData)
                     if let latest = self.sortData.first(where: { $0.tag == "LATEST" }) {
                         self.latestChipButton.setTitle(latest.name, for: .normal)
                     }
