@@ -12,11 +12,13 @@ import Moya
 protocol ZipAPIServiceProtocol {
     typealias GetMyZipListResponseDTO = BaseDTO<GetMyZipListResponseData>
     typealias GetZipDetailResponseDTO = BaseDTO<GetZipDetailResponseData>
+    typealias GetZipNicknameResponseDTO = BaseDTO<GetZipNicknameResponseData>
     
     func getMyZipList(id: Int, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
     func getZipList(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<Void>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
+    func getZipNickname(zipId: Int, completion: @escaping (NetworkResult<GetZipNicknameResponseDTO>) -> Void)
     func postSharedZip(zipId: Int, requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<Void>) -> Void)
     func postHankkiToZip(requestBody: PostHankkiToZipRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
@@ -96,6 +98,21 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
             case .failure(let error):
                 if let response = error.response {
                     let networkResult: NetworkResult<EmptyDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    completion(networkResult)
+                }
+            }
+        }
+    }
+    
+    func getZipNickname(zipId: Int, completion: @escaping (NetworkResult<GetZipNicknameResponseDTO>) -> Void) {
+        provider.request(.getZipNickname(zipId: zipId)) { result in
+            switch result {
+            case .success(let response):
+                let networkResult: NetworkResult<GetZipNicknameResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                completion(networkResult)
+            case .failure(let error):
+                if let response = error.response {
+                    let networkResult: NetworkResult<GetZipNicknameResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }

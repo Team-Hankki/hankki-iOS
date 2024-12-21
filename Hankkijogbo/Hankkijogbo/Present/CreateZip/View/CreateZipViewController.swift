@@ -220,14 +220,17 @@ private extension CreateZipViewController {
     }
     
     func presentMyZipListViewController() {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            if let window = windowScene.windows.first {
-                let tabBarController = TabBarController()
-                tabBarController.selectedIndex = 2
-                let navigationController = HankkiNavigationController(rootViewController: tabBarController)
-                
-                window.rootViewController = navigationController
-                navigationController.pushViewController(ZipListViewController(), animated: false)
+        DispatchQueue.main.async {
+            // 족보 만들기를 완료해서, 서버에서 생성이되면 나의 족보 리스트 페이지로 이동한다.
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first {
+                    let tabBarController = TabBarController()
+                    tabBarController.selectedIndex = 2
+                    let navigationController = HankkiNavigationController(rootViewController: tabBarController)
+                    
+                    window.rootViewController = navigationController
+                    navigationController.pushViewController(ZipListViewController(), animated: false)
+                }
             }
         }
     }

@@ -57,7 +57,7 @@ extension BaseHankkiListViewController {
             switch self {
             case .sharedZip:
                 true
-            default :
+            default:
                 false
             }
         }

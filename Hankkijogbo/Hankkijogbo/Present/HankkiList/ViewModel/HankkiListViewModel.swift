@@ -28,22 +28,33 @@ final class HankkiListViewModel {
 
 extension HankkiListViewModel {
     
-    func getZipDetail(zipID: Int) {
-        NetworkService.shared.zipService.getZipList(zipId: zipID) { result in
-            
+    func getZipNickname(zipID: Int, completion: @escaping (String) -> Void) {
+        NetworkService.shared.zipService.getZipNickname(zipId: zipID) { result in
             result.handleNetworkResult(delegate: self.delegate) { response in
-                self.zipInfo = ZipHeaderTableView.Model(id: zipID,
-                                                        name: UserDefaults.standard.getNickname(),
-                                                        title: response.data.title,
-                                                        details: response.data.details)
+                let nickname: String = response.data.nickname
+                completion(nickname)
+            }
+        }
+    }
+    
+    func getZipDetail(zipID: Int) {
+        getZipNickname(zipID: zipID) { nickname in
+            NetworkService.shared.zipService.getZipList(zipId: zipID) { result in
                 
-                self.hankkiList = response.data.stores.map {
-                    return HankkiListTableViewCell.Model(id: $0.id,
-                                                         name: $0.name,
-                                                         imageURL: $0.imageUrl ?? "",
-                                                         category: $0.category,
-                                                         lowestPrice: $0.lowestPrice,
-                                                         heartCount: $0.heartCount)
+                result.handleNetworkResult(delegate: self.delegate) { response in
+                    self.zipInfo = ZipHeaderTableView.Model(id: zipID,
+                                                            name: nickname,
+                                                            title: response.data.title,
+                                                            details: response.data.details)
+                    
+                    self.hankkiList = response.data.stores.map {
+                        return HankkiListTableViewCell.Model(id: $0.id,
+                                                             name: $0.name,
+                                                             imageURL: $0.imageUrl ?? "",
+                                                             category: $0.category,
+                                                             lowestPrice: $0.lowestPrice,
+                                                             heartCount: $0.heartCount)
+                    }
                 }
             }
         }
