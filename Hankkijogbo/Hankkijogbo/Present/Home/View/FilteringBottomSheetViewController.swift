@@ -20,6 +20,9 @@ final class FilteringBottomSheetViewController: BaseViewController {
     
     // MARK: - Components
     
+    private let dimmedView: UIView = UIView()
+    private let containerView: UIView = UIView()
+    
     private let priceTitleLabel: UILabel = UILabel()
     private let entireChipButton: UIButton = UIButton()
     private let less6000ChipButton: UIButton = UIButton()
@@ -36,20 +39,33 @@ final class FilteringBottomSheetViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        setupAddTarget()
         bindViewModels()
     }
     
     override func setupHierarchy() {
-        view.addSubviews(priceTitleLabel, priceChipStackView, sortTitleLabel, sortChipStackView, applyButton)
+        view.addSubviews(dimmedView, containerView)
+        
+        containerView.addSubviews(
+            priceTitleLabel,
+            priceChipStackView,
+            sortTitleLabel,
+            sortChipStackView,
+            applyButton
+        )
         
         priceChipStackView.addArrangedSubviews(entireChipButton, less6000ChipButton, more6000ChipButton)
-        
         sortChipStackView.addArrangedSubviews(latestChipButton, lowestChipButton, recommendChipButton)
     }
     
     override func setupLayout() {
-        self.view.snp.makeConstraints {
+        dimmedView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints {
+            $0.bottom.width.equalToSuperview()
             $0.height.equalTo(defaultHeight)
         }
         
@@ -87,6 +103,21 @@ final class FilteringBottomSheetViewController: BaseViewController {
     }
     
     override func setupStyle() {
+        view.do {
+            $0.backgroundColor = .clear
+        }
+        
+        dimmedView.do {
+            $0.backgroundColor = .black.withAlphaComponent(0.67)
+        }
+        
+        containerView.do {
+            $0.isUserInteractionEnabled = true
+            $0.backgroundColor = .hankkiWhite
+            $0.layer.cornerRadius = 18
+            $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
         [priceTitleLabel, sortTitleLabel].enumerated().forEach { index, label in
             label.do {
                 $0.font = .setupPretendardStyle(of: .body4)
@@ -115,6 +146,19 @@ final class FilteringBottomSheetViewController: BaseViewController {
             $0.isEnabled = true
         }
     }
+
+    @objc func dimmedViewDidTap() {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.dimmedView.alpha = 0.0
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.dismiss(animated: false, completion: nil)
+        })
+    }
 }
 
 
@@ -142,6 +186,10 @@ private extension FilteringBottomSheetViewController {
 }
 
 private extension FilteringBottomSheetViewController {
+    func setupAddTarget() {
+        dimmedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap)))
+    }
+    
     func bindViewModels() {
         viewModel.getPriceCategoryFilterAPI { [weak self] success in
             guard let self = self else { return }
