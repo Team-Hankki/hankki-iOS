@@ -99,6 +99,7 @@
 		866DFE0C2D154ACF006EE662 /* ZipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */; };
 		866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */; };
 		866DFE122D172083006EE662 /* GetZipNicknameResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE112D172083006EE662 /* GetZipNicknameResponseDTO.swift */; };
+		866DFE142D17295A006EE662 /* GetZipOwnershipResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
@@ -332,6 +333,7 @@
 		866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDetailViewController.swift; sourceTree = "<group>"; };
 		866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewControllerType.swift; sourceTree = "<group>"; };
 		866DFE112D172083006EE662 /* GetZipNicknameResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZipNicknameResponseDTO.swift; sourceTree = "<group>"; };
+		866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZipOwnershipResponseDTO.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
@@ -1611,6 +1613,7 @@
 				A2C9FCAE2C49985800868DF7 /* GetMyZipListResponseDTO.swift */,
 				A2C9FCAF2C49985800868DF7 /* GetZipListResponseDTO.swift */,
 				866DFE112D172083006EE662 /* GetZipNicknameResponseDTO.swift */,
+				866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1969,6 +1972,7 @@
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
 				839FC7202C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift in Sources */,
+				866DFE142D17295A006EE662 /* GetZipOwnershipResponseDTO.swift in Sources */,
 				864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */,
 				A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */,
 				8641516D2C67B9AE00E2FD44 /* MyZipViewModel.swift in Sources */,

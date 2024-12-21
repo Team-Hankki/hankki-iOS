@@ -94,8 +94,8 @@ private extension SceneDelegate {
         if url.host == "kakaolink" {
             let queryParameters = url.getQueryParameters()
             
-            if let zipID = queryParameters["sharedZipID"] {
-                presentSharedZipDetails(zipID: zipID)
+            if let zipID = Int(queryParameters["sharedZipID"] ?? "") {
+                getZipOwnership(zipId: zipID)
             } else {
                 print("❌ 카카오 메세지 템플릿을 통한 잘못된 딥링크 형식")
             }
@@ -105,19 +105,17 @@ private extension SceneDelegate {
     }
     
     /// 공유받은 족보 상세 페이지로 이동
-    private func presentSharedZipDetails(zipID: String) {
+    private func presentZipDetails(zipID: Int, isOwnership: Bool) {
+        let tabBarController = TabBarController()
+        tabBarController.selectedIndex = 2
+        let navigationController = HankkiNavigationController(rootViewController: tabBarController)
         
-        if let id = Int(zipID) {
-            let tabBarController = TabBarController()
-            tabBarController.selectedIndex = 2
-            let navigationController = HankkiNavigationController(rootViewController: tabBarController)
-            
-            window?.rootViewController = navigationController
-            navigationController.pushViewController(ZipDetailViewController(zipID: id, type: .sharedZip), animated: false)
-            
+        window?.rootViewController = navigationController
+        
+        if isOwnership {
+            navigationController.pushViewController(ZipDetailViewController(zipID: zipID, type: .myZip), animated: false)
         } else {
-            print("❌ 공유받은 족보의 ID가 잘못된 형식입니다. - \(zipID)")
-            return
+            navigationController.pushViewController(ZipDetailViewController(zipID: zipID, type: .sharedZip), animated: false)
         }
     }
 }
@@ -154,6 +152,23 @@ private extension SceneDelegate {
                 // refresh token이 정상적이지 않을 경우
                 // 로그인을 다시 진행해 refresh token을 재발급 받는다.
                 UIApplication.resetApp()
+            }
+        }
+    }
+    
+    func getZipOwnership(zipId: Int) {
+        NetworkService.shared.zipService.getZipOwnership(zipId: zipId) { result in
+            switch result {
+            case .success(let response):
+                // 성공시
+                if let isOwnership = response?.data.isOwner {
+                    self.presentZipDetails(zipID: zipId, isOwnership: isOwnership)
+                } else {
+                    fatalError("is Ownership 없음")
+                }
+            default:
+                // TODO: - 에러 처리
+                fatalError("잘못된 접근입니다!")
             }
         }
     }

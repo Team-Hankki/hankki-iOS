@@ -19,6 +19,7 @@ enum ZipTargetType {
     case postHankkiToZip(requestBody: PostHankkiToZipRequestDTO)
     case deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO)
     case getMyZipList(id: Int)
+    case getZipOwnership(zipId: Int)
 }
 
 extension ZipTargetType: BaseTargetType {
@@ -54,6 +55,8 @@ extension ZipTargetType: BaseTargetType {
         case .postHankkiToZip: return .none
         case .deleteZipToHankki: return .none
         case .getMyZipList: return .none
+        case .getZipOwnership:
+            return .none
         }
     }
     
@@ -77,12 +80,14 @@ extension ZipTargetType: BaseTargetType {
             return utilPath.rawValue + "/\(requestBody.favoriteId)/stores/\(requestBody.storeId)"
         case .getMyZipList:
             return utilPath.rawValue
+        case .getZipOwnership(let zipId):
+            return utilPath.rawValue + "/\(zipId)/ownership"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getZipList, .getZipDetail, .getMyZipList, .getZipNickname:
+        case .getZipList, .getZipDetail, .getMyZipList, .getZipNickname, .getZipOwnership:
             return .get
         case .postZip, .postSharedZip, .postZipBatchDelete, .postHankkiToZip:
             return .post
@@ -93,7 +98,7 @@ extension ZipTargetType: BaseTargetType {
     
     var loadingViewType: LoadingViewType {
         switch self {
-        case .getZipList, .getMyZipList, .getZipDetail, .getZipNickname: return .fullView
+        case .getZipList, .getMyZipList, .getZipDetail, .getZipNickname, .getZipOwnership: return .fullView
         case .postZip, .postSharedZip, .postZipBatchDelete, .deleteZipToHankki: return .submit
         default: return .none
         }
