@@ -146,19 +146,6 @@ final class FilteringBottomSheetViewController: BaseViewController {
             $0.isEnabled = true
         }
     }
-
-    @objc func dimmedViewDidTap() {
-        containerView.snp.remakeConstraints {
-            $0.bottom.width.equalToSuperview()
-            $0.height.equalTo(0)
-        }
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-            self.dimmedView.alpha = 0.0
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.dismiss(animated: false, completion: nil)
-        })
-    }
 }
 
 
@@ -183,11 +170,37 @@ private extension FilteringBottomSheetViewController {
             $0.sizeToFit()
         }
     }
+    
+    @objc func dimmedViewDidTap() {
+        containerView.snp.remakeConstraints {
+            $0.bottom.width.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            self.dimmedView.alpha = 0.0
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.dismiss(animated: false, completion: nil)
+        })
+    }
+    
+    @objc func filteringChipButtonDidTap(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            selectedButtonStyle(button: sender)
+        } else {
+            defaultButtonStyle(button: sender)
+        }
+    }
 }
 
 private extension FilteringBottomSheetViewController {
     func setupAddTarget() {
         dimmedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dimmedViewDidTap)))
+        
+        [entireChipButton, less6000ChipButton, more6000ChipButton, latestChipButton, lowestChipButton, recommendChipButton].forEach { button in
+            button.addTarget(self, action: #selector(filteringChipButtonDidTap(_:)), for: .touchUpInside)
+        }
     }
     
     func bindViewModels() {
