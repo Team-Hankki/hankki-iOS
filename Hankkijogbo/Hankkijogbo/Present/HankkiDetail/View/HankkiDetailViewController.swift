@@ -20,9 +20,10 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     private let contentView: UIView = UIView()
     private let lightGrayBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
+    private let topBlackGradientImageView: UIImageView = UIImageView()
     private let thumbnailImageView: UIImageView = UIImageView()
     private let differentInfoView: DifferentInfoView = DifferentInfoView()
-    private let topBlackGradientImageView: UIImageView = UIImageView()
+    private let hankkiInfoView: HankkiInfoView = HankkiInfoView()
     
     // MARK: - Life Cycle
     
@@ -68,7 +69,8 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
             lightGrayBackgroundView,
             thumbnailImageView,
             backButton,
-            differentInfoView
+            differentInfoView,
+            hankkiInfoView
         )
         thumbnailImageView.addSubview(topBlackGradientImageView)
     }
@@ -108,6 +110,11 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         differentInfoView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(15)
             $0.bottom.equalTo(thumbnailImageView.snp.bottom).offset(-12)
+        }
+        
+        hankkiInfoView.snp.makeConstraints {
+            $0.top.equalTo(thumbnailImageView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
         }
     }
     

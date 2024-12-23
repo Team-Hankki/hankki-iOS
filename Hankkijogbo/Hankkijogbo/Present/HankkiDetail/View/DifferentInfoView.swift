@@ -11,7 +11,6 @@ final class DifferentInfoView: BaseView {
     
     // MARK: - Properties
     
-    
     // MARK: - UI Components
     
     private let homeImageView: UIImageView = UIImageView()
@@ -19,7 +18,6 @@ final class DifferentInfoView: BaseView {
     private let rightArrowImageView: UIImageView = UIImageView()
     
     // MARK: - Life Cycle
-    
     
     // MARK: - Setup UI
     
