@@ -187,7 +187,10 @@ private extension HankkiDetailViewController {
     func setupGesture() {
         let rightSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(backButtonDidTap))
         rightSwipeGesture.direction = .right
-        self.view.addGestureRecognizer(rightSwipeGesture)
+        view.addGestureRecognizer(rightSwipeGesture)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(differentInfoViewDidTap))
+        differentInfoView.addGestureRecognizer(tapGesture)
     }
     
     func setupNotification() {
@@ -293,6 +296,11 @@ extension HankkiDetailViewController {
     
     @objc func addMyZipButtonDidTap() {
         presentMyZipListBottomSheet(id: hankkiId)
+    }
+    
+    @objc func differentInfoViewDidTap() {
+        let removeHankkiViewController = RemoveHankkiViewController()
+        self.navigationController?.pushViewController(removeHankkiViewController, animated: true)
     }
     
     @objc func hankkiReportButtonDidTap() {

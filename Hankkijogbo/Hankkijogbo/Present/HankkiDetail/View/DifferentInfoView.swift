@@ -17,8 +17,6 @@ final class DifferentInfoView: BaseView {
     private let textLabel: UILabel = UILabel()
     private let rightArrowImageView: UIImageView = UIImageView()
     
-    // MARK: - Life Cycle
-    
     // MARK: - Setup UI
     
     override func setupHierarchy() {
@@ -70,8 +68,4 @@ final class DifferentInfoView: BaseView {
             $0.image = .icArrowRight
         }
     }
-    
-    
-    // MARK: - Private Func
-    // MARK: - @objc Func
 }
