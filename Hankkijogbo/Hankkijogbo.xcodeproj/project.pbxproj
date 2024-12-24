@@ -141,6 +141,7 @@
 		9E38C1F6B1DB0B110CF9BCB7 /* Pods_Hankkijogbo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AC84CE15CCD6BBF6F508B9D /* Pods_Hankkijogbo.framework */; };
 		A200C66B2D1441AB0065C749 /* DifferentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C66A2D1441AB0065C749 /* DifferentInfoView.swift */; };
 		A200C66D2D1872510065C749 /* HankkiInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C66C2D1872510065C749 /* HankkiInfoView.swift */; };
+		A200C66F2D19EA0D0065C749 /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C66E2D19EA0D0065C749 /* DetailMapView.swift */; };
 		A2079B942C656F7D00817651 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079B932C656F7D00817651 /* ImageCompressor.swift */; };
 		A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */; };
 		A21DAE9B2CD9085B004D896C /* ModifyMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */; };
@@ -371,6 +372,7 @@
 		86FAFBAC2CB4DECE00910A7D /* MypageSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSeparatorView.swift; sourceTree = "<group>"; };
 		A200C66A2D1441AB0065C749 /* DifferentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentInfoView.swift; sourceTree = "<group>"; };
 		A200C66C2D1872510065C749 /* HankkiInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiInfoView.swift; sourceTree = "<group>"; };
+		A200C66E2D19EA0D0065C749 /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		A2079B932C656F7D00817651 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiCategoryModel.swift; sourceTree = "<group>"; };
 		A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewModel.swift; sourceTree = "<group>"; };
@@ -1398,6 +1400,7 @@
 				A240EA3B2C4450E2000FF458 /* HankkiDetailViewController.swift */,
 				A200C66A2D1441AB0065C749 /* DifferentInfoView.swift */,
 				A200C66C2D1872510065C749 /* HankkiInfoView.swift */,
+				A200C66E2D19EA0D0065C749 /* DetailMapView.swift */,
 				A240EA552C45596C000FF458 /* Cell */,
 			);
 			path = View;
@@ -1999,6 +2002,7 @@
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */,
+				A200C66F2D19EA0D0065C749 /* DetailMapView.swift in Sources */,
 				837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */,
 				865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */,
