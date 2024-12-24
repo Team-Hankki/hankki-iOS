@@ -15,7 +15,7 @@ final class HankkiInfoView: BaseView {
     
     private let categoryImageView: UIImageView = UIImageView()
     private let categoryLabel: UILabel = UILabel()
-    private let hankkiLabel: UILabel = UILabel()
+    private let nameLabel: UILabel = UILabel()
     private let heartButton: UIButton = UIButton()
     private let myZipButton: UIButton = UIButton()
     private let separatorView: UIView = UIView()
@@ -28,7 +28,7 @@ final class HankkiInfoView: BaseView {
         addSubviews(
             categoryImageView,
             categoryLabel,
-            hankkiLabel,
+            nameLabel,
             heartButton,
             myZipButton,
             separatorView
@@ -47,13 +47,13 @@ final class HankkiInfoView: BaseView {
             $0.centerY.equalTo(categoryImageView)
         }
         
-        hankkiLabel.snp.makeConstraints {
+        nameLabel.snp.makeConstraints {
             $0.top.equalTo(categoryImageView.snp.bottom).offset(2)
             $0.leading.equalToSuperview().inset(22)
         }
         
         heartButton.snp.makeConstraints {
-            $0.top.equalTo(hankkiLabel.snp.bottom).offset(10)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().inset(22)
         }
         
@@ -80,25 +80,14 @@ final class HankkiInfoView: BaseView {
         }
         
         categoryLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption4,
-                                                            withText: "일식",
-                                                            color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption4, color: .gray900)
         }
         
-        hankkiLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1,
-                                                            withText: "아리가또 고자이마스",
-                                                            color: .gray900)
+        nameLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1, color: .gray900)
         }
         
         heartButton.do {
-            if let attributedTitle = UILabel.setupAttributedText(
-                for: PretendardStyle.body8,
-                withText: "24",
-                color: .gray800
-            ) {
-                $0.setAttributedTitle(attributedTitle, for: .normal)
-            }
             $0.setImage(.icHeart, for: .normal)
             $0.configuration = .plain()
             $0.configuration?.imagePadding = 4
@@ -108,7 +97,7 @@ final class HankkiInfoView: BaseView {
         myZipButton.do {
             if let attributedTitle = UILabel.setupAttributedText(
                 for: PretendardStyle.body8,
-                withText: "내 족보",
+                withText: StringLiterals.HankkiDetail.myZip,
                 color: .gray800
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
@@ -123,5 +112,20 @@ final class HankkiInfoView: BaseView {
             $0.backgroundColor = .gray100
         }
     }
+}
+
+extension HankkiInfoView {
     
+    func bindData(category: String, name: String, heartCount: String, isLiked: Bool) {
+        categoryLabel.text = category
+        nameLabel.text = name
+        if let attributedTitle = UILabel.setupAttributedText(
+            for: PretendardStyle.body8,
+            withText: heartCount,
+            color: .gray800
+        ) {
+            heartButton.setAttributedTitle(attributedTitle, for: .normal)
+        }
+        heartButton.setImage(isLiked ? .icHeartRed : .icHeart, for: .normal)
+    }
 }

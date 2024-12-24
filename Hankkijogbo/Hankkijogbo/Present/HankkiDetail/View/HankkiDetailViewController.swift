@@ -150,12 +150,21 @@ private extension HankkiDetailViewController {
     
     func bindViewModel() {
         viewModel.setHankkiDetailData = { [weak self] in
-            if let data = self?.viewModel.hankkiDetailData {
+            if let self = self,
+               let data = viewModel.hankkiDetailData {
                 if let first = data.imageUrls.first {
-                    self?.setupImageStyle(imageUrl: first)
+                    setupImageStyle(imageUrl: first)
                 } else {
-                    self?.setupNoImageStyle()
+                    setupNoImageStyle()
                 }
+                
+                hankkiInfoView.bindData(
+                    category: data.category,
+                    name: data.name,
+                    heartCount: String(data.heartCount),
+                    isLiked: data.isLiked
+                )
+                // map view bind data 예정
             }
         }
         
