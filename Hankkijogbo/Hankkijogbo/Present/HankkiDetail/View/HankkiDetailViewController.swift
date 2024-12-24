@@ -11,8 +11,7 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     
     // MARK: - Properties
     
-    let hankkiId: Int
-    var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
+    var viewModel: HankkiDetailViewModel
     
     // MARK: - UI Components
     
@@ -28,8 +27,8 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int) {
-        self.hankkiId = hankkiId
+    init(viewModel: HankkiDetailViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
     
@@ -203,7 +202,7 @@ private extension HankkiDetailViewController {
     }
     
     func getHankkiDetail() {
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
+        viewModel.getHankkiDetailAPI()
     }
     
     func setupNoImageStyle() {
@@ -242,7 +241,7 @@ private extension HankkiDetailViewController {
     
     /// 제보를 통한 식당 삭제
     func deleteHankkiByReport() {
-        viewModel.deleteHankkiAPI(id: hankkiId) { [self] in
+        viewModel.deleteHankkiAPI() { [self] in
             showThanksAlert()
         }
     }
@@ -285,7 +284,7 @@ extension HankkiDetailViewController {
         
         let editHankkiBottomSheet = HankkiNavigationController(
             rootViewController: EditHankkiBottomSheetViewController(
-                storeId: self.hankkiId,
+                storeId: viewModel.hankkiId,
                 selectableMenus: selectableMenus
             )
         )
@@ -295,11 +294,11 @@ extension HankkiDetailViewController {
     }
     
     @objc func addMyZipButtonDidTap() {
-        presentMyZipListBottomSheet(id: hankkiId)
+        presentMyZipListBottomSheet(id: viewModel.hankkiId)
     }
     
     @objc func differentInfoViewDidTap() {
-        let removeHankkiViewController = RemoveHankkiViewController()
+        let removeHankkiViewController = RemoveHankkiViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(removeHankkiViewController, animated: true)
     }
     

@@ -146,7 +146,7 @@ private extension MarkerInfoCardView {
             rootViewController.setupNavigationBar(forType: type)
             rootViewController.isNavigationBarHidden = false
             
-            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
+            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
             rootViewController.pushViewController(hankkiDetailViewController, animated: true)
         }
     }

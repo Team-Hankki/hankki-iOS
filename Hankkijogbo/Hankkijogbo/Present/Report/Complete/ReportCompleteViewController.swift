@@ -236,7 +236,7 @@ private extension ReportCompleteViewController {
     // MARK: - @objc Func
     
     @objc func bottomButtonPrimaryHandler() {
-        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
+        let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
         navigationController?.pushViewController(hankkiDetailViewController, animated: true)
     }
     
