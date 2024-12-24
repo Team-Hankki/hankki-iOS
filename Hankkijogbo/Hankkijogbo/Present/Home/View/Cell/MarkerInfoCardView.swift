@@ -132,13 +132,20 @@ final class MarkerInfoCardView: BaseView {
 
 private extension MarkerInfoCardView {
     func setupAddTarget() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewDidTap))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
         self.addGestureRecognizer(tapGesture)
     }
     
-    @objc func ViewDidTap() {
+    @objc func viewDidTap() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+           let rootViewController = windowScene.windows.first?.rootViewController as? HankkiNavigationController {
+            let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                                  hasRightButton: false,
+                                                                  mainTitle: .string(""),
+                                                                  rightButton: .string(""))
+            rootViewController.setupNavigationBar(forType: type)
+            rootViewController.isNavigationBarHidden = false
+            
             let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
             rootViewController.pushViewController(hankkiDetailViewController, animated: true)
         }
