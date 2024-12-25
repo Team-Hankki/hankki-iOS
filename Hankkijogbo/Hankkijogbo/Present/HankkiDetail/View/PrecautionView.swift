@@ -12,12 +12,7 @@ final class PrecautionView: BaseView {
     // MARK: - UI Components
     
     private let guideLabel: UILabel = UILabel()
-    private let precautionStackView = UIStackView()
-
-    private let firstPrecautionLabel: UILabel = UILabel()
-    private let secondPrecautionLabel: UILabel = UILabel()
-    private let thirdPrecautionLabel: UILabel = UILabel()
-    private let fourthPrecautionLabel: UILabel = UILabel()
+    private let precautionStackView: UIStackView = UIStackView()
     
     // MARK: - Setup UI
     
