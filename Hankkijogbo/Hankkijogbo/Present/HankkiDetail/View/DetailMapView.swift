@@ -20,7 +20,18 @@ final class DetailMapView: BaseView {
     private let addressLabel: UILabel = UILabel()
     private let copyButton: UIButton = UIButton()
     
-    // MARK: - Life Cycle
+    // MARK: - Init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupAddTarget()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Setup UI
     
     override func setupHierarchy() {
@@ -87,11 +98,12 @@ final class DetailMapView: BaseView {
         addressGuideLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption4,
-                withText: "주소",
+                withText: StringLiterals.HankkiDetail.address,
                 color: .gray400
             )
         }
         
+        // TODO: - 위경도 값으로 주소 불러와야 함
         addressLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption4,
@@ -106,14 +118,31 @@ final class DetailMapView: BaseView {
             
             if let attributedTitle = UILabel.setupAttributedText(
                 for: PretendardStyle.caption5,
-                withText: "복사",
+                withText: StringLiterals.HankkiDetail.copy,
                 color: .gray600
             ) {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
         }
     }
-    // MARK: - Private Func
+}
+
+// MARK: - Private Func
+
+private extension DetailMapView {
+    
+    func setupAddTarget() {
+        copyButton.addTarget(self, action: #selector(copyButtonDidTap), for: .touchUpInside)
+    }
+    
+    func copyAddressToClipboard() {
+        UIPasteboard.general.string = addressLabel.text
+    }
+    
     // MARK: - @objc Func
     
+    @objc func copyButtonDidTap() { // 클릭이 안 먹음 ^ㅡ..
+        copyAddressToClipboard()
+        UIApplication.showBlackToast(message: StringLiterals.HankkiDetail.copyToastMessage)
+    }
 }
