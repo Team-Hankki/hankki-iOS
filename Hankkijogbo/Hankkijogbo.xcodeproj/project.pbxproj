@@ -162,7 +162,7 @@
 		A240EA262C4176FF000FF458 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA252C4176FF000FF458 /* String+.swift */; };
 		A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA342C4405A4000FF458 /* UIResponder+.swift */; };
 		A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3B2C4450E2000FF458 /* HankkiDetailViewController.swift */; };
-		A240EA3E2C445D62000FF458 /* HankkiDetailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3D2C445D62000FF458 /* HankkiDetailCollectionView.swift */; };
+		A240EA3E2C445D62000FF458 /* HankkiMenuCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3D2C445D62000FF458 /* HankkiMenuCollectionView.swift */; };
 		A240EA402C445D6B000FF458 /* HankkiMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA3F2C445D6B000FF458 /* HankkiMenuHeaderView.swift */; };
 		A240EA422C445D86000FF458 /* HankkiMenuFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA412C445D86000FF458 /* HankkiMenuFooterView.swift */; };
 		A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA432C446AB6000FF458 /* HankkiDetailButton.swift */; };
@@ -394,7 +394,7 @@
 		A240EA252C4176FF000FF458 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A240EA342C4405A4000FF458 /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		A240EA3B2C4450E2000FF458 /* HankkiDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailViewController.swift; sourceTree = "<group>"; };
-		A240EA3D2C445D62000FF458 /* HankkiDetailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailCollectionView.swift; sourceTree = "<group>"; };
+		A240EA3D2C445D62000FF458 /* HankkiMenuCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiMenuCollectionView.swift; sourceTree = "<group>"; };
 		A240EA3F2C445D6B000FF458 /* HankkiMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiMenuHeaderView.swift; sourceTree = "<group>"; };
 		A240EA412C445D86000FF458 /* HankkiMenuFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiMenuFooterView.swift; sourceTree = "<group>"; };
 		A240EA432C446AB6000FF458 /* HankkiDetailButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDetailButton.swift; sourceTree = "<group>"; };
@@ -1430,7 +1430,7 @@
 		A240EA562C455977000FF458 /* HankkiDetail */ = {
 			isa = PBXGroup;
 			children = (
-				A240EA3D2C445D62000FF458 /* HankkiDetailCollectionView.swift */,
+				A240EA3D2C445D62000FF458 /* HankkiMenuCollectionView.swift */,
 				A240EA3F2C445D6B000FF458 /* HankkiMenuHeaderView.swift */,
 				A240EA452C451061000FF458 /* HankkiMenuCollectionViewCell.swift */,
 				A240EA412C445D86000FF458 /* HankkiMenuFooterView.swift */,
@@ -1992,7 +1992,7 @@
 				83DBEDD02C256B4C0042BA48 /* UITextField+.swift in Sources */,
 				832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */,
 				A2C9FC972C49237400868DF7 /* HeartResponseDTO.swift in Sources */,
-				A240EA3E2C445D62000FF458 /* HankkiDetailCollectionView.swift in Sources */,
+				A240EA3E2C445D62000FF458 /* HankkiMenuCollectionView.swift in Sources */,
 				A2B542432C32AF7500A6B225 /* UIFont+.swift in Sources */,
 				A236B5FF2CAC237D00935819 /* EditHankkiBottomSheetViewController.swift in Sources */,
 				A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */,

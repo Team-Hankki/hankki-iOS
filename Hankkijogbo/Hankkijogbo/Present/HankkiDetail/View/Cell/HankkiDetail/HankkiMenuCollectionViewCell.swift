@@ -48,7 +48,7 @@ final class HankkiMenuCollectionViewCell: BaseCollectionViewCell {
         
         priceLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body4,
+                for: PretendardStyle.body5,
                 color: .gray850
             )
         }
@@ -57,7 +57,7 @@ final class HankkiMenuCollectionViewCell: BaseCollectionViewCell {
 
 extension HankkiMenuCollectionViewCell {
     
-    func bindMenuData(_ menuData: MenuData) {
+    func bindData(_ menuData: MenuData) {
         nameLabel.text = menuData.name
         priceLabel.formattingPrice(price: menuData.price)
     }

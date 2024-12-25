@@ -35,16 +35,16 @@ final class HankkiMenuFooterView: BaseCollectionReusableView {
     
     override func setupLayout() {
         editButton.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.38)
-            $0.height.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.bottom.equalToSuperview().inset(18)
         }
     }
     
     override func setupStyle() {
         editButton.do {
             $0.configuration = .plain()
-            $0.configuration?.image = .icEditMenu
+            $0.configuration?.image = .icEditDetail
             $0.configuration?.imagePadding = 4
             if let attributedTitle = UILabel.setupAttributedText(
                 for: PretendardStyle.body5,

@@ -34,9 +34,9 @@ final class HankkiMenuHeaderView: BaseCollectionReusableView {
     
     override func setupStyle() {
         menuLabel.do {
-            $0.text = StringLiterals.HankkiDetail.menu
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle2,
+                withText: StringLiterals.HankkiDetail.menu,
                 color: .gray900
             )
         }
@@ -47,5 +47,12 @@ final class HankkiMenuHeaderView: BaseCollectionReusableView {
                 color: .red500
             )
         }
+    }
+}
+
+extension HankkiMenuHeaderView {
+    
+    func bindData(menuNumber: String) {
+        menuNumberLabel.text = menuNumber
     }
 }
