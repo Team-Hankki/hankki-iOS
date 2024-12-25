@@ -139,7 +139,7 @@ extension HankkiListViewModel {
         let imageURL: String = hankkiList[0].imageURL.isEmpty ? StringLiterals.SharedZip.zipShareDefaultImageURL : hankkiList[0].imageURL
         
         let templetArgs: [String: String] = ["IMAGE_URL": imageURL,
-                                              "SHARED_ZIP_ID": String(zipInfo?.id ?? 0),
+                                              "FAVORITE_ID": String(zipInfo?.id ?? 0),
                                               "NAME": hankkiList[0].name,
                                               "SENDER": "서현"]
         

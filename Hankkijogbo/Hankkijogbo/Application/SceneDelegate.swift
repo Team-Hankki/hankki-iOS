@@ -88,13 +88,12 @@ private extension SceneDelegate {
     private func handleDeeplink(_ url: URL) {
         guard url.scheme == "kakao\(Config.Kakao)" else { return }
         
-        print("🍪 \(url)")
         switch url.host {
         case "kakaolink":
             let queryParameters: [String: String] = url.getQueryParameters()
             
-            if queryParameters.keys.contains("sharedZipID") {
-                if let zipId = Int(queryParameters["sharedZipID"] ?? "") {
+            if queryParameters.keys.contains("sharedZipId") {
+                if let zipId = Int(queryParameters["sharedZipId"] ?? "") {
                     handleSharedZipDeeplink(zipId: zipId)
                     return
                 } else {
