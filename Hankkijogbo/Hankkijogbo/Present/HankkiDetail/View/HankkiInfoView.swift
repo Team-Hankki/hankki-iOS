@@ -53,8 +53,8 @@ final class HankkiInfoView: BaseView {
         }
         
         heartButton.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(22)
+            $0.top.equalTo(nameLabel.snp.bottom)
+            $0.leading.equalTo(nameLabel)
         }
         
         myZipButton.snp.makeConstraints {
@@ -63,7 +63,7 @@ final class HankkiInfoView: BaseView {
         }
         
         separatorView.snp.makeConstraints {
-            $0.top.equalTo(heartButton.snp.bottom).offset(12)
+            $0.top.equalTo(heartButton.snp.bottom).offset(2)
             $0.leading.equalTo(heartButton)
             $0.trailing.bottom.equalToSuperview()
             $0.height.equalTo(1)
@@ -84,14 +84,14 @@ final class HankkiInfoView: BaseView {
         }
         
         nameLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h1, color: .gray900)
+            $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h3, color: .gray900)
         }
         
         heartButton.do {
             $0.setImage(.icHeart, for: .normal)
             $0.configuration = .plain()
             $0.configuration?.imagePadding = 4
-            $0.configuration?.contentInsets = .zero
+            $0.configuration?.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
         }
            
         myZipButton.do {
@@ -105,7 +105,7 @@ final class HankkiInfoView: BaseView {
             $0.setImage(.icAddZip, for: .normal)
             $0.configuration = .plain()
             $0.configuration?.imagePadding = 4
-            $0.configuration?.contentInsets = .zero
+            $0.configuration?.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
         }
         
         separatorView.do {
