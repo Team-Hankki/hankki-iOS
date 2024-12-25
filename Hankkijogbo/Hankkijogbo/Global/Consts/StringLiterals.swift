@@ -142,12 +142,13 @@ enum StringLiterals {
     }
     
     enum HankkiDetail {
-        static let editMenu = "메뉴 수정/삭제 제보하기"
         static let reportDifferentInformation = "식당 정보가 실제와 다른가요?"
         static let myZip = "내 족보"
         static let address = "주소"
         static let copy = "복사"
         static let copyToastMessage = "주소를 복사했습니다"
+        static let menu = "메뉴"
+        static let editMenu = "메뉴 수정/삭제 제보하기"
         static let precautions = "유의사항"
         static let canBeDifferent = "제보된 내용은 실제 정보와 다를 수 있습니다"
         static let showOnly8000OrUnder = "8000원 이하인 메뉴만 노출됩니다"
