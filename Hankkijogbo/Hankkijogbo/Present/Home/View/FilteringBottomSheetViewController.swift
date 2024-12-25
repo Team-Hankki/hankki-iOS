@@ -155,7 +155,6 @@ final class FilteringBottomSheetViewController: BaseViewController {
     }
 }
 
-
 private extension FilteringBottomSheetViewController {
     func defaultButtonStyle(button: UIButton) {
         button.do {
@@ -179,6 +178,20 @@ private extension FilteringBottomSheetViewController {
         }
     }
     
+    // buttonStackView 당 하나의 button만 눌리도록 제한하는 메소드
+    func limitedButtonState(for selectedButton: UIButton, in stackView: UIStackView) {
+        let buttons = stackView.arrangedSubviews.compactMap { $0 as? UIButton }
+        for button in buttons {
+            if button == selectedButton {
+                button.isSelected = true
+                selectedButtonStyle(button: button)
+            } else {
+                button.isSelected = false
+                defaultButtonStyle(button: button)
+            }
+        }
+    }
+    
     @objc func dimmedViewDidTap() {
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
@@ -193,11 +206,10 @@ private extension FilteringBottomSheetViewController {
     }
     
     @objc func filteringChipButtonDidTap(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        if sender.isSelected {
-            selectedButtonStyle(button: sender)
-        } else {
-            defaultButtonStyle(button: sender)
+        if priceChipStackView.arrangedSubviews.contains(sender) {
+            limitedButtonState(for: sender, in: priceChipStackView)
+        } else if sortChipStackView.arrangedSubviews.contains(sender) {
+            limitedButtonState(for: sender, in: sortChipStackView)
         }
     }
 }
