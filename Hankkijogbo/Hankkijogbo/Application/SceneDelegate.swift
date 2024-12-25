@@ -83,7 +83,6 @@ private extension SceneDelegate {
         }
     }
     
-    // TODO: - throw catch 로 변경
     /// 딥링크로 앱이 시작된 경우, url 에 따라 view를 처리합니다
     private func handleDeeplink(_ url: URL) {
         guard url.scheme == "kakao\(Config.Kakao)" else { return }
@@ -92,22 +91,17 @@ private extension SceneDelegate {
         case "kakaolink":
             let queryParameters: [String: String] = url.getQueryParameters()
             
-            if queryParameters.keys.contains("sharedZipId") {
-                if let zipId = Int(queryParameters["sharedZipId"] ?? "") {
-                    handleSharedZipDeeplink(zipId: zipId)
-                    return
-                } else {
-                    print("❌ NO-EXISTENT DEEP LINK ❌ - ZIPID IS ERROR")
-                }
-            } else {
+            switch Set(queryParameters.keys) {
+            case ["sharedZipId"]:
+                guard let zipId = Int(queryParameters["sharedZipId"] ?? "") else { print("❌ NO-EXISTENT DEEP LINK ❌ - ZIP ID IS ERROR"); return }
+                handleSharedZipDeeplink(zipId: zipId)
+                
+            default:
                 print("❌ NO-EXISTENT DEEP LINK ❌ - NO PARAMETERS")
             }
-            
         default:
             print("❌ NO-EXISTENT DEEP LINK ❌")
         }
-        print("present Splash View Controller")
-        return
     }
     
     /// 족보 공유의 딥링크를 이용한 경우, zipVC를 반환합니다.
@@ -135,6 +129,7 @@ private extension SceneDelegate {
     }
 }
 
+// MARK: - API
 private extension SceneDelegate {
     func getMe() {
         NetworkService.shared.userService.getMe { result in
@@ -175,14 +170,12 @@ private extension SceneDelegate {
         NetworkService.shared.zipService.getZipOwnership(zipId: zipId) { result in
             switch result {
             case .success(let response):
-                // 성공시
-                if let isOwnership = response?.data.isOwner {
-                    self.presentZipDetails(zipId: zipId, isOwnership: isOwnership)
-                } else {
-                    fatalError("is Ownership을 찾을 수 없습니다.")
-                }
+                guard let isOwnership = response?.data.isOwner else { return }
+                self.presentZipDetails(zipId: zipId, isOwnership: isOwnership)
+                
             case .notFound:
                 fatalError("\(zipId)의 족보가 없습니다")
+            
             default:
                 fatalError("잘못된 접근입니다!")
             }
