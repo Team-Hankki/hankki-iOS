@@ -144,6 +144,7 @@
 		A200C66D2D1872510065C749 /* HankkiInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C66C2D1872510065C749 /* HankkiInfoView.swift */; };
 		A200C66F2D19EA0D0065C749 /* DetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C66E2D19EA0D0065C749 /* DetailMapView.swift */; };
 		A200C6732D1B16C40065C749 /* RemoveHankkiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C6722D1B16C40065C749 /* RemoveHankkiViewController.swift */; };
+		A200C6772D1C18960065C749 /* PrecautionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200C6762D1C18960065C749 /* PrecautionView.swift */; };
 		A2079B942C656F7D00817651 /* ImageCompressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079B932C656F7D00817651 /* ImageCompressor.swift */; };
 		A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */; };
 		A21DAE9B2CD9085B004D896C /* ModifyMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */; };
@@ -376,6 +377,7 @@
 		A200C66C2D1872510065C749 /* HankkiInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiInfoView.swift; sourceTree = "<group>"; };
 		A200C66E2D19EA0D0065C749 /* DetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMapView.swift; sourceTree = "<group>"; };
 		A200C6722D1B16C40065C749 /* RemoveHankkiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveHankkiViewController.swift; sourceTree = "<group>"; };
+		A200C6762D1C18960065C749 /* PrecautionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecautionView.swift; sourceTree = "<group>"; };
 		A2079B932C656F7D00817651 /* ImageCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressor.swift; sourceTree = "<group>"; };
 		A2079BA82C68C26D00817651 /* HankkiCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiCategoryModel.swift; sourceTree = "<group>"; };
 		A21DAE9A2CD9085B004D896C /* ModifyMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyMenuViewModel.swift; sourceTree = "<group>"; };
@@ -1407,6 +1409,7 @@
 				A200C66E2D19EA0D0065C749 /* DetailMapView.swift */,
 				A240EA3D2C445D62000FF458 /* HankkiMenuCollectionView.swift */,
 				A240EA552C45596C000FF458 /* Cell */,
+				A200C6762D1C18960065C749 /* PrecautionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2040,6 +2043,7 @@
 				8302853B2C415BBD0004D9F7 /* TotalListCollectionViewCell.swift in Sources */,
 				A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */,
 				839138DB2C48F82900611D5C /* GetHankkiPinRequestDTO.swift in Sources */,
+				A200C6772D1C18960065C749 /* PrecautionView.swift in Sources */,
 				83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */,
 				A2DEBF642C3D67DE00DE14A9 /* MenuCollectionViewCell.swift in Sources */,
 				A24A787E2CB44E500049B031 /* MenuAPIService.swift in Sources */,

@@ -17,7 +17,6 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
-    private let lightGrayBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
     private let topBlackGradientImageView: UIImageView = UIImageView()
     private let thumbnailImageView: UIImageView = UIImageView()
@@ -25,6 +24,7 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     private let hankkiInfoView: HankkiInfoView = HankkiInfoView()
     private let detailMapView: DetailMapView = DetailMapView()
     private let menuCollectionView: HankkiMenuCollectionView = HankkiMenuCollectionView()
+    private let precautionView: PrecautionView = PrecautionView()
     
     // MARK: - Life Cycle
     
@@ -67,13 +67,13 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
-            lightGrayBackgroundView,
             thumbnailImageView,
             backButton,
             differentInfoView,
             hankkiInfoView,
             detailMapView,
-            menuCollectionView
+            menuCollectionView,
+            precautionView
         )
         thumbnailImageView.addSubview(topBlackGradientImageView)
     }
@@ -97,11 +97,6 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         topBlackGradientImageView.snp.makeConstraints {
             $0.top.equalTo(self.scrollView)
             $0.size.equalTo(thumbnailImageView)
-        }
-        
-        lightGrayBackgroundView.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom)
-            $0.horizontalEdges.bottom.equalToSuperview()
         }
         
         backButton.snp.makeConstraints {
@@ -130,22 +125,22 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         menuCollectionView.snp.makeConstraints {
             $0.top.equalTo(detailMapView.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(31)
         }
-//        hankkiInfoView.heartButton.addTarget(self, action: #selector(t), for: .touchUpInside)
+
+        precautionView.snp.makeConstraints {
+            $0.top.equalTo(menuCollectionView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(169)
+        }
     }
     
     override func setupStyle() {
         view.do {
-            $0.backgroundColor = .gray50
+            $0.backgroundColor = .gray100
         }
         
         scrollView.do {
             $0.backgroundColor = .clear
-        }
-        
-        lightGrayBackgroundView.do {
-            $0.backgroundColor = .gray50
         }
         
         backButton.do {
@@ -253,7 +248,7 @@ private extension HankkiDetailViewController {
     
     func setupNoImageStyle() {
         contentView.do {
-            $0.backgroundColor = .gray300
+            $0.backgroundColor = .gray100
         }
         thumbnailImageView.do {
             $0.image = .imgDetailDefault
