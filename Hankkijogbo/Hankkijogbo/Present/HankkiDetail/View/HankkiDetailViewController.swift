@@ -165,11 +165,12 @@ private extension HankkiDetailViewController {
                 
                 hankkiInfoView.bindData(
                     category: data.category,
+                    categoryImageUrl: data.categoryImageUrl,
                     name: data.name,
                     heartCount: String(data.heartCount),
                     isLiked: data.isLiked
                 )
-                // map view bind data 예정
+                detailMapView.bindData(latitude: data.latitude, longitude: data.longitude)
                 
                 menuCollectionView.updateLayout(menuSize: data.menus.count)
                 menuCollectionView.collectionView.reloadData()

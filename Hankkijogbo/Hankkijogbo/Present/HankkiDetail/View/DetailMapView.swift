@@ -107,7 +107,6 @@ final class DetailMapView: BaseView {
         addressLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption4,
-                withText: "경기도 수원시 아주대학교 어쩌구",
                 color: .gray700
             )
         }
@@ -124,6 +123,13 @@ final class DetailMapView: BaseView {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
         }
+    }
+}
+
+extension DetailMapView {
+    
+    func bindData(latitude: Double, longitude: Double) {
+        addressLabel.text = "\(latitude) \(longitude)"
     }
 }
 
