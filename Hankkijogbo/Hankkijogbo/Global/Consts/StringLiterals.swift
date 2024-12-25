@@ -9,6 +9,11 @@ import Foundation
 
 // swiftlint:disable nesting
 enum StringLiterals {
+    enum Kakao {
+        static let storeUrl = "itms-apps://itunes.apple.com/app/362057947"
+        static let zipShareTemplete = 115383
+    }
+    
     enum Common {
         static let goToHome = "홈으로"
         static let withdraw = "탈퇴하기"
@@ -66,6 +71,12 @@ enum StringLiterals {
         enum NeedLoginToSharedZip {
             static let title = "족보를 확인하려면\n로그인이 필요해요"
             static let primaryButton = "로그인"
+        }
+        
+        enum NeedOneMoreHankkiToShare {
+            static let title = "족보에 식당이 없어요\n식당 1개 이상 시에만 공유할 수 있어요"
+            static let secondaryButton = back
+            static let primaryButton = "둘러보기"
         }
         
         enum Logout {

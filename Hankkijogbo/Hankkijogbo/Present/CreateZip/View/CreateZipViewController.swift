@@ -229,7 +229,12 @@ private extension CreateZipViewController {
                     let navigationController = HankkiNavigationController(rootViewController: tabBarController)
                     
                     window.rootViewController = navigationController
-                    navigationController.pushViewController(ZipListViewController(), animated: false)
+                    let viewController = ZipListViewController()
+                    if self.type == .sharedZip {
+                        viewController.showBlackToast(message: StringLiterals.Toast.addSharedZip)
+                    }
+                    navigationController.pushViewController(viewController, animated: false)
+                    
                 }
             }
         }

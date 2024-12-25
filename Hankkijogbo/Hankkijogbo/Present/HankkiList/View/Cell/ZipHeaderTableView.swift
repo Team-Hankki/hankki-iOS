@@ -163,9 +163,27 @@ private extension ZipHeaderTableView {
     }
     
     @objc func shareButtonDidTap() {
-        viewModel?.shareZip()
+        viewModel?.shareZip {
+            UIApplication.showAlert(titleText: StringLiterals.Alert.NeedOneMoreHankkiToShare.title,
+                                    secondaryButtonText: StringLiterals.Alert.NeedOneMoreHankkiToShare.secondaryButton,
+                                    primaryButtonText: StringLiterals.Alert.NeedOneMoreHankkiToShare.primaryButton,
+                                    primaryButtonHandler: presentHomeView)
+            return
+        }
     }
     
+    func presentHomeView() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+                window.rootViewController = navigationController
+            }
+        }
+    }
+}
+
+// MARK: - UI setting을 돕는 함수들
+private extension ZipHeaderTableView {
     func setupTagStackView(_ tagList: [String]) {
         tagList.forEach { createTagChipView($0) }
     }

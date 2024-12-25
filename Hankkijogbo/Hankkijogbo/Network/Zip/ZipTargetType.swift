@@ -72,7 +72,7 @@ extension ZipTargetType: BaseTargetType {
         case .postZip:
             return utilPath.rawValue
         case .postSharedZip(zipId: let zipId, requestBody: _):
-            return utilPath.rawValue + "/\(zipId)/shared"
+            return utilPath.rawValue + "/shared/\(zipId)"
         case .postZipBatchDelete:
             return utilPath.rawValue + "/batch-delete"
         case .postHankkiToZip(let requestBody):
@@ -82,7 +82,7 @@ extension ZipTargetType: BaseTargetType {
         case .getMyZipList:
             return utilPath.rawValue
         case .getZipOwnership(let zipId):
-            return utilPath.rawValue + "/\(zipId)/ownership"
+            return utilPath.rawValue + "/shared/\(zipId)/ownership"
         }
     }
     

@@ -91,7 +91,7 @@ private extension SceneDelegate {
         print("🍪 \(url)")
         switch url.host {
         case "kakaolink":
-            let queryParameters: [String : String] = url.getQueryParameters()
+            let queryParameters: [String: String] = url.getQueryParameters()
             
             if queryParameters.keys.contains("sharedZipID") {
                 if let zipId = Int(queryParameters["sharedZipID"] ?? "") {
@@ -172,7 +172,6 @@ private extension SceneDelegate {
         }
     }
     
-    // TODO: - 에러 처리 필요
     func getZipOwnership(zipId: Int) {
         NetworkService.shared.zipService.getZipOwnership(zipId: zipId) { result in
             switch result {
@@ -181,10 +180,11 @@ private extension SceneDelegate {
                 if let isOwnership = response?.data.isOwner {
                     self.presentZipDetails(zipId: zipId, isOwnership: isOwnership)
                 } else {
-                    fatalError("is Ownership 없음")
+                    fatalError("is Ownership을 찾을 수 없습니다.")
                 }
+            case .notFound:
+                fatalError("\(zipId)의 족보가 없습니다")
             default:
-                // TODO: - 에러 처리
                 fatalError("잘못된 접근입니다!")
             }
         }

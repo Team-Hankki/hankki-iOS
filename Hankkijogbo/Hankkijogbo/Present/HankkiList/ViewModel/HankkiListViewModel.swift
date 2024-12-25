@@ -127,13 +127,19 @@ extension HankkiListViewModel {
         }
     }
     
-    func shareZip() {
-        let templeteID: Int64 = 115383
+    func shareZip(handelHankkiListIsEmpty: () -> Void) {
+  
+        if hankkiList.isEmpty {
+            handelHankkiListIsEmpty()
+            return
+        }
         
-        let templetArgs: [String:String] = ["IMAGE_URL": hankkiList[0].imageURL,
-                                            "SHARED_ZIP_ID": String(zipInfo?.id ?? 0),
-                                            "NAME": hankkiList[0].name,
-                                            "SENDER": "서현"]
+        let templeteID: Int64 = Int64(StringLiterals.Kakao.zipShareTemplete)
+        
+        let templetArgs: [String: String] = ["IMAGE_URL": hankkiList[0].imageURL,
+                                              "SHARED_ZIP_ID": String(zipInfo?.id ?? 0),
+                                              "NAME": hankkiList[0].name,
+                                              "SENDER": "서현"]
         
         // 카카오톡이 있는지 확인합니다.
         if ShareApi.isKakaoTalkSharingAvailable() {
@@ -147,7 +153,7 @@ extension HankkiListViewModel {
                 }
             }
         } else {
-            let url = "itms-apps://itunes.apple.com/app/362057947"
+            let url = StringLiterals.Kakao.storeUrl
             if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
