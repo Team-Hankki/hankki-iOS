@@ -22,7 +22,7 @@ final class RemoveHankkiViewController: BaseViewController {
     private let carefulGuideLabel: UILabel = UILabel()
     private lazy var reportBottomButtonView: BottomButtonView = BottomButtonView(
         primaryButtonText: StringLiterals.RemoveHankki.reportButton,
-        primaryButtonHandler: hankkiReportButtonDidTap
+        primaryButtonHandler: removeHankkiButtonDidTap
     )
     
     // MARK: - Life Cycle
@@ -111,18 +111,18 @@ private extension RemoveHankkiViewController {
     }
     
     /// 정말 제보하시겠어요? Alert 띄우기
-    func showCheckAlertForReport() {
+    func showCheckAlertForRemove() {
         self.showAlert(
             titleText: StringLiterals.Alert.reallyReport,
             subText: StringLiterals.Alert.disappearInfoByReport,
             secondaryButtonText: StringLiterals.Alert.back,
             primaryButtonText: StringLiterals.Common.report,
-            primaryButtonHandler: deleteHankkiByReport
+            primaryButtonHandler: removeHankkiByReport
         )
     }
     
     /// 제보를 통한 식당 삭제
-    func deleteHankkiByReport() {
+    func removeHankkiByReport() {
         viewModel.deleteHankkiAPI { [self] in
             showThanksAlert()
         }
@@ -135,20 +135,26 @@ private extension RemoveHankkiViewController {
         self.showAlert(
             image: .imgModalReport,
             titleText: nickname + StringLiterals.Alert.thanksForReport,
-            primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: dismissAlertAndPop,
+            primaryButtonText: StringLiterals.Alert.check,
+            primaryButtonHandler: popToHomeHankkiList,
             hightlightedText: nickname,
             hightlightedColor: .red500
         )
     }
     
-    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
-    func dismissAlertAndPop() {
-        self.navigationController?.popViewController(animated: true)
+    // 전체 식당 리스트가 떠있는 홈으로 이동
+    func popToHomeHankkiList() {
+        if let viewControllers = self.navigationController?.viewControllers {
+            if viewControllers.count > 2 {
+                self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            }
+        }
     }
     
-    @objc func hankkiReportButtonDidTap() {
-        showCheckAlertForReport()
+    // MARK: - @objc Func
+    
+    @objc func removeHankkiButtonDidTap() {
+        showCheckAlertForRemove()
     }
 }
 
