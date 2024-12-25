@@ -1405,6 +1405,7 @@
 				A200C66A2D1441AB0065C749 /* DifferentInfoView.swift */,
 				A200C66C2D1872510065C749 /* HankkiInfoView.swift */,
 				A200C66E2D19EA0D0065C749 /* DetailMapView.swift */,
+				A240EA3D2C445D62000FF458 /* HankkiMenuCollectionView.swift */,
 				A240EA552C45596C000FF458 /* Cell */,
 			);
 			path = View;
@@ -1430,7 +1431,6 @@
 		A240EA562C455977000FF458 /* HankkiDetail */ = {
 			isa = PBXGroup;
 			children = (
-				A240EA3D2C445D62000FF458 /* HankkiMenuCollectionView.swift */,
 				A240EA3F2C445D6B000FF458 /* HankkiMenuHeaderView.swift */,
 				A240EA452C451061000FF458 /* HankkiMenuCollectionViewCell.swift */,
 				A240EA412C445D86000FF458 /* HankkiMenuFooterView.swift */,
