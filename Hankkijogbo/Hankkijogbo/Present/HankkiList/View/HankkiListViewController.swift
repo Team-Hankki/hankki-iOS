@@ -240,8 +240,8 @@ extension HankkiListViewController: UITableViewDelegate {
     /// 터치시 식당 디테일로 이동
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    
-        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: viewModel.hankkiList[indexPath.item].id)
+        let hankkiId = viewModel.hankkiList[indexPath.item].id
+        let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
         navigationController?.pushViewController(hankkiDetailViewController, animated: true)
     }
 }

@@ -12,6 +12,8 @@ import UIKit
 
 final class HankkiDetailViewModel {
     
+    var hankkiId: Int
+    
     var setHankkiDetailData: (() -> Void)?
     var showAlert: ((String) -> Void)?
     var dismiss: (() -> Void)?
@@ -23,8 +25,15 @@ final class HankkiDetailViewModel {
     }
     weak var delegate: NetworkResultDelegate?
     
+    init(hankkiId: Int) {
+        self.hankkiId = hankkiId
+    }
+}
+
+extension HankkiDetailViewModel {
+    
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int) {
+    func getHankkiDetailAPI() {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -41,8 +50,8 @@ final class HankkiDetailViewModel {
     }
     
     /// 식당 좋아요 추가
-    func postHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
+    func postHankkiHeartAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.postHankkiHeart(id: hankkiId) { result in
             result.handleNetworkResult { _ in
                 SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabHeart)
                 completion()
@@ -51,15 +60,15 @@ final class HankkiDetailViewModel {
     }
     
     /// 식당 좋아요 삭제
-    func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
+    func deleteHankkiHeartAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankkiHeart(id: hankkiId) { result in
             result.handleNetworkResult { _ in completion() }
         }
     }
     
     /// 식당 삭제
-    func deleteHankkiAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.deleteHankki(id: id) { result in
+    func deleteHankkiAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankki(id: hankkiId) { result in
             result.handleNetworkResult(onSuccessVoid: completion)
         }
     }

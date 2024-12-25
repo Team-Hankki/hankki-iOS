@@ -29,7 +29,7 @@ final class HankkiReportOptionHeaderView: BaseCollectionReusableView {
         headerLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.subtitle1,
-                withText: StringLiterals.HankkiDetail.reportWrongInformation,
+                withText: StringLiterals.HankkiDetail.reportDifferentInformation,
                 color: .gray900
             )
         }
