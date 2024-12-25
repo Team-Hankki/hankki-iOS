@@ -307,7 +307,7 @@ enum StringLiterals {
     }
     
     enum SharedZip {
-        static let zipShareDefaultImageURL = "https://hankki-prod-bucket.s3.ap-northeast-2.amazonaws.com/shared/%E1%84%92%E1%85%A1%E1%86%AB%E1%84%81%E1%85%B5_%E1%84%8C%E1%85%A9%E1%86%A8%E1%84%87%E1%85%A9%E1%84%83%E1%85%B5%E1%84%91%E1%85%A9%E1%86%AF%E1%84%90%E1%85%B3.jpg"
+        static let zipShareDefaultImageURL = Config.DefaultHankkiImageURL
         
         static let navigation = "공유받은 족보"
         static let addButton = "내 족보에 추가하기"
@@ -316,7 +316,6 @@ enum StringLiterals {
         static let viewDescription = "공유받은 족보는 내 마음대로 편집할 수 있어요!"
         static let submitButton = "추가하기"
     }
-
     
     enum ExternalLink {
         static let OneonOne = "https://tally.so/r/mO0oJY"
