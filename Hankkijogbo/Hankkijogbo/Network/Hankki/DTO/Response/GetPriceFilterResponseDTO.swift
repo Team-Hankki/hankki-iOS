@@ -15,5 +15,5 @@ struct GetPriceFilterResponseData: Codable {
 
 struct GetPriceFilterData: Codable {
     let name: String
-    let tag: String
+    let tag: String?
 }

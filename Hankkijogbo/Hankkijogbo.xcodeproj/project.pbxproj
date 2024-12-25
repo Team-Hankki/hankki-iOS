@@ -64,6 +64,7 @@
 		83DBEDD22C256B7A0042BA48 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDD12C256B7A0042BA48 /* UIColor+.swift */; };
 		83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39732C4644DD00DD7EC3 /* URLConstant.swift */; };
 		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
+		83E9B3422D0C0553009F033E /* FilteringBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9B3412D0C054B009F033E /* FilteringBottomSheetViewController.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
 		862518AD2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */; };
 		8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */; };
@@ -300,6 +301,7 @@
 		83DBEDD12C256B7A0042BA48 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		83DD39732C4644DD00DD7EC3 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
+		83E9B3412D0C054B009F033E /* FilteringBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringBottomSheetViewController.swift; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSharedZipListResponseDTO.swift; sourceTree = "<group>"; };
 		864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 		83DBED8F2C25648B0042BA48 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				83E9B3412D0C054B009F033E /* FilteringBottomSheetViewController.swift */,
 				830285422C442BCF0004D9F7 /* Extension */,
 				8302F8E52C3E98DB004ADAA4 /* Cell */,
 				83DBED932C2564A20042BA48 /* HomeView.swift */,
@@ -2039,6 +2042,7 @@
 				86880C382C4920A700CAEF58 /* PostZipRequestDTO.swift in Sources */,
 				A2AF6FB22CDD427800F5271D /* DeleteMenuAccessoryView.swift in Sources */,
 				865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */,
+				83E9B3422D0C0553009F033E /* FilteringBottomSheetViewController.swift in Sources */,
 				86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */,
 				A240EA4E2C454B78000FF458 /* HankkiReportOptionCollectionView.swift in Sources */,
 				86880C2D2C480AED00CAEF58 /* ZipListViewModel.swift in Sources */,
