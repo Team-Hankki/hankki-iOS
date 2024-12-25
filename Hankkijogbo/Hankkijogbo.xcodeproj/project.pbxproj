@@ -65,6 +65,7 @@
 		83DD39742C4644DD00DD7EC3 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39732C4644DD00DD7EC3 /* URLConstant.swift */; };
 		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
+		862518AD2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */; };
 		8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */; };
 		8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */; };
 		8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */; };
@@ -98,7 +99,6 @@
 		866DFE0A2D1548BD006EE662 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE092D1548BD006EE662 /* HankkiListViewController.swift */; };
 		866DFE0C2D154ACF006EE662 /* ZipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */; };
 		866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */; };
-		866DFE122D172083006EE662 /* GetZipNicknameResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE112D172083006EE662 /* GetZipNicknameResponseDTO.swift */; };
 		866DFE142D17295A006EE662 /* GetZipOwnershipResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
@@ -301,6 +301,7 @@
 		83DD39732C4644DD00DD7EC3 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
 		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSharedZipListResponseDTO.swift; sourceTree = "<group>"; };
 		864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
 		864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
@@ -332,7 +333,6 @@
 		866DFE092D1548BD006EE662 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
 		866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDetailViewController.swift; sourceTree = "<group>"; };
 		866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewControllerType.swift; sourceTree = "<group>"; };
-		866DFE112D172083006EE662 /* GetZipNicknameResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZipNicknameResponseDTO.swift; sourceTree = "<group>"; };
 		866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZipOwnershipResponseDTO.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -1612,7 +1612,7 @@
 			children = (
 				A2C9FCAE2C49985800868DF7 /* GetMyZipListResponseDTO.swift */,
 				A2C9FCAF2C49985800868DF7 /* GetZipListResponseDTO.swift */,
-				866DFE112D172083006EE662 /* GetZipNicknameResponseDTO.swift */,
+				862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */,
 				866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */,
 			);
 			path = Response;
@@ -1889,6 +1889,7 @@
 				830285472C455BB10004D9F7 /* NetworkService.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2EC33AF2C47166F00809840 /* LocationTargetType.swift in Sources */,
+				862518AD2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */,
 				A21DAE9B2CD9085B004D896C /* ModifyMenuViewModel.swift in Sources */,
@@ -1982,7 +1983,6 @@
 				86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */,
 				83DBEDCE2C256B180042BA48 /* UIButton+.swift in Sources */,
 				A2EC33D92C47CFA500809840 /* ReportViewModel.swift in Sources */,
-				866DFE122D172083006EE662 /* GetZipNicknameResponseDTO.swift in Sources */,
 				A2EC33C42C47183700809840 /* GetReportedNumberResponseDTO.swift in Sources */,
 				837F10DB2C4A851A00E3CCE6 /* HankkiInfoCardView.swift in Sources */,
 				83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */,

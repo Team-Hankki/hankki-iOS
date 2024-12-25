@@ -13,7 +13,7 @@ import KakaoSDKShare
 import KakaoSDKTemplate
 
 final class HankkiListViewModel {
-
+    
     weak var delegate: NetworkResultDelegate?
     
     var reloadCollectionView: (() -> Void)?
@@ -28,33 +28,43 @@ final class HankkiListViewModel {
 
 extension HankkiListViewModel {
     
-    func getZipNickname(zipID: Int, completion: @escaping (String) -> Void) {
-        NetworkService.shared.zipService.getZipNickname(zipId: zipID) { result in
+    func getZipDetail(zipID: Int) {
+        NetworkService.shared.zipService.getZipDetail(zipId: zipID) { result in
+            
             result.handleNetworkResult(delegate: self.delegate) { response in
-                let nickname: String = response.data.nickname
-                completion(nickname)
+                self.zipInfo = ZipHeaderTableView.Model(id: zipID,
+                                                        name: UserDefaults.standard.getNickname(),
+                                                        title: response.data.title,
+                                                        details: response.data.details)
+                
+                self.hankkiList = response.data.stores.map {
+                    return HankkiListTableViewCell.Model(id: $0.id,
+                                                         name: $0.name,
+                                                         imageURL: $0.imageUrl ?? "",
+                                                         category: $0.category,
+                                                         lowestPrice: $0.lowestPrice,
+                                                         heartCount: $0.heartCount)
+                }
             }
         }
     }
     
-    func getZipDetail(zipID: Int) {
-        getZipNickname(zipID: zipID) { nickname in
-            NetworkService.shared.zipService.getZipList(zipId: zipID) { result in
+    func getSharedZipDetail(zipID: Int) {
+        NetworkService.shared.zipService.getSharedZipDetail(zipId: zipID) { result in
+            
+            result.handleNetworkResult(delegate: self.delegate) { response in
+                self.zipInfo = ZipHeaderTableView.Model(id: zipID,
+                                                        name: response.data.nickname,
+                                                        title: response.data.title,
+                                                        details: response.data.details)
                 
-                result.handleNetworkResult(delegate: self.delegate) { response in
-                    self.zipInfo = ZipHeaderTableView.Model(id: zipID,
-                                                            name: nickname,
-                                                            title: response.data.title,
-                                                            details: response.data.details)
-                    
-                    self.hankkiList = response.data.stores.map {
-                        return HankkiListTableViewCell.Model(id: $0.id,
-                                                             name: $0.name,
-                                                             imageURL: $0.imageUrl ?? "",
-                                                             category: $0.category,
-                                                             lowestPrice: $0.lowestPrice,
-                                                             heartCount: $0.heartCount)
-                    }
+                self.hankkiList = response.data.stores.map {
+                    return HankkiListTableViewCell.Model(id: $0.id,
+                                                         name: $0.name,
+                                                         imageURL: $0.imageUrl ?? "",
+                                                         category: $0.category,
+                                                         lowestPrice: $0.lowestPrice,
+                                                         heartCount: $0.heartCount)
                 }
             }
         }
@@ -172,7 +182,7 @@ private extension HankkiListViewModel {
             }
             return store
         }
-
+        
         self.hankkiList = updatedHankkiList
     }
 }

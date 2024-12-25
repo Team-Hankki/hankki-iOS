@@ -12,8 +12,9 @@ import Moya
 enum ZipTargetType {
     case getZipList(storedId: Int)
     case getZipDetail(zipId: Int)
+    case getSharedZipDetail(zipId: Int)
+    
     case postZip(requestBody: PostZipRequestDTO)
-    case getZipNickname(zipId: Int)
     case postSharedZip(zipId: Int, requestBody: PostZipRequestDTO)
     case postZipBatchDelete(requestBody: PostZipBatchDeleteRequestDTO)
     case postHankkiToZip(requestBody: PostHankkiToZipRequestDTO)
@@ -48,8 +49,8 @@ extension ZipTargetType: BaseTargetType {
         switch self {
         case .getZipList(let storeId): return storeId
         case .getZipDetail: return .none
+        case .getSharedZipDetail: return .none
         case .postZip(let requestBody): return requestBody
-        case .getZipNickname: return .none
         case .postSharedZip(zipId: _, requestBody: let requestBody): return requestBody
         case .postZipBatchDelete(let requestBody): return requestBody
         case .postHankkiToZip: return .none
@@ -66,10 +67,10 @@ extension ZipTargetType: BaseTargetType {
             return utilPath.rawValue
         case .getZipDetail(let zipId):
             return utilPath.rawValue + "/\(zipId)"
+        case .getSharedZipDetail(let zipId):
+            return utilPath.rawValue + "/shared/\(zipId)"
         case .postZip:
             return utilPath.rawValue
-        case .getZipNickname(let zipId):
-            return utilPath.rawValue + "/\(zipId)/users/me"
         case .postSharedZip(zipId: let zipId, requestBody: _):
             return utilPath.rawValue + "/\(zipId)/shared"
         case .postZipBatchDelete:
@@ -87,7 +88,7 @@ extension ZipTargetType: BaseTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getZipList, .getZipDetail, .getMyZipList, .getZipNickname, .getZipOwnership:
+        case .getZipList, .getZipDetail, .getMyZipList, .getSharedZipDetail, .getZipOwnership:
             return .get
         case .postZip, .postSharedZip, .postZipBatchDelete, .postHankkiToZip:
             return .post
@@ -98,7 +99,7 @@ extension ZipTargetType: BaseTargetType {
     
     var loadingViewType: LoadingViewType {
         switch self {
-        case .getZipList, .getMyZipList, .getZipDetail, .getZipNickname, .getZipOwnership: return .fullView
+        case .getZipList, .getMyZipList, .getZipDetail, .getSharedZipDetail, .getZipOwnership: return .fullView
         case .postZip, .postSharedZip, .postZipBatchDelete, .deleteZipToHankki: return .submit
         default: return .none
         }

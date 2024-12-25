@@ -12,14 +12,15 @@ import Moya
 protocol ZipAPIServiceProtocol {
     typealias GetMyZipListResponseDTO = BaseDTO<GetMyZipListResponseData>
     typealias GetZipDetailResponseDTO = BaseDTO<GetZipDetailResponseData>
-    typealias GetZipNicknameResponseDTO = BaseDTO<GetZipNicknameResponseData>
+    typealias GetSharedZipDetailResponseDTO = BaseDTO<GetSharedZipDetailResponseData>
     typealias GetZipOwnershipResponseDTO = BaseDTO<GetZipOwnershipResponseData>
     
     func getMyZipList(id: Int, completion: @escaping(NetworkResult<GetMyZipListResponseDTO>) -> Void)
-    func getZipList(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
+    func getZipDetail(zipId: Int, completion: @escaping(NetworkResult<GetZipDetailResponseDTO>) -> Void)
+    func getSharedZipDetail(zipId: Int, completion: @escaping (NetworkResult<GetSharedZipDetailResponseDTO>) -> Void)
+    
     func postZipBatchDelete(requesBody: PostZipBatchDeleteRequestDTO, completion: @escaping(NetworkResult<Void>) -> Void)
     func postZip(requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
-    func getZipNickname(zipId: Int, completion: @escaping (NetworkResult<GetZipNicknameResponseDTO>) -> Void)
     func postSharedZip(zipId: Int, requestBody: PostZipRequestDTO, completion: @escaping (NetworkResult<EmptyDTO>) -> Void)
     func deleteZipToHankki(requestBody: DeleteZipToHankkiRequestDTO, completion: @escaping (NetworkResult<Void>) -> Void)
     func postHankkiToZip(requestBody: PostHankkiToZipRequestDTO, completion: @escaping(NetworkResult<EmptyDTO>) -> Void)
@@ -61,7 +62,7 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
     
-    func getZipList(zipId: Int, completion: @escaping (NetworkResult<GetZipDetailResponseDTO>) -> Void) {
+    func getZipDetail(zipId: Int, completion: @escaping (NetworkResult<GetZipDetailResponseDTO>) -> Void) {
         provider.request(.getZipDetail(zipId: zipId)) { result in
             switch result {
             case .success(let response):
@@ -106,15 +107,15 @@ final class ZipAPIService: BaseAPIService, ZipAPIServiceProtocol {
         }
     }
     
-    func getZipNickname(zipId: Int, completion: @escaping (NetworkResult<GetZipNicknameResponseDTO>) -> Void) {
-        provider.request(.getZipNickname(zipId: zipId)) { result in
+    func getSharedZipDetail(zipId: Int, completion: @escaping (NetworkResult<GetSharedZipDetailResponseDTO>) -> Void) {
+        provider.request(.getSharedZipDetail(zipId: zipId)) { result in
             switch result {
             case .success(let response):
-                let networkResult: NetworkResult<GetZipNicknameResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                let networkResult: NetworkResult<GetSharedZipDetailResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                 completion(networkResult)
             case .failure(let error):
                 if let response = error.response {
-                    let networkResult: NetworkResult<GetZipNicknameResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
+                    let networkResult: NetworkResult<GetSharedZipDetailResponseDTO> = self.fetchNetworkResult(statusCode: response.statusCode, data: response.data)
                     completion(networkResult)
                 }
             }
