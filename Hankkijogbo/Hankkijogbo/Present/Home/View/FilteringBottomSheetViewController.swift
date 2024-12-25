@@ -36,6 +36,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
     private let sortChipStackView: UIStackView = UIStackView()
     
     private let applyButton: UIButton = UIButton()
+    private let divideLineView: CustomLineView = CustomLineView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +53,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
             priceChipStackView,
             sortTitleLabel,
             sortChipStackView,
+            divideLineView,
             applyButton
         )
         
@@ -93,6 +95,11 @@ final class FilteringBottomSheetViewController: BaseViewController {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(68)
             $0.width.equalTo(UIScreen.main.bounds.width)
+        }
+        
+        divideLineView.snp.makeConstraints {
+            $0.bottom.equalTo(applyButton.snp.top)
+            $0.width.equalToSuperview()
         }
         
         [entireChipButton, less6000ChipButton, more6000ChipButton, latestChipButton, lowestChipButton, recommendChipButton].forEach {
