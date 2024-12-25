@@ -260,43 +260,6 @@ private extension HankkiDetailViewController {
             $0.image = .imgBlackGradient
         }
     }
-    
-    /// 정말 제보하시겠어요? Alert 띄우기
-    func showCheckAlertForReport() {
-        self.showAlert(
-            titleText: StringLiterals.Alert.reallyReport,
-            subText: StringLiterals.Alert.disappearInfoByReport,
-            secondaryButtonText: StringLiterals.Alert.back,
-            primaryButtonText: StringLiterals.Common.report,
-            primaryButtonHandler: deleteHankkiByReport
-        )
-    }
-    
-    /// 제보를 통한 식당 삭제
-    func deleteHankkiByReport() {
-        viewModel.deleteHankkiAPI { [self] in
-            showThanksAlert()
-        }
-    }
-    
-    /// 제보 감사 Alert 띄우기
-    func showThanksAlert() {
-        let nickname: String = UserDefaults.standard.getNickname()
-
-        self.showAlert(
-            image: .imgModalReport,
-            titleText: nickname + StringLiterals.Alert.thanksForReport,
-            primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: dismissAlertAndPop,
-            hightlightedText: nickname,
-            hightlightedColor: .red500
-        )
-    }
-    
-    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
-    func dismissAlertAndPop() {
-        backButtonDidTap()
-    }
 }
 
 extension HankkiDetailViewController {
@@ -337,10 +300,6 @@ extension HankkiDetailViewController {
     @objc func differentInfoViewDidTap() {
         let removeHankkiViewController = RemoveHankkiViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(removeHankkiViewController, animated: true)
-    }
-    
-    @objc func hankkiReportButtonDidTap() {
-        showCheckAlertForReport()
     }
     
     @objc func setupBlackToast(_ notification: Notification) {
