@@ -16,8 +16,8 @@ final class HankkiInfoView: BaseView {
     private let categoryImageView: UIImageView = UIImageView()
     private let categoryLabel: UILabel = UILabel()
     private let nameLabel: UILabel = UILabel()
-    private let heartButton: UIButton = UIButton()
-    private let myZipButton: UIButton = UIButton()
+    let heartButton: UIButton = UIButton()
+    let myZipButton: UIButton = UIButton()
     private let separatorView: UIView = UIView()
     
     // MARK: - Life Cycle

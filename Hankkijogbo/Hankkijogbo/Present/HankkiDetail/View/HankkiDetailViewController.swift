@@ -173,16 +173,6 @@ private extension HankkiDetailViewController {
                 
                 menuCollectionView.updateLayout(menuSize: data.menus.count)
                 menuCollectionView.collectionView.reloadData()
-                
-//                if data.isLiked {
-//                    self.viewModel.postHankkiHeartAPI(id: self.hankkiId) {
-//                        footer.updateLikeButtonStatus()
-//                    }
-//                } else {
-//                    self.viewModel.deleteHankkiHeartAPI(id: self.hankkiId) {
-//                        footer.updateLikeButtonStatus()
-//                    }
-//                }
             }
         }
         
@@ -222,6 +212,8 @@ private extension HankkiDetailViewController {
     
     func setupAddTarget() {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+        hankkiInfoView.heartButton.addTarget(self, action: #selector(heartButtonDidTap), for: .touchUpInside)
+        hankkiInfoView.myZipButton.addTarget(self, action: #selector(myZipButtonDidTap), for: .touchUpInside)
     }
     
     func setupGesture() {
@@ -315,17 +307,19 @@ extension HankkiDetailViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-//    @objc func heartButtonDidTap() {
-//        if !viewModel.hankkiDetailData?.isLiked {
-//            self.viewModel.postHankkiHeartAPI(id: self.hankkiId) {
-//                footer.updateLikeButtonStatus()
-//            }
-//        } else {
-//            self.viewModel.deleteHankkiHeartAPI(id: self.hankkiId) {
-//                footer.updateLikeButtonStatus()
-//            }
-//        }
-//    }
+    @objc func heartButtonDidTap() {
+        guard let data = viewModel.hankkiDetailData else { return }
+        
+        if !data.isLiked {
+            self.viewModel.postHankkiHeartAPI()
+        } else {
+            self.viewModel.deleteHankkiHeartAPI()
+        }
+    }
+    
+    @objc func myZipButtonDidTap() {
+        presentMyZipListBottomSheet(id: viewModel.hankkiId)
+    }
     
     @objc func editMenuButtonDidTap() {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
@@ -338,10 +332,6 @@ extension HankkiDetailViewController {
         editHankkiBottomSheet.modalTransitionStyle = .crossDissolve
         editHankkiBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(editHankkiBottomSheet, animated: true, completion: nil)
-    }
-    
-    @objc func addMyZipButtonDidTap() {
-        presentMyZipListBottomSheet(id: viewModel.hankkiId)
     }
     
     @objc func differentInfoViewDidTap() {
