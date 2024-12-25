@@ -130,7 +130,7 @@ private extension ZipListViewController {
     }
     
     func navigateToHankkiListViewController(zipId: Int) {
-        let hankkiListViewController = ZipDetailViewController(zipID: zipId)
+        let hankkiListViewController = ZipDetailViewController(zipId: zipId)
             navigationController?.pushViewController(hankkiListViewController, animated: true)
     }
     

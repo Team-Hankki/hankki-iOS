@@ -12,7 +12,7 @@ final class ZipDetailViewController: BaseHankkiListViewController {
     // MARK: - Properties
     
     private let type: ZipDetailCollectionViewType
-    private let zipID: Int
+    private let zipId: Int
     private var isHeaderSetting: Bool = false
     private let headerViewHeight: CGFloat = UIView.convertByAspectRatioHeight(UIScreen.getDeviceWidth() - 22 * 2,
                                                                               width: 329,
@@ -26,9 +26,9 @@ final class ZipDetailViewController: BaseHankkiListViewController {
                                                                            isPrimaryButtonAble: true)
     
     // MARK: - Life Cycle
-    init (zipID: Int, type: ZipDetailCollectionViewType = .myZip) {
+    init (zipId: Int, type: ZipDetailCollectionViewType = .myZip) {
         self.type = type
-        self.zipID = zipID
+        self.zipId = zipId
         super.init()
         self.emptyView = EmptyView(
             text: StringLiterals.HankkiList.EmptyView.myZip,
@@ -45,7 +45,13 @@ final class ZipDetailViewController: BaseHankkiListViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
         
-        viewModel.getZipDetail(zipID: zipID)
+        switch type {
+        case .myZip:
+            viewModel.getZipDetail(zipId: zipId)
+        case .sharedZip:
+            viewModel.getSharedZipDetail(zipId: zipId)
+            checkLogin()
+        }
     }
     
     // MARK: - override
@@ -111,7 +117,7 @@ private extension ZipDetailViewController {
     
     /// 셀을 지우는 함수
     func deleteItem(at indexPath: IndexPath) {
-        let request: DeleteZipToHankkiRequestDTO = DeleteZipToHankkiRequestDTO(favoriteId: zipID, storeId: viewModel.hankkiList[indexPath.item].id)
+        let request: DeleteZipToHankkiRequestDTO = DeleteZipToHankkiRequestDTO(favoriteId: zipId, storeId: viewModel.hankkiList[indexPath.item].id)
         viewModel.deleteZipToHankki(requestBody: request) {
             self.removeCellFromCollectionView(indexPath)
         }
@@ -129,8 +135,18 @@ private extension ZipDetailViewController {
     func presentAddZipViewController() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false, zipId: zipID, type: .sharedZip)
+            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false, zipId: zipId, type: .sharedZip)
             rootViewController.pushViewController(addZipViewController, animated: true)
+        }
+    }
+    
+    /// 로그인 여부 확인
+    /// 비로그인 회원인 경우, 로그인 필요 경고를 띄운뒤 로그인 뷰로 이동한다
+    func checkLogin() {
+        if !UserDefaults.standard.isLogin {
+            self.showAlert(titleText: StringLiterals.Alert.NeedLoginToSharedZip.title,
+                           primaryButtonText: StringLiterals.Alert.NeedLoginToSharedZip.primaryButton,
+                           primaryButtonHandler: UIApplication.resetApp)
         }
     }
 }

@@ -252,7 +252,7 @@ private extension ReportCompleteViewController {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showWhiteToast(message: StringLiterals.Toast.addToMyZipWhite) { [self] in
-                let hankkiListViewController = ZipDetailViewController(zipID: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }

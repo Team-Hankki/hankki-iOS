@@ -194,7 +194,7 @@ extension HomeViewController {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
-                let hankkiListViewController = ZipDetailViewController(zipID: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }

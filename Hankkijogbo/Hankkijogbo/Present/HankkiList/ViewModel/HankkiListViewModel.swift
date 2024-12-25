@@ -28,11 +28,11 @@ final class HankkiListViewModel {
 
 extension HankkiListViewModel {
     
-    func getZipDetail(zipID: Int) {
-        NetworkService.shared.zipService.getZipDetail(zipId: zipID) { result in
+    func getZipDetail(zipId: Int) {
+        NetworkService.shared.zipService.getZipDetail(zipId: zipId) { result in
             
             result.handleNetworkResult(delegate: self.delegate) { response in
-                self.zipInfo = ZipHeaderTableView.Model(id: zipID,
+                self.zipInfo = ZipHeaderTableView.Model(id: zipId,
                                                         name: UserDefaults.standard.getNickname(),
                                                         title: response.data.title,
                                                         details: response.data.details)
@@ -49,11 +49,11 @@ extension HankkiListViewModel {
         }
     }
     
-    func getSharedZipDetail(zipID: Int) {
-        NetworkService.shared.zipService.getSharedZipDetail(zipId: zipID) { result in
+    func getSharedZipDetail(zipId: Int) {
+        NetworkService.shared.zipService.getSharedZipDetail(zipId: zipId) { result in
             
             result.handleNetworkResult(delegate: self.delegate) { response in
-                self.zipInfo = ZipHeaderTableView.Model(id: zipID,
+                self.zipInfo = ZipHeaderTableView.Model(id: zipId,
                                                         name: response.data.nickname,
                                                         title: response.data.title,
                                                         details: response.data.details)

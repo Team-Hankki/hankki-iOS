@@ -18,14 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         
-        // TODO: - 로그인 확인 여부 로직 필요
-        // 딥링크로 앱이 시작된 경우 처리합니다
-        if let urlContext = connectionOptions.urlContexts.first {
-            print("❤️ 딥링크로 앱이 시작된 경우 처리합니다")
-            handleDeeplink(urlContext.url)
-        } else {
+        guard let urlContext = connectionOptions.urlContexts.first else {
             window?.rootViewController = SplashViewController()
+            return
         }
+        
+        // 딥링크로 앱이 시작된 경우 처리합니다
+        handleDeeplink(urlContext.url)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -45,11 +44,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        // TODO: - 로그인 확인 여부 로직 필요
+        guard let urlContext = URLContexts.first else { return }
         
         // 앱이 실행중일 때, 딥링크로 접속했을 경우 처리를 진행합니다.
-        print("❤️ 앱이 시작중일때, 딥링크로 접속했을 경우 처리를 진행합니다.")
-        guard let urlContext = URLContexts.first else { return }
         handleDeeplink(urlContext.url)
     }
 }
@@ -77,7 +74,7 @@ private extension SceneDelegate {
         }
     }
     
-    // 서버에 사용자의 정보가 저장되어있는지 확인합니다.
+    /// 서버에 사용자의 정보가 저장되어있는지 확인합니다.
     func checkServerAccountStatus() {
         let accessToken: String = UserDefaults.standard.getAccesshToken()
         
@@ -86,26 +83,45 @@ private extension SceneDelegate {
         }
     }
     
-    /// 딥링크의 URL을 처리합니다.
+    // TODO: - throw catch 로 변경
+    /// 딥링크로 앱이 시작된 경우, url 에 따라 view를 처리합니다
     private func handleDeeplink(_ url: URL) {
         guard url.scheme == "kakao\(Config.Kakao)" else { return }
         
-        // 카카오 메세지 템플릿을 통해 접속한 경우
-        if url.host == "kakaolink" {
-            let queryParameters = url.getQueryParameters()
+        print("🍪 \(url)")
+        switch url.host {
+        case "kakaolink":
+            let queryParameters: [String : String] = url.getQueryParameters()
             
-            if let zipID = Int(queryParameters["sharedZipID"] ?? "") {
-                getZipOwnership(zipId: zipID)
+            if queryParameters.keys.contains("sharedZipID") {
+                if let zipId = Int(queryParameters["sharedZipID"] ?? "") {
+                    handleSharedZipDeeplink(zipId: zipId)
+                    return
+                } else {
+                    print("❌ NO-EXISTENT DEEP LINK ❌ - ZIPID IS ERROR")
+                }
             } else {
-                print("❌ 카카오 메세지 템플릿을 통한 잘못된 딥링크 형식")
+                print("❌ NO-EXISTENT DEEP LINK ❌ - NO PARAMETERS")
             }
+            
+        default:
+            print("❌ NO-EXISTENT DEEP LINK ❌")
+        }
+        print("present Splash View Controller")
+        return
+    }
+    
+    /// 족보 공유의 딥링크를 이용한 경우, zipVC를 반환합니다.
+    private func handleSharedZipDeeplink(zipId: Int) {
+        if UserDefaults.standard.isLogin {
+            getZipOwnership(zipId: zipId)
         } else {
-            print("❌ 존제하지 않는 딥링크 형식")
+            presentZipDetails(zipId: zipId, isOwnership: false)
         }
     }
     
     /// 공유받은 족보 상세 페이지로 이동
-    private func presentZipDetails(zipID: Int, isOwnership: Bool) {
+    private func presentZipDetails(zipId: Int, isOwnership: Bool) {
         let tabBarController = TabBarController()
         tabBarController.selectedIndex = 2
         let navigationController = HankkiNavigationController(rootViewController: tabBarController)
@@ -113,9 +129,9 @@ private extension SceneDelegate {
         window?.rootViewController = navigationController
         
         if isOwnership {
-            navigationController.pushViewController(ZipDetailViewController(zipID: zipID, type: .myZip), animated: false)
+            navigationController.pushViewController(ZipDetailViewController(zipId: zipId, type: .myZip), animated: false)
         } else {
-            navigationController.pushViewController(ZipDetailViewController(zipID: zipID, type: .sharedZip), animated: false)
+            navigationController.pushViewController(ZipDetailViewController(zipId: zipId, type: .sharedZip), animated: false)
         }
     }
 }
@@ -156,13 +172,14 @@ private extension SceneDelegate {
         }
     }
     
+    // TODO: - 에러 처리 필요
     func getZipOwnership(zipId: Int) {
         NetworkService.shared.zipService.getZipOwnership(zipId: zipId) { result in
             switch result {
             case .success(let response):
                 // 성공시
                 if let isOwnership = response?.data.isOwner {
-                    self.presentZipDetails(zipID: zipId, isOwnership: isOwnership)
+                    self.presentZipDetails(zipId: zipId, isOwnership: isOwnership)
                 } else {
                     fatalError("is Ownership 없음")
                 }
