@@ -141,7 +141,7 @@ private extension DetailMapView {
     
     // MARK: - @objc Func
     
-    @objc func copyButtonDidTap() { // 클릭이 안 먹음 ^ㅡ..
+    @objc func copyButtonDidTap() {
         copyAddressToClipboard()
         UIApplication.showBlackToast(message: StringLiterals.HankkiDetail.copyToastMessage)
     }
