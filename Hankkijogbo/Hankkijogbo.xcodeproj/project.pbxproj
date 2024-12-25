@@ -27,6 +27,7 @@
 		8322D03D2C5FB38700F6D725 /* HankkiCategoryTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8322D03C2C5FB38700F6D725 /* HankkiCategoryTagLabel.swift */; };
 		832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownView.swift */; };
 		8336B5222CBACDC90034474E /* NetworkResultDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336B5212CBACDC90034474E /* NetworkResultDelegate.swift */; };
+		8364B4022D17CA8D005FA842 /* CustomLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8364B4012D17CA81005FA842 /* CustomLineView.swift */; };
 		837F10DB2C4A851A00E3CCE6 /* HankkiInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837F10D92C4A851A00E3CCE6 /* HankkiInfoCardView.swift */; };
 		837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837F10DA2C4A851A00E3CCE6 /* ReportCompleteViewController.swift */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
@@ -257,6 +258,7 @@
 		8322D03C2C5FB38700F6D725 /* HankkiCategoryTagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiCategoryTagLabel.swift; sourceTree = "<group>"; };
 		832546EB2C3F28F900B8C3DC /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		8336B5212CBACDC90034474E /* NetworkResultDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultDelegate.swift; sourceTree = "<group>"; };
+		8364B4012D17CA81005FA842 /* CustomLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLineView.swift; sourceTree = "<group>"; };
 		837F10D92C4A851A00E3CCE6 /* HankkiInfoCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HankkiInfoCardView.swift; sourceTree = "<group>"; };
 		837F10DA2C4A851A00E3CCE6 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -1509,6 +1511,7 @@
 		A29A441C2C6ADC11002B8D36 /* HankkiLineView */ = {
 			isa = PBXGroup;
 			children = (
+				8364B4012D17CA81005FA842 /* CustomLineView.swift */,
 				A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */,
 			);
 			path = HankkiLineView;
@@ -1947,6 +1950,7 @@
 				839FC7202C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift in Sources */,
 				864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */,
 				A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */,
+				8364B4022D17CA8D005FA842 /* CustomLineView.swift in Sources */,
 				8641516D2C67B9AE00E2FD44 /* MyZipViewModel.swift in Sources */,
 				83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */,
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
