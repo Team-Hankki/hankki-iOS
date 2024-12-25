@@ -336,15 +336,9 @@ extension HankkiDetailViewController {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
         
         guard let menus = viewModel.hankkiDetailData?.menus else { return }
-        let selectableMenus: [SelectableMenuData] = menus.map { menu in
-            SelectableMenuData(isSelected: false, id: menu.id, name: menu.name, price: menu.price)
-        }
         
         let editHankkiBottomSheet = HankkiNavigationController(
-            rootViewController: EditHankkiBottomSheetViewController(
-                storeId: viewModel.hankkiId,
-                selectableMenus: selectableMenus
-            )
+            rootViewController: EditHankkiBottomSheetViewController(storeId: viewModel.hankkiId, menus: menus)
         )
         editHankkiBottomSheet.modalTransitionStyle = .crossDissolve
         editHankkiBottomSheet.modalPresentationStyle = .overFullScreen
@@ -419,6 +413,7 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
             ) as? HankkiMenuFooterView else {
                 return UICollectionReusableView()
             }
+            footer.editButton.addTarget(self, action: #selector(editMenuButtonDidTap), for: .touchUpInside)
             return footer
         default:
             return UICollectionReusableView()

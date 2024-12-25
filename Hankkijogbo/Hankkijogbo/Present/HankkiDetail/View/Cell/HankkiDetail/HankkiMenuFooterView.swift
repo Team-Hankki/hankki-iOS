@@ -13,19 +13,7 @@ final class HankkiMenuFooterView: BaseCollectionReusableView {
     
     // MARK: - UI Components
     
-    lazy var editButton: UIButton = UIButton()
-    
-    // MARK: - Init
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupAddTarget()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    let editButton: UIButton = UIButton()
     
     // MARK: - Setup UI
     
@@ -57,16 +45,5 @@ final class HankkiMenuFooterView: BaseCollectionReusableView {
             $0.backgroundColor = .gray100
             $0.makeRoundCorners(radius: 8)
         }
-    }
-}
-
-private extension HankkiMenuFooterView {
-    
-    func setupAddTarget() {
-        editButton.addTarget(self, action: #selector(test), for: .touchUpInside)
-    }
-    
-    @objc func test() {
-        print("Edit")
     }
 }
