@@ -16,6 +16,7 @@ final class HomeViewModel {
     
     private let hankkiAPIService: HankkiAPIServiceProtocol
     var showAlert: ((String) -> Void)?
+    var showHankkiListBottomSheet: (() -> Void)?
     
     var categoryFilters: [GetCategoryFilterData] = []
     var priceFilters: [GetPriceFilterData] = []
@@ -153,6 +154,14 @@ extension HomeViewModel {
                 self?.hankkiThumbnail = response.data
                 completion(true)
             }
+        }
+    }
+    
+    // 포커싱하고 있는 식당이 삭제된 식당인지 아닌지 확인
+    func checkThumbnailHankkiValidation() {
+        let isValid = hankkiLists.contains { $0.id == hankkiThumbnail?.id ?? 0 }
+        if !isValid {
+            showHankkiListBottomSheet?()
         }
     }
 }

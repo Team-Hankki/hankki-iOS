@@ -1,5 +1,5 @@
 //
-//  HankkiReportOptionCollectionView.swift
+//  RemoveOptionCollectionView.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/15/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HankkiReportOptionCollectionView: BaseView {
+final class RemoveOptionCollectionView: BaseView {
         
     // MARK: - UI Components
     
@@ -23,22 +23,15 @@ final class HankkiReportOptionCollectionView: BaseView {
     override func setupLayout() {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.width.equalTo(331)
-            $0.height.equalTo(285)
+            $0.height.equalTo(172)
         }
     }
     
     override func setupStyle() {
         flowLayout.do {
-            $0.itemSize = .init(width: UIScreen.getDeviceWidth() - 22 * 2, height: 52)
             $0.scrollDirection = .vertical
+            $0.itemSize = .init(width: UIScreen.getDeviceWidth(), height: 52)
             $0.minimumLineSpacing = 8
-            $0.headerReferenceSize = .init(width: 252, height: 27)
-            $0.footerReferenceSize = .init(width: 275, height: 54)
-            $0.sectionInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
-        }
-        collectionView.do {
-            $0.backgroundColor = .clear
         }
     }
 }

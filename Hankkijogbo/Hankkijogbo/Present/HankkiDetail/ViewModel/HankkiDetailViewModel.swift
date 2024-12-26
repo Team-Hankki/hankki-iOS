@@ -13,17 +13,21 @@ import UIKit
 final class HankkiDetailViewModel {
     
     var hankkiId: Int
-    
-    var setHankkiDetailData: (() -> Void)?
-    var showAlert: ((String) -> Void)?
-    var dismiss: (() -> Void)?
-    
     var hankkiDetailData: GetHankkiDetailResponseData? {
         didSet {
             setHankkiDetailData?()
         }
     }
+    var removeOptions: [String] = [
+        StringLiterals.RemoveHankki.optionDisappeared,
+        StringLiterals.RemoveHankki.optionNoMore8000,
+        StringLiterals.RemoveHankki.optionImproperHankki
+    ]
     weak var delegate: NetworkResultDelegate?
+    
+    var setHankkiDetailData: (() -> Void)?
+    var showAlert: ((String) -> Void)?
+    var dismiss: (() -> Void)?
     
     init(hankkiId: Int) {
         self.hankkiId = hankkiId

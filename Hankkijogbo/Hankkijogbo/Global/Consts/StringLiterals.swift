@@ -156,6 +156,15 @@ enum StringLiterals {
         static let precautionCanStop = "악성 무단 삭제 및 수정 시 서비스 이용이 중단될 수 있습니다"
     }
     
+    enum RemoveHankki {
+        static let titleWhyRemove = "식당 정보가\n실제와 어떻게 다른가요?"
+        static let optionDisappeared = "식당이 사라졌어요"
+        static let optionNoMore8000 = "더이상 8,000원 이하인 메뉴가 없어요"
+        static let optionImproperHankki = "부적절한 제보예요"
+        static let modifyCarefullyPlease = ModifyMenu.modifyCarefullyPlease
+        static let reportButton = Common.report
+    }
+    
     enum EditHankki {
         static let howToEdit = "어떻게 편집할까요?"
         static let addNewMenu = "새로운 메뉴\n추가하기"
