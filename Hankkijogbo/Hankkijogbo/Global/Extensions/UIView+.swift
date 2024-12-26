@@ -26,7 +26,15 @@ extension UIView {
     }
     
     /// 특정 코너만 둥글게
-    func makeRoundCorners(corners: CACornerMask, radius: CGFloat) {
+    func makeRoundCorners(
+        corners: CACornerMask = [
+            .layerMaxXMaxYCorner,
+            .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner,
+            .layerMinXMinYCorner
+        ],
+        radius: CGFloat
+    ) {
         layer.maskedCorners = corners
         layer.cornerRadius = radius
     }

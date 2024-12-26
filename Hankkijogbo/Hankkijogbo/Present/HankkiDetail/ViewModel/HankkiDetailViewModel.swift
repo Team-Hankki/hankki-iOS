@@ -50,19 +50,21 @@ extension HankkiDetailViewModel {
     }
     
     /// 식당 좋아요 추가
-    func postHankkiHeartAPI(completion: @escaping () -> Void) {
+    func postHankkiHeartAPI() {
         NetworkService.shared.hankkiService.postHankkiHeart(id: hankkiId) { result in
             result.handleNetworkResult { _ in
                 SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabHeart)
-                completion()
+                self.getHankkiDetailAPI()
             }
         }
     }
     
     /// 식당 좋아요 삭제
-    func deleteHankkiHeartAPI(completion: @escaping () -> Void) {
+    func deleteHankkiHeartAPI() {
         NetworkService.shared.hankkiService.deleteHankkiHeart(id: hankkiId) { result in
-            result.handleNetworkResult { _ in completion() }
+            result.handleNetworkResult { _ in
+                self.getHankkiDetailAPI()
+            }
         }
     }
     
