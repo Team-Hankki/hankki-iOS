@@ -364,8 +364,8 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
 extension MyZipListBottomSheetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let data = viewModel.myZipListFavoriteData {
-            
-            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: data[indexPath.item].id)
+            let hankkiId = data[indexPath.item].id
+            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
             navigationController?.pushViewController(hankkiDetailViewController, animated: true)
         }
     }
