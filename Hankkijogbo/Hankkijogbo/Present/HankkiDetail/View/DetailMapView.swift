@@ -35,7 +35,7 @@ final class DetailMapView: BaseView {
     // MARK: - Setup UI
     
     override func setupHierarchy() {
-        addSubviews(mapView, addressView)
+        addSubviews(addressView, mapView)
         
         addressView.addSubviews(
             addressGuideLabel,
@@ -92,7 +92,7 @@ final class DetailMapView: BaseView {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 12
             $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 1, borderColor: .imageLine)
+            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 1, borderColor: .gray200)
         }
         
         addressGuideLabel.do {
