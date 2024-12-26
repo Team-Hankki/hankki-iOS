@@ -9,8 +9,6 @@ import UIKit
 
 final class HankkiInfoView: BaseView {
     
-    // MARK: - Properties
-    
     // MARK: - UI Components
     
     private let categoryImageView: UIImageView = UIImageView()
@@ -19,8 +17,6 @@ final class HankkiInfoView: BaseView {
     let heartButton: UIButton = UIButton()
     let myZipButton: UIButton = UIButton()
     private let separatorView: UIView = UIView()
-    
-    // MARK: - Life Cycle
     
     // MARK: - Setup UI
     
