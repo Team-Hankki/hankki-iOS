@@ -9,8 +9,6 @@ import UIKit
 
 final class DifferentInfoView: BaseView {
     
-    // MARK: - Properties
-    
     // MARK: - UI Components
     
     private let homeImageView: UIImageView = UIImageView()
