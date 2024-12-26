@@ -67,8 +67,12 @@ final class RemoveHankkiViewController: BaseViewController {
         
         reportBottomButtonView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
             $0.height.equalTo(154)
+            if UIScreen.hasNotch {
+                $0.bottom.equalToSuperview()
+            } else {
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(30) // SE 대응
+            }
         }
         
         carefulGuideLabel.snp.makeConstraints {
