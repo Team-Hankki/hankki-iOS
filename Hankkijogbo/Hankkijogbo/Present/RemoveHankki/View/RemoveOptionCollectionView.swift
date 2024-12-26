@@ -33,10 +33,5 @@ final class RemoveOptionCollectionView: BaseView {
             $0.itemSize = .init(width: UIScreen.getDeviceWidth(), height: 52)
             $0.minimumLineSpacing = 8
         }
-        
-        collectionView.do {
-            $0.backgroundColor = .clear
-            $0.isScrollEnabled = false
-        }
     }
 }
