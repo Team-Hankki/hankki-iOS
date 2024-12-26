@@ -140,14 +140,14 @@ private extension RemoveHankkiViewController {
             image: .imgModalReport,
             titleText: nickname + StringLiterals.Alert.thanksForReport,
             primaryButtonText: StringLiterals.Alert.check,
-            primaryButtonHandler: popToHomeHankkiList,
+            primaryButtonHandler: popToThreeStepsBack,
             hightlightedText: nickname,
             hightlightedColor: .red500
         )
     }
     
-    // 전체 식당 리스트가 떠있는 홈으로 이동
-    func popToHomeHankkiList() {
+    // 이전의 이전의 이전 화면으로 이동
+    func popToThreeStepsBack() {
         if let viewControllers = self.navigationController?.viewControllers {
             if viewControllers.count > 2 {
                 self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
