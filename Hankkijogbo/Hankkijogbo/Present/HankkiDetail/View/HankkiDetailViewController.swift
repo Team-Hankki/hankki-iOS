@@ -113,7 +113,6 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         hankkiInfoView.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(116)
         }
         
         detailMapView.snp.makeConstraints {

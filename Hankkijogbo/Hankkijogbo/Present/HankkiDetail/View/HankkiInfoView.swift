@@ -45,7 +45,7 @@ final class HankkiInfoView: BaseView {
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(categoryImageView.snp.bottom).offset(2)
-            $0.leading.equalToSuperview().inset(22)
+            $0.leading.trailing.equalToSuperview().inset(22)
         }
         
         heartButton.snp.makeConstraints {
@@ -76,6 +76,7 @@ final class HankkiInfoView: BaseView {
         }
         
         nameLabel.do {
+            $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h3, color: .gray900)
         }
         
