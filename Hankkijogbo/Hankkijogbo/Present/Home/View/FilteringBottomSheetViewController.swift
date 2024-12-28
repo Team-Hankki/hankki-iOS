@@ -18,6 +18,9 @@ final class FilteringBottomSheetViewController: BaseViewController {
     private var priceData: [GetPriceFilterData] = []
     private var sortData: [GetSortOptionFilterData] = []
     
+    private var selectedPriceValue: String?
+    private var selectedSortValue: String?
+    
     // MARK: - Components
     
     private let dimmedView: UIView = UIView()
@@ -207,10 +210,28 @@ private extension FilteringBottomSheetViewController {
     
     @objc func filteringChipButtonDidTap(_ sender: UIButton) {
         if priceChipStackView.arrangedSubviews.contains(sender) {
+            if let priceValue = sender.titleLabel?.text { selectedPriceValue = priceValue }
             limitedButtonState(for: sender, in: priceChipStackView)
         } else if sortChipStackView.arrangedSubviews.contains(sender) {
+            if let sortValue = sender.titleLabel?.text { selectedSortValue = sortValue }
             limitedButtonState(for: sender, in: sortChipStackView)
         }
+    }
+  
+    @objc func applyButtonDidTap() {
+        if let selectedPriceValue = selectedPriceValue,
+           let selectedPriceData = priceData.first(where: { $0.name == selectedPriceValue }) {
+            viewModel.priceCategory = selectedPriceData.tag
+        } else { viewModel.priceCategory = nil }
+
+
+        if let selectedSortValue = selectedSortValue,
+           let selectedSortData = sortData.first(where: { $0.name == selectedSortValue }) {
+            viewModel.sortOption = selectedSortData.tag
+        } else { viewModel.sortOption = nil }
+
+//        viewModel.updateHankkiList()
+        dimmedViewDidTap()
     }
 }
 
@@ -221,6 +242,8 @@ private extension FilteringBottomSheetViewController {
         [entireChipButton, less6000ChipButton, more6000ChipButton, latestChipButton, lowestChipButton, recommendChipButton].forEach { button in
             button.addTarget(self, action: #selector(filteringChipButtonDidTap(_:)), for: .touchUpInside)
         }
+        
+        applyButton.addTarget(self, action: #selector(applyButtonDidTap), for: .touchUpInside)
     }
     
     func bindViewModels() {
