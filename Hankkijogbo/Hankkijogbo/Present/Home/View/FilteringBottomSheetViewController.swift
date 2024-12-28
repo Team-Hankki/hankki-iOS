@@ -211,10 +211,10 @@ private extension FilteringBottomSheetViewController {
     @objc func filteringChipButtonDidTap(_ sender: UIButton) {
         if priceChipStackView.arrangedSubviews.contains(sender) {
             if let priceValue = sender.titleLabel?.text { selectedPriceValue = priceValue }
-            limitedButtonState(for: sender, in: priceChipStackView)
+            setButtonStateLimit(for: sender, in: priceChipStackView)
         } else if sortChipStackView.arrangedSubviews.contains(sender) {
             if let sortValue = sender.titleLabel?.text { selectedSortValue = sortValue }
-            limitedButtonState(for: sender, in: sortChipStackView)
+            setButtonStateLimit(for: sender, in: sortChipStackView)
         }
     }
   
