@@ -182,7 +182,7 @@ private extension FilteringBottomSheetViewController {
     }
     
     // buttonStackView 당 하나의 button만 눌리도록 제한하는 메소드
-    func limitedButtonState(for selectedButton: UIButton, in stackView: UIStackView) {
+    func setButtonStateLimit(for selectedButton: UIButton, in stackView: UIStackView) {
         let buttons = stackView.arrangedSubviews.compactMap { $0 as? UIButton }
         for button in buttons {
             if button == selectedButton {
