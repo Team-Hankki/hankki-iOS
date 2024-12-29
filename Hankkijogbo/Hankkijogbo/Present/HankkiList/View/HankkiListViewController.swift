@@ -241,8 +241,7 @@ extension HankkiListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let hankkiId = viewModel.hankkiList[indexPath.item].id
-        let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
-        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
+        pushToDetailWithHankkiNavigation(hankkiId: hankkiId)
     }
 }
 
