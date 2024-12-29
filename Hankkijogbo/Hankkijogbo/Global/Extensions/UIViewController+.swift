@@ -156,4 +156,20 @@ extension UIViewController {
         self.view.window!.layer.add(transition, forKey: nil)
         self.dismiss(animated: true, completion: nil)
     }
+    
+    /// 한끼 네비로 세팅한 후 식당 상세로 push
+    func pushToDetailWithHankkiNavigation(hankkiId: Int) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? HankkiNavigationController {
+            let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                                  hasRightButton: false,
+                                                                  mainTitle: .string(""),
+                                                                  rightButton: .string(""))
+            rootViewController.setupNavigationBar(forType: type)
+            rootViewController.isNavigationBarHidden = false
+            
+            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
+            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
+        }
+    }
 }
