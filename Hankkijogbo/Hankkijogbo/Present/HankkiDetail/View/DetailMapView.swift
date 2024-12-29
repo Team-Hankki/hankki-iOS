@@ -81,6 +81,7 @@ final class DetailMapView: BaseView {
         }
         
         mapView.do {
+            $0.zoomLevel = 16
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 12
             $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
@@ -130,6 +131,8 @@ extension DetailMapView {
     
     func bindData(latitude: Double, longitude: Double) {
         addressLabel.text = "\(latitude) \(longitude)"
+        addMapMarker(latitude: latitude, longitude: longitude)
+        moveMapCamera(latitude: latitude, longitude: longitude)
     }
 }
 
@@ -143,6 +146,18 @@ private extension DetailMapView {
     
     func copyAddressToClipboard() {
         UIPasteboard.general.string = addressLabel.text
+    }
+    
+    func addMapMarker(latitude: Double, longitude: Double) {
+        let marker = NMFMarker()
+        marker.position = NMGLatLng(lat: latitude, lng: longitude)
+        marker.iconImage = NMFOverlayImage(image: .icPin)
+        marker.mapView = mapView
+    }
+    
+    func moveMapCamera(latitude: Double, longitude: Double) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
+        mapView.moveCamera(cameraUpdate)
     }
     
     // MARK: - @objc Func
