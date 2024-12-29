@@ -100,8 +100,8 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         }
         
         backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(48.5)
-            $0.leading.equalToSuperview().inset(7)
+            $0.top.equalToSuperview().inset(57)
+            $0.leading.equalToSuperview().inset(8)
             $0.size.equalTo(40)
         }
         
