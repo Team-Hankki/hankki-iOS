@@ -207,7 +207,6 @@ private extension MyZipListBottomSheetViewController {
     }
     
     func setupDelegate() {
-        myZipCollectionView.delegate = self
         myZipCollectionView.dataSource = self
     }
     
@@ -356,17 +355,5 @@ extension MyZipListBottomSheetViewController: UICollectionViewDataSource {
             cell.bindData(zipData: data[indexPath.item])
         }
         return cell
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension MyZipListBottomSheetViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let data = viewModel.myZipListFavoriteData {
-            let hankkiId = data[indexPath.item].id
-            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
-            navigationController?.pushViewController(hankkiDetailViewController, animated: true)
-        }
     }
 }
