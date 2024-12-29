@@ -171,7 +171,6 @@ private extension HankkiDetailViewController {
                 )
                 detailMapView.bindData(latitude: data.latitude, longitude: data.longitude)
                 
-                menuCollectionView.updateLayout(menuSize: data.menus.count)
                 menuCollectionView.collectionView.reloadData()
             }
         }
@@ -370,10 +369,31 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiMenuCollectionViewCell.className, for: indexPath) as? HankkiMenuCollectionViewCell else { return UICollectionViewCell() }
+        
         if let data = viewModel.hankkiDetailData {
             cell.bindData(data.menus[indexPath.item])
+            menuCollectionView.updateLayout()
             return cell
         }
         return UICollectionViewCell()
+    }
+}
+
+extension HankkiDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    // 메뉴명 label 길이에 따라 다르게 셀 크기 지정
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let data = viewModel.hankkiDetailData {
+            let menuNameLabelSize = NSString(string: data.menus[indexPath.item].name)
+                .boundingRect(
+                    with: CGSize(width: UIScreen.getDeviceWidth() - 44, height: CGFloat.greatestFiniteMagnitude),
+                    options: .usesLineFragmentOrigin,
+                    attributes: [NSAttributedString.Key.font: UIFont.setupPretendardStyle(of: .body8)],
+                    context: nil
+                )
+            return CGSize(width: UIScreen.getDeviceWidth(), height: menuNameLabelSize.height + 25)
+        }
+        
+        return .zero
     }
 }
