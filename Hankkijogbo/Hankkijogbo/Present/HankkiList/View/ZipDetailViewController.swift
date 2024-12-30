@@ -26,6 +26,7 @@ final class ZipDetailViewController: BaseHankkiListViewController {
                                                                            isPrimaryButtonAble: true)
     
     // MARK: - Life Cycle
+    
     init (zipId: Int, type: ZipDetailCollectionViewType = .myZip) {
         self.type = type
         self.zipId = zipId
@@ -45,13 +46,7 @@ final class ZipDetailViewController: BaseHankkiListViewController {
         super.viewWillAppear(animated)
         setupNavigationBar()
         
-        switch type {
-        case .myZip:
-            viewModel.getZipDetail(zipId: zipId)
-        case .sharedZip:
-            viewModel.getSharedZipDetail(zipId: zipId)
-            checkLogin()
-        }
+        getZipDetail()
     }
     
     // MARK: - override
@@ -63,11 +58,7 @@ final class ZipDetailViewController: BaseHankkiListViewController {
                 self?.hankkiTableView.reloadData()
             }
             
-            if !(self?.isHeaderSetting ?? false) {
-                guard let headerView = self?.hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
-                headerView.dataBind(self?.viewModel.zipInfo ?? nil, viewModel: self!.viewModel, isShareButtonHidden: self?.type == .sharedZip)
-                self?.isHeaderSetting = true
-            }
+            self?.bindHeaderView()
         }
     }
     
@@ -97,6 +88,30 @@ final class ZipDetailViewController: BaseHankkiListViewController {
 }
 
 private extension ZipDetailViewController {
+    
+    func getZipDetail() {
+        switch type {
+        case .myZip:
+            viewModel.getZipDetail(zipId: zipId)
+        case .sharedZip:
+            viewModel.getSharedZipDetail(zipId: zipId)
+            checkLogin()
+        }
+    }
+    
+    func bindHeaderView() {
+        // header 가 초기화 되지 않은 경우 진행
+        if !(isHeaderSetting) {
+            
+            guard let headerView = hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
+            
+            headerView.dataBind(viewModel.zipInfo ?? nil,
+                                viewModel: viewModel,
+                                isShareButtonHidden: type == .sharedZip)
+            
+            isHeaderSetting = true
+        }
+    }
     
     func setupNavigationBar() {
         let type: HankkiNavigationType
@@ -150,7 +165,8 @@ private extension ZipDetailViewController {
         }
     }
 }
-// MARK: - Delegat
+
+// MARK: - Delegate
 
 extension ZipDetailViewController {
     
