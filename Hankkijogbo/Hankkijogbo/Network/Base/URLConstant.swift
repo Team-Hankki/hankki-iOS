@@ -12,6 +12,7 @@ enum URLConstant {
     // MARK: - Base URL
     
     static let baseURL = Config.baseURL
+    static let reverseGeocodingBaseURL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode"
     
     // MARK: - URL Path
     
