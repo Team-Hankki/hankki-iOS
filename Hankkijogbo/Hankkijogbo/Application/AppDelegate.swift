@@ -8,12 +8,14 @@
 import UIKit
 
 import Amplitude
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Amplitude.instance().initializeApiKey(Config.Amplitude)
+        KakaoSDK.initSDK(appKey: Config.Kakao)
         return true
     }
 

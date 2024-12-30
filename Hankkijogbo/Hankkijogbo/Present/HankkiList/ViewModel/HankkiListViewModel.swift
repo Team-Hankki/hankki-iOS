@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+import KakaoSDKCommon
+import KakaoSDKShare
+import KakaoSDKTemplate
+
 final class HankkiListViewModel {
     
     weak var delegate: NetworkResultDelegate?
@@ -25,10 +29,32 @@ final class HankkiListViewModel {
 extension HankkiListViewModel {
     
     func getZipDetail(zipId: Int) {
-        NetworkService.shared.zipService.getZipList(zipId: zipId) { result in
+        NetworkService.shared.zipService.getZipDetail(zipId: zipId) { result in
             
             result.handleNetworkResult(delegate: self.delegate) { response in
-                self.zipInfo = ZipHeaderTableView.Model(name: UserDefaults.standard.getNickname(),
+                self.zipInfo = ZipHeaderTableView.Model(id: zipId,
+                                                        name: UserDefaults.standard.getNickname(),
+                                                        title: response.data.title,
+                                                        details: response.data.details)
+                
+                self.hankkiList = response.data.stores.map {
+                    return HankkiListTableViewCell.Model(id: $0.id,
+                                                         name: $0.name,
+                                                         imageURL: $0.imageUrl ?? "",
+                                                         category: $0.category,
+                                                         lowestPrice: $0.lowestPrice,
+                                                         heartCount: $0.heartCount)
+                }
+            }
+        }
+    }
+    
+    func getSharedZipDetail(zipId: Int) {
+        NetworkService.shared.zipService.getSharedZipDetail(zipId: zipId) { result in
+            
+            result.handleNetworkResult(delegate: self.delegate) { response in
+                self.zipInfo = ZipHeaderTableView.Model(id: zipId,
+                                                        name: response.data.nickname,
                                                         title: response.data.title,
                                                         details: response.data.details)
                 
@@ -100,6 +126,45 @@ extension HankkiListViewModel {
             }
         }
     }
+    
+    func shareZip(handelHankkiListIsEmpty: () -> Void) {
+  
+        if hankkiList.isEmpty {
+            handelHankkiListIsEmpty()
+            return
+        }
+        
+        let templeteID: Int64 = Int64(StringLiterals.Kakao.zipShareTemplete)
+        
+        let imageURL: String = hankkiList[0].imageURL.isEmpty ? StringLiterals.SharedZip.zipShareDefaultImageURL : hankkiList[0].imageURL
+        
+        let templetArgs: [String: String] = ["IMAGE_URL": imageURL,
+                                             "FAVORITE_ID": String(zipInfo?.id ?? 0),
+                                             "NAME": hankkiList[0].name,
+                                             "SENDER": zipInfo?.name ?? ""]
+        
+        // 카카오톡이 있는지 확인합니다.
+        if ShareApi.isKakaoTalkSharingAvailable() {
+            ShareApi.shared.shareCustom(templateId: templeteID, templateArgs: templetArgs) { sharingResult, error in
+                if let error = error {
+                    print("error : \(error)")
+                } else {
+                    print("sharing is success")
+                    guard let sharingResult else { return }
+                    UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
+                }
+            }
+        } else {
+            let url = StringLiterals.Kakao.storeUrl
+            if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
+    }
 }
 
 private extension HankkiListViewModel {
@@ -125,7 +190,7 @@ private extension HankkiListViewModel {
             }
             return store
         }
-
+        
         self.hankkiList = updatedHankkiList
     }
 }
