@@ -102,6 +102,9 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
     private func bindViewModel() {
         viewModel.hankkiListsDidChange = { [weak self] data in
             guard let self = self else { return }
+            
+            self.viewModel.checkThumbnailHankkiValidation()
+            
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.updateTotalListCount(count: data.count)
@@ -122,6 +125,10 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
             self?.showAlert(titleText: StringLiterals.Alert.unknownError,
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
+        }
+        
+        viewModel.showHankkiListBottomSheet = {
+            self.showHankkiListBottomSheet()
         }
         
         viewModel.getCategoryFilterAPI { [weak self] success in
@@ -170,6 +177,7 @@ extension HomeViewController {
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
         rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
+        rootView.filteringFloatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
     }
     
     func presentUniversity() {
@@ -245,12 +253,16 @@ private extension HomeViewController {
             }
         }
     }
+    
+    func showHankkiListBottomSheet() {
+        self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+        self.hideMarkerInfoCard()
+    }
 }
 
 extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-        self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
-        self.hideMarkerInfoCard()
+        showHankkiListBottomSheet()
     }
 }
 

@@ -197,6 +197,7 @@ final class BottomButtonView: BaseView {
 }
 
 private extension BottomButtonView {
+    
     func setupBottomButtonViewGradient() {
         let gradient = CAGradientLayer()
         

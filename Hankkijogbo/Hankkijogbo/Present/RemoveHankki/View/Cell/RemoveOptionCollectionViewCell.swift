@@ -1,5 +1,5 @@
 //
-//  HankkiReportOptionCollectionViewCell.swift
+//  RemoveOptionCollectionViewCell.swift
 //  Hankkijogbo
 //
 //  Created by 서은수 on 7/15/24.
@@ -7,20 +7,14 @@
 
 import UIKit
 
-/// Cell의 클릭 상태에 따라 FooterView의 버튼 스타일을 변경하기 위한 delegate
+/// Cell의 클릭 상태에 따라 제보하기 버튼 스타일을 변경하기 위한 delegate
 protocol UpdateReportButtonStyleDelegate: AnyObject {
     func updateReportButtonStyle(isEnabled: Bool)
 }
 
-final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
+final class RemoveOptionCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Properties
-    
-    var selectedOptionString: String? {
-        didSet {
-            print(selectedOptionString ?? "")
-        }
-    }
     
     override var isSelected: Bool {
         didSet {
@@ -42,13 +36,14 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    var optionString: String = "" {
+    weak var delegate: UpdateReportButtonStyleDelegate?
+    
+    private var selectedOptionString: String?
+    private var optionString: String = "" {
         didSet {
             reportOptionLabel.text = optionString
         }
     }
-    
-    weak var delegate: UpdateReportButtonStyleDelegate?
     
     // MARK: - UI Components
     
@@ -72,26 +67,26 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     override func setupLayout() {
         reportOptionLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(22)
         }
+        
         radioButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(20)
+            $0.trailing.equalToSuperview().inset(22)
             $0.size.equalTo(24)
         }
     }
     
     override func setupStyle() {
         self.do {
-            $0.makeRoundBorder(cornerRadius: 10, borderWidth: 1, borderColor: .gray200)
             $0.backgroundColor = .hankkiWhite
         }
+        
         reportOptionLabel.do {
-            $0.attributedText = UILabel.setupAttributedText(
-                for: PretendardStyle.body5,
-                color: .gray400
-            )
+            $0.font = .setupPretendardStyle(of: .body6)
+            $0.textColor = .gray500
         }
+        
         radioButton.do {
             $0.setImage(.btnRadioNormal, for: .normal)
             $0.isUserInteractionEnabled = false
@@ -103,17 +98,21 @@ final class HankkiReportOptionCollectionViewCell: BaseCollectionViewCell {
     }
 }
 
-private extension HankkiReportOptionCollectionViewCell {
+// MARK: - Private Func
+
+private extension RemoveOptionCollectionViewCell {
     
     func setupSelectedStyle() {
-        self.layer.borderColor = UIColor.red500.cgColor
-        self.radioButton.setImage(.btnRadioSelected, for: .normal)
-        self.reportOptionLabel.textColor = .red500
+        backgroundColor = .red100
+        radioButton.setImage(.btnRadioSelected, for: .normal)
+        reportOptionLabel.font = .setupPretendardStyle(of: .body5)
+        reportOptionLabel.textColor = .red500
     }
     
     func setupNormalStyle() {
-        self.layer.borderColor = UIColor.gray200.cgColor
-        self.radioButton.setImage(.btnRadioNormal, for: .normal)
-        self.reportOptionLabel.textColor = .gray400
+        backgroundColor = .hankkiWhite
+        radioButton.setImage(.btnRadioNormal, for: .normal)
+        reportOptionLabel.font = .setupPretendardStyle(of: .body6)
+        reportOptionLabel.textColor = .gray500
     }
 }

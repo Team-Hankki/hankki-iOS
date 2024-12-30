@@ -12,19 +12,32 @@ import UIKit
 
 final class HankkiDetailViewModel {
     
-    var setHankkiDetailData: (() -> Void)?
-    var showAlert: ((String) -> Void)?
-    var dismiss: (() -> Void)?
-    
+    var hankkiId: Int
     var hankkiDetailData: GetHankkiDetailResponseData? {
         didSet {
             setHankkiDetailData?()
         }
     }
+    var removeOptions: [String] = [
+        StringLiterals.RemoveHankki.optionDisappeared,
+        StringLiterals.RemoveHankki.optionNoMore8000,
+        StringLiterals.RemoveHankki.optionImproperHankki
+    ]
     weak var delegate: NetworkResultDelegate?
     
+    var setHankkiDetailData: (() -> Void)?
+    var showAlert: ((String) -> Void)?
+    var dismiss: (() -> Void)?
+    
+    init(hankkiId: Int) {
+        self.hankkiId = hankkiId
+    }
+}
+
+extension HankkiDetailViewModel {
+    
     /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int) {
+    func getHankkiDetailAPI() {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -41,25 +54,27 @@ final class HankkiDetailViewModel {
     }
     
     /// 식당 좋아요 추가
-    func postHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
+    func postHankkiHeartAPI() {
+        NetworkService.shared.hankkiService.postHankkiHeart(id: hankkiId) { result in
             result.handleNetworkResult { _ in
                 SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabHeart)
-                completion()
+                self.getHankkiDetailAPI()
             }
         }
     }
     
     /// 식당 좋아요 삭제
-    func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in completion() }
+    func deleteHankkiHeartAPI() {
+        NetworkService.shared.hankkiService.deleteHankkiHeart(id: hankkiId) { result in
+            result.handleNetworkResult { _ in
+                self.getHankkiDetailAPI()
+            }
         }
     }
     
     /// 식당 삭제
-    func deleteHankkiAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.deleteHankki(id: id) { result in
+    func deleteHankkiAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankki(id: hankkiId) { result in
             result.handleNetworkResult(onSuccessVoid: completion)
         }
     }
