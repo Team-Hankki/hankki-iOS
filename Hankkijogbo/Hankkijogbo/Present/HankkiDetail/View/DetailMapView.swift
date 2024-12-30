@@ -58,12 +58,7 @@ final class DetailMapView: BaseView {
         
         addressGuideLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(10)
-            $0.centerY.equalToSuperview()
-        }
-        
-        addressLabel.snp.makeConstraints {
-            $0.leading.equalTo(addressGuideLabel.snp.trailing).offset(8)
-            $0.centerY.equalTo(addressGuideLabel)
+            $0.top.equalToSuperview().inset(11.5)
         }
         
         copyButton.snp.makeConstraints {
@@ -71,6 +66,12 @@ final class DetailMapView: BaseView {
             $0.centerY.equalTo(addressLabel)
             $0.width.equalTo(36)
             $0.height.equalTo(25)
+        }
+        
+        addressLabel.snp.makeConstraints {
+            $0.leading.equalTo(addressGuideLabel.snp.trailing).offset(8)
+            $0.trailing.equalTo(copyButton.snp.leading).offset(-6)
+            $0.centerY.equalToSuperview()
         }
     }
     
@@ -130,6 +131,8 @@ extension DetailMapView {
     
     func bindData(latitude: Double, longitude: Double, address: String) {
         addressLabel.text = address
+        
+        updateAddressViewLayout()
         addMapMarker(latitude: latitude, longitude: longitude)
         moveMapCamera(latitude: latitude, longitude: longitude)
     }
@@ -141,6 +144,23 @@ private extension DetailMapView {
     
     func setupAddTarget() {
         copyButton.addTarget(self, action: #selector(copyButtonDidTap), for: .touchUpInside)
+    }
+    
+    func updateAddressViewLayout() {
+        let maxSize: CGSize = CGSize(width: addressLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let expectedSize: CGSize = addressLabel.sizeThatFits(maxSize)
+        let spacing: CGFloat = expectedSize.height > 18 ? 8 : 11.5 // 줄 수를 기준으로
+        
+        addressView.snp.updateConstraints {
+            $0.top.equalTo(mapView.snp.bottom).offset(-1)
+            $0.leading.trailing.equalTo(mapView)
+            $0.height.equalTo(spacing + expectedSize.height + spacing)
+        }
+        
+        addressGuideLabel.snp.updateConstraints {
+            $0.leading.equalToSuperview().inset(10)
+            $0.top.equalToSuperview().inset(spacing)
+        }
     }
     
     func copyAddressToClipboard() {
