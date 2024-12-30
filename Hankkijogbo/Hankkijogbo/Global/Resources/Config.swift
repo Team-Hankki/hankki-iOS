@@ -15,6 +15,8 @@ enum Config {
             static let baseURL = "BASE_URL"
             static let NMFClientId = "NMFClientId"
             static let Amplitude = "Amplitude"
+            static let reverseGeocodingClientId = "ReverseGeocodingClientId"
+            static let reverseGeocodingClientSecret = "ReverseGeocodingClientSecret"
         }
     }
     
@@ -37,6 +39,20 @@ extension Config {
     static let NMFClientId: String = {
         guard let key = Config.infoDictionary[Keys.Plist.NMFClientId] as? String else {
             fatalError("ClientID is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let ReverseGeocodingClientId: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.reverseGeocodingClientId] as? String else {
+            fatalError("ReverseGeocodingClientID is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let ReverseGeocodingClientSecret: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.reverseGeocodingClientSecret] as? String else {
+            fatalError("ReverseGeocodingClientSecret is not set in plist for this configuration.")
         }
         return key
     }()
