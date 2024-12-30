@@ -20,8 +20,8 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
 
-    private var viewModel: HankkiListViewModel?
     var showAlert: ((String) -> Void)?
+    var shareZip: (() -> Void)?
     
     // MARK: - UI Properties
     
@@ -163,22 +163,8 @@ private extension ZipHeaderTableView {
     }
     
     @objc func shareButtonDidTap() {
-        viewModel?.shareZip {
-            UIApplication.showAlert(titleText: StringLiterals.Alert.NeedOneMoreHankkiToShare.title,
-                                    secondaryButtonText: StringLiterals.Alert.NeedOneMoreHankkiToShare.secondaryButton,
-                                    primaryButtonText: StringLiterals.Alert.NeedOneMoreHankkiToShare.primaryButton,
-                                    primaryButtonHandler: presentHomeView)
-            return
-        }
-    }
-    
-    func presentHomeView() {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-            if let window = windowScene.windows.first {
-                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
-                window.rootViewController = navigationController
-            }
-        }
+        guard let shareZip = shareZip else { return }
+        shareZip()
     }
 }
 
@@ -221,8 +207,8 @@ private extension ZipHeaderTableView {
 }
 
 extension ZipHeaderTableView {
-    func dataBind(_ data: Model?, viewModel: HankkiListViewModel, isShareButtonHidden: Bool) {
-        self.viewModel = viewModel
+    func dataBind(_ data: Model?, isShareButtonHidden: Bool, shareZip: @escaping ()-> Void) {
+        self.shareZip = shareZip
         headerLabel.text = data?.title
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name

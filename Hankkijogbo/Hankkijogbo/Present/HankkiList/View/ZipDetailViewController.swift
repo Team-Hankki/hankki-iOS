@@ -89,6 +89,7 @@ final class ZipDetailViewController: BaseHankkiListViewController {
 
 private extension ZipDetailViewController {
     
+    /// 족보 정보 가져오기
     func getZipDetail() {
         switch type {
         case .myZip:
@@ -106,10 +107,30 @@ private extension ZipDetailViewController {
             guard let headerView = hankkiTableView.headerView(forSection: 0) as? ZipHeaderTableView else { return }
             
             headerView.dataBind(viewModel.zipInfo ?? nil,
-                                viewModel: viewModel,
-                                isShareButtonHidden: type == .sharedZip)
+                                isShareButtonHidden: type == .sharedZip,
+                                shareZip: shareZip)
             
             isHeaderSetting = true
+        }
+    }
+    
+    /// 족보 공유
+    func shareZip() {
+        viewModel.shareZip {
+            UIApplication.showAlert(titleText: StringLiterals.Alert.NeedOneMoreHankkiToShare.title,
+                                    secondaryButtonText: StringLiterals.Alert.NeedOneMoreHankkiToShare.secondaryButton,
+                                    primaryButtonText: StringLiterals.Alert.NeedOneMoreHankkiToShare.primaryButton,
+                                    primaryButtonHandler: presentHomeView)
+            return
+        }
+    }
+    
+    func presentHomeView() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                let navigationController = HankkiNavigationController(rootViewController: TabBarController())
+                window.rootViewController = navigationController
+            }
         }
     }
     
@@ -198,7 +219,7 @@ extension ZipDetailViewController {
         footerView.viewController = self
         return footerView
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if type == .sharedZip {
             return 100
