@@ -256,9 +256,9 @@ enum StringLiterals {
         }
         
         enum Option {
-            static let Terms = "약관 및 정책"
-            static let OneonOne = "1:1 문의"
-            static let Logout = Common.logout
+            static let terms = "약관 및 정책"
+            static let oneOnOne = "1:1 문의"
+            static let logout = Common.logout
         }
         
         enum Header {
@@ -318,9 +318,9 @@ enum StringLiterals {
     }
     
     enum ExternalLink {
-        static let OneonOne = "https://tally.so/r/mO0oJY"
-        static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
-        static let LinkTree = "https://link.inpock.co.kr/hankkilink?fbclid=PAZXh0bgNhZW0CMTEAAabp7jPfQGVtGfHXOSEA-urXPNPbog0a0Rco43_a-zsdcxQOvFqVXQoqsXQ_aem_gyGO3bZoFAlf0tMF7QTqKg"
+        static let oneOnOne = "https://tally.so/r/mO0oJY"
+        static let terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let linkTree = "https://link.inpock.co.kr/hankkilink?fbclid=PAZXh0bgNhZW0CMTEAAabp7jPfQGVtGfHXOSEA-urXPNPbog0a0Rco43_a-zsdcxQOvFqVXQoqsXQ_aem_gyGO3bZoFAlf0tMF7QTqKg"
     }
     
     enum Onboarding {
