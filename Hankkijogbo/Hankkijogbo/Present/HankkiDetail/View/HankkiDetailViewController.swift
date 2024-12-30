@@ -169,7 +169,11 @@ private extension HankkiDetailViewController {
                     heartCount: String(data.heartCount),
                     isLiked: data.isLiked
                 )
-                detailMapView.bindData(latitude: data.latitude, longitude: data.longitude)
+                detailMapView.bindData(
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    address: viewModel.address ?? "-"
+                )
                 
                 menuCollectionView.collectionView.reloadData()
             }

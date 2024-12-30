@@ -11,7 +11,6 @@ import NMapsMap
 
 final class DetailMapView: BaseView {
     
-    // MARK: - Properties
     // MARK: - UI Components
     
     private let mapView: NMFMapView = NMFMapView()
@@ -104,12 +103,12 @@ final class DetailMapView: BaseView {
             )
         }
         
-        // TODO: - 위경도 값으로 주소 불러와야 함
         addressLabel.do {
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.caption4,
                 color: .gray700
             )
+            $0.numberOfLines = 2
         }
         
         copyButton.do {
@@ -129,8 +128,8 @@ final class DetailMapView: BaseView {
 
 extension DetailMapView {
     
-    func bindData(latitude: Double, longitude: Double) {
-        addressLabel.text = "\(latitude) \(longitude)"
+    func bindData(latitude: Double, longitude: Double, address: String) {
+        addressLabel.text = address
         addMapMarker(latitude: latitude, longitude: longitude)
         moveMapCamera(latitude: latitude, longitude: longitude)
     }
