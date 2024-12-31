@@ -33,7 +33,7 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     var showAlert: ((String) -> Void)?
     var dismiss: (() -> Void)?
-    var handleMapError: (() -> Void)?
+    var handleMapLoadError: (() -> Void)?
     var handleDeletedHankki: (() -> Void)?
     
     init(hankkiId: Int) {
@@ -89,18 +89,18 @@ private extension HankkiDetailViewModel {
         guard let detailData = hankkiDetailData else { return }
         NetworkService.shared.naverMapService.getHankkiAddress(latitude: detailData.latitude, longitude: detailData.longitude) { result in
             switch result {
-            case .badRequest, .serverError:
-                self.handleMapError?()
-            default:
+            case .success:
                 result.handleNetworkResult { response in
                     guard let data = response.results.first,
                           let data = data else {
-                        self.address = "-"
+                        self.handleMapLoadError?()
                         return
                     }
 
                     self.address = self.formatAddress(from: data)
                 }
+            default:
+                self.handleMapLoadError?()
             }
         }
     }

@@ -19,6 +19,9 @@ final class DetailMapView: BaseView {
     private let addressLabel: UILabel = UILabel()
     private let copyButton: UIButton = UIButton()
     
+    private let mapErrorView: UIView = UIView()
+    private let mapErrorLabel: UILabel = UILabel()
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -83,9 +86,9 @@ final class DetailMapView: BaseView {
         mapView.do {
             $0.zoomLevel = 16
             $0.clipsToBounds = true
-            $0.layer.cornerRadius = 12
+            $0.layer.cornerRadius = 8
             $0.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
-            $0.makeRoundBorder(cornerRadius: 12, borderWidth: 1, borderColor: .imageLine)
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 1, borderColor: .imageLine)
         }
         
         addressView.do {
@@ -124,6 +127,20 @@ final class DetailMapView: BaseView {
                 $0.setAttributedTitle(attributedTitle, for: .normal)
             }
         }
+        
+        mapErrorView.do {
+            $0.backgroundColor = .gray100
+            $0.makeRoundCorners(corners: [.layerMinXMinYCorner, .layerMaxXMinYCorner], radius: 8)
+            $0.makeRoundBorder(cornerRadius: 8, borderWidth: 1, borderColor: .imageLine)
+        }
+        
+        mapErrorLabel.do {
+            $0.attributedText = UILabel.setupAttributedText(
+                for: PretendardStyle.caption4,
+                withText: StringLiterals.HankkiDetail.mapLoadErrorMessage,
+                color: .gray400
+            )
+        }
     }
 }
 
@@ -135,6 +152,11 @@ extension DetailMapView {
         updateAddressViewLayout()
         addMapMarker(latitude: latitude, longitude: longitude)
         moveMapCamera(latitude: latitude, longitude: longitude)
+    }
+    
+    func handleMapLoadError() {
+        showMapErrorView()
+        disableCopyButton()
     }
 }
 
@@ -177,6 +199,31 @@ private extension DetailMapView {
     func moveMapCamera(latitude: Double, longitude: Double) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
         mapView.moveCamera(cameraUpdate)
+    }
+    
+    func showMapErrorView() {
+        addSubview(mapErrorView)
+        mapErrorView.addSubview(mapErrorLabel)
+        
+        mapErrorView.snp.makeConstraints {
+            $0.edges.equalTo(mapView)
+        }
+        
+        mapErrorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    func disableCopyButton() {
+        copyButton.isEnabled = false
+        
+        if let attributedTitle = UILabel.setupAttributedText(
+            for: PretendardStyle.caption5,
+            withText: StringLiterals.HankkiDetail.copy,
+            color: .gray300
+        ) {
+            copyButton.setAttributedTitle(attributedTitle, for: .normal)
+        }
     }
     
     // MARK: - @objc Func

@@ -192,6 +192,10 @@ private extension HankkiDetailViewController {
         viewModel.handleDeletedHankki = { [weak self] in
             self?.showBlackToast(message: StringLiterals.Toast.deleteAlready)
         }
+        
+        viewModel.handleMapLoadError = { [weak self] in
+            self?.detailMapView.handleMapLoadError()
+        }
     }
     
     func setupRegister() {
