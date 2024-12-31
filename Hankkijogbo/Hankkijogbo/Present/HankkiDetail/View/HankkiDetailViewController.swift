@@ -185,8 +185,12 @@ private extension HankkiDetailViewController {
                             primaryButtonText: StringLiterals.Alert.check)
         }
         
-        viewModel.dismiss = {
-            self.navigationController?.popViewController(animated: false)
+        viewModel.dismiss = { [weak self] in
+            self?.navigationController?.popViewController(animated: false)
+        }
+        
+        viewModel.handleDeletedHankki = { [weak self] in
+            self?.showBlackToast(message: StringLiterals.Toast.deleteAlready)
         }
     }
     

@@ -8,7 +8,6 @@
 import Foundation
 
 import Moya
-import UIKit
 
 final class HankkiDetailViewModel {
     
@@ -34,6 +33,8 @@ final class HankkiDetailViewModel {
     var setHankkiDetailData: (() -> Void)?
     var showAlert: ((String) -> Void)?
     var dismiss: (() -> Void)?
+    var handleMapError: (() -> Void)?
+    var handleDeletedHankki: (() -> Void)?
     
     init(hankkiId: Int) {
         self.hankkiId = hankkiId
@@ -47,8 +48,8 @@ extension HankkiDetailViewModel {
             guard let self = self else { return }
             switch result {
             case .notFound:
-                UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
-                self.dismiss?()
+                handleDeletedHankki?()
+                dismiss?()
             default:
                 result.handleNetworkResult(delegate: self.delegate) { response in
                     self.hankkiDetailData = response.data
@@ -88,10 +89,8 @@ private extension HankkiDetailViewModel {
         guard let detailData = hankkiDetailData else { return }
         NetworkService.shared.naverMapService.getHankkiAddress(latitude: detailData.latitude, longitude: detailData.longitude) { result in
             switch result {
-            case .badRequest:
-                UIApplication.showBlackToast(message: StringLiterals.Toast.serverError)
-            case .serverError:
-                UIApplication.showBlackToast(message: StringLiterals.Toast.serverError)
+            case .badRequest, .serverError:
+                self.handleMapError?()
             default:
                 result.handleNetworkResult { response in
                     guard let data = response.results.first,
