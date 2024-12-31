@@ -186,7 +186,7 @@ final class HankkiListTableViewCell: BaseTableViewCell {
 }
 
 extension HankkiListTableViewCell {
-    func dataBind(_ data: Model, isFinal: Bool, isLikeButtonDisable: Bool) {
+    func dataBind(_ data: Model, isFinal: Bool, isLikeButtonDisable: Bool = true) {
         self.data = data
         
         categoryLabel.text = data.category

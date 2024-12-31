@@ -27,6 +27,7 @@
 		8322D03D2C5FB38700F6D725 /* HankkiCategoryTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8322D03C2C5FB38700F6D725 /* HankkiCategoryTagLabel.swift */; };
 		832546EC2C3F28F900B8C3DC /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832546EB2C3F28F900B8C3DC /* DropDownView.swift */; };
 		8336B5222CBACDC90034474E /* NetworkResultDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8336B5212CBACDC90034474E /* NetworkResultDelegate.swift */; };
+		8364B4022D17CA8D005FA842 /* CustomLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8364B4012D17CA81005FA842 /* CustomLineView.swift */; };
 		837F10DB2C4A851A00E3CCE6 /* HankkiInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837F10D92C4A851A00E3CCE6 /* HankkiInfoCardView.swift */; };
 		837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837F10DA2C4A851A00E3CCE6 /* ReportCompleteViewController.swift */; };
 		838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BEB022C38196300AAA153 /* TabBarItem.swift */; };
@@ -54,7 +55,6 @@
 		83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB32C2566300042BA48 /* StringLiterals.swift */; };
 		83DBEDB92C25666E0042BA48 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDB82C25666E0042BA48 /* MainButton.swift */; };
 		83DBEDBE2C25698B0042BA48 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 83DBEDBD2C25698B0042BA48 /* Then */; };
-		83DBEDC12C2569A80042BA48 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 83DBEDC02C2569A80042BA48 /* SnapKit */; };
 		83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 83DBEDC32C256A3B0042BA48 /* Moya */; };
 		83DBEDC62C256A7A0042BA48 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDC52C256A7A0042BA48 /* UIView+.swift */; };
 		83DBEDC82C256AD00042BA48 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DBEDC72C256AD00042BA48 /* NSObject+.swift */; };
@@ -67,6 +67,7 @@
 		83DD39762C46AEC800DD7EC3 /* MarkerInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */; };
 		83E9B3422D0C0553009F033E /* FilteringBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9B3412D0C054B009F033E /* FilteringBottomSheetViewController.swift */; };
 		861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 861704F62C38304D00D99E50 /* AlertViewController.swift */; };
+		862518AD2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */; };
 		8641516A2C67B9AE00E2FD44 /* MyZipListBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */; };
 		8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */; };
 		8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */; };
@@ -81,6 +82,12 @@
 		864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA9112C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift */; };
 		864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864FA91B2C3D63400051EA36 /* BottomButtonView.swift */; };
 		865826062C4170BE00265401 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865826052C4170BE00265401 /* LoginViewController.swift */; };
+		865938142D10226200A07E7A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 865938132D10226200A07E7A /* SnapKit */; };
+		8659381C2D10262800A07E7A /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 8659381B2D10262800A07E7A /* KakaoSDK */; };
+		8659381E2D10262800A07E7A /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 8659381D2D10262800A07E7A /* KakaoSDKCommon */; };
+		865938202D10262800A07E7A /* KakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8659381F2D10262800A07E7A /* KakaoSDKShare */; };
+		865938222D10262800A07E7A /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 865938212D10262800A07E7A /* KakaoSDKTemplate */; };
+		865938242D14939700A07E7A /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865938232D14939700A07E7A /* URL+.swift */; };
 		865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D012C44E9E0009D9BEA /* MoreButton.swift */; };
 		865C3D042C4506C8009D9BEA /* ZipFooterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */; };
 		865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D59C52C7B72C9004CC517 /* FullLoadingView.swift */; };
@@ -91,6 +98,10 @@
 		8668D2482C7DAEEC001CBCA0 /* Amplitude in Frameworks */ = {isa = PBXBuildFile; productRef = 8668D2472C7DAEEC001CBCA0 /* Amplitude */; };
 		8668D24A2C7DE0CA001CBCA0 /* SetupAmplitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D2492C7DE0CA001CBCA0 /* SetupAmplitude.swift */; };
 		8668D24C2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */; };
+		866DFE0A2D1548BD006EE662 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE092D1548BD006EE662 /* HankkiListViewController.swift */; };
+		866DFE0C2D154ACF006EE662 /* ZipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */; };
+		866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */; };
+		866DFE142D17295A006EE662 /* GetZipOwnershipResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */; };
 		8670A7832C4971A80098DCF1 /* UniversityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7822C4971A80098DCF1 /* UniversityModel.swift */; };
 		8670A7862C49C3290098DCF1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8670A7852C49C3290098DCF1 /* Lottie */; };
 		8670A78A2C49C3670098DCF1 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */; };
@@ -100,7 +111,6 @@
 		8670A7942C49CBB50098DCF1 /* onboarding4.json in Resources */ = {isa = PBXBuildFile; fileRef = 8670A7932C49CBB50098DCF1 /* onboarding4.json */; };
 		8670A7972C49EFC80098DCF1 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */; };
 		86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */; };
-		86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86784E8E2C4021E200E94A5D /* TagTextField.swift */; };
 		86880BD02C46C0FD00CAEF58 /* AuthAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */; };
 		86880BD22C46C27E00CAEF58 /* AuthTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */; };
 		86880BD52C46C55200CAEF58 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880BD42C46C55200CAEF58 /* UserTargetType.swift */; };
@@ -130,7 +140,7 @@
 		86880C382C4920A700CAEF58 /* PostZipRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86880C372C4920A700CAEF58 /* PostZipRequestDTO.swift */; };
 		86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761132C3DC79F00413059 /* ZipListViewController.swift */; };
 		86B761162C3DC7AB00413059 /* ZipListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */; };
-		86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* HankkiListViewController.swift */; };
+		86B7611C2C3DE04200413059 /* BaseHankkiListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611B2C3DE04200413059 /* BaseHankkiListViewController.swift */; };
 		86B7611F2C3DE05800413059 /* HankkiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */; };
 		86B761212C3DF60800413059 /* ZipHeaderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761202C3DF60800413059 /* ZipHeaderTableView.swift */; };
 		86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B761222C3EC87A00413059 /* ZipListCollectionViewCellModel.swift */; };
@@ -262,6 +272,7 @@
 		8322D03C2C5FB38700F6D725 /* HankkiCategoryTagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiCategoryTagLabel.swift; sourceTree = "<group>"; };
 		832546EB2C3F28F900B8C3DC /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		8336B5212CBACDC90034474E /* NetworkResultDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultDelegate.swift; sourceTree = "<group>"; };
+		8364B4012D17CA81005FA842 /* CustomLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLineView.swift; sourceTree = "<group>"; };
 		837F10D92C4A851A00E3CCE6 /* HankkiInfoCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HankkiInfoCardView.swift; sourceTree = "<group>"; };
 		837F10DA2C4A851A00E3CCE6 /* ReportCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportCompleteViewController.swift; sourceTree = "<group>"; };
 		838BEB022C38196300AAA153 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -299,6 +310,7 @@
 		83DD39752C46AEC800DD7EC3 /* MarkerInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoCardView.swift; sourceTree = "<group>"; };
 		83E9B3412D0C054B009F033E /* FilteringBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringBottomSheetViewController.swift; sourceTree = "<group>"; };
 		861704F62C38304D00D99E50 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSharedZipListResponseDTO.swift; sourceTree = "<group>"; };
 		864151632C67B9AD00E2FD44 /* MyZipListBottomSheetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListBottomSheetViewController.swift; sourceTree = "<group>"; };
 		864151642C67B9AD00E2FD44 /* MyZipListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListCollectionViewCell.swift; sourceTree = "<group>"; };
 		864151652C67B9AD00E2FD44 /* MyZipListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyZipListHeaderView.swift; sourceTree = "<group>"; };
@@ -314,6 +326,7 @@
 		864FA91B2C3D63400051EA36 /* BottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonView.swift; sourceTree = "<group>"; };
 		865826052C4170BE00265401 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		865826072C41762600265401 /* Hankkijogbo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hankkijogbo.entitlements; sourceTree = "<group>"; };
+		865938232D14939700A07E7A /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		865C3D012C44E9E0009D9BEA /* MoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreButton.swift; sourceTree = "<group>"; };
 		865C3D032C4506C8009D9BEA /* ZipFooterTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFooterTableView.swift; sourceTree = "<group>"; };
 		865C3D052C45B4B3009D9BEA /* Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Target Support Files/Pods-Hankkijogbo/Pods-Hankkijogbo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -326,6 +339,10 @@
 		86685C572C3BD89500C080C4 /* UnivCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnivCollectionViewCell.swift; sourceTree = "<group>"; };
 		8668D2492C7DE0CA001CBCA0 /* SetupAmplitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAmplitude.swift; sourceTree = "<group>"; };
 		8668D24B2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeLiterals.swift; sourceTree = "<group>"; };
+		866DFE092D1548BD006EE662 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
+		866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipDetailViewController.swift; sourceTree = "<group>"; };
+		866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewControllerType.swift; sourceTree = "<group>"; };
+		866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetZipOwnershipResponseDTO.swift; sourceTree = "<group>"; };
 		8670A7822C4971A80098DCF1 /* UniversityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityModel.swift; sourceTree = "<group>"; };
 		8670A7892C49C3670098DCF1 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8670A78B2C49C6BD0098DCF1 /* onboarding2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2.json; sourceTree = "<group>"; };
@@ -334,7 +351,6 @@
 		8670A7932C49CBB50098DCF1 /* onboarding4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding4.json; sourceTree = "<group>"; };
 		8670A7962C49EFC80098DCF1 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
 		86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateZipViewController.swift; sourceTree = "<group>"; };
-		86784E8E2C4021E200E94A5D /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		86880BCF2C46C0FD00CAEF58 /* AuthAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPIService.swift; sourceTree = "<group>"; };
 		86880BD12C46C27E00CAEF58 /* AuthTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTargetType.swift; sourceTree = "<group>"; };
 		86880BD42C46C55200CAEF58 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTargetType.swift; sourceTree = "<group>"; };
@@ -365,7 +381,7 @@
 		86880C372C4920A700CAEF58 /* PostZipRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostZipRequestDTO.swift; sourceTree = "<group>"; };
 		86B761132C3DC79F00413059 /* ZipListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListViewController.swift; sourceTree = "<group>"; };
 		86B761152C3DC7AB00413059 /* ZipListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCell.swift; sourceTree = "<group>"; };
-		86B7611B2C3DE04200413059 /* HankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListViewController.swift; sourceTree = "<group>"; };
+		86B7611B2C3DE04200413059 /* BaseHankkiListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseHankkiListViewController.swift; sourceTree = "<group>"; };
 		86B7611E2C3DE05800413059 /* HankkiListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiListTableViewCell.swift; sourceTree = "<group>"; };
 		86B761202C3DF60800413059 /* ZipHeaderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipHeaderTableView.swift; sourceTree = "<group>"; };
 		86B761222C3EC87A00413059 /* ZipListCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipListCollectionViewCellModel.swift; sourceTree = "<group>"; };
@@ -481,10 +497,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DBEDBE2C25698B0042BA48 /* Then in Frameworks */,
-				83DBEDC12C2569A80042BA48 /* SnapKit in Frameworks */,
+				8659381C2D10262800A07E7A /* KakaoSDK in Frameworks */,
 				83DBEDC42C256A3B0042BA48 /* Moya in Frameworks */,
+				865938222D10262800A07E7A /* KakaoSDKTemplate in Frameworks */,
 				839FC7232C47A3DB00B7FEDD /* Kingfisher in Frameworks */,
+				8659381E2D10262800A07E7A /* KakaoSDKCommon in Frameworks */,
+				865938142D10226200A07E7A /* SnapKit in Frameworks */,
 				8668D2482C7DAEEC001CBCA0 /* Amplitude in Frameworks */,
+				865938202D10262800A07E7A /* KakaoSDKShare in Frameworks */,
 				8670A7862C49C3290098DCF1 /* Lottie in Frameworks */,
 				9E38C1F6B1DB0B110CF9BCB7 /* Pods_Hankkijogbo.framework in Frameworks */,
 			);
@@ -775,6 +795,7 @@
 		83DBEDA72C2565840042BA48 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				865938232D14939700A07E7A /* URL+.swift */,
 				83DBEDC72C256AD00042BA48 /* NSObject+.swift */,
 				A240EA5A2C459DEA000FF458 /* CATransition+.swift */,
 				A2DEBF442C3BD0DD00DE14A9 /* UIScreen+.swift */,
@@ -1037,7 +1058,7 @@
 			isa = PBXGroup;
 			children = (
 				86784E8A2C3FC0CD00E94A5D /* CreateZipViewController.swift */,
-				86784E8E2C4021E200E94A5D /* TagTextField.swift */,
+				866DFE0D2D155DC6006EE662 /* CreateZipViewControllerType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1251,8 +1272,10 @@
 			isa = PBXGroup;
 			children = (
 				86B7611D2C3DE04600413059 /* Cell */,
-				86B7611B2C3DE04200413059 /* HankkiListViewController.swift */,
+				86B7611B2C3DE04200413059 /* BaseHankkiListViewController.swift */,
 				86B7612F2C3EEDEE00413059 /* HankkiListViewControllerType.swift */,
+				866DFE092D1548BD006EE662 /* HankkiListViewController.swift */,
+				866DFE0B2D154ACF006EE662 /* ZipDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1556,6 +1579,7 @@
 		A29A441C2C6ADC11002B8D36 /* HankkiLineView */ = {
 			isa = PBXGroup;
 			children = (
+				8364B4012D17CA81005FA842 /* CustomLineView.swift */,
 				A29A441D2C6ADC28002B8D36 /* DottedLineView.swift */,
 			);
 			path = HankkiLineView;
@@ -1641,6 +1665,8 @@
 			children = (
 				A2C9FCAE2C49985800868DF7 /* GetMyZipListResponseDTO.swift */,
 				A2C9FCAF2C49985800868DF7 /* GetZipListResponseDTO.swift */,
+				862518AC2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift */,
+				866DFE132D172959006EE662 /* GetZipOwnershipResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1760,11 +1786,15 @@
 			name = Hankkijogbo;
 			packageProductDependencies = (
 				83DBEDBD2C25698B0042BA48 /* Then */,
-				83DBEDC02C2569A80042BA48 /* SnapKit */,
 				83DBEDC32C256A3B0042BA48 /* Moya */,
 				839FC7222C47A3DB00B7FEDD /* Kingfisher */,
 				8670A7852C49C3290098DCF1 /* Lottie */,
 				8668D2472C7DAEEC001CBCA0 /* Amplitude */,
+				865938132D10226200A07E7A /* SnapKit */,
+				8659381B2D10262800A07E7A /* KakaoSDK */,
+				8659381D2D10262800A07E7A /* KakaoSDKCommon */,
+				8659381F2D10262800A07E7A /* KakaoSDKShare */,
+				865938212D10262800A07E7A /* KakaoSDKTemplate */,
 			);
 			productName = Hankkijogbo;
 			productReference = 83DBED722C255A180042BA48 /* Hankkijogbo.app */;
@@ -1796,11 +1826,12 @@
 			mainGroup = 83DBED692C255A180042BA48;
 			packageReferences = (
 				83DBEDBC2C25698A0042BA48 /* XCRemoteSwiftPackageReference "Then" */,
-				83DBEDBF2C2569A80042BA48 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */,
 				839FC7212C47A3DB00B7FEDD /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				8670A7842C49C3290098DCF1 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				8668D2462C7DAEEC001CBCA0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */,
+				865938122D10226200A07E7A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8659381A2D10262800A07E7A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = 83DBED732C255A180042BA48 /* Products */;
 			projectDirPath = "";
@@ -1911,6 +1942,7 @@
 				830285472C455BB10004D9F7 /* NetworkService.swift in Sources */,
 				A2DEBF622C3D67D400DE14A9 /* SelectImageCollectionViewCell.swift in Sources */,
 				A2EC33AF2C47166F00809840 /* LocationTargetType.swift in Sources */,
+				862518AD2D1CA33C00E8B2A3 /* GetSharedZipListResponseDTO.swift in Sources */,
 				A2DEBF5C2C3D2F6700DE14A9 /* ReportCompositionalLayoutFactory.swift in Sources */,
 				8641516C2C67B9AE00E2FD44 /* MyZipListHeaderView.swift in Sources */,
 				A21DAE9B2CD9085B004D896C /* ModifyMenuViewModel.swift in Sources */,
@@ -1918,13 +1950,14 @@
 				A2DEBF452C3BD0DD00DE14A9 /* UIScreen+.swift in Sources */,
 				838BEB052C382B0700AAA153 /* TabBarController.swift in Sources */,
 				86880BF62C46E93400CAEF58 /* GetMeHankkiListResponseDTO.swift in Sources */,
-				86B7611C2C3DE04200413059 /* HankkiListViewController.swift in Sources */,
+				86B7611C2C3DE04200413059 /* BaseHankkiListViewController.swift in Sources */,
 				838BEB032C38196300AAA153 /* TabBarItem.swift in Sources */,
 				8668D24C2C7EAF5F001CBCA0 /* AmplitudeLiterals.swift in Sources */,
 				864FA9032C3D1F7B0051EA36 /* MypageViewController.swift in Sources */,
 				86B761142C3DC79F00413059 /* ZipListViewController.swift in Sources */,
 				A240EA352C4405A4000FF458 /* UIResponder+.swift in Sources */,
 				86784E8B2C3FC0CD00E94A5D /* CreateZipViewController.swift in Sources */,
+				866DFE0A2D1548BD006EE662 /* HankkiListViewController.swift in Sources */,
 				A29A441E2C6ADC28002B8D36 /* DottedLineView.swift in Sources */,
 				864FA90C2C3D20BE0051EA36 /* MypageQuitFooterView.swift in Sources */,
 				864FA9122C3D34B80051EA36 /* MypageCollectionViewCellEnum.swift in Sources */,
@@ -1938,11 +1971,13 @@
 				830285552C4562BE0004D9F7 /* HankkiTargetType.swift in Sources */,
 				865C3D022C44E9E0009D9BEA /* MoreButton.swift in Sources */,
 				A2C9FC952C48F7D100868DF7 /* GetHankkiDetailResponseDTO.swift in Sources */,
-				86784E8F2C4021E200E94A5D /* TagTextField.swift in Sources */,
 				8302F8E72C3E991F004ADAA4 /* TypeCollectionViewCell.swift in Sources */,
 				A27AD9392CB8057700515D3B /* EditMenuCollectionViewCell.swift in Sources */,
 				A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */,
 				A2C9FCB32C49AFF800868DF7 /* PostHankkiRequestDTO.swift in Sources */,
+				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
+				866DFE0C2D154ACF006EE662 /* ZipDetailViewController.swift in Sources */,
+				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
 				A240EA402C445D6B000FF458 /* HankkiMenuHeaderView.swift in Sources */,
 				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
 				A2EC33C82C47184500809840 /* GetSearchedLocationResponseDTO.swift in Sources */,
@@ -1961,6 +1996,7 @@
 				8668D24A2C7DE0CA001CBCA0 /* SetupAmplitude.swift in Sources */,
 				830285592C4565940004D9F7 /* GetHankkiListRequestDTO.swift in Sources */,
 				A2DEBF782C3E700A00DE14A9 /* AddMenuCollectionViewCell.swift in Sources */,
+				865938242D14939700A07E7A /* URL+.swift in Sources */,
 				8302854B2C455E860004D9F7 /* BaseAPIService.swift in Sources */,
 				A2EC33AD2C47166500809840 /* ReportTargetType.swift in Sources */,
 				A23D119A2C4811790023480C /* HankkiDebouncer.swift in Sources */,
@@ -1992,8 +2028,10 @@
 				864FA9062C3D20150051EA36 /* MypageHankkiCollectionViewCell.swift in Sources */,
 				861704F72C38304D00D99E50 /* AlertViewController.swift in Sources */,
 				839FC7202C46E64000B7FEDD /* GetSortOptionFilterResponseDTO.swift in Sources */,
+				866DFE142D17295A006EE662 /* GetZipOwnershipResponseDTO.swift in Sources */,
 				864FA91C2C3D63400051EA36 /* BottomButtonView.swift in Sources */,
 				A2079BA92C68C26D00817651 /* HankkiCategoryModel.swift in Sources */,
+				8364B4022D17CA8D005FA842 /* CustomLineView.swift in Sources */,
 				8641516D2C67B9AE00E2FD44 /* MyZipViewModel.swift in Sources */,
 				83DBEDB42C2566300042BA48 /* StringLiterals.swift in Sources */,
 				83DBED782C255A180042BA48 /* SceneDelegate.swift in Sources */,
@@ -2046,6 +2084,7 @@
 				A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */,
 				A200C66F2D19EA0D0065C749 /* DetailMapView.swift in Sources */,
 				837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */,
+				866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */,
 				865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */,
 				A23F35512D2211BF00B6F8C8 /* NaverMapTargetType.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */,
@@ -2367,20 +2406,28 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		83DBEDBF2C2569A80042BA48 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
 		83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 15.0.3;
+			};
+		};
+		865938122D10226200A07E7A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		8659381A2D10262800A07E7A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
 			};
 		};
 		8668D2462C7DAEEC001CBCA0 /* XCRemoteSwiftPackageReference "Amplitude-iOS" */ = {
@@ -2412,15 +2459,35 @@
 			package = 83DBEDBC2C25698A0042BA48 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
 		};
-		83DBEDC02C2569A80042BA48 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 83DBEDBF2C2569A80042BA48 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
 		83DBEDC32C256A3B0042BA48 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 83DBEDC22C256A3B0042BA48 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		865938132D10226200A07E7A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 865938122D10226200A07E7A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		8659381B2D10262800A07E7A /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8659381A2D10262800A07E7A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		8659381D2D10262800A07E7A /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8659381A2D10262800A07E7A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		8659381F2D10262800A07E7A /* KakaoSDKShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8659381A2D10262800A07E7A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKShare;
+		};
+		865938212D10262800A07E7A /* KakaoSDKTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8659381A2D10262800A07E7A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKTemplate;
 		};
 		8668D2472C7DAEEC001CBCA0 /* Amplitude */ = {
 			isa = XCSwiftPackageProductDependency;

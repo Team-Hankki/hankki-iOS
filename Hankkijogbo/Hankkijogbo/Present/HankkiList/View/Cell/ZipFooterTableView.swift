@@ -11,7 +11,7 @@ final class ZipFooterTableView: UITableViewHeaderFooterView {
     
     // MARK: - Properties
     
-    weak var viewController: HankkiListViewController?
+    weak var viewController: BaseHankkiListViewController?
         
     // MARK: - UI Components
     

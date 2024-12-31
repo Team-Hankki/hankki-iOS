@@ -19,8 +19,10 @@ final class CreateZipViewController: BaseViewController {
     
     // MARK: - Properties
     
+    private let type: CreateZipViewControllerType
     private let isBottomSheetOpen: Bool
     private let storeId: Int?
+    private let zipId: Int?
     
     private let viewModel: CreateZipViewModel = CreateZipViewModel()
     
@@ -39,18 +41,20 @@ final class CreateZipViewController: BaseViewController {
     }
     
     private lazy var submitButton: MainButton = MainButton(
-        titleText: StringLiterals.CreateZip.submitButton,
+        titleText: type.submitButtonText,
         isValid: false,
         buttonHandler: submitButtonDidTap
     )
     
-    private let hankkiAccessoryView: HankkiAccessoryView = HankkiAccessoryView(text: StringLiterals.CreateZip.submitButton)
+    private lazy var hankkiAccessoryView: HankkiAccessoryView = HankkiAccessoryView(text: type.submitButtonText)
     
     // MARK: - Life Cycle
     
-    init(isBottomSheetOpen: Bool, storeId: Int? = nil) {
+    init(isBottomSheetOpen: Bool, storeId: Int? = nil, zipId: Int? = nil, type: CreateZipViewControllerType = .myZip) {
         self.isBottomSheetOpen = isBottomSheetOpen
         self.storeId = storeId
+        self.zipId = zipId
+        self.type = type
         super.init()
     }
     
@@ -76,18 +80,19 @@ final class CreateZipViewController: BaseViewController {
     
     override func setupStyle() {
         viewTitleLabel.do {
+            $0.numberOfLines = 0
             $0.attributedText = UILabel.setupAttributedText(
                 for: SuiteStyle.h1,
-                withText: StringLiterals.CreateZip.viewTitle,
+                withText: type.viewTitle,
                 color: .gray900
             )
         }
         
         descriptionLabel.do {
-            $0.numberOfLines = 2
+            $0.numberOfLines = 0
             $0.attributedText = UILabel.setupAttributedText(
                 for: PretendardStyle.body6,
-                withText: StringLiterals.CreateZip.viewDescription,
+                withText: type.viewDescription,
                 color: .gray400
             )
         }
@@ -172,7 +177,16 @@ private extension CreateZipViewController {
         
         let data = PostZipRequestDTO(title: title, details: tagList)
         
-        viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+        switch type {
+        case .sharedZip:
+            // 공유된 족보를 내 족보에 추가
+            viewModel.postSharedZip(data, zipId: zipId!, onConflict: resetTitleTextField, completion: presentMyZipListViewController)
+            
+        case .myZip:
+            // 내 족보를 새로 만들기
+            viewModel.postZip(data, onConflict: resetTitleTextField, completion: dismissSelf)
+        }
+        
     }
     
     // textField 값의 유효성 검사
@@ -200,6 +214,27 @@ private extension CreateZipViewController {
                 rootViewController.popViewController(animated: true)
                 if let id = self.storeId {
                     rootViewController.presentMyZipListBottomSheet(id: id)
+                }
+            }
+        }
+    }
+    
+    func presentMyZipListViewController() {
+        DispatchQueue.main.async {
+            // 족보 만들기를 완료해서, 서버에서 생성이되면 나의 족보 리스트 페이지로 이동한다.
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first {
+                    let tabBarController = TabBarController()
+                    tabBarController.selectedIndex = 2
+                    let navigationController = HankkiNavigationController(rootViewController: tabBarController)
+                    
+                    window.rootViewController = navigationController
+                    let viewController = ZipListViewController()
+                    if self.type == .sharedZip {
+                        viewController.showBlackToast(message: StringLiterals.Toast.addSharedZip)
+                    }
+                    navigationController.pushViewController(viewController, animated: false)
+                    
                 }
             }
         }

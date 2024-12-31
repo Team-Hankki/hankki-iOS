@@ -9,7 +9,11 @@ import Foundation
 
 // swiftlint:disable nesting
 enum StringLiterals {
-    
+    enum Kakao {
+        static let storeUrl = "itms-apps://itunes.apple.com/app/362057947"
+        static let zipShareTemplete = 115383
+    }
+
     enum Common {
         static let goToHome = "홈으로"
         static let withdraw = "탈퇴하기"
@@ -63,6 +67,17 @@ enum StringLiterals {
             static let title = "로그인이 필요한 기능이에요."
             static let secondaryButton = "닫기"
             static let primaryButton = "로그인하기"
+        }
+        
+        enum NeedLoginToSharedZip {
+            static let title = "족보를 확인하려면\n로그인이 필요해요"
+            static let primaryButton = "로그인"
+        }
+        
+        enum NeedOneMoreHankkiToShare {
+            static let title = "족보에 식당이 없어요\n식당 1개 이상 시에만 공유할 수 있어요"
+            static let secondaryButton = back
+            static let primaryButton = "둘러보기"
         }
         
         enum Logout {
@@ -130,6 +145,7 @@ enum StringLiterals {
         static let deleteAlready = "이미 삭제된 식당입니다"
         static let serverError = "오류가 발생했어요 다시 시도해주세요"
         static let accessError = "로그인 유효기간이 만료되었어요 재로그인 해주세요"
+        static let addSharedZip = "족보가 추가되었습니다"
     }
     
     enum Toolbar {
@@ -257,9 +273,9 @@ enum StringLiterals {
         }
         
         enum Option {
-            static let Terms = "약관 및 정책"
-            static let OneonOne = "1:1 문의"
-            static let Logout = Common.logout
+            static let terms = "약관 및 정책"
+            static let oneOnOne = "1:1 문의"
+            static let logout = Common.logout
         }
         
         enum Header {
@@ -307,9 +323,21 @@ enum StringLiterals {
         }
     }
     
+    enum SharedZip {
+        static let zipShareDefaultImageURL = Config.DefaultHankkiImageURL
+        
+        static let navigation = "공유받은 족보"
+        static let addButton = "내 족보에 추가하기"
+        
+        static let viewTitle = "공유받은 족보의\n새로운 이름을 지어주세요"
+        static let viewDescription = "공유받은 족보는 내 마음대로 편집할 수 있어요!"
+        static let submitButton = "추가하기"
+    }
+    
     enum ExternalLink {
-        static let OneonOne = "https://tally.so/r/mO0oJY"
-        static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let oneOnOne = "https://tally.so/r/mO0oJY"
+        static let terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let linkTree = "https://link.inpock.co.kr/hankkilink?fbclid=PAZXh0bgNhZW0CMTEAAabp7jPfQGVtGfHXOSEA-urXPNPbog0a0Rco43_a-zsdcxQOvFqVXQoqsXQ_aem_gyGO3bZoFAlf0tMF7QTqKg"
     }
     
     enum Onboarding {

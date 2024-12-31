@@ -1,5 +1,5 @@
 {
-  "originHash" : "83f265caa107bd411a5b1166549c8ea62979fd689642172db418fac79f0298a8",
+  "originHash" : "ec45888e133ae9767d5888f71108bbada090fd616f4ec1a668477eeace7cbafd",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "e2ca17ac735bcbc48b13062484541702ef45153d",
         "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "kakao-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kakao/kakao-ios-sdk",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ab4309c1950550add307046ad1e08024c7514603"
       }
     },
     {
@@ -76,7 +85,7 @@
     {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SnapKit/SnapKit",
+      "location" : "https://github.com/SnapKit/SnapKit.git",
       "state" : {
         "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
         "version" : "5.7.1"

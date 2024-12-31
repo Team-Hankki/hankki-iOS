@@ -17,6 +17,8 @@ enum Config {
             static let Amplitude = "Amplitude"
             static let reverseGeocodingClientId = "ReverseGeocodingClientId"
             static let reverseGeocodingClientSecret = "ReverseGeocodingClientSecret"
+            static let Kakao = "Kakao"
+            static let DefaultHankkiImageURL = "DefaultHankkiImageURL"
         }
     }
     
@@ -60,6 +62,20 @@ extension Config {
     static let Amplitude: String = {
         guard let key = Config.infoDictionary[Keys.Plist.Amplitude] as? String else {
             fatalError("Amplitude is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let Kakao: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.Kakao] as? String else {
+            fatalError("Kakao is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let DefaultHankkiImageURL: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.DefaultHankkiImageURL] as? String else {
+            fatalError("DefaultHankkiImageURL is not set in plist for this configuration.")
         }
         return key
     }()

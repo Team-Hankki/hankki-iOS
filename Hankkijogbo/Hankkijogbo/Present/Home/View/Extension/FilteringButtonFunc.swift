@@ -278,6 +278,12 @@ extension HomeViewController {
         }
         toggleCollectionView()
     }
+    
+    @objc func floatingButtonDidTap() {
+        let filteringBottomSheet = HankkiNavigationController(rootViewController: FilteringBottomSheetViewController())
+        filteringBottomSheet.modalPresentationStyle = .overFullScreen
+        self.present(filteringBottomSheet, animated: true, completion: nil)
+    }
 }
 
 extension HomeViewController {

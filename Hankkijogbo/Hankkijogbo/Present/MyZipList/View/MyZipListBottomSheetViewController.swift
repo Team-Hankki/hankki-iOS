@@ -316,7 +316,7 @@ private extension MyZipListBottomSheetViewController {
             // 족보에 식당 추가를 성공햇을 경우
             // black toast message 를 띄웁니다
             UIApplication.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) {
-                let zipListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                let zipListViewController = ZipDetailViewController(zipId: zipId)
                 if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                    let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
                     rootViewController.pushViewController(zipListViewController, animated: true)

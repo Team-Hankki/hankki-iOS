@@ -177,6 +177,7 @@ extension HomeViewController {
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
         rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
+        rootView.filteringFloatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
     }
     
     func presentUniversity() {
@@ -209,7 +210,7 @@ extension HomeViewController {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
-                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }

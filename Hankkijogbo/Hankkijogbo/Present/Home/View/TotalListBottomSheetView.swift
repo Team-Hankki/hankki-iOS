@@ -17,7 +17,7 @@ final class TotalListBottomSheetView: BaseView {
     
     var isExpanded: Bool = false
     var isBottomSheetUp: Bool = false
-    var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.4
+    var defaultHeight: CGFloat = UIScreen.getDeviceHeight() * 0.3
     var expandedHeight: CGFloat = UIScreen.getDeviceHeight() * 0.8
     
     var data: [GetHankkiListData] = []
@@ -177,7 +177,7 @@ extension TotalListBottomSheetView {
                        delay: 0,
                        options: .curveEaseOut,
                        animations: {
-            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.4))
+            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.3))
         }, completion: { [weak self] _ in
             guard let self = self else { return }
             self.isBottomSheetUp = true
@@ -210,7 +210,7 @@ extension TotalListBottomSheetView {
                        delay: 0,
                        options: .curveEaseOut,
                        animations: {
-            self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.4))
+            self.transform = .init(translationX: 0, y: (UIScreen.getDeviceHeight() * 0.3))
         }, completion: { _ in
             self.isBottomSheetUp = false
         })

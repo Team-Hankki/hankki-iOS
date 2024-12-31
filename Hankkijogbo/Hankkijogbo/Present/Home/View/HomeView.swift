@@ -73,7 +73,7 @@ final class HomeView: BaseView {
         }
         
         bottomSheetView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(UIScreen.getDeviceHeight() * 0.4)
+            $0.bottom.equalToSuperview().offset(UIScreen.getDeviceHeight() * 0.5)
         }
         
         gradient.snp.makeConstraints {
