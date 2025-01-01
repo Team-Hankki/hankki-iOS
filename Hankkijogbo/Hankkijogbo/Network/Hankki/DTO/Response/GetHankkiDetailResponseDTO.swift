@@ -15,6 +15,9 @@ struct GetHankkiDetailResponseData: Codable {
     let isLiked: Bool
     let imageUrls: [String]
     let menus: [MenuData]
+    let latitude: Double
+    let longitude: Double
+    let categoryImageUrl: String
 }
 
 struct MenuData: Codable {

@@ -45,7 +45,7 @@ final class HankkiInfoView: BaseView {
         
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(categoryImageView.snp.bottom).offset(2)
-            $0.leading.equalToSuperview().inset(22)
+            $0.leading.trailing.equalToSuperview().inset(22)
         }
         
         heartButton.snp.makeConstraints {
@@ -71,15 +71,12 @@ final class HankkiInfoView: BaseView {
             $0.backgroundColor = .hankkiWhite
         }
         
-        categoryImageView.do {
-            $0.image = .icHomeSelected
-        }
-        
         categoryLabel.do {
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.caption4, color: .gray900)
         }
         
         nameLabel.do {
+            $0.numberOfLines = 2
             $0.attributedText = UILabel.setupAttributedText(for: PretendardStyle.h3, color: .gray900)
         }
         
@@ -112,8 +109,9 @@ final class HankkiInfoView: BaseView {
 
 extension HankkiInfoView {
     
-    func bindData(category: String, name: String, heartCount: String, isLiked: Bool) {
+    func bindData(category: String, categoryImageUrl: String, name: String, heartCount: String, isLiked: Bool) {
         categoryLabel.text = category
+        categoryImageView.setKFImage(url: categoryImageUrl)
         nameLabel.text = name
         if let attributedTitle = UILabel.setupAttributedText(
             for: PretendardStyle.body8,

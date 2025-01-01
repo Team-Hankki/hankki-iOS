@@ -275,8 +275,7 @@ private extension SearchViewController {
     
     func pushToHankkiDetail() {
         guard let hankkiId = viewModel.storeId else { return }
-        let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
-        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
+        pushToDetailWithHankkiNavigation(hankkiId: hankkiId)
     }
 }
 

@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key></key>
-	<string></string>
+	<key>ReverseGeocodingClientId</key>
+	<string>$(ReverseGeocodingClientId)</string>
+	<key>ReverseGeocodingClientSecret</key>
+	<string>$(ReverseGeocodingClientSecret)</string>
 	<key>Amplitude</key>
 	<string>$(Amplitude)</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>BASE_URL</key>
 	<string>$(BASE_URL)</string>
 	<key>CFBundleURLTypes</key>

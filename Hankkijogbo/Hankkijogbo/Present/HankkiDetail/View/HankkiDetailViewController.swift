@@ -100,8 +100,8 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         }
         
         backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(48.5)
-            $0.leading.equalToSuperview().inset(7)
+            $0.top.equalToSuperview().inset(57)
+            $0.leading.equalToSuperview().inset(8)
             $0.size.equalTo(40)
         }
         
@@ -113,7 +113,6 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         hankkiInfoView.snp.makeConstraints {
             $0.top.equalTo(thumbnailImageView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(116)
         }
         
         detailMapView.snp.makeConstraints {
@@ -165,13 +164,17 @@ private extension HankkiDetailViewController {
                 
                 hankkiInfoView.bindData(
                     category: data.category,
+                    categoryImageUrl: data.categoryImageUrl,
                     name: data.name,
                     heartCount: String(data.heartCount),
                     isLiked: data.isLiked
                 )
-                // map view bind data 예정
+                detailMapView.bindData(
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    address: viewModel.address ?? "-"
+                )
                 
-                menuCollectionView.updateLayout(menuSize: data.menus.count)
                 menuCollectionView.collectionView.reloadData()
             }
         }
@@ -182,8 +185,16 @@ private extension HankkiDetailViewController {
                             primaryButtonText: StringLiterals.Alert.check)
         }
         
-        viewModel.dismiss = {
-            self.navigationController?.popViewController(animated: false)
+        viewModel.dismiss = { [weak self] in
+            self?.navigationController?.popViewController(animated: false)
+        }
+        
+        viewModel.handleDeletedHankki = { [weak self] in
+            self?.showBlackToast(message: StringLiterals.Toast.deleteAlready)
+        }
+        
+        viewModel.handleMapLoadError = { [weak self] in
+            self?.detailMapView.handleMapLoadError()
         }
     }
     
@@ -370,10 +381,31 @@ extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiMenuCollectionViewCell.className, for: indexPath) as? HankkiMenuCollectionViewCell else { return UICollectionViewCell() }
+        
         if let data = viewModel.hankkiDetailData {
             cell.bindData(data.menus[indexPath.item])
+            menuCollectionView.updateLayout()
             return cell
         }
         return UICollectionViewCell()
+    }
+}
+
+extension HankkiDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    // 메뉴명 label 길이에 따라 다르게 셀 크기 지정
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let data = viewModel.hankkiDetailData {
+            let menuNameLabelSize = NSString(string: data.menus[indexPath.item].name)
+                .boundingRect(
+                    with: CGSize(width: UIScreen.getDeviceWidth() - 44, height: CGFloat.greatestFiniteMagnitude),
+                    options: .usesLineFragmentOrigin,
+                    attributes: [NSAttributedString.Key.font: UIFont.setupPretendardStyle(of: .body8)],
+                    context: nil
+                )
+            return CGSize(width: UIScreen.getDeviceWidth(), height: menuNameLabelSize.height + 25)
+        }
+        
+        return .zero
     }
 }

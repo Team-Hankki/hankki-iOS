@@ -9,7 +9,6 @@ import UIKit
 
 final class HankkiMenuCollectionViewCell: BaseCollectionViewCell {
     
-    // MARK: - Properties
     // MARK: - UI Components
     
     private var nameLabel: UILabel = UILabel()

@@ -163,6 +163,9 @@
 		A23D11972C47FFB90023480C /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D11962C47FFB90023480C /* SearchViewModel.swift */; };
 		A23D119A2C4811790023480C /* HankkiDebouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D11992C4811790023480C /* HankkiDebouncer.swift */; };
 		A23D119C2C4844AE0023480C /* PostHankkiValidateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23D119B2C4844AE0023480C /* PostHankkiValidateRequestDTO.swift */; };
+		A23F354F2D2211B200B6F8C8 /* NaverMapAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23F354E2D2211B200B6F8C8 /* NaverMapAPIService.swift */; };
+		A23F35512D2211BF00B6F8C8 /* NaverMapTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23F35502D2211BF00B6F8C8 /* NaverMapTargetType.swift */; };
+		A23F35552D22135200B6F8C8 /* GetHankkiAddressResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23F35542D22135200B6F8C8 /* GetHankkiAddressResponseDTO.swift */; };
 		A240EA082C3EF6E0000FF458 /* BufferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA072C3EF6E0000FF458 /* BufferView.swift */; };
 		A240EA0C2C3EFD77000FF458 /* CompositionalLayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */; };
 		A240EA192C3F35BC000FF458 /* SearchBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240EA182C3F35BC000FF458 /* SearchBarCollectionViewCell.swift */; };
@@ -400,6 +403,9 @@
 		A23D11962C47FFB90023480C /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		A23D11992C4811790023480C /* HankkiDebouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HankkiDebouncer.swift; sourceTree = "<group>"; };
 		A23D119B2C4844AE0023480C /* PostHankkiValidateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHankkiValidateRequestDTO.swift; sourceTree = "<group>"; };
+		A23F354E2D2211B200B6F8C8 /* NaverMapAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapAPIService.swift; sourceTree = "<group>"; };
+		A23F35502D2211BF00B6F8C8 /* NaverMapTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapTargetType.swift; sourceTree = "<group>"; };
+		A23F35542D22135200B6F8C8 /* GetHankkiAddressResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHankkiAddressResponseDTO.swift; sourceTree = "<group>"; };
 		A240EA072C3EF6E0000FF458 /* BufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferView.swift; sourceTree = "<group>"; };
 		A240EA0B2C3EFD77000FF458 /* CompositionalLayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalLayoutFactory.swift; sourceTree = "<group>"; };
 		A240EA182C3F35BC000FF458 /* SearchBarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -718,6 +724,7 @@
 				A2EC33A92C4711A000809840 /* Report */,
 				A24A78792CB44E110049B031 /* Menu */,
 				A2EC33AA2C4711A600809840 /* Location */,
+				A23F354D2D2211A000B6F8C8 /* NaverMap */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1384,6 +1391,32 @@
 			name = ViewModel;
 			sourceTree = "<group>";
 		};
+		A23F354D2D2211A000B6F8C8 /* NaverMap */ = {
+			isa = PBXGroup;
+			children = (
+				A23F35522D22134300B6F8C8 /* DTO */,
+				A23F35502D2211BF00B6F8C8 /* NaverMapTargetType.swift */,
+				A23F354E2D2211B200B6F8C8 /* NaverMapAPIService.swift */,
+			);
+			path = NaverMap;
+			sourceTree = "<group>";
+		};
+		A23F35522D22134300B6F8C8 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				A23F35532D22134900B6F8C8 /* Response */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		A23F35532D22134900B6F8C8 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				A23F35542D22135200B6F8C8 /* GetHankkiAddressResponseDTO.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		A240EA092C3EF712000FF458 /* HankkiReusableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2014,6 +2047,7 @@
 				86880C2A2C47F2DF00CAEF58 /* HankkiListViewModel.swift in Sources */,
 				8641516B2C67B9AE00E2FD44 /* MyZipListCollectionViewCell.swift in Sources */,
 				A2C9FCB12C49985800868DF7 /* GetZipListResponseDTO.swift in Sources */,
+				A23F35552D22135200B6F8C8 /* GetHankkiAddressResponseDTO.swift in Sources */,
 				A240EA442C446AB6000FF458 /* HankkiDetailButton.swift in Sources */,
 				A2AF6FDB2CE61AA000F5271D /* MenuResponseDTO.swift in Sources */,
 				839138DF2C4962E500611D5C /* GetHankkiThumbnailResponseDTO.swift in Sources */,
@@ -2046,11 +2080,13 @@
 				86880C0F2C47116900CAEF58 /* DeleteZipToHankkRequestiDTO.swift in Sources */,
 				83DBED942C2564A20042BA48 /* HomeView.swift in Sources */,
 				86880BF42C46E89C00CAEF58 /* GetMeUniversityResponseDTO.swift in Sources */,
+				A23F354F2D2211B200B6F8C8 /* NaverMapAPIService.swift in Sources */,
 				A2FF94112C31660E001ADA03 /* BaseDTO.swift in Sources */,
 				A200C66F2D19EA0D0065C749 /* DetailMapView.swift in Sources */,
 				837F10DC2C4A851A00E3CCE6 /* ReportCompleteViewController.swift in Sources */,
 				866DFE0E2D155DC6006EE662 /* CreateZipViewControllerType.swift in Sources */,
 				865D59C62C7B72C9004CC517 /* FullLoadingView.swift in Sources */,
+				A23F35512D2211BF00B6F8C8 /* NaverMapTargetType.swift in Sources */,
 				86B761232C3EC87A00413059 /* ZipListCollectionViewCellModel.swift in Sources */,
 				83DBEDCA2C256AE70042BA48 /* UIViewController+.swift in Sources */,
 				A23D11972C47FFB90023480C /* SearchViewModel.swift in Sources */,
