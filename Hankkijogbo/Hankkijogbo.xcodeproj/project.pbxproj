@@ -1975,9 +1975,8 @@
 				A27AD9392CB8057700515D3B /* EditMenuCollectionViewCell.swift in Sources */,
 				A240EA3C2C4450E2000FF458 /* HankkiDetailViewController.swift in Sources */,
 				A2C9FCB32C49AFF800868DF7 /* PostHankkiRequestDTO.swift in Sources */,
-				A240EA402C445D6B000FF458 /* HankkiDetailHeaderView.swift in Sources */,
+				A240EA402C445D6B000FF458 /* HankkiMenuHeaderView.swift in Sources */,
 				866DFE0C2D154ACF006EE662 /* ZipDetailViewController.swift in Sources */,
-				A240EA542C4551A3000FF458 /* HankkiReportOptionFooterView.swift in Sources */,
 				A240EA402C445D6B000FF458 /* HankkiMenuHeaderView.swift in Sources */,
 				A2471B8D2C46AB770080FA30 /* UIApplication+.swift in Sources */,
 				A2EC33C82C47184500809840 /* GetSearchedLocationResponseDTO.swift in Sources */,
@@ -2315,7 +2314,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = shop.hankki.dev.hankki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2354,7 +2353,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = shop.hankki.dev.hankki;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
