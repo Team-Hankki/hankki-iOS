@@ -17,7 +17,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     private let priceImage: UIImageView = UIImageView()
     private let priceLabel: UILabel = UILabel()
-    private let dotImage: UIImageView = UIImageView()
     private let likeImage: UIImageView = UIImageView()
     private let likeLabel: UILabel = UILabel()
     
@@ -48,7 +47,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         hankkiDetailStackView.addArrangedSubviews(priceImage,
                                                   priceLabel,
-                                                  dotImage, 
                                                   likeImage,
                                                   likeLabel)
     }
@@ -84,10 +82,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         priceImage.do {
             $0.image = .icFood16
-        }
-        
-        dotImage.do {
-            $0.image = .icSeparator
         }
         
         likeImage.do {
