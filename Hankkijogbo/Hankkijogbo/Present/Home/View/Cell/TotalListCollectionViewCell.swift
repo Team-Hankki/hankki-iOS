@@ -12,7 +12,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Components
     
     let thumbnailImageView: UIImageView = UIImageView()
-    private let menutagLabel: UILabel = HankkiCategoryTagLabel()
+    private let menutagLabel: UILabel = UILabel()
     private let hankkiTitle: UILabel = UILabel()
     
     private let priceImage: UIImageView = UIImageView()
@@ -64,11 +64,13 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         menutagLabel.do {
             $0.setNeedsLayout()
             $0.layoutIfNeeded()
+            $0.font = .setupPretendardStyle(of: .caption4)
+            $0.textColor = .gray500
         }
         
         hankkiTitle.do {
-            $0.textColor = .gray900
-            $0.font = .setupSuiteStyle(of: .subtitle2)
+            $0.textColor = .gray850
+            $0.font = .setupPretendardStyle(of: .body5)
             $0.lineBreakMode = .byTruncatingTail
             $0.numberOfLines = 1
         }
