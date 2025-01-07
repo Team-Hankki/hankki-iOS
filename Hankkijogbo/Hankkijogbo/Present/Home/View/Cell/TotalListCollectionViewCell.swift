@@ -45,7 +45,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         hankkiInfoStackView.addArrangedSubviews(menutagLabel,
                                                 hankkiDetailStackView,
                                                 hankkiLowPriceStackView)
-
+        
         hankkiDetailStackView.addArrangedSubviews(hankkiTitle,
                                                   likeImage,
                                                   likeLabel)
@@ -87,7 +87,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         likeImage.do {
-            $0.image = .icHeart
+            $0.image = .icHeartRed
         }
         
         hankkiInfoStackView.do {
@@ -98,8 +98,8 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         hankkiDetailStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 5
-            $0.alignment = .leading
+            $0.spacing = 3
+            $0.alignment = .center
         }
         
         hankkiLowPriceStackView.do {
