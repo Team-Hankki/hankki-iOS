@@ -109,7 +109,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         }
         
         addButton.do {
-            $0.setImage(.btnAddFilled, for: .normal)
+            $0.setImage(.icAddZipGray, for: .normal)
         }
     }
     
