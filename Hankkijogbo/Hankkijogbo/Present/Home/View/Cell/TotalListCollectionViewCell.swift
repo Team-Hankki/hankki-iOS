@@ -22,6 +22,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     
     private let hankkiInfoStackView: UIStackView = UIStackView()
     private let hankkiDetailStackView: UIStackView = UIStackView()
+    private let hankkiLowPriceStackView: UIStackView = UIStackView()
     
     let addButton: UIButton = UIButton()
     
@@ -42,13 +43,14 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
                     addButton)
         
         hankkiInfoStackView.addArrangedSubviews(menutagLabel,
-                                                hankkiTitle,
-                                                hankkiDetailStackView)
-        
-        hankkiDetailStackView.addArrangedSubviews(priceImage,
-                                                  priceLabel,
+                                                hankkiDetailStackView,
+                                                hankkiLowPriceStackView)
+
+        hankkiDetailStackView.addArrangedSubviews(hankkiTitle,
                                                   likeImage,
                                                   likeLabel)
+        
+        hankkiLowPriceStackView.addArrangedSubviews(priceImage, priceLabel)
     }
     
     override func setupStyle() {
@@ -96,8 +98,14 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         hankkiDetailStackView.do {
             $0.axis = .horizontal
+            $0.spacing = 5
+            $0.alignment = .leading
+        }
+        
+        hankkiLowPriceStackView.do {
+            $0.axis = .horizontal
             $0.spacing = 2
-            $0.alignment = .center
+            $0.alignment = .leading
         }
         
         addButton.do {
@@ -110,10 +118,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalToSuperview().inset(22)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(72)
-        }
-        
-        hankkiTitle.snp.makeConstraints {
-            $0.width.equalTo(200)
         }
         
         hankkiInfoStackView.snp.makeConstraints {
