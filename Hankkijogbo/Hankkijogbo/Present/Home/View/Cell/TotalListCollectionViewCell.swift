@@ -15,7 +15,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     private let menutagLabel: UILabel = UILabel()
     private let hankkiTitle: UILabel = UILabel()
     
-    private let priceImage: UIImageView = UIImageView()
+    private let lowestPriceLabel: UILabel = UILabel()
     private let priceLabel: UILabel = UILabel()
     private let likeImage: UIImageView = UIImageView()
     private let likeLabel: UILabel = UILabel()
@@ -50,7 +50,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
                                                   likeImage,
                                                   likeLabel)
         
-        hankkiLowPriceStackView.addArrangedSubviews(priceImage, priceLabel)
+        hankkiLowPriceStackView.addArrangedSubviews(lowestPriceLabel, priceLabel)
     }
     
     override func setupStyle() {
@@ -78,12 +78,14 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         [priceLabel, likeLabel].forEach {
             $0.do {
                 $0.font = .setupPretendardStyle(of: .button)
-                $0.textColor = .gray500
+                $0.textColor = .gray800
             }
         }
         
-        priceImage.do {
-            $0.image = .icFood16
+        lowestPriceLabel.do {
+            $0.text = StringLiterals.Home.lowest
+            $0.font = .setupPretendardStyle(of: .caption4)
+            $0.textColor = .gray400
         }
         
         likeImage.do {
