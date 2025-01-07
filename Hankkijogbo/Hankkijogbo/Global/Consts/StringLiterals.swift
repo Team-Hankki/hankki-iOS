@@ -39,6 +39,7 @@ enum StringLiterals {
         static let more6000 = "6000~8000원"
         static let emptyNotice = "조건에 맞는 식당이 없어요"
         static let apply = "적용"
+        static let lowest = "최저"
     }
     
     enum Alert {
