@@ -269,7 +269,7 @@ extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.selectedStoreCategoryIndex = indexPath.item
-        viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
+        viewModel.storeCategory = (indexPath.item == 0) ? nil : viewModel.categoryFilters[indexPath.item].tag
         changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
         collectionView.reloadData()
         collectionView.scrollToCenter(at: indexPath)
