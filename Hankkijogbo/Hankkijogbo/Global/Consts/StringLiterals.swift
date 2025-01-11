@@ -71,7 +71,7 @@ enum StringLiterals {
         
         enum NeedLoginToSharedZip {
             static let title = "족보를 확인하려면\n로그인이 필요해요"
-            static let primaryButton = "로그인"
+            static let primaryButton = "로그인하기"
         }
         
         enum NeedOneMoreHankkiToShare {

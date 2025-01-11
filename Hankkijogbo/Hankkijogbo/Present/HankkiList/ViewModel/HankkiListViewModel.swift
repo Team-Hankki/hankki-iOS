@@ -137,8 +137,7 @@ extension HankkiListViewModel {
         let templeteID: Int64 = Int64(StringLiterals.Kakao.zipShareTemplete)
         
         let imageURL: String = hankkiList[0].imageURL.isEmpty ? StringLiterals.SharedZip.zipShareDefaultImageURL : hankkiList[0].imageURL
-        
-        
+ 
         let templetArgs: [String: String] = ["IMAGE_URL": imageURL,
                                              "FAVORITE_ID": String(zipInfo?.id ?? 0),
                                              "NAME": zipInfo?.title ?? "",
