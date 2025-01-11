@@ -346,6 +346,7 @@ enum StringLiterals {
     }
     
     enum FilteringTag {
+        static let all = "ALL"
         static let less6000 = "K6"
         static let more6000 = "K8"
         static let latest = "LATEST"
