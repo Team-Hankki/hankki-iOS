@@ -138,9 +138,10 @@ extension HankkiListViewModel {
         
         let imageURL: String = hankkiList[0].imageURL.isEmpty ? StringLiterals.SharedZip.zipShareDefaultImageURL : hankkiList[0].imageURL
         
+        
         let templetArgs: [String: String] = ["IMAGE_URL": imageURL,
                                              "FAVORITE_ID": String(zipInfo?.id ?? 0),
-                                             "NAME": hankkiList[0].name,
+                                             "NAME": zipInfo?.title ?? "",
                                              "SENDER": zipInfo?.name ?? ""]
         
         // 카카오톡이 있는지 확인합니다.
