@@ -256,7 +256,6 @@ private extension HomeViewController {
     
     func showHankkiListBottomSheet() {
         self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
-        self.hideMarkerInfoCard()
     }
 }
 
