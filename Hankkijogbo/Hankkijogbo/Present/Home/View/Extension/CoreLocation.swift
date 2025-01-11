@@ -277,25 +277,25 @@ extension HomeViewController {
     }
     
     // 식당 상세 카드뷰 숨기기
-    func hideMarkerInfoCard() {
-        guard markerInfoCardView != nil else { return }
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.markerInfoCardView?.snp.updateConstraints {
-                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
-            }
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.markerInfoCardView?.removeFromSuperview()
-            self.markerInfoCardView = nil
-            self.selectedMarkerIndex = nil
-            
-            // 전체 지도 핀 복원
-            self.clearMarkers()
-            self.setupPosition(with: self.hankkiPins)
-        })
-        self.showTargetButtonAtBottomSheet()
-    }
+//    func hideMarkerInfoCard() {
+//        guard markerInfoCardView != nil else { return }
+//        
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.markerInfoCardView?.snp.updateConstraints {
+//                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
+//            }
+//            self.view.layoutIfNeeded()
+//        }, completion: { _ in
+//            self.markerInfoCardView?.removeFromSuperview()
+//            self.markerInfoCardView = nil
+//            self.selectedMarkerIndex = nil
+//            
+//            // 전체 지도 핀 복원
+//            self.clearMarkers()
+//            self.setupPosition(with: self.hankkiPins)
+//        })
+//        self.showTargetButtonAtBottomSheet()
+//    }
     
     // 식당 id로 latitude, longitude 찾는 메소드
     func findLocationById(_ id: Int) -> (latitude: Double, longitude: Double)? {
@@ -308,7 +308,18 @@ extension HomeViewController {
 
 extension HomeViewController: TotalListBottomSheetViewDelegate {
     func didSelectHankkiCell(at index: Int, pinId: Int) {
-        showMarkerInfoCard(at: index, pinId: pinId)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? HankkiNavigationController {
+            let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                                  hasRightButton: false,
+                                                                  mainTitle: .string(""),
+                                                                  rightButton: .string(""))
+            rootViewController.setupNavigationBar(forType: type)
+            rootViewController.isNavigationBarHidden = false
+            
+            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: pinId))
+            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
+        }
         
         if let location = findLocationById(pinId) {
             moveCameraToLocation(latitude: location.latitude, longitude: location.longitude)
