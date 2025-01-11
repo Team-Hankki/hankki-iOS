@@ -252,7 +252,7 @@ private extension FilteringBottomSheetViewController {
             if success {
                 DispatchQueue.main.async {
                     self.priceData = self.viewModel.priceFilters
-                    if let entire = self.priceData.first(where: { $0.tag == nil}) {
+                    if let entire = self.priceData.first(where: { $0.tag == StringLiterals.FilteringTag.all}) {
                         self.entireChipButton.setTitle(StringLiterals.Home.entire, for: .normal)
                     }
                     
