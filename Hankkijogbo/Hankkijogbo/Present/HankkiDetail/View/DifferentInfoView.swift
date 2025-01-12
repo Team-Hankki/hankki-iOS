@@ -30,7 +30,7 @@ final class DifferentInfoView: BaseView {
         homeImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(10)
             $0.centerY.equalToSuperview()
-            $0.size.equalTo(15)
+            $0.size.equalTo(18)
         }
         
         textLabel.snp.makeConstraints {
