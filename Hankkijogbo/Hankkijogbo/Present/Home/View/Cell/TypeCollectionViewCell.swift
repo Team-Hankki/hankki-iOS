@@ -13,8 +13,8 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Components
     
-    private let thumbnailImageView: UIImageView = UIImageView()
-    private let typeLabel: UILabel = UILabel()
+    let thumbnailImageView: UIImageView = UIImageView()
+    let typeLabel: UILabel = UILabel()
     private let selectedUnderLineView: UIView = UIView()
     
     // MARK: - Life Cycle
