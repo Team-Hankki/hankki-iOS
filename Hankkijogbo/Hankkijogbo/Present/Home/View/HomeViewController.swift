@@ -72,7 +72,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
             isRestoringScrollPosition = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -265,24 +265,18 @@ extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate 
     }
 }
 
-// CollectionViewDelegate, DataSource
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if indexPath.item == 0 {
             viewModel.selectedStoreCategoryIndex = indexPath.item
-               viewModel.storeCategory = nil
-               changeButtonTitle(for: rootView.typeButton, newTitle: "전체")
-           } else if indexPath.item - 1 < viewModel.categoryFilters.count {
-               let selectedCategory = viewModel.categoryFilters[indexPath.item - 1]
-               viewModel.selectedStoreCategoryIndex = indexPath.item
-               viewModel.storeCategory = selectedCategory.tag
-               changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
-           }
-        
-//        viewModel.selectedStoreCategoryIndex = indexPath.item
-//        viewModel.storeCategory = (indexPath.item == 0) ? nil : viewModel.categoryFilters[indexPath.item].tag
-//        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
+            viewModel.storeCategory = nil
+            changeButtonTitle(for: rootView.typeButton, newTitle: "전체")
+        } else if indexPath.item - 1 < viewModel.categoryFilters.count {
+            let selectedCategory = viewModel.categoryFilters[indexPath.item - 1]
+            viewModel.selectedStoreCategoryIndex = indexPath.item
+            viewModel.storeCategory = selectedCategory.tag
+            changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
+        }
         collectionView.reloadData()
         collectionView.scrollToCenter(at: indexPath)
     }
@@ -297,7 +291,7 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
         
         if indexPath.item == 0 {
-            cell.typeLabel.text = "전체"
+            cell.typeLabel.text = StringLiterals.Home.entire
             cell.thumbnailImageView.image = .imgAll
         } else if indexPath.item <= viewModel.categoryFilters.count {
             cell.bindData(model: viewModel.categoryFilters[indexPath.item - 1])
@@ -309,11 +303,6 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.updateSelection(isSelected: isSelected)
         
         return cell
-        //        if indexPath.item < viewModel.categoryFilters.count { cell.bindData(model: viewModel.categoryFilters[indexPath.item]) }
-        //        else { cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""))}
-        //        let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
-        //        cell.updateSelection(isSelected: isSelected)
-        //        return cell
     }
 }
 
