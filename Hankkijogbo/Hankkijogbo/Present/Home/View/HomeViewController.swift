@@ -160,7 +160,7 @@ extension HomeViewController {
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImageDouble(title, .icSchool, .icArrowUnder),
+                                                              mainTitle: .stringAndImage(title, .icArrowUnder),
                                                               mainTitleFont: PretendardStyle.body5,
                                                               mainTitlePosition: "left",
                                                               rightButton: .string(""),
