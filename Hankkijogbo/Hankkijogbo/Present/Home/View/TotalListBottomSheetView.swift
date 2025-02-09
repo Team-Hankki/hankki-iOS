@@ -243,6 +243,11 @@ extension TotalListBottomSheetView {
         
         bottomGradientView.layer.addSublayer(gradient)
     }
+    
+    func updateTotalListCount(count: Int) {
+        totalListCountLabel.text = "\(count)개의 족보"
+    }
+
 }
 
 extension TotalListBottomSheetView {
