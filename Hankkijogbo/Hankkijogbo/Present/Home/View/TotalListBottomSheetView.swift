@@ -178,7 +178,7 @@ extension TotalListBottomSheetView {
                        delay: 0,
                        options: .curveEaseOut,
                        animations: {
-            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.3))
+            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.45))
         }, completion: { [weak self] _ in
             guard let self = self else { return }
             self.isBottomSheetUp = true
