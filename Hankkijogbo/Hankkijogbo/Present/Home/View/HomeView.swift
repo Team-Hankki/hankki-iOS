@@ -87,6 +87,11 @@ final class HomeView: BaseView {
         filteringFloatingButton.do {
             $0.setImage(.icFilteringNormal, for: .normal)
             $0.setImage(.icFilteringSelected, for: .selected)
+            
+            $0.layer.shadowColor = UIColor.hankkiWhite.cgColor
+            $0.layer.shadowOpacity = 1.0
+            $0.layer.shadowOffset = CGSize(width: 0, height: 6)
+            $0.layer.shadowRadius = 12
         }
         
         targetButton.do {
