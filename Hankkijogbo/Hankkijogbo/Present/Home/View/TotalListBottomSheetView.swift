@@ -295,7 +295,6 @@ extension TotalListBottomSheetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pinId = data[indexPath.item].id
         delegate?.didSelectHankkiCell(at: indexPath.item, pinId: pinId)
-        viewLayoutIfNeededWithHiddenAnimation()
     }
 }
 
