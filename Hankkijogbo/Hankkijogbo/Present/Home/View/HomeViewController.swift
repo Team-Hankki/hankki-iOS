@@ -190,6 +190,7 @@ extension HomeViewController {
 
 extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
+        print("Touched")
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
@@ -255,6 +256,7 @@ private extension HomeViewController {
     }
     
     func showHankkiListBottomSheet() {
+        hideMarkerInfoCard()
         self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
     }
 }
