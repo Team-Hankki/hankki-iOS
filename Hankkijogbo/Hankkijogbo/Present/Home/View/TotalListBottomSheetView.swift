@@ -87,7 +87,8 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         totalListCountLabel.do {
-            $0.font = .setupPretendardStyle(of: .body5)
+            $0.font = .setupPretendardStyle(of: .body8)
+            $0.textColor =  .gray800
         }
         
         flowLayout.do {
@@ -241,11 +242,6 @@ extension TotalListBottomSheetView {
         }
         
         bottomGradientView.layer.addSublayer(gradient)
-    }
-    
-    func updateTotalListCount(count: Int) {
-        totalListCountLabel.text = "\(count)개의 족보"
-        totalListCountLabel.asFontColor(targetString: "의 족보", font: .setupPretendardStyle(of: .body6), color: .gray600)
     }
 }
 
