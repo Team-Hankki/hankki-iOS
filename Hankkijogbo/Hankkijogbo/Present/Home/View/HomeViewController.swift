@@ -292,8 +292,7 @@ extension HomeViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
         
         if indexPath.item == 0 {
-            cell.typeLabel.text = StringLiterals.Home.entire
-            cell.thumbnailImageView.image = .imgAll
+            cell.bindData(model: GetCategoryFilterData(name: StringLiterals.Home.entire, tag: "", imageUrl: ""))
         } else if indexPath.item <= viewModel.categoryFilters.count {
             cell.bindData(model: viewModel.categoryFilters[indexPath.item - 1])
         } else {

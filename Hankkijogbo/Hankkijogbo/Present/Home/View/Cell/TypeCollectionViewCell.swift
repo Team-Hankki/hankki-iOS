@@ -58,7 +58,11 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 extension TypeCollectionViewCell {
     func bindData(model: GetCategoryFilterData) {
         typeLabel.text = model.name
-        thumbnailImageView.setKFImage(url: model.imageUrl)
+        if let url = URL(string: model.imageUrl), !model.imageUrl.isEmpty {
+            thumbnailImageView.setKFImage(url: model.imageUrl)
+        } else {
+            thumbnailImageView.image = .imgAll
+        }
     }
     
     func updateSelection(isSelected: Bool) {
