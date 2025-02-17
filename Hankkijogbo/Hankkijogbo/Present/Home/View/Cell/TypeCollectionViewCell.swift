@@ -13,8 +13,8 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Components
     
-    private let thumbnailImageView: UIImageView = UIImageView()
-    private let typeLabel: UILabel = UILabel()
+    let thumbnailImageView: UIImageView = UIImageView()
+    let typeLabel: UILabel = UILabel()
     private let selectedUnderLineView: UIView = UIView()
     
     // MARK: - Life Cycle
@@ -58,7 +58,11 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 extension TypeCollectionViewCell {
     func bindData(model: GetCategoryFilterData) {
         typeLabel.text = model.name
-        thumbnailImageView.setKFImage(url: model.imageUrl)
+        if let url = URL(string: model.imageUrl), !model.imageUrl.isEmpty {
+            thumbnailImageView.setKFImage(url: model.imageUrl)
+        } else {
+            thumbnailImageView.image = .imgAll
+        }
     }
     
     func updateSelection(isSelected: Bool) {

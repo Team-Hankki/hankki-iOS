@@ -277,25 +277,25 @@ extension HomeViewController {
     }
     
     // 식당 상세 카드뷰 숨기기
-//    func hideMarkerInfoCard() {
-//        guard markerInfoCardView != nil else { return }
-//        
-//        UIView.animate(withDuration: 0.3, animations: {
-//            self.markerInfoCardView?.snp.updateConstraints {
-//                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
-//            }
-//            self.view.layoutIfNeeded()
-//        }, completion: { _ in
-//            self.markerInfoCardView?.removeFromSuperview()
-//            self.markerInfoCardView = nil
-//            self.selectedMarkerIndex = nil
-//            
-//            // 전체 지도 핀 복원
-//            self.clearMarkers()
-//            self.setupPosition(with: self.hankkiPins)
-//        })
-//        self.showTargetButtonAtBottomSheet()
-//    }
+    func hideMarkerInfoCard() {
+        guard markerInfoCardView != nil else { return }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.markerInfoCardView?.snp.updateConstraints {
+                $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(109)
+            }
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.markerInfoCardView?.removeFromSuperview()
+            self.markerInfoCardView = nil
+            self.selectedMarkerIndex = nil
+            
+            // 전체 지도 핀 복원
+            self.clearMarkers()
+            self.setupPosition(with: self.hankkiPins)
+        })
+        self.showTargetButtonAtBottomSheet()
+    }
     
     // 식당 id로 latitude, longitude 찾는 메소드
     func findLocationById(_ id: Int) -> (latitude: Double, longitude: Double)? {

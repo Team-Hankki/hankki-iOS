@@ -72,7 +72,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
             isRestoringScrollPosition = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -160,7 +160,7 @@ extension HomeViewController {
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImageDouble(title, .icSchool, .icArrowUnder),
+                                                              mainTitle: .stringAndImage(title, .icArrowUnder),
                                                               mainTitleFont: PretendardStyle.body5,
                                                               mainTitlePosition: "left",
                                                               rightButton: .string(""),
@@ -188,7 +188,7 @@ extension HomeViewController {
     }
 }
 
- extension HomeViewController {
+extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
@@ -255,6 +255,7 @@ private extension HomeViewController {
     }
     
     func showHankkiListBottomSheet() {
+        hideMarkerInfoCard()
         self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
     }
 }
@@ -265,12 +266,18 @@ extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate 
     }
 }
 
-// CollectionViewDelegate, DataSource
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectedStoreCategoryIndex = indexPath.item
-        viewModel.storeCategory = (indexPath.item == 0) ? nil : viewModel.categoryFilters[indexPath.item].tag
-        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
+        if indexPath.item == 0 {
+            viewModel.selectedStoreCategoryIndex = indexPath.item
+            viewModel.storeCategory = nil
+            changeButtonTitle(for: rootView.typeButton, newTitle: "전체")
+        } else if indexPath.item - 1 < viewModel.categoryFilters.count {
+            let selectedCategory = viewModel.categoryFilters[indexPath.item - 1]
+            viewModel.selectedStoreCategoryIndex = indexPath.item
+            viewModel.storeCategory = selectedCategory.tag
+            changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
+        }
         collectionView.reloadData()
         collectionView.scrollToCenter(at: indexPath)
     }
@@ -283,10 +290,18 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
-        if indexPath.item < viewModel.categoryFilters.count { cell.bindData(model: viewModel.categoryFilters[indexPath.item]) }
-        else { cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""))}
+        
+        if indexPath.item == 0 {
+            cell.bindData(model: GetCategoryFilterData(name: StringLiterals.Home.entire, tag: "", imageUrl: ""))
+        } else if indexPath.item <= viewModel.categoryFilters.count {
+            cell.bindData(model: viewModel.categoryFilters[indexPath.item - 1])
+        } else {
+            cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""))
+        }
+        
         let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
         cell.updateSelection(isSelected: isSelected)
+        
         return cell
     }
 }

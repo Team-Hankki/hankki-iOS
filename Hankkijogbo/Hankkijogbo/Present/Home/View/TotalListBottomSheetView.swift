@@ -87,7 +87,8 @@ final class TotalListBottomSheetView: BaseView {
         }
         
         totalListCountLabel.do {
-            $0.font = .setupPretendardStyle(of: .body5)
+            $0.font = .setupPretendardStyle(of: .body8)
+            $0.textColor =  .gray800
         }
         
         flowLayout.do {
@@ -177,7 +178,7 @@ extension TotalListBottomSheetView {
                        delay: 0,
                        options: .curveEaseOut,
                        animations: {
-            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.3))
+            self.transform = .init(translationX: 0, y: -(UIScreen.getDeviceHeight() * 0.45))
         }, completion: { [weak self] _ in
             guard let self = self else { return }
             self.isBottomSheetUp = true
@@ -245,8 +246,8 @@ extension TotalListBottomSheetView {
     
     func updateTotalListCount(count: Int) {
         totalListCountLabel.text = "\(count)개의 족보"
-        totalListCountLabel.asFontColor(targetString: "의 족보", font: .setupPretendardStyle(of: .body6), color: .gray600)
     }
+
 }
 
 extension TotalListBottomSheetView {
@@ -295,7 +296,6 @@ extension TotalListBottomSheetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pinId = data[indexPath.item].id
         delegate?.didSelectHankkiCell(at: indexPath.item, pinId: pinId)
-        viewLayoutIfNeededWithHiddenAnimation()
     }
 }
 
