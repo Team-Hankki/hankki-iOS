@@ -67,5 +67,6 @@ extension TypeCollectionViewCell {
     
     func updateSelection(isSelected: Bool) {
         selectedUnderLineView.isHidden = !isSelected
+        typeLabel.font = .setupPretendardStyle(of: isSelected ? .caption3 : .caption1)
     }
 }
