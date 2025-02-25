@@ -302,7 +302,7 @@ extension TotalListBottomSheetView: UICollectionViewDelegate {
 extension TotalListBottomSheetView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.convertByWidthRatio(375)
-        let height = UIScreen.convertByHeightRatio(104)
+        let height = UIScreen.convertByHeightRatio(102)
         return CGSize(width: width, height: height)
     }
 }
