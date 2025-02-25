@@ -17,6 +17,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
     var isButtonModified: Bool = false
     var isDropDownVisible: Bool = false
     var isTypeCollectionViewVisible: Bool = false
+    var isScrolled: Bool = false
     var currentDropDownButtonType: ButtonType?
     
     var selectedMarkerIndex: Int?
@@ -306,9 +307,23 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let collectionView = scrollView as? UICollectionView {
+            collectionView.collectionViewLayout.invalidateLayout()
+            isScrolled = collectionView.contentOffset.x <= 5 ? false : true
+        }
+    }
+}
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 58, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: isScrolled ? 0 : 12, bottom: 0, right: 0)
     }
 }
 
