@@ -110,7 +110,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         hankkiLowPriceStackView.do {
             $0.axis = .horizontal
             $0.spacing = 2
-            $0.alignment = .leading
+            $0.alignment = .center
         }
         
         addButton.do {
