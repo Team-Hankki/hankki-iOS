@@ -75,9 +75,9 @@ final class TotalListBottomSheetView: BaseView {
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOpacity = 0.08
             $0.layer.shadowOffset = CGSize(width: 0, height: -10)
-            $0.layer.shadowRadius = 30
+            $0.layer.shadowRadius = 18
             
-            $0.layer.cornerRadius = 30
+            $0.layer.cornerRadius = 18
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
