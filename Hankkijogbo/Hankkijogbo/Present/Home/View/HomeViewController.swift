@@ -286,7 +286,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.categoryFilters.count + 1
+        return viewModel.categoryFilters.count + 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -297,7 +297,7 @@ extension HomeViewController: UICollectionViewDataSource {
         } else if indexPath.item <= viewModel.categoryFilters.count {
             cell.bindData(model: viewModel.categoryFilters[indexPath.item - 1])
         } else {
-            cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""))
+            cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""), isLastIndex: true)
         }
         
         let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
