@@ -110,8 +110,8 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.updateTotalListCount(count: data.count)
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
-                self.rootView.bottomSheetView.setNeedsLayout()
-                self.rootView.bottomSheetView.layoutIfNeeded()
+//                self.rootView.bottomSheetView.setNeedsLayout()
+//                self.rootView.bottomSheetView.layoutIfNeeded()
             }
         }
         
@@ -196,7 +196,7 @@ extension HomeViewController {
     }
     
     @objc func filteringBottomSheet() {
-        let filteringBottomSheet = FilteringBottomSheetViewController()
+        let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
         filteringBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(filteringBottomSheet, animated: true, completion: nil)
     }
