@@ -42,7 +42,6 @@ final class HomeView: BaseView {
         setupGradientView()
     }
     
-    
     // MARK: - Set UI
     
     override func setupHierarchy() {
@@ -163,9 +162,10 @@ extension HomeView {
         gradient.do {
             $0.colors = [
                 UIColor.hankkiWhite.withAlphaComponent(0).cgColor,
+                UIColor.hankkiWhite.cgColor,
                 UIColor.hankkiWhite.cgColor
             ]
-            $0.locations = [0.0, 1.0]
+            $0.locations = [0.0, 0.3, 1.0]
             $0.startPoint = CGPoint(x: 0.0, y: 0.5)
             $0.endPoint = CGPoint(x: 1.0, y: 0.5)
             $0.frame = self.shadowView.bounds
