@@ -35,6 +35,13 @@ final class HomeView: BaseView {
     let targetButton: UIButton = UIButton()
     
     private let gradient: UIView = UIView()
+    private let shadowView: UIView = UIView()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupGradientView()
+    }
+    
     
     // MARK: - Set UI
     
@@ -42,6 +49,7 @@ final class HomeView: BaseView {
         addSubviews(mapView,
                     gradient,
                     typeFiletringCollectionView,
+                    shadowView,
                     filteringFloatingButton,
                     targetButton,
                     bottomSheetView)
@@ -55,6 +63,13 @@ final class HomeView: BaseView {
         typeFiletringCollectionView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
+        }
+        
+        shadowView.snp.makeConstraints {
+            $0.trailing.equalToSuperview()
+            $0.centerY.equalTo(typeFiletringCollectionView)
+            $0.width.equalTo(64)
+            $0.height.equalTo(54)
         }
         
         filteringFloatingButton.snp.makeConstraints {
@@ -89,8 +104,10 @@ final class HomeView: BaseView {
             $0.setImage(.icFilteringSelected, for: .selected)
             $0.clipsToBounds = false
             superview?.clipsToBounds = false
-            $0.addShadow(color: .hankkiWhite, alpha: 1.0, x: 0, y: 6, blur: 24)
-    
+        }
+        
+        shadowView.do {
+            $0.backgroundColor = .clear
         }
         
         targetButton.do {
@@ -139,4 +156,21 @@ extension HomeView {
             button.setImage(.icArrowClose, for: .normal)
         }
     }
+    
+    func setupGradientView() {
+        let gradient = CAGradientLayer()
+        
+        gradient.do {
+            $0.colors = [
+                UIColor.hankkiWhite.withAlphaComponent(0).cgColor,
+                UIColor.hankkiWhite.cgColor
+            ]
+            $0.locations = [0.0, 1.0]
+            $0.startPoint = CGPoint(x: 0.0, y: 0.5)
+            $0.endPoint = CGPoint(x: 1.0, y: 0.5)
+            $0.frame = self.shadowView.bounds
+        }
+        self.shadowView.layer.addSublayer(gradient)
+    }
+
 }
