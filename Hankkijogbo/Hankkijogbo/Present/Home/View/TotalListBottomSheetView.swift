@@ -75,9 +75,9 @@ final class TotalListBottomSheetView: BaseView {
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.shadowOpacity = 0.08
             $0.layer.shadowOffset = CGSize(width: 0, height: -10)
-            $0.layer.shadowRadius = 30
+            $0.layer.shadowRadius = 18
             
-            $0.layer.cornerRadius = 30
+            $0.layer.cornerRadius = 18
             $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         }
         
@@ -138,6 +138,7 @@ final class TotalListBottomSheetView: BaseView {
         totalListCollectionView.snp.makeConstraints {
             $0.top.equalTo(totalListCountLabel.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().priority(.low)
         }
         
         emptyView.snp.makeConstraints {
@@ -173,6 +174,14 @@ extension TotalListBottomSheetView {
         self.addGestureRecognizer(downSwipeGesture)
     }
     
+    func updateCollectionViewInsets(forExpandedState isExpanded: Bool) {
+        let bottomInset: CGFloat = isExpanded ? 40 : (defaultHeight - totalListCollectionView.frame.height)
+        let inset = max(0, bottomInset)
+        
+        totalListCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: inset, right: 0)
+        totalListCollectionView.scrollIndicatorInsets = totalListCollectionView.contentInset
+    }
+    
     func viewLayoutIfNeededWithUpAnimation() {
         UIView.animate(withDuration: 0.3,
                        delay: 0,
@@ -182,6 +191,8 @@ extension TotalListBottomSheetView {
         }, completion: { [weak self] _ in
             guard let self = self else { return }
             self.isBottomSheetUp = true
+            self.updateCollectionViewInsets(forExpandedState: true)
+            
             if let homeVC = self.homeViewController {
                 homeVC.lastScrollPosition = self.totalListCollectionView.contentOffset
                 self.totalListCollectionView.setContentOffset(homeVC.lastScrollPosition, animated: false)
@@ -197,9 +208,11 @@ extension TotalListBottomSheetView {
             self.transform = .identity
         }, completion: { [weak self] _ in
             self?.isBottomSheetUp = false
+            self?.updateCollectionViewInsets(forExpandedState: false)
+            
             if let collectionView = self?.totalListCollectionView {
                 collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-                let bottomInset = self?.defaultHeight ?? 0 - collectionView.frame.height
+                let bottomInset = (self?.defaultHeight ?? 0 - collectionView.frame.height) + 102 + 57
                 collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: max(0, bottomInset), right: 0)
                 collectionView.scrollIndicatorInsets = collectionView.contentInset
             }
@@ -302,7 +315,7 @@ extension TotalListBottomSheetView: UICollectionViewDelegate {
 extension TotalListBottomSheetView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = UIScreen.convertByWidthRatio(375)
-        let height = UIScreen.convertByHeightRatio(104)
+        let height = UIScreen.convertByHeightRatio(102)
         return CGSize(width: width, height: height)
     }
 }

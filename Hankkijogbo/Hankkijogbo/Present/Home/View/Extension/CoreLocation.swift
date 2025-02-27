@@ -181,20 +181,6 @@ extension HomeViewController {
             }
             
             self?.setupPosition(with: markers)
-//            self?.clearMarkers()
-//
-//            for (index, location) in markers.enumerated() {
-//                let marker = NMFMarker()
-//                marker.iconImage = NMFOverlayImage(image: .icPin)
-//                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
-//                marker.mapView = self?.rootView.mapView
-//                marker.touchHandler = { [weak self] _ in
-//                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
-//                    self?.showMarkerInfoCard(at: index, pinId: location.id)
-//                    return true
-//                }
-//                self?.markers.append(marker)
-//            }
         })
     }
     

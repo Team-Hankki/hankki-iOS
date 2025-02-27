@@ -12,7 +12,7 @@ final class FilteringBottomSheetViewController: BaseViewController {
     // MARK: - Properties
     
     private var defaultHeight: CGFloat = 266
-    private let viewModel = HomeViewModel()
+    private let viewModel: HomeViewModel
     
     private let filteringTitleList = [StringLiterals.Home.priceFilteringButton, StringLiterals.Home.sortFilteringButton]
     private var priceData: [GetPriceFilterData] = []
@@ -40,6 +40,15 @@ final class FilteringBottomSheetViewController: BaseViewController {
     
     private let applyButton: UIButton = UIButton()
     private let divideLineView: CustomLineView = CustomLineView()
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -230,7 +239,7 @@ private extension FilteringBottomSheetViewController {
             viewModel.sortOption = selectedSortData.tag
         } else { viewModel.sortOption = nil }
 
-//        viewModel.updateHankkiList()
+        viewModel.updateHankkiList()
         dimmedViewDidTap()
     }
 }

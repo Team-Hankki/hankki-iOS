@@ -35,6 +35,14 @@ final class MarkerInfoCardView: BaseView {
         setupAddTarget()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        clipsToBounds = false
+        superview?.clipsToBounds = false
+        addShadow(color: .black, alpha: 0.12, x: 0, y: 2, blur: 8, spread: 0)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -95,7 +103,7 @@ final class MarkerInfoCardView: BaseView {
         likeImage.do {
             $0.image = .icHeartRed
         }
-            
+        
         hankkiInfoStackView.do {
             $0.axis = .vertical
             $0.spacing = 3
@@ -130,7 +138,7 @@ final class MarkerInfoCardView: BaseView {
             $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
             $0.centerY.equalTo(thumbnailImageView)
         }
-
+        
         addButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(22)

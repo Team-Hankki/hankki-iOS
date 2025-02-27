@@ -75,11 +75,14 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.numberOfLines = 1
         }
         
-        [priceLabel, likeLabel].forEach {
-            $0.do {
-                $0.font = .setupPretendardStyle(of: .button)
-                $0.textColor = .gray800
-            }
+        likeLabel.do {
+            $0.font = .setupPretendardStyle(of: .caption1)
+            $0.textColor = .gray700
+        }
+        
+        priceLabel.do {
+            $0.font = .setupPretendardStyle(of: .body6)
+            $0.textColor = .gray800
         }
         
         lowestPriceLabel.do {
@@ -107,7 +110,7 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         hankkiLowPriceStackView.do {
             $0.axis = .horizontal
             $0.spacing = 2
-            $0.alignment = .leading
+            $0.alignment = .center
         }
         
         addButton.do {

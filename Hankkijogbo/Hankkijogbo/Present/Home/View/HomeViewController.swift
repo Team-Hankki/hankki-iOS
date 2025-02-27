@@ -17,6 +17,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
     var isButtonModified: Bool = false
     var isDropDownVisible: Bool = false
     var isTypeCollectionViewVisible: Bool = false
+    var isScrolled: Bool = false
     var currentDropDownButtonType: ButtonType?
     
     var selectedMarkerIndex: Int?
@@ -109,8 +110,6 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.updateTotalListCount(count: data.count)
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
-                self.rootView.bottomSheetView.setNeedsLayout()
-                self.rootView.bottomSheetView.layoutIfNeeded()
             }
         }
         
@@ -195,7 +194,7 @@ extension HomeViewController {
     }
     
     @objc func filteringBottomSheet() {
-        let filteringBottomSheet = FilteringBottomSheetViewController()
+        let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
         filteringBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(filteringBottomSheet, animated: true, completion: nil)
     }
@@ -285,7 +284,7 @@ extension HomeViewController: UICollectionViewDelegate {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.categoryFilters.count + 1
+        return viewModel.categoryFilters.count + 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -296,7 +295,7 @@ extension HomeViewController: UICollectionViewDataSource {
         } else if indexPath.item <= viewModel.categoryFilters.count {
             cell.bindData(model: viewModel.categoryFilters[indexPath.item - 1])
         } else {
-            cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""))
+            cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""), isLastIndex: true)
         }
         
         let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
@@ -306,9 +305,23 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let collectionView = scrollView as? UICollectionView {
+            collectionView.collectionViewLayout.invalidateLayout()
+            isScrolled = collectionView.contentOffset.x <= 5 ? false : true
+        }
+    }
+}
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 58, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: isScrolled ? 0 : 12, bottom: 0, right: 0)
     }
 }
 

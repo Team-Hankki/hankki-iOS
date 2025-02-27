@@ -56,16 +56,20 @@ final class TypeCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension TypeCollectionViewCell {
-    func bindData(model: GetCategoryFilterData) {
+    func bindData(model: GetCategoryFilterData, isLastIndex: Bool = false) {
         typeLabel.text = model.name
-        if let url = URL(string: model.imageUrl), !model.imageUrl.isEmpty {
+        if isLastIndex {
+            thumbnailImageView.image = nil
+        } else if let url = URL(string: model.imageUrl), !model.imageUrl.isEmpty {
             thumbnailImageView.setKFImage(url: model.imageUrl)
         } else {
             thumbnailImageView.image = .imgAll
         }
     }
+
     
     func updateSelection(isSelected: Bool) {
         selectedUnderLineView.isHidden = !isSelected
+        typeLabel.font = .setupPretendardStyle(of: isSelected ? .caption3 : .caption1)
     }
 }

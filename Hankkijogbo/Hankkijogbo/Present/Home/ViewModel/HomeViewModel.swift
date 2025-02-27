@@ -40,8 +40,21 @@ final class HomeViewModel {
     
     var hankkiThumbnail: GetHankkiThumbnailResponseData?
     
-    var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
-    var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)?
+    var hankkiListsDidChange: (([GetHankkiListData]) -> Void)? {
+        didSet {
+            DispatchQueue.main.async {
+                self.hankkiListsDidChange?(self.hankkiLists)
+            }
+        }
+    }
+    
+    var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)? {
+        didSet {
+            DispatchQueue.main.async {
+                self.hankkiPinsDidChange?(self.hankkiPins)
+            }
+        }
+    }
     var onHankkiListFetchCompletion: ((Bool, Bool) -> Void)?
     
     var storeCategory: String? {
@@ -74,12 +87,16 @@ extension HomeViewModel {
         
         self.getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
-                print("식당 전체 족보 fetch 완료 😄")
-                self.hankkiListsDidChange?(self.hankkiLists)
+                DispatchQueue.main.async {
+                    print("식당 전체 족보 fetch 완료 😄")
+                    self.hankkiListsDidChange?(self.hankkiLists)
+                }
                 self.getHankkiPinAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
                     if pinSuccess {
-                        print("지도 핀 fetch 완료 😄")
-                        self.hankkiPinsDidChange?(self.hankkiPins)
+                        DispatchQueue.main.async {
+                            print("지도 핀 fetch 완료 😄")
+                            self.hankkiPinsDidChange?(self.hankkiPins)
+                        }
                     } else {
                         print("지도 핀 fetch 실패 😞")
                     }
