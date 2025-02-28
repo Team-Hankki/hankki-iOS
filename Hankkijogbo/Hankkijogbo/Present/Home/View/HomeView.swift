@@ -103,6 +103,7 @@ final class HomeView: BaseView {
             $0.setImage(.icFilteringSelected, for: .selected)
             $0.clipsToBounds = false
             superview?.clipsToBounds = false
+            $0.addShadow(color: .hankkiWhite, alpha: 1.0, x: 0, y: 6, blur: 24)
         }
         
         shadowView.do {
