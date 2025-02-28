@@ -53,6 +53,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
         setupLocation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resetFloatingButton), name: NSNotification.Name("FilteringBottomSheetDismissed"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -213,6 +214,10 @@ extension HomeViewController {
         if let university = notification.userInfo?["university"] as? UniversityModel {
             setupPosition(with: university)
         }
+    }
+    
+    @objc func resetFloatingButton() {
+        rootView.filteringFloatingButton.isSelected = false
     }
 }
 

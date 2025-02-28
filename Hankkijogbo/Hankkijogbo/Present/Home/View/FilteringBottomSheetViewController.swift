@@ -205,6 +205,7 @@ private extension FilteringBottomSheetViewController {
     }
     
     @objc func dimmedViewDidTap() {
+        NotificationCenter.default.post(name: NSNotification.Name("FilteringBottomSheetDismissed"), object: nil)
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(0)

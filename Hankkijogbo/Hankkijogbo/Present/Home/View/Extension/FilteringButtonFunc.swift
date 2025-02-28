@@ -280,6 +280,7 @@ extension HomeViewController {
     }
     
     @objc func floatingButtonDidTap() {
+        rootView.filteringFloatingButton.isSelected.toggle()
         let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
         filteringBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(filteringBottomSheet, animated: true, completion: nil)
