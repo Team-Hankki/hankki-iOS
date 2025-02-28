@@ -192,13 +192,7 @@ extension HomeViewController {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
-    
-    @objc func filteringBottomSheet() {
-        let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
-        filteringBottomSheet.modalPresentationStyle = .overFullScreen
-        self.present(filteringBottomSheet, animated: true, completion: nil)
-    }
-    
+
     @objc func getNotificationForMyZipList(_ notification: Notification) {
         if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
             self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
