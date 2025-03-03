@@ -53,7 +53,7 @@ enum TabBarItem: CaseIterable {
         }
     }
     
-    var amplitudeButtonName: String{
+    var amplitudeButtonName: String {
         switch self {
         case .home: return AmplitudeLiterals.Tabbar.tabHome
         case .report: return AmplitudeLiterals.Tabbar.tabReport

@@ -132,10 +132,16 @@ private extension AddMenuViewController {
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
                                                               hasRightButton: false,
                                                               mainTitle: .string(""),
-                                                              rightButton: .string(""))
+                                                              rightButton: .string(""),
+                                                              backButtonAction: setupAmplitudeToBackButton)
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
         }
+    }
+    
+    func setupAmplitudeToBackButton() {
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabBack)
+        navigationController?.popViewController(animated: true)
     }
     
     func scrollToFooterView() {
