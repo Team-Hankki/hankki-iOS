@@ -36,4 +36,8 @@ enum AmplitudeLiterals {
     enum UnivSelect {
         static let tabSubmit = "UniversityChoice_AnyUniv_Click"
     }
+    
+    enum Property {
+        static let university = "university"
+    }
 }
