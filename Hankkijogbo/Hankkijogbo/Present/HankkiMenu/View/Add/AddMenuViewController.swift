@@ -208,6 +208,8 @@ private extension AddMenuViewController {
             let addMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(addMenuCompleteViewController, animated: true)
         }
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuAddCompleted)
     }
     
     /// 메뉴 셀 추가
