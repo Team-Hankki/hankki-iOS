@@ -132,11 +132,16 @@ private extension ReportViewController {
                                                               hasRightButton: true,
                                                               mainTitle: .string(StringLiterals.Common.report),
                                                               rightButton: .string(""),
-                                                              rightButtonAction: {})
+                                                              backButtonAction: setupAmplitudeToBackButton)
         
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
         }
+    }
+    
+    func setupAmplitudeToBackButton() {
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabBack)
+        navigationController?.popViewController(animated: true)
     }
     
     func scrollToFooterView() {
