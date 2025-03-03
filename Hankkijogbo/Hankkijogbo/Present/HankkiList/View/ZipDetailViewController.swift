@@ -110,6 +110,12 @@ private extension ZipDetailViewController {
                                 isShareButtonHidden: type == .sharedZip,
                                 shareZip: shareZip)
             
+            if type == .sharedZip {
+                let zipName = viewModel.zipInfo?.title ?? ""
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.SharedZip.present,
+                                               eventProperties: [AmplitudeLiterals.Property.zip: zipName])
+            }
+            
             isHeaderSetting = true
         }
     }
@@ -169,9 +175,15 @@ private extension ZipDetailViewController {
     
     // 공유 받은 족보 -> 족보 저장 뷰
     func presentAddZipViewController() {
+        let zipName = viewModel.zipInfo?.title ?? ""
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.SharedZip.tabAdd,
+                                       eventProperties: [AmplitudeLiterals.Property.zip: zipName])
+        
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false, zipId: zipId, type: .sharedZip)
+            let addZipViewController = CreateZipViewController(isBottomSheetOpen: false,
+                                                               zipId: zipId,
+                                                               type: .sharedZip)
             rootViewController.pushViewController(addZipViewController, animated: true)
         }
     }

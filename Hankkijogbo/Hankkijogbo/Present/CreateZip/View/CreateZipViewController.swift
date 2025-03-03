@@ -50,7 +50,7 @@ final class CreateZipViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(isBottomSheetOpen: Bool, storeId: Int? = nil, zipId: Int? = nil, type: CreateZipViewControllerType = .myZip) {
+    init(isBottomSheetOpen: Bool, storeId: Int? = nil, zipId: Int? = nil, type: CreateZipViewControllerType = .myZip, prevTitle: String? = nil) {
         self.isBottomSheetOpen = isBottomSheetOpen
         self.storeId = storeId
         self.zipId = zipId
@@ -220,6 +220,9 @@ private extension CreateZipViewController {
     }
     
     func presentMyZipListViewController() {
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.SharedZip.completedAdd,
+                                       eventProperties: [AmplitudeLiterals.Property.zip: titleTextField.value])
+        
         DispatchQueue.main.async {
             // 족보 만들기를 완료해서, 서버에서 생성이되면 나의 족보 리스트 페이지로 이동한다.
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {

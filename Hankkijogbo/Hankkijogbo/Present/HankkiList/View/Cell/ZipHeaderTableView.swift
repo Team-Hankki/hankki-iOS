@@ -23,6 +23,8 @@ final class ZipHeaderTableView: UITableViewHeaderFooterView {
     var showAlert: ((String) -> Void)?
     var shareZip: (() -> Void)?
     
+    private var zipName: String = ""
+    
     // MARK: - UI Properties
     
     private let headerView = UIView()
@@ -164,6 +166,8 @@ private extension ZipHeaderTableView {
     
     @objc func shareButtonDidTap() {
         guard let shareZip = shareZip else { return }
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Mypage.tabShare,
+                                       eventProperties: [AmplitudeLiterals.Property.zip: zipName])
         shareZip()
     }
 }
@@ -207,9 +211,10 @@ private extension ZipHeaderTableView {
 }
 
 extension ZipHeaderTableView {
-    func dataBind(_ data: Model?, isShareButtonHidden: Bool, shareZip: @escaping ()-> Void) {
+    func dataBind(_ data: Model?, isShareButtonHidden: Bool, shareZip: @escaping () -> Void) {
         self.shareZip = shareZip
         headerLabel.text = data?.title
+        zipName = data?.title ?? ""
         setupTagStackView(data?.details ?? [])
         nameLabel.text = data?.name
         shareButton.isHidden = isShareButtonHidden

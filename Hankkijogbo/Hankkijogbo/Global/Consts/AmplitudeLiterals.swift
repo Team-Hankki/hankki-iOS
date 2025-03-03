@@ -22,8 +22,16 @@ enum AmplitudeLiterals {
     
     enum Mypage {
         static let tabMyzip = "Mypage_MyZip_Click"
+        static let tabShare = "Mypage_MyJokbo_Share"
+        static let completedShare = "Mypage_MyJokbo_Share_Completed"
     }
 
+    enum SharedZip {
+        static let present = "Shared_Jokbo_Page"
+        static let tabAdd = "Shared_Jokbo_MyJokbo_Add"
+        static let completedAdd = "Shared_Jokbo_MyJokbo_Add_Completed"
+    }
+    
     enum ZipList {
         static let tabCreateZip = "Mypage_MyJokbo_NewJokbo_Create"
     }
@@ -39,5 +47,6 @@ enum AmplitudeLiterals {
     
     enum Property {
         static let university = "university"
+        static let zip = "족보"
     }
 }

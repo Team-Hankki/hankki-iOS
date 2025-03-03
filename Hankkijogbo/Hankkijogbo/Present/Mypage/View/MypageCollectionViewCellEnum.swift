@@ -33,6 +33,7 @@ extension MypageViewController {
         case .hankki:
             switch itemIndex {
             case 0:
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.Mypage.tabMyzip)
                 navigateToZipListViewController()
             case 1:
                 navigateToHankkiListViewController(.reported)
