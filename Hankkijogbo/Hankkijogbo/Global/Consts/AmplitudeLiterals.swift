@@ -30,7 +30,7 @@ enum AmplitudeLiterals {
     }
     
     enum Mypage {
-        static let tabMyzip = "Mypage_MyZip_Click"
+        static let tabMyzip = "Mypage_MyJokbo_Click"
         static let tabShare = "Mypage_MyJokbo_Share"
         static let completedShare = "Mypage_MyJokbo_Share_Completed"
     }
