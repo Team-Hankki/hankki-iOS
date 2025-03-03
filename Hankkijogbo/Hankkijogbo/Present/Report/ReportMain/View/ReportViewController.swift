@@ -342,6 +342,9 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
             reportViewModel.disableCheckedCategories()
             reportViewModel.categories[indexPath.row].isChecked = true
+            
+            SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabFoodCategories,
+                                           eventProperties: [AmplitudeLiterals.Report.propertyFood: reportViewModel.categories[indexPath.row].categoryData.name])
         }
     }
 }
