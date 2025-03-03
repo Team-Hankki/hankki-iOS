@@ -53,6 +53,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
         setupLocation()
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resetFloatingButton), name: NSNotification.Name("FilteringBottomSheetDismissed"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -192,13 +193,7 @@ extension HomeViewController {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
-    
-    @objc func filteringBottomSheet() {
-        let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
-        filteringBottomSheet.modalPresentationStyle = .overFullScreen
-        self.present(filteringBottomSheet, animated: true, completion: nil)
-    }
-    
+
     @objc func getNotificationForMyZipList(_ notification: Notification) {
         if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
             self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
@@ -219,6 +214,10 @@ extension HomeViewController {
         if let university = notification.userInfo?["university"] as? UniversityModel {
             setupPosition(with: university)
         }
+    }
+    
+    @objc func resetFloatingButton() {
+        rootView.filteringFloatingButton.isSelected = false
     }
 }
 
