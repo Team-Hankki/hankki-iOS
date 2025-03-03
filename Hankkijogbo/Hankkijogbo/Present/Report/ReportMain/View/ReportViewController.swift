@@ -172,6 +172,15 @@ private extension ReportViewController {
         ) as? MenuCollectionViewCell else { return }
         cell.deleteMenuButton.isHidden = false
     }
+    
+    func setupImagePickerView() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .any(of: [.images])
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
 }
 
 // MARK: - @objc Func
@@ -179,12 +188,9 @@ private extension ReportViewController {
 private extension ReportViewController {
     
     @objc func selectImageButtonDidTap() {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration.filter = .any(of: [.images])
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        setupImagePickerView()
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabFoodPicture)
     }
     
     @objc func imageXButtonDidTap() {
