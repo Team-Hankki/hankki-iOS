@@ -202,6 +202,9 @@ extension HomeViewController {
             marker.touchHandler = { [weak self] _ in
                 self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                 self?.showMarkerInfoCard(at: index, pinId: location.id)
+                
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabPin,
+                                               eventProperties: [AmplitudeLiterals.Property.store: location.name])
                 return true
             }
             markers.append(marker)

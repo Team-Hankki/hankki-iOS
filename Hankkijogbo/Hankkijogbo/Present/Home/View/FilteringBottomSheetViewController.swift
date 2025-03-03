@@ -234,12 +234,14 @@ private extension FilteringBottomSheetViewController {
             viewModel.priceCategory = selectedPriceData.tag
         } else { viewModel.priceCategory = nil }
 
-
         if let selectedSortValue = selectedSortValue,
            let selectedSortData = sortData.first(where: { $0.name == selectedSortValue }) {
             viewModel.sortOption = selectedSortData.tag
         } else { viewModel.sortOption = nil }
-
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabFilter,
+                                       eventProperties: [AmplitudeLiterals.Property.filterSort: selectedSortValue ?? "",
+                                                         AmplitudeLiterals.Property.filterPrice: selectedPriceValue ?? ""])
         viewModel.updateHankkiList()
         dimmedViewDidTap()
     }

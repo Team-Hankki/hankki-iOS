@@ -6,6 +6,15 @@
 //
 
 enum AmplitudeLiterals {
+    enum Home {
+        static let tabHankki = "Home_StoreCard_Click"
+        static let tabPin = "Home_Map_Pin_Click"
+        
+        static let tabFilter = "Home_Detail_Filter_Completed"
+        
+        static let tabCategory = "Home_Food_Categories_Click"
+        
+    }
     enum Tabbar {
         static let tabHome = "Nav_Home_Click"
         static let tabReport = "Nav_Report_Click"
@@ -48,5 +57,9 @@ enum AmplitudeLiterals {
     enum Property {
         static let university = "university"
         static let zip = "족보"
+        static let store = "식당"
+        static let food = "food"
+        static let filterSort = "정렬"
+        static let filterPrice = "가격대"
     }
 }
