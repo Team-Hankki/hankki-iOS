@@ -344,7 +344,7 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
             reportViewModel.categories[indexPath.row].isChecked = true
             
             SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabFoodCategories,
-                                           eventProperties: [AmplitudeLiterals.Report.propertyFood: reportViewModel.categories[indexPath.row].categoryData.name])
+                                           eventProperties: [AmplitudeLiterals.Property.food: reportViewModel.categories[indexPath.row].categoryData.name])
         }
     }
 }

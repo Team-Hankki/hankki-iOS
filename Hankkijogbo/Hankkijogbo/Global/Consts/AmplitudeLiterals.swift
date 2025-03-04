@@ -29,7 +29,6 @@ enum AmplitudeLiterals {
         static let tabSubmit =  "Report_Complete_Click"
         static let tabRestaurantComplete =  "Report_RestaurantComplete_Click"
         static let tabFoodCategories =  "Report_Food_Categories_Click"
-        static let propertyFood =  "food"
         static let tabFoodPicture =  "Report_Food_Picture_Click"
         static let tabBack =  "Report_Back_Click"
     }
