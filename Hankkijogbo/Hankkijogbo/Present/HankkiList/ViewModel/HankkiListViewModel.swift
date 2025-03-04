@@ -137,6 +137,9 @@ extension HankkiListViewModel {
         let templeteID: Int64 = Int64(StringLiterals.Kakao.zipShareTemplete)
         
         let imageURL: String = hankkiList[0].imageURL.isEmpty ? StringLiterals.SharedZip.zipShareDefaultImageURL : hankkiList[0].imageURL
+        
+        let name: String = zipInfo?.title ?? ""
+        let sender: String = zipInfo?.name ?? ""
  
         let templetArgs: [String: String] = ["IMAGE_URL": imageURL,
                                              "FAVORITE_ID": String(zipInfo?.id ?? 0),
@@ -150,6 +153,8 @@ extension HankkiListViewModel {
                     print("error : \(error)")
                 } else {
                     print("sharing is success")
+                    SetupAmplitude.shared.logEvent(AmplitudeLiterals.Mypage.completedShare,
+                                                   eventProperties: [AmplitudeLiterals.Property.zip: name])
                     guard let sharingResult else { return }
                     UIApplication.shared.open(sharingResult.url, options: [:], completionHandler: nil)
                 }

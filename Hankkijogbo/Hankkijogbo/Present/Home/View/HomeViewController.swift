@@ -272,6 +272,8 @@ extension HomeViewController: UICollectionViewDelegate {
             changeButtonTitle(for: rootView.typeButton, newTitle: "전체")
         } else if indexPath.item - 1 < viewModel.categoryFilters.count {
             let selectedCategory = viewModel.categoryFilters[indexPath.item - 1]
+            SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabCategory,
+                                           eventProperties: [AmplitudeLiterals.Property.food: selectedCategory.name])
             viewModel.selectedStoreCategoryIndex = indexPath.item
             viewModel.storeCategory = selectedCategory.tag
             changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
