@@ -179,8 +179,6 @@ private extension ModifyMenuViewController {
             let deleteMenuCompleteViewController = CompleteViewController(completeView: completeView)
             self.navigationController?.pushViewController(deleteMenuCompleteViewController, animated: true)
         }
-        
-        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuDeleteCompleted)
     }
     
     func popToEditMenu() {
