@@ -280,7 +280,8 @@ extension HomeViewController {
     }
     
     @objc func floatingButtonDidTap() {
-        let filteringBottomSheet = HankkiNavigationController(rootViewController: FilteringBottomSheetViewController(viewModel: viewModel))
+        rootView.filteringFloatingButton.isSelected.toggle()
+        let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
         filteringBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(filteringBottomSheet, animated: true, completion: nil)
     }

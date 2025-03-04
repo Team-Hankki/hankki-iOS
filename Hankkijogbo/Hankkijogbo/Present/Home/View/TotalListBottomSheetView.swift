@@ -308,6 +308,9 @@ extension TotalListBottomSheetView: UICollectionViewDataSource {
 extension TotalListBottomSheetView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pinId = data[indexPath.item].id
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabHankki,
+                                       eventProperties: [AmplitudeLiterals.Property.store: data[indexPath.item].name])
+        
         delegate?.didSelectHankkiCell(at: indexPath.item, pinId: pinId)
     }
 }

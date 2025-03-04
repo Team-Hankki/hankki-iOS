@@ -205,6 +205,7 @@ private extension FilteringBottomSheetViewController {
     }
     
     @objc func dimmedViewDidTap() {
+        NotificationCenter.default.post(name: NSNotification.Name("FilteringBottomSheetDismissed"), object: nil)
         containerView.snp.remakeConstraints {
             $0.bottom.width.equalToSuperview()
             $0.height.equalTo(0)
@@ -233,12 +234,14 @@ private extension FilteringBottomSheetViewController {
             viewModel.priceCategory = selectedPriceData.tag
         } else { viewModel.priceCategory = nil }
 
-
         if let selectedSortValue = selectedSortValue,
            let selectedSortData = sortData.first(where: { $0.name == selectedSortValue }) {
             viewModel.sortOption = selectedSortData.tag
         } else { viewModel.sortOption = nil }
-
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabFilter,
+                                       eventProperties: [AmplitudeLiterals.Property.filterSort: selectedSortValue ?? "",
+                                                         AmplitudeLiterals.Property.filterPrice: selectedPriceValue ?? ""])
         viewModel.updateHankkiList()
         dimmedViewDidTap()
     }
