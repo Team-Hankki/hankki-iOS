@@ -27,6 +27,10 @@ enum AmplitudeLiterals {
     
     enum Report {
         static let tabSubmit =  "Report_Complete_Click"
+        static let tabRestaurantComplete =  "Report_RestaurantComplete_Click"
+        static let tabFoodCategories =  "Report_Food_Categories_Click"
+        static let tabFoodPicture =  "Report_Food_Picture_Click"
+        static let tabBack =  "Report_Back_Click"
     }
     
     enum Mypage {
@@ -48,6 +52,11 @@ enum AmplitudeLiterals {
     enum Detail {
         static let tabHeart = "RestInfo_Like_Click"
         static let tabMenuEdit = "RestInfo_MenuEdit_Click"
+        static let tabMenuAddCompleted = "RestInfo_MenuAddCompleted_Click"
+        static let tabMenuEditCompleted = "RestInfo_MenuEditCompleted_Click"
+        static let tabMenuDeleteCompleted = "RestInfo_DeleteCompleted_Click"
+        static let tabBack = "RestInfo_Back_Click"
+        
     }
 
     enum UnivSelect {

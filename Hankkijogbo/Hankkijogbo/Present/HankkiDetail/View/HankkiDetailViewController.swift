@@ -278,6 +278,7 @@ extension HankkiDetailViewController {
     // MARK: - @objc Func
     
     @objc func backButtonDidTap() {
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabBack)
         self.navigationController?.popViewController(animated: true)
     }
     

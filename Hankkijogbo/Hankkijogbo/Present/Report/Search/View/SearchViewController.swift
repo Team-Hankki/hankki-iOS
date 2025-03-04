@@ -297,6 +297,8 @@ private extension SearchViewController {
                                                    longitude: hankkiLocation.longitude,
                                                    storeName: hankkiLocation.name)
         viewModel.postHankkiValidateAPI(req: request)
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabRestaurantComplete)
     }
 }
 

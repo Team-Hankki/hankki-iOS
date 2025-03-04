@@ -56,6 +56,7 @@ extension EditMenuViewModel {
         guard let selectedMenu = selectedMenu else { return }
         NetworkService.shared.menuService.deleteMenu(storeId: storeId, id: selectedMenu.id) { result in
             result.handleNetworkResult(onSuccessVoid: completion)
+            SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuDeleteCompleted)
         }
     }
     
