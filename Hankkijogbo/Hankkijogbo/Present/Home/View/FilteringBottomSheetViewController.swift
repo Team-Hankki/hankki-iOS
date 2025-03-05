@@ -195,8 +195,13 @@ private extension FilteringBottomSheetViewController {
         let buttons = stackView.arrangedSubviews.compactMap { $0 as? UIButton }
         for button in buttons {
             if button == selectedButton {
-                button.isSelected = true
-                selectedButtonStyle(button: button)
+                if button.isSelected {
+                    button.isSelected = false
+                    defaultButtonStyle(button: button)
+                } else {
+                    button.isSelected = true
+                    selectedButtonStyle(button: button)
+                }
             } else {
                 button.isSelected = false
                 defaultButtonStyle(button: button)
@@ -220,10 +225,18 @@ private extension FilteringBottomSheetViewController {
     
     @objc func filteringChipButtonDidTap(_ sender: UIButton) {
         if priceChipStackView.arrangedSubviews.contains(sender) {
-            if let priceValue = sender.titleLabel?.text { selectedPriceValue = priceValue }
+            if sender.isSelected {
+                selectedPriceValue = nil
+            } else {
+                selectedPriceValue = sender.titleLabel?.text
+            }
             setButtonStateLimit(for: sender, in: priceChipStackView)
         } else if sortChipStackView.arrangedSubviews.contains(sender) {
-            if let sortValue = sender.titleLabel?.text { selectedSortValue = sortValue }
+            if sender.isSelected {
+                selectedSortValue = nil
+            } else {
+                selectedSortValue = sender.titleLabel?.text
+            }
             setButtonStateLimit(for: sender, in: sortChipStackView)
         }
     }
