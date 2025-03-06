@@ -21,6 +21,8 @@ final class FilteringBottomSheetViewController: BaseViewController {
     private var selectedPriceValue: String?
     private var selectedSortValue: String?
     
+    var filteringStatus: (() -> Void)?
+    
     // MARK: - Components
     
     private let dimmedView: UIView = UIView()
@@ -270,6 +272,8 @@ private extension FilteringBottomSheetViewController {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabFilter,
                                        eventProperties: [AmplitudeLiterals.Property.filterSort: selectedSortValue ?? "",
                                                          AmplitudeLiterals.Property.filterPrice: selectedPriceValue ?? ""])
+
+        filteringStatus?()
         viewModel.updateHankkiList()
         dimmedViewDidTap()
     }
