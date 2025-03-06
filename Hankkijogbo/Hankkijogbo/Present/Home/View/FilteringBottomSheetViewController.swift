@@ -21,6 +21,8 @@ final class FilteringBottomSheetViewController: BaseViewController {
     private var selectedPriceValue: String?
     private var selectedSortValue: String?
     
+    var filteringStatus: (() -> Void)?
+    
     // MARK: - Components
     
     private let dimmedView: UIView = UIView()
@@ -43,6 +45,8 @@ final class FilteringBottomSheetViewController: BaseViewController {
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
+        self.selectedPriceValue = viewModel.priceCategory
+        self.selectedSortValue = viewModel.sortOption
         super.init()
     }
     
@@ -57,6 +61,15 @@ final class FilteringBottomSheetViewController: BaseViewController {
         bindViewModels()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.setupPriceFilterSelection()
+            self.setupSortFilterSelection()
+        }
+    }
+
     override func setupHierarchy() {
         view.addSubviews(dimmedView, containerView)
         
@@ -195,8 +208,13 @@ private extension FilteringBottomSheetViewController {
         let buttons = stackView.arrangedSubviews.compactMap { $0 as? UIButton }
         for button in buttons {
             if button == selectedButton {
-                button.isSelected = true
-                selectedButtonStyle(button: button)
+                if button.isSelected {
+                    button.isSelected = false
+                    defaultButtonStyle(button: button)
+                } else {
+                    button.isSelected = true
+                    selectedButtonStyle(button: button)
+                }
             } else {
                 button.isSelected = false
                 defaultButtonStyle(button: button)
@@ -220,10 +238,18 @@ private extension FilteringBottomSheetViewController {
     
     @objc func filteringChipButtonDidTap(_ sender: UIButton) {
         if priceChipStackView.arrangedSubviews.contains(sender) {
-            if let priceValue = sender.titleLabel?.text { selectedPriceValue = priceValue }
+            if sender.isSelected {
+                selectedPriceValue = nil
+            } else {
+                selectedPriceValue = sender.titleLabel?.text
+            }
             setButtonStateLimit(for: sender, in: priceChipStackView)
         } else if sortChipStackView.arrangedSubviews.contains(sender) {
-            if let sortValue = sender.titleLabel?.text { selectedSortValue = sortValue }
+            if sender.isSelected {
+                selectedSortValue = nil
+            } else {
+                selectedSortValue = sender.titleLabel?.text
+            }
             setButtonStateLimit(for: sender, in: sortChipStackView)
         }
     }
@@ -232,16 +258,22 @@ private extension FilteringBottomSheetViewController {
         if let selectedPriceValue = selectedPriceValue,
            let selectedPriceData = priceData.first(where: { $0.name == selectedPriceValue }) {
             viewModel.priceCategory = selectedPriceData.tag
-        } else { viewModel.priceCategory = nil }
+        } else {
+            viewModel.priceCategory = nil
+        }
 
         if let selectedSortValue = selectedSortValue,
            let selectedSortData = sortData.first(where: { $0.name == selectedSortValue }) {
             viewModel.sortOption = selectedSortData.tag
-        } else { viewModel.sortOption = nil }
-        
+        } else {
+            viewModel.sortOption = nil
+        }
+
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabFilter,
                                        eventProperties: [AmplitudeLiterals.Property.filterSort: selectedSortValue ?? "",
                                                          AmplitudeLiterals.Property.filterPrice: selectedPriceValue ?? ""])
+
+        filteringStatus?()
         viewModel.updateHankkiList()
         dimmedViewDidTap()
     }
@@ -259,11 +291,17 @@ private extension FilteringBottomSheetViewController {
     }
     
     func bindViewModels() {
+        DispatchQueue.main.async {
+                self.setupPriceFilterSelection()
+                self.setupSortFilterSelection()
+            }
+        
         viewModel.getPriceCategoryFilterAPI { [weak self] success in
             guard let self = self else { return }
             if success {
                 DispatchQueue.main.async {
                     self.priceData = self.viewModel.priceFilters
+                    self.setupPriceFilterSelection()
                     if let entire = self.priceData.first(where: { $0.tag == StringLiterals.FilteringTag.all}) {
                         self.entireChipButton.setTitle(StringLiterals.Home.entire, for: .normal)
                     }
@@ -284,6 +322,7 @@ private extension FilteringBottomSheetViewController {
             if success {
                 DispatchQueue.main.async {
                     self.sortData = self.viewModel.sortOptions
+                    self.setupSortFilterSelection()
                     if let latest = self.sortData.first(where: { $0.tag == StringLiterals.FilteringTag.latest }) {
                         self.latestChipButton.setTitle(latest.name, for: .normal)
                     }
@@ -297,6 +336,28 @@ private extension FilteringBottomSheetViewController {
                     }
                 }
             }
+        }
+    }
+    
+    func setupPriceFilterSelection() {
+        guard let selectedTag = viewModel.priceCategory,
+              let selectedData = priceData.first(where: { $0.tag == selectedTag }) else { return }
+        
+        let buttons = [entireChipButton, less6000ChipButton, more6000ChipButton]
+        if let selectedButton = buttons.first(where: { $0.titleLabel?.text == selectedData.name }) {
+            setButtonStateLimit(for: selectedButton, in: priceChipStackView)
+            selectedPriceValue = selectedData.name
+        }
+    }
+
+    func setupSortFilterSelection() {
+        guard let selectedTag = viewModel.sortOption,
+              let selectedData = sortData.first(where: { $0.tag == selectedTag }) else { return }
+        
+        let buttons = [latestChipButton, lowestChipButton, recommendChipButton]
+        if let selectedButton = buttons.first(where: { $0.titleLabel?.text == selectedData.name }) {
+            setButtonStateLimit(for: selectedButton, in: sortChipStackView)
+            selectedSortValue = selectedData.name
         }
     }
 }

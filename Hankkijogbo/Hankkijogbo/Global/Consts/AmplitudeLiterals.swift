@@ -22,7 +22,7 @@ enum AmplitudeLiterals {
     }
     
     enum MyZipListBottomSheet {
-        static let tabAdd = "Home_RestList_Jockbo_Add"
+        static let tabAdd = "Home_RestList_Jokbo_Add"
     }
     
     enum Report {

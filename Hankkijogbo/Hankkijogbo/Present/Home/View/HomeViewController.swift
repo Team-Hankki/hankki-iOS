@@ -51,6 +51,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
         bindViewModel()
         setupHankkiListResult()
         setupLocation()
+        updateFilteringFloatingButtonState()
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(resetFloatingButton), name: NSNotification.Name("FilteringBottomSheetDismissed"), object: nil)
@@ -185,6 +186,14 @@ extension HomeViewController {
         univSelectViewController.delegate = self
         resetAllFilters()
         navigationController?.pushViewController(univSelectViewController, animated: true)
+    }
+    
+    func isFiltering() -> Bool {
+        return viewModel.priceCategory != nil || viewModel.sortOption != nil
+    }
+
+    func updateFilteringFloatingButtonState() {
+        rootView.filteringFloatingButton.setImage(isFiltering() ? .icFilteringSelected : .icFilteringNormal, for: .normal)
     }
 }
 
