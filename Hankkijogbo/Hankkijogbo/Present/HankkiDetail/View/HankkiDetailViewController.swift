@@ -11,29 +11,25 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
     
     // MARK: - Properties
     
-    let hankkiId: Int
-    var viewModel: HankkiDetailViewModel = HankkiDetailViewModel()
-    var reportOptionArray: [String] = [
-        StringLiterals.HankkiDetail.optionDisappear,
-        StringLiterals.HankkiDetail.optionIncreasePrice,
-        StringLiterals.HankkiDetail.optionImproperReport
-    ]
+    var viewModel: HankkiDetailViewModel
     
     // MARK: - UI Components
     
     private let scrollView: UIScrollView = UIScrollView()
     private let contentView: UIView = UIView()
-    private let lightGrayBackgroundView: UIView = UIView()
     private let backButton: UIButton = UIButton()
-    private let thumbnailImageView: UIImageView = UIImageView()
     private let topBlackGradientImageView: UIImageView = UIImageView()
-    private var infoCollectionView: HankkiDetailCollectionView = HankkiDetailCollectionView()
-    private var reportOptionCollectionView: HankkiReportOptionCollectionView = HankkiReportOptionCollectionView()
+    private let thumbnailImageView: UIImageView = UIImageView()
+    private let differentInfoView: DifferentInfoView = DifferentInfoView()
+    private let hankkiInfoView: HankkiInfoView = HankkiInfoView()
+    private let detailMapView: DetailMapView = DetailMapView()
+    private let menuCollectionView: HankkiMenuCollectionView = HankkiMenuCollectionView()
+    private let precautionView: PrecautionView = PrecautionView()
     
     // MARK: - Life Cycle
     
-    init(hankkiId: Int) {
-        self.hankkiId = hankkiId
+    init(viewModel: HankkiDetailViewModel) {
+        self.viewModel = viewModel
         super.init()
     }
     
@@ -71,11 +67,13 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
-            lightGrayBackgroundView,
             thumbnailImageView,
             backButton,
-            infoCollectionView,
-            reportOptionCollectionView
+            differentInfoView,
+            hankkiInfoView,
+            detailMapView,
+            menuCollectionView,
+            precautionView
         )
         thumbnailImageView.addSubview(topBlackGradientImageView)
     }
@@ -85,48 +83,65 @@ final class HankkiDetailViewController: BaseViewController, NetworkResultDelegat
             $0.top.equalTo(self.view).offset(-UIApplication.getStatusBarHeight())
             $0.horizontalEdges.bottom.equalToSuperview()
         }
+        
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(UIScreen.getDeviceWidth())
         }
+        
         thumbnailImageView.snp.makeConstraints {
             $0.top.width.equalToSuperview()
-            $0.height.equalTo(250)
+            $0.height.equalTo(235)
         }
+        
         topBlackGradientImageView.snp.makeConstraints {
             $0.top.equalTo(self.scrollView)
             $0.size.equalTo(thumbnailImageView)
         }
-        lightGrayBackgroundView.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
+        
         backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(UIApplication.getStatusBarHeight() + 15)
-            $0.leading.equalToSuperview().inset(20)
-            $0.size.equalTo(20)
+            $0.top.equalToSuperview().inset(57)
+            $0.leading.equalToSuperview().inset(8)
+            $0.size.equalTo(40)
         }
-        infoCollectionView.snp.makeConstraints {
-            $0.top.equalTo(thumbnailImageView.snp.bottom).offset(-37)
-            $0.centerX.equalToSuperview()
+        
+        differentInfoView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(15)
+            $0.bottom.equalTo(thumbnailImageView.snp.bottom).offset(-12)
         }
-        reportOptionCollectionView.snp.makeConstraints {
-            $0.top.equalTo(infoCollectionView.snp.bottom).offset(50)
-            $0.horizontalEdges.equalToSuperview().inset(22)
-            $0.bottom.equalToSuperview().inset(31)
+        
+        hankkiInfoView.snp.makeConstraints {
+            $0.top.equalTo(thumbnailImageView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        detailMapView.snp.makeConstraints {
+            $0.top.equalTo(hankkiInfoView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(260)
+        }
+        
+        menuCollectionView.snp.makeConstraints {
+            $0.top.equalTo(detailMapView.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
+        }
+
+        precautionView.snp.makeConstraints {
+            $0.top.equalTo(menuCollectionView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(169)
         }
     }
     
     override func setupStyle() {
         view.do {
-            $0.backgroundColor = .gray50
+            $0.backgroundColor = .gray100
         }
+        
         scrollView.do {
             $0.backgroundColor = .clear
         }
-        lightGrayBackgroundView.do {
-            $0.backgroundColor = .gray50
-        }
+        
         backButton.do {
             $0.setImage(.btnBackWhite, for: .normal)
         }
@@ -139,14 +154,28 @@ private extension HankkiDetailViewController {
     
     func bindViewModel() {
         viewModel.setHankkiDetailData = { [weak self] in
-            if let data = self?.viewModel.hankkiDetailData {
+            if let self = self,
+               let data = viewModel.hankkiDetailData {
                 if let first = data.imageUrls.first {
-                    self?.setupImageStyle(imageUrl: first)
+                    setupImageStyle(imageUrl: first)
                 } else {
-                    self?.setupNoImageStyle()
+                    setupNoImageStyle()
                 }
-                self?.infoCollectionView.updateLayout(menuSize: data.menus.count)
-                self?.infoCollectionView.collectionView.reloadData()
+                
+                hankkiInfoView.bindData(
+                    category: data.category,
+                    categoryImageUrl: data.categoryImageUrl,
+                    name: data.name,
+                    heartCount: String(data.heartCount),
+                    isLiked: data.isLiked
+                )
+                detailMapView.bindData(
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    address: viewModel.address ?? "-"
+                )
+                
+                menuCollectionView.collectionView.reloadData()
             }
         }
         
@@ -156,59 +185,55 @@ private extension HankkiDetailViewController {
                             primaryButtonText: StringLiterals.Alert.check)
         }
         
-        viewModel.dismiss = {
-            self.navigationController?.popViewController(animated: false)
+        viewModel.dismiss = { [weak self] in
+            self?.navigationController?.popViewController(animated: false)
+        }
+        
+        viewModel.handleDeletedHankki = { [weak self] in
+            self?.showBlackToast(message: StringLiterals.Toast.deleteAlready)
+        }
+        
+        viewModel.handleMapLoadError = { [weak self] in
+            self?.detailMapView.handleMapLoadError()
         }
     }
     
     func setupRegister() {
-        infoCollectionView.collectionView.do {
-            $0.register(HankkiDetailCollectionViewCell.self, forCellWithReuseIdentifier: HankkiDetailCollectionViewCell.className)
-            $0.register(HankkiEditMenuCollectionViewCell.self, forCellWithReuseIdentifier: HankkiEditMenuCollectionViewCell.className)
+        menuCollectionView.collectionView.do {
+            $0.register(HankkiMenuCollectionViewCell.self, forCellWithReuseIdentifier: HankkiMenuCollectionViewCell.className)
             $0.register(
-                HankkiDetailHeaderView.self,
+                HankkiMenuHeaderView.self,
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                withReuseIdentifier: HankkiDetailHeaderView.className
+                withReuseIdentifier: HankkiMenuHeaderView.className
             )
             $0.register(
-                HankkiDetailFooterView.self,
+                HankkiMenuFooterView.self,
                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                withReuseIdentifier: HankkiDetailFooterView.className
-            )
-        }
-        
-        reportOptionCollectionView.collectionView.do {
-            $0.register(HankkiReportOptionCollectionViewCell.self, forCellWithReuseIdentifier: HankkiReportOptionCollectionViewCell.className)
-            $0.register(
-                HankkiReportOptionHeaderView.self,
-                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                withReuseIdentifier: HankkiReportOptionHeaderView.className
-            )
-            $0.register(
-                HankkiReportOptionFooterView.self,
-                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                withReuseIdentifier: HankkiReportOptionFooterView.className
+                withReuseIdentifier: HankkiMenuFooterView.className
             )
         }
     }
     
     func setupDelegate() {
-        scrollView.delegate = self
-        infoCollectionView.collectionView.delegate = self
-        infoCollectionView.collectionView.dataSource = self
-        reportOptionCollectionView.collectionView.delegate = self
-        reportOptionCollectionView.collectionView.dataSource = self
         viewModel.delegate = self
+        scrollView.delegate = self
+        menuCollectionView.collectionView.delegate = self
+        menuCollectionView.collectionView.dataSource = self
     }
     
     func setupAddTarget() {
         backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+        hankkiInfoView.heartButton.addTarget(self, action: #selector(heartButtonDidTap), for: .touchUpInside)
+        hankkiInfoView.myZipButton.addTarget(self, action: #selector(myZipButtonDidTap), for: .touchUpInside)
     }
     
     func setupGesture() {
         let rightSwipeGesture = UISwipeGestureRecognizer.init(target: self, action: #selector(backButtonDidTap))
         rightSwipeGesture.direction = .right
-        self.view.addGestureRecognizer(rightSwipeGesture)
+        view.addGestureRecognizer(rightSwipeGesture)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(differentInfoViewDidTap))
+        differentInfoView.addGestureRecognizer(tapGesture)
     }
     
     func setupNotification() {
@@ -221,12 +246,12 @@ private extension HankkiDetailViewController {
     }
     
     func getHankkiDetail() {
-        viewModel.getHankkiDetailAPI(hankkiId: hankkiId)
+        viewModel.getHankkiDetailAPI()
     }
     
     func setupNoImageStyle() {
         contentView.do {
-            $0.backgroundColor = .gray300
+            $0.backgroundColor = .gray100
         }
         thumbnailImageView.do {
             $0.image = .imgDetailDefault
@@ -246,43 +271,6 @@ private extension HankkiDetailViewController {
             $0.image = .imgBlackGradient
         }
     }
-    
-    /// 정말 제보하시겠어요? Alert 띄우기
-    func showCheckAlertForReport() {
-        self.showAlert(
-            titleText: StringLiterals.Alert.reallyReport,
-            subText: StringLiterals.Alert.disappearInfoByReport,
-            secondaryButtonText: StringLiterals.Alert.back,
-            primaryButtonText: StringLiterals.Common.report,
-            primaryButtonHandler: deleteHankkiByReport
-        )
-    }
-    
-    /// 제보를 통한 식당 삭제
-    func deleteHankkiByReport() {
-        viewModel.deleteHankkiAPI(id: hankkiId) { [self] in
-            showThanksAlert()
-        }
-    }
-    
-    /// 제보 감사 Alert 띄우기
-    func showThanksAlert() {
-        let nickname: String = UserDefaults.standard.getNickname()
-
-        self.showAlert(
-            image: .imgModalReport,
-            titleText: nickname + StringLiterals.Alert.thanksForReport,
-            primaryButtonText: StringLiterals.Alert.back,
-            primaryButtonHandler: dismissAlertAndPop,
-            hightlightedText: nickname,
-            hightlightedColor: .red500
-        )
-    }
-    
-    /// Alert를 fade out으로 dismiss 시킴과 동시에 VC를 pop
-    func dismissAlertAndPop() {
-        backButtonDidTap()
-    }
 }
 
 extension HankkiDetailViewController {
@@ -290,41 +278,47 @@ extension HankkiDetailViewController {
     // MARK: - @objc Func
     
     @objc func backButtonDidTap() {
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabBack)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func heartButtonDidTap() {
+        guard let data = viewModel.hankkiDetailData else { return }
+        
+        if !data.isLiked {
+            self.viewModel.postHankkiHeartAPI()
+        } else {
+            self.viewModel.deleteHankkiHeartAPI()
+        }
+    }
+    
+    @objc func myZipButtonDidTap() {
+        presentMyZipListBottomSheet(id: viewModel.hankkiId)
     }
     
     @objc func editMenuButtonDidTap() {
         SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEdit)
         
         guard let menus = viewModel.hankkiDetailData?.menus else { return }
-        let selectableMenus: [SelectableMenuData] = menus.map { menu in
-            SelectableMenuData(isSelected: false, id: menu.id, name: menu.name, price: menu.price)
-        }
         
         let editHankkiBottomSheet = HankkiNavigationController(
-            rootViewController: EditHankkiBottomSheetViewController(
-                storeId: self.hankkiId,
-                selectableMenus: selectableMenus
-            )
+            rootViewController: EditHankkiBottomSheetViewController(storeId: viewModel.hankkiId, menus: menus)
         )
         editHankkiBottomSheet.modalTransitionStyle = .crossDissolve
         editHankkiBottomSheet.modalPresentationStyle = .overFullScreen
         self.present(editHankkiBottomSheet, animated: true, completion: nil)
     }
     
-    @objc func addMyZipButtonDidTap() {
-        presentMyZipListBottomSheet(id: hankkiId)
-    }
-    
-    @objc func hankkiReportButtonDidTap() {
-        showCheckAlertForReport()
+    @objc func differentInfoViewDidTap() {
+        let removeHankkiViewController = RemoveHankkiViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(removeHankkiViewController, animated: true)
     }
     
     @objc func setupBlackToast(_ notification: Notification) {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
-                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }
@@ -336,6 +330,7 @@ extension HankkiDetailViewController {
 }
 
 extension HankkiDetailViewController {
+    
     /// 상단의 bounces만 비활성화
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y < -UIApplication.getStatusBarHeight() {
@@ -347,122 +342,71 @@ extension HankkiDetailViewController {
 // MARK: - UICollectionView Delegate
 
 extension HankkiDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if collectionView == infoCollectionView.collectionView {
-            switch kind {
-            case UICollectionView.elementKindSectionHeader:
-                guard let header = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: HankkiDetailHeaderView.className,
-                    for: indexPath
-                ) as? HankkiDetailHeaderView else {
-                    return UICollectionReusableView()
-                }
-                if let data = viewModel.hankkiDetailData {
-                    header.bindData(name: data.name, category: data.category)
-                }
-                return header
-            case UICollectionView.elementKindSectionFooter:
-                guard let footer = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: HankkiDetailFooterView.className,
-                    for: indexPath
-                ) as? HankkiDetailFooterView else {
-                    return UICollectionReusableView()
-                }
-                footer.likedButton.buttonHandler = {
-                    if !footer.isLiked {
-                        self.viewModel.postHankkiHeartAPI(id: self.hankkiId) {
-                            footer.updateLikeButtonStatus()
-                        }
-                    } else {
-                        self.viewModel.deleteHankkiHeartAPI(id: self.hankkiId) {
-                            footer.updateLikeButtonStatus()
-                        }
-                    }
-                }
-                if let data = viewModel.hankkiDetailData {
-                    footer.isLiked = data.isLiked
-                    footer.likedNumber = data.heartCount
-                }
-                footer.addMyZipButton.hankkiDetailButton.addTarget(self, action: #selector(addMyZipButtonDidTap), for: .touchUpInside)
-                return footer
-            default:
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HankkiMenuHeaderView.className,
+                for: indexPath
+            ) as? HankkiMenuHeaderView else {
                 return UICollectionReusableView()
             }
-        } else if collectionView == reportOptionCollectionView.collectionView {
-            switch kind {
-            case UICollectionView.elementKindSectionHeader:
-                guard let header = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: HankkiReportOptionHeaderView.className,
-                    for: indexPath
-                ) as? HankkiReportOptionHeaderView else {
-                    return UICollectionReusableView()
-                }
-                return header
-            case UICollectionView.elementKindSectionFooter:
-                guard let footer = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: HankkiReportOptionFooterView.className,
-                    for: indexPath
-                ) as? HankkiReportOptionFooterView else {
-                    return UICollectionReusableView()
-                }
-                return footer
-            default:
+            if let data = viewModel.hankkiDetailData {
+                header.bindData(menuNumber: String(data.menus.count))
+            }
+            return header
+        case UICollectionView.elementKindSectionFooter:
+            guard let footer = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: HankkiMenuFooterView.className,
+                for: indexPath
+            ) as? HankkiMenuFooterView else {
                 return UICollectionReusableView()
             }
+            footer.editButton.addTarget(self, action: #selector(editMenuButtonDidTap), for: .touchUpInside)
+            return footer
+        default:
+            return UICollectionReusableView()
         }
-        return UICollectionReusableView()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == infoCollectionView.collectionView {
-            (viewModel.hankkiDetailData?.menus.count ?? 0) + 1
-        } else {
-            reportOptionArray.count
-        }
+        return viewModel.hankkiDetailData?.menus.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == infoCollectionView.collectionView {
-            if indexPath.item == viewModel.hankkiDetailData?.menus.count {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiEditMenuCollectionViewCell.className, for: indexPath) as? HankkiEditMenuCollectionViewCell else { return UICollectionViewCell() }
-                cell.editMenuButton.addTarget(self, action: #selector(editMenuButtonDidTap), for: .touchUpInside)
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiDetailCollectionViewCell.className, for: indexPath) as? HankkiDetailCollectionViewCell else { return UICollectionViewCell() }
-                if let data = viewModel.hankkiDetailData {
-                    cell.bindMenuData(data.menus[indexPath.item])
-                }
-                return cell
-            }
-        } else if collectionView == reportOptionCollectionView.collectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiReportOptionCollectionViewCell.className, for: indexPath) as? HankkiReportOptionCollectionViewCell else { return UICollectionViewCell() }
-            cell.delegate = self
-            cell.bindData(text: reportOptionArray[indexPath.item])
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HankkiMenuCollectionViewCell.className, for: indexPath) as? HankkiMenuCollectionViewCell else { return UICollectionViewCell() }
+        
+        if let data = viewModel.hankkiDetailData {
+            cell.bindData(data.menus[indexPath.item])
+            menuCollectionView.updateLayout()
             return cell
         }
         return UICollectionViewCell()
     }
 }
 
-// MARK: - UpdateReportButtonStyle Delegate
-
-extension HankkiDetailViewController: UpdateReportButtonStyleDelegate {
-    func updateReportButtonStyle(isEnabled: Bool) {
-        guard let footer = reportOptionCollectionView.collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: HankkiReportOptionFooterView.className, for: IndexPath(item: 3, section: 0)) as? HankkiReportOptionFooterView else { return }
-        
-        if isEnabled {
-            footer.hankkiReportButton.setupIsValid(true)
-            footer.hankkiReportButton.addTarget(
-                self,
-                action: #selector(hankkiReportButtonDidTap),
-                for: .touchUpInside
-            )
-        } else {
-            footer.hankkiReportButton.setupIsValid(false)
+extension HankkiDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    // 메뉴명 label 길이에 따라 다르게 셀 크기 지정
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let data = viewModel.hankkiDetailData {
+            let menuNameLabelSize = NSString(string: data.menus[indexPath.item].name)
+                .boundingRect(
+                    with: CGSize(width: UIScreen.getDeviceWidth() - 44, height: CGFloat.greatestFiniteMagnitude),
+                    options: .usesLineFragmentOrigin,
+                    attributes: [NSAttributedString.Key.font: UIFont.setupPretendardStyle(of: .body8)],
+                    context: nil
+                )
+            return CGSize(width: UIScreen.getDeviceWidth(), height: menuNameLabelSize.height + 25)
         }
+        
+        return .zero
     }
 }

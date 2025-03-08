@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 import Moya
 
@@ -25,6 +24,7 @@ enum HeaderType {
     case loginHeader(accessToken: String)
     case withdrawHeader(authorizationCode: String)
     case formdataHeader(multipartData: [MultipartFormData])
+    case naverMapHeader(clientId: String, clientSecret: String)
 }
 
 /// 각 API에 따라 공통된 Path 값 (존재하지 않는 경우 빈 String 값)
@@ -38,6 +38,7 @@ enum UtilPath: String {
     case university = "/v1/universities"
     case location = "/v1/locations"
     case universityStores = "/v1/university-stores"
+    case naverMap = "/v2/gc"
 }
 
 protocol BaseTargetType: TargetType {
@@ -51,26 +52,33 @@ protocol BaseTargetType: TargetType {
 
 extension BaseTargetType {
     var baseURL: URL {
-        guard let baseURL = URL(string: URLConstant.baseURL) else {
-            fatalError("ERROR - BASEURL")
+        switch utilPath {
+        case .naverMap:
+            guard let reverseGeocodingBaseURL = URL(string: URLConstant.reverseGeocodingBaseURL) else {
+                fatalError("ERROR - NAVER MAP Reverse Geocoding BASEURL")
+            }
+            return reverseGeocodingBaseURL
+        default:
+            guard let baseURL = URL(string: URLConstant.baseURL) else {
+                fatalError("ERROR - BASEURL")
+            }
+            return baseURL
         }
-        return baseURL
     }
     
     var headers: [String: String]? {
         var header: [String: String] = [:]
         
         switch headerType {
+            
         case .loginHeader(let accessToken):
             header["Content-Type"] = "application/json"
             header["Authorization"] = "\(accessToken)"
-            return header
             
         case .refreshTokenHeader:
             header["Content-Type"] = "application/json"
             let refreshToken = UserDefaults.standard.getRefreshToken()
             header["Authorization"] = URLConstant.bearer + "\(refreshToken)"
-            return header
             
         // 이후부터는 access token이 헤더에 필요합니다.
         case .withdrawHeader(let authorizationCode):
@@ -79,6 +87,10 @@ extension BaseTargetType {
                
         case .formdataHeader:
             header["Content-Type"] = "multipart/form-data"
+            
+        case .naverMapHeader(let clientId, let clientSecret):
+            header["x-ncp-apigw-api-key-id"] = clientId
+            header["x-ncp-apigw-api-key"] = clientSecret
             
         default:
             header["Content-Type"] = "application/json"
@@ -110,4 +122,3 @@ extension BaseTargetType {
         }
     }
 }
-

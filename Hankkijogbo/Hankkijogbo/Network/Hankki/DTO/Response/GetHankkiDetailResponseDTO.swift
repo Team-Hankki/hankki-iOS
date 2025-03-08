@@ -15,6 +15,9 @@ struct GetHankkiDetailResponseData: Codable {
     let isLiked: Bool
     let imageUrls: [String]
     let menus: [MenuData]
+    let latitude: Double
+    let longitude: Double
+    let categoryImageUrl: String
 }
 
 struct MenuData: Codable {
@@ -23,19 +26,28 @@ struct MenuData: Codable {
     var price: Int = 0
 }
 
+struct SelectableMenuData {
+    var isSelected: Bool = false
+    var id: Int = 0
+    var name: String = ""
+    var price: Int = 0
+}
 
 extension MenuData {
+    
+    func toSelectableMenuData() -> SelectableMenuData {
+        return SelectableMenuData(
+            isSelected: false,
+            id: self.id,
+            name: self.name,
+            price: self.price
+        )
+    }
+    
     func toMenuRequestDTO() -> MenuRequestDTO {
         return MenuRequestDTO(
             name: self.name,
             price: self.price
         )
     }
-}
-
-struct SelectableMenuData {
-    var isSelected: Bool = false
-    var id: Int = 0
-    var name: String = ""
-    var price: Int = 0
 }

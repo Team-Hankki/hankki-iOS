@@ -16,6 +16,7 @@ final class HomeViewModel {
     
     private let hankkiAPIService: HankkiAPIServiceProtocol
     var showAlert: ((String) -> Void)?
+    var showHankkiListBottomSheet: (() -> Void)?
     
     var categoryFilters: [GetCategoryFilterData] = []
     var priceFilters: [GetPriceFilterData] = []
@@ -39,19 +40,36 @@ final class HomeViewModel {
     
     var hankkiThumbnail: GetHankkiThumbnailResponseData?
     
-    var hankkiListsDidChange: (([GetHankkiListData]) -> Void)?
-    var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)?
+    var hankkiListsDidChange: (([GetHankkiListData]) -> Void)? {
+        didSet {
+            DispatchQueue.main.async {
+                self.hankkiListsDidChange?(self.hankkiLists)
+            }
+        }
+    }
+    
+    var hankkiPinsDidChange: (([GetHankkiPinData]) -> Void)? {
+        didSet {
+            DispatchQueue.main.async {
+                self.hankkiPinsDidChange?(self.hankkiPins)
+            }
+        }
+    }
     var onHankkiListFetchCompletion: ((Bool, Bool) -> Void)?
     
     var storeCategory: String? {
         didSet { updateHankkiList() }
     }
+    
     var priceCategory: String? {
         didSet { updateHankkiList() }
     }
+    
     var sortOption: String? {
         didSet { updateHankkiList() }
     }
+    
+    var selectedStoreCategoryIndex: Int? = 0
     
     init(hankkiAPIService: HankkiAPIServiceProtocol = HankkiAPIService()) {
         self.hankkiAPIService = hankkiAPIService
@@ -59,6 +77,7 @@ final class HomeViewModel {
 }
 
 extension HomeViewModel {
+    
     func updateHankkiList() {
         let storeCategory = storeCategory ?? ""
         let priceCategory = priceCategory ?? ""
@@ -68,12 +87,16 @@ extension HomeViewModel {
         
         self.getHankkiListAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { success in
             if success {
-                print("식당 전체 족보 fetch 완료 😄")
-                self.hankkiListsDidChange?(self.hankkiLists)
+                DispatchQueue.main.async {
+                    print("식당 전체 족보 fetch 완료 😄")
+                    self.hankkiListsDidChange?(self.hankkiLists)
+                }
                 self.getHankkiPinAPI(universityId: id, storeCategory: storeCategory, priceCategory: priceCategory, sortOption: sortOption) { pinSuccess in
                     if pinSuccess {
-                        print("지도 핀 fetch 완료 😄")
-                        self.hankkiPinsDidChange?(self.hankkiPins)
+                        DispatchQueue.main.async {
+                            print("지도 핀 fetch 완료 😄")
+                            self.hankkiPinsDidChange?(self.hankkiPins)
+                        }
                     } else {
                         print("지도 핀 fetch 실패 😞")
                     }
@@ -148,6 +171,14 @@ extension HomeViewModel {
                 self?.hankkiThumbnail = response.data
                 completion(true)
             }
+        }
+    }
+    
+    // 포커싱하고 있는 식당이 삭제된 식당인지 아닌지 확인
+    func checkThumbnailHankkiValidation() {
+        let isValid = hankkiLists.contains { $0.id == hankkiThumbnail?.id ?? 0 }
+        if !isValid {
+            showHankkiListBottomSheet?()
         }
     }
 }

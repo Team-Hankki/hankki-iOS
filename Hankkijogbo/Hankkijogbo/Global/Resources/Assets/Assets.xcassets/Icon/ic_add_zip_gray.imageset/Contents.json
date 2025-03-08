@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_addjocbo.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

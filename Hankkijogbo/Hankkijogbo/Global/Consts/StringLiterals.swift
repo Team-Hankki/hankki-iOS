@@ -9,6 +9,11 @@ import Foundation
 
 // swiftlint:disable nesting
 enum StringLiterals {
+    enum Kakao {
+        static let storeUrl = "itms-apps://itunes.apple.com/app/362057947"
+        static let zipShareTemplete = 115383
+    }
+
     enum Common {
         static let goToHome = "홈으로"
         static let withdraw = "탈퇴하기"
@@ -26,13 +31,15 @@ enum StringLiterals {
     }
     
     enum Home {
-        static let allUniversity = "전체"
+        static let entire = "전체"
         static let storeCategoryFilteringButton = "뭐 먹지"
         static let priceFilteringButton = "가격대"
         static let sortFilteringButton = "정렬"
         static let less6000 = "6000원 이하"
         static let more6000 = "6000~8000원"
         static let emptyNotice = "조건에 맞는 식당이 없어요"
+        static let apply = "적용"
+        static let lowest = "최저"
     }
     
     enum Alert {
@@ -61,6 +68,17 @@ enum StringLiterals {
             static let title = "로그인이 필요한 기능이에요."
             static let secondaryButton = "닫기"
             static let primaryButton = "로그인하기"
+        }
+        
+        enum NeedLoginToSharedZip {
+            static let title = "족보를 확인하려면\n로그인이 필요해요"
+            static let primaryButton = "로그인하기"
+        }
+        
+        enum NeedOneMoreHankkiToShare {
+            static let title = "족보에 식당이 없어요\n식당 1개 이상 시에만 공유할 수 있어요"
+            static let secondaryButton = back
+            static let primaryButton = "둘러보기"
         }
         
         enum Logout {
@@ -128,6 +146,7 @@ enum StringLiterals {
         static let deleteAlready = "이미 삭제된 식당입니다"
         static let serverError = "오류가 발생했어요 다시 시도해주세요"
         static let accessError = "로그인 유효기간이 만료되었어요 재로그인 해주세요"
+        static let addSharedZip = "족보가 추가되었습니다"
     }
     
     enum Toolbar {
@@ -140,11 +159,28 @@ enum StringLiterals {
     }
     
     enum HankkiDetail {
-        static let editMenu = "메뉴 추가/수정하기"
-        static let reportWrongInformation = "내가 알고 있는 정보와 다른가요?"
-        static let optionDisappear = "식당이 사라졌어요"
-        static let optionIncreasePrice = "더이상 8,000원 이하인 메뉴가 없어요"
-        static let optionImproperReport = "부적절한 제보예요"
+        static let reportDifferentInformation = "식당 정보가 실제와 다른가요?"
+        static let myZip = "내 족보"
+        static let address = "주소"
+        static let copy = "복사"
+        static let mapLoadErrorMessage = "주소를 불러오지 못했어요"
+        static let copyToastMessage = "주소를 복사했습니다"
+        static let menu = "메뉴"
+        static let editMenu = "메뉴 수정/삭제 제보하기"
+        static let precautions = "유의사항"
+        static let precautionCanBeDifferent = "제보된 내용은 실제 정보와 다를 수 있습니다"
+        static let precautionShowOnly8000OrUnder = "8000원 이하인 메뉴만 노출됩니다"
+        static let precautionCanModify = "사용자가 직접 제보한 정보 기준으로 제공되었으며 변동될 수 있습니다"
+        static let precautionCanStop = "악성 무단 삭제 및 수정 시 서비스 이용이 중단될 수 있습니다"
+    }
+    
+    enum RemoveHankki {
+        static let titleWhyRemove = "식당 정보가\n실제와 어떻게 다른가요?"
+        static let optionDisappeared = "식당이 사라졌어요"
+        static let optionNoMore8000 = "더이상 8,000원 이하인 메뉴가 없어요"
+        static let optionImproperHankki = "부적절한 제보예요"
+        static let modifyCarefullyPlease = ModifyMenu.modifyCarefullyPlease
+        static let reportButton = Common.report
     }
     
     enum EditHankki {
@@ -238,9 +274,9 @@ enum StringLiterals {
         }
         
         enum Option {
-            static let Terms = "약관 및 정책"
-            static let OneonOne = "1:1 문의"
-            static let Logout = Common.logout
+            static let terms = "약관 및 정책"
+            static let oneOnOne = "1:1 문의"
+            static let logout = Common.logout
         }
         
         enum Header {
@@ -279,7 +315,7 @@ enum StringLiterals {
         }
         
         static let moreButton = "식당 구경하러 가기"
-        static let average = "평균"
+        static let lowest = "최저"
         
         enum EmptyView {
             static let myZip = "나의 족보에\n식당을 추가해보세요"
@@ -288,12 +324,33 @@ enum StringLiterals {
         }
     }
     
+    enum SharedZip {
+        static let zipShareDefaultImageURL = Config.DefaultHankkiImageURL
+        
+        static let navigation = "공유받은 족보"
+        static let addButton = "내 족보에 추가하기"
+        
+        static let viewTitle = "공유받은 족보의\n새로운 이름을 지어주세요"
+        static let viewDescription = "공유받은 족보는 내 마음대로 편집할 수 있어요!"
+        static let submitButton = "추가하기"
+    }
+    
     enum ExternalLink {
-        static let OneonOne = "https://tally.so/r/mO0oJY"
-        static let Terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let oneOnOne = "https://tally.so/r/mO0oJY"
+        static let terms = "https://fast-kilometer-dbf.notion.site/FAQ-bb4d74b681d14f4f91bbbcc829f6d023?pvs=4"
+        static let linkTree = "https://link.inpock.co.kr/hankkilink?fbclid=PAZXh0bgNhZW0CMTEAAabp7jPfQGVtGfHXOSEA-urXPNPbog0a0Rco43_a-zsdcxQOvFqVXQoqsXQ_aem_gyGO3bZoFAlf0tMF7QTqKg"
     }
     
     enum Onboarding {
         static let guest = "둘러보기"
+    }
+    
+    enum FilteringTag {
+        static let all = "ALL"
+        static let less6000 = "K6"
+        static let more6000 = "K8"
+        static let latest = "LATEST"
+        static let recommended = "RECOMMENDED"
+        static let lowestPrice = "LOWESTPRICE"
     }
 }

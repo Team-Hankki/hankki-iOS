@@ -11,22 +11,23 @@ protocol FontStyle {
     var rawValue: String { get }
     var size: CGFloat { get }
     var lineHeight: CGFloat { get }
+    var kernValue: Double { get }
 }
 
 enum PretendardStyle: FontStyle {
-    case h1, h2
+    case h1, h2, h3
     case subtitle1, subtitle2, subtitle3
     case body1, body2, body3, body4, body5, body6, body7, body8
     case button
-    case caption1, caption2
+    case caption1, caption2, caption3, caption4, caption5
     
     var rawValue: String {
         switch self {
-        case .h1, .h2, .body4:
+        case .h1, .h2, .body4, .caption3:
             return "Pretendard-Bold"
-        case .subtitle1, .subtitle2, .subtitle3, .body2, .body5, .body7:
+        case .h3, .subtitle1, .subtitle2, .subtitle3, .body2, .body5, .body7, .caption5:
             return "Pretendard-SemiBold"
-        case .body1, .body3, .body6, .body8, .caption1:
+        case .body1, .body3, .body6, .body8, .caption1, .caption4:
             return "Pretendard-Medium"
         case .button, .caption2:
             return "Pretendard-Regular"
@@ -37,6 +38,8 @@ enum PretendardStyle: FontStyle {
         switch self {
         case .h1:
             return 24
+        case .h3:
+            return 22
         case .h2:
             return 20
         case .subtitle1:
@@ -51,9 +54,9 @@ enum PretendardStyle: FontStyle {
             return 14
         case .body7, .body8:
             return 13
-        case .button, .caption1:
+        case .button, .caption1, .caption3, .caption4:
             return 12
-        case .caption2:
+        case .caption2, .caption5:
             return 11
         }
     }
@@ -62,6 +65,15 @@ enum PretendardStyle: FontStyle {
         switch self {
         default:
             return 1.5
+        }
+    }
+    
+    var kernValue: Double {
+        switch self {
+        case .h3:
+            return -0.02
+        default:
+            return 0
         }
     }
 }
@@ -114,6 +126,13 @@ enum SuiteStyle: FontStyle {
             return 1.4
         default:
             return 1.5
+        }
+    }
+    
+    var kernValue: Double {
+        switch self {
+        default:
+            return 0
         }
     }
 }

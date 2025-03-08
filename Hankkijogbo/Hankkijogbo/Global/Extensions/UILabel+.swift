@@ -79,7 +79,8 @@ extension UILabel {
             .font: font,
             .foregroundColor: color,
             .paragraphStyle: paragraphStyle,
-            .baselineOffset: offset
+            .baselineOffset: offset,
+            .kern: fontName.kernValue
         ]
                 
         return NSAttributedString(string: text, attributes: attributes)

@@ -8,59 +8,117 @@
 import Foundation
 
 import Moya
-import UIKit
 
 final class HankkiDetailViewModel {
     
-    var setHankkiDetailData: (() -> Void)?
-    var showAlert: ((String) -> Void)?
-    var dismiss: (() -> Void)?
-    
+    var hankkiId: Int
     var hankkiDetailData: GetHankkiDetailResponseData? {
         didSet {
             setHankkiDetailData?()
         }
     }
+    var address: String? {
+        didSet {
+            setHankkiDetailData?()
+        }
+    }
+    var removeOptions: [String] = [
+        StringLiterals.RemoveHankki.optionDisappeared,
+        StringLiterals.RemoveHankki.optionNoMore8000,
+        StringLiterals.RemoveHankki.optionImproperHankki
+    ]
+    
     weak var delegate: NetworkResultDelegate?
     
-    /// 식당 세부 조회
-    func getHankkiDetailAPI(hankkiId: Int) {
+    var setHankkiDetailData: (() -> Void)?
+    var showAlert: ((String) -> Void)?
+    var dismiss: (() -> Void)?
+    var handleMapLoadError: (() -> Void)?
+    var handleDeletedHankki: (() -> Void)?
+    
+    init(hankkiId: Int) {
+        self.hankkiId = hankkiId
+    }
+}
+
+extension HankkiDetailViewModel {
+    
+    func getHankkiDetailAPI() {
         NetworkService.shared.hankkiService.getHankkiDetail(id: hankkiId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .notFound:
-                UIApplication.showBlackToast(message: StringLiterals.Toast.deleteAlready)
-                self.dismiss?()
+                handleDeletedHankki?()
+                dismiss?()
             default:
                 result.handleNetworkResult(delegate: self.delegate) { response in
                     self.hankkiDetailData = response.data
+                    self.getHankkiAddressAPI() // 상세 조회 후 주소도 같이 불러옴
                 }
             }
-
         }
     }
     
-    /// 식당 좋아요 추가
-    func postHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.postHankkiHeart(id: id) { result in
+    func postHankkiHeartAPI() {
+        NetworkService.shared.hankkiService.postHankkiHeart(id: hankkiId) { result in
             result.handleNetworkResult { _ in
                 SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabHeart)
-                completion()
+                self.getHankkiDetailAPI()
             }
         }
     }
     
-    /// 식당 좋아요 삭제
-    func deleteHankkiHeartAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.deleteHankkiHeart(id: id) { result in
-            result.handleNetworkResult { _ in completion() }
+    func deleteHankkiHeartAPI() {
+        NetworkService.shared.hankkiService.deleteHankkiHeart(id: hankkiId) { result in
+            result.handleNetworkResult { _ in
+                self.getHankkiDetailAPI()
+            }
         }
     }
     
-    /// 식당 삭제
-    func deleteHankkiAPI(id: Int, completion: @escaping () -> Void) {
-        NetworkService.shared.hankkiService.deleteHankki(id: id) { result in
+    func deleteHankkiAPI(completion: @escaping () -> Void) {
+        NetworkService.shared.hankkiService.deleteHankki(id: hankkiId) { result in
             result.handleNetworkResult(onSuccessVoid: completion)
         }
+    }
+}
+
+private extension HankkiDetailViewModel {
+    
+    func getHankkiAddressAPI() {
+        guard let detailData = hankkiDetailData else { return }
+        NetworkService.shared.naverMapService.getHankkiAddress(latitude: detailData.latitude, longitude: detailData.longitude) { result in
+            switch result {
+            case .success:
+                result.handleNetworkResult { response in
+                    guard let data = response.results.first,
+                          let data = data else {
+                        self.handleMapLoadError?()
+                        return
+                    }
+
+                    self.address = self.formatAddress(from: data)
+                }
+            default:
+                self.handleMapLoadError?()
+            }
+        }
+    }
+    
+    func formatAddress(from data: GetHankkiAddressResult) -> String {
+        let address: [String?] = [
+            data.region?.area1?.name,
+            data.region?.area2?.name,
+            data.region?.area3?.name,
+            data.region?.area4?.name,
+            data.land?.name,
+            data.land?.number1,
+            data.land?.number2
+        ]
+        
+        return address
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
     }
 }

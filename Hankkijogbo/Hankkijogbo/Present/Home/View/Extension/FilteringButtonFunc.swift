@@ -278,6 +278,18 @@ extension HomeViewController {
         }
         toggleCollectionView()
     }
+    
+    @objc func floatingButtonDidTap() {
+        rootView.filteringFloatingButton.isSelected.toggle()
+        let filteringBottomSheet = FilteringBottomSheetViewController(viewModel: viewModel)
+    
+        filteringBottomSheet.filteringStatus = { [weak self] in
+            self?.updateFilteringFloatingButtonState()
+        }
+        
+        filteringBottomSheet.modalPresentationStyle = .overFullScreen
+        self.present(filteringBottomSheet, animated: true, completion: nil)
+    }
 }
 
 extension HomeViewController {

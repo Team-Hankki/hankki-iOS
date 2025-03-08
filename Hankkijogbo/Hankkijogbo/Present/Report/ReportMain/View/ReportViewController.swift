@@ -132,11 +132,16 @@ private extension ReportViewController {
                                                               hasRightButton: true,
                                                               mainTitle: .string(StringLiterals.Common.report),
                                                               rightButton: .string(""),
-                                                              rightButtonAction: {})
+                                                              backButtonAction: setupAmplitudeToBackButton)
         
         if let navigationController = navigationController as? HankkiNavigationController {
             navigationController.setupNavigationBar(forType: type)
         }
+    }
+    
+    func setupAmplitudeToBackButton() {
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabBack)
+        navigationController?.popViewController(animated: true)
     }
     
     func scrollToFooterView() {
@@ -172,6 +177,15 @@ private extension ReportViewController {
         ) as? MenuCollectionViewCell else { return }
         cell.deleteMenuButton.isHidden = false
     }
+    
+    func setupImagePickerView() {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .any(of: [.images])
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
+    }
 }
 
 // MARK: - @objc Func
@@ -179,12 +193,9 @@ private extension ReportViewController {
 private extension ReportViewController {
     
     @objc func selectImageButtonDidTap() {
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration.filter = .any(of: [.images])
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
+        setupImagePickerView()
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabFoodPicture)
     }
     
     @objc func imageXButtonDidTap() {
@@ -331,6 +342,9 @@ extension ReportViewController: UICollectionViewDataSource, UICollectionViewDele
         if collectionView.cellForItem(at: indexPath) as? CategoryCollectionViewCell != nil {
             reportViewModel.disableCheckedCategories()
             reportViewModel.categories[indexPath.row].isChecked = true
+            
+            SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabFoodCategories,
+                                           eventProperties: [AmplitudeLiterals.Property.food: reportViewModel.categories[indexPath.row].categoryData.name])
         }
     }
 }

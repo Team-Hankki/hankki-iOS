@@ -15,6 +15,10 @@ enum Config {
             static let baseURL = "BASE_URL"
             static let NMFClientId = "NMFClientId"
             static let Amplitude = "Amplitude"
+            static let reverseGeocodingClientId = "ReverseGeocodingClientId"
+            static let reverseGeocodingClientSecret = "ReverseGeocodingClientSecret"
+            static let Kakao = "Kakao"
+            static let DefaultHankkiImageURL = "DefaultHankkiImageURL"
         }
     }
     
@@ -41,9 +45,37 @@ extension Config {
         return key
     }()
     
+    static let ReverseGeocodingClientId: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.reverseGeocodingClientId] as? String else {
+            fatalError("ReverseGeocodingClientID is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let ReverseGeocodingClientSecret: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.reverseGeocodingClientSecret] as? String else {
+            fatalError("ReverseGeocodingClientSecret is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
     static let Amplitude: String = {
         guard let key = Config.infoDictionary[Keys.Plist.Amplitude] as? String else {
             fatalError("Amplitude is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let Kakao: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.Kakao] as? String else {
+            fatalError("Kakao is not set in plist for this configuration.")
+        }
+        return key
+    }()
+    
+    static let DefaultHankkiImageURL: String = {
+        guard let key = Config.infoDictionary[Keys.Plist.DefaultHankkiImageURL] as? String else {
+            fatalError("DefaultHankkiImageURL is not set in plist for this configuration.")
         }
         return key
     }()

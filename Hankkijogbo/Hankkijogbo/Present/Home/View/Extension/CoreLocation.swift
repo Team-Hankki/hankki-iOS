@@ -181,20 +181,6 @@ extension HomeViewController {
             }
             
             self?.setupPosition(with: markers)
-//            self?.clearMarkers()
-//
-//            for (index, location) in markers.enumerated() {
-//                let marker = NMFMarker()
-//                marker.iconImage = NMFOverlayImage(image: .icPin)
-//                marker.position = NMGLatLng(lat: location.latitude, lng: location.longitude)
-//                marker.mapView = self?.rootView.mapView
-//                marker.touchHandler = { [weak self] _ in
-//                    self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
-//                    self?.showMarkerInfoCard(at: index, pinId: location.id)
-//                    return true
-//                }
-//                self?.markers.append(marker)
-//            }
         })
     }
     
@@ -216,6 +202,9 @@ extension HomeViewController {
             marker.touchHandler = { [weak self] _ in
                 self?.rootView.bottomSheetView.viewLayoutIfNeededWithHiddenAnimation()
                 self?.showMarkerInfoCard(at: index, pinId: location.id)
+                
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabPin,
+                                               eventProperties: [AmplitudeLiterals.Property.store: location.name])
                 return true
             }
             markers.append(marker)
@@ -308,7 +297,18 @@ extension HomeViewController {
 
 extension HomeViewController: TotalListBottomSheetViewDelegate {
     func didSelectHankkiCell(at index: Int, pinId: Int) {
-        showMarkerInfoCard(at: index, pinId: pinId)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController as? HankkiNavigationController {
+            let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                                  hasRightButton: false,
+                                                                  mainTitle: .string(""),
+                                                                  rightButton: .string(""))
+            rootViewController.setupNavigationBar(forType: type)
+            rootViewController.isNavigationBarHidden = false
+            
+            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: pinId))
+            rootViewController.pushViewController(hankkiDetailViewController, animated: true)
+        }
         
         if let location = findLocationById(pinId) {
             moveCameraToLocation(latitude: location.latitude, longitude: location.longitude)

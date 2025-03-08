@@ -18,6 +18,7 @@ final class BottomButtonView: BaseView {
             setupStyle()
         }
     }
+    
     let lineButtonText: String
     let leftButtonText: String
     let rightButtonText: String
@@ -27,6 +28,8 @@ final class BottomButtonView: BaseView {
     var leftButtonHandler: ButtonAction?
     var rightButtonHandler: ButtonAction?
     var gradientColor: UIColor
+    
+    var isPrimaryButtonAble: Bool = false
     
     // MARK: - UI Properties
     
@@ -49,7 +52,8 @@ final class BottomButtonView: BaseView {
          lineButtonHandler: ButtonAction? = nil,
          leftButtonHandler: ButtonAction? = nil,
          rightButtonHandler: ButtonAction? = nil,
-         gradientColor: UIColor = .hankkiWhite
+         gradientColor: UIColor = .hankkiWhite,
+         isPrimaryButtonAble: Bool = false
     ) {
         self.primaryButtonText = primaryButtonText
         self.lineButtonText = lineButtonText
@@ -61,6 +65,10 @@ final class BottomButtonView: BaseView {
         self.rightButtonHandler = rightButtonHandler
         self.gradientColor = gradientColor
         super.init(frame: frame)
+        
+        if isPrimaryButtonAble {
+            self.setupEnabledDoneButton()
+        }
         
         setupButtonAction()
     }
@@ -189,6 +197,7 @@ final class BottomButtonView: BaseView {
 }
 
 private extension BottomButtonView {
+    
     func setupBottomButtonViewGradient() {
         let gradient = CAGradientLayer()
         

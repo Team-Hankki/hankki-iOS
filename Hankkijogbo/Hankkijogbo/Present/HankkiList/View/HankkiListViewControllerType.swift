@@ -7,38 +7,13 @@
 
 import UIKit
 
-extension HankkiListViewController {
+extension BaseHankkiListViewController {
     enum HankkiListViewControllerType {
-        case myZip
         case reported
         case liked
         
-        var navigationColor: UIColor {
-            switch self {
-            case .myZip:
-                .red500
-            case .reported, .liked:
-                .white
-            }
-        }
-        var headrViewHeight: CGFloat {
-            switch self {
-            case .myZip:
-                UIView.convertByAspectRatioHeight(
-                    UIScreen.getDeviceWidth() - 22 * 2,
-                    width: 329,
-                    height: 231
-                ) + 22
-                
-            case .reported, .liked:
-                0
-            }
-        }
-        
         var navigationTitle: String {
             switch self {
-            case .myZip:
-                StringLiterals.Mypage.myZipList
             case .reported:
                 StringLiterals.Mypage.HankkiList.reported
             case .liked:
@@ -48,8 +23,6 @@ extension HankkiListViewController {
         
         var emptyViewLabel: String {
             switch self {
-            case .myZip:
-                StringLiterals.HankkiList.EmptyView.myZip
             case .reported:
                 StringLiterals.HankkiList.EmptyView.reported
             case .liked:
@@ -60,11 +33,32 @@ extension HankkiListViewController {
         var userTargetType: UserTargetType {
             switch self {
             case .reported:
-                    .getMeHankkiReportList
+                .getMeHankkiReportList
             case .liked:
-                    .getMeHankkiHeartList
+                .getMeHankkiHeartList
+            }
+        }
+    }
+    
+    enum ZipDetailCollectionViewType {
+        case myZip
+        case sharedZip
+        
+        var navigationTitle: String {
+            switch self {
+            case .myZip:
+                StringLiterals.Mypage.myZipList
+            case .sharedZip:
+                StringLiterals.SharedZip.navigation
+            }
+        }
+        
+        var isAddZipButton: Bool {
+            switch self {
+            case .sharedZip:
+                true
             default:
-                    .getMeHankkiHeartList
+                false
             }
         }
     }

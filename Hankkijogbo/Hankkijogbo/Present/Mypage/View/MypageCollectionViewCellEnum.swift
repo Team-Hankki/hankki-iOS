@@ -33,6 +33,7 @@ extension MypageViewController {
         case .hankki:
             switch itemIndex {
             case 0:
+                SetupAmplitude.shared.logEvent(AmplitudeLiterals.Mypage.tabMyzip)
                 navigateToZipListViewController()
             case 1:
                 navigateToHankkiListViewController(.reported)
@@ -43,11 +44,11 @@ extension MypageViewController {
         case .option:
             switch itemIndex {
             case 0:
-                if let url = URL(string: StringLiterals.ExternalLink.OneonOne) {
+                if let url = URL(string: StringLiterals.ExternalLink.oneOnOne) {
                     UIApplication.shared.open(url, options: [:])
                 }
             case 1:
-                if let url = URL(string: StringLiterals.ExternalLink.Terms) {
+                if let url = URL(string: StringLiterals.ExternalLink.terms) {
                     UIApplication.shared.open(url, options: [:])
                 }
             case 2:

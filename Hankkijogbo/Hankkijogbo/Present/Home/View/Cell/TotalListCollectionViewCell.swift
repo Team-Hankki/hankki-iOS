@@ -12,17 +12,17 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
     // MARK: - UI Components
     
     let thumbnailImageView: UIImageView = UIImageView()
-    private let menutagLabel: UILabel = HankkiCategoryTagLabel()
+    private let menutagLabel: UILabel = UILabel()
     private let hankkiTitle: UILabel = UILabel()
     
-    private let priceImage: UIImageView = UIImageView()
+    private let lowestPriceLabel: UILabel = UILabel()
     private let priceLabel: UILabel = UILabel()
-    private let dotImage: UIImageView = UIImageView()
     private let likeImage: UIImageView = UIImageView()
     private let likeLabel: UILabel = UILabel()
     
     private let hankkiInfoStackView: UIStackView = UIStackView()
     private let hankkiDetailStackView: UIStackView = UIStackView()
+    private let hankkiLowPriceStackView: UIStackView = UIStackView()
     
     let addButton: UIButton = UIButton()
     
@@ -43,14 +43,14 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
                     addButton)
         
         hankkiInfoStackView.addArrangedSubviews(menutagLabel,
-                                                hankkiTitle,
-                                                hankkiDetailStackView)
+                                                hankkiDetailStackView,
+                                                hankkiLowPriceStackView)
         
-        hankkiDetailStackView.addArrangedSubviews(priceImage,
-                                                  priceLabel,
-                                                  dotImage, 
+        hankkiDetailStackView.addArrangedSubviews(hankkiTitle,
                                                   likeImage,
                                                   likeLabel)
+        
+        hankkiLowPriceStackView.addArrangedSubviews(lowestPriceLabel, priceLabel)
     }
     
     override func setupStyle() {
@@ -64,32 +64,35 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         menutagLabel.do {
             $0.setNeedsLayout()
             $0.layoutIfNeeded()
+            $0.font = .setupPretendardStyle(of: .caption4)
+            $0.textColor = .gray500
         }
         
         hankkiTitle.do {
-            $0.textColor = .gray900
-            $0.font = .setupSuiteStyle(of: .subtitle2)
+            $0.textColor = .gray850
+            $0.font = .setupPretendardStyle(of: .body5)
             $0.lineBreakMode = .byTruncatingTail
             $0.numberOfLines = 1
         }
         
-        [priceLabel, likeLabel].forEach {
-            $0.do {
-                $0.font = .setupPretendardStyle(of: .button)
-                $0.textColor = .gray500
-            }
+        likeLabel.do {
+            $0.font = .setupPretendardStyle(of: .caption1)
+            $0.textColor = .gray700
         }
         
-        priceImage.do {
-            $0.image = .icFood16
+        priceLabel.do {
+            $0.font = .setupPretendardStyle(of: .body6)
+            $0.textColor = .gray800
         }
         
-        dotImage.do {
-            $0.image = .icSeparator
+        lowestPriceLabel.do {
+            $0.text = StringLiterals.Home.lowest
+            $0.font = .setupPretendardStyle(of: .caption4)
+            $0.textColor = .gray400
         }
         
         likeImage.do {
-            $0.image = .icHeart
+            $0.image = .icHeartRed
         }
         
         hankkiInfoStackView.do {
@@ -100,12 +103,18 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
         
         hankkiDetailStackView.do {
             $0.axis = .horizontal
+            $0.spacing = 3
+            $0.alignment = .center
+        }
+        
+        hankkiLowPriceStackView.do {
+            $0.axis = .horizontal
             $0.spacing = 2
             $0.alignment = .center
         }
         
         addButton.do {
-            $0.setImage(.btnAddFilled, for: .normal)
+            $0.setImage(.icAddZipGray, for: .normal)
         }
     }
     
@@ -114,10 +123,6 @@ final class TotalListCollectionViewCell: BaseCollectionViewCell {
             $0.leading.equalToSuperview().inset(22)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(72)
-        }
-        
-        hankkiTitle.snp.makeConstraints {
-            $0.width.equalTo(200)
         }
         
         hankkiInfoStackView.snp.makeConstraints {

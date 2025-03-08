@@ -17,6 +17,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
     var isButtonModified: Bool = false
     var isDropDownVisible: Bool = false
     var isTypeCollectionViewVisible: Bool = false
+    var isScrolled: Bool = false
     var currentDropDownButtonType: ButtonType?
     
     var selectedMarkerIndex: Int?
@@ -50,8 +51,10 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
         bindViewModel()
         setupHankkiListResult()
         setupLocation()
+        updateFilteringFloatingButtonState()
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStateUpdate(_:)), name:  NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(resetFloatingButton), name: NSNotification.Name("FilteringBottomSheetDismissed"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +75,7 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
             isRestoringScrollPosition = false
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -102,12 +105,13 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
     private func bindViewModel() {
         viewModel.hankkiListsDidChange = { [weak self] data in
             guard let self = self else { return }
+            
+            self.viewModel.checkThumbnailHankkiValidation()
+            
             DispatchQueue.main.async {
                 self.rootView.bottomSheetView.data = data
                 self.rootView.bottomSheetView.updateTotalListCount(count: data.count)
                 self.rootView.bottomSheetView.totalListCollectionView.reloadData()
-                self.rootView.bottomSheetView.setNeedsLayout()
-                self.rootView.bottomSheetView.layoutIfNeeded()
             }
         }
         
@@ -123,29 +127,41 @@ final class HomeViewController: BaseViewController, NetworkResultDelegate {
                             subText: StringLiterals.Alert.tryAgain,
                             primaryButtonText: StringLiterals.Alert.check)
         }
+        
+        viewModel.showHankkiListBottomSheet = {
+            self.showHankkiListBottomSheet()
+        }
+        
+        viewModel.getCategoryFilterAPI { [weak self] success in
+            if success {
+                DispatchQueue.main.async {
+                    self?.rootView.typeFiletringCollectionView.collectionView.reloadData()
+                }
+            }
+        }
     }
 }
 
 extension HomeViewController {
     private func setupDelegate() {
-        typeCollectionView.collectionView.delegate = self
-        typeCollectionView.collectionView.dataSource = self
+        rootView.typeFiletringCollectionView.collectionView.delegate = self
+        rootView.typeFiletringCollectionView.collectionView.dataSource = self
         rootView.bottomSheetView.homeViewController = self
         rootView.bottomSheetView.delegate = self
         viewModel.delegate = self
     }
     
     private func setupRegister() {
-        typeCollectionView.collectionView.register(TypeCollectionViewCell.self,
-                                                   forCellWithReuseIdentifier: TypeCollectionViewCell.className)
+        rootView.typeFiletringCollectionView.collectionView.register(TypeCollectionViewCell.self,
+                                                                     forCellWithReuseIdentifier: TypeCollectionViewCell.className)
     }
     
     private func setupNavigationBar(mainTitle: String? = nil) {
-        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.allUniversity
+        let title = mainTitle ?? UserDefaults.standard.getUniversity()?.name ?? StringLiterals.Home.entire
         
         let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: false,
                                                               hasRightButton: false,
-                                                              mainTitle: .stringAndImageDouble(title, .icSchool, .icArrowUnder),
+                                                              mainTitle: .stringAndImage(title, .icArrowUnder),
                                                               mainTitleFont: PretendardStyle.body5,
                                                               mainTitlePosition: "left",
                                                               rightButton: .string(""),
@@ -162,6 +178,7 @@ extension HomeViewController {
         rootView.priceButton.addTarget(self, action: #selector(priceButtonDidTap), for: .touchUpInside)
         rootView.sortButton.addTarget(self, action: #selector(sortButtonDidTap), for: .touchUpInside)
         rootView.targetButton.addTarget(self, action: #selector(targetButtonDidTap), for: .touchUpInside)
+        rootView.filteringFloatingButton.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
     }
     
     func presentUniversity() {
@@ -171,11 +188,21 @@ extension HomeViewController {
         navigationController?.pushViewController(univSelectViewController, animated: true)
     }
     
+    func isFiltering() -> Bool {
+        return viewModel.priceCategory != nil || viewModel.sortOption != nil
+    }
+
+    func updateFilteringFloatingButtonState() {
+        rootView.filteringFloatingButton.setImage(isFiltering() ? .icFilteringSelected : .icFilteringNormal, for: .normal)
+    }
+}
+
+extension HomeViewController {
     @objc func presentMyZipBottomSheet() {
         guard let thumbnailData = viewModel.hankkiThumbnail else { return }
         self.presentMyZipListBottomSheet(id: thumbnailData.id)
     }
-    
+
     @objc func getNotificationForMyZipList(_ notification: Notification) {
         if let indexPath = notification.userInfo?["itemIndexPath"] as? IndexPath {
             self.presentMyZipListBottomSheet(id: viewModel.hankkiLists[indexPath.item].id)
@@ -186,7 +213,7 @@ extension HomeViewController {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showBlackToast(message: StringLiterals.Toast.addToMyZipBlack) { [self] in
-                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }
@@ -197,14 +224,16 @@ extension HomeViewController {
             setupPosition(with: university)
         }
     }
+    
+    @objc func resetFloatingButton() {
+        rootView.filteringFloatingButton.isSelected = false
+    }
 }
 
 private extension HomeViewController {
     func updateUniversityData() {
         let universityId = UserDefaults.standard.getUniversity()?.id
-        
         viewModel.updateHankkiList()
-        
         rootView.bottomSheetView.totalListCollectionView.reloadData()
     }
     
@@ -231,39 +260,78 @@ private extension HomeViewController {
             }
         }
     }
+    
+    func showHankkiListBottomSheet() {
+        hideMarkerInfoCard()
+        self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
+    }
 }
 
 extension HomeViewController: NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-        self.rootView.bottomSheetView.viewLayoutIfNeededWithDownAnimation()
-        self.hideMarkerInfoCard()
+        showHankkiListBottomSheet()
     }
 }
 
-// CollectionViewDelegate, DataSource
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        typeCollectionView.isHidden = true
-        viewModel.storeCategory = viewModel.categoryFilters[indexPath.item].tag
-        changeButtonTitle(for: rootView.typeButton, newTitle: viewModel.categoryFilters[indexPath.item].name)
+        if indexPath.item == 0 {
+            viewModel.selectedStoreCategoryIndex = indexPath.item
+            viewModel.storeCategory = nil
+            changeButtonTitle(for: rootView.typeButton, newTitle: "전체")
+        } else if indexPath.item - 1 < viewModel.categoryFilters.count {
+            let selectedCategory = viewModel.categoryFilters[indexPath.item - 1]
+            SetupAmplitude.shared.logEvent(AmplitudeLiterals.Home.tabCategory,
+                                           eventProperties: [AmplitudeLiterals.Property.food: selectedCategory.name])
+            viewModel.selectedStoreCategoryIndex = indexPath.item
+            viewModel.storeCategory = selectedCategory.tag
+            changeButtonTitle(for: rootView.typeButton, newTitle: selectedCategory.name)
+        }
+        collectionView.reloadData()
+        collectionView.scrollToCenter(at: indexPath)
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.categoryFilters.count
+        return viewModel.categoryFilters.count + 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TypeCollectionViewCell.className, for: indexPath) as? TypeCollectionViewCell else { return UICollectionViewCell() }
-        cell.bindData(model: viewModel.categoryFilters[indexPath.item])
+        
+        if indexPath.item == 0 {
+            cell.bindData(model: GetCategoryFilterData(name: StringLiterals.Home.entire, tag: "", imageUrl: ""))
+        } else if indexPath.item <= viewModel.categoryFilters.count {
+            cell.bindData(model: viewModel.categoryFilters[indexPath.item - 1])
+        } else {
+            cell.bindData(model: GetCategoryFilterData(name: "", tag: "", imageUrl: ""), isLastIndex: true)
+        }
+        
+        let isSelected = indexPath.item == viewModel.selectedStoreCategoryIndex
+        cell.updateSelection(isSelected: isSelected)
+        
         return cell
+    }
+}
+
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let collectionView = scrollView as? UICollectionView {
+            collectionView.collectionViewLayout.invalidateLayout()
+            isScrolled = collectionView.contentOffset.x <= 5 ? false : true
+        }
     }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 58, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: isScrolled ? 0 : 12, bottom: 0, right: 0)
     }
 }
 
@@ -303,7 +371,7 @@ extension HomeViewController: UnivSelectViewControllerDelegate {
         guard let manager = locationManager else { return }
         manager.startUpdatingLocation()
         
-        setupNavigationBar(mainTitle: StringLiterals.Home.allUniversity)
+        setupNavigationBar(mainTitle: StringLiterals.Home.entire)
         fetchAllHankkiInfo()
     }
     

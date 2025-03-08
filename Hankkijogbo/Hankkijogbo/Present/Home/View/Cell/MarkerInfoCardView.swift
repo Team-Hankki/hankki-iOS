@@ -16,17 +16,17 @@ final class MarkerInfoCardView: BaseView {
     // MARK: - UI Components
     
     private let thumbnailImageView: UIImageView = UIImageView()
-    private let menutagLabel: UILabel = HankkiCategoryTagLabel()
+    private let menutagLabel: UILabel = UILabel()
     private let hankkiTitle: UILabel = UILabel()
     
-    private let priceImage: UIImageView = UIImageView()
+    private let lowestPriceLabel: UILabel = UILabel()
     private let priceLabel: UILabel = UILabel()
-    private let dotImage: UIImageView = UIImageView()
     private let likeImage: UIImageView = UIImageView()
     private let likeLabel: UILabel = UILabel()
     
     private let hankkiInfoStackView: UIStackView = UIStackView()
     private let hankkiDetailStackView: UIStackView = UIStackView()
+    private let hankkiLowPriceStackView: UIStackView = UIStackView()
     
     let addButton: UIButton = UIButton()
     
@@ -35,6 +35,14 @@ final class MarkerInfoCardView: BaseView {
         setupAddTarget()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        clipsToBounds = false
+        superview?.clipsToBounds = false
+        addShadow(color: .black, alpha: 0.12, x: 0, y: 2, blur: 8, spread: 0)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,14 +55,14 @@ final class MarkerInfoCardView: BaseView {
                     addButton)
         
         hankkiInfoStackView.addArrangedSubviews(menutagLabel,
-                                                hankkiTitle,
-                                                hankkiDetailStackView)
+                                                hankkiDetailStackView,
+                                                hankkiLowPriceStackView)
         
-        hankkiDetailStackView.addArrangedSubviews(priceImage,
-                                                priceLabel,
-                                                dotImage,
-                                                likeImage,
-                                                likeLabel)
+        hankkiDetailStackView.addArrangedSubviews(hankkiTitle,
+                                                  likeImage,
+                                                  likeLabel)
+        
+        hankkiLowPriceStackView.addArrangedSubviews(lowestPriceLabel, priceLabel)
     }
     
     override func setupStyle() {
@@ -68,32 +76,34 @@ final class MarkerInfoCardView: BaseView {
         menutagLabel.do {
             $0.setNeedsLayout()
             $0.layoutIfNeeded()
+            $0.font = .setupPretendardStyle(of: .caption4)
+            $0.textColor = .gray500
         }
         
         hankkiTitle.do {
-            $0.textColor = .gray900
-            $0.font = .setupSuiteStyle(of: .subtitle2)
+            $0.textColor = .gray850
+            $0.font = .setupPretendardStyle(of: .body5)
+            $0.lineBreakMode = .byTruncatingTail
+            $0.numberOfLines = 1
         }
         
         [priceLabel, likeLabel].forEach {
             $0.do {
                 $0.font = .setupPretendardStyle(of: .button)
-                $0.textColor = .gray500
+                $0.textColor = .gray800
             }
         }
         
-        priceImage.do {
-            $0.image = .icFood16
-        }
-        
-        dotImage.do {
-            $0.image = .icSeparator
+        lowestPriceLabel.do {
+            $0.text = StringLiterals.Home.lowest
+            $0.font = .setupPretendardStyle(of: .caption4)
+            $0.textColor = .gray400
         }
         
         likeImage.do {
-            $0.image = .icHeart
+            $0.image = .icHeartRed
         }
-            
+        
         hankkiInfoStackView.do {
             $0.axis = .vertical
             $0.spacing = 3
@@ -102,12 +112,18 @@ final class MarkerInfoCardView: BaseView {
         
         hankkiDetailStackView.do {
             $0.axis = .horizontal
-            $0.spacing = 2
+            $0.spacing = 3
             $0.alignment = .center
         }
         
+        hankkiLowPriceStackView.do {
+            $0.axis = .horizontal
+            $0.spacing = 2
+            $0.alignment = .leading
+        }
+        
         addButton.do {
-            $0.setImage(.btnAddFilled, for: .normal)
+            $0.setImage(.icAddZipGray, for: .normal)
         }
     }
     
@@ -122,7 +138,7 @@ final class MarkerInfoCardView: BaseView {
             $0.leading.equalTo(thumbnailImageView.snp.trailing).offset(12)
             $0.centerY.equalTo(thumbnailImageView)
         }
-
+        
         addButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(22)
@@ -132,14 +148,21 @@ final class MarkerInfoCardView: BaseView {
 
 private extension MarkerInfoCardView {
     func setupAddTarget() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewDidTap))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewDidTap))
         self.addGestureRecognizer(tapGesture)
     }
     
-    @objc func ViewDidTap() {
+    @objc func viewDidTap() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
-            let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
+           let rootViewController = windowScene.windows.first?.rootViewController as? HankkiNavigationController {
+            let type: HankkiNavigationType = HankkiNavigationType(hasBackButton: true,
+                                                                  hasRightButton: false,
+                                                                  mainTitle: .string(""),
+                                                                  rightButton: .string(""))
+            rootViewController.setupNavigationBar(forType: type)
+            rootViewController.isNavigationBarHidden = false
+            
+            let hankkiDetailViewController = HankkiDetailViewController(viewModel: HankkiDetailViewModel(hankkiId: hankkiId))
             rootViewController.pushViewController(hankkiDetailViewController, animated: true)
         }
     }

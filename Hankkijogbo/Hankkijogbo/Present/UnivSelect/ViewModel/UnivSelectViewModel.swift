@@ -41,7 +41,7 @@ extension UnivSelectViewModel {
     func postMeUniversity(isNull: Bool = false) {
         var currentUniversity: UniversityModel
         if isNull {
-            currentUniversity = UniversityModel(id: nil, name: StringLiterals.Home.allUniversity, longitude: 0.0, latitude: 0.0)
+            currentUniversity = UniversityModel(id: nil, name: StringLiterals.Home.entire, longitude: 0.0, latitude: 0.0)
         } else {
             currentUniversity = universityList[currentUnivIndex]
         }
@@ -53,7 +53,7 @@ extension UnivSelectViewModel {
         NetworkService.shared.userService.postMeUniversity(requestBody: request) { result in
             result.handleNetworkResult(delegate: self.delegate) { _ in
                 SetupAmplitude.shared.logEvent(AmplitudeLiterals.UnivSelect.tabSubmit,
-                                               eventProperties: ["university_name": currentUniversity.name])
+                                               eventProperties: [AmplitudeLiterals.Property.university: currentUniversity.name])
                 // local에 대학 정보 저장
                 UserDefaults.standard.saveUniversity(currentUniversity)
                 NotificationCenter.default.post(name: NSNotification.Name(StringLiterals.NotificationName.locationDidUpdate), object: nil, userInfo: ["university": currentUniversity])

@@ -236,8 +236,7 @@ private extension ReportCompleteViewController {
     // MARK: - @objc Func
     
     @objc func bottomButtonPrimaryHandler() {
-        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
-        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
+        pushToDetailWithHankkiNavigation(hankkiId: hankkiId)
     }
     
     @objc func addToMyZipListButtonDidTap() {
@@ -252,7 +251,7 @@ private extension ReportCompleteViewController {
         if let zipId = notification.userInfo?["zipId"] as? Int {
             
             self.showWhiteToast(message: StringLiterals.Toast.addToMyZipWhite) { [self] in
-                let hankkiListViewController = HankkiListViewController(.myZip, zipId: zipId)
+                let hankkiListViewController = ZipDetailViewController(zipId: zipId)
                 navigationController?.pushViewController(hankkiListViewController, animated: true)
             }
         }

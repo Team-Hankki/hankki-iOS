@@ -208,6 +208,8 @@ private extension ModifyMenuViewController {
             let modifyMenuCompleteViewController = CompleteViewController(completeView: completeView)
             navigationController?.pushViewController(modifyMenuCompleteViewController, animated: true)
         }
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Detail.tabMenuEditCompleted)
     }
 }
 

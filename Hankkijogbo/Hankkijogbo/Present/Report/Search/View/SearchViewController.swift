@@ -275,8 +275,7 @@ private extension SearchViewController {
     
     func pushToHankkiDetail() {
         guard let hankkiId = viewModel.storeId else { return }
-        let hankkiDetailViewController = HankkiDetailViewController(hankkiId: hankkiId)
-        navigationController?.pushViewController(hankkiDetailViewController, animated: true)
+        pushToDetailWithHankkiNavigation(hankkiId: hankkiId)
     }
 }
 
@@ -298,6 +297,8 @@ private extension SearchViewController {
                                                    longitude: hankkiLocation.longitude,
                                                    storeName: hankkiLocation.name)
         viewModel.postHankkiValidateAPI(req: request)
+        
+        SetupAmplitude.shared.logEvent(AmplitudeLiterals.Report.tabRestaurantComplete)
     }
 }
 

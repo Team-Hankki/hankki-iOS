@@ -21,6 +21,7 @@ final class NetworkService {
     let locationService: LocationAPIServiceProtocol = LocationAPIService()
     let zipService: ZipAPIServiceProtocol = ZipAPIService()
     let reportService: ReportAPIServiceProtocol = ReportAPIService()
+    let naverMapService: NaverMapAPIServiceProtocol = NaverMapAPIService()
 }
 
 extension NetworkService {
