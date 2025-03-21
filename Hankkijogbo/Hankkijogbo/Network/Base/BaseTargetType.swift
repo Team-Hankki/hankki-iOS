@@ -72,7 +72,7 @@ extension BaseTargetType {
         if UserDefaults.standard.isLogin {
             // 유저가 로그인 한 회원일 경우
             // Access Token을 header-Authorization 에 삽입해 전송한다.
-            let accessToken = UserDefaults.standard.getAccesshToken()
+            let accessToken = UserDefaults.standard.getAccessToken()
             header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         }
         
