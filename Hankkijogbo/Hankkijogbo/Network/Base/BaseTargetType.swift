@@ -69,6 +69,13 @@ extension BaseTargetType {
     var headers: [String: String]? {
         var header: [String: String] = [:]
         
+        if UserDefaults.standard.isLogin {
+            // 유저가 로그인 한 회원일 경우
+            // Access Token을 header-Authorization 에 삽입해 전송한다.
+            let accessToken = UserDefaults.standard.getAccessToken()
+            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
+        }
+        
         switch headerType {
             
         case .loginHeader(let accessToken):
@@ -94,13 +101,6 @@ extension BaseTargetType {
             
         default:
             header["Content-Type"] = "application/json"
-        }
-        
-        if UserDefaults.standard.isLogin {
-            // 유저가 로그인 한 회원일 경우
-            // Access Token을 header-Authorization 에 삽입해 전송한다.
-            let accessToken = UserDefaults.standard.getAccesshToken()
-            header["Authorization"] = URLConstant.bearer + "\(accessToken)"
         }
         
         return header

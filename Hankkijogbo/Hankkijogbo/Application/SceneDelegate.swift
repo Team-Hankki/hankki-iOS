@@ -76,7 +76,7 @@ private extension SceneDelegate {
     
     /// 서버에 사용자의 정보가 저장되어있는지 확인합니다.
     func checkServerAccountStatus() {
-        let accessToken: String = UserDefaults.standard.getAccesshToken()
+        let accessToken: String = UserDefaults.standard.getAccessToken()
         
         if !accessToken.isEmpty {
             getMe()

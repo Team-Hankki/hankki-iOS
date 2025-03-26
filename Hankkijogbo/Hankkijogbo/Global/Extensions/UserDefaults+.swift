@@ -11,7 +11,7 @@ extension UserDefaults {
     /// 유저의 로그인 유무를 확인합니다.
     /// UserDefaults에 AccessToken이 저장되어있을 경우 로그인이 되어있다고 판단합니다.
     var isLogin: Bool {
-        return !UserDefaults.standard.getAccesshToken().isEmpty
+        return !UserDefaults.standard.getAccessToken().isEmpty
     }
     
     func saveUserId(_ userId: String) {
@@ -41,7 +41,7 @@ extension UserDefaults {
         return UserDefaults.standard.string(forKey: UserDefaultsKey.refreshToken.rawValue) ?? ""
     }
     
-    func getAccesshToken() -> String {
+    func getAccessToken() -> String {
         return UserDefaults.standard.string(forKey: UserDefaultsKey.accessToken.rawValue) ?? ""
     }
     
